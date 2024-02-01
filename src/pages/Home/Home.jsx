@@ -85,7 +85,7 @@ const Home = () => {
   return (
     <MainContainer>
       <LeftContainer>
-        <Logo>😉 Giftpie</Logo>
+        <Logo>😉 Giftipie</Logo>
         <P pt="25px" fs="16px" fw="800" pb="5px">
           기프티파이에서
         </P>
@@ -101,7 +101,7 @@ const Home = () => {
       <RightContainer>
         <Navbar>
           <NavbarBtn fs="20px" fw="800" pl="15px">
-            😉 Giftpie
+            😉 Giftipie
           </NavbarBtn>
           <NavbarBtnDiv>
             <NavbarBtn fs="13px" fw="600">
@@ -114,14 +114,14 @@ const Home = () => {
         </Navbar>
 
         <Body>
-          <BannerImg src="/imgs/배너예시.png" alt="logo" />
+          <BannerImg src="/imgs/banner.png" alt="logo" />
           <FundingDiv>
             <P pt="30px" pl="30px" fs="14px" fw="800">
               지금 진행중인 펀딩
             </P>
             <FundingSection>
               <FundingGrid>
-                <FundingImg src="/imgs/테슬라.jpeg" alt="logo" />
+                <FundingImg src="/imgs/tesla.jpeg" alt="logo" />
                 <P pt="10px" fs="12px" fw="800">
                   인생차로 테슬라를 선물해주세요 😘
                   <FundingNewline></FundingNewline>
