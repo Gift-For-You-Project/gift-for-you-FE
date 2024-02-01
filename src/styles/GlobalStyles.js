@@ -22,10 +22,11 @@ const GlobalStyles = createGlobalStyle`
         line-height: 1;
         font-family: 'Pretendard', sans-serif;
         margin-bottom: 100px;
-        /* background-image: linear-gradient(to top, #d9afd9 0%, #97d9e1 100%); */
         background-repeat: no-repeat;
         background-size: cover;
         background-attachment: fixed;
+        background-color: #F6F9F0;
+        margin-bottom: 100px;
     }
     ol, ul{
         list-style: none;
