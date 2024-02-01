@@ -8,6 +8,9 @@ import theme from "./styles/theme";
 import GlobalStyle from "./styles/GlobalStyles";
 import { Provider } from "react-redux";
 import store from "./redux/store";
+import { ThemeProvider } from "styled-components";
+import theme from "./styles/theme";
+import GlobalStyle from "./styles/GlobalStyles";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
