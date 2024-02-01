@@ -1,5 +1,5 @@
 #!/bin/sh
 cd ../
 mkdir output
-cp -R ./[team-repo-name]/* ./output
-cp -R ./output ./[team-repo-name]/
+cp -R ./gift-for-you-FE/* ./output
+cp -R ./output ./gift-for-you-FE/
