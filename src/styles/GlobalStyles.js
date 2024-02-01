@@ -25,6 +25,8 @@ const GlobalStyles = createGlobalStyle`
         background-repeat: no-repeat;
         background-size: cover;
         background-attachment: fixed;
+        background-color: #F6F9F0;
+        margin-bottom: 100px;
     }
     ol, ul{
         list-style: none;
