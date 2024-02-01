@@ -1,7 +1,7 @@
-import React from 'react';
+import React from "react";
 
 const FundingModify = () => {
-    return <div>FundingModify</div>;
+  return <div>FundingModify Page</div>;
 };
 
 export default FundingModify;

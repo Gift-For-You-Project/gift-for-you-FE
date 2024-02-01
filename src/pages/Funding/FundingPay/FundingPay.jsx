@@ -1,7 +1,7 @@
-import React from 'react';
+import React from "react";
 
 const FundingPay = () => {
-    return <div>FundingPay</div>;
+  return <div>FundingPay Page</div>;
 };
 
 export default FundingPay;
