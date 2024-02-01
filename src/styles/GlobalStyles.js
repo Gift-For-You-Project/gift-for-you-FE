@@ -1,0 +1,40 @@
+import { createGlobalStyle } from "styled-components";
+import reset from "styled-reset";
+
+const GlobalStyles = createGlobalStyle`
+    ${reset}
+    a{
+        text-decoration: none;
+        color: inherit;
+    }
+    *{
+        box-sizing: border-box;
+    }
+    html, body, div, span, h1, h2, h3, h4, h5, h6, p, 
+    a, dl, dt, dd, ol, ul, li, form, label, table{
+        margin: 0;
+        padding: 0;
+        border: 0;
+        font-size: 10px;
+        vertical-align: baseline;
+    }
+    body{
+        line-height: 1;
+        font-family: 'Pretendard', sans-serif;
+        margin-bottom: 100px;
+        /* background-image: linear-gradient(to top, #d9afd9 0%, #97d9e1 100%); */
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-attachment: fixed;
+    }
+    ol, ul{
+        list-style: none;
+    }
+    button {
+        border: 0;
+        background: transparent;
+        cursor: pointer;
+    }
+`;
+
+export default GlobalStyles;
