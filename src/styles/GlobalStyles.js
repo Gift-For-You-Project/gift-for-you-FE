@@ -21,6 +21,10 @@ const GlobalStyles = createGlobalStyle`
     body{
         line-height: 1;
         font-family: 'Pretendard', sans-serif;
+        margin-bottom: 100px;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-attachment: fixed;
         background-color: #F6F9F0;
         margin-bottom: 100px;
     }
