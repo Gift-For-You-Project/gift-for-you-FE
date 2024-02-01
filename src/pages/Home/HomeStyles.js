@@ -125,9 +125,9 @@ export const FundingSection = styled.div`
 export const FundingGrid = styled.div`
   width: 200px;
 
-  @media (max-width: 470px) {
+  /* @media (max-width: 470px) {
     width: 100%; // FundingGrid가 부모 컨테이너에 꽉 차도록 설정
-  }
+  } */
 `;
 
 export const FundingImg = styled.img`
