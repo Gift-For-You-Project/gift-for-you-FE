@@ -1,4 +1,7 @@
 import React from "react";
+import { FaChevronRight } from "react-icons/fa";
+import { FaPlus } from "react-icons/fa6";
+import { useNavigate } from "react-router-dom";
 import {
   MainContainer,
   LeftContainer,
@@ -10,82 +13,56 @@ import {
   NavbarBtn,
   NavbarBtnDiv,
   Body,
-  BannerImg,
+  MainDiv,
+  MainTitle,
+  MainFunding,
+  MainImg,
+  MainBtnContainer,
+  MainBtn,
+  MainBtnLine,
   FundingDiv,
   FundingSection,
   FundingGrid,
   FundingImg,
-  FundingNewline,
+  ProgressDivBar,
+  ProgressDiv,
   ProgressBar,
   Progress,
   BetweenDiv,
-  TogatherDiv,
+  BetweenMainDiv,
+  TogetherDiv,
+  TogetherImg,
+  TogetherGrids,
+  TogetherGrid,
+  ProductDiv,
+  ProductGrids,
+  ProductGrid,
+  ProductImg,
+  ProductBlank,
   Footer,
+  FooterLine,
+  FundingBtn,
 } from "./HomeStyles";
 
-// 이미지 크기 조정 함수
-// const resizeImg = (imgFile) => {
-//   const maxWidth = 200;
-//   const maxHeight = 140;
-
-//   // canvas element를 생성하고 2D Context를 얻음
-//   const canvas = document.createElement("canvas");
-//   const ctx = canvas.getContext("2d");
-
-//   // img element를 생성하고 입력 이미지 파일로 설정
-//   const img = new Image();
-//   img.src = URL.createObjectURL(imgFile);
-
-//   // 조절된 이미지 Blob으로 resolve되는 Promis를 반환
-//   return new Promise((resolve) => {
-//     img.onload = () => {
-//       let width = img.width;
-//       let height = img.height;
-
-//       // 이미지 높이가 140보다 작은 경우, 높이를 140으로 확장
-//       if (height < maxHeight) {
-//         width *= maxHeight / height;
-//         height = maxHeight;
-//       }
-
-//       // 이미지 높이가 140보다 큰 경우, 높이를 140으로 축소
-//       if (height > maxHeight) {
-//         width *= maxHeight / height;
-//         height = maxHeight;
-//       }
-
-//       canvas.width = maxWidth;
-//       canvas.height = maxHeight;
-
-//       // 이미지 가운데 정렬
-//       const xOffset = (maxWidth - width) / 2;
-//       const yOffset = (maxHeight - height) / 2;
-//       canvas.width = maxWidth;
-//       canvas.height = maxHeight;
-//       ctx.drawImage(img, xOffset, yOffset, width, height);
-
-//       // canvas 내용을 Blob으로 변환하고 Promise를 resolove
-//       canvas.toBlob((blob) => {
-//         resolve(blob);
-//       }, imgFile.type);
-//     };
-//   });
-// };
-
-// 이미지 크기 조절
-// const resizedImgBlob = await resizeImg(fundingImg);
-
-// FormData를 사용하여 이미지와 데이터를 서버에 전송
-// const formData = new FormData();
-// formData.append("fundingImg", resizedImgBlob);
-// formData.append("fundingTitle", fundingTitle);
-// formData.append("fundingContents", fundingContents);
-
 const Home = () => {
+  const navigate = useNavigate();
+
+  const handleLoginClick = () => {
+    navigate("/login");
+  };
+
+  const handleSignupClick = () => {
+    navigate("/signup");
+  };
+
+  const handleFundingCreate = () => {
+    navigate("/fundingcreate");
+  };
+
   return (
     <MainContainer>
       <LeftContainer>
-        <Logo>😉 Giftipie</Logo>
+        <Logo>🥧 Giftipie</Logo>
         <P pt="25px" fs="16px" fw="800" pb="5px">
           기프티파이에서
         </P>
@@ -100,140 +77,273 @@ const Home = () => {
 
       <RightContainer>
         <Navbar>
-          <NavbarBtn fs="20px" fw="800" pl="15px">
-            😉 Giftipie
+          <NavbarBtn fs="20px" fw="600" pl="15px">
+            🥧 Giftipie
           </NavbarBtn>
           <NavbarBtnDiv>
-            <NavbarBtn fs="13px" fw="600">
-              문의
+            {/* 문의는 로그인 후에, 로그인/회원가입 버튼은 분리 */}
+            <NavbarBtn onClick={handleLoginClick} fs="13px" fw="600">
+              로그인
             </NavbarBtn>
-            <NavbarBtn fs="13px" fw="600">
-              로그인/회원가입
+            <NavbarBtn onClick={handleSignupClick} fs="13px" fw="600">
+              회원가입
             </NavbarBtn>
           </NavbarBtnDiv>
         </Navbar>
 
         <Body>
-          <BannerImg src="/imgs/banner.png" alt="logo" />
+          <MainTitle>
+            <P fs="18px" fw="600" pb="10px">
+              내 펀딩
+            </P>
+            <P fs="14px" fw="400" pb="10px" color="gray">
+              펀딩은 1개만 진행할 수 있어요
+            </P>
+          </MainTitle>
+          <MainDiv>
+            <MainFunding>
+              <MainImg src="/imgs/airpods.jpeg" alt="airpods" />
+              <ProgressDivBar>
+                <ProgressDiv width={(36 / 100) * 100} />
+              </ProgressDivBar>
+              <BetweenMainDiv>
+                <BetweenDiv>
+                  <P fs="14px" fw="600" pl="20px" pt="10px" color="orange">
+                    36%
+                  </P>
+                  <P fs="14px" fw="600" pr="20px" pt="10px">
+                    16일 남음
+                  </P>
+                </BetweenDiv>
+                <P fs="16px" fw="400" color="gray" pl="20px" pt="10px">
+                  에어팟
+                </P>
+                <P fs="16px" fw="400" pl="20px" pt="10px" pb="14px">
+                  인생 첫 에어팟을 선물해주세요 😘
+                </P>
+              </BetweenMainDiv>
+              <MainBtnContainer>
+                <MainBtn>링크 복사</MainBtn>
+                <MainBtnLine />
+                <MainBtn>수정하기</MainBtn>
+                <MainBtnLine />
+                <MainBtn>삭제하기</MainBtn>
+              </MainBtnContainer>
+            </MainFunding>
+          </MainDiv>
           <FundingDiv>
-            <P pt="30px" pl="30px" fs="14px" fw="800">
-              지금 진행중인 펀딩
+            <button>
+              <P fs="18px" fw="600" pt="30px" pb="10px">
+                지금 진행중인 펀딩 &nbsp;
+                <FaChevronRight />
+              </P>
+            </button>
+            <P fs="14px" fw="400" pb="10px" color="gray">
+              비공개 펀딩은 이곳에 공개되지 않아요
             </P>
             <FundingSection>
               <FundingGrid>
-                <FundingImg src="/imgs/tesla.jpeg" alt="logo" />
-                <P pt="10px" fs="12px" fw="800">
-                  인생차로 테슬라를 선물해주세요 😘
-                  <FundingNewline></FundingNewline>
+                <FundingImg src="/imgs/airpods.jpeg" alt="airpodspro" />
+                <ProgressBar>
+                  <Progress width={(20 / 100) * 100} />
+                </ProgressBar>
+                <BetweenDiv>
+                  <P pt="2px" fs="10px" fw="800" color="orange">
+                    36%
+                  </P>
+                  <P pt="2px" pl="90px" fs="10px" fw="800">
+                    16일 남음
+                  </P>
+                </BetweenDiv>
+                <P pt="10px" fs="14px" fw="600" color="gray">
+                  에어팟
                 </P>
-                <P pt="10px" fs="10px" fw="800" color="gray">
-                  모델X
+                <P pt="10px" fs="14px" fw="600">
+                  인생 첫 에어팟을 선물해주세요 😘
                 </P>
+              </FundingGrid>
+              <FundingGrid>
+                <FundingImg src="/imgs/tesla.jpeg" alt="tesla" />
                 <ProgressBar>
                   <Progress width={(65 / 100) * 100} />
                 </ProgressBar>
                 <BetweenDiv>
-                  <P pt="8px" fs="10px" fw="800">
+                  <P pt="2px" fs="10px" fw="800" color="orange">
                     65%
                   </P>
-                  <P pt="8px" pl="90px" fs="10px" fw="800">
+                  <P pt="2px" pl="90px" fs="10px" fw="800">
                     13일 남음
                   </P>
                 </BetweenDiv>
+                <P pt="10px" fs="14px" fw="600" color="gray">
+                  모델X
+                </P>
+                <P pt="10px" fs="14px" fw="600">
+                  제로백 2.6초를 경험하고 싶어요 😘
+                </P>
               </FundingGrid>
               <FundingGrid>
-                <FundingImg src="/imgs/airpodspro.jpeg" alt="logo" />
-                <P pt="10px" fs="12px" fw="800">
-                  설맞이 AirPods Pro 스페셜 에디션, 갑진년 기념으로 사주세요 😘
+                <FundingImg src="/imgs/bluebottle.png" alt="logo" />
+                <ProgressBar>
+                  <Progress width={(100 / 100) * 100} />
+                </ProgressBar>
+                <BetweenDiv>
+                  <P pt="2px" fs="10px" fw="800" color="orange">
+                    100%
+                  </P>
+                  <P pt="2px" pl="90px" fs="10px" fw="800" color="orange">
+                    종료
+                  </P>
+                </BetweenDiv>
+                <P pt="10px" fs="14px" fw="600" color="gray">
+                  텀블러
                 </P>
-                <P pt="10px" fs="10px" fw="800" color="gray">
-                  에어팟 프로
+                <P pt="10px" fs="14px" fw="600">
+                  제목은 한줄 컷 😘
                 </P>
+              </FundingGrid>
+              <FundingGrid>
+                <FundingImg src="/imgs/massage.jpeg" alt="logo" />
                 <ProgressBar>
                   <Progress width={(20 / 100) * 100} />
                 </ProgressBar>
                 <BetweenDiv>
-                  <P pt="8px" fs="10px" fw="800">
+                  <P pt="2px" fs="10px" fw="800" color="orange">
                     20%
                   </P>
-                  <P pt="8px" pl="90px" fs="10px" fw="800">
+                  <P pt="2px" pl="90px" fs="10px" fw="800">
                     28일 남음
                   </P>
                 </BetweenDiv>
-              </FundingGrid>
-              <FundingGrid>
-                <FundingImg src="/imgs/airpodspro.jpeg" alt="logo" />
-                <P pt="10px" fs="12px" fw="800">
-                  설맞이 AirPods Pro 스페셜 에디션, 갑진년 기념으로 사주세요 😘
+                <P pt="10px" fs="14px" fw="600" color="gray">
+                  마사지기
                 </P>
-                <P pt="10px" fs="10px" fw="800" color="gray">
-                  에어팟 프로
+                <P pt="10px" fs="14px" fw="600">
+                  내용은 상세페이지에서 😘
                 </P>
-                <ProgressBar>
-                  <Progress width={(20 / 100) * 100} />
-                </ProgressBar>
-                <BetweenDiv>
-                  <P pt="8px" fs="10px" fw="800">
-                    20%
-                  </P>
-                  <P pt="8px" pl="90px" fs="10px" fw="800">
-                    28일 남음
-                  </P>
-                </BetweenDiv>
-              </FundingGrid>
-              <FundingGrid>
-                <FundingImg src="/imgs/airpodspro.jpeg" alt="logo" />
-                <P pt="10px" fs="12px" fw="800">
-                  설맞이 AirPods Pro 스페셜 에디션, 갑진년 기념으로 사주세요 😘
-                </P>
-                <P pt="10px" fs="10px" fw="800" color="gray">
-                  에어팟 프로
-                </P>
-                <ProgressBar>
-                  <Progress width={(20 / 100) * 100} />
-                </ProgressBar>
-                <BetweenDiv>
-                  <P pt="8px" fs="10px" fw="800">
-                    20%
-                  </P>
-                  <P pt="8px" pl="90px" fs="10px" fw="800">
-                    28일 남음
-                  </P>
-                </BetweenDiv>
               </FundingGrid>
             </FundingSection>
           </FundingDiv>
-          <TogatherDiv>
-            <P pt="30px" pl="30px" fs="14px" fw="800">
-              Giftipie에서 함께 하는 기쁨
+          <TogetherDiv>
+            <P fs="18px" fw="600">
+              Giftipie에서 함께한 선물
             </P>
-            <BetweenDiv>
-              <P pt="40px" pl="30px" fs="13px" fw="800">
-                펀딩에 참여한 사람
+            <TogetherGrids>
+              <TogetherGrid>
+                <TogetherImg
+                  src="/imgs/participation.png"
+                  alt="participation"
+                />
+                <P fs="14px" fw="400">
+                  &nbsp;&nbsp;&nbsp; 펀딩에
+                  <br />
+                  참여한 사람
+                </P>
+                <P pt="10px" pb="10px" fs="14px" fw="700" color="orange">
+                  13명
+                </P>
+              </TogetherGrid>
+              <TogetherGrid>
+                <TogetherImg src="/imgs/receive.png" alt="receive" />
+                <P fs="14px" fw="400">
+                  &nbsp; 선물을
+                  <br />
+                  받은 사람
+                </P>
+                <P pt="10px" pb="10px" fs="14px" fw="700" color="orange">
+                  6명
+                </P>
+              </TogetherGrid>
+              <TogetherGrid>
+                <TogetherImg src="/imgs/amount.png" alt="amount" />
+                <P fs="14px" fw="400">
+                  &nbsp;&nbsp;&nbsp; 모인
+                  <br /> 펀딩 금액
+                </P>
+                <P pt="10px" pb="10px" fs="14px" fw="700" color="orange">
+                  1억원
+                </P>
+              </TogetherGrid>
+            </TogetherGrids>
+          </TogetherDiv>
+          <ProductDiv>
+            <button>
+              <P fs="18px" fw="600" pb="10px">
+                추천 상품 &nbsp;
+                <FaChevronRight />
               </P>
-              <P pt="40px" pr="30px" fs="13px" fw="800">
-                11명
-              </P>
-            </BetweenDiv>
-            <BetweenDiv>
-              <P pt="20px" pl="30px" fs="13px" fw="800">
-                선물을 받은 사람
-              </P>
-              <P pt="20px" pr="30px" fs="13px" fw="800">
-                11명
-              </P>
-            </BetweenDiv>
-            <BetweenDiv>
-              <P pt="20px" pl="30px" fs="13px" fw="800">
-                모인 펀딩 금액
-              </P>
-              <P pt="20px" pr="30px" fs="13px" fw="800">
-                89,345,000원
-              </P>
-            </BetweenDiv>
-          </TogatherDiv>
+            </button>
+            <ProductGrids>
+              <ProductGrid>
+                <ProductBlank />
+              </ProductGrid>
+              <ProductGrid>
+                <ProductImg src="/imgs/iphone15pro.jpeg" alt="iphone" />
+                <P pt="8px" fs="14px" fw="600" color="gray">
+                  Apple
+                </P>
+                <P pt="8px" fs="14px" fw="600">
+                  아이폰 15 Pro 256BG 자급제
+                </P>
+                <P pt="8px" fs="14px" fw="600">
+                  1,550,000원
+                </P>
+              </ProductGrid>
+              <ProductGrid>
+                <ProductImg src="/imgs/iphone15.jpeg" alt="iphone" />
+                <P pt="8px" fs="14px" fw="600" color="gray">
+                  Apple
+                </P>
+                <P pt="8px" fs="14px" fw="600">
+                  아이폰 15 256BG 자급제
+                </P>
+                <P pt="8px" fs="14px" fw="600">
+                  1,250,000원
+                </P>
+              </ProductGrid>
+              <ProductGrid>
+                <ProductImg src="/imgs/iphone14.jpeg" alt="iphone" />
+                <P pt="8px" fs="14px" fw="600" color="gray">
+                  Apple
+                </P>
+                <P pt="8px" fs="14px" fw="600">
+                  아이폰 14 256BG 자급제
+                </P>
+                <P pt="8px" fs="14px" fw="600">
+                  1,090,000원
+                </P>
+              </ProductGrid>
+              <ProductGrid>
+                <ProductImg src="/imgs/iphonese.jpeg" alt="iphone" />
+                <P pt="8px" fs="14px" fw="600" color="gray">
+                  Apple
+                </P>
+                <P pt="8px" fs="14px" fw="600">
+                  아이폰SE 256BG 자급제
+                </P>
+                <P pt="8px" fs="14px" fw="600">
+                  650,0000원
+                </P>
+              </ProductGrid>
+            </ProductGrids>
+          </ProductDiv>
         </Body>
-        <Footer>Footer</Footer>
+        <FooterLine />
+        <Footer>
+          <P fs="18px" fw="600" pt="30px" pb="10px">
+            GiftiPie란?
+          </P>
+          <P fs="14px" color="dimgray" pb="4px">
+            커피 기프티콘 대신, 친구가 정말로 원하는 선물을
+          </P>
+          <P fs="14px" color="dimgray" pb="50px">
+            함께 모금해서 선물하는 서비스예요!
+          </P>
+          <FundingBtn onClick={handleFundingCreate}>
+            <FaPlus />
+            &nbsp; 펀딩 개설하기
+          </FundingBtn>
+        </Footer>
       </RightContainer>
     </MainContainer>
   );
