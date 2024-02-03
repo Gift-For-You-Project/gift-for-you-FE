@@ -42,6 +42,9 @@ export const P = styled.p`
   font-weight: ${(props) => props.fw};
   color: ${(props) => props.color};
   align-items: center;
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 export const Button = styled.button`
@@ -49,7 +52,7 @@ export const Button = styled.button`
   align-items: center;
   width: ${(props) => props.w};
   height: ${(props) => props.h};
-  padding: ${(props) => props.p};
+  padding: 10px;
   background-color: ${(props) => props.bc};
   border-radius: 7px;
   color: ${(props) => props.color};
@@ -61,7 +64,7 @@ export const Button = styled.button`
   padding-right: ${(props) => props.pr};
   &:hover {
     color: white;
-    background-color: black;
+    background-color: violet;
     cursor: pointer;
   }
 `;
@@ -93,6 +96,11 @@ export const NavbarBtn = styled.button`
   padding-right: ${(props) => props.pr};
 `;
 
+export const NavbarBtnDiv = styled.div`
+  flex-direction: row;
+  padding-right: ${(props) => props.pr};
+`;
+
 // 바디 영역
 export const Body = styled.div`
   font-size: 24px;
@@ -108,81 +116,33 @@ export const FundingDiv = styled.div`
   padding: 30px;
 `;
 
-export const ProducImgtDiv = styled.div`
+export const SponserDiv = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  height: 70px;
+  margin-bottom: 15px;
 `;
 
-export const SponsorDiv = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-`;
-
-export const SponsorComment = styled.div`
+export const SponserComment = styled.div`
   margin-top: ${(props) => props.mt};
   display: flex;
   flex-direction: column;
-  justify-content: start;
+  justify-content: center;
   align-items: start;
 `;
 
-export const FundingProductImg = styled.img`
-  width: 90px;
-  height: 90px;
-  border-radius: 4px;
+export const SponsorImg = styled.img`
+  width: 60px;
+  height: 60px;
+  border-radius: 100px;
   margin-top: 10px;
 `;
-
-export const FundingImg = styled.img`
-  max-width: 100px;
-  max-height: 100px;
-  width: 100%;
-  height: 100%;
-  border-radius: 8px;
-  margin-top: 10px;
-`;
-
-export const InputTag = styled.input`
-    width: ${(props) => props.w};
-    height: ${(props) => props.h};
-    background-color: #eae7de;
-    border-radius: 4px;
-    border: none;
-    margin-left: ${(props) => props.ml};
-    margin-bottom: ${(props) => props.mb};
-    padding-left: ${(props) => props.pl};
-    padding-top: ${(props) => props.pt};
-    padding-bottom: ${(props) => props.pb};
-    font-weight: 500;
-    font-size: 12px;
-    justify-content: start;
-    align-items: start;
-    &:hover {
-    cursor: pointer;
-  }
-`;
-export const RadioInput = styled.input`
-    margin-bottom: ${(props) => props.mb};
-    accent-color: black;
-`
 
 export const FundingNewline = styled.div`
   width: 100%;
   height: 12px;
-`;
-
-export const TogatherDiv = styled.div`
-  margin-top: 30px;
-  width: 442px;
-  height: 45px;
-  background-color: ${(props) => props.bc};
-  color: ${(props) => props.color};
-  justify-content: center;
-  align-items: center;
 `;
 
 export const Footer = styled.div`

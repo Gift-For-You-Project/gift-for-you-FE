@@ -22,6 +22,7 @@ export const LeftContainer = styled.div`
   border: 1px solid lightgray;
   margin-right: 100px;
 
+  
   @media (max-width: 1024px) {
     display: none;
   }
@@ -96,10 +97,12 @@ export const NavbarBtn = styled.button`
   font-size: ${(props) => props.fs};
   font-weight: ${(props) => props.fw};
   padding-left: ${(props) => props.pl};
+  padding-right: ${(props) => props.pr};
 `;
 
 export const NavbarBtnDiv = styled.div`
   flex-direction: row;
+  padding-right: ${(props) => props.pr};
 `;
 
 // 바디 영역
@@ -255,6 +258,7 @@ export const Progress = styled.div`
   padding: 0;
   text-align: center;
   background-color: orange;
+  border-radius: 15px; // 추가
   color: #111;
 `;
 
