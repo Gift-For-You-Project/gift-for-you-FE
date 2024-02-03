@@ -3,9 +3,8 @@ import styled from "styled-components";
 // 전체 컨테이너
 export const MainContainer = styled.div`
   display: flex;
-  justify-content: center; // 수정함
-  /* width: 1200px; */
-  max-width: 1200px; // 수정함
+  justify-content: center; 
+  max-width: 1200px; 
   min-height: 100vh;
   margin: 0 auto;
   flex-wrap: wrap;
@@ -43,21 +42,26 @@ export const P = styled.p`
   font-weight: ${(props) => props.fw};
   color: ${(props) => props.color};
   align-items: center;
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 export const Button = styled.button`
   justify-content: center;
   align-items: center;
-  width: 200px;
-  height: 50px;
+  width: ${(props) => props.w};
+  height: ${(props) => props.h};
   padding: 10px;
-  background-color: orange;
+  background-color: ${(props) => props.bc};
   border-radius: 7px;
-  color: white;
-  font-size: 15px;
+  color: ${(props) => props.color};
+  font-size: ${(props) => props.fs};
   font-weight: 600;
-  margin-top: 30px;
-  margin-bottom: 20px;
+  margin-top: ${(props) => props.mt};
+  margin-bottom: ${(props) => props.mb};
+  padding-left: ${(props) => props.pl};
+  padding-right: ${(props) => props.pr};
   &:hover {
     color: white;
     background-color: violet;
@@ -68,12 +72,9 @@ export const Button = styled.button`
 // 오른쪽 컨테이너
 export const RightContainer = styled.div`
   position: relative;
-  /* width: 470px; */
   width: 442px;
-  /* margin-left: auto; */
   border: 1px solid lightgray;
 
-  /* @media (max-width: 1024px) { */
   @media (max-width: 442px) {
     width: 100%;
   }
@@ -104,94 +105,44 @@ export const NavbarBtnDiv = styled.div`
 export const Body = styled.div`
   font-size: 24px;
   font-weight: 800;
-  height: 1500px;
-`;
-
-export const BannerImg = styled.img`
-  width: 100%;
-  /* max-width: 470px; */
-  max-width: 442px;
-  height: auto;
+  height: 2100px;
 `;
 
 export const FundingDiv = styled.div`
   justify-content: center;
   width: 100%;
-  /* max-width: 470px; */
   max-width: 442px;
   height: auto;
+  padding: 30px;
 `;
 
-export const FundingSection = styled.div`
+export const SponserDiv = styled.div`
   display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
-  /* width: 100%; */
-  gap: 10px;
-  padding: 10px;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 70px;
+  margin-bottom: 15px;
 `;
 
-export const FundingGrid = styled.div`
-  /* width: 200px; */
-  /* width: 195px; */
-  width: 100%;
-  max-width: 190px;
-
-  /* @media (max-width: 470px) { */
-  /* @media (max-width: 195px) {
-    width: 100%; // FundingGrid가 부모 컨테이너에 꽉 차도록 설정
-  } */
+export const SponserComment = styled.div`
+  margin-top: ${(props) => props.mt};
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
 `;
 
-export const FundingImg = styled.img`
-  /* width: 200px; */
-  max-width: 190px;
-  max-height: 140px;
-  width: 100%;
-  height: 100%;
-  border-radius: 8px;
+export const SponsorImg = styled.img`
+  width: 60px;
+  height: 60px;
+  border-radius: 100px;
   margin-top: 10px;
 `;
 
 export const FundingNewline = styled.div`
   width: 100%;
   height: 12px;
-`;
-
-export const ProgressBar = styled.div`
-  width: 100%;
-  height: 10px;
-  background-color: #dedede;
-  border-radius: 12px;
-  font-weight: 600;
-  font-size: 0.8rem;
-  margin-top: 20px;
-  overflow: hidden;
-`;
-
-export const Progress = styled.div`
-  width: ${(props) => props.width}%;
-  height: 10px;
-  padding: 0;
-  text-align: center;
-  background-color: orange;
-  border-radius: 15px; // 추가
-  color: #111;
-`;
-
-export const BetweenDiv = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-`;
-
-export const TogatherDiv = styled.div`
-  margin-top: 20px;
-  /* width: 470px; */
-  width: 442px;
-  /* height: 200px; */
-  height: 210px;
-  background-color: orange;
 `;
 
 export const Footer = styled.div`

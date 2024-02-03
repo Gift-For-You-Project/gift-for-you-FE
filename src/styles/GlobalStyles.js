@@ -19,7 +19,7 @@ const GlobalStyles = createGlobalStyle`
         vertical-align: baseline;
     }
     body{
-        line-height: 1;
+        line-height: 1.2;
         font-family: 'Pretendard', sans-serif;
         margin-bottom: 100px;
         background-repeat: no-repeat;
