@@ -8,7 +8,7 @@ import Login from "./pages/Home/Login";
 import Signup from "./pages/Home/Signup";
 import FundingCreate from "./pages/Funding/FundingCreate/FundingCreate";
 import FundingDetail from "./pages/Funding/FundingDetail/FundingDetail";
-import FundingSponsorDetail from "./pages/Funding/FundingSponsorDetail/FundingSponsorDetail";
+import Sponsor from "./pages/Funding/FundingDetail/Sponsor/Sponsor";
 import FundingModify from "./pages/Funding/FundingModify/FundingModify";
 import FundingPay from "./pages/Funding/FundingPay/FundingPay";
 
@@ -18,7 +18,7 @@ const links = [
   { path: "/signup" },
   { path: "/fundingcreate" },
   { path: "/fundingdetail" },
-  { path: "/fundingsponsordetail" },
+  { path: "/sponsor" },
   { path: "/fundingmodify" },
   { path: "/fundingpay" },
   // 새로운 링크 추가하는 곳
@@ -50,7 +50,7 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/fundingcreate" element={<FundingCreate />} />
         <Route path="/fundingdetail" element={<FundingDetail />} />
-        <Route path="/fundingsponsordetail" element={<FundingSponsorDetail />} />
+        <Route path="/fundingsponsordetail" element={<Sponsor />} />
         <Route path="/fundingmodify" element={<FundingModify />} />
         <Route path="/fundingpay" element={<FundingPay />} />
         <Route path="*" element={<NotFound />} />

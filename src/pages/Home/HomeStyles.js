@@ -22,7 +22,6 @@ export const LeftContainer = styled.div`
   border: 1px solid lightgray;
   margin-right: 100px;
 
-  
   @media (max-width: 1024px) {
     display: none;
   }

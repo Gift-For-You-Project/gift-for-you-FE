@@ -1,7 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { FaChevronRight } from "react-icons/fa";
 import { FaPlus } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
+import Login from "./Login";
+import { openLoginModal } from "../../redux/authSlice"; // 액션 추가
+import { bootChannelTalk } from "../../redux/channelTalkSlice";
 import {
   MainContainer,
   LeftContainer,
@@ -46,9 +50,12 @@ import {
 
 const Home = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const isLoginModalOpen = useSelector((state) => state.auth.isLoginModalOpen);
 
   const handleLoginClick = () => {
-    navigate("/login");
+    console.log("Dispatching openLoginModal"); // 디스패치가 제대로 되고 있는지 확인용 로그
+    dispatch(openLoginModal()); // 액션 디스패치
   };
 
   const handleSignupClick = () => {
@@ -58,6 +65,11 @@ const Home = () => {
   const handleFundingCreate = () => {
     navigate("/fundingcreate");
   };
+
+  useEffect(() => {
+    // 컴포넌트가 마운트될 때 bootChannelTalk 액션 디스패치
+    dispatch(bootChannelTalk());
+  }, [dispatch]);
 
   return (
     <MainContainer>
@@ -345,6 +357,9 @@ const Home = () => {
           </FundingBtn>
         </Footer>
       </RightContainer>
+
+      {/* 로그인 모달 */}
+      {isLoginModalOpen && <Login />}
     </MainContainer>
   );
 };
