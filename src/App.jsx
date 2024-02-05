@@ -1,7 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Link, Routes } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { setCurrentPage } from "./redux/navigationSlice";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import NotFound from "./pages/NotFound/NotFound";
 import Home from "./pages/Home/Home";
 import Login from "./pages/Home/Login";
@@ -12,38 +10,9 @@ import Sponsor from "./pages/Funding/FundingDetail/Sponsor/Sponsor";
 import FundingModify from "./pages/Funding/FundingModify/FundingModify";
 import FundingPay from "./pages/Funding/FundingPay/FundingPay";
 
-const links = [
-  { path: "/" },
-  { path: "/login" },
-  { path: "/signup" },
-  { path: "/fundingcreate" },
-  { path: "/fundingdetail" },
-  { path: "/sponsor" },
-  { path: "/fundingmodify" },
-  { path: "/fundingpay" },
-  // 새로운 링크 추가하는 곳
-];
-
 function App() {
-  const dispatch = useDispatch();
-  const handleLinkClick = (path) => {
-    dispatch(setCurrentPage(path));
-  };
-
   return (
     <Router>
-      <div>
-        {links.map((link) => (
-          <Link
-            key={link.path}
-            to={link.path}
-            onClick={() => handleLinkClick(link.path)}
-          >
-            {link.label}
-          </Link>
-        ))}
-      </div>
-
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />

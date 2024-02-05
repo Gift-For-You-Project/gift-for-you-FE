@@ -37,6 +37,11 @@ export const IoCloseDiv = styled.div`
   font-size: 30px;
   color: lightgray;
   padding: 8px;
+
+  &:hover {
+    color: darkgray;
+    cursor: pointer;
+  }
 `;
 
 export const LoginImg = styled.img`

@@ -9,12 +9,12 @@ import {
   LoginBtn,
 } from "./LoginStyles";
 
-const Login = () => {
+const Login = ({ closeModal }) => {
   return (
     <>
-      <Background />
+      <Background onClick={closeModal} />
       <ModalContainer>
-        <IoCloseDiv>
+        <IoCloseDiv onClick={closeModal}>
           <IoClose />
         </IoCloseDiv>
         <LoginImg src="/imgs/Login/pie.png" alt="pie" w="100px" h="100px" />
