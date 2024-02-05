@@ -8,13 +8,28 @@ export const instance = axios.create({
 
 // 토큰을 쿠키에 저장하는 함수
 const saveTokensToCookies = (accessToken, refreshToken) => {
-  // 쿠키에 저장하는 로직 구현
   Cookies.set("accessToken", accessToken, { path: "/" });
   Cookies.set("refreshToken", refreshToken, { path: "/" });
 };
 
+// 인터셉터를 사용하여 요청 변경
+instance.interceptors.request.use(
+  (config) => {
+    const accessToken = Cookies.get("accessToken");
+
+    if (accessToken) {
+      config.headers.Authorization = `Bearer ${accessToken}`;
+    }
+
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
+
 // 회원가입 API
-export const signupUser = async (userData) => {
+export const signup = async (userData) => {
   try {
     const response = await instance.post("/api/signup", userData);
     return response.data;
@@ -36,7 +51,7 @@ export const signupUser = async (userData) => {
 };
 
 // 로그인 API
-export const loginUser = async (credentials) => {
+export const login = async (credentials) => {
   try {
     const response = await instance.post("/api/login", credentials);
     const { accessToken, user } = response.data;
@@ -59,14 +74,3 @@ export const loginUser = async (credentials) => {
     }
   }
 };
-
-// Axios 인터셉터를 사용하여 요청을 변경하는 함수
-instance.interceptors.request.use((config) => {
-  const accessToken = Cookies.get("accessToken");
-
-  if (accessToken) {
-    config.headers.Authorization = `Bearer ${accessToken}`;
-  }
-
-  return config;
-});

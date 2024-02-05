@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { FaChevronRight } from "react-icons/fa";
 import { FaPlus } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
-import Login from "./Login";
+import LoginModal from "../Home/Login/LoginModal";
 import { bootChannelTalk } from "../../redux/channelTalkSlice";
 import {
   MainContainer,
@@ -60,10 +60,6 @@ const Home = () => {
     setIsLoginModalOpen(false);
   };
 
-  const handleSignupClick = () => {
-    navigate("/signup");
-  };
-
   const handleFundingCreate = () => {
     navigate("/fundingcreate");
   };
@@ -97,9 +93,6 @@ const Home = () => {
           <NavbarBtnDiv>
             <NavbarBtn onClick={handleLoginClick} fs="13px" fw="600">
               로그인
-            </NavbarBtn>
-            <NavbarBtn onClick={handleSignupClick} fs="13px" fw="600">
-              회원가입
             </NavbarBtn>
           </NavbarBtnDiv>
         </Navbar>
@@ -360,7 +353,7 @@ const Home = () => {
       </RightContainer>
 
       {/* 로그인 모달 */}
-      {isLoginModalOpen && <Login closeModal={closeModal} />}
+      {isLoginModalOpen && <LoginModal closeModal={closeModal} />}
     </MainContainer>
   );
 };

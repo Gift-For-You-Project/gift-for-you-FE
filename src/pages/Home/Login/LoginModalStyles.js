@@ -44,7 +44,7 @@ export const IoCloseDiv = styled.div`
   }
 `;
 
-export const LoginImg = styled.img`
+export const LoginModalImg = styled.img`
   width: ${(props) => props.w};
   height: ${(props) => props.h};
   margin-top: ${(props) => props.mt};
@@ -67,7 +67,7 @@ export const P = styled.p`
   align-items: center;
 `;
 
-export const LoginBtn = styled.button`
+export const LoginModalBtn = styled.button`
   background-color: ${(props) => props.color};
   padding: 16px 20px;
   font-size: 18px;

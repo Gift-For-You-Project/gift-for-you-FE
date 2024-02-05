@@ -19,10 +19,7 @@ const channelTalkSlice = createSlice({
   name: "channelTalk",
   initialState: {},
   reducers: {
-    bootChannelTalkSuccess: (state, action) => {
-      // 부트 성공 후 상태를 변경하는 로직 작성
-    },
-    // ... 다른 액션 및 리듀서들
+    bootChannelTalkSuccess: (state, action) => {},
   },
 });
 

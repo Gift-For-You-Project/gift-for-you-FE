@@ -2,8 +2,9 @@ import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import NotFound from "./pages/NotFound/NotFound";
 import Home from "./pages/Home/Home";
-import Login from "./pages/Home/Login";
-import Signup from "./pages/Home/Signup";
+import LoginModal from "./pages/Home/Login/LoginModal";
+import Login from "./pages/Home/Login/Login";
+import Signup from "./pages/Home/Signup/Signup";
 import FundingCreate from "./pages/Funding/FundingCreate/FundingCreate";
 import FundingDetail from "./pages/Funding/FundingDetail/FundingDetail";
 import Sponsor from "./pages/Funding/FundingDetail/Sponsor/Sponsor";
@@ -15,6 +16,7 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/loginmodal" element={<LoginModal />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/fundingcreate" element={<FundingCreate />} />
