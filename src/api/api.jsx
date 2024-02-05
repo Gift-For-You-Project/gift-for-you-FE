@@ -32,6 +32,7 @@ instance.interceptors.request.use(
 export const signup = async (userData) => {
   try {
     const response = await instance.post("/api/signup", userData);
+    console.log(response.body);
     return response.data;
   } catch (error) {
     console.error("회원가입 오류:", error);
@@ -39,7 +40,6 @@ export const signup = async (userData) => {
       const { status } = error.response;
       const errorMessages = {
         401: "이미 존재하는 사용자입니다.",
-        404: "이메일 또는 비밀번호가 존재하지 않습니다.",
       };
       const errorMessage =
         errorMessages[status] || "알 수 없는 오류가 발생했습니다.";
