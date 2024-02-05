@@ -97,11 +97,11 @@ const Login = () => {
 
     try {
       // 로그인 API 호출
-      const user = await login({ email, password });
-      console.log("로그인 성공:", user);
+      await login({ email, password });
+      // console.log("로그인 성공:", user);
       navigate("/");
     } catch (error) {
-      console.error("로그인 오류:", error);
+      // console.error("로그인 오류:", error);
     }
   };
 

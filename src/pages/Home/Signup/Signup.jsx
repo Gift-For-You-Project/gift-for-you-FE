@@ -156,10 +156,10 @@ const Signup = () => {
       }
 
       // 가입 로직 수행
-      const userData = { email, password, nickname };
+      const userData = { email, nickname, password, phoneNumber };
       await signup(userData);
       console.log("가입 성공! 환영합니다.");
-      navigate("/");
+      navigate("/login");
     } catch (error) {
       console.error("가입 오류:", error);
     }
