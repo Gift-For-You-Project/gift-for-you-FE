@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { FaChevronRight } from "react-icons/fa";
 import { FaPlus } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
+import LoginModal from "../Home/Login/LoginModal";
+import { bootChannelTalk } from "../../redux/channelTalkSlice";
 import {
   MainContainer,
   LeftContainer,
@@ -46,18 +49,25 @@ import {
 
 const Home = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
 
   const handleLoginClick = () => {
-    navigate("/login");
+    setIsLoginModalOpen(true);
   };
 
-  const handleSignupClick = () => {
-    navigate("/signup");
+  const closeModal = () => {
+    setIsLoginModalOpen(false);
   };
 
   const handleFundingCreate = () => {
     navigate("/fundingcreate");
   };
+
+  useEffect(() => {
+    // 컴포넌트가 마운트될 때 bootChannelTalk 액션 디스패치
+    dispatch(bootChannelTalk());
+  }, [dispatch]);
 
   return (
     <MainContainer>
@@ -81,12 +91,8 @@ const Home = () => {
             🥧 Giftipie
           </NavbarBtn>
           <NavbarBtnDiv>
-            {/* 문의는 로그인 후에, 로그인/회원가입 버튼은 분리 */}
             <NavbarBtn onClick={handleLoginClick} fs="13px" fw="600">
               로그인
-            </NavbarBtn>
-            <NavbarBtn onClick={handleSignupClick} fs="13px" fw="600">
-              회원가입
             </NavbarBtn>
           </NavbarBtnDiv>
         </Navbar>
@@ -345,6 +351,9 @@ const Home = () => {
           </FundingBtn>
         </Footer>
       </RightContainer>
+
+      {/* 로그인 모달 */}
+      {isLoginModalOpen && <LoginModal closeModal={closeModal} />}
     </MainContainer>
   );
 };

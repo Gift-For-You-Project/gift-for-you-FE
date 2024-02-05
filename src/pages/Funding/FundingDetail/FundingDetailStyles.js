@@ -3,8 +3,8 @@ import styled from "styled-components";
 // 전체 컨테이너
 export const MainContainer = styled.div`
   display: flex;
-  justify-content: center; 
-  max-width: 1200px; 
+  justify-content: center;
+  max-width: 1200px;
   min-height: 100vh;
   margin: 0 auto;
   flex-wrap: wrap;
@@ -169,7 +169,7 @@ export const Progress = styled.div`
   padding: 0;
   text-align: center;
   background-color: orange;
-  border-radius: 15px; 
+  border-radius: 15px;
   color: #111;
   padding-left: ${(props) => props.pl};
   padding-right: ${(props) => props.pr};
@@ -181,7 +181,7 @@ export const BetweenDiv = styled.div`
   justify-content: space-between;
 `;
 
-export const TogatherDiv = styled.div`
+export const TogetherDiv = styled.div`
   margin-top: 20px;
   width: 442px;
   height: 215px;
