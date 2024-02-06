@@ -130,15 +130,7 @@ export const LoginBtn = styled.button`
   }
 `;
 
-export const LoginEmailHelpDiv = styled.div`
-  width: 300px;
-  height: 20px;
-  font-size: 14px;
-  margin-top: 10px;
-  color: #f45757;
-`;
-
-export const LoginPasswordHelpDiv = styled.div`
+export const LoginHelpDiv = styled.div`
   width: 300px;
   height: 20px;
   font-size: 14px;

@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { FaChevronRight } from "react-icons/fa";
 import { FaPlus } from "react-icons/fa6";
+// import { BsPersonCircle } from "react-icons/bs";
+// import { HiBell } from "react-icons/hi";
 import { useNavigate } from "react-router-dom";
 import LoginModal from "../Home/Login/LoginModal";
 import { bootChannelTalk } from "../../redux/channelTalkSlice";
@@ -118,7 +120,7 @@ const Home = () => {
                     36%
                   </P>
                   <P fs="14px" fw="600" pr="20px" pt="10px">
-                    16일 남음
+                    D-16
                   </P>
                 </BetweenDiv>
                 <P fs="16px" fw="400" color="gray" pl="20px" pt="10px">
@@ -158,7 +160,7 @@ const Home = () => {
                     36%
                   </P>
                   <P pt="2px" pl="90px" fs="10px" fw="800">
-                    16일 남음
+                    D-16
                   </P>
                 </BetweenDiv>
                 <P pt="10px" fs="14px" fw="600" color="gray">
