@@ -49,21 +49,23 @@ const FundingDetail = () => {
     // 펀딩 상세 정보를 담는 상태 변수 초기화
     const [detailData, setDetailData] = useState({
         // 초기 상태를 명세서에 따라 설정
-        fundingid: 0,
+        fundingid: '',
         itemLink: '',
-        itemImage: '',
+        itemImage: '', // 
         title: '',
         content: '',
         currentAmount: 0,
         targetAmount: 0,
         publicFlag: false,
         endDate: '',
-        dDay: '',
+        dday: '',
         status: false,
         achievementRate: 0,
         ownerFlag: false,
         modifiedAt: '',
         showName: '',
+        itemName: '',
+        // 후원자 이름 추가
     });
 
     useEffect(() => {
@@ -71,7 +73,7 @@ const FundingDetail = () => {
         const fetchData = async () => {
             try {
                 // 펀딩 ID를 설정하여 특정 펀딩의 상세 정보 가져오기
-                const fundingId = 1; // 예: 펀딩 ID가 1인 경우
+                const fundingId = 10; // 예: 펀딩 ID가 1인 경우
                 const data = await fetchFundingDetail(fundingId);
                 setDetailData(data); // 가져온 데이터를 상태 변수에 설정
             } catch (error) {
@@ -118,17 +120,21 @@ const FundingDetail = () => {
                 </Navbar>
 
                 <Body>
-                    <BannerImg src="/imgs/airpodspro2.jpg" alt="image" />
+                    {/* <BannerImg src="/imgs/airpodspro2.jpg" alt="image" /> */}
+                    <BannerImg src={detailData.itemImage} alt="image" />
                     <FundingDiv>
                         <P pt="20px" fs="13px" fw="800">
                             진행중
                         </P>
                         <P pt="10px" fs="20px" fw="900">
-                            {detailData.title}
+                            {detailData.title} 
+                        </P>
+                        <P pt="10px" fs="15px" fw="900">
+                            {detailData.itemName} 
                         </P>
                         <BetweenDiv>
                             <P pt="10px" fs="15px" fw="800">
-                                {detailData.dDay}
+                                {detailData.dday}
                             </P>
                             <P pt="10px" fs="15px" fw="800">
                                 {detailData.endDate}

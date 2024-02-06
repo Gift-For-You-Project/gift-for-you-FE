@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { updateFundingModify } from '../../../api/api';
+import { FundingModifyGet } from '../../../api/api';
 import {
     MainContainer,
     LeftContainer,
@@ -32,8 +33,9 @@ const FundingModify = () => {
         title: '',
         content: '',
         targetAmount: 0,
-        publicFlag: false,
+        publicFlag: '',
         endDate: '',
+        itemImage: '', 
     });
 
     // 공개 여부 변경 핸들러
@@ -49,15 +51,33 @@ const FundingModify = () => {
     const fundingModifyData = async () => {
         try {
             // 펀딩 ID를 적절하게 설정 (예: 1)
-            const fundingId = 1;
+            const fundingId = 10;
             const data = await updateFundingModify(fundingId, fundingData); // 펀딩 수정 API 호출
-
             console.log('펀딩 수정 성공:', data);
             alert('펀딩이 수정되었습니다.');
         } catch (error) {
             console.error('펀딩 수정 오류:', error);
         }
     };
+
+    useEffect(() => {
+        // API를 호출하여 펀딩 상세 정보를 가져오는 함수 정의
+        const fetchData = async () => {
+            try {
+                // 펀딩 ID를 설정하여 특정 펀딩의 상세 정보 가져오기
+                const fundingId = 10; // 예: 펀딩 ID가 1인 경우
+                const data = await FundingModifyGet(fundingId);
+                console.log('+++', data);
+                setFundingData(data); // 가져온 데이터를 상태 변수에 설정
+            } catch (error) {
+                // API 호출 실패 시 에러 처리
+                console.error('API 호출 오류:', error);
+            }
+        };
+
+        // 컴포넌트가 마운트될 때 API 호출 함수 실행
+        fetchData();
+    }, []); // 빈 배열을 전달하여 한 번만 실행하도록 설정
 
     return (
         <MainContainer>
@@ -100,7 +120,8 @@ const FundingModify = () => {
                         <ProducImgtDiv></ProducImgtDiv>
 
                         <SponsorDiv>
-                            <FundingImg src="/imgs/airpodspro.jpeg" alt="logo" />
+                            {/* <FundingImg src="/imgs/airpodspro.jpeg" alt="logo" /> */}
+                            <FundingImg src={fundingData.itemImage} alt="logo" />
                             <SponsorComment mt="10px">
                                 <div>
                                     <InputTag
@@ -152,7 +173,10 @@ const FundingModify = () => {
                                     <RadioInput
                                         value="true"
                                         checked={fundingData.publicFlag === 'true'}
-                                        onChange={handlePublicFlagChange}
+                                        // onChange={handlePublicFlagChange}
+                                        onChange={(e) => {
+                                            setFundingData({ ...fundingData, publicFlag: e.target.value });
+                                        }}
                                         type="radio"
                                         mb="21px"
                                     />
@@ -168,7 +192,10 @@ const FundingModify = () => {
                                     <RadioInput
                                         value="false"
                                         checked={fundingData.publicFlag === 'false'}
-                                        onChange={handlePublicFlagChange}
+                                        // onChange={handlePublicFlagChange}
+                                        onChange={(e) => {
+                                            setFundingData({ ...fundingData, publicFlag: e.target.value });
+                                        }}
                                         type="radio"
                                         mb="21px"
                                     />
