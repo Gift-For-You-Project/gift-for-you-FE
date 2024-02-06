@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
 import { FaChevronRight } from "react-icons/fa";
 import { FaPlus } from "react-icons/fa6";
-// import { BsPersonCircle } from "react-icons/bs";
-// import { HiBell } from "react-icons/hi";
+import { BsPersonCircle } from "react-icons/bs";
+import { HiBell } from "react-icons/hi";
 import { useNavigate } from "react-router-dom";
 import LoginModal from "../Home/Login/LoginModal";
+import { useDispatch } from "react-redux";
 import { bootChannelTalk } from "../../redux/channelTalkSlice";
 import {
   MainContainer,
@@ -17,6 +17,8 @@ import {
   Navbar,
   NavbarBtn,
   NavbarBtnDiv,
+  NavbarIconContainer,
+  NavbarIconDiv,
   Body,
   MainDiv,
   MainTitle,
@@ -53,9 +55,16 @@ const Home = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+  const [userLoggedIn, setUserLoggedIn] = useState(false);
 
   const handleLoginClick = () => {
     setIsLoginModalOpen(true);
+  };
+
+  const handleLogoutClick = () => {
+    setUserLoggedIn(false);
+    localStorage.removeItem("Authorization");
+    navigate("/");
   };
 
   const closeModal = () => {
@@ -66,9 +75,35 @@ const Home = () => {
     navigate("/fundingcreate");
   };
 
+  // 상태에 따라 Navbar에 표시될 아이콘 결정
+  const navbarState = userLoggedIn ? (
+    <>
+      <NavbarIconContainer>
+        <NavbarIconDiv>
+          <HiBell />
+        </NavbarIconDiv>
+        <NavbarIconDiv>
+          <BsPersonCircle />
+        </NavbarIconDiv>
+        <NavbarBtn onClick={handleLogoutClick} fs="13px" fw="600">
+          로그아웃
+        </NavbarBtn>
+      </NavbarIconContainer>
+    </>
+  ) : (
+    <>
+      <NavbarBtn onClick={handleLoginClick} fs="13px" fw="600">
+        로그인
+      </NavbarBtn>
+    </>
+  );
+
   useEffect(() => {
-    // 컴포넌트가 마운트될 때 bootChannelTalk 액션 디스패치
-    dispatch(bootChannelTalk());
+    const token = localStorage.getItem("Authorization");
+    if (token) {
+      setUserLoggedIn(true);
+      dispatch(bootChannelTalk());
+    }
   }, [dispatch]);
 
   return (
@@ -92,11 +127,7 @@ const Home = () => {
           <NavbarBtn fs="20px" fw="600" pl="15px">
             🥧 Giftipie
           </NavbarBtn>
-          <NavbarBtnDiv>
-            <NavbarBtn onClick={handleLoginClick} fs="13px" fw="600">
-              로그인
-            </NavbarBtn>
-          </NavbarBtnDiv>
+          <NavbarBtnDiv>{navbarState}</NavbarBtnDiv>
         </Navbar>
 
         <Body>

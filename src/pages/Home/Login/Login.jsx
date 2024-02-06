@@ -1,14 +1,12 @@
 import React, { useState } from "react";
 import { FaAngleLeft } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import InputField from "../../../components/LoginInput";
 import {
   login,
-  saveTokensToLocalStorage,
-  getTokensFromCookies,
+  saveTokensToLocalStorageAndCookies,
+  getTokensFromLocalStorageAndCookies,
 } from "../../../api/api";
-import { loginSuccess } from "../../../redux/authSlice";
-import InputField from "../../../components/LoginInput";
 import {
   MainContainer,
   LeftContainer,
@@ -25,7 +23,6 @@ import {
 
 const Login = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showEmailHelp, setShowEmailHelp] = useState(false);
@@ -76,14 +73,11 @@ const Login = () => {
 
     // API 호출을 통한 로그인 처리
     try {
-      const user = await login({ email, password });
-      saveTokensToLocalStorage(
-        getTokensFromCookies().accessToken,
-        getTokensFromCookies().refreshToken
-      );
+      await login({ email, password });
+      const { localStorageToken, cookieToken } =
+        getTokensFromLocalStorageAndCookies();
+      saveTokensToLocalStorageAndCookies(localStorageToken || cookieToken);
       navigate("/");
-      // Redux 상태 업데이트
-      dispatch(loginSuccess(user));
     } catch (error) {
       console.error("로그인 오류:", error);
     }
