@@ -1,7 +1,12 @@
 import React, { useState } from "react";
 import { FaAngleLeft } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
-import { login } from "../../../api/api";
+import InputField from "../../../components/LoginInput";
+import {
+  login,
+  saveTokensToLocalStorageAndCookies,
+  getTokensFromLocalStorageAndCookies,
+} from "../../../api/api";
 import {
   MainContainer,
   LeftContainer,
@@ -12,27 +17,9 @@ import {
   Body,
   LoginIconDiv,
   LoginImg,
-  LoginInput,
   LoginBtn,
-  LoginEmailHelpDiv,
-  LoginPasswordHelpDiv,
   BlankLine,
 } from "./LoginStyles";
-
-// InputField 컴포넌트
-const InputField = ({ onChange, onKeyDown, title, type, placeholder }) => (
-  <div>
-    <P fs="20px" pb="10px">
-      {title}
-    </P>
-    <LoginInput
-      type={type}
-      placeholder={`${placeholder}`}
-      onChange={onChange}
-      onKeyDown={onKeyDown}
-    />
-  </div>
-);
 
 const Login = () => {
   const navigate = useNavigate();
@@ -52,13 +39,11 @@ const Login = () => {
     }
   };
 
-  // 알파벳 대소문자, 숫자, 특수문자, @기호, 도메인 부분은 2자 이상
   const isValidEmailFormat = (email) => {
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     return emailRegex.test(email);
   };
 
-  // 알파벳 대소문자, 숫자, 특수문자를 조합하여 8자에서 15자 사이의 비밀번호
   const isValidPasswordFormat = (password) => {
     const passwordRegex =
       /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,15}$/;
@@ -83,25 +68,18 @@ const Login = () => {
 
   // 빈 칸인 상태에서 로그인을 했을 때 help 보여주기
   const handleLoginClick = async () => {
-    if (email.trim() === "") {
-      setShowEmailHelp(true);
-    } else {
-      setShowEmailHelp(false);
-    }
+    setShowEmailHelp(email.trim() === "");
+    setShowPasswordHelp(password.trim() === "");
 
-    if (password.trim() === "") {
-      setShowPasswordHelp(true);
-    } else {
-      setShowPasswordHelp(false);
-    }
-
+    // API 호출을 통한 로그인 처리
     try {
-      // 로그인 API 호출
       await login({ email, password });
-      // console.log("로그인 성공:", user);
+      const { localStorageToken, cookieToken } =
+        getTokensFromLocalStorageAndCookies();
+      saveTokensToLocalStorageAndCookies(localStorageToken || cookieToken);
       navigate("/");
     } catch (error) {
-      // console.error("로그인 오류:", error);
+      console.error("로그인 오류:", error);
     }
   };
 
@@ -133,17 +111,15 @@ const Login = () => {
               title="이메일"
               type="email"
               placeholder="Email"
+              showHelp={showEmailHelp}
+              helpMessage={
+                showEmailHelp
+                  ? isValidEmailFormat(email)
+                    ? "올바른 이메일 주소 형식으로 다시 입력해 주세요."
+                    : "이메일을 입력해 주세요."
+                  : ""
+              }
             />
-            {showEmailHelp && email.trim() === "" && (
-              <LoginEmailHelpDiv>이메일을 입력해 주세요.</LoginEmailHelpDiv>
-            )}
-            {showEmailHelp &&
-              !isValidEmailFormat(email) &&
-              email.trim() !== "" && (
-                <LoginEmailHelpDiv>
-                  올바른 이메일 주소 형식으로 다시 입력해 주세요.
-                </LoginEmailHelpDiv>
-              )}
             <BlankLine h="50px" />
             <InputField
               value={password}
@@ -152,14 +128,15 @@ const Login = () => {
               title="비밀번호"
               type="password"
               placeholder="Password"
+              showHelp={showPasswordHelp}
+              helpMessage={
+                showPasswordHelp
+                  ? password.trim() === ""
+                    ? "비밀번호를 입력해 주세요."
+                    : "가입되지 않은 이메일이거나 비밀번호가 일치하지 않습니다."
+                  : ""
+              }
             />
-            {showPasswordHelp && (
-              <LoginPasswordHelpDiv>
-                {password.trim() === ""
-                  ? "비밀번호를 입력해 주세요."
-                  : "가입되지 않은 이메일이거나 비밀번호가 일치하지 않습니다."}
-              </LoginPasswordHelpDiv>
-            )}
           </InputFieldContainer>
           <LoginBtn onClick={handleLoginClick}>로그인하기</LoginBtn>
         </Body>
