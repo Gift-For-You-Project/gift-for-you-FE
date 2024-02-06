@@ -37,6 +37,20 @@ const GlobalStyles = createGlobalStyle`
         background: transparent;
         cursor: pointer;
     }
+    input {
+        border: 0;
+        outline: 0;
+    }
+    input[type="number"] {
+        appearance: none;
+        -moz-appearance: textfield; /* Firefox에서의 설정 */
+    }
+    /* Webkit 계열 브라우저에 대한 추가 설정 */
+    input[type="number"]::-webkit-inner-spin-button,
+    input[type="number"]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
 `;
 
 export default GlobalStyles;

@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { fetchFundingDetail } from '../../../api/api'; // 펀딩 상세 정보를 가져오는 API 함수 import
+// import Sponsor from './Sponsor/Sponsor';
 import {
     MainContainer,
     LeftContainer,
@@ -19,17 +21,68 @@ import {
     ProgressBar,
     Progress,
     BetweenDiv,
-    TogatherDiv,
-    Footer,
+    TogetherDiv,
 } from './FundingDetailStyles';
 
+// 펀딩 상세 페이지 컴포넌트
 const FundingDetail = () => {
-    const navigate = useNavigate();
+    const navigate = useNavigate(); // React Router의 네비게이션 기능을 사용하기 위한 hook
 
-    const meta = document.createElement('meta');
-    meta.name = 'viewport';
-    meta.content = 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover';
-    document.getElementsByTagName('head')[0].appendChild(meta);
+    // const [detailData, setDetailData] = useState({
+    //     fundingid: 1,
+    //     itemLink: 'https://www.naver.com',
+    //     itemImage: '신발',
+    //     title: '인생 첫 에어팟을 선물해주세요 😘', // 펀딩 제목
+    //     content: '본문 내용 블라블라~ 😘😘😘', // 본문 내용
+    //     currentAmount: 210500, // 현재 금액
+    //     targetAmount: 300000, // 목표 금액
+    //     publicFlag: false,
+    //     endDate: '2024-02-01', // 2월 1일 23:59 마감
+    //     dDay: 'D-5', // 디데이
+    //     status: false, // (펀딩 상태)
+    //     achievementRate: 70, // 달성률%
+    //     ownerFlag: true, // (작성자 확인)
+    //     modifiedAt: '2024-02-02', // (수정 날짜)
+    //     showName: '윤다인', // 보여줄 이름
+    // });
+
+    // 펀딩 상세 정보를 담는 상태 변수 초기화
+    const [detailData, setDetailData] = useState({
+        // 초기 상태를 명세서에 따라 설정
+        fundingid: 0,
+        itemLink: '',
+        itemImage: '',
+        title: '',
+        content: '',
+        currentAmount: 0,
+        targetAmount: 0,
+        publicFlag: false,
+        endDate: '',
+        dDay: '',
+        status: false,
+        achievementRate: 0,
+        ownerFlag: false,
+        modifiedAt: '',
+        showName: '',
+    });
+
+    useEffect(() => {
+        // API를 호출하여 펀딩 상세 정보를 가져오는 함수 정의
+        const fetchData = async () => {
+            try {
+                // 펀딩 ID를 설정하여 특정 펀딩의 상세 정보 가져오기
+                const fundingId = 1; // 예: 펀딩 ID가 1인 경우
+                const data = await fetchFundingDetail(fundingId);
+                setDetailData(data); // 가져온 데이터를 상태 변수에 설정
+            } catch (error) {
+                // API 호출 실패 시 에러 처리
+                console.error('API 호출 오류:', error);
+            }
+        };
+
+        // 컴포넌트가 마운트될 때 API 호출 함수 실행
+        fetchData();
+    }, []); // 빈 배열을 전달하여 한 번만 실행하도록 설정
 
     return (
         <MainContainer>
@@ -71,57 +124,42 @@ const FundingDetail = () => {
                             진행중
                         </P>
                         <P pt="10px" fs="20px" fw="900">
-                            인생 첫 에어팟을 선물해주세요 😘
+                            {detailData.title}
                         </P>
                         <BetweenDiv>
                             <P pt="10px" fs="15px" fw="800">
-                                D-5
+                                {detailData.dDay}
                             </P>
                             <P pt="10px" fs="15px" fw="800">
-                                2월 1일 23:59 마감
+                                {detailData.endDate}
                             </P>
                         </BetweenDiv>
                         <P pt="10px" fs="15px" fw="800">
-                            윤다인
+                            {detailData.showName}
                         </P>
                         <ProgressBar>
                             <Progress width={(65 / 100) * 100} />
                         </ProgressBar>
                         <BetweenDiv>
                             <P pt="8px" fs="15px" fw="800">
-                                65%
+                                {detailData.achievementRate}%
                             </P>
                             <P pt="8px" pl="90px" fs="15px" fw="800">
-                                13일 남음
+                                {detailData.targetAmount}원
                             </P>
                         </BetweenDiv>
                     </FundingDiv>
-
-                    <TogatherDiv bc="orange">
+                    <TogetherDiv bc="orange">
                         <P pt="30px" pl="30px" fs="14px" fw="800">
-                            안녕하세요 여러분
-                            <br />
-                            일단 여기까지 와주셔서 감사합니다 ㅎㅎ
+                            {detailData.content}
                         </P>
-                        <P pt="20px" pl="30px" fs="14px" fw="800">
-                            이번 20번째 생일로
-                            <br />
-                            인생 첫 에어팟을 가지고 싶습니다!!!
-                        </P>
-                        <P pt="20px" pl="30px" fs="14px" fw="800">
-                            여러분의 소중한 선물 고이고이 모시면서
-                            <br />
-                            알뜰살뜰 사용하겠습니다.
-                            <br />
-                            도와주세요 😘😘😘
-                            <br />
-                        </P>
-                    </TogatherDiv>
+                    </TogetherDiv>
 
                     <FundingDiv>
                         <P pt="20px" fs="16px" fw="900">
                             후원자
                         </P>
+                        {/* <Sponsor /> */}
                         <SponserDiv>
                             <SponsorImg src="/imgs/iu.jpg" alt="image" />
                             <SponserComment mt="10px">
@@ -138,22 +176,22 @@ const FundingDetail = () => {
                             <SponsorImg src="/imgs/songjoongy.jpg" alt="logo" />
                             <SponserComment mt="10px">
                                 <P pl="5px" fs="13px" fw="800">
-                                    송**
+                                    {detailData.showName}
                                 </P>
                                 <Button mt="5px" w="300px" h="40px" pr="90px" fs="13px" bc="violet">
-                                    이게 뭐야 ㅋㅋㅋㅋ 생일 축하해ㅎ
+                                {detailData.content}
                                 </Button>
                             </SponserComment>
                         </SponserDiv>
 
                         <SponserDiv>
-                            <SponsorImg src="/imgs/junjihyun.jpg" alt="logo" />
+                            <SponsorImg src="/imgs/junjihyun.jpg" alt="img" />
                             <SponserComment mt="10px">
                                 <P pl="5px" fs="13px" fw="800">
-                                    전**
+                                    {detailData.showName}
                                 </P>
                                 <Button mt="5px" w="300px" h="40px" pr="90px" fs="13px" bc="violet">
-                                    줄이어폰 그만써~ 생일축하해!!
+                                {detailData.content}
                                 </Button>
                             </SponserComment>
                         </SponserDiv>
@@ -167,17 +205,7 @@ const FundingDetail = () => {
                         <P pt="10px" fs="16px" fw="900">
                             펀딩 참여하기
                         </P>
-                        <ProgressBar>
-                            <Progress width={(36 / 100) * 100} />
-                        </ProgressBar>
-                        <BetweenDiv>
-                            <P pt="8px" fs="15px" fw="800">
-                                36%
-                            </P>
-                            <P pt="8px" pl="90px" fs="15px" fw="800">
-                                210,500원 남았어요
-                            </P>
-                        </BetweenDiv>
+
                         <Button mt="30px" w="375px" h="60px" bc="orange">
                             <BetweenDiv>
                                 <P pt="2px" pl="20px" fs="15px" fw="800" color="black">
@@ -198,7 +226,7 @@ const FundingDetail = () => {
                                 </P>
                             </BetweenDiv>
                         </Button>
-                        <Button mt="10px" w="375px" h="60px" bc="orange">
+                        <Button onClick={() => navigate('/fundingcreate')} mt="10px" w="375px" h="60px" bc="orange">
                             <BetweenDiv>
                                 <P pt="2px" pl="20px" fs="15px" fw="800" color="black">
                                     원하는만큼 선물하기
@@ -214,12 +242,12 @@ const FundingDetail = () => {
                                     이 펀딩을 끝내러 왔다
                                 </P>
                                 <P pt="2px" pr="20px" fs="15px" fw="700" color="black">
-                                    210,500원
+                                    {detailData.currentAmount}원
                                 </P>
                             </BetweenDiv>
                         </Button>
                     </FundingDiv>
-                    <TogatherDiv bc="violet">
+                    <TogetherDiv bc="violet">
                         <P pt="30px" pl="30px" fs="16px" fw="800">
                             Giftipie에서 함께 하는 기쁨
                         </P>
@@ -244,16 +272,23 @@ const FundingDetail = () => {
                                 모인 펀딩 금액
                             </P>
                             <P pt="20px" pr="30px" fs="13px" fw="800">
-                                200,000원
+                                {detailData.currentAmount}원
                             </P>
                         </BetweenDiv>
-                    </TogatherDiv>
+                    </TogetherDiv>
 
-                    <Button onClick={() => navigate('/fundingpay')} mt="30px" w="442px" h="60px" color="black" fs="19px" bc="orange">
+                    <Button
+                        onClick={() => navigate('/fundingpay')}
+                        mt="30px"
+                        w="442px"
+                        h="60px"
+                        color="black"
+                        fs="19px"
+                        bc="orange"
+                    >
                         선물하기
                     </Button>
                 </Body>
-                <Footer>Footer</Footer>
             </RightContainer>
         </MainContainer>
     );

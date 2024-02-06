@@ -16,18 +16,13 @@ import {
     SponserDiv,
     SponserComment,
     SponsorImg,
-    TogatherDiv,
-    Footer,
+    TogetherDiv,
 } from './FundingPayStyles';
-import CheckBox from '../CheckBox/CheckBox';
+import CheckBox from '../FundingPay/CheckBox/CheckBox';
+import KakaoPay from './KakaoPay/KakaoPay';
 
 const FundingPay = () => {
     const navigate = useNavigate();
-
-    const meta = document.createElement('meta');
-    meta.name = 'viewport';
-    meta.content = 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover';
-    document.getElementsByTagName('head')[0].appendChild(meta);
 
     return (
         <MainContainer>
@@ -86,11 +81,6 @@ const FundingPay = () => {
                         </SponserDiv>
 
                         <P pt="10px" pl="10px" pb="5px" fs="13px" fw="800">
-                            후원금
-                        </P>
-                        <InputTag type="text" placeholder="남길 이름을 입력해주세요" h="40px" />
-
-                        <P pt="10px" pl="10px" pb="5px" fs="13px" fw="800">
                             메시지
                         </P>
                         <InputTag type="text" placeholder="남길 메시지를 입력해주세요" pb="50px" h="100px" />
@@ -103,26 +93,17 @@ const FundingPay = () => {
 
                     <CheckBox />
 
-                    <TogatherDiv pt="10px" bc="orange">
+                    <TogetherDiv pt="10px" bc="orange">
                         <P pl="140px" fs="14px" fw="800">
                             <br />
                             지금 선물하면 3등이에요!
                             <br />
                         </P>
-                    </TogatherDiv>
+                    </TogetherDiv>
 
-                    <Button
-                        onClick={() => navigate('/fundingpay')}
-                        w="442px"
-                        h="60px"
-                        color="black"
-                        fs="19px"
-                        bc="#fae101;"
-                    >
-                        카카오로 결제
-                    </Button>
+                    <KakaoPay />
+                    
                 </Body>
-                <Footer>Footer</Footer>
             </RightContainer>
         </MainContainer>
     );
