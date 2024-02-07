@@ -4,6 +4,9 @@ import Cookies from "js-cookie";
 export const instance = axios.create({
   baseURL: process.env.REACT_APP_API_URL,
   withCredentials: true, // 쿠키 전송을 위한 옵션
+  headers: {
+    "Access-Control-Allow-Origin": `${process.env.REACT_APP_API_URL}`,
+  },
 });
 
 // 회원가입 API
@@ -31,6 +34,7 @@ export const getTokensFromLocalStorageAndCookies = () => {
 
 // 토큰을 로컬 스토리지와 쿠키에 저장
 export const saveTokensToLocalStorageAndCookies = (token) => {
+  console.log("로컬 스토리지와 쿠키에 저장되는 토큰 확인: ", token);
   Cookies.set("Authorization", token, { httpOnly: true });
   localStorage.setItem("Authorization", token);
 };
@@ -42,22 +46,21 @@ export const login = async (credentials) => {
     const { token } = response.data;
 
     // 로그인 성공 시 로컬 스토리지와 토큰에 저장
-    saveTokensToLocalStorageAndCookies(token);
+    saveTokensToLocalStorageAndCookies(`Bearer ${token}`);
     console.log("로그인 성공 후 로컬 스토리지 토큰:", token);
     console.log("로그인 성공 후 쿠키 토큰:", token);
     return response.data;
   } catch (error) {
     console.error("로그인 오류:", error);
-    throw error;
   }
 };
 
 // 인터셉터를 사용하여 요청 변경
 instance.interceptors.request.use(
   (config) => {
-    const token = Cookies.get("token");
+    const token = Cookies.get("Authorization");
     if (token) {
-      config.headers.token = `Bearer ${token}`;
+      config.headers.Authorization = `Bearer ${token}`;
     }
     return config;
   },
@@ -70,7 +73,9 @@ instance.interceptors.request.use(
 // 인터셉터를 사용하여 응답 변경
 instance.interceptors.response.use(
   (response) => {
-    console.log("토 to the 큰: ", response.data.result);
+    const newToken = response.data.result;
+    console.log("토큰: ", newToken);
+    localStorage.setItem("test", newToken);
     return response;
   },
   (error) => {

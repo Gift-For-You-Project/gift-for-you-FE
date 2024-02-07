@@ -74,9 +74,9 @@ const Login = () => {
     // API 호출을 통한 로그인 처리
     try {
       await login({ email, password });
-      const { localStorageToken, cookieToken } =
-        getTokensFromLocalStorageAndCookies();
-      saveTokensToLocalStorageAndCookies(localStorageToken || cookieToken);
+      saveTokensToLocalStorageAndCookies(
+        getTokensFromLocalStorageAndCookies().token
+      );
       navigate("/");
     } catch (error) {
       console.error("로그인 오류:", error);
