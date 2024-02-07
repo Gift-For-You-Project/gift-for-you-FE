@@ -83,7 +83,6 @@ export const fundingCreate = async (fundingData) => {
 // 펀딩 생성페이지 모달창(ItemLink) API
 export const modalItemLink = async (LinkData) => {
     try {
-        // const response = await instance.post('/api/funding/addLink', LinkData); // 모달창(ItemLink) API 호출
         const response = await instance.post('/api/funding/addLink', LinkData); // 모달창(ItemLink) API 호출
         return response.data; // 응답 데이터 반환
     } catch (error) {
@@ -94,10 +93,8 @@ export const modalItemLink = async (LinkData) => {
 // 펀딩 상세페이지 API
 export const fetchFundingDetail = async (fundingId) => {
     try {
-        // const response = await instance.get(`/api/funding`); // 펀딩 상세페이지 요청
         const response = await instance.get(`/api/funding/${fundingId}`); // 펀딩 상세페이지 요청
         console.log('++++', response);
-        // const response = await instance.get(`http://localhost:4000/fundingdetail/${fundingId}`); // 펀딩 상세페이지 요청
         return response.data; // 응답 데이터 반환
     } catch (error) {
         console.error('펀딩 상세페이지 API 호출 오류:', error); // 오류 로깅
@@ -108,8 +105,7 @@ export const fetchFundingDetail = async (fundingId) => {
 // 펀딩 후원자 상세페이지 API
 export const fetchSponsorDetail = async (fundingId) => {
     try {
-        // const response = await instance.get(`/api/funding/${fundingId}`); // 펀딩 후원자 상세페이지 요청
-        const response = await instance.get(`http://localhost:4000/fundingsponsordetail/${fundingId}`); // 펀딩 상세페이지 요청
+        const response = await instance.get(`/api/funding/${fundingId}`); // 펀딩 후원자 상세페이지 요청
         return response.data; // 응답 데이터 반환
     } catch (error) {
         console.error('펀딩 상세페이지 API 호출 오류:', error); // 오류 로깅
@@ -122,7 +118,6 @@ export const fetchSponsorDetail = async (fundingId) => {
 export const FundingModifyGet = async (fundingId, data) => {
     try {
         const response = await instance.get(`/api/funding/${fundingId}`, data); // 펀딩 수정페이지 요청
-        // const response = await instance.patch(`http://localhost:4000/fundingmodify/${fundingId}`, data); // 펀딩 수정페이지 요청
         return response.data; // 응답 데이터 반환
     } catch (error) {
         console.error('API 호출 중 에러 발생:', error); // 오류 로깅
@@ -133,7 +128,6 @@ export const FundingModifyGet = async (fundingId, data) => {
 export const updateFundingModify = async (fundingId, data) => {
     try {
         const response = await instance.patch(`/api/funding/${fundingId}`, data); // 펀딩 수정페이지 요청
-        // const response = await instance.patch(`http://localhost:4000/fundingmodify/${fundingId}`, data); // 펀딩 수정페이지 요청
         return response.data; // 응답 데이터 반환
     } catch (error) {
         console.error('API 호출 중 에러 발생:', error); // 오류 로깅

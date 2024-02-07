@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
     MainContainer,
@@ -28,25 +28,26 @@ const FundingCreate = () => {
     const navigate = useNavigate(); // React Router의 네비게이션 기능을 사용하기 위한 hook
 
     // 펀딩 생성 페이지에서 사용될 상태 변수 초기화
-    const [itemName, setItemName] = useState('');
+    const [itemName, setItemName] = useState(''); 
     const [showName, setShowName] = useState('');
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
     const [targetAmount, setTargetAmount] = useState('');
     const [publicFlag, setPublicFlag] = useState('');
     const [endDate, setEndDate] = useState('');
+    const [itemLink, setItemLink] = useState('');
     const [isFundingModalOpen, setIsFundingModalOpen] = useState(false); // 모달 창의 열림 여부 상태 변수
+    const [selectedItemImage, setSelectedItemImage] = useState(''); // 추가된 부분
 
     // 모달 열기 이벤트 핸들러
-    const handleFundingModalClick = () => {
+    const handleFundingModalClick = (e) => {
         setIsFundingModalOpen(true);
+        setItemLink(e.target.value);
     };
-
     // 모달 닫기 이벤트 핸들러
     const closeModal = () => {
         setIsFundingModalOpen(false);
     };
-
     // 각 입력값에 대한 상태 업데이트 핸들러
     const handleItemNameChange = (e) => {
         setItemName(e.target.value);
@@ -71,31 +72,32 @@ const FundingCreate = () => {
         const value = e.target.value === 'true' ? true : false;
         setPublicFlag(value.toString());
     };
-
     // 펀딩 생성 요청 처리 함수
     const handleFundingClick = async () => {
         try {
             // 펀딩 생성 API 호출 및 데이터 전송
             const fundingData = await fundingCreate({
+                itemLink,
                 itemName,
+                targetAmount,
+                publicFlag,
                 showName,
                 title,
                 content,
-                targetAmount,
-                publicFlag,
                 endDate,
             });
             console.log('펀딩 생성 성공:', fundingData);
             // 펀딩 생성 성공 시, 성공 메시지 표시 또는 다른 동작 수행
             // 요청이 성공했는지 확인합니다.
             alert('펀딩 상품이 등록되었습니다.')
-            // navigate('/fundingdetail'); // 생성된 펀딩 상세 페이지로 이동
+            // 추가된 부분: 펀딩 생성 후 해당 링크의 이미지 가져와서 적용
+            setSelectedItemImage(itemLink);
         } catch (error) {
-            // console.error('펀딩 생성 오류:', error);
+            console.error('펀딩 생성 오류:', error);
             // 펀딩 생성 실패 시, 오류 메시지 표시 또는 다른 처리 수행
         }
     };
-
+    
     return (
         <MainContainer>
             <LeftContainer>
@@ -129,9 +131,12 @@ const FundingCreate = () => {
                         <P pb="20px" fs="10px" fw="900">
                             펀딩 페이지에 상품명과 이미지가 노출돼요.
                         </P>
-
                         <ProducImgtDiv>
-                            <FundingImg onClick={handleFundingModalClick} htmlFor="file-input" h="90px" w="90px">
+                            {/* 추가된 부분: 선택된 이미지 표시 */}
+                            {selectedItemImage && (
+                                <FundingImg src={selectedItemImage} h="90px" w="90px" />
+                            )}
+                            <FundingImg value={itemLink} onClick={handleFundingModalClick} htmlFor="file-input" h="90px" w="90px">
                                 <PlusImg src="/imgs/plus.png" />
                             </FundingImg>
                             <div>

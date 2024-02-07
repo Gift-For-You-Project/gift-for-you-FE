@@ -117,7 +117,7 @@ export const Body = styled.div`
 export const BannerImg = styled.img`
   width: 100%;
   max-width: 442px;
-  height: auto;
+  height: 320px;
 `;
 
 export const FundingDiv = styled.div`

@@ -51,7 +51,7 @@ const FundingModify = () => {
     const fundingModifyData = async () => {
         try {
             // 펀딩 ID를 적절하게 설정 (예: 1)
-            const fundingId = 10;
+            const fundingId = 1;
             const data = await updateFundingModify(fundingId, fundingData); // 펀딩 수정 API 호출
             console.log('펀딩 수정 성공:', data);
             alert('펀딩이 수정되었습니다.');
@@ -65,7 +65,7 @@ const FundingModify = () => {
         const fetchData = async () => {
             try {
                 // 펀딩 ID를 설정하여 특정 펀딩의 상세 정보 가져오기
-                const fundingId = 10; // 예: 펀딩 ID가 1인 경우
+                const fundingId = 1; // 예: 펀딩 ID가 1인 경우
                 const data = await FundingModifyGet(fundingId);
                 console.log('+++', data);
                 setFundingData(data); // 가져온 데이터를 상태 변수에 설정

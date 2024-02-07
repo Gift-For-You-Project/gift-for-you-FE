@@ -28,30 +28,12 @@ import {
 const FundingDetail = () => {
     const navigate = useNavigate(); // React Router의 네비게이션 기능을 사용하기 위한 hook
 
-    // const [detailData, setDetailData] = useState({
-    //     fundingid: 1,
-    //     itemLink: 'https://www.naver.com',
-    //     itemImage: '신발',
-    //     title: '인생 첫 에어팟을 선물해주세요 😘', // 펀딩 제목
-    //     content: '본문 내용 블라블라~ 😘😘😘', // 본문 내용
-    //     currentAmount: 210500, // 현재 금액
-    //     targetAmount: 300000, // 목표 금액
-    //     publicFlag: false,
-    //     endDate: '2024-02-01', // 2월 1일 23:59 마감
-    //     dDay: 'D-5', // 디데이
-    //     status: false, // (펀딩 상태)
-    //     achievementRate: 70, // 달성률%
-    //     ownerFlag: true, // (작성자 확인)
-    //     modifiedAt: '2024-02-02', // (수정 날짜)
-    //     showName: '윤다인', // 보여줄 이름
-    // });
-
     // 펀딩 상세 정보를 담는 상태 변수 초기화
     const [detailData, setDetailData] = useState({
         // 초기 상태를 명세서에 따라 설정
         fundingid: '',
         itemLink: '',
-        itemImage: '', // 
+        itemImage: '',
         title: '',
         content: '',
         currentAmount: 0,
@@ -73,7 +55,7 @@ const FundingDetail = () => {
         const fetchData = async () => {
             try {
                 // 펀딩 ID를 설정하여 특정 펀딩의 상세 정보 가져오기
-                const fundingId = 10; // 예: 펀딩 ID가 1인 경우
+                const fundingId = 1; // 예: 펀딩 ID가 1인 경우
                 const data = await fetchFundingDetail(fundingId);
                 setDetailData(data); // 가져온 데이터를 상태 변수에 설정
             } catch (error) {
@@ -120,7 +102,6 @@ const FundingDetail = () => {
                 </Navbar>
 
                 <Body>
-                    {/* <BannerImg src="/imgs/airpodspro2.jpg" alt="image" /> */}
                     <BannerImg src={detailData.itemImage} alt="image" />
                     <FundingDiv>
                         <P pt="20px" fs="13px" fw="800">
