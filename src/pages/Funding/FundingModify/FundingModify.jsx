@@ -62,7 +62,7 @@ const FundingModify = () => {
 
     useEffect(() => {
         // API를 호출하여 펀딩 상세 정보를 가져오는 함수 정의
-        const fetchData = async () => {
+        const fetchData = async (fundingId) => {
             try {
                 // 펀딩 ID를 설정하여 특정 펀딩의 상세 정보 가져오기
                 const fundingId = 1; // 예: 펀딩 ID가 1인 경우
@@ -70,8 +70,13 @@ const FundingModify = () => {
                 console.log('+++', data);
                 setFundingData(data); // 가져온 데이터를 상태 변수에 설정
             } catch (error) {
-                // API 호출 실패 시 에러 처리
-                console.error('API 호출 오류:', error);
+                if (error.response) {
+                    const statusCode = error.response.status;
+                    const errorMessage = error.response.data.message;
+                    if (statusCode === 400) {
+                        alert(errorMessage);
+                    }
+                }
             }
         };
 
@@ -111,7 +116,7 @@ const FundingModify = () => {
                     <FundingDiv>
                         {/* 펀딩 제품 정보 입력 부분 */}
                         <P pb="10px" fs="16px" fw="900">
-                            펀딩 제품
+                            펀딩 수정페이지
                         </P>
                         <P pb="20px" fs="10px" fw="900">
                             펀딩 페이지에 상품명과 이미지가 노출돼요.
@@ -173,7 +178,6 @@ const FundingModify = () => {
                                     <RadioInput
                                         value="true"
                                         checked={fundingData.publicFlag === 'true'}
-                                        // onChange={handlePublicFlagChange}
                                         onChange={(e) => {
                                             setFundingData({ ...fundingData, publicFlag: e.target.value });
                                         }}
@@ -192,7 +196,6 @@ const FundingModify = () => {
                                     <RadioInput
                                         value="false"
                                         checked={fundingData.publicFlag === 'false'}
-                                        // onChange={handlePublicFlagChange}
                                         onChange={(e) => {
                                             setFundingData({ ...fundingData, publicFlag: e.target.value });
                                         }}

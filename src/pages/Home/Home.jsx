@@ -102,8 +102,11 @@ const Home = () => {
     const token = localStorage.getItem("Authorization");
     if (token) {
       setUserLoggedIn(true);
-      dispatch(bootChannelTalk());
     }
+  }, []);
+
+  useEffect(() => {
+    dispatch(bootChannelTalk());
   }, [dispatch]);
 
   return (

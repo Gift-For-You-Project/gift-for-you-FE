@@ -96,9 +96,9 @@ export const fundingCreate = async (fundingData) => {
 };
 
 // 펀딩 생성페이지 모달창(ItemLink) API
-export const modalItemLink = async (LinkData) => {
+export const modalItemLink = async (linkData) => {
     try {
-        const response = await instance.post('/api/funding/addLink', LinkData); // 모달창(ItemLink) API 호출
+        const response = await instance.post('/api/funding/addLink', linkData); // 모달창(ItemLink) API 호출
         return response.data; // 응답 데이터 반환
     } catch (error) {
         throw error; // 실패 시 예외 처리

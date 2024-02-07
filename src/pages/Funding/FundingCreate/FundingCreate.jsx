@@ -12,7 +12,7 @@ import {
     ProducImgtDiv,
     InputTag,
     FundingImg,
-    PlusImg,
+    // PlusImg,
     Body,
     FundingDiv,
     SponserDiv,
@@ -28,26 +28,33 @@ const FundingCreate = () => {
     const navigate = useNavigate(); // React Router의 네비게이션 기능을 사용하기 위한 hook
 
     // 펀딩 생성 페이지에서 사용될 상태 변수 초기화
-    const [itemName, setItemName] = useState(''); 
+    const [itemName, setItemName] = useState('');
     const [showName, setShowName] = useState('');
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
     const [targetAmount, setTargetAmount] = useState('');
     const [publicFlag, setPublicFlag] = useState('');
     const [endDate, setEndDate] = useState('');
-    const [itemLink, setItemLink] = useState('');
+    const [itemImage, setItemImage] = useState(false);
     const [isFundingModalOpen, setIsFundingModalOpen] = useState(false); // 모달 창의 열림 여부 상태 변수
-    const [selectedItemImage, setSelectedItemImage] = useState(''); // 추가된 부분
 
-    // 모달 열기 이벤트 핸들러
+    // 펀딩 이미지를 클릭했을 때 모달을 열고 이미지를 설정하는 함수
     const handleFundingModalClick = (e) => {
         setIsFundingModalOpen(true);
-        setItemLink(e.target.value);
     };
-    // 모달 닫기 이벤트 핸들러
+
+    // 모달을 닫는 함수
     const closeModal = () => {
         setIsFundingModalOpen(false);
+        setItemImage(''); // 이미지 상태를 초기화하여 이미지를 숨김
     };
+
+    // 모달 내에서 이미지를 선택하고 설정하는 함수
+    const handleImageSelection = (imageUrl) => {
+        setItemImage(imageUrl);
+        setIsFundingModalOpen(false); // 이미지 선택 후 모달을 닫습니다.
+    };
+
     // 각 입력값에 대한 상태 업데이트 핸들러
     const handleItemNameChange = (e) => {
         setItemName(e.target.value);
@@ -75,9 +82,22 @@ const FundingCreate = () => {
     // 펀딩 생성 요청 처리 함수
     const handleFundingClick = async () => {
         try {
+            if (
+                itemImage === '' ||
+                itemName === '' ||
+                showName === '' ||
+                title === '' ||
+                content === '' ||
+                targetAmount === '' ||
+                publicFlag === '' ||
+                endDate === ''
+            ) {
+                alert('내용을 입력해주세요');
+                return;
+            }
             // 펀딩 생성 API 호출 및 데이터 전송
             const fundingData = await fundingCreate({
-                itemLink,
+                itemImage,
                 itemName,
                 targetAmount,
                 publicFlag,
@@ -89,15 +109,19 @@ const FundingCreate = () => {
             console.log('펀딩 생성 성공:', fundingData);
             // 펀딩 생성 성공 시, 성공 메시지 표시 또는 다른 동작 수행
             // 요청이 성공했는지 확인합니다.
-            alert('펀딩 상품이 등록되었습니다.')
+            alert('펀딩 상품이 등록되었습니다.');
             // 추가된 부분: 펀딩 생성 후 해당 링크의 이미지 가져와서 적용
-            setSelectedItemImage(itemLink);
         } catch (error) {
-            console.error('펀딩 생성 오류:', error);
-            // 펀딩 생성 실패 시, 오류 메시지 표시 또는 다른 처리 수행
+            if (error.response) {
+                const statusCode = error.response.status;
+                const errorMessage = error.response.data.message;
+                if (statusCode === 400) {
+                    alert(errorMessage);
+                }
+            }
         }
     };
-    
+
     return (
         <MainContainer>
             <LeftContainer>
@@ -126,19 +150,30 @@ const FundingCreate = () => {
                 <Body>
                     <FundingDiv>
                         <P pb="10px" fs="16px" fw="900">
-                            펀딩 제품
+                            펀딩 생성페이지
                         </P>
                         <P pb="20px" fs="10px" fw="900">
-                            펀딩 페이지에 상품명과 이미지가 노출돼요.
+                            펀딩 생성 페이지에 상품명과 이미지가 노출돼요.
                         </P>
                         <ProducImgtDiv>
+                            <FundingImg
+                                src={
+                                    itemImage
+                                        ? itemImage
+                                        : 'https://image.msscdn.net/images/goods_img/20240111/3788388/3788388_17065904732279_big.jpg'
+                                }
+                                h="90px"
+                                w="90px"
+                                onClick={handleFundingModalClick}
+                            />
                             {/* 추가된 부분: 선택된 이미지 표시 */}
-                            {selectedItemImage && (
-                                <FundingImg src={selectedItemImage} h="90px" w="90px" />
-                            )}
-                            <FundingImg value={itemLink} onClick={handleFundingModalClick} htmlFor="file-input" h="90px" w="90px">
-                                <PlusImg src="/imgs/plus.png" />
-                            </FundingImg>
+                            {/* <FundingImg
+                                src="https://image.msscdn.net/images/goods_img/20240111/3788388/3788388_17065904732279_big.jpg"
+                                h="90px"
+                                w="90px"
+                            />
+                            <FundingImg value={itemImage} onClick={handleFundingModalClick} h="90px" w="90px" /> */}
+                            {/* <PlusImg src="/imgs/plus.png" /> */}
                             <div>
                                 <InputTag
                                     type="text"
@@ -164,7 +199,7 @@ const FundingCreate = () => {
                             </div>
                         </ProducImgtDiv>
                         {/* 모달 컴포넌트 표시 여부 확인 후 표시 */}
-                        {isFundingModalOpen && <Modal closeModal={closeModal} />}
+                        {isFundingModalOpen && <Modal closeModal={closeModal} setItemImage={setItemImage} />}
                         {/* 펀딩 내용 및 공개 여부 입력 폼 */}
                         <SponserDiv>
                             <SponserComment mt="50px">
