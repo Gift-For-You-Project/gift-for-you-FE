@@ -115,25 +115,7 @@ const Signup = () => {
   };
 
   const handleSignupClick = async () => {
-    if (email.trim() === "") {
-      setShowEmailHelp(true);
-    } else {
-      setShowEmailHelp(false);
-    }
-
-    if (password.trim() === "") {
-      setShowPasswordHelp(true);
-    } else {
-      setShowPasswordHelp(false);
-    }
-
     try {
-      // 가입 전에 모든 도움말을 숨김
-      setShowEmailHelp(false);
-      setShowNicknameHelp(false);
-      setShowPasswordHelp(false);
-      setShowPhoneNumberHelp(false);
-
       // 가입 전에 유효성 검사 수행
       if (!isValidEmailFormat(email)) {
         setShowEmailHelp(true);
@@ -195,13 +177,13 @@ const Signup = () => {
               placeholder="Email"
             />
             {showEmailHelp && email.trim() === "" && (
-              <SignupEmailHelpDiv>이메일을 입력해 주세요.</SignupEmailHelpDiv>
+              <SignupEmailHelpDiv>이메일을 입력해주세요.</SignupEmailHelpDiv>
             )}
             {showEmailHelp &&
               !isValidEmailFormat(email) &&
               email.trim() !== "" && (
                 <SignupEmailHelpDiv>
-                  올바른 이메일 주소 형식으로 다시 입력해 주세요.
+                  올바른 이메일 주소 형식으로 다시 입력해주세요.
                 </SignupEmailHelpDiv>
               )}
             <BlankLine h="30px" />
@@ -230,8 +212,8 @@ const Signup = () => {
             {showPasswordHelp && (
               <SignupPasswordHelpDiv>
                 {password.trim() === ""
-                  ? "비밀번호를 입력해 주세요."
-                  : "가입되지 않은 이메일이거나 비밀번호가 일치하지 않습니다."}
+                  ? "비밀번호를 입력해주세요."
+                  : "비밀번호는 8자에서 15자 사이이어야 하며, 영문, 숫자, 특수문자(@$!%*?&)를 포함해야 합니다."}
               </SignupPasswordHelpDiv>
             )}
             <BlankLine h="30px" />
@@ -246,7 +228,7 @@ const Signup = () => {
             {showPhoneNumberHelp && (
               <SignupPhoneNumberHelpDiv>
                 {phoneNumber.trim() === ""
-                  ? "휴대폰 번호를 입력해 주세요."
+                  ? "휴대폰 번호를 입력해주세요."
                   : !isValidPhoneNumberFormat(phoneNumber)
                   ? "휴대폰 번호는 10자에서 11자 사이의 숫자로 구성되어야 합니다."
                   : null}
