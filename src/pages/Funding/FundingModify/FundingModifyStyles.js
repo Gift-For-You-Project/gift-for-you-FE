@@ -71,6 +71,13 @@ export const RightContainer = styled.div`
   position: relative;
   width: 442px;
   border: 1px solid lightgray;
+  height: 100vh;
+  overflow-y: scroll;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
 
   @media (max-width: 442px) {
     width: 100%;
@@ -97,7 +104,7 @@ export const NavbarBtn = styled.button`
 export const Body = styled.div`
   font-size: 24px;
   font-weight: 800;
-  height: 2100px;
+  height: auto;
 `;
 
 export const FundingDiv = styled.div`
@@ -161,9 +168,6 @@ export const InputTag = styled.input`
     font-size: 12px;
     justify-content: start;
     align-items: start;
-    &:hover {
-    cursor: pointer;
-  }
 `;
 export const RadioInput = styled.input`
     margin-bottom: ${(props) => props.mb};
@@ -175,7 +179,7 @@ export const FundingNewline = styled.div`
   height: 12px;
 `;
 
-export const TogatherDiv = styled.div`
+export const TogetherDiv = styled.div`
   margin-top: 30px;
   width: 442px;
   height: 45px;
@@ -183,11 +187,4 @@ export const TogatherDiv = styled.div`
   color: ${(props) => props.color};
   justify-content: center;
   align-items: center;
-`;
-
-export const Footer = styled.div`
-  border: 1px solid lightgray;
-  font-size: 24px;
-  font-weight: 800;
-  height: 80px;
 `;

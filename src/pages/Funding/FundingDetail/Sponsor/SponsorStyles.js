@@ -74,6 +74,12 @@ export const RightContainer = styled.div`
   position: relative;
   width: 442px;
   border: 1px solid lightgray;
+  height: 100vh;
+  overflow-y: scroll;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 
   @media (max-width: 442px) {
     width: 100%;
@@ -105,7 +111,7 @@ export const NavbarBtnDiv = styled.div`
 export const Body = styled.div`
   font-size: 24px;
   font-weight: 800;
-  height: 2100px;
+  height: auto;
 `;
 
 export const FundingDiv = styled.div`
@@ -143,11 +149,4 @@ export const SponsorImg = styled.img`
 export const FundingNewline = styled.div`
   width: 100%;
   height: 12px;
-`;
-
-export const Footer = styled.div`
-  border: 1px solid lightgray;
-  font-size: 24px;
-  font-weight: 800;
-  height: 80px;
 `;

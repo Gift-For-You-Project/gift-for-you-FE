@@ -73,7 +73,13 @@ export const Button = styled.button`
 export const RightContainer = styled.div`
   position: relative;
   width: 442px;
+  height: 100vh;
   border: 1px solid lightgray;
+  overflow-y: scroll;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 
   @media (max-width: 442px) {
     width: 100%;
@@ -105,13 +111,13 @@ export const NavbarBtnDiv = styled.div`
 export const Body = styled.div`
   font-size: 24px;
   font-weight: 800;
-  height: 2100px;
+  height: auto;
 `;
 
 export const BannerImg = styled.img`
   width: 100%;
   max-width: 442px;
-  height: auto;
+  height: 320px;
 `;
 
 export const FundingDiv = styled.div`
@@ -188,9 +194,3 @@ export const TogetherDiv = styled.div`
   background-color: ${(props) => props.bc};
 `;
 
-export const Footer = styled.div`
-  border: 1px solid lightgray;
-  font-size: 24px;
-  font-weight: 800;
-  height: 80px;
-`;

@@ -71,9 +71,9 @@ const Home = () => {
     setIsLoginModalOpen(false);
   };
 
-  const handleFundingCreate = () => {
-    navigate("/fundingcreate");
-  };
+    const handleFundingCreate = () => {
+        navigate('/fundingcreate');
+    };
 
   // 상태에 따라 Navbar에 표시될 아이콘 결정
   const navbarState = userLoggedIn ? (
