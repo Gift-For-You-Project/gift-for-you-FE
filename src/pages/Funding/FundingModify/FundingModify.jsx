@@ -39,13 +39,13 @@ const FundingModify = () => {
     });
 
     // 공개 여부 변경 핸들러
-    const handlePublicFlagChange = (e) => {
-        // 선택된 라디오 버튼 값에 따라 펀딩 데이터의 공개 여부 업데이트
-        setFundingData({
-            ...fundingData,
-            publicFlag: e.target.value === 'true',
-        });
-    };
+    // const handlePublicFlagChange = (e) => {
+    //     // 선택된 라디오 버튼 값에 따라 펀딩 데이터의 공개 여부 업데이트
+    //     setFundingData({
+    //         ...fundingData,
+    //         publicFlag: e.target.value === 'true',
+    //     });
+    // };
 
     // 펀딩 수정 요청 함수
     const fundingModifyData = async () => {

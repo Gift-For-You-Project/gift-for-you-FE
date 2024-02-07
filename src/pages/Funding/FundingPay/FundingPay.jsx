@@ -81,6 +81,11 @@ const FundingPay = () => {
                         </SponserDiv>
 
                         <P pt="10px" pl="10px" pb="5px" fs="13px" fw="800">
+                            후원금
+                        </P>
+                        <InputTag type="text" placeholder="남길 이름을 입력해주세요" h="40px" />
+
+                        <P pt="10px" pl="10px" pb="5px" fs="13px" fw="800">
                             메시지
                         </P>
                         <InputTag type="text" placeholder="남길 메시지를 입력해주세요" pb="50px" h="100px" />
@@ -102,7 +107,6 @@ const FundingPay = () => {
                     </TogetherDiv>
 
                     <KakaoPay />
-                    
                 </Body>
             </RightContainer>
         </MainContainer>

@@ -1,73 +1,88 @@
-import axios from 'axios';
-import Cookies from 'js-cookie';
+import axios from "axios";
+import Cookies from "js-cookie";
 
-// Axios 인스턴스 생성
 export const instance = axios.create({
-    baseURL: process.env.REACT_APP_API_URL, // 환경변수를 통한 API URL 설정
-    withCredentials: true, // 쿠키 전송을 위한 옵션
-});
-
-// 토큰을 쿠키에 저장하는 함수
-const saveTokensToCookies = (accessToken, refreshToken) => {
-    Cookies.set('accessToken', accessToken, { path: '/' }); // accessToken을 쿠키에 저장
-    Cookies.set('refreshToken', refreshToken, { path: '/' }); // refreshToken을 쿠키에 저장
-};
-
-// Axios 인터셉터를 사용하여 요청을 변경하는 함수
-instance.interceptors.request.use((config) => {
-    const accessToken = Cookies.get('accessToken'); // 쿠키에서 accessToken 가져오기
-
-    if (accessToken) {
-        config.headers.Authorization = `Bearer ${accessToken}`; // 헤더에 Authorization 추가
-    }
-
-    return config;
+  baseURL: process.env.REACT_APP_API_URL,
+  withCredentials: true, // 쿠키 전송을 위한 옵션
+  headers: {
+    "Access-Control-Allow-Origin": `${process.env.REACT_APP_API_URL}`,
+  },
 });
 
 // 회원가입 API
-export const signupUser = async (userData) => {
-    try {
-        const response = await instance.post('/api/signup', userData); // 회원가입 요청
-        return response.data; // 응답 데이터 반환
-    } catch (error) {
-        console.error('회원가입 오류:', error); // 오류 로깅
-        if (error.response) {
-            const { status } = error.response;
-            const errorMessages = {
-                401: '이미 존재하는 사용자입니다.',
-                404: '이메일 또는 비밀번호가 존재하지 않습니다.',
-            };
-            const errorMessage = errorMessages[status] || '알 수 없는 오류가 발생했습니다.';
-            throw new Error(errorMessage); // 오류 처리
-        } else {
-            throw error;
-        }
-    }
+export const signup = async (userData) => {
+  try {
+    const response = await instance.post("/api/signup", userData);
+    console.log(response);
+    return response.data;
+  } catch (error) {
+    console.error("회원가입 오류:", error);
+    throw error;
+  }
+};
+
+// 토큰을 로컬 스토리지와 쿠키에서 가져오기
+export const getTokensFromLocalStorageAndCookies = () => {
+  const cookieToken = Cookies.get("Authorization");
+  const localStorageToken = localStorage.getItem("Authorization");
+
+  console.log("로컬 스토리지에서 가져온 토큰:", localStorageToken);
+  console.log("쿠키에서 가져온 토큰:", cookieToken);
+
+  return { localStorageToken, cookieToken };
+};
+
+// 토큰을 로컬 스토리지와 쿠키에 저장
+export const saveTokensToLocalStorageAndCookies = (token) => {
+  console.log("로컬 스토리지와 쿠키에 저장되는 토큰 확인: ", token);
+  Cookies.set("Authorization", token, { httpOnly: true });
+  localStorage.setItem("Authorization", token);
 };
 
 // 로그인 API
-export const loginUser = async (credentials) => {
-    try {
-        const response = await instance.post('/api/login', credentials); // 로그인 요청
-        const { accessToken, user } = response.data; // 응답 데이터에서 accessToken과 user 추출
-        // 로그인 성공 시 토큰을 저장
-        saveTokensToCookies(accessToken);
-        return user; // 유저 정보 반환
-    } catch (error) {
-        console.error('로그인 오류:', error); // 오류 로깅
-        if (error.response) {
-            const { status } = error.response;
-            const errorMessages = {
-                401: '이메일 또는 비밀번호가 일치하지 않습니다.',
-                404: '사용자를 찾을 수 없습니다.',
-            };
-            const errorMessage = errorMessages[status] || '알 수 없는 오류가 발생했습니다.';
-            throw new Error(errorMessage); // 오류 처리
-        } else {
-            throw error;
-        }
-    }
+export const login = async (credentials) => {
+  try {
+    const response = await instance.post("/api/login", credentials);
+    const { token } = response.data;
+
+    // 로그인 성공 시 로컬 스토리지와 토큰에 저장
+    saveTokensToLocalStorageAndCookies(`Bearer ${token}`);
+    console.log("로그인 성공 후 로컬 스토리지 토큰:", token);
+    console.log("로그인 성공 후 쿠키 토큰:", token);
+    return response.data;
+  } catch (error) {
+    console.error("로그인 오류:", error);
+  }
 };
+
+// 인터셉터를 사용하여 요청 변경
+instance.interceptors.request.use(
+  (config) => {
+    const token = Cookies.get("Authorization");
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+  },
+  (error) => {
+    // 응답이 에러인 경우 처리할 로직
+    return Promise.reject(error);
+  }
+);
+
+// 인터셉터를 사용하여 응답 변경
+instance.interceptors.response.use(
+  (response) => {
+    const newToken = response.data.result;
+    console.log("토큰: ", newToken);
+    localStorage.setItem("test", newToken);
+    return response;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
+
 
 // 펀딩 생성페이지 API
 export const fundingCreate = async (fundingData) => {

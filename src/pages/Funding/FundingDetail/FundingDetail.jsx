@@ -68,38 +68,46 @@ const FundingDetail = () => {
         fetchData();
     }, []); // 빈 배열을 전달하여 한 번만 실행하도록 설정
 
-    return (
-        <MainContainer>
-            <LeftContainer>
-                <Logo>😉 Giftipie</Logo>
-                <P pt="25px" fs="16px" fw="800" pb="5px">
-                    기프티파이에서
-                </P>
-                <P fs="16px" fw="800" pb="5px">
-                    정말 원하는 선물을
-                </P>
-                <P fs="16px" fw="800">
-                    주고 받아요
-                </P>
-                <Button onClick={() => navigate('/')} mt="20px" w="180px" h="50px" fs="16px" color="white" bc="orange">
-                    펀딩 시작하기
-                </Button>
-            </LeftContainer>
+  return (
+    <MainContainer>
+      <LeftContainer>
+        <Logo>😉 Giftipie</Logo>
+        <P pt="25px" fs="16px" fw="800" pb="5px">
+          기프티파이에서
+        </P>
+        <P fs="16px" fw="800" pb="5px">
+          정말 원하는 선물을
+        </P>
+        <P fs="16px" fw="800">
+          주고 받아요
+        </P>
+        <Button
+          onClick={() => navigate("/")}
+          mt="20px"
+          w="180px"
+          h="50px"
+          fs="16px"
+          color="white"
+          bc="orange"
+        >
+          펀딩 시작하기
+        </Button>
+      </LeftContainer>
 
-            <RightContainer>
-                <Navbar>
-                    <NavbarBtn onClick={() => navigate('/')} fs="20px" fw="800" pl="15px">
-                        😉 Giftipie
-                    </NavbarBtn>
-                    <NavbarBtnDiv pr="15px">
-                        <NavbarBtn fs="13px" fw="600">
-                            문의
-                        </NavbarBtn>
-                        <NavbarBtn fs="13px" fw="600">
-                            로그인/회원가입
-                        </NavbarBtn>
-                    </NavbarBtnDiv>
-                </Navbar>
+      <RightContainer>
+        <Navbar>
+          <NavbarBtn onClick={() => navigate("/")} fs="20px" fw="800" pl="15px">
+            😉 Giftipie
+          </NavbarBtn>
+          <NavbarBtnDiv pr="15px">
+            <NavbarBtn fs="13px" fw="600">
+              문의
+            </NavbarBtn>
+            <NavbarBtn fs="13px" fw="600">
+              로그인/회원가입
+            </NavbarBtn>
+          </NavbarBtnDiv>
+        </Navbar>
 
                 <Body>
                     <BannerImg src={detailData.itemImage} alt="image" />

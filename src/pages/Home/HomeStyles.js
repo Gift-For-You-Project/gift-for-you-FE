@@ -104,6 +104,17 @@ export const NavbarBtnDiv = styled.div`
   padding-right: ${(props) => props.pr};
 `;
 
+export const NavbarIconContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+`;
+
+export const NavbarIconDiv = styled.div`
+  font-size: 24px;
+  cursor: pointer;
+`;
+
 // 바디 영역
 export const Body = styled.div`
   display: flex;
