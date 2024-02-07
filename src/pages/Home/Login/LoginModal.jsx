@@ -1,6 +1,7 @@
 import React from "react";
 import { IoClose } from "react-icons/io5";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import Cookies from "js-cookie";
 
 import {
   ModalContainer,
@@ -8,10 +9,32 @@ import {
   IoCloseDiv,
   LoginModalImg,
   P,
+  GoogleBtn,
+  KakaoBtn,
   LoginModalBtn,
 } from "./LoginModalStyles";
 
 const LoginModal = ({ closeModal }) => {
+  const navigate = useNavigate();
+
+  const GoogleLogin = () => {
+    window.location.href =
+      "https://accounts.google.com/o/oauth2/v2/auth?client_id={CLIENT-ID}&redirect_uri={REDIRECT-URL}&response_type=code&scope=email profile";
+
+    if (Cookies.get("Authorization")) {
+      navigate("/");
+    }
+  };
+
+  const KakaoLogin = () => {
+    window.location.href =
+      "https://kauth.kakao.com/oauth/authorize?response_type=code&client_id={API-KEY}&redirect_uri={REDIRECT-URI}&response_type=code";
+
+    if (Cookies.get("Authorization")) {
+      navigate("/");
+    }
+  };
+
   return (
     <>
       <Background onClick={() => closeModal()} />
@@ -39,18 +62,22 @@ const LoginModal = ({ closeModal }) => {
             가입하기
           </LoginModalBtn>
         </Link>
-        <LoginModalImg
-          src="/imgs/Login/google.png"
-          alt="google"
-          w="65%"
-          mt="10px"
-        />
-        <LoginModalImg
-          src="/imgs/Login/kakao.png"
-          alt="kakao"
-          w="65%"
-          mt="10px"
-        />
+        <GoogleBtn onClick={GoogleLogin}>
+          <LoginModalImg
+            src="/imgs/Login/google.png"
+            alt="google"
+            w="65%"
+            mt="10px"
+          />
+        </GoogleBtn>
+        <KakaoBtn onClick={KakaoLogin}>
+          <LoginModalImg
+            src="/imgs/Login/kakao.png"
+            alt="kakao"
+            w="65%"
+            mt="10px"
+          />
+        </KakaoBtn>
         <Link to="/login">
           <LoginModalBtn color="orange" hover="#f19900">
             로그인하기

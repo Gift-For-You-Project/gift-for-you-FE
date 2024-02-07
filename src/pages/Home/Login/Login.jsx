@@ -68,8 +68,15 @@ const Login = () => {
 
   // 빈 칸인 상태에서 로그인을 했을 때 help 보여주기
   const handleLoginClick = async () => {
-    setShowEmailHelp(email.trim() === "");
-    setShowPasswordHelp(password.trim() === "");
+    if (email.trim() === "" || !isValidEmailFormat(email)) {
+      setShowEmailHelp(true);
+      return;
+    }
+
+    if (password.trim() === "" || !isValidPasswordFormat(password)) {
+      setShowPasswordHelp(true);
+      return;
+    }
 
     // API 호출을 통한 로그인 처리
     try {
@@ -113,10 +120,8 @@ const Login = () => {
               placeholder="Email"
               showHelp={showEmailHelp}
               helpMessage={
-                showEmailHelp
-                  ? isValidEmailFormat(email)
-                    ? "올바른 이메일 주소 형식으로 다시 입력해 주세요."
-                    : "이메일을 입력해 주세요."
+                showEmailHelp && !isValidEmailFormat(email)
+                  ? "올바른 이메일 주소 형식으로 입력해주세요."
                   : ""
               }
             />
@@ -130,10 +135,8 @@ const Login = () => {
               placeholder="Password"
               showHelp={showPasswordHelp}
               helpMessage={
-                showPasswordHelp
-                  ? password.trim() === ""
-                    ? "비밀번호를 입력해 주세요."
-                    : "가입되지 않은 이메일이거나 비밀번호가 일치하지 않습니다."
+                showPasswordHelp && !isValidPasswordFormat(password)
+                  ? "비밀번호는 8자에서 15자 사이이어야 하며, 영문, 숫자, 특수문자(@$!%*?&)를 포함해야 합니다."
                   : ""
               }
             />
