@@ -1,5 +1,5 @@
 import axios from "axios";
-// import Cookies from "js-cookie";
+import Cookies from "js-cookie";
 
 export const instance = axios.create({
   baseURL: process.env.REACT_APP_API_URL,
@@ -46,11 +46,11 @@ export const signup = async (userData) => {
 };
 
 // 토큰을 쿠키에서 가져오기
-// export const getTokensFromCookies = () => {
-//   const cookieToken = Cookies.get("Authorization");
-//   console.log("쿠키에서 가져온 토큰:", cookieToken);
-//   return { cookieToken };
-// };
+export const getTokensFromCookies = () => {
+  const cookieToken = Cookies.get("Authorization");
+  console.log("쿠키에서 가져온 토큰:", cookieToken);
+  return { cookieToken };
+};
 
 // 로그인 API
 export const login = async (credentials) => {
