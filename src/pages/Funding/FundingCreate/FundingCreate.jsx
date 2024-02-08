@@ -50,8 +50,8 @@ const FundingCreate = () => {
     };
 
     // 모달 내에서 이미지를 선택하고 설정하는 함수
-    const handleImageSelection = (itemLink) => {
-        setItemImage(itemLink);
+    const handleImageSelection = (itemImage) => {
+        setItemImage(itemImage);
         setIsFundingModalOpen(false); // 이미지 선택 후 모달을 닫습니다.
     };
 
