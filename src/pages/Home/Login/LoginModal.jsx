@@ -1,7 +1,8 @@
 import React from "react";
 import { IoClose } from "react-icons/io5";
 import { Link, useNavigate } from "react-router-dom";
-
+import { useDispatch } from "react-redux";
+import { googleLogin, kakaoLogin } from "../../../redux/authSlice";
 import {
   ModalContainer,
   Background,
@@ -15,16 +16,17 @@ import {
 
 const LoginModal = ({ closeModal }) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const GoogleLogin = () => {
-    window.location.href =
-      "https://accounts.google.com/o/oauth2/v2/auth?client_id={CLIENT-ID}&redirect_uri={REDIRECT-URL}&response_type=code&scope=email profile";
+    window.location.href = process.env.REACT_APP_GOOGLE_URL;
+    dispatch(googleLogin());
     navigate("/");
   };
 
-  const KakaoLogin = () => {
-    window.location.href =
-      "https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=f33cfedfa3a09e1e2690f6b2b73e5491&redirect_uri=https://api.giftipie.me/api/kakao/callback&response_type=code";
+  const KakaoLogin = (e) => {
+    window.location.href = process.env.REACT_APP_KAKAO_URL;
+    dispatch(kakaoLogin());
     navigate("/");
   };
 

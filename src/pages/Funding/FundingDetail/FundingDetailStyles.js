@@ -193,4 +193,3 @@ export const TogetherDiv = styled.div`
   height: 215px;
   background-color: ${(props) => props.bc};
 `;
-

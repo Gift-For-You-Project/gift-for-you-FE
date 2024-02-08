@@ -1,5 +1,4 @@
 import axios from "axios";
-import Cookies from "js-cookie";
 
 export const instance = axios.create({
   baseURL: process.env.REACT_APP_API_URL,
@@ -43,13 +42,6 @@ export const signup = async (userData) => {
 
     throw error;
   }
-};
-
-// 토큰을 쿠키에서 가져오기
-export const getTokensFromCookies = () => {
-  const cookieToken = Cookies.get("Authorization");
-  console.log("쿠키에서 가져온 토큰:", cookieToken);
-  return { cookieToken };
 };
 
 // 로그인 API
@@ -152,39 +144,3 @@ export const updateFundingModify = async (fundingId, data) => {
     throw error; // 에러 다시 throw
   }
 };
-
-// 로그인 API
-// export const login = async (credentials) => {
-//   try {
-//     const response = await instance.post("/api/login", credentials);
-
-//     if (response.status === 200) {
-//       // 성공적으로 로그인한 경우
-//       const token = response.data.result;
-//       alert("로그인이 완료되었습니다.");
-//       console.log("로그인 토큰:", token);
-//       Cookies.set("Authorization", token);
-//     }
-
-//     return response.data;
-//   } catch (error) {
-//     console.error("로그인 오류:", error);
-//     if (error.response && error.response.status === 401) {
-//       alert(error.response.data.message);
-//     }
-
-//     throw error;
-//   }
-// };
-
-// 회원가입 API
-// export const signup = async (userData) => {
-//   try {
-//     const response = await instance.post("/api/signup", userData);
-//     console.log(response);
-//     return response.data;
-//   } catch (error) {
-//     console.error("회원가입 오류:", error);
-//     throw error;
-//   }
-// };

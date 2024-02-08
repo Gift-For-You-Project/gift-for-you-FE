@@ -3,8 +3,8 @@ import styled from "styled-components";
 // 전체 컨테이너
 export const MainContainer = styled.div`
   display: flex;
-  justify-content: center; 
-  max-width: 1200px; 
+  justify-content: center;
+  max-width: 1200px;
   min-height: 100vh;
   margin: 0 auto;
   flex-wrap: wrap;
@@ -77,7 +77,6 @@ export const RightContainer = styled.div`
   &::-webkit-scrollbar {
     display: none;
   }
-
 
   @media (max-width: 442px) {
     width: 100%;
@@ -154,25 +153,25 @@ export const FundingImg = styled.img`
 `;
 
 export const InputTag = styled.input`
-    width: ${(props) => props.w};
-    height: ${(props) => props.h};
-    background-color: #eae7de;
-    border-radius: 4px;
-    border: none;
-    margin-left: ${(props) => props.ml};
-    margin-bottom: ${(props) => props.mb};
-    padding-left: ${(props) => props.pl};
-    padding-top: ${(props) => props.pt};
-    padding-bottom: ${(props) => props.pb};
-    font-weight: 500;
-    font-size: 12px;
-    justify-content: start;
-    align-items: start;
+  width: ${(props) => props.w};
+  height: ${(props) => props.h};
+  background-color: #eae7de;
+  border-radius: 4px;
+  border: none;
+  margin-left: ${(props) => props.ml};
+  margin-bottom: ${(props) => props.mb};
+  padding-left: ${(props) => props.pl};
+  padding-top: ${(props) => props.pt};
+  padding-bottom: ${(props) => props.pb};
+  font-weight: 500;
+  font-size: 12px;
+  justify-content: start;
+  align-items: start;
 `;
 export const RadioInput = styled.input`
-    margin-bottom: ${(props) => props.mb};
-    accent-color: black;
-`
+  margin-bottom: ${(props) => props.mb};
+  accent-color: black;
+`;
 
 export const FundingNewline = styled.div`
   width: 100%;
