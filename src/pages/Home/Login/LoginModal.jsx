@@ -28,7 +28,7 @@ const LoginModal = ({ closeModal }) => {
 
   const KakaoLogin = () => {
     window.location.href =
-      "https://kauth.kakao.com/oauth/authorize?response_type=code&client_id={API-KEY}&redirect_uri={REDIRECT-URI}&response_type=code";
+      "https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=f33cfedfa3a09e1e2690f6b2b73e5491&redirect_uri=https//api.giftipie.me/api/kakao/callback&response_type=code";
 
     if (Cookies.get("Authorization")) {
       navigate("/");

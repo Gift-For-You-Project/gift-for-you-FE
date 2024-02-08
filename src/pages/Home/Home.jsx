@@ -7,7 +7,6 @@ import { useNavigate } from "react-router-dom";
 import LoginModal from "../Home/Login/LoginModal";
 import { useDispatch } from "react-redux";
 import { bootChannelTalk } from "../../redux/channelTalkSlice";
-import Cookies from "js-cookie";
 import {
   MainContainer,
   LeftContainer,
@@ -64,7 +63,6 @@ const Home = () => {
 
   const handleLogoutClick = () => {
     setUserLoggedIn(false);
-    Cookies.remove("Authorization");
     navigate("/");
   };
 
@@ -98,13 +96,6 @@ const Home = () => {
       </NavbarBtn>
     </>
   );
-
-  useEffect(() => {
-    const token = Cookies.get("Authorization");
-    if (token) {
-      setUserLoggedIn(true);
-    }
-  }, []);
 
   useEffect(() => {
     dispatch(bootChannelTalk());
