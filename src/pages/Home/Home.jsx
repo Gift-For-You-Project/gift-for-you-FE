@@ -5,8 +5,9 @@ import { BsPersonCircle } from "react-icons/bs";
 import { HiBell } from "react-icons/hi";
 import { useNavigate } from "react-router-dom";
 import LoginModal from "../Home/Login/LoginModal";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { bootChannelTalk } from "../../redux/channelTalkSlice";
+import { userLogout } from "../../redux/authSlice";
 import {
   MainContainer,
   LeftContainer,
@@ -55,15 +56,14 @@ const Home = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
-  const [userLoggedIn, setUserLoggedIn] = useState(false);
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
 
   const handleLoginClick = () => {
     setIsLoginModalOpen(true);
   };
 
   const handleLogoutClick = () => {
-    setUserLoggedIn(false);
-    localStorage.removeItem("Authorization");
+    dispatch(userLogout()); // 로그아웃 액션 디스패치
     navigate("/");
   };
 
@@ -76,7 +76,7 @@ const Home = () => {
   };
 
   // 상태에 따라 Navbar에 표시될 아이콘 결정
-  const navbarState = userLoggedIn ? (
+  const navbarContents = isLoggedIn ? (
     <>
       <NavbarIconContainer>
         <NavbarIconDiv>
@@ -97,13 +97,6 @@ const Home = () => {
       </NavbarBtn>
     </>
   );
-
-  useEffect(() => {
-    const token = localStorage.getItem("Authorization");
-    if (token) {
-      setUserLoggedIn(true);
-    }
-  }, []);
 
   useEffect(() => {
     dispatch(bootChannelTalk());
@@ -130,7 +123,7 @@ const Home = () => {
           <NavbarBtn fs="20px" fw="600" pl="15px">
             🥧 Giftipie
           </NavbarBtn>
-          <NavbarBtnDiv>{navbarState}</NavbarBtnDiv>
+          <NavbarBtnDiv>{navbarContents}</NavbarBtnDiv>
         </Navbar>
 
         <Body>
