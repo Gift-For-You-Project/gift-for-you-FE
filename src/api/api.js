@@ -104,7 +104,6 @@ export const modalItemLink = async (linkData) => {
   try {
     const response = await instance.post('/api/funding/addLink', linkData); // 모달창(ItemLink) API 호출
     if (response.status === 200) {
-      alert("상품 링크를 입력하세요");
       return response.data; // 응답 데이터 반환
     }
   } catch (error) {
