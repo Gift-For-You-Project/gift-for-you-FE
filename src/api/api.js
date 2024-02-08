@@ -62,10 +62,6 @@ export const login = async (credentials) => {
 
       if (code === 2000 && result) {
         alert(message);
-
-        console.log("로그인 토큰:", result);
-        // Cookies.set("Authorization", response.data.result);
-        console.log("로그인 토큰2:", result);
       } else {
         console.error("올바르지 않은 응답 형식 또는 값");
         throw new Error("로그인 처리 중 오류가 발생했습니다.");
@@ -90,32 +86,6 @@ export const login = async (credentials) => {
     throw error;
   }
 };
-
-// 인터셉터를 사용하여 요청 변경
-// instance.interceptors.request.use(
-//   (config) => {
-//     const token = Cookies.get("Authorization");
-//     if (token) {
-//       config.headers.Authorization = `Bearer${token}`;
-//     }
-//     return config;
-//   },
-//   (error) => {
-//     // 응답이 에러인 경우 처리할 로직
-//     return Promise.reject(error);
-//   }
-// );
-
-// 인터셉터를 사용하여 응답 변경
-// instance.interceptors.response.use(
-//   (response) => {
-//     console.log("Authorization: ", response.data.result);
-//     return response;
-//   },
-//   (error) => {
-//     return Promise.reject(error);
-//   }
-// );
 
 // 펀딩 생성페이지 API
 export const fundingCreate = async (fundingData) => {

@@ -3,6 +3,8 @@ import { FaAngleLeft } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 import InputField from "../../../components/LoginInput";
 import { login } from "../../../api/api";
+import { useDispatch } from "react-redux";
+import { userLogin } from "../../../redux/authSlice";
 import {
   MainContainer,
   LeftContainer,
@@ -18,6 +20,7 @@ import {
 } from "./LoginStyles";
 
 const Login = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -75,6 +78,7 @@ const Login = () => {
     // API 호출을 통한 로그인 처리
     try {
       await login({ email, password });
+      dispatch(userLogin()); // 로그인 액션 디스패치
       navigate("/");
     } catch (error) {
       console.error("로그인 에러:", error);
