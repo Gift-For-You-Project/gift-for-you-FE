@@ -5,7 +5,7 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { Provider } from "react-redux";
 import store from "./redux/store";
-import { ThemeProvider } from "styled-components";
+import { StyleSheetManager, ThemeProvider } from "styled-components";
 import theme from "./styles/theme";
 import GlobalStyle from "./styles/GlobalStyles";
 
@@ -14,8 +14,10 @@ root.render(
   <React.StrictMode>
     <Provider store={store}>
       <ThemeProvider theme={theme}>
-        <GlobalStyle />
-        <App />
+        <StyleSheetManager shouldForwardProp={() => true}>
+          <GlobalStyle />
+          <App />
+        </StyleSheetManager>
       </ThemeProvider>
     </Provider>
   </React.StrictMode>

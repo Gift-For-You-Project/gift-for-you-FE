@@ -3,8 +3,8 @@ import styled from "styled-components";
 // 전체 컨테이너
 export const MainContainer = styled.div`
   display: flex;
-  justify-content: center; 
-  max-width: 1200px; 
+  justify-content: center;
+  max-width: 1200px;
   min-height: 100vh;
   margin: 0 auto;
   flex-wrap: wrap;
