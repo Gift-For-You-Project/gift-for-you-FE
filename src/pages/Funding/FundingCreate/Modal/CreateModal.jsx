@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 function CreateModal({ closeModal, handleImageSelection }) {
     const navigate = useNavigate(); // React Router의 네비게이션 기능을 사용하기 위한 hook
     const [itemLink, setItemLink] = useState(''); // 상품 링크를 담는 상태 변수 초기화
+    // const [itemImage, setItemImage] = useState(''); // 상품 링크를 담는 상태 변수 초기화
 
     // 모달 버튼 클릭 이벤트 핸들러
     const handleModalButtonClick = async () => {
@@ -14,11 +15,12 @@ function CreateModal({ closeModal, handleImageSelection }) {
             // API를 호출하여 상품 링크를 등록하는 함수 호출
             const linkData = await modalItemLink({
                 itemLink,
+            
             });
             console.log('펀딩 생성 성공:', linkData);
             if (linkData.response.status === 200) {
                 alert('펀딩 상품 이미지가 생성되었습니다.');
-                handleImageSelection(itemLink);
+                handleImageSelection(linkData.itemImage);
                 closeModal();
                 navigate('/fundingcreate');
             }
@@ -38,11 +40,11 @@ function CreateModal({ closeModal, handleImageSelection }) {
         <Container>
             <Background>
                 <ModalBox>
-                    <form
+                    {/* <form
                         onSubmit={(e) => {
                             e.preventDefault();
                         }}
-                    >
+                    > */}
                         <ModalTitleXBox>
                             <P>상품 링크</P>
                             <XButton onClick={closeModal}>X</XButton>
@@ -56,7 +58,7 @@ function CreateModal({ closeModal, handleImageSelection }) {
                         <ModalButton onClick={handleModalButtonClick}>
                             등록하기
                         </ModalButton>
-                    </form>
+                    {/* </form> */}
                 </ModalBox>
             </Background>
         </Container>
