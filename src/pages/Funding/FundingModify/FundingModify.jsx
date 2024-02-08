@@ -38,15 +38,6 @@ const FundingModify = () => {
         itemImage: '', 
     });
 
-    // 공개 여부 변경 핸들러
-    // const handlePublicFlagChange = (e) => {
-    //     // 선택된 라디오 버튼 값에 따라 펀딩 데이터의 공개 여부 업데이트
-    //     setFundingData({
-    //         ...fundingData,
-    //         publicFlag: e.target.value === 'true',
-    //     });
-    // };
-
     // 펀딩 수정 요청 함수
     const fundingModifyData = async () => {
         try {
@@ -54,26 +45,24 @@ const FundingModify = () => {
             const fundingId = 1;
             const data = await updateFundingModify(fundingId, fundingData); // 펀딩 수정 API 호출
             console.log('펀딩 수정 성공:', data);
-            alert('펀딩이 수정되었습니다.');
+            navigate('/fundingdetail');
         } catch (error) {
-            console.error('펀딩 수정 오류:', error);
+            console.error("오류:", error);
         }
-    };
-
+        };
     useEffect(() => {
         // API를 호출하여 펀딩 상세 정보를 가져오는 함수 정의
-        const fetchData = async () => {
+        const fetchData = async (fundingId) => {
             try {
                 // 펀딩 ID를 설정하여 특정 펀딩의 상세 정보 가져오기
                 const fundingId = 1; // 예: 펀딩 ID가 1인 경우
                 const data = await FundingModifyGet(fundingId);
-                console.log('+++', data);
                 setFundingData(data); // 가져온 데이터를 상태 변수에 설정
+                console.log('+++', data);
             } catch (error) {
-                // API 호출 실패 시 에러 처리
-                console.error('API 호출 오류:', error);
+                console.error("오류:", error);
             }
-        };
+            };
 
         // 컴포넌트가 마운트될 때 API 호출 함수 실행
         fetchData();
@@ -111,7 +100,7 @@ const FundingModify = () => {
                     <FundingDiv>
                         {/* 펀딩 제품 정보 입력 부분 */}
                         <P pb="10px" fs="16px" fw="900">
-                            펀딩 제품
+                            펀딩 수정페이지
                         </P>
                         <P pb="20px" fs="10px" fw="900">
                             펀딩 페이지에 상품명과 이미지가 노출돼요.
@@ -173,7 +162,6 @@ const FundingModify = () => {
                                     <RadioInput
                                         value="true"
                                         checked={fundingData.publicFlag === 'true'}
-                                        // onChange={handlePublicFlagChange}
                                         onChange={(e) => {
                                             setFundingData({ ...fundingData, publicFlag: e.target.value });
                                         }}
@@ -192,7 +180,6 @@ const FundingModify = () => {
                                     <RadioInput
                                         value="false"
                                         checked={fundingData.publicFlag === 'false'}
-                                        // onChange={handlePublicFlagChange}
                                         onChange={(e) => {
                                             setFundingData({ ...fundingData, publicFlag: e.target.value });
                                         }}
@@ -246,7 +233,7 @@ const FundingModify = () => {
                             placeholder="본문을 입력해주세요"
                             value={fundingData.content}
                             onChange={(e) => {
-                                setFundingData({ ...fundingData, title: e.target.value });
+                                setFundingData({ ...fundingData, content: e.target.value });
                             }}
                             h="90px"
                             w="97%"

@@ -134,7 +134,7 @@ export const SponserComment = styled.div`
   justify-content: center;
   align-items: start;
 `;
-export const FundingImg = styled.label`
+export const FundingImg = styled.img`
     width: ${(props) => props.w};
     height: ${(props) => props.h};
     padding-left: ${(props) => props.pl};
@@ -171,9 +171,6 @@ export const InputTag = styled.input`
   font-size: 12px;
   justify-content: start;
   align-items: start;
-  &:hover {
-    cursor: pointer;
-  }
 `;
 export const RadioInput = styled.input`
   margin-bottom: ${(props) => props.mb};
