@@ -25,7 +25,7 @@ function CreateModal({ closeModal, handleImageSelection }) {
             const linkData = await modalItemLink({
                 itemLink,
             });
-            console.log('펀딩 생성 성공:', linkData);
+            console.log('펀딩 모달 성공:', linkData);
             // if (linkData.response.status === 200) {
             alert('펀딩 상품 이미지가 생성되었습니다.');
             handleImageSelection(linkData.itemImage);

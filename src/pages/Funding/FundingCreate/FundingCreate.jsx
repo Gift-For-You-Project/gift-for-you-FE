@@ -46,7 +46,7 @@ const FundingCreate = () => {
     // 모달을 닫는 함수
     const closeModal = () => {
         setIsFundingModalOpen(false);
-        setItemImage(''); // 이미지 상태를 초기화하여 이미지를 숨김
+        // setItemImage(''); // 이미지 상태를 초기화하여 이미지를 숨김
     };
 
     // 모달 내에서 이미지를 선택하고 설정하는 함수
