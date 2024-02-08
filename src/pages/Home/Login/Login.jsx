@@ -2,11 +2,7 @@ import React, { useState } from "react";
 import { FaAngleLeft } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 import InputField from "../../../components/LoginInput";
-import {
-  login,
-  saveTokensToLocalStorageAndCookies,
-  getTokensFromLocalStorageAndCookies,
-} from "../../../api/api";
+import { login } from "../../../api/api";
 import {
   MainContainer,
   LeftContainer,
@@ -28,9 +24,7 @@ const Login = () => {
   const [showEmailHelp, setShowEmailHelp] = useState(false);
   const [showPasswordHelp, setShowPasswordHelp] = useState(false);
 
-  const handleBackClick = () => {
-    navigate("/");
-  };
+  const handleBackClick = () => navigate("/");
 
   // Enter키가 눌렸을 때 로그인 처리
   const handleKeyDown = (e) => {
@@ -81,12 +75,9 @@ const Login = () => {
     // API 호출을 통한 로그인 처리
     try {
       await login({ email, password });
-      saveTokensToLocalStorageAndCookies(
-        getTokensFromLocalStorageAndCookies().token
-      );
       navigate("/");
     } catch (error) {
-      console.error("로그인 오류:", error);
+      alert("로그인에 실패하였습니다.");
     }
   };
 
