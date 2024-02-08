@@ -108,11 +108,6 @@ const FundingCreate = () => {
             });
             console.log('펀딩 생성 성공:', fundingData);
             // 펀딩 생성 성공 시, 성공 메시지 표시 또는 다른 동작 수행
-            // navigate('/fundingcreate');
-            // if (fundingCreate.status === 200) {
-            //     alert('펀딩 상품이 등록되었습니다.');
-            // }
-            // 추가된 부분: 펀딩 생성 후 해당 링크의 이미지 가져와서 적용
         } catch (error) {
             if (error.response) {
                 const statusCode = error.response.status;
@@ -168,7 +163,7 @@ const FundingCreate = () => {
                             </P>
                             <ProducImgtDiv>
                                 <FundingImg
-                                    src={itemImage ? itemImage : !itemImage}
+                                    src={itemImage}
                                     h="90px"
                                     w="90px"
                                     onClick={handleFundingModalClick}
