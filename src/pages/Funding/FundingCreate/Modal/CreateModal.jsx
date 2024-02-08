@@ -27,7 +27,7 @@ function CreateModal({ closeModal, handleImageSelection }) {
             if (error.response) {
                 const statusCode = error.response.status;
                 const errorMessage = error.response.data.message;
-                if (statusCode === 400) {
+                if (statusCode === 404) {
                     alert(errorMessage);
                 }
             }
@@ -38,11 +38,11 @@ function CreateModal({ closeModal, handleImageSelection }) {
         <Container>
             <Background>
                 <ModalBox>
-                    {/* <form
+                    <form
                         onSubmit={(e) => {
                             e.preventDefault();
                         }}
-                    > */}
+                    >
                         <ModalTitleXBox>
                             <P>상품 링크</P>
                             <XButton onClick={closeModal}>X</XButton>
@@ -51,12 +51,12 @@ function CreateModal({ closeModal, handleImageSelection }) {
                             type="text"
                             value={itemLink}
                             onChange={(e) => setItemLink(e.target.value)}
-                            placeholder="상품 링크를 입력해주세요"
+                            // placeholder="상품 링크를 입력해주세요"
                         ></ModalInput>
                         <ModalButton onClick={handleModalButtonClick}>
                             등록하기
                         </ModalButton>
-                    {/* </form> */}
+                    </form>
                 </ModalBox>
             </Background>
         </Container>

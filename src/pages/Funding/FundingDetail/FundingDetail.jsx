@@ -52,11 +52,11 @@ const FundingDetail = () => {
 
     useEffect(() => {
         // API를 호출하여 펀딩 상세 정보를 가져오는 함수 정의
-        const fetchData = async (fundingId) => {
+        const fetchData = async (fundingid) => {
             try {
                 // 펀딩 ID를 설정하여 특정 펀딩의 상세 정보 가져오기
-                const fundingId = 1; // 예: 펀딩 ID가 1인 경우
-                const data = await fetchFundingDetail(fundingId);
+                const fundingid = 1; // 예: 펀딩 ID가 1인 경우
+                const data = await fetchFundingDetail(fundingid);
                 setDetailData(data); // 가져온 데이터를 상태 변수에 설정
             } catch (error) {
                 if (error.response) {
