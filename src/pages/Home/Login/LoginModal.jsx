@@ -1,7 +1,6 @@
 import React from "react";
 import { IoClose } from "react-icons/io5";
 import { Link, useNavigate } from "react-router-dom";
-import Cookies from "js-cookie";
 
 import {
   ModalContainer,
@@ -20,19 +19,13 @@ const LoginModal = ({ closeModal }) => {
   const GoogleLogin = () => {
     window.location.href =
       "https://accounts.google.com/o/oauth2/v2/auth?client_id={CLIENT-ID}&redirect_uri={REDIRECT-URL}&response_type=code&scope=email profile";
-
-    if (Cookies.get("Authorization")) {
-      navigate("/");
-    }
+    navigate("/");
   };
 
   const KakaoLogin = () => {
     window.location.href =
-      "https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=f33cfedfa3a09e1e2690f6b2b73e5491&redirect_uri=https//www.giftipie.me/api/kakao/callback&response_type=code";
-
-    if (Cookies.get("Authorization")) {
-      navigate("/");
-    }
+      "https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=f33cfedfa3a09e1e2690f6b2b73e5491&redirect_uri=https://www.giftipie.me/api/kakao/callback&response_type=code";
+    navigate("/");
   };
 
   return (
