@@ -77,7 +77,7 @@ const Login = () => {
       await login({ email, password });
       navigate("/");
     } catch (error) {
-      alert("로그인에 실패하였습니다.");
+      console.error("로그인 에러:", error);
     }
   };
 
