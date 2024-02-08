@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { Container, Background, P, ModalBox, ModalTitleXBox, ModalInput, ModalButton, XButton } from './ModalStyles';
+import { Container, Background, P, ModalBox, ModalTitleXBox, ModalInput, ModalButton, XButton } from './CreateModalStyles';
 import { modalItemLink } from '../../../../api/api';
 import { useNavigate } from 'react-router-dom';
 
 // 모달 컴포넌트
-function Modal({ closeModal, handleImageSelection }) {
+function CreateModal({ closeModal, handleImageSelection }) {
     const navigate = useNavigate(); // React Router의 네비게이션 기능을 사용하기 위한 hook
     const [itemLink, setItemLink] = useState(''); // 상품 링크를 담는 상태 변수 초기화
 
@@ -63,4 +63,4 @@ function Modal({ closeModal, handleImageSelection }) {
     );
 }
 
-export default Modal;
+export default CreateModal;

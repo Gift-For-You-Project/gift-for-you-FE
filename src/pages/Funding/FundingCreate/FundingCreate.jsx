@@ -20,7 +20,7 @@ import {
     SponserComment,
     TogetherDiv,
 } from './FundingCreateStyles';
-import Modal from './Modal/Modal'; // 모달 컴포넌트 import
+import CreateModal from './Modal/CreateModal';
 import { fundingCreate } from '../../../api/api'; // 펀딩 생성 API import
 
 // 펀딩 생성 페이지 컴포넌트
@@ -207,7 +207,7 @@ const FundingCreate = () => {
                             </ProducImgtDiv>
                             {/* 모달 컴포넌트 표시 여부 확인 후 표시 */}
                             {isFundingModalOpen && (
-                                <Modal closeModal={closeModal} handleImageSelection={handleImageSelection} />
+                                <CreateModal closeModal={closeModal} handleImageSelection={handleImageSelection} />
                             )}
                             {/* 펀딩 내용 및 공개 여부 입력 폼 */}
                             <SponserDiv>

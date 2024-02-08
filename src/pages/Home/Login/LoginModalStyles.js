@@ -67,6 +67,10 @@ export const P = styled.p`
   align-items: center;
 `;
 
+export const GoogleBtn = styled.button``;
+
+export const KakaoBtn = styled.button``;
+
 export const LoginModalBtn = styled.button`
   background-color: ${(props) => props.color};
   padding: 16px 20px;

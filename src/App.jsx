@@ -2,7 +2,6 @@ import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import NotFound from "./pages/NotFound/NotFound";
 import Home from "./pages/Home/Home";
-import LoginModal from "./pages/Home/Login/LoginModal";
 import Login from "./pages/Home/Login/Login";
 import Signup from "./pages/Home/Signup/Signup";
 import FundingCreate from "./pages/Funding/FundingCreate/FundingCreate";
@@ -16,7 +15,6 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/loginmodal" element={<LoginModal />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/fundingcreate" element={<FundingCreate />} />
