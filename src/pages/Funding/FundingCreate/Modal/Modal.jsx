@@ -4,7 +4,7 @@ import { modalItemLink } from '../../../../api/api';
 import { useNavigate } from 'react-router-dom';
 
 // 모달 컴포넌트
-function Modal({ closeModal }) {
+function Modal({ closeModal, handleImageSelection }) {
     const navigate = useNavigate(); // React Router의 네비게이션 기능을 사용하기 위한 hook
     const [itemLink, setItemLink] = useState(''); // 상품 링크를 담는 상태 변수 초기화
 
@@ -16,9 +16,13 @@ function Modal({ closeModal }) {
                 itemLink,
             });
             console.log('펀딩 생성 성공:', linkData);
+            if (linkData.response.status === 200) {
+                alert('펀딩 상품 이미지가 생성되었습니다.');
+                handleImageSelection(itemLink);
+                closeModal();
+                navigate('/fundingcreate');
+            }
             // 성공 시 처리: 새 페이지로 이동하거나 성공 메시지 표시 등
-            navigate('/fundingcreate');
-            closeModal();
         } catch (error) {
             if (error.response) {
                 const statusCode = error.response.status;

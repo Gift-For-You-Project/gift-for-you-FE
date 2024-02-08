@@ -38,15 +38,6 @@ const FundingModify = () => {
         itemImage: '', 
     });
 
-    // 공개 여부 변경 핸들러
-    // const handlePublicFlagChange = (e) => {
-    //     // 선택된 라디오 버튼 값에 따라 펀딩 데이터의 공개 여부 업데이트
-    //     setFundingData({
-    //         ...fundingData,
-    //         publicFlag: e.target.value === 'true',
-    //     });
-    // };
-
     // 펀딩 수정 요청 함수
     const fundingModifyData = async () => {
         try {
@@ -54,12 +45,11 @@ const FundingModify = () => {
             const fundingId = 1;
             const data = await updateFundingModify(fundingId, fundingData); // 펀딩 수정 API 호출
             console.log('펀딩 수정 성공:', data);
-            alert('펀딩이 수정되었습니다.');
+            navigate('/fundingdetail');
         } catch (error) {
-            console.error('펀딩 수정 오류:', error);
+            console.error("오류:", error);
         }
-    };
-
+        };
     useEffect(() => {
         // API를 호출하여 펀딩 상세 정보를 가져오는 함수 정의
         const fetchData = async (fundingId) => {
@@ -67,18 +57,12 @@ const FundingModify = () => {
                 // 펀딩 ID를 설정하여 특정 펀딩의 상세 정보 가져오기
                 const fundingId = 1; // 예: 펀딩 ID가 1인 경우
                 const data = await FundingModifyGet(fundingId);
-                console.log('+++', data);
                 setFundingData(data); // 가져온 데이터를 상태 변수에 설정
+                console.log('+++', data);
             } catch (error) {
-                if (error.response) {
-                    const statusCode = error.response.status;
-                    const errorMessage = error.response.data.message;
-                    if (statusCode === 400) {
-                        alert(errorMessage);
-                    }
-                }
+                console.error("오류:", error);
             }
-        };
+            };
 
         // 컴포넌트가 마운트될 때 API 호출 함수 실행
         fetchData();
@@ -249,7 +233,7 @@ const FundingModify = () => {
                             placeholder="본문을 입력해주세요"
                             value={fundingData.content}
                             onChange={(e) => {
-                                setFundingData({ ...fundingData, title: e.target.value });
+                                setFundingData({ ...fundingData, content: e.target.value });
                             }}
                             h="90px"
                             w="97%"
