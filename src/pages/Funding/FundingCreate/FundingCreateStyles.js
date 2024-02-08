@@ -134,21 +134,22 @@ export const SponserComment = styled.div`
   justify-content: center;
   align-items: start;
 `;
-export const FundingImg = styled.label`
-  width: ${(props) => props.w};
-  height: ${(props) => props.h};
-  padding-left: ${(props) => props.pl};
-  border-radius: 4px;
-  border: none;
-  background-color: #eae7de;
-  font-weight: 500;
-  font-size: 12px;
-  justify-content: start;
-  align-items: start;
-  &:hover {
+
+export const FundingImg = styled.img`
+    width: ${(props) => props.w};
+    height: ${(props) => props.h};
+    padding-left: ${(props) => props.pl};
+    border-radius: 4px;
+    border: none;
+    background-color: #eae7de;
+    font-weight: 500;
+    font-size: 12px;
+    justify-content: start;
+    align-items: start;
+    &:hover {
     cursor: pointer;
-  }
 `;
+
 export const PlusImg = styled.img`
   width: 20px;
   height: 20px;
@@ -171,9 +172,6 @@ export const InputTag = styled.input`
   font-size: 12px;
   justify-content: start;
   align-items: start;
-  &:hover {
-    cursor: pointer;
-  }
 `;
 export const RadioInput = styled.input`
   margin-bottom: ${(props) => props.mb};
