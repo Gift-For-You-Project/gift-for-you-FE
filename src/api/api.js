@@ -2,7 +2,7 @@ import axios from "axios";
 
 export const instance = axios.create({
   baseURL: process.env.REACT_APP_API_URL,
-  withCredentials: true, // 쿠키 전송을 위한 옵션
+  withCredentials: true, // Cookies에 브라우저가 자동으로 쿠키를 넣어줌
   headers: {
     "Access-Control-Allow-Origin": `${process.env.REACT_APP_API_URL}`,
   },
