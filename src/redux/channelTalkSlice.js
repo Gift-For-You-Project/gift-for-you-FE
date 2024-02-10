@@ -16,7 +16,7 @@ export const bootChannelTalk = () => async (dispatch) => {
 };
 
 const channelTalkSlice = createSlice({
-  name: "channelTalk",
+  name: "channelTalk", // 개발자들이 상태나 액션들을 식별하기 쉽게 하기 위해 이름 지정. (가독성, 유지보수)
   initialState: {},
   reducers: {
     bootChannelTalkSuccess: (state, action) => {},
