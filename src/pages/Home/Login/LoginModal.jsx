@@ -21,14 +21,19 @@ const LoginModal = ({ closeModal }) => {
   const GoogleLogin = () => {
     window.location.href = process.env.REACT_APP_GOOGLE_URL;
     dispatch(googleLogin());
+    alert("구글 로그인이 완료되었습니다.");
+    console.log("구글 로그인 디스패치 확인");
+    window.history.replaceState(null, null, "/"); // 이전 페이지 이력 삭제
     navigate("/");
   };
 
   const KakaoLogin = () => {
     window.location.href = process.env.REACT_APP_KAKAO_URL;
     dispatch(kakaoLogin());
-    console.log("카카오 로그인 디스패치");
-    navigate("/", { replace: true }); // replace: true를 통해 기록을 남기지 않음 -> 페이지 새로고침 방지
+    alert("카카오 로그인이 완료되었습니다.");
+    console.log("카카오 로그인 디스패치 확인");
+    window.history.replaceState(null, null, "/"); // 이전 페이지 이력 삭제
+    navigate("/");
   };
 
   return (
