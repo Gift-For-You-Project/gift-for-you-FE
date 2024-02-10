@@ -27,8 +27,7 @@ const LoginModal = ({ closeModal }) => {
   const KakaoLogin = () => {
     window.location.href = process.env.REACT_APP_KAKAO_URL;
     dispatch(kakaoLogin());
-    console.log("카카오 로그인 디스패치");
-    navigate("/", { replace: true }); // replace: true를 통해 기록을 남기지 않음 -> 페이지 새로고침 방지
+    navigate("/");
   };
 
   return (
