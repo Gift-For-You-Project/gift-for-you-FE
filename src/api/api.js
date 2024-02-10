@@ -137,9 +137,9 @@ export const fetchFundingDetail = async (fundingId) => {
 };
 
 // 펀딩 후원자 상세페이지 API
-export const fetchSponsorDetail = async (fundingId) => {
+export const fetchSponsorDetail = async (id) => {
   try {
-    const response = await instance.get(`/api/funding/${fundingId}`); // 펀딩 후원자 상세페이지 요청
+    const response = await instance.get(`/api/funding/${id}`); // 펀딩 후원자 상세페이지 요청
     if (response.status === 200) {
       alert("후원자 상세페이지입니다.");
       return response.data; // 응답 데이터 반환
@@ -157,9 +157,10 @@ export const fetchSponsorDetail = async (fundingId) => {
 
 // 펀딩 수정페이지 API
 // 수정할 fundingId와 data
-export const FundingModifyGet = async (fundingId, data) => {
+export const FundingModifyGet = async (id, data) => {
   try {
-    const response = await instance.get(`/api/funding/${fundingId}`, data); // 펀딩 수정페이지 요청
+    // const response = await instance.get(`/api/funding/${fundingId}`, data); // 펀딩 수정페이지 요청
+    const response = await instance.get(`/api/funding/${id}`, data); // 펀딩 수정페이지 요청
     if (response.status === 200) {
       return response.data; // 응답 데이터 반환
     }
@@ -174,11 +175,30 @@ export const FundingModifyGet = async (fundingId, data) => {
   }
 };
 
-export const updateFundingModify = async (fundingId, data) => {
+export const updateFundingModify = async (id, data) => {
   try {
-    const response = await instance.patch(`/api/funding/${fundingId}`, data); // 펀딩 수정페이지 요청
+    // const response = await instance.patch(`/api/funding/${fundingId}`, data); // 펀딩 수정페이지 요청
+    const response = await instance.patch(`/api/funding/${id}`, data); // 펀딩 수정페이지 요청
     if (response.status === 200) {
       alert("정말 수정하시겠습니까?");
+      return response.data; // 응답 데이터 반환
+    }
+  } catch (error) {
+    if (error.response) {
+      const statusCode = error.response.status;
+      const errorMessage = error.response.data.message;
+      if (statusCode === 400) {
+        alert(errorMessage);
+      }
+    }
+  }
+};
+
+// 펀딩 수정페이지 상품링크 변경 모달창(ItemLink) API
+export const modalLinkModify = async (linkModifyData) => {
+  try {
+    const response = await instance.post('/api/funding/modifyLink', linkModifyData); // 모달창(ItemLink) API 호출
+    if (response.status === 200) {
       return response.data; // 응답 데이터 반환
     }
   } catch (error) {

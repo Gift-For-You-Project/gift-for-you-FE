@@ -1,5 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { fundingCreate } from '../../../api/api'; // 펀딩 생성 API import
+import { useParams } from 'react-router-dom';
+import CreateModal from './Modal/CreateModal';
 import {
     MainContainer,
     LeftContainer,
@@ -20,12 +23,11 @@ import {
     SponserComment,
     TogetherDiv,
 } from './FundingCreateStyles';
-import CreateModal from './Modal/CreateModal';
-import { fundingCreate } from '../../../api/api'; // 펀딩 생성 API import
 
 // 펀딩 생성 페이지 컴포넌트
 const FundingCreate = () => {
     const navigate = useNavigate(); // React Router의 네비게이션 기능을 사용하기 위한 hook
+    const { id } = useParams(); // URL 매개변수(id)를 가져옴
 
     // 펀딩 생성 페이지에서 사용될 상태 변수 초기화
     const [itemName, setItemName] = useState('');
@@ -46,7 +48,6 @@ const FundingCreate = () => {
     // 모달을 닫는 함수
     const closeModal = () => {
         setIsFundingModalOpen(false);
-        // setItemImage(''); // 이미지 상태를 초기화하여 이미지를 숨김
     };
 
     // 모달 내에서 이미지를 선택하고 설정하는 함수
@@ -97,6 +98,7 @@ const FundingCreate = () => {
             }
             // 펀딩 생성 API 호출 및 데이터 전송
             const fundingData = await fundingCreate({
+                id,
                 itemImage,
                 itemName,
                 targetAmount,
@@ -108,20 +110,18 @@ const FundingCreate = () => {
             });
             console.log('펀딩 생성 성공:', fundingData);
             // 펀딩 생성 성공 시, 성공 메시지 표시 또는 다른 동작 수행
+            navigate(`/fundingdetail/${id}`);
         } catch (error) {
             if (error.response) {
                 const statusCode = error.response.status;
                 const errorMessage = error.response.data.message;
                 if (statusCode === 400) {
-                    alert(errorMessage);
+                    // alert(errorMessage);
+                    alert('펀딩 생성 실패 :', errorMessage );
                 }
             }
         }
     };
-
-    useEffect(() => {
-        // handleFundingClick();
-    }, []);
 
     return (
         <MainContainer>
@@ -143,7 +143,7 @@ const FundingCreate = () => {
 
             <RightContainer>
                 <Navbar>
-                    <NavbarBtn onClick={() => navigate('/fundingmodify')} fs="15px" fw="800" pl="15px">
+                    <NavbarBtn onClick={() => navigate(`/fundingmodify/1`)} fs="15px" fw="800" pl="15px">
                         😉 펀딩 수정페이지로 이동
                     </NavbarBtn>
                 </Navbar>
