@@ -104,7 +104,7 @@ export const modalItemLink = async (LinkData) => {
 export const fetchFundingDetail = async (fundingId) => {
   try {
     const response = await instance.get(`/api/funding/${fundingId}`); // 펀딩 상세페이지 요청
-    console.log("펀딩 상세페이지 API", response);
+    console.log("++++", response);
     return response.data; // 응답 데이터 반환
   } catch (error) {
     console.error("펀딩 상세페이지 API 호출 오류:", error); // 오류 로깅
@@ -113,11 +113,13 @@ export const fetchFundingDetail = async (fundingId) => {
 };
 
 // 펀딩 후원자 상세페이지 API
-export const fetchSponsorDetail = async (fundingId, data) => {
+export const fetchSponsorDetail = async (fundingId) => {
   try {
-    const response = await instance.get(`/api/fundingsponsor/${fundingId}`, data); // 펀딩 수정페이지 요청
-    console.log("펀딩 후원자 상세페이지", response);
-    return response.data; // 응답 데이터 반환
+    const response = await instance.get(`/api/fundingsponsordetail/${fundingId}`); // 펀딩 후원자 상세페이지 요청
+    if (response.status === 200) {
+      alert("후원자 상세페이지입니다.");
+      return response.data; // 응답 데이터 반환
+    }
   } catch (error) {
     console.error("펀딩 상세페이지 API 호출 오류:", error); // 오류 로깅
     throw error; // 에러 다시 throw 또는 다른 적절한 처리를 수행
@@ -125,6 +127,7 @@ export const fetchSponsorDetail = async (fundingId, data) => {
 };
 
 // 펀딩 수정페이지 API
+// 수정할 fundingId와 data
 export const FundingModifyGet = async (fundingId, data) => {
   try {
     // const response = await instance.get(`/api/funding/${fundingId}`, data); // 펀딩 수정페이지 요청
