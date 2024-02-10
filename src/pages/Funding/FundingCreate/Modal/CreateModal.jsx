@@ -16,8 +16,7 @@ import { useNavigate } from 'react-router-dom';
 function CreateModal({ closeModal, handleImageSelection }) {
     const navigate = useNavigate(); // React Router의 네비게이션 기능을 사용하기 위한 hook
     const [itemLink, setItemLink] = useState(''); // 상품 링크를 담는 상태 변수 초기화
-    // const [itemImage, setItemImage] = useState(''); // 상품 링크를 담는 상태 변수 초기화
-
+    
     // 모달 버튼 클릭 이벤트 핸들러
     const handleModalButtonClick = async () => {
         try {

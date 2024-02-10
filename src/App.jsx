@@ -18,9 +18,9 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/fundingcreate" element={<FundingCreate />} />
-        <Route path="/fundingdetail" element={<FundingDetail />} />
+        <Route path="/fundingdetail/:fundingId" element={<FundingDetail />} />
         <Route path="/fundingsponsordetail" element={<Sponsor />} />
-        <Route path="/fundingmodify" element={<FundingModify />} />
+        <Route path="/fundingmodify/:fundingId" element={<FundingModify />} />
         <Route path="/fundingpay" element={<FundingPay />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
