@@ -27,7 +27,7 @@ import {
 // 펀딩 생성 페이지 컴포넌트
 const FundingCreate = () => {
     const navigate = useNavigate(); // React Router의 네비게이션 기능을 사용하기 위한 hook
-    const { id } = useParams(); // URL 매개변수(id)를 가져옴
+    const { fundingId } = useParams(); // URL 매개변수(id)를 가져옴
 
     // 펀딩 생성 페이지에서 사용될 상태 변수 초기화
     const [itemName, setItemName] = useState('');
@@ -98,7 +98,7 @@ const FundingCreate = () => {
             }
             // 펀딩 생성 API 호출 및 데이터 전송
             const fundingData = await fundingCreate({
-                id,
+                fundingId,
                 itemImage,
                 itemName,
                 targetAmount,
@@ -110,7 +110,7 @@ const FundingCreate = () => {
             });
             console.log('펀딩 생성 성공:', fundingData);
             // 펀딩 생성 성공 시, 성공 메시지 표시 또는 다른 동작 수행
-            navigate(`/fundingdetail/${id}`);
+            navigate(`/fundingdetail/${fundingData.fundingId}`);
         } catch (error) {
             if (error.response) {
                 const statusCode = error.response.status;
