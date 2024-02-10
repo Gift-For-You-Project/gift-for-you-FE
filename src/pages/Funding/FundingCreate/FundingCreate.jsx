@@ -121,7 +121,7 @@ const FundingCreate = () => {
             console.log('펀딩 생성 성공:', response);
 
             // 펀딩 생성 성공 시, 성공 메시지 표시 또는 다른 동작 수행
-            navigate(`/fundingdetail/${id}`);
+            navigate(`/fundingdetail/${response.data.id}`);
         } catch (error) {
             if (error.response) {
                 const statusCode = error.response.status;
