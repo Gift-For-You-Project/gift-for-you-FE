@@ -21,7 +21,7 @@ import {
 
 const Sponsor = () => {
     const navigate = useNavigate();
-    const { id } = useParams(); // URL 매개변수(id)를 가져옴
+    const { fundingId } = useParams(); // URL 매개변수(id)를 가져옴
 
     // 펀딩 상세 정보를 담는 상태 변수 초기화
     const [sponsorData, setSponsorData] = useState({
@@ -36,13 +36,13 @@ const Sponsor = () => {
         // API를 호출하여 펀딩 상세 정보를 가져오는 함수 정의
         const fetchData = async () => {
             try {
-                if (!id) {
+                if (!fundingId) {
                     // 유효한 id가 없으면 데이터를 요청하지 않음
                     return;
                 }
                 // 펀딩 ID를 설정하여 특정 펀딩의 상세 정보 가져오기
                 // const fundingId = 1; // 예: 펀딩 ID가 1인 경우
-                const data = await fetchSponsorDetail(id);
+                const data = await fetchSponsorDetail(fundingId);
                 setSponsorData(data); // 가져온 데이터를 상태 변수에 설정
             } catch (error) {
                 // API 호출 실패 시 에러 처리
@@ -52,7 +52,7 @@ const Sponsor = () => {
 
         // 컴포넌트가 마운트될 때 API 호출 함수 실행
         fetchData();
-    }, []); // 빈 배열을 전달하여 한 번만 실행하도록 설정
+    }, [fundingId]); // 빈 배열을 전달하여 한 번만 실행하도록 설정
 
     return (
         <MainContainer>
@@ -74,7 +74,7 @@ const Sponsor = () => {
 
             <RightContainer>
                 <Navbar>
-                    <NavbarBtn onClick={() => navigate(`/fundingdetail/${id}`)} fs="15px" fw="800" pl="15px">
+                    <NavbarBtn onClick={() => navigate(`/fundingdetail/${fundingId}`)} fs="15px" fw="800" pl="15px">
                         😉 펀딩 상세페이지로 이동
                     </NavbarBtn>
                     <NavbarBtnDiv pr="15px">

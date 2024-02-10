@@ -3,8 +3,8 @@ import styled from "styled-components";
 // 전체 컨테이너
 export const MainContainer = styled.div`
   display: flex;
-  justify-content: center; 
-  max-width: 1200px; 
+  justify-content: center;
+  max-width: 1200px;
   min-height: 100vh;
   margin: 0 auto;
   flex-wrap: wrap;
@@ -145,19 +145,19 @@ export const SponsorImg = styled.img`
 `;
 
 export const InputTag = styled.input`
-    width: 98%;
-    height: ${(props) => props.h};
-    background-color: #eae7de;
-    border-radius: 4px;
-    border: none;
-    margin-left: 10px;
-    margin-bottom: 10px;
-    padding-left: 10px;
-    padding-bottom: ${(props) => props.pb};
-    font-weight: 500;
-    font-size: 11px;
-    justify-content: start;
-    align-items: start;
+  width: 98%;
+  height: ${(props) => props.h};
+  background-color: #eae7de;
+  border-radius: 4px;
+  border: none;
+  margin-left: 10px;
+  margin-bottom: 10px;
+  padding-left: 10px;
+  padding-bottom: ${(props) => props.pb};
+  font-weight: 500;
+  font-size: 11px;
+  justify-content: start;
+  align-items: start;
 `;
 
 export const FundingNewline = styled.div`

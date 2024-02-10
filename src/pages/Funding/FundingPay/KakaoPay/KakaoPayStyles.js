@@ -20,6 +20,6 @@ export const Button = styled.button`
 `;
 
 export const KakaoPayLogo = styled.img`
-    height: 35px;
-    margin-top: 5px;
-`
+  height: 35px;
+  margin-top: 5px;
+`;

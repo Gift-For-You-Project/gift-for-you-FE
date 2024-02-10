@@ -134,6 +134,7 @@ export const SponserComment = styled.div`
   justify-content: center;
   align-items: start;
 `;
+
 export const FundingImg = styled.img`
     width: ${(props) => props.w};
     height: ${(props) => props.h};
@@ -147,8 +148,8 @@ export const FundingImg = styled.img`
     align-items: start;
     &:hover {
     cursor: pointer;
-  }
-`
+`;
+
 export const PlusImg = styled.img`
   width: 20px;
   height: 20px;
