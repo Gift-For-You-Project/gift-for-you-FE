@@ -27,18 +27,28 @@ import {
 // 펀딩 생성 페이지 컴포넌트
 const FundingCreate = () => {
     const navigate = useNavigate(); // React Router의 네비게이션 기능을 사용하기 위한 hook
-    const { fundingId } = useParams(); // URL 매개변수(id)를 가져옴
+    const { id } = useParams(); // URL 매개변수(id)를 가져옴
 
     // 펀딩 생성 페이지에서 사용될 상태 변수 초기화
-    const [itemName, setItemName] = useState('');
-    const [showName, setShowName] = useState('');
-    const [title, setTitle] = useState('');
-    const [content, setContent] = useState('');
-    const [targetAmount, setTargetAmount] = useState('');
-    const [publicFlag, setPublicFlag] = useState('');
-    const [endDate, setEndDate] = useState('');
+    // const [itemName, setItemName] = useState('');
+    // const [showName, setShowName] = useState('');
+    // const [title, setTitle] = useState('');
+    // const [content, setContent] = useState('');
+    // const [targetAmount, setTargetAmount] = useState('');
+    // const [publicFlag, setPublicFlag] = useState('');
+    // const [endDate, setEndDate] = useState('');
     const [itemImage, setItemImage] = useState(false);
     const [isFundingModalOpen, setIsFundingModalOpen] = useState(false); // 모달 창의 열림 여부 상태 변수
+
+    const [createData, setCreateData] = useState({
+        itemName: '',
+        targetAmount: '',
+        publicFlag: '',
+        showName: '',
+        title: '',
+        content: '',
+        endDate: '',
+    });
 
     // 펀딩 이미지를 클릭했을 때 모달을 열고 이미지를 설정하는 함수
     const handleFundingModalClick = (e) => {
@@ -58,66 +68,67 @@ const FundingCreate = () => {
 
     // 각 입력값에 대한 상태 업데이트 핸들러
     const handleItemNameChange = (e) => {
-        setItemName(e.target.value);
+        setCreateData({ ...createData, itemName: e.target.value });
     };
     const handleTargetAmountChange = (e) => {
-        setTargetAmount(e.target.value);
+        setCreateData({ ...createData, targetAmount: e.target.value });
     };
     const handleShowNameChange = (e) => {
-        setShowName(e.target.value);
-    };
-    const handleTitleChange = (e) => {
-        setTitle(e.target.value);
-    };
-    const handleContentChange = (e) => {
-        setContent(e.target.value);
-    };
-    const handleEndDateChange = (e) => {
-        setEndDate(e.target.value);
-    };
+        setCreateData({ ...createData, showName: e.target.value }); 
+      };
+      const handleTitleChange = (e) => {
+        setCreateData({ ...createData, title: e.target.value });
+      };
+      const handleContentChange = (e) => {
+        setCreateData({ ...createData, content: e.target.value });
+      };
+      const handleEndDateChange = (e) => {
+        setCreateData({ ...createData, endDate: e.target.value });
+      };
     const handlePublicFlagChange = (e) => {
         // 업데이트: 한 번에 하나의 옵션만 선택했는지 확인하세요.
         const value = e.target.value === 'true' ? true : false;
-        setPublicFlag(value.toString());
+        setCreateData({...createData, publicFlag: value});
     };
     // 펀딩 생성 요청 처리 함수
     const handleFundingClick = async () => {
         try {
             if (
                 itemImage === '' ||
-                itemName === '' ||
-                targetAmount === '' ||
-                publicFlag === '' ||
-                showName === '' ||
-                title === '' ||
-                content === '' ||
-                endDate === ''
+                createData.itemName === '' ||
+                createData.targetAmount === '' ||
+                createData.publicFlag === '' ||
+                createData.showName === '' ||
+                createData.title === '' ||
+                createData.content === '' ||
+                createData.endDate === ''
             ) {
                 alert('내용을 입력해주세요');
                 return;
             }
             // 펀딩 생성 API 호출 및 데이터 전송
-            const fundingData = await fundingCreate({
-                fundingId,
+            const response = await fundingCreate({
+                id,
                 itemImage,
-                itemName,
-                targetAmount,
-                publicFlag,
-                showName,
-                title,
-                content,
-                endDate,
+                itemName: createData.itemName,
+                targetAmount: createData.targetAmount,
+                publicFlag: createData.publicFlag,
+                showName: createData.showName,
+                title: createData.title,
+                content: createData.content,
+                endDate: createData.endDate,
             });
-            console.log('펀딩 생성 성공:', fundingData);
+            console.log('펀딩 생성 성공:', response);
+
             // 펀딩 생성 성공 시, 성공 메시지 표시 또는 다른 동작 수행
-            navigate(`/fundingdetail/${fundingData.fundingId}`);
+            navigate(`/fundingdetail/${id}`);
         } catch (error) {
             if (error.response) {
                 const statusCode = error.response.status;
                 const errorMessage = error.response.data.message;
                 if (statusCode === 400) {
                     // alert(errorMessage);
-                    alert('펀딩 생성 실패 :', errorMessage );
+                    alert('펀딩 생성 실패 :', errorMessage);
                 }
             }
         }
@@ -162,12 +173,7 @@ const FundingCreate = () => {
                                 펀딩 생성 페이지에 상품명과 이미지가 노출돼요.
                             </P>
                             <ProducImgtDiv>
-                                <FundingImg
-                                    src={itemImage}
-                                    h="90px"
-                                    w="90px"
-                                    onClick={handleFundingModalClick}
-                                />
+                                <FundingImg src={itemImage} h="90px" w="90px" onClick={handleFundingModalClick} />
                                 {/* 추가된 부분: 선택된 이미지 표시 */}
                                 {/* <FundingImg
                                 src="https://image.msscdn.net/images/goods_img/20240111/3788388/3788388_17065904732279_big.jpg"
@@ -179,7 +185,7 @@ const FundingCreate = () => {
                                 <div>
                                     <InputTag
                                         type="text"
-                                        value={itemName}
+                                        value={createData.itemName}
                                         onChange={handleItemNameChange}
                                         placeholder="상품명을 입력해주세요"
                                         h="40px"
@@ -190,7 +196,7 @@ const FundingCreate = () => {
                                     />
                                     <InputTag
                                         type="text"
-                                        value={targetAmount}
+                                        value={createData.targetAmount}
                                         onChange={handleTargetAmountChange}
                                         placeholder="가격을 입력해주세요"
                                         h="40px"
@@ -216,7 +222,7 @@ const FundingCreate = () => {
                                     <SponserDiv>
                                         <RadioInput
                                             value="true"
-                                            checked={publicFlag === 'true'}
+                                            checked={createData.publicFlag === true}
                                             onChange={handlePublicFlagChange}
                                             type="radio"
                                             mb="21px"
@@ -232,7 +238,7 @@ const FundingCreate = () => {
                                     <SponserDiv>
                                         <RadioInput
                                             value="false"
-                                            checked={publicFlag === 'false'}
+                                            checked={createData.publicFlag === 'false'}
                                             onChange={handlePublicFlagChange}
                                             type="radio"
                                             mb="21px"
@@ -251,7 +257,7 @@ const FundingCreate = () => {
                             </P>
                             <InputTag
                                 type="text"
-                                value={showName}
+                                value={createData.showName}
                                 onChange={handleShowNameChange}
                                 placeholder="이름을 입력해주세요"
                                 h="40px"
@@ -264,7 +270,7 @@ const FundingCreate = () => {
                             </P>
                             <InputTag
                                 type="text"
-                                value={title}
+                                value={createData.title}
                                 onChange={handleTitleChange}
                                 placeholder="제목을 입력해주세요"
                                 h="40px"
@@ -277,7 +283,7 @@ const FundingCreate = () => {
                             </P>
                             <InputTag
                                 type="text"
-                                value={content}
+                                value={createData.content}
                                 onChange={handleContentChange}
                                 placeholder="본문을 입력해주세요"
                                 h="90px"
@@ -291,7 +297,7 @@ const FundingCreate = () => {
                             </P>
                             <InputTag
                                 type="date"
-                                value={endDate}
+                                value={createData.endDate}
                                 onChange={handleEndDateChange}
                                 h="40px"
                                 w="97%"
@@ -299,7 +305,7 @@ const FundingCreate = () => {
                                 pt="10px"
                             />
                         </FundingDiv>
- 
+
                         <TogetherDiv>
                             <P pl="130px" fs="14px" fw="800">
                                 펀딩 금액은 계좌로 전달돼요

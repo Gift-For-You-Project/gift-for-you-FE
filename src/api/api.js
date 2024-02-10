@@ -101,9 +101,9 @@ export const modalItemLink = async (LinkData) => {
 };
 
 // 펀딩 상세페이지 API
-export const fetchFundingDetail = async (fundingId) => {
+export const fetchFundingDetail = async (id) => {
   try {
-    const response = await instance.get("/api/funding/{fundingId}"); // 펀딩 상세페이지 요청
+    const response = await instance.get(`/api/funding/${id}`); // 펀딩 상세페이지 요청
     console.log("++++", response);
     return response.data; // 응답 데이터 반환
   } catch (error) {
@@ -113,9 +113,9 @@ export const fetchFundingDetail = async (fundingId) => {
 };
 
 // 펀딩 후원자 상세페이지 API
-export const fetchSponsorDetail = async (fundingId) => {
+export const fetchSponsorDetail = async (id) => {
   try {
-    const response = await instance.get(`/api/fundingsponsordetail/${fundingId}`); // 펀딩 후원자 상세페이지 요청
+    const response = await instance.get(`/api/fundingsponsordetail/${id}`); // 펀딩 후원자 상세페이지 요청
     if (response.status === 200) {
       alert("후원자 상세페이지입니다.");
       return response.data; // 응답 데이터 반환
@@ -128,10 +128,10 @@ export const fetchSponsorDetail = async (fundingId) => {
 
 // 펀딩 수정페이지 API
 // 수정할 fundingId와 data
-export const FundingModifyGet = async (fundingId, data) => {
+export const FundingModifyGet = async (id, data) => {
   try {
     // const response = await instance.get(`/api/funding/${fundingId}`, data); // 펀딩 수정페이지 요청
-    const response = await instance.get(`/api/funding/${fundingId}`, data); // 펀딩 수정페이지 요청
+    const response = await instance.get(`/api/funding/${id}`, data); // 펀딩 수정페이지 요청
     if (response.status === 200) {
       return response.data; // 응답 데이터 반환
     }
@@ -141,10 +141,10 @@ export const FundingModifyGet = async (fundingId, data) => {
   }
 };
 
-export const updateFundingModify = async (fundingId, data) => {
+export const updateFundingModify = async (id, data) => {
   try {
     // const response = await instance.patch(`/api/funding/${fundingId}`, data); // 펀딩 수정페이지 요청
-    const response = await instance.patch(`/api/funding/${fundingId}`, data); // 펀딩 수정페이지 요청
+    const response = await instance.patch(`/api/funding/${id}`, data); // 펀딩 수정페이지 요청
     if (response.status === 200) {
       alert("정말 수정하시겠습니까?");
       return response.data; // 응답 데이터 반환
@@ -178,9 +178,9 @@ export const modalLinkModify = async (linkModifyData) => {
   }
 };
 
-export const deleteFundingModify = async (fundingId, data) => {
+export const deleteFundingModify = async (id, data) => {
   try {
-    const response = await instance.delete(`/api/funding/${fundingId}`, data); // 펀딩 삭제페이지 요청
+    const response = await instance.delete(`/api/funding/${id}`, data); // 펀딩 삭제페이지 요청
     if (response.status === 200) {
       alert("정말 삭제하시겠습니까?");
       return response.data; // 응답 데이터 반환

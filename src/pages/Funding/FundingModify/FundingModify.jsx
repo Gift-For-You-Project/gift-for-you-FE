@@ -28,7 +28,7 @@ import {
 // 펀딩 수정 페이지 컴포넌트
 const FundingModify = () => {
     const navigate = useNavigate(); // React Router의 네비게이션 기능을 사용하기 위한 hook
-    const { fundingId } = useParams(); // URL 매개변수(id)를 가져옴
+    const { id } = useParams(); // URL 매개변수(id)를 가져옴
 
     // 펀딩 데이터 상태와 상태 설정 함수 초기화
     const [fundingData, setFundingData] = useState({
@@ -63,15 +63,15 @@ const FundingModify = () => {
     // 펀딩 수정 요청 함수
     const fundingModifyData = async () => {
         try {
-            if (!fundingId) {
+            if (!id) {
                 // 유효한 id가 없으면 데이터를 요청하지 않음
                 return;
             }
             // 펀딩 ID를 적절하게 설정 (예: 1)
             // const fundingId = 1;
-            const data = await updateFundingModify(fundingId, fundingData); // 펀딩 수정 API 호출
+            const data = await updateFundingModify(id, fundingData); // 펀딩 수정 API 호출
             console.log('펀딩 수정 성공:', data);
-            navigate(`/fundingdetail/${fundingId}`); // 펀딩 상세 페이지로 이동
+            navigate(`/fundingdetail/${id}`); // 펀딩 상세 페이지로 이동
         } catch (error) {
             console.error('오류:', error);
         }
@@ -80,13 +80,13 @@ const FundingModify = () => {
         // API를 호출하여 펀딩 상세 정보를 가져오는 함수 정의
         const fetchData = async () => {
             try {
-                if (!fundingId) {
+                if (!id) {
                     // 유효한 id가 없으면 데이터를 요청하지 않음
                     return;
                 }
                 // 펀딩 ID를 설정하여 특정 펀딩의 상세 정보 가져오기
                 // const fundingId = 1; // 예: 펀딩 ID가 1인 경우
-                const data = await FundingModifyGet(fundingId); // 펀딩 상세 정보 가져오기
+                const data = await FundingModifyGet(id); // 펀딩 상세 정보 가져오기
                 setFundingData(data); // 가져온 데이터를 상태 변수에 설정
                 console.log('+++', data);
             } catch (error) {
@@ -96,7 +96,7 @@ const FundingModify = () => {
 
         // 컴포넌트가 마운트될 때 API 호출 함수 실행
         fetchData();
-    }, [fundingId]); // 빈 배열을 전달하여 한 번만 실행하도록 설정
+    }, [id]); // 빈 배열을 전달하여 한 번만 실행하도록 설정
 
     // UI 렌더링
     return (
