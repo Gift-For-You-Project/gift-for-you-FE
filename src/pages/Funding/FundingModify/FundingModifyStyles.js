@@ -134,6 +134,9 @@ export const SponsorComment = styled.div`
   flex-direction: column;
   justify-content: start;
   align-items: start;
+  &:hover {
+    cursor: ${(props) => props.pointer};
+  }
 `;
 
 export const FundingProductImg = styled.img`
@@ -149,9 +152,15 @@ export const FundingImg = styled.img`
   width: 100%;
   height: 100%;
   border-radius: 8px;
-  margin-top: 10px;
+  margin-top: 18px;
 `;
-
+export const ImgText = styled.h1`
+  /* position: absolute; 핵심코드 */
+  top: 47%; // 핵심코드
+  right: 25%; //핵심코드 */
+  transform: translate( 15%, -130%); // 핵심코드
+  color: gray;
+`
 export const InputTag = styled.input`
   width: ${(props) => props.w};
   height: ${(props) => props.h};

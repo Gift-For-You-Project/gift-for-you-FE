@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { fetchFundingDetail } from '../../../api/api'; // 펀딩 상세 정보를 가져오는 API 함수 import
-// import Sponsor from './Sponsor/Sponsor';
 import {
     MainContainer,
     LeftContainer,
@@ -27,36 +27,43 @@ import {
 // 펀딩 상세 페이지 컴포넌트
 const FundingDetail = () => {
     const navigate = useNavigate(); // React Router의 네비게이션 기능을 사용하기 위한 hook
+    const { fundingId } = useParams(); // URL 매개변수(id)를 가져옴
 
     // 펀딩 상세 정보를 담는 상태 변수 초기화
     const [detailData, setDetailData] = useState({
         // 초기 상태를 명세서에 따라 설정
-        fundingid: '',
-        itemLink: '',
+        // FundingCreate에서 받아올 Data 초기값
         itemImage: '',
+        itemName: '',
+        targetAmount: 0,
+        publicFlag: false, // 공개, 비공개 여부 어떻게 표현되는지?
+        showName: '',
         title: '',
         content: '',
-        currentAmount: 0,
-        targetAmount: 0,
-        publicFlag: false,
         endDate: '',
+        // FundignDetail에 출력되는 Data 초기값
+        itemLink: '',
+        currentAmount: 0,
         dday: '',
         status: false,
         achievementRate: 0,
         ownerFlag: false,
-        modifiedAt: '',
-        showName: '',
-        itemName: '',
+        modifiedAt: '', // 수정 날짜 너무 길어서 수정 필요해보임
         // 후원자 이름 추가
+        // 후원자 댓글 추가
     });
 
     useEffect(() => {
         // API를 호출하여 펀딩 상세 정보를 가져오는 함수 정의
-        const fetchData = async (fundingid) => {
+        const fetchData = async () => {
             try {
+                if (!fundingId) {
+                    // 유효한 id가 없으면 데이터를 요청하지 않음
+                    return;
+                }
                 // 펀딩 ID를 설정하여 특정 펀딩의 상세 정보 가져오기
-                const fundingid = 1; // 예: 펀딩 ID가 1인 경우
-                const data = await fetchFundingDetail(fundingid);
+                // const fundingid = 1; // 예: 펀딩 ID가 1인 경우
+                const data = await fetchFundingDetail(fundingId);
                 setDetailData(data); // 가져온 데이터를 상태 변수에 설정
             } catch (error) {
                 if (error.response) {
@@ -70,7 +77,8 @@ const FundingDetail = () => {
         };
         // 컴포넌트가 마운트될 때 API 호출 함수 실행
         fetchData();
-    }, []); // 빈 배열을 전달하여 한 번만 실행하도록 설정
+    }, [fundingId]); // 빈 배열을 전달하여 한 번만 실행하도록 설정
+
 
     return (
         <MainContainer>
@@ -109,7 +117,7 @@ const FundingDetail = () => {
                     <BannerImg src={detailData.itemImage} alt="image" />
                     <FundingDiv>
                         <P pt="20px" fs="13px" fw="800">
-                            진행중
+                            {detailData.status}
                         </P>
                         <P pt="10px" fs="20px" fw="900">
                             {detailData.title}
@@ -128,12 +136,18 @@ const FundingDetail = () => {
                         <P pt="10px" fs="15px" fw="800">
                             {detailData.showName}
                         </P>
+                        <P pt="10px" fs="15px" fw="800">
+                            수정날짜 : {detailData.modifiedAt}
+                        </P>
                         <ProgressBar>
                             <Progress width={(65 / 100) * 100} />
                         </ProgressBar>
                         <BetweenDiv>
                             <P pt="8px" fs="15px" fw="800">
                                 {detailData.achievementRate}%
+                            </P>
+                            <P pt="8px" pl="90px" fs="15px" fw="800">
+                                현재&nbsp;{detailData.currentAmount}원
                             </P>
                             <P pt="8px" pl="90px" fs="15px" fw="800">
                                 {detailData.targetAmount}원
