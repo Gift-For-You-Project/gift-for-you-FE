@@ -103,7 +103,7 @@ export const modalItemLink = async (LinkData) => {
 // 펀딩 상세페이지 API
 export const fetchFundingDetail = async (fundingId) => {
   try {
-    const response = await instance.get(`/api/funding/${fundingId}`); // 펀딩 상세페이지 요청
+    const response = await instance.get("/api/funding/{fundingId}"); // 펀딩 상세페이지 요청
     console.log("++++", response);
     return response.data; // 응답 데이터 반환
   } catch (error) {
