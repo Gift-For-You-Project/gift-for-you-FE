@@ -83,7 +83,7 @@ export const login = async (credentials) => {
 export const fundingCreate = async (fundingData) => {
   try {
     const response = await instance.post("/api/funding/create", fundingData); // 펀딩 생성 요청
-    console.log("++", response);
+    console.log("펀딩 생성페이지 API", response);
     return response.data; // 응답 데이터 반환
   } catch (error) {
     throw error; // 실패 시 예외 처리
