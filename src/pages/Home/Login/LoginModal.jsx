@@ -21,17 +21,13 @@ const LoginModal = ({ closeModal }) => {
   const GoogleLogin = () => {
     window.location.href = process.env.REACT_APP_GOOGLE_URL;
     dispatch(googleLogin());
-    alert("구글 로그인이 완료되었습니다.");
     navigate("/");
-    window.history.replaceState(null, null, "/"); // 이전 페이지 이력 삭제 (방법1)
   };
 
   const KakaoLogin = () => {
     window.location.href = process.env.REACT_APP_KAKAO_URL;
     dispatch(kakaoLogin());
-    alert("카카오 로그인이 완료되었습니다.");
     navigate("/");
-    window.location.reload(true); // 페이지 강제 새로고침 (방법2)
   };
 
   return (
