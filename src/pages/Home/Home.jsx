@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { FaChevronRight } from "react-icons/fa";
 import { FaPlus } from "react-icons/fa6";
-import { BsPersonCircle } from "react-icons/bs";
-import { HiBell } from "react-icons/hi";
 import { useNavigate } from "react-router-dom";
 import LoginModal from "../Home/Login/LoginModal";
 import { useDispatch, useSelector } from "react-redux";
 import { bootChannelTalk } from "../../redux/channelTalkSlice";
 import { userLogout } from "../../redux/authSlice";
+import Navbar from "../../components/Navbar";
+import { getFundingList, getMyFunding } from "../../api/homeApi";
 import {
   MainContainer,
   LeftContainer,
@@ -15,11 +15,7 @@ import {
   P,
   Button,
   RightContainer,
-  Navbar,
-  NavbarBtn,
-  NavbarBtnDiv,
-  NavbarIconContainer,
-  NavbarIconDiv,
+  NavbarDiv,
   Body,
   MainDiv,
   MainTitle,
@@ -55,52 +51,108 @@ import {
 const Home = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+  const [myFunding, setMyFunding] = useState([
+    {
+      id: "",
+      itemLink: "",
+      itemImage: "",
+      itemName: "",
+      title: "",
+      showName: "",
+      content: "",
+      currentAmount: 0,
+      targetAmount: 0,
+      publicFlag: false,
+      endDate: "",
+      dday: 0,
+      status: false,
+      achievementRate: 0,
+      ownerFlag: false,
+      modifiedAt: "",
+    },
+  ]);
+  const [fundingList, setFundingList] = useState([
+    {
+      id: "",
+      itemLink: "",
+      itemImage: "",
+      itemName: "",
+      title: "",
+      showName: "",
+      content: "",
+      currentAmount: 0,
+      targetAmount: 0,
+      publicFlag: false,
+      endDate: "",
+      dday: 0,
+      status: false,
+      achievementRate: 0,
+      ownerFlag: false,
+      modifiedAt: "",
+    },
+  ]);
 
-  const handleLoginClick = () => {
-    setIsLoginModalOpen(true);
-  };
+  const closeModal = () => setIsLoginModalOpen(false);
+
+  const handleLoginClick = () => setIsLoginModalOpen(true);
 
   const handleLogoutClick = () => {
     dispatch(userLogout()); // 로그아웃 액션 디스패치
     navigate("/");
   };
 
-  const closeModal = () => {
-    setIsLoginModalOpen(false);
+  const handleFundingCreate = () => navigate("/fundingcreate");
+
+  // 내 펀딩 정보를 가져오는 함수 호출
+  const myFundingData = async () => {
+    try {
+      const response = await getMyFunding();
+
+      if (response && response.status === 200) setMyFunding(response.data);
+    } catch (error) {
+      console.error("내 펀딩 정보를 가져오는 함수 호출 실패: ", error);
+    }
   };
 
-  const handleFundingCreate = () => {
-    navigate("/fundingcreate");
-  };
+  // 펀딩 리스트 정보를 가져오는 함수 호출
+  const fundingListData = async () => {
+    try {
+      const response = await getFundingList();
 
-  // 상태에 따라 Navbar에 표시될 아이콘 결정
-  const navbarContents = isLoggedIn ? (
-    <>
-      <NavbarIconContainer>
-        <NavbarIconDiv>
-          <HiBell />
-        </NavbarIconDiv>
-        <NavbarIconDiv>
-          <BsPersonCircle />
-        </NavbarIconDiv>
-        <NavbarBtn onClick={handleLogoutClick} fs="13px" fw="600">
-          로그아웃
-        </NavbarBtn>
-      </NavbarIconContainer>
-    </>
-  ) : (
-    <>
-      <NavbarBtn onClick={handleLoginClick} fs="13px" fw="600">
-        로그인
-      </NavbarBtn>
-    </>
-  );
+      if (response && response.status === 200) setFundingList(response.data);
+    } catch (error) {
+      console.error("펀딩 리스트 정보를 가져오는 함수 호출 실패: ", error);
+    }
+  };
 
   useEffect(() => {
     dispatch(bootChannelTalk());
+    myFundingData();
+    fundingListData();
   }, [dispatch]);
+
+  const ProductGridComponent = ({
+    imgSrc,
+    altText,
+    brand,
+    itemName,
+    price,
+  }) => (
+    <ProductGrid>
+      <ProductImg src={imgSrc} alt={altText} />
+      <P pt="8px" fs="14px" fw="600" color="gray">
+        {brand}
+      </P>
+      <P pt="8px" fs="14px" fw="600">
+        {itemName}
+      </P>
+      <P pt="8px" fs="14px" fw="600">
+        {price}
+      </P>
+    </ProductGrid>
+  );
 
   return (
     <MainContainer>
@@ -119,13 +171,13 @@ const Home = () => {
       </LeftContainer>
 
       <RightContainer>
-        <Navbar>
-          <NavbarBtn fs="20px" fw="600" pl="15px">
-            🥧 Giftipie
-          </NavbarBtn>
-          <NavbarBtnDiv>{navbarContents}</NavbarBtnDiv>
-        </Navbar>
-
+        <NavbarDiv>
+          <Navbar
+            isLoggedIn={isLoggedIn}
+            handleLoginClick={handleLoginClick}
+            handleLogoutClick={handleLogoutClick}
+          />
+        </NavbarDiv>
         <Body>
           <MainTitle>
             <P fs="18px" fw="600" pb="10px">
@@ -136,35 +188,42 @@ const Home = () => {
             </P>
           </MainTitle>
           <MainDiv>
-            <MainFunding>
-              <MainImg src="/imgs/airpods.jpeg" alt="airpods" />
-              <ProgressDivBar>
-                <ProgressDiv width={(36 / 100) * 100} />
-              </ProgressDivBar>
-              <BetweenMainDiv>
-                <BetweenDiv>
-                  <P fs="14px" fw="600" pl="20px" pt="10px" color="orange">
-                    36%
+            {myFunding.map((myFundingItem) => (
+              <MainFunding key={myFundingItem.id}>
+                <MainImg
+                  src={myFundingItem.itemImage}
+                  alt={myFundingItem.itemName}
+                />
+                <ProgressDivBar>
+                  <ProgressDiv
+                    width={(myFundingItem.achievementRate / 100) * 100}
+                  />
+                </ProgressDivBar>
+                <BetweenMainDiv>
+                  <BetweenDiv>
+                    <P fs="14px" fw="600" pl="20px" pt="10px" color="orange">
+                      {myFundingItem.achievementRate}%
+                    </P>
+                    <P fs="14px" fw="600" pr="20px" pt="10px">
+                      {myFundingItem.dday}
+                    </P>
+                  </BetweenDiv>
+                  <P fs="16px" fw="400" color="gray" pl="20px" pt="10px">
+                    {myFundingItem.itemName}
                   </P>
-                  <P fs="14px" fw="600" pr="20px" pt="10px">
-                    D-16
+                  <P fs="16px" fw="400" pl="20px" pt="10px" pb="14px">
+                    {myFundingItem.content}
                   </P>
-                </BetweenDiv>
-                <P fs="16px" fw="400" color="gray" pl="20px" pt="10px">
-                  에어팟
-                </P>
-                <P fs="16px" fw="400" pl="20px" pt="10px" pb="14px">
-                  인생 첫 에어팟을 선물해주세요 😘
-                </P>
-              </BetweenMainDiv>
-              <MainBtnContainer>
-                <MainBtn>링크 복사</MainBtn>
-                <MainBtnLine />
-                <MainBtn>수정하기</MainBtn>
-                <MainBtnLine />
-                <MainBtn>삭제하기</MainBtn>
-              </MainBtnContainer>
-            </MainFunding>
+                </BetweenMainDiv>
+                <MainBtnContainer>
+                  <MainBtn>링크 복사</MainBtn>
+                  <MainBtnLine />
+                  <MainBtn>수정하기</MainBtn>
+                  <MainBtnLine />
+                  <MainBtn>삭제하기</MainBtn>
+                </MainBtnContainer>
+              </MainFunding>
+            ))}
           </MainDiv>
           <FundingDiv>
             <button>
@@ -177,46 +236,60 @@ const Home = () => {
               비공개 펀딩은 이곳에 공개되지 않아요
             </P>
             <FundingSection>
-              <FundingGrid>
-                <FundingImg src="/imgs/airpods.jpeg" alt="airpodspro" />
-                <ProgressBar>
-                  <Progress width={(20 / 100) * 100} />
-                </ProgressBar>
-                <BetweenDiv>
-                  <P pt="2px" fs="10px" fw="800" color="orange">
-                    36%
+              {fundingList.map((fundingListItem) => (
+                <FundingGrid key={fundingListItem.id}>
+                  <FundingImg
+                    src={fundingListItem.itemImage}
+                    alt={fundingListItem.itemName}
+                  />
+                  <ProgressBar>
+                    <Progress
+                      width={(fundingListItem.achievementRate / 100) * 100}
+                    />
+                  </ProgressBar>
+                  <BetweenDiv>
+                    <P pt="2px" fs="10px" fw="800" color="orange">
+                      {fundingListItem.achievementRate}%
+                    </P>
+                    <P pt="2px" pl="90px" fs="10px" fw="800">
+                      {fundingListItem.dday}
+                    </P>
+                  </BetweenDiv>
+                  <P pt="10px" fs="14px" fw="600" color="gray">
+                    {fundingListItem.itemName}
                   </P>
-                  <P pt="2px" pl="90px" fs="10px" fw="800">
-                    D-16
+                  <P pt="10px" fs="14px" fw="600">
+                    {fundingListItem.content}
                   </P>
-                </BetweenDiv>
-                <P pt="10px" fs="14px" fw="600" color="gray">
-                  에어팟
-                </P>
-                <P pt="10px" fs="14px" fw="600">
-                  인생 첫 에어팟을 선물해주세요 😘
-                </P>
-              </FundingGrid>
-              <FundingGrid>
-                <FundingImg src="/imgs/tesla.jpeg" alt="tesla" />
-                <ProgressBar>
-                  <Progress width={(65 / 100) * 100} />
-                </ProgressBar>
-                <BetweenDiv>
-                  <P pt="2px" fs="10px" fw="800" color="orange">
-                    65%
+                </FundingGrid>
+              ))}
+              {fundingList.map((fundingListItem) => (
+                <FundingGrid key={fundingListItem.id}>
+                  <FundingImg
+                    src={fundingListItem.itemImage}
+                    alt={fundingListItem.itemName}
+                  />
+                  <ProgressBar>
+                    <Progress
+                      width={(fundingListItem.achievementRate / 100) * 100}
+                    />
+                  </ProgressBar>
+                  <BetweenDiv>
+                    <P pt="2px" fs="10px" fw="800" color="orange">
+                      {fundingListItem.achievementRate}%
+                    </P>
+                    <P pt="2px" pl="90px" fs="10px" fw="800">
+                      {fundingListItem.dday}
+                    </P>
+                  </BetweenDiv>
+                  <P pt="10px" fs="14px" fw="600" color="gray">
+                    {fundingListItem.itemName}
                   </P>
-                  <P pt="2px" pl="90px" fs="10px" fw="800">
-                    13일 남음
+                  <P pt="10px" fs="14px" fw="600">
+                    {fundingListItem.content}
                   </P>
-                </BetweenDiv>
-                <P pt="10px" fs="14px" fw="600" color="gray">
-                  모델X
-                </P>
-                <P pt="10px" fs="14px" fw="600">
-                  제로백 2.6초를 경험하고 싶어요 😘
-                </P>
-              </FundingGrid>
+                </FundingGrid>
+              ))}
               <FundingGrid>
                 <FundingImg src="/imgs/bluebottle.png" alt="logo" />
                 <ProgressBar>
@@ -312,54 +385,34 @@ const Home = () => {
               <ProductGrid>
                 <ProductBlank />
               </ProductGrid>
-              <ProductGrid>
-                <ProductImg src="/imgs/iphone15pro.jpeg" alt="iphone" />
-                <P pt="8px" fs="14px" fw="600" color="gray">
-                  Apple
-                </P>
-                <P pt="8px" fs="14px" fw="600">
-                  아이폰 15 Pro 256BG 자급제
-                </P>
-                <P pt="8px" fs="14px" fw="600">
-                  1,550,000원
-                </P>
-              </ProductGrid>
-              <ProductGrid>
-                <ProductImg src="/imgs/iphone15.jpeg" alt="iphone" />
-                <P pt="8px" fs="14px" fw="600" color="gray">
-                  Apple
-                </P>
-                <P pt="8px" fs="14px" fw="600">
-                  아이폰 15 256BG 자급제
-                </P>
-                <P pt="8px" fs="14px" fw="600">
-                  1,250,000원
-                </P>
-              </ProductGrid>
-              <ProductGrid>
-                <ProductImg src="/imgs/iphone14.jpeg" alt="iphone" />
-                <P pt="8px" fs="14px" fw="600" color="gray">
-                  Apple
-                </P>
-                <P pt="8px" fs="14px" fw="600">
-                  아이폰 14 256BG 자급제
-                </P>
-                <P pt="8px" fs="14px" fw="600">
-                  1,090,000원
-                </P>
-              </ProductGrid>
-              <ProductGrid>
-                <ProductImg src="/imgs/iphonese.jpeg" alt="iphone" />
-                <P pt="8px" fs="14px" fw="600" color="gray">
-                  Apple
-                </P>
-                <P pt="8px" fs="14px" fw="600">
-                  아이폰SE 256BG 자급제
-                </P>
-                <P pt="8px" fs="14px" fw="600">
-                  650,0000원
-                </P>
-              </ProductGrid>
+              <ProductGridComponent
+                imgSrc="/imgs/iphone15pro.jpeg"
+                altText="iphone"
+                brand="Apple"
+                itemName="아이폰 15 Pro 256BG 자급제"
+                price="1,550,000원"
+              />
+              <ProductGridComponent
+                imgSrc="/imgs/iphone15.jpeg"
+                altText="iphone"
+                brand="Apple"
+                itemName="아이폰 15 256BG 자급제"
+                price="1,250,000원"
+              />
+              <ProductGridComponent
+                imgSrc="/imgs/iphone14.jpeg"
+                altText="iphone"
+                brand="Apple"
+                itemName="아이폰 14 256BG 자급제"
+                price="1,090,000원"
+              />
+              <ProductGridComponent
+                imgSrc="/imgs/iphonese.jpeg"
+                altText="iphone"
+                brand="Apple"
+                itemName="아이폰SE 256BG 자급제"
+                price="650,0000원"
+              />
             </ProductGrids>
           </ProductDiv>
         </Body>
