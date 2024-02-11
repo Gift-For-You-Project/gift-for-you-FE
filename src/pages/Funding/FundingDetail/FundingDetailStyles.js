@@ -87,7 +87,7 @@ export const RightContainer = styled.div`
 `;
 
 // 네브바 영역
-export const Navbar = styled.div`
+export const NavbarDiv = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;

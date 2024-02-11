@@ -84,7 +84,7 @@ export const RightContainer = styled.div`
 `;
 
 // 네브바 영역
-export const Navbar = styled.div`
+export const NavbarDiv = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -158,9 +158,9 @@ export const ImgText = styled.h1`
   /* position: absolute; 핵심코드 */
   top: 47%; // 핵심코드
   right: 25%; //핵심코드 */
-  transform: translate( 15%, -130%); // 핵심코드
+  transform: translate(15%, -130%); // 핵심코드
   color: gray;
-`
+`;
 export const InputTag = styled.input`
   width: ${(props) => props.w};
   height: ${(props) => props.h};

@@ -241,6 +241,7 @@ export const FundingSection = styled.section`
 
 export const FundingGrid = styled.div`
   width: 190px;
+  overflow: hidden;
 
   @media (max-width: 190px) {
     width: 100%;
