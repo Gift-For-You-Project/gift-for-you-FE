@@ -55,25 +55,6 @@ const Home = () => {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [homeFundingList, setHomeFundingList] = useState([]);
 
-  // {
-  //   id: "",
-  //   itemLink: "",
-  //   itemImage: "",
-  //   itemName: "",
-  //   title: "",
-  //   showName: "",
-  //   content: "",
-  //   currentAmount: 0,
-  //   targetAmount: 0,
-  //   publicFlag: false,
-  //   endDate: "",
-  //   dday: 0,
-  //   status: false,
-  //   achievementRate: 0,
-  //   ownerFlag: false,
-  //   modifiedAt: "",
-  // },
-
   const closeModal = () => setIsLoginModalOpen(false);
 
   const handleLoginClick = () => setIsLoginModalOpen(true);
@@ -83,9 +64,14 @@ const Home = () => {
     navigate("/");
   };
 
+  const handleFundingClick = (id) => {
+    navigate(`/fundingdetail/${id}`);
+  };
+
+  const handleOngoingFundingClick = () => navigate("/ongoingfunding");
+
   const handleFundingCreate = () => navigate("/fundingcreate");
 
-  // 내 펀딩 정보를 가져오는 함수 호출
   // const myFundingData = async () => {
   //   try {
   //     const response = await getMyFunding();
@@ -100,7 +86,6 @@ const Home = () => {
     try {
       const response = await getHomeFundingList();
 
-      if (response && response.status === 200) console.log("Data: ", response);
       setHomeFundingList(response);
     } catch (error) {
       console.error("펀딩 리스트 정보를 가져오는 함수 호출 실패: ", error);
@@ -199,7 +184,7 @@ const Home = () => {
             </MainFunding>
           </MainDiv>
           <FundingDiv>
-            <button>
+            <button onClick={handleOngoingFundingClick}>
               <P fs="18px" fw="600" pt="30px" pb="10px">
                 지금 진행중인 펀딩 &nbsp;
                 <FaChevronRight />
@@ -210,7 +195,10 @@ const Home = () => {
             </P>
             <FundingSection>
               {homeFundingList.map((funding) => (
-                <FundingGrid key={funding.id}>
+                <FundingGrid
+                  key={funding.id}
+                  onClick={() => handleFundingClick(funding.id)}
+                >
                   <FundingImg src={funding.itemImage} alt={funding.itemName} />
                   <ProgressBar>
                     <Progress width={(funding.achievementRate / 100) * 100} />

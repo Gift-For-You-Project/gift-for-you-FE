@@ -163,7 +163,10 @@ export const updateFundingModify = async (id, data) => {
 // 펀딩 수정페이지 상품링크 변경 모달창(ItemLink) API
 export const modalLinkModify = async (linkModifyData) => {
   try {
-    const response = await instance.post('/api/funding/modifyLink', linkModifyData); // 모달창(ItemLink) API 호출
+    const response = await instance.post(
+      "/api/funding/modifyLink",
+      linkModifyData
+    ); // 모달창(ItemLink) API 호출
     if (response.status === 200) {
       return response.data; // 응답 데이터 반환
     }
