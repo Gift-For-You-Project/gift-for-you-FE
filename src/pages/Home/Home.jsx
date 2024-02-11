@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { bootChannelTalk } from "../../redux/channelTalkSlice";
 import { userLogout } from "../../redux/authSlice";
 import Navbar from "../../components/Navbar";
-import { getFundingList, getMyFunding } from "../../api/homeApi";
+import { getHomeFundingList } from "../../api/homeApi";
 import {
   MainContainer,
   LeftContainer,
@@ -53,46 +53,26 @@ const Home = () => {
   const dispatch = useDispatch();
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
-  const [myFunding, setMyFunding] = useState([
-    {
-      id: "",
-      itemLink: "",
-      itemImage: "",
-      itemName: "",
-      title: "",
-      showName: "",
-      content: "",
-      currentAmount: 0,
-      targetAmount: 0,
-      publicFlag: false,
-      endDate: "",
-      dday: 0,
-      status: false,
-      achievementRate: 0,
-      ownerFlag: false,
-      modifiedAt: "",
-    },
-  ]);
-  const [fundingList, setFundingList] = useState([
-    {
-      id: "",
-      itemLink: "",
-      itemImage: "",
-      itemName: "",
-      title: "",
-      showName: "",
-      content: "",
-      currentAmount: 0,
-      targetAmount: 0,
-      publicFlag: false,
-      endDate: "",
-      dday: 0,
-      status: false,
-      achievementRate: 0,
-      ownerFlag: false,
-      modifiedAt: "",
-    },
-  ]);
+  const [homeFundingList, setHomeFundingList] = useState([]);
+
+  // {
+  //   id: "",
+  //   itemLink: "",
+  //   itemImage: "",
+  //   itemName: "",
+  //   title: "",
+  //   showName: "",
+  //   content: "",
+  //   currentAmount: 0,
+  //   targetAmount: 0,
+  //   publicFlag: false,
+  //   endDate: "",
+  //   dday: 0,
+  //   status: false,
+  //   achievementRate: 0,
+  //   ownerFlag: false,
+  //   modifiedAt: "",
+  // },
 
   const closeModal = () => setIsLoginModalOpen(false);
 
@@ -106,22 +86,22 @@ const Home = () => {
   const handleFundingCreate = () => navigate("/fundingcreate");
 
   // 내 펀딩 정보를 가져오는 함수 호출
-  const myFundingData = async () => {
+  // const myFundingData = async () => {
+  //   try {
+  //     const response = await getMyFunding();
+
+  //     if (response && response.status === 200) setMyFunding(response.data);
+  //   } catch (error) {
+  //     console.error("내 펀딩 정보를 가져오는 함수 호출 실패: ", error);
+  //   }
+  // };
+
+  const homeFundingListData = async () => {
     try {
-      const response = await getMyFunding();
+      const response = await getHomeFundingList();
 
-      if (response && response.status === 200) setMyFunding(response.data);
-    } catch (error) {
-      console.error("내 펀딩 정보를 가져오는 함수 호출 실패: ", error);
-    }
-  };
-
-  // 펀딩 리스트 정보를 가져오는 함수 호출
-  const fundingListData = async () => {
-    try {
-      const response = await getFundingList();
-
-      if (response && response.status === 200) setFundingList(response.data);
+      if (response && response.status === 200) console.log("Data: ", response);
+      setHomeFundingList(response);
     } catch (error) {
       console.error("펀딩 리스트 정보를 가져오는 함수 호출 실패: ", error);
     }
@@ -129,8 +109,8 @@ const Home = () => {
 
   useEffect(() => {
     dispatch(bootChannelTalk());
-    myFundingData();
-    fundingListData();
+    // myFundingData();
+    homeFundingListData();
   }, [dispatch]);
 
   const ProductGridComponent = ({
@@ -188,42 +168,35 @@ const Home = () => {
             </P>
           </MainTitle>
           <MainDiv>
-            {myFunding.map((myFundingItem) => (
-              <MainFunding key={myFundingItem.id}>
-                <MainImg
-                  src={myFundingItem.itemImage}
-                  alt={myFundingItem.itemName}
-                />
-                <ProgressDivBar>
-                  <ProgressDiv
-                    width={(myFundingItem.achievementRate / 100) * 100}
-                  />
-                </ProgressDivBar>
-                <BetweenMainDiv>
-                  <BetweenDiv>
-                    <P fs="14px" fw="600" pl="20px" pt="10px" color="orange">
-                      {myFundingItem.achievementRate}%
-                    </P>
-                    <P fs="14px" fw="600" pr="20px" pt="10px">
-                      {myFundingItem.dday}
-                    </P>
-                  </BetweenDiv>
-                  <P fs="16px" fw="400" color="gray" pl="20px" pt="10px">
-                    {myFundingItem.itemName}
+            <MainFunding>
+              <MainImg src="/imgs/airpods.jpeg" alt="airpods" />
+              <ProgressDivBar>
+                <ProgressDiv width={(36 / 100) * 100} />
+              </ProgressDivBar>
+              <BetweenMainDiv>
+                <BetweenDiv>
+                  <P fs="14px" fw="600" pl="20px" pt="10px" color="orange">
+                    36%
                   </P>
-                  <P fs="16px" fw="400" pl="20px" pt="10px" pb="14px">
-                    {myFundingItem.content}
+                  <P fs="14px" fw="600" pr="20px" pt="10px">
+                    D-16
                   </P>
-                </BetweenMainDiv>
-                <MainBtnContainer>
-                  <MainBtn>링크 복사</MainBtn>
-                  <MainBtnLine />
-                  <MainBtn>수정하기</MainBtn>
-                  <MainBtnLine />
-                  <MainBtn>삭제하기</MainBtn>
-                </MainBtnContainer>
-              </MainFunding>
-            ))}
+                </BetweenDiv>
+                <P fs="16px" fw="400" color="gray" pl="20px" pt="10px">
+                  에어팟
+                </P>
+                <P fs="16px" fw="400" pl="20px" pt="10px" pb="14px">
+                  인생 첫 에어팟을 선물해주세요 😘
+                </P>
+              </BetweenMainDiv>
+              <MainBtnContainer>
+                <MainBtn>링크 복사</MainBtn>
+                <MainBtnLine />
+                <MainBtn>수정하기</MainBtn>
+                <MainBtnLine />
+                <MainBtn>삭제하기</MainBtn>
+              </MainBtnContainer>
+            </MainFunding>
           </MainDiv>
           <FundingDiv>
             <button>
@@ -236,100 +209,28 @@ const Home = () => {
               비공개 펀딩은 이곳에 공개되지 않아요
             </P>
             <FundingSection>
-              {fundingList.map((fundingListItem) => (
-                <FundingGrid key={fundingListItem.id}>
-                  <FundingImg
-                    src={fundingListItem.itemImage}
-                    alt={fundingListItem.itemName}
-                  />
+              {homeFundingList.map((funding) => (
+                <FundingGrid key={funding.id}>
+                  <FundingImg src={funding.itemImage} alt={funding.itemName} />
                   <ProgressBar>
-                    <Progress
-                      width={(fundingListItem.achievementRate / 100) * 100}
-                    />
+                    <Progress width={(funding.achievementRate / 100) * 100} />
                   </ProgressBar>
                   <BetweenDiv>
                     <P pt="2px" fs="10px" fw="800" color="orange">
-                      {fundingListItem.achievementRate}%
+                      {funding.achievementRate}%
                     </P>
                     <P pt="2px" pl="90px" fs="10px" fw="800">
-                      {fundingListItem.dday}
+                      {funding.dday}
                     </P>
                   </BetweenDiv>
                   <P pt="10px" fs="14px" fw="600" color="gray">
-                    {fundingListItem.itemName}
+                    {funding.itemName}
                   </P>
                   <P pt="10px" fs="14px" fw="600">
-                    {fundingListItem.content}
+                    {funding.content}
                   </P>
                 </FundingGrid>
               ))}
-              {fundingList.map((fundingListItem) => (
-                <FundingGrid key={fundingListItem.id}>
-                  <FundingImg
-                    src={fundingListItem.itemImage}
-                    alt={fundingListItem.itemName}
-                  />
-                  <ProgressBar>
-                    <Progress
-                      width={(fundingListItem.achievementRate / 100) * 100}
-                    />
-                  </ProgressBar>
-                  <BetweenDiv>
-                    <P pt="2px" fs="10px" fw="800" color="orange">
-                      {fundingListItem.achievementRate}%
-                    </P>
-                    <P pt="2px" pl="90px" fs="10px" fw="800">
-                      {fundingListItem.dday}
-                    </P>
-                  </BetweenDiv>
-                  <P pt="10px" fs="14px" fw="600" color="gray">
-                    {fundingListItem.itemName}
-                  </P>
-                  <P pt="10px" fs="14px" fw="600">
-                    {fundingListItem.content}
-                  </P>
-                </FundingGrid>
-              ))}
-              <FundingGrid>
-                <FundingImg src="/imgs/bluebottle.png" alt="logo" />
-                <ProgressBar>
-                  <Progress width={(100 / 100) * 100} />
-                </ProgressBar>
-                <BetweenDiv>
-                  <P pt="2px" fs="10px" fw="800" color="orange">
-                    100%
-                  </P>
-                  <P pt="2px" pl="90px" fs="10px" fw="800" color="orange">
-                    종료
-                  </P>
-                </BetweenDiv>
-                <P pt="10px" fs="14px" fw="600" color="gray">
-                  텀블러
-                </P>
-                <P pt="10px" fs="14px" fw="600">
-                  제목은 한줄 컷 😘
-                </P>
-              </FundingGrid>
-              <FundingGrid>
-                <FundingImg src="/imgs/massage.jpeg" alt="logo" />
-                <ProgressBar>
-                  <Progress width={(20 / 100) * 100} />
-                </ProgressBar>
-                <BetweenDiv>
-                  <P pt="2px" fs="10px" fw="800" color="orange">
-                    20%
-                  </P>
-                  <P pt="2px" pl="90px" fs="10px" fw="800">
-                    28일 남음
-                  </P>
-                </BetweenDiv>
-                <P pt="10px" fs="14px" fw="600" color="gray">
-                  마사지기
-                </P>
-                <P pt="10px" fs="14px" fw="600">
-                  내용은 상세페이지에서 😘
-                </P>
-              </FundingGrid>
             </FundingSection>
           </FundingDiv>
           <TogetherDiv>
