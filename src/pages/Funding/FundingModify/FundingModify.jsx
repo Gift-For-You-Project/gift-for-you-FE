@@ -16,7 +16,6 @@ import {
     Button,
     NavbarDiv,
     RightContainer,
-    ProducImgtDiv,
     InputTag,
     Body,
     FundingDiv,
@@ -98,13 +97,19 @@ const FundingModify = () => {
                 fundingData.publicFlag === '' ||
                 fundingData.showName === '' ||
                 fundingData.title === '' ||
-                fundingData.content === '' ||
-                fundingData.endDate === ''
+                fundingData.content === ''
             ) {
                 alert('내용을 입력해주세요');
                 return;
             }
             const data = await updateFundingModify(id, fundingData); // 펀딩 수정 API 호출
+            // setFundingData(fundingData.map((data) => {
+            //     if (data.id === id) {
+            //         return { ...data, fundingData };
+            //     } else {
+            //         return data;
+            //     }
+            // }))
             console.log('펀딩 수정 성공:', data);
             navigate(`/fundingdetail/${data.id}`); // 펀딩 상세 페이지로 이동
         } catch (error) {
@@ -120,27 +125,28 @@ const FundingModify = () => {
 
     const handledeleteFundingClick = async () => {
         try {
-            if (id) {
-                alert('정말 삭제하시겠습니까?');
-                return;
-            }
-            const data = await deleteFundingModify(id, fundingData);
-            // const data = await deleteFundingModify(id);
-            setFundingData(
-                fundingData.filter((data) => {
-                    return data.id !== id;
-                })
-            );
-            console.log('펀딩 삭제 성공:', data);
+            const confirmDelete = window.confirm('정말 삭제하시겠습니까?');
+            if (!confirmDelete) return;
+
+            await deleteFundingModify(id, fundingData);
+            console.log('펀딩 삭제 성공:', id);
             navigate(`/`);
+            // if (id) {
+            //     alert('정말 삭제하시겠습니까?');
+            //     return;
+            // }
+            // const data = await deleteFundingModify(id, fundingData);
+            // const data = await deleteFundingModify(id);
+            // setFundingData(
+            //     fundingData.filter((data) => {
+            //         return data.id !== id;
+            //     })
+            // );
+            // console.log('펀딩 삭제 성공:', data);
+            // navigate(`/`);
         } catch (error) {
-            if (error.response) {
-                const statusCode = error.response.status;
-                const errorMessage = error.response.data.message;
-                if (statusCode === 400) {
-                    alert('펀딩 삭제 실패 :', errorMessage);
-                }
-            }
+            console.error('펀딩 삭제 실패:', error);
+            // 에러 핸들링
         }
     };
 
@@ -236,7 +242,7 @@ const FundingModify = () => {
                                 <SponsorDiv>
                                     <RadioInput
                                         value="true"
-                                        checked={fundingData.publicFlag === 'true'}
+                                        checked={fundingData.publicFlag === "true"}
                                         onChange={(e) => {
                                             setFundingData({ ...fundingData, publicFlag: e.target.value });
                                         }}
@@ -254,7 +260,7 @@ const FundingModify = () => {
                                 <SponsorDiv>
                                     <RadioInput
                                         value="false"
-                                        checked={fundingData.publicFlag === 'false'}
+                                        checked={fundingData.publicFlag === "false"}
                                         onChange={(e) => {
                                             setFundingData({ ...fundingData, publicFlag: e.target.value });
                                         }}
@@ -322,9 +328,9 @@ const FundingModify = () => {
                         <InputTag
                             type="date"
                             value={fundingData.endDate}
-                            onChange={(e) => {
-                                setFundingData({ ...fundingData, endDate: e.target.value });
-                            }}
+                            // onChange={(e) => {
+                            //     setFundingData({ ...fundingData, endDate: e.target.value });
+                            // }}
                             h="40px"
                             w="97%"
                             pl="10px"
