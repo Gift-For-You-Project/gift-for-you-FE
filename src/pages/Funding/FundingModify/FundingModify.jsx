@@ -7,6 +7,8 @@ import { userLogout } from '../../../redux/authSlice'; // 추가된 코드
 import { updateFundingModify } from '../../../api/api'; // 펀딩 수정 API를 호출하기 위한 함수 import
 import { deleteFundingModify } from '../../../api/api'; // 펀딩 수정 API를 호출하기 위한 함수 import
 import { FundingModifyGet } from '../../../api/api'; // 펀딩 상세 정보를 가져오기 위한 함수 import
+import { completeFundingModify } from '../../../api/api'; // 펀딩 상세 정보를 가져오기 위한 함수 import
+
 // import ModifyModal from './ModifyModal'; // 이미지 선택 모달 컴포넌트 import
 import {
     MainContainer,
@@ -147,6 +149,20 @@ const FundingModify = () => {
         } catch (error) {
             console.error('펀딩 삭제 실패:', error);
             // 에러 핸들링
+        }
+    };
+
+    const handlecompleteFundingClick = async () => {
+        try {
+            if (!id) {
+                // 유효한 id가 없으면 데이터를 요청하지 않음
+                return;
+            }
+            const data = await completeFundingModify(id); // 펀딩 상세 정보 가져오기
+            setFundingData(data); // 가져온 데이터를 상태 변수에 설정
+            console.log('펀딩 종료 성공', data);
+        } catch (error) {
+            console.error('펀딩 종료 오류:', error);
         }
     };
 
@@ -359,7 +375,7 @@ const FundingModify = () => {
                         펀딩 변경하기
                     </Button>
                     <Button
-                        onClick={() => navigate('/')}
+                        onClick={handlecompleteFundingClick}
                         w="442px"
                         h="60px"
                         mt="10px"
