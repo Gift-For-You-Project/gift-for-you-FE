@@ -139,6 +139,7 @@ export const FundingModifyGet = async (id, data) => {
     throw error; // 에러 다시 throw
   }
 };
+
 // 펀딩 수정페이지 API - patch
 export const updateFundingModify = async (id, data) => {
   try {

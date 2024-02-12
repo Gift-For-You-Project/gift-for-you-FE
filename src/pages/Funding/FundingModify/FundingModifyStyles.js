@@ -107,13 +107,6 @@ export const FundingDiv = styled.div`
   padding: 30px;
 `;
 
-export const ProducImgtDiv = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-`;
-
 export const SponsorDiv = styled.div`
   display: flex;
   flex-direction: row;
