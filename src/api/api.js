@@ -140,22 +140,16 @@ export const FundingModifyGet = async (id, data) => {
   }
 };
 
-// 펀딩 수정페이지 API - patch
+// 펀딩 수정페이지 API - 변경버튼 - patch
 export const updateFundingModify = async (id, data) => {
   try {
-    const response = await instance.patch(`/api/funding/${id}`, data); // 펀딩 수정페이지 요청
+    const response = await instance.patch(`/api/funding/${id}/update`, data); // 펀딩 수정페이지 요청
     console.log("펀딩 수정 API", response);
     if (response.status === 200) {
       return response.data; // 응답 데이터 반환
     }
   } catch (error) {
-    if (error.response) {
-      const statusCode = error.response.status;
-      const errorMessage = error.response.data.message;
-      if (statusCode === 400) {
-        alert(errorMessage);
-      }
-    }
+    throw error; // 실패 시 예외 처리
   }
 };
 

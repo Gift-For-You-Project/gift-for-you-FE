@@ -151,9 +151,6 @@ const FundingDetail = () => {
             <P pt="10px" fs="15px" fw="800">
               {detailData.showName}
             </P>
-            <P pt="10px" fs="15px" fw="800">
-              수정날짜 : {detailData.modifiedAt}
-            </P>
             <ProgressBar>
               <Progress width={(65 / 100) * 100} />
             </ProgressBar>
