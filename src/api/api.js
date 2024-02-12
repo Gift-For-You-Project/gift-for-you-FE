@@ -194,20 +194,14 @@ export const deleteFundingModify = async (id, data) => {
 };
 
 // 펀딩 수정페이지 API - 종료버튼 API - patch
-export const completeFundingModify = async (id, data) => {
+export const completeFundingModify = async (id) => {
   try {
-    const response = await instance.patch(`/api/funding/${id}/finish`, data); // 펀딩 수정페이지 요청
+    const response = await instance.patch(`/api/funding/${id}/finish`); // 펀딩 수정페이지 요청
     console.log("펀딩 종료 API", response);
     if (response.status === 200) {
       return response.data; // 응답 데이터 반환
     }
   } catch (error) {
-    if (error.response) {
-      const statusCode = error.response.status;
-      const errorMessage = error.response.data.message;
-      if (statusCode === 400) {
-        alert(errorMessage);
-      }
-    }
+    throw error; // 실패 시 예외 처리
   }
 };
