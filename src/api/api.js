@@ -149,13 +149,7 @@ export const updateFundingModify = async (id, data) => {
       return response.data; // 응답 데이터 반환
     }
   } catch (error) {
-    if (error.response) {
-      const statusCode = error.response.status;
-      const errorMessage = error.response.data.message;
-      if (statusCode === 400) {
-        alert(errorMessage);
-      }
-    }
+    throw error; // 실패 시 예외 처리
   }
 };
 
