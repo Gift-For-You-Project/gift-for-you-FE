@@ -104,7 +104,7 @@ export const modalItemLink = async (LinkData) => {
 export const fetchFundingDetail = async (id) => {
   try {
     const response = await instance.get(`/api/funding/${id}`); // 펀딩 상세페이지 요청
-    console.log("++++", response);
+    console.log("펀딩 상세페이지 API", response);
     return response.data; // 응답 데이터 반환
   } catch (error) {
     console.error("펀딩 상세페이지 API 호출 오류:", error); // 오류 로깅
@@ -126,12 +126,11 @@ export const fetchSponsorDetail = async (id) => {
   }
 };
 
-// 펀딩 수정페이지 API
-// 수정할 fundingId와 data
+// 펀딩 수정페이지 불러오기 API - get
 export const FundingModifyGet = async (id, data) => {
   try {
-    // const response = await instance.get(`/api/funding/${fundingId}`, data); // 펀딩 수정페이지 요청
     const response = await instance.get(`/api/funding/${id}`, data); // 펀딩 수정페이지 요청
+    console.log("펀딩 불러오기 API", response);
     if (response.status === 200) {
       return response.data; // 응답 데이터 반환
     }
@@ -140,13 +139,12 @@ export const FundingModifyGet = async (id, data) => {
     throw error; // 에러 다시 throw
   }
 };
-
+// 펀딩 수정페이지 API - patch
 export const updateFundingModify = async (id, data) => {
   try {
-    // const response = await instance.patch(`/api/funding/${fundingId}`, data); // 펀딩 수정페이지 요청
     const response = await instance.patch(`/api/funding/${id}`, data); // 펀딩 수정페이지 요청
+    console.log("펀딩 수정 API", response);
     if (response.status === 200) {
-      alert("정말 수정하시겠습니까?");
       return response.data; // 응답 데이터 반환
     }
   } catch (error) {
@@ -160,7 +158,7 @@ export const updateFundingModify = async (id, data) => {
   }
 };
 
-// 펀딩 수정페이지 상품링크 변경 모달창(ItemLink) API
+// 펀딩 수정페이지 - 상품링크 변경 모달창(ItemLink) API
 export const modalLinkModify = async (linkModifyData) => {
   try {
     const response = await instance.post(
@@ -181,11 +179,31 @@ export const modalLinkModify = async (linkModifyData) => {
   }
 };
 
+// 펀딩 수정페이지 - 삭제하기 버튼 API - delete 
 export const deleteFundingModify = async (id, data) => {
   try {
-    const response = await instance.delete(`/api/funding/${id}`, data); // 펀딩 삭제페이지 요청
+    const response = await instance.delete(`/api/funding/${id}`, data);
+    console.log("펀딩 삭제 API", response);
     if (response.status === 200) {
-      alert("정말 삭제하시겠습니까?");
+      return response.data; // 응답 데이터 반환
+    }
+  } catch (error) {
+    if (error.response) {
+      const statusCode = error.response.status;
+      const errorMessage = error.response.data.message;
+      if (statusCode === 400) {
+        alert(errorMessage);
+      }
+    }
+  }
+};
+
+// 펀딩 수정페이지 API - 종료버튼 API - patch
+export const completeFundingModify = async (id, data) => {
+  try {
+    const response = await instance.patch(`/api/funding/${id}/finish`, data); // 펀딩 수정페이지 요청
+    console.log("펀딩 종료 API", response);
+    if (response.status === 200) {
       return response.data; // 응답 데이터 반환
     }
   } catch (error) {

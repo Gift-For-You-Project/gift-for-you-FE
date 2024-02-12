@@ -92,13 +92,6 @@ export const NavbarDiv = styled.div`
   height: 70px;
 `;
 
-export const NavbarBtn = styled.button`
-  font-size: ${(props) => props.fs};
-  font-weight: ${(props) => props.fw};
-  padding-left: ${(props) => props.pl};
-  padding-right: ${(props) => props.pr};
-`;
-
 // 바디 영역
 export const Body = styled.div`
   font-size: 24px;
@@ -147,12 +140,12 @@ export const FundingProductImg = styled.img`
 `;
 
 export const FundingImg = styled.img`
-  max-width: 100px;
+  max-width: 90px;
   max-height: 100px;
   width: 100%;
   height: 100%;
   border-radius: 8px;
-  margin-top: 18px;
+  margin-top: 10px;
 `;
 export const ImgText = styled.h1`
   /* position: absolute; 핵심코드 */
