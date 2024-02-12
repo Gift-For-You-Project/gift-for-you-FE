@@ -3,6 +3,9 @@ import { useNavigate } from 'react-router-dom';
 import { fundingCreate } from '../../../api/api'; // 펀딩 생성 API import
 import { useParams } from 'react-router-dom';
 import CreateModal from './Modal/CreateModal';
+import Navbar from '../../../components/Navbar'; // 추가된 코드
+import { useDispatch, useSelector } from 'react-redux'; // 추가된 코드
+import { userLogout } from '../../../redux/authSlice'; // 추가된 코드
 import {
     MainContainer,
     LeftContainer,
@@ -10,6 +13,7 @@ import {
     P,
     Button,
     RightContainer,
+    NavbarDiv,
     ProducImgtDiv,
     InputTag,
     FundingImg,
@@ -26,10 +30,12 @@ import {
 // 펀딩 생성 페이지 컴포넌트
 const FundingCreate = () => {
     const navigate = useNavigate(); // React Router의 네비게이션 기능을 사용하기 위한 hook
-    const { id } = useParams(); // URL 매개변수(id)를 가져옴       
+    const { id } = useParams(); // URL 매개변수(id)를 가져옴
     const [itemImage, setItemImage] = useState(false);
     const [isFundingModalOpen, setIsFundingModalOpen] = useState(false); // 모달 창의 열림 여부 상태 변수
-    
+    const isLoggedIn = useSelector((state) => state.auth.isLoggedIn); // 추가된 코드
+    const dispatch = useDispatch(); // 추가된 코드
+
     // 펀딩 생성 페이지에서 사용될 상태 변수 초기화
     const [createData, setCreateData] = useState({
         itemName: '',
@@ -65,21 +71,21 @@ const FundingCreate = () => {
         setCreateData({ ...createData, targetAmount: e.target.value });
     };
     const handleShowNameChange = (e) => {
-        setCreateData({ ...createData, showName: e.target.value }); 
-      };
-      const handleTitleChange = (e) => {
+        setCreateData({ ...createData, showName: e.target.value });
+    };
+    const handleTitleChange = (e) => {
         setCreateData({ ...createData, title: e.target.value });
-      };
-      const handleContentChange = (e) => {
+    };
+    const handleContentChange = (e) => {
         setCreateData({ ...createData, content: e.target.value });
-      };
-      const handleEndDateChange = (e) => {
+    };
+    const handleEndDateChange = (e) => {
         setCreateData({ ...createData, endDate: e.target.value });
-      };
+    };
     const handlePublicFlagChange = (e) => {
         // 업데이트: 한 번에 하나의 옵션만 선택했는지 확인하세요.
         const value = e.target.value === 'true' ? true : false;
-        setCreateData({...createData, publicFlag: value});
+        setCreateData({ ...createData, publicFlag: value });
     };
     // 펀딩 생성 요청 처리 함수
     const handleFundingClick = async () => {
@@ -109,7 +115,7 @@ const FundingCreate = () => {
                 content: createData.content,
                 endDate: createData.endDate,
             });
-            console.log('펀딩 생성 전달 성공:', response);
+            console.log('펀딩 생성 성공:', response);
             navigate(`/fundingdetail/${response.id}`);
         } catch (error) {
             if (error.response) {
@@ -121,6 +127,12 @@ const FundingCreate = () => {
                 }
             }
         }
+    };
+
+    // 추가된 코드
+    const handleLogoutClick = () => {
+        dispatch(userLogout()); // 로그아웃 액션 디스패치
+        navigate('/');
     };
 
     return (
@@ -142,6 +154,10 @@ const FundingCreate = () => {
             </LeftContainer>
 
             <RightContainer>
+                {/* 추가된 코드 */}
+                <NavbarDiv>
+                    <Navbar isLoggedIn={isLoggedIn} handleLogoutClick={handleLogoutClick} />
+                </NavbarDiv>
 
                 <Body>
                     <form
@@ -157,10 +173,10 @@ const FundingCreate = () => {
                                 펀딩 생성 페이지에 상품명과 이미지가 노출돼요.
                             </P>
                             <ProducImgtDiv>
-                            <SponsorComment mt="10px" pointer="pointer" onClick={handleFundingModalClick}>
-                                <FundingImg src={itemImage} h="90px" w="80px"/>
-                                <ImgText>상품 링크 URL</ImgText>
-                            </SponsorComment>
+                                <SponsorComment mt="10px" pointer="pointer" onClick={handleFundingModalClick}>
+                                    <FundingImg src={itemImage} h="90px" w="80px" />
+                                    <ImgText>상품 링크 URL</ImgText>
+                                </SponsorComment>
                                 <div>
                                     <InputTag
                                         type="text"
@@ -214,6 +230,7 @@ const FundingCreate = () => {
                                         </P>
                                     </SponserDiv>
 
+                                    {/* 여기까지*/}
                                     <SponserDiv>
                                         <RadioInput
                                             value="false"

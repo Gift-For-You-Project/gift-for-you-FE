@@ -21,12 +21,14 @@ const LoginModal = ({ closeModal }) => {
   const GoogleLogin = () => {
     window.location.href = process.env.REACT_APP_GOOGLE_URL;
     dispatch(googleLogin());
+    alert("구글 로그인이 완료되었습니다.");
     navigate("/");
   };
 
   const KakaoLogin = () => {
     window.location.href = process.env.REACT_APP_KAKAO_URL;
     dispatch(kakaoLogin());
+    alert("카카오 로그인이 완료되었습니다.");
     navigate("/");
   };
 

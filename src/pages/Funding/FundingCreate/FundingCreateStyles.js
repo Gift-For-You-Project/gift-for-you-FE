@@ -83,6 +83,15 @@ export const RightContainer = styled.div`
   }
 `;
 
+// 네브바 영역
+export const NavbarDiv = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 70px;
+`;
+
 // 바디 영역
 export const Body = styled.div`
   font-size: 24px;
@@ -120,17 +129,17 @@ export const SponserComment = styled.div`
 `;
 
 export const FundingImg = styled.img`
-    width: ${(props) => props.w};
-    height: ${(props) => props.h};
-    padding-left: ${(props) => props.pl};
-    border-radius: 4px;
-    border: none;
-    background-color: #eae7de;
-    font-weight: 500;
-    font-size: 12px;
-    justify-content: start;
-    align-items: start;
-    &:hover {
+  width: ${(props) => props.w};
+  height: ${(props) => props.h};
+  padding-left: ${(props) => props.pl};
+  border-radius: 4px;
+  border: none;
+  background-color: #eae7de;
+  font-weight: 500;
+  font-size: 12px;
+  justify-content: start;
+  align-items: start;
+  &:hover {
     cursor: pointer;
     }
 `;

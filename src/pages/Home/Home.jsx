@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { FaChevronRight } from "react-icons/fa";
 import { FaPlus } from "react-icons/fa6";
-import { BsPersonCircle } from "react-icons/bs";
-import { HiBell } from "react-icons/hi";
 import { useNavigate } from "react-router-dom";
 import LoginModal from "../Home/Login/LoginModal";
 import { useDispatch, useSelector } from "react-redux";
 import { bootChannelTalk } from "../../redux/channelTalkSlice";
 import { userLogout } from "../../redux/authSlice";
+import Navbar from "../../components/Navbar";
+import { getHomeFundingList } from "../../api/homeApi";
 import {
   MainContainer,
   LeftContainer,
@@ -15,11 +15,7 @@ import {
   P,
   Button,
   RightContainer,
-  Navbar,
-  NavbarBtn,
-  NavbarBtnDiv,
-  NavbarIconContainer,
-  NavbarIconDiv,
+  NavbarDiv,
   Body,
   MainDiv,
   MainTitle,
@@ -55,52 +51,73 @@ import {
 const Home = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+  const [homeFundingList, setHomeFundingList] = useState([]);
 
-  const handleLoginClick = () => {
-    setIsLoginModalOpen(true);
-  };
+  const closeModal = () => setIsLoginModalOpen(false);
+
+  const handleLoginClick = () => setIsLoginModalOpen(true);
 
   const handleLogoutClick = () => {
     dispatch(userLogout()); // 로그아웃 액션 디스패치
     navigate("/");
   };
 
-  const closeModal = () => {
-    setIsLoginModalOpen(false);
+  const handleFundingClick = (id) => {
+    navigate(`/fundingdetail/${id}`);
   };
 
-  const handleFundingCreate = () => {
-    navigate("/fundingcreate");
-  };
+  const handleOngoingFundingClick = () => navigate("/ongoingfunding");
 
-  // 상태에 따라 Navbar에 표시될 아이콘 결정
-  const navbarContents = isLoggedIn ? (
-    <>
-      <NavbarIconContainer>
-        <NavbarIconDiv>
-          <HiBell />
-        </NavbarIconDiv>
-        <NavbarIconDiv>
-          <BsPersonCircle />
-        </NavbarIconDiv>
-        <NavbarBtn onClick={handleLogoutClick} fs="13px" fw="600">
-          로그아웃
-        </NavbarBtn>
-      </NavbarIconContainer>
-    </>
-  ) : (
-    <>
-      <NavbarBtn onClick={handleLoginClick} fs="13px" fw="600">
-        로그인
-      </NavbarBtn>
-    </>
-  );
+  const handleFundingCreate = () => navigate("/fundingcreate");
+
+  // const myFundingData = async () => {
+  //   try {
+  //     const response = await getMyFunding();
+
+  //     if (response && response.status === 200) setMyFunding(response.data);
+  //   } catch (error) {
+  //     console.error("내 펀딩 정보를 가져오는 함수 호출 실패: ", error);
+  //   }
+  // };
+
+  const homeFundingListData = async () => {
+    try {
+      const response = await getHomeFundingList();
+
+      setHomeFundingList(response);
+    } catch (error) {
+      console.error("펀딩 리스트 정보를 가져오는 함수 호출 실패: ", error);
+    }
+  };
 
   useEffect(() => {
     dispatch(bootChannelTalk());
+    // myFundingData();
+    homeFundingListData();
   }, [dispatch]);
+
+  const ProductGridComponent = ({
+    imgSrc,
+    altText,
+    brand,
+    itemName,
+    price,
+  }) => (
+    <ProductGrid>
+      <ProductImg src={imgSrc} alt={altText} />
+      <P pt="8px" fs="14px" fw="600" color="gray">
+        {brand}
+      </P>
+      <P pt="8px" fs="14px" fw="600">
+        {itemName}
+      </P>
+      <P pt="8px" fs="14px" fw="600">
+        {price}
+      </P>
+    </ProductGrid>
+  );
 
   return (
     <MainContainer>
@@ -119,13 +136,13 @@ const Home = () => {
       </LeftContainer>
 
       <RightContainer>
-        <Navbar>
-          <NavbarBtn fs="20px" fw="600" pl="15px">
-            🥧 Giftipie
-          </NavbarBtn>
-          <NavbarBtnDiv>{navbarContents}</NavbarBtnDiv>
-        </Navbar>
-
+        <NavbarDiv>
+          <Navbar
+            isLoggedIn={isLoggedIn}
+            handleLoginClick={handleLoginClick}
+            handleLogoutClick={handleLogoutClick}
+          />
+        </NavbarDiv>
         <Body>
           <MainTitle>
             <P fs="18px" fw="600" pb="10px">
@@ -167,7 +184,7 @@ const Home = () => {
             </MainFunding>
           </MainDiv>
           <FundingDiv>
-            <button>
+            <button onClick={handleOngoingFundingClick}>
               <P fs="18px" fw="600" pt="30px" pb="10px">
                 지금 진행중인 펀딩 &nbsp;
                 <FaChevronRight />
@@ -177,86 +194,31 @@ const Home = () => {
               비공개 펀딩은 이곳에 공개되지 않아요
             </P>
             <FundingSection>
-              <FundingGrid>
-                <FundingImg src="/imgs/airpods.jpeg" alt="airpodspro" />
-                <ProgressBar>
-                  <Progress width={(20 / 100) * 100} />
-                </ProgressBar>
-                <BetweenDiv>
-                  <P pt="2px" fs="10px" fw="800" color="orange">
-                    36%
+              {homeFundingList.map((funding) => (
+                <FundingGrid
+                  key={funding.id}
+                  onClick={() => handleFundingClick(funding.id)}
+                >
+                  <FundingImg src={funding.itemImage} alt={funding.itemName} />
+                  <ProgressBar>
+                    <Progress width={(funding.achievementRate / 100) * 100} />
+                  </ProgressBar>
+                  <BetweenDiv>
+                    <P pt="2px" fs="10px" fw="800" color="orange">
+                      {funding.achievementRate}%
+                    </P>
+                    <P pt="2px" pl="90px" fs="10px" fw="800">
+                      {funding.dday}
+                    </P>
+                  </BetweenDiv>
+                  <P pt="10px" fs="14px" fw="600" color="gray">
+                    {funding.itemName}
                   </P>
-                  <P pt="2px" pl="90px" fs="10px" fw="800">
-                    D-16
+                  <P pt="10px" fs="14px" fw="600">
+                    {funding.content}
                   </P>
-                </BetweenDiv>
-                <P pt="10px" fs="14px" fw="600" color="gray">
-                  에어팟
-                </P>
-                <P pt="10px" fs="14px" fw="600">
-                  인생 첫 에어팟을 선물해주세요 😘
-                </P>
-              </FundingGrid>
-              <FundingGrid>
-                <FundingImg src="/imgs/tesla.jpeg" alt="tesla" />
-                <ProgressBar>
-                  <Progress width={(65 / 100) * 100} />
-                </ProgressBar>
-                <BetweenDiv>
-                  <P pt="2px" fs="10px" fw="800" color="orange">
-                    65%
-                  </P>
-                  <P pt="2px" pl="90px" fs="10px" fw="800">
-                    13일 남음
-                  </P>
-                </BetweenDiv>
-                <P pt="10px" fs="14px" fw="600" color="gray">
-                  모델X
-                </P>
-                <P pt="10px" fs="14px" fw="600">
-                  제로백 2.6초를 경험하고 싶어요 😘
-                </P>
-              </FundingGrid>
-              <FundingGrid>
-                <FundingImg src="/imgs/bluebottle.png" alt="logo" />
-                <ProgressBar>
-                  <Progress width={(100 / 100) * 100} />
-                </ProgressBar>
-                <BetweenDiv>
-                  <P pt="2px" fs="10px" fw="800" color="orange">
-                    100%
-                  </P>
-                  <P pt="2px" pl="90px" fs="10px" fw="800" color="orange">
-                    종료
-                  </P>
-                </BetweenDiv>
-                <P pt="10px" fs="14px" fw="600" color="gray">
-                  텀블러
-                </P>
-                <P pt="10px" fs="14px" fw="600">
-                  제목은 한줄 컷 😘
-                </P>
-              </FundingGrid>
-              <FundingGrid>
-                <FundingImg src="/imgs/massage.jpeg" alt="logo" />
-                <ProgressBar>
-                  <Progress width={(20 / 100) * 100} />
-                </ProgressBar>
-                <BetweenDiv>
-                  <P pt="2px" fs="10px" fw="800" color="orange">
-                    20%
-                  </P>
-                  <P pt="2px" pl="90px" fs="10px" fw="800">
-                    28일 남음
-                  </P>
-                </BetweenDiv>
-                <P pt="10px" fs="14px" fw="600" color="gray">
-                  마사지기
-                </P>
-                <P pt="10px" fs="14px" fw="600">
-                  내용은 상세페이지에서 😘
-                </P>
-              </FundingGrid>
+                </FundingGrid>
+              ))}
             </FundingSection>
           </FundingDiv>
           <TogetherDiv>
@@ -312,54 +274,34 @@ const Home = () => {
               <ProductGrid>
                 <ProductBlank />
               </ProductGrid>
-              <ProductGrid>
-                <ProductImg src="/imgs/iphone15pro.jpeg" alt="iphone" />
-                <P pt="8px" fs="14px" fw="600" color="gray">
-                  Apple
-                </P>
-                <P pt="8px" fs="14px" fw="600">
-                  아이폰 15 Pro 256BG 자급제
-                </P>
-                <P pt="8px" fs="14px" fw="600">
-                  1,550,000원
-                </P>
-              </ProductGrid>
-              <ProductGrid>
-                <ProductImg src="/imgs/iphone15.jpeg" alt="iphone" />
-                <P pt="8px" fs="14px" fw="600" color="gray">
-                  Apple
-                </P>
-                <P pt="8px" fs="14px" fw="600">
-                  아이폰 15 256BG 자급제
-                </P>
-                <P pt="8px" fs="14px" fw="600">
-                  1,250,000원
-                </P>
-              </ProductGrid>
-              <ProductGrid>
-                <ProductImg src="/imgs/iphone14.jpeg" alt="iphone" />
-                <P pt="8px" fs="14px" fw="600" color="gray">
-                  Apple
-                </P>
-                <P pt="8px" fs="14px" fw="600">
-                  아이폰 14 256BG 자급제
-                </P>
-                <P pt="8px" fs="14px" fw="600">
-                  1,090,000원
-                </P>
-              </ProductGrid>
-              <ProductGrid>
-                <ProductImg src="/imgs/iphonese.jpeg" alt="iphone" />
-                <P pt="8px" fs="14px" fw="600" color="gray">
-                  Apple
-                </P>
-                <P pt="8px" fs="14px" fw="600">
-                  아이폰SE 256BG 자급제
-                </P>
-                <P pt="8px" fs="14px" fw="600">
-                  650,0000원
-                </P>
-              </ProductGrid>
+              <ProductGridComponent
+                imgSrc="/imgs/iphone15pro.jpeg"
+                altText="iphone"
+                brand="Apple"
+                itemName="아이폰 15 Pro 256BG 자급제"
+                price="1,550,000원"
+              />
+              <ProductGridComponent
+                imgSrc="/imgs/iphone15.jpeg"
+                altText="iphone"
+                brand="Apple"
+                itemName="아이폰 15 256BG 자급제"
+                price="1,250,000원"
+              />
+              <ProductGridComponent
+                imgSrc="/imgs/iphone14.jpeg"
+                altText="iphone"
+                brand="Apple"
+                itemName="아이폰 14 256BG 자급제"
+                price="1,090,000원"
+              />
+              <ProductGridComponent
+                imgSrc="/imgs/iphonese.jpeg"
+                altText="iphone"
+                brand="Apple"
+                itemName="아이폰SE 256BG 자급제"
+                price="650,0000원"
+              />
             </ProductGrids>
           </ProductDiv>
         </Body>

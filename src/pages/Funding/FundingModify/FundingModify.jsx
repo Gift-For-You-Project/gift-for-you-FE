@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom'; // React Router에서 네비게이션 기능을 사용하기 위한 hook
 import { useParams } from 'react-router-dom'; // React Router에서 URL 매개변수를 가져오기 위한 hook
+import Navbar from '../../../components/Navbar'; // 추가된 코드
+import { useDispatch, useSelector } from 'react-redux'; // 추가된 코드
+import { userLogout } from '../../../redux/authSlice'; // 추가된 코드
 import { updateFundingModify } from '../../../api/api'; // 펀딩 수정 API를 호출하기 위한 함수 import
 import { deleteFundingModify } from '../../../api/api'; // 펀딩 수정 API를 호출하기 위한 함수 import
 import { FundingModifyGet } from '../../../api/api'; // 펀딩 상세 정보를 가져오기 위한 함수 import
@@ -11,6 +14,7 @@ import {
     Logo,
     P,
     Button,
+    NavbarDiv,
     RightContainer,
     ProducImgtDiv,
     InputTag,
@@ -28,6 +32,8 @@ import {
 const FundingModify = () => {
     const navigate = useNavigate(); // React Router의 네비게이션 기능을 사용하기 위한 hook
     const { id } = useParams(); // URL 매개변수(id)를 가져옴
+    const isLoggedIn = useSelector((state) => state.auth.isLoggedIn); // 추가된 코드
+    const dispatch = useDispatch(); // 추가된 코드
 
     // 펀딩 데이터 상태와 상태 설정 함수 초기화
     const [fundingData, setFundingData] = useState({
@@ -40,6 +46,12 @@ const FundingModify = () => {
         endDate: '',
         itemImage: '',
     });
+
+    // 추가된 코드
+    const handleLogoutClick = () => {
+        dispatch(userLogout()); // 로그아웃 액션 디스패치
+        navigate('/');
+    };
     // const [isFundingModalOpen, setIsFundingModalOpen] = useState(false); // 모달 창의 열림 여부 상태 변수
 
     // 펀딩 이미지를 클릭하여 모달을 열고 이미지를 설정하는 함수
@@ -156,6 +168,10 @@ const FundingModify = () => {
 
             {/* 오른쪽 컨테이너 */}
             <RightContainer>
+                {/* 추가된 코드 */}
+                <NavbarDiv>
+                    <Navbar isLoggedIn={isLoggedIn} handleLogoutClick={handleLogoutClick} />
+                </NavbarDiv>
                 {/* 펀딩 수정 내용 입력 부분 */}
                 <Body>
                     {/* 펀딩 상품 정보 입력 및 이미지 변경 */}
@@ -167,8 +183,6 @@ const FundingModify = () => {
                         <P pb="20px" fs="10px" fw="900">
                             펀딩페이지의 상품명, 가격, 이미지는 변경할 수 없습니다.
                         </P>
-
-                        <ProducImgtDiv></ProducImgtDiv>
 
                         <SponsorDiv>
                             {/* <SponsorComment pointer="pointer" onClick={handleFundingModalClick}> */}

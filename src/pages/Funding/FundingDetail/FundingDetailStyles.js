@@ -93,6 +93,15 @@ export const NavigateBtn = styled.button`
   padding-right: ${(props) => props.pr};
 `;
 
+// 네브바 영역
+export const NavbarDiv = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 70px;
+`;
+
 // 바디 영역
 export const Body = styled.div`
   font-size: 24px;
