@@ -10,36 +10,27 @@ import {
     P,
     Button,
     RightContainer,
-    Navbar,
-    NavbarBtn,
     ProducImgtDiv,
     InputTag,
     FundingImg,
-    // PlusImg,
     Body,
     FundingDiv,
     SponserDiv,
     RadioInput,
     SponserComment,
     TogetherDiv,
+    SponsorComment,
+    ImgText,
 } from './FundingCreateStyles';
 
 // 펀딩 생성 페이지 컴포넌트
 const FundingCreate = () => {
     const navigate = useNavigate(); // React Router의 네비게이션 기능을 사용하기 위한 hook
-    const { id } = useParams(); // URL 매개변수(id)를 가져옴
-
-    // 펀딩 생성 페이지에서 사용될 상태 변수 초기화
-    // const [itemName, setItemName] = useState('');
-    // const [showName, setShowName] = useState('');
-    // const [title, setTitle] = useState('');
-    // const [content, setContent] = useState('');
-    // const [targetAmount, setTargetAmount] = useState('');
-    // const [publicFlag, setPublicFlag] = useState('');
-    // const [endDate, setEndDate] = useState('');
+    const { id } = useParams(); // URL 매개변수(id)를 가져옴       
     const [itemImage, setItemImage] = useState(false);
     const [isFundingModalOpen, setIsFundingModalOpen] = useState(false); // 모달 창의 열림 여부 상태 변수
-
+    
+    // 펀딩 생성 페이지에서 사용될 상태 변수 초기화
     const [createData, setCreateData] = useState({
         itemName: '',
         targetAmount: '',
@@ -118,9 +109,7 @@ const FundingCreate = () => {
                 content: createData.content,
                 endDate: createData.endDate,
             });
-            console.log('펀딩 생성 성공:', response);
-
-            // 펀딩 생성 성공 시, 성공 메시지 표시 또는 다른 동작 수행
+            console.log('펀딩 생성 전달 성공:', response);
             navigate(`/fundingdetail/${response.id}`);
         } catch (error) {
             if (error.response) {
@@ -153,11 +142,6 @@ const FundingCreate = () => {
             </LeftContainer>
 
             <RightContainer>
-                <Navbar>
-                    <NavbarBtn onClick={() => navigate(`/fundingmodify/1`)} fs="15px" fw="800" pl="15px">
-                        😉 펀딩 수정페이지로 이동
-                    </NavbarBtn>
-                </Navbar>
 
                 <Body>
                     <form
@@ -173,15 +157,10 @@ const FundingCreate = () => {
                                 펀딩 생성 페이지에 상품명과 이미지가 노출돼요.
                             </P>
                             <ProducImgtDiv>
-                                <FundingImg src={itemImage} h="90px" w="90px" onClick={handleFundingModalClick} />
-                                {/* 추가된 부분: 선택된 이미지 표시 */}
-                                {/* <FundingImg
-                                src="https://image.msscdn.net/images/goods_img/20240111/3788388/3788388_17065904732279_big.jpg"
-                                h="90px"
-                                w="90px"
-                            />
-                            <FundingImg value={itemImage} onClick={handleFundingModalClick} h="90px" w="90px" /> */}
-                                {/* <PlusImg src="/imgs/plus.png" /> */}
+                            <SponsorComment mt="10px" pointer="pointer" onClick={handleFundingModalClick}>
+                                <FundingImg src={itemImage} h="90px" w="80px"/>
+                                <ImgText>상품 링크 URL</ImgText>
+                            </SponsorComment>
                                 <div>
                                     <InputTag
                                         type="text"

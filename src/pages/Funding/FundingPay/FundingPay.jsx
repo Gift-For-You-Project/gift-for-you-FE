@@ -7,8 +7,6 @@ import {
     P,
     Button,
     RightContainer,
-    Navbar,
-    NavbarBtn,
     SponserMoney,
     InputTag,
     Body,
@@ -43,12 +41,6 @@ const FundingPay = () => {
             </LeftContainer>
 
             <RightContainer>
-                <Navbar>
-                    <NavbarBtn onClick={() => navigate('/fundingdetail')} fs="15px" fw="800" pl="15px">
-                        😉 펀딩 상세페이지로 이동
-                    </NavbarBtn>
-                </Navbar>
-
                 <Body>
                     <FundingDiv>
                         <SponserMoney>

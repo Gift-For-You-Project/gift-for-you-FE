@@ -86,24 +86,10 @@ export const RightContainer = styled.div`
   }
 `;
 
-// 네브바 영역
-export const Navbar = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  height: 70px;
-`;
-
-export const NavbarBtn = styled.button`
+export const NavigateBtn = styled.button`
   font-size: ${(props) => props.fs};
   font-weight: ${(props) => props.fw};
   padding-left: ${(props) => props.pl};
-  padding-right: ${(props) => props.pr};
-`;
-
-export const NavbarBtnDiv = styled.div`
-  flex-direction: row;
   padding-right: ${(props) => props.pr};
 `;
 

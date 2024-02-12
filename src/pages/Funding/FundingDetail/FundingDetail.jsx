@@ -9,9 +9,7 @@ import {
     P,
     Button,
     RightContainer,
-    Navbar,
-    NavbarBtn,
-    NavbarBtnDiv,
+    NavigateBtn,
     Body,
     BannerImg,
     FundingDiv,
@@ -36,7 +34,7 @@ const FundingDetail = () => {
         itemImage: '',
         itemName: '',
         targetAmount: 0,
-        publicFlag: false, // 공개, 비공개 여부 어떻게 표현되는지?
+        publicFlag: false, // 공개, 비공개 여부
         showName: '',
         title: '',
         content: '',
@@ -47,8 +45,8 @@ const FundingDetail = () => {
         dday: '',
         status: false,
         achievementRate: 0,
-        ownerFlag: false,
-        modifiedAt: '', // 수정 날짜 너무 길어서 수정 필요해보임
+        ownerFlag: false, // true면 수정 페이지 버튼 보여지게
+        modifiedAt: '', // 수정 날짜
         // 후원자 이름 추가
         // 후원자 댓글 추가
     });
@@ -79,7 +77,6 @@ const FundingDetail = () => {
         fetchData();
     }, [id]); // 빈 배열을 전달하여 한 번만 실행하도록 설정
 
-
     return (
         <MainContainer>
             <LeftContainer>
@@ -99,21 +96,10 @@ const FundingDetail = () => {
             </LeftContainer>
 
             <RightContainer>
-                <Navbar>
-                    <NavbarBtn onClick={() => navigate('/')} fs="20px" fw="800" pl="15px">
-                        😉 Giftipie
-                    </NavbarBtn>
-                    <NavbarBtnDiv pr="15px">
-                        <NavbarBtn fs="13px" fw="600">
-                            문의
-                        </NavbarBtn>
-                        <NavbarBtn fs="13px" fw="600">
-                            로그인/회원가입
-                        </NavbarBtn>
-                    </NavbarBtnDiv>
-                </Navbar>
-
                 <Body>
+                    <NavigateBtn onClick={() => navigate(`/fundingModify/${id}`)} pl="360px" fs="13px" fw="600">
+                        🖍 수정하기
+                    </NavigateBtn>
                     <BannerImg src={detailData.itemImage} alt="image" />
                     <FundingDiv>
                         <P pt="20px" fs="13px" fw="800">
@@ -136,9 +122,6 @@ const FundingDetail = () => {
                         <P pt="10px" fs="15px" fw="800">
                             {detailData.showName}
                         </P>
-                        <P pt="10px" fs="15px" fw="800">
-                            수정날짜 : {detailData.modifiedAt}
-                        </P>
                         <ProgressBar>
                             <Progress width={(65 / 100) * 100} />
                         </ProgressBar>
@@ -155,7 +138,7 @@ const FundingDetail = () => {
                         </BetweenDiv>
                     </FundingDiv>
                     <TogetherDiv bc="orange">
-                        <P pt="30px" pl="30px" fs="14px" fw="800">
+                        <P pt="30px" pl="30px" pr="30px" fs="14px" fw="800">
                             {detailData.content}
                         </P>
                     </TogetherDiv>
@@ -181,10 +164,10 @@ const FundingDetail = () => {
                             <SponsorImg src="/imgs/songjoongy.jpg" alt="logo" />
                             <SponserComment mt="10px">
                                 <P pl="5px" fs="13px" fw="800">
-                                    {detailData.showName}
+                                    송**
                                 </P>
                                 <Button mt="5px" w="300px" h="40px" pr="90px" fs="13px" bc="violet">
-                                    {detailData.content}
+                                    줄이어폰 그만써~ 생일축하해!!
                                 </Button>
                             </SponserComment>
                         </SponserDiv>
@@ -193,10 +176,10 @@ const FundingDetail = () => {
                             <SponsorImg src="/imgs/junjihyun.jpg" alt="img" />
                             <SponserComment mt="10px">
                                 <P pl="5px" fs="13px" fw="800">
-                                    {detailData.showName}
+                                    전**
                                 </P>
                                 <Button mt="5px" w="300px" h="40px" pr="90px" fs="13px" bc="violet">
-                                    {detailData.content}
+                                    줄이어폰 그만써~ 생일축하해!!
                                 </Button>
                             </SponserComment>
                         </SponserDiv>
