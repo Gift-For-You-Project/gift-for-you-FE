@@ -140,10 +140,10 @@ export const FundingModifyGet = async (id, data) => {
   }
 };
 
-// 펀딩 수정페이지 API - patch
+// 펀딩 수정페이지 API - 변경버튼 - patch
 export const updateFundingModify = async (id, data) => {
   try {
-    const response = await instance.patch(`/api/funding/${id}`, data); // 펀딩 수정페이지 요청
+    const response = await instance.patch(`/api/funding/${id}/update`, data); // 펀딩 수정페이지 요청
     console.log("펀딩 수정 API", response);
     if (response.status === 200) {
       return response.data; // 응답 데이터 반환
