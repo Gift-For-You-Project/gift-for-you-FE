@@ -161,6 +161,7 @@ const FundingModify = () => {
             const data = await completeFundingModify(id); // 펀딩 상세 정보 가져오기
             setFundingData(data); // 가져온 데이터를 상태 변수에 설정
             console.log('펀딩 종료 성공', data);
+            navigate(`/`);
         } catch (error) {
             console.error('펀딩 종료 오류:', error);
         }
