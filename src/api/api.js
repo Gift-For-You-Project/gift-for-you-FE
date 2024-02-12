@@ -194,9 +194,9 @@ export const deleteFundingModify = async (id, data) => {
 };
 
 // 펀딩 수정페이지 API - 종료버튼 API - patch
-export const completeFundingModify = async (id) => {
+export const completeFundingModify = async (id, data) => {
   try {
-    const response = await instance.patch(`/api/funding/${id}/finish`); // 펀딩 수정페이지 요청
+    const response = await instance.patch(`/api/funding/${id}/finish`, data); // 펀딩 수정페이지 요청
     console.log("펀딩 종료 API", response);
     if (response.status === 200) {
       return response.data; // 응답 데이터 반환
