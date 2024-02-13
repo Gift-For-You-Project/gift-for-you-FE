@@ -1,61 +1,61 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useParams } from 'react-router-dom';
-import { fetchFundingDetail } from '../../../api/api'; // 펀딩 상세 정보를 가져오는 API 함수 import
-import Navbar from '../../../components/Navbar'; // 추가된 코드
-import { useDispatch, useSelector } from 'react-redux'; // 추가된 코드
-import { userLogout } from '../../../redux/authSlice'; // 추가된 코드
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import { fetchFundingDetail } from "../../../api/api"; // 펀딩 상세 정보를 가져오는 API 함수 import
+import Navbar from "../../../components/Navbar"; // 추가된 코드
+import { useDispatch, useSelector } from "react-redux"; // 추가된 코드
+import { userLogout } from "../../../redux/authSlice"; // 추가된 코드
 import {
-    MainContainer,
-    LeftContainer,
-    Logo,
-    P,
-    Button,
-    RightContainer,
-    NavbarDiv,
-    NavigateBtn,
-    Body,
-    BannerImg,
-    FundingDiv,
-    SponserDiv,
-    SponserComment,
-    SponsorImg,
-    ProgressBar,
-    Progress,
-    BetweenDiv,
-    TogetherDiv,
-} from './FundingDetailStyles';
+  MainContainer,
+  LeftContainer,
+  Logo,
+  P,
+  Button,
+  RightContainer,
+  NavbarDiv,
+  NavigateBtn,
+  Body,
+  BannerImg,
+  FundingDiv,
+  SponserDiv,
+  SponserComment,
+  SponsorImg,
+  ProgressBar,
+  Progress,
+  BetweenDiv,
+  TogetherDiv,
+} from "./FundingDetailStyles";
 
 // 펀딩 상세 페이지 컴포넌트
 const FundingDetail = () => {
-    const navigate = useNavigate(); // React Router의 네비게이션 기능을 사용하기 위한 hook
-    const { id } = useParams(); // URL 매개변수(id)를 가져옴
-    const isLoggedIn = useSelector((state) => state.auth.isLoggedIn); // 추가된 코드
-    const dispatch = useDispatch(); // 추가된 코드
+  const navigate = useNavigate(); // React Router의 네비게이션 기능을 사용하기 위한 hook
+  const { id } = useParams(); // URL 매개변수(id)를 가져옴
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn); // 추가된 코드
+  const dispatch = useDispatch(); // 추가된 코드
 
-    // 펀딩 상세 정보를 담는 상태 변수 초기화
-    const [detailData, setDetailData] = useState({
-        // 초기 상태를 명세서에 따라 설정
-        // FundingCreate에서 받아올 Data 초기값
-        itemImage: '',
-        itemName: '',
-        targetAmount: 0,
-        publicFlag: false, // 공개, 비공개 여부
-        showName: '',
-        title: '',
-        content: '',
-        endDate: '',
-        // FundignDetail에 출력되는 Data 초기값
-        itemLink: '',
-        currentAmount: 0,
-        dday: '',
-        status: false,
-        achievementRate: 0,
-        ownerFlag: false, // true면 수정 페이지 버튼 보여지게
-        modifiedAt: '', // 수정 날짜
-        // 후원자 이름 추가
-        // 후원자 댓글 추가
-    });
+  // 펀딩 상세 정보를 담는 상태 변수 초기화
+  const [detailData, setDetailData] = useState({
+    // 초기 상태를 명세서에 따라 설정
+    // FundingCreate에서 받아올 Data 초기값
+    itemImage: "",
+    itemName: "",
+    targetAmount: 0,
+    publicFlag: false, // 공개, 비공개 여부
+    showName: "",
+    title: "",
+    content: "",
+    endDate: "",
+    // FundignDetail에 출력되는 Data 초기값
+    itemLink: "",
+    currentAmount: 0,
+    dday: "",
+    status: false,
+    achievementRate: 0,
+    ownerFlag: false, // true면 수정 페이지 버튼 보여지게
+    modifiedAt: "", // 수정 날짜
+    // 후원자 이름 추가
+    // 후원자 댓글 추가
+  });
 
     const [sponsorDonation, setSponsorDonation] = useState({
         donation5000: 5000,
@@ -315,6 +315,6 @@ const FundingDetail = () => {
             </RightContainer>
         </MainContainer>
     );
-};
+  };
 
 export default FundingDetail;

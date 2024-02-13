@@ -11,22 +11,19 @@ export const instance = axios.create({
 // 구글 API
 
 // 카카오 API
-export const getKakaoLogin = async (credentials) => {
-  try {
-    const response = await instance.get(
-      process.env.REACT_APP_KAKAO_URL,
-      credentials
-    );
+// export const getKakaoLogin = async (credentials) => {
+//   try {
+//     const response = await instance.get("/api/kakao/callback", credentials);
 
-    if (response.data.isSuccess) {
-      alert(response.data.message);
-      return response.data.result;
-    }
-  } catch (error) {
-    console.error("카카오 로그인 오류:", error);
-    throw error;
-  }
-};
+//     if (response.data.isSuccess) {
+//       alert(response.data.message);
+//       return response.data.result;
+//     }
+//   } catch (error) {
+//     console.error("카카오 로그인 오류:", error);
+//     throw error;
+//   }
+// };
 
 // 회원가입 API
 export const signup = async (userData) => {
@@ -195,7 +192,7 @@ export const modalLinkModify = async (linkModifyData) => {
   }
 };
 
-// 펀딩 수정페이지 - 삭제하기 버튼 API - delete 
+// 펀딩 수정페이지 - 삭제하기 버튼 API - delete
 export const deleteFundingModify = async (id, data) => {
   try {
     const response = await instance.delete(`/api/funding/${id}`, data);
@@ -217,20 +214,20 @@ export const deleteFundingModify = async (id, data) => {
 // 펀딩 수정페이지 API - 종료버튼 API - patch
 export const completeFundingModify = async (id, data) => {
   try {
-    const response = await instance.patch(`/api/funding/${id}/finish`, data); 
+    const response = await instance.patch(`/api/funding/${id}/finish`, data);
     console.log("펀딩 종료 API", response);
     if (response.status === 200) {
-      return response.data; 
+      return response.data;
     }
   } catch (error) {
-    throw error; 
+    throw error;
   }
 };
 
 // 펀딩 결제페이지 API - get
 export const fetchFundingPay = async (id) => {
   try {
-    const response = await instance.get(`/api/funding/${id}/donation`); 
+    const response = await instance.get(`/api/funding/${id}/donation`);
     console.log("펀딩 결제페이지-랭킹 API호출 성공:", response);
     return response.data; // 응답 데이터 반환
   } catch (error) {
