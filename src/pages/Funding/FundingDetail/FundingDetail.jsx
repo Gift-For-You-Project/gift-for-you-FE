@@ -6,26 +6,26 @@ import Navbar from "../../../components/Navbar"; // 추가된 코드
 import { useDispatch, useSelector } from "react-redux"; // 추가된 코드
 import { userLogout } from "../../../redux/authSlice"; // 추가된 코드
 import {
-  MainContainer,
-  LeftContainer,
-  Logo,
-  P,
-  Button,
-  RightContainer,
-  NavbarDiv,
-  NavbarBtn,
-  NavbarBtnDiv,
-  Body,
-  BannerImg,
-  FundingDiv,
-  SponserDiv,
-  SponserComment,
-  SponsorImg,
-  ProgressBar,
-  Progress,
-  BetweenDiv,
-  TogetherDiv,
-} from "./FundingDetailStyles";
+    MainContainer,
+    LeftContainer,
+    Logo,
+    P,
+    Button,
+    RightContainer,
+    NavbarDiv,
+    NavbarBtn,
+    NavigateBtn,
+    Body,
+    BannerImg,
+    FundingDiv,
+    SponserDiv,
+    SponserComment,
+    SponsorImg,
+    ProgressBar,
+    Progress,
+    BetweenDiv,
+    TogetherDiv,
+} from './FundingDetailStyles';
 
 // 펀딩 상세 페이지 컴포넌트
 const FundingDetail = () => {
@@ -34,29 +34,29 @@ const FundingDetail = () => {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn); // 추가된 코드
   const dispatch = useDispatch(); // 추가된 코드
 
-  // 펀딩 상세 정보를 담는 상태 변수 초기화
-  const [detailData, setDetailData] = useState({
-    // 초기 상태를 명세서에 따라 설정
-    // FundingCreate에서 받아올 Data 초기값
-    itemImage: "",
-    itemName: "",
-    targetAmount: 0,
-    publicFlag: false, // 공개, 비공개 여부 어떻게 표현되는지?
-    showName: "",
-    title: "",
-    content: "",
-    endDate: "",
-    // FundignDetail에 출력되는 Data 초기값
-    itemLink: "",
-    currentAmount: 0,
-    dday: "",
-    status: false,
-    achievementRate: 0,
-    ownerFlag: false,
-    modifiedAt: "", // 수정 날짜 너무 길어서 수정 필요해보임
-    // 후원자 이름 추가
-    // 후원자 댓글 추가
-  });
+    // 펀딩 상세 정보를 담는 상태 변수 초기화
+    const [detailData, setDetailData] = useState({
+        // 초기 상태를 명세서에 따라 설정
+        // FundingCreate에서 받아올 Data 초기값
+        itemImage: '',
+        itemName: '',
+        targetAmount: 0,
+        publicFlag: false, // 공개, 비공개 여부
+        showName: '',
+        title: '',
+        content: '',
+        endDate: '',
+        // FundignDetail에 출력되는 Data 초기값
+        itemLink: '',
+        currentAmount: 0,
+        dday: '',
+        status: false,
+        achievementRate: 0,
+        ownerFlag: false, // true면 수정 페이지 버튼 보여지게
+        modifiedAt: '', // 수정 날짜
+        // 후원자 이름 추가
+        // 후원자 댓글 추가
+    });
 
   useEffect(() => {
     // API를 호출하여 펀딩 상세 정보를 가져오는 함수 정의
@@ -124,21 +124,11 @@ const FundingDetail = () => {
             handleLogoutClick={handleLogoutClick}
           />
         </NavbarDiv>
-        <NavbarDiv>
-          <NavbarBtn onClick={() => navigate("/")} fs="20px" fw="800" pl="15px">
-            😉 Giftipie
-          </NavbarBtn>
-          <NavbarBtnDiv pr="15px">
-            <NavbarBtn fs="13px" fw="600">
-              문의
-            </NavbarBtn>
-            <NavbarBtn fs="13px" fw="600">
-              로그인/회원가입
-            </NavbarBtn>
-          </NavbarBtnDiv>
-        </NavbarDiv>
 
         <Body>
+        <NavigateBtn onClick={() => navigate(`/fundingModify/${id}`)} pl="360px" fs="13px" fw="600">
+                        🖍 수정하기
+                    </NavigateBtn>
           <BannerImg src={detailData.itemImage} alt="image" />
           <FundingDiv>
             <P pt="20px" fs="13px" fw="800">
@@ -160,9 +150,6 @@ const FundingDetail = () => {
             </BetweenDiv>
             <P pt="10px" fs="15px" fw="800">
               {detailData.showName}
-            </P>
-            <P pt="10px" fs="15px" fw="800">
-              수정날짜 : {detailData.modifiedAt}
             </P>
             <ProgressBar>
               <Progress width={(65 / 100) * 100} />
