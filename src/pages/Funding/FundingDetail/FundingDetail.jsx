@@ -6,26 +6,25 @@ import Navbar from "../../../components/Navbar"; // 추가된 코드
 import { useDispatch, useSelector } from "react-redux"; // 추가된 코드
 import { userLogout } from "../../../redux/authSlice"; // 추가된 코드
 import {
-    MainContainer,
-    LeftContainer,
-    Logo,
-    P,
-    Button,
-    RightContainer,
-    NavbarDiv,
-    NavbarBtn,
-    NavigateBtn,
-    Body,
-    BannerImg,
-    FundingDiv,
-    SponserDiv,
-    SponserComment,
-    SponsorImg,
-    ProgressBar,
-    Progress,
-    BetweenDiv,
-    TogetherDiv,
-} from './FundingDetailStyles';
+  MainContainer,
+  LeftContainer,
+  Logo,
+  P,
+  Button,
+  RightContainer,
+  NavbarDiv,
+  NavigateBtn,
+  Body,
+  BannerImg,
+  FundingDiv,
+  SponserDiv,
+  SponserComment,
+  SponsorImg,
+  ProgressBar,
+  Progress,
+  BetweenDiv,
+  TogetherDiv,
+} from "./FundingDetailStyles";
 
 // 펀딩 상세 페이지 컴포넌트
 const FundingDetail = () => {
@@ -34,29 +33,46 @@ const FundingDetail = () => {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn); // 추가된 코드
   const dispatch = useDispatch(); // 추가된 코드
 
-    // 펀딩 상세 정보를 담는 상태 변수 초기화
-    const [detailData, setDetailData] = useState({
-        // 초기 상태를 명세서에 따라 설정
-        // FundingCreate에서 받아올 Data 초기값
-        itemImage: '',
-        itemName: '',
-        targetAmount: 0,
-        publicFlag: false, // 공개, 비공개 여부
-        showName: '',
-        title: '',
-        content: '',
-        endDate: '',
-        // FundignDetail에 출력되는 Data 초기값
-        itemLink: '',
-        currentAmount: 0,
-        dday: '',
-        status: false,
-        achievementRate: 0,
-        ownerFlag: false, // true면 수정 페이지 버튼 보여지게
-        modifiedAt: '', // 수정 날짜
-        // 후원자 이름 추가
-        // 후원자 댓글 추가
-    });
+  // 펀딩 상세 정보를 담는 상태 변수 초기화
+  const [detailData, setDetailData] = useState({
+    // 초기 상태를 명세서에 따라 설정
+    // FundingCreate에서 받아올 Data 초기값
+    itemImage: "",
+    itemName: "",
+    targetAmount: 0,
+    publicFlag: false, // 공개, 비공개 여부
+    showName: "",
+    title: "",
+    content: "",
+    endDate: "",
+    // FundignDetail에 출력되는 Data 초기값
+    itemLink: "",
+    currentAmount: 0,
+    dday: "",
+    status: false,
+    achievementRate: 0,
+    ownerFlag: false, // true면 수정 페이지 버튼 보여지게
+    modifiedAt: "", // 수정 날짜
+    // 후원자 이름 추가
+    // 후원자 댓글 추가
+  });
+
+  const [sponsorDonation, setSponsorDonation] = useState({
+    donation5000: 5000,
+    price10000: 10000,
+    priceinput: "직접입력",
+  });
+
+  //
+  const handledonation5000Change = (e) => {
+    navigate(
+      `/fundingpay/${id}?price=${sponsorDonation.donation5000}&showName=${detailData.showName}`
+    );
+  };
+
+  const handleprice10000Change = () => {
+    navigate(`/fundingpay/${id}?price=${sponsorDonation.price10000}`);
+  };
 
   useEffect(() => {
     // API를 호출하여 펀딩 상세 정보를 가져오는 함수 정의
@@ -126,9 +142,14 @@ const FundingDetail = () => {
         </NavbarDiv>
 
         <Body>
-        <NavigateBtn onClick={() => navigate(`/fundingModify/${id}`)} pl="360px" fs="13px" fw="600">
-                        🖍 수정하기
-                    </NavigateBtn>
+          <NavigateBtn
+            onClick={() => navigate(`/fundingModify/${id}`)}
+            pl="360px"
+            fs="13px"
+            fw="600"
+          >
+            🖍 수정하기
+          </NavigateBtn>
           <BannerImg src={detailData.itemImage} alt="image" />
           <FundingDiv>
             <P pt="20px" fs="13px" fw="800">
@@ -200,7 +221,7 @@ const FundingDetail = () => {
               <SponsorImg src="/imgs/songjoongy.jpg" alt="logo" />
               <SponserComment mt="10px">
                 <P pl="5px" fs="13px" fw="800">
-                  {detailData.showName}
+                  송**
                 </P>
                 <Button
                   mt="5px"
@@ -219,7 +240,7 @@ const FundingDetail = () => {
               <SponsorImg src="/imgs/junjihyun.jpg" alt="img" />
               <SponserComment mt="10px">
                 <P pl="5px" fs="13px" fw="800">
-                  {detailData.showName}
+                  전**
                 </P>
                 <Button
                   mt="5px"
@@ -250,28 +271,27 @@ const FundingDetail = () => {
               펀딩 참여하기
             </P>
 
-            <Button mt="30px" w="375px" h="60px" bc="orange">
-              <BetweenDiv>
+            <Button
+              onClick={handledonation5000Change}
+              mt="30px"
+              w="375px"
+              h="60px"
+              bc="orange"
+            >
+              <BetweenDiv
+                value={sponsorDonation.donation5000}
+                onChange={(e) => setSponsorDonation(e.target.value)}
+              >
                 <P pt="2px" pl="20px" fs="15px" fw="800" color="black">
                   커피 한잔 선물하기
                 </P>
                 <P pt="2px" pr="20px" fs="15px" fw="700" color="black">
-                  5,000원
-                </P>
-              </BetweenDiv>
-            </Button>
-            <Button mt="10px" w="375px" h="60px" bc="orange">
-              <BetweenDiv>
-                <P pt="2px" pl="20px" fs="15px" fw="800" color="black">
-                  파인트 아이스크림 선물하기
-                </P>
-                <P pt="2px" pr="20px" fs="15px" fw="700" color="black">
-                  10,000원
+                  {sponsorDonation.donation5000}원
                 </P>
               </BetweenDiv>
             </Button>
             <Button
-              onClick={() => navigate("/fundingcreate")}
+              onClick={handleprice10000Change}
               mt="10px"
               w="375px"
               h="60px"
@@ -279,17 +299,39 @@ const FundingDetail = () => {
             >
               <BetweenDiv>
                 <P pt="2px" pl="20px" fs="15px" fw="800" color="black">
-                  원하는만큼 선물하기
+                  파인트 아이스크림 선물하기
                 </P>
                 <P pt="2px" pr="20px" fs="15px" fw="700" color="black">
-                  직접입력
+                  {sponsorDonation.price10000}원
                 </P>
               </BetweenDiv>
             </Button>
-            <Button mt="10px" w="375px" h="60px" bc="orange">
+            <Button
+              onClick={() => navigate("/fundingpay")}
+              mt="10px"
+              w="375px"
+              h="60px"
+              bc="orange"
+            >
               <BetweenDiv>
                 <P pt="2px" pl="20px" fs="15px" fw="800" color="black">
-                  이 펀딩을 끝내러 왔다
+                  원하는 만큼 선물하기
+                </P>
+                <P pt="2px" pr="20px" fs="15px" fw="700" color="black">
+                  {sponsorDonation.priceinput}
+                </P>
+              </BetweenDiv>
+            </Button>
+            <Button
+              onClick={() => navigate("/fundingpay")}
+              mt="10px"
+              w="375px"
+              h="60px"
+              bc="orange"
+            >
+              <BetweenDiv>
+                <P pt="2px" pl="20px" fs="15px" fw="800" color="black">
+                  이 펀딩 끝내러 왔다
                 </P>
                 <P pt="2px" pr="20px" fs="15px" fw="700" color="black">
                   {detailData.currentAmount}원
