@@ -1,9 +1,9 @@
 import React from "react";
 import { IoClose } from "react-icons/io5";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom"; // useNavigate
 import { useDispatch } from "react-redux";
 import { googleLogin, kakaoLogin } from "../../../redux/authSlice";
-import { getKakaoLogin } from "../../../api/api";
+// import { getKakaoLogin } from "../../../api/api";
 import {
   ModalContainer,
   Background,
@@ -16,38 +16,36 @@ import {
 } from "./LoginModalStyles";
 
 const LoginModal = ({ closeModal }) => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const GoogleLogin = () => {
     window.location.href = process.env.REACT_APP_GOOGLE_URL;
     dispatch(googleLogin());
-    navigate("/");
+    // navigate("/");
   };
 
-  // const KakaoLogin = () => {
-  //   window.location.href = process.env.REACT_APP_KAKAO_URL;
-  //   dispatch(kakaoLogin());
-  //   navigate("/");
+  const KakaoLogin = () => {
+    window.location.href = process.env.REACT_APP_KAKAO_URL;
+    dispatch(kakaoLogin());
+    // navigate("/");
+  };
+
+  // const KakaoLogin = async () => {
+  //   try {
+  //     window.location.href = process.env.REACT_APP_KAKAO_URL;
+  //     const response = await getKakaoLogin();
+
+  //     if (response.data.isSuccess) {
+  //       dispatch(kakaoLogin());
+  //       navigate("/");
+  //       alert(response.data.message);
+  //     }
+  //   } catch (error) {
+  //     console.error("카카오 로그인 오류:", error);
+  //     throw error;
+  //   }
   // };
-
-  const KakaoLogin = async () => {
-    try {
-      // 카카오 로그인 URL로 리다이렉트
-      // window.location.href = process.env.REACT_APP_KAKAO_URL;
-      // 카카오 로그인 완료 후 백엔드에서 받아온 응답 처리
-      const response = await getKakaoLogin();
-
-      if (response.data.isSuccess) {
-        dispatch(kakaoLogin());
-        navigate("/");
-        alert(response.data.message);
-      }
-    } catch (error) {
-      console.error("카카오 로그인 오류:", error);
-      throw error;
-    }
-  };
 
   return (
     <>
