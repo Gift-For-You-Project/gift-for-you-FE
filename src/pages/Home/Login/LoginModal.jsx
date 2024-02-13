@@ -20,9 +20,8 @@ const LoginModal = ({ closeModal }) => {
   const dispatch = useDispatch();
 
   const GoogleLogin = async () => {
-    // window.location.href = process.env.REACT_APP_GOOGLE_URL;
-    const resp = await getGoogleLogin();
-    // dispatch(googleLogin());
+    window.location.href = process.env.REACT_APP_GOOGLE_URL;
+    dispatch(googleLogin());
   };
 
   const KakaoLogin = () => {
