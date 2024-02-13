@@ -1,9 +1,9 @@
 import React from "react";
 import { IoClose } from "react-icons/io5";
-import { Link } from "react-router-dom"; // useNavigate
+import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { googleLogin, kakaoLogin } from "../../../redux/authSlice";
-// import { getKakaoLogin } from "../../../api/api";
+import { getKakaoLogin } from "../../../api/api";
 import {
   ModalContainer,
   Background,
@@ -26,26 +26,25 @@ const LoginModal = ({ closeModal }) => {
     console.log("응답2: ", response);
   };
 
-  const KakaoLogin = () => {
-    window.location.href = process.env.REACT_APP_KAKAO_URL;
-    dispatch(kakaoLogin());
-  };
-
-  // const KakaoLogin = async () => {
-  //   try {
-  //     window.location.href = process.env.REACT_APP_KAKAO_URL;
-  //     const response = await getKakaoLogin();
-
-  //     if (response.data.isSuccess) {
-  //       dispatch(kakaoLogin());
-  //       navigate("/");
-  //       alert(response.data.message);
-  //     }
-  //   } catch (error) {
-  //     console.error("카카오 로그인 오류:", error);
-  //     throw error;
-  //   }
+  // const KakaoLogin = () => {
+  //   window.location.href = process.env.REACT_APP_KAKAO_URL;
+  //   dispatch(kakaoLogin());
   // };
+
+  const KakaoLogin = async () => {
+    try {
+      window.location.href = process.env.REACT_APP_KAKAO_URL;
+      const response = await getKakaoLogin();
+
+      if (response.data.isSuccess) {
+        dispatch(kakaoLogin());
+        alert(response.data.message);
+      }
+    } catch (error) {
+      console.error("카카오 로그인 오류:", error);
+      throw error;
+    }
+  };
 
   return (
     <>

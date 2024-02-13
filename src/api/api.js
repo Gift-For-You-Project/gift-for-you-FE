@@ -13,10 +13,7 @@ export const instance = axios.create({
 // 카카오 API
 export const getKakaoLogin = async (credentials) => {
   try {
-    const response = await instance.get(
-      process.env.REACT_APP_KAKAO_URL,
-      credentials
-    );
+    const response = await instance.get("/api/kakao/callback", credentials);
 
     if (response.data.isSuccess) {
       alert(response.data.message);
