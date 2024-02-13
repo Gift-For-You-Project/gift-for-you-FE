@@ -1,5 +1,5 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import {
     MainContainer,
     LeftContainer,
@@ -15,12 +15,103 @@ import {
     SponserComment,
     SponsorImg,
     TogetherDiv,
+    KakaoButton, 
+    KakaoPayLogo,
 } from './FundingPayStyles';
 import CheckBox from '../FundingPay/CheckBox/CheckBox';
-import KakaoPay from './KakaoPay/KakaoPay';
+// import KakaoPay from './KakaoPay/KakaoPay';
+import { fetchFundingPay } from '../../../api/api'; // 펀딩 상세 정보를 가져오는 API 함수 import
+import { FundingPayDonationReady } from '../../../api/api'; // 펀딩 상세 정보를 가져오는 API 함수 import
 
 const FundingPay = () => {
     const navigate = useNavigate();
+    const { id } = useParams(); // URL 매개변수(id)를 가져옴
+    const location = useLocation();
+
+    // FundingPay 컴포넌트의 showName 상태 변수 설정 부분 추가
+    const [sponsorDonation, setSponsorDonation] = useState({
+        itemImage: '',
+        showName: '',
+        donation: '',
+        donationRanking: '',
+        sponsorNickname: '',
+        sponsorComment: '',
+    });
+
+    // 기존의 useEffect를 사용하여 donation 값을 설정하는 부분
+    useEffect(() => {
+        const params = new URLSearchParams(location.search);
+        const price = params.get('price');
+        if (price) {
+            setSponsorDonation((prevPrice) => ({ ...prevPrice, donation: parseInt(price) }));
+        }
+    }, [location.search, id]);
+
+    // 수정한 useEffect를 사용하여 showName 값을 설정하는 부분
+    useEffect(() => {
+        const params = new URLSearchParams(location.search);
+        const showName = params.get('showName');
+        if (showName) {
+            setSponsorDonation((prevState) => ({ ...prevState, showName }));
+        }
+    }, [location.search]);
+
+    useEffect(() => {
+        // API를 호출하여 펀딩 상세 정보를 가져오는 함수 정의
+        const fetchData = async () => {
+            try {
+                if (!id) {
+                    // 유효한 id가 없으면 데이터를 요청하지 않음
+                    return;
+                }
+                // 펀딩 ID를 설정하여 특정 펀딩의 상세 정보 가져오기
+                // const fundingid = 1; // 예: 펀딩 ID가 1인 경우
+                const data = await fetchFundingPay(id);
+                setSponsorDonation(data.donationRanking); // 가져온 데이터를 상태 변수에 설정
+                console.log('펀딩 랭킹 가져오기:', data);
+            } catch (error) {
+                if (error.response) {
+                    const statusCode = error.response.status;
+                    const errorMessage = error.response.data.message;
+                    if (statusCode === 400) {
+                        alert('결제 오류', errorMessage);
+                    }
+                }
+            }
+        };
+        // 컴포넌트가 마운트될 때 API 호출 함수 실행
+        fetchData();
+    }, [id]); // 빈 배열을 전달하여 한 번만 실행하도록 설정
+
+    const handleFundingDonationClick = async () => {
+        try {
+            if (
+                sponsorDonation.sponsorNickname === '' ||
+                sponsorDonation.sponsorComment === '' ||
+                sponsorDonation.donation === ''
+            ) {
+                alert('내용을 입력해주세요');
+                return;
+            }
+            // 펀딩 생성 API 호출 및 데이터 전송
+            const response = await FundingPayDonationReady({
+                id,
+                sponsorNickname: sponsorDonation.sponsorNickname,
+                sponsorComment: sponsorDonation.sponsorComment,
+                donation: sponsorDonation.donation,
+            });
+            console.log('펀딩 생성 성공:', response);
+            navigate(`/fundingdetail/${response.id}`);
+        } catch (error) {
+            if (error.response) {
+                const statusCode = error.response.status;
+                const errorMessage = error.response.data.message;
+                if (statusCode === 400) {
+                    alert('펀딩 생성 실패 :', errorMessage);
+                }
+            }
+        }
+    };
 
     return (
         <MainContainer>
@@ -45,11 +136,12 @@ const FundingPay = () => {
                     <FundingDiv>
                         <SponserMoney>
                             <SponsorImg src="/imgs/junjihyun.jpg" alt="logo" />
+                            {/* <SponsorImg src={sponsorDonation.itemImage} alt="logo" /> */}
                             <P pt="10px" fs="16px" fw="800" pb="5px">
-                                윤다인 님에게
+                                {sponsorDonation.showName} 님에게
                             </P>
                             <P fs="16px" fw="800" pb="5px">
-                                5,000원
+                                {sponsorDonation.donation}원
                             </P>
                             <P fs="16px" fw="800">
                                 후원하기
@@ -72,10 +164,10 @@ const FundingPay = () => {
                             </SponserComment>
                         </SponserDiv>
 
-                        <P pt="10px" pl="10px" pb="5px" fs="13px" fw="800">
+                        {/* <P pt="10px" pl="10px" pb="5px" fs="13px" fw="800">
                             후원금
                         </P>
-                        <InputTag type="text" placeholder="남길 이름을 입력해주세요" h="40px" />
+                        <InputTag type="text" placeholder="남길 이름을 입력해주세요" h="40px" /> */}
 
                         <P pt="10px" pl="10px" pb="5px" fs="13px" fw="800">
                             메시지
@@ -93,12 +185,16 @@ const FundingPay = () => {
                     <TogetherDiv pt="10px" bc="orange">
                         <P pl="140px" fs="14px" fw="800">
                             <br />
-                            지금 선물하면 3등이에요!
+                            지금 선물하면 {sponsorDonation.donationRanking}등이에요!
                             <br />
                         </P>
                     </TogetherDiv>
 
-                    <KakaoPay />
+                    <KakaoButton onClick={handleFundingDonationClick}>
+                        <KakaoPayLogo src="/imgs/kakaopay.png" alt="image" />
+                    </KakaoButton>
+
+                    {/* <KakaoPay /> */}
                 </Body>
             </RightContainer>
         </MainContainer>
