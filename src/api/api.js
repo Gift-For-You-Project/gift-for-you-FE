@@ -9,13 +9,6 @@ export const instance = axios.create({
 });
 
 // 구글 API
-export const getGoogleLogin = async () => {
-  const response = await axios.get(process.env.REACT_APP_GOOGLE_URL, {
-    withCredentials: true,
-  });
-  
-  console.log(response.data);
-};
 
 // 카카오 API
 // export const getKakaoLogin = async (credentials) => {
