@@ -19,16 +19,16 @@ const LoginModal = ({ closeModal }) => {
   // const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const GoogleLogin = () => {
+  const GoogleLogin = (response) => {
     window.location.href = process.env.REACT_APP_GOOGLE_URL;
+    console.log("응답1: ", response);
     dispatch(googleLogin());
-    // navigate("/");
+    console.log("응답2: ", response);
   };
 
   const KakaoLogin = () => {
     window.location.href = process.env.REACT_APP_KAKAO_URL;
     dispatch(kakaoLogin());
-    // navigate("/");
   };
 
   // const KakaoLogin = async () => {
