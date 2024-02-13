@@ -237,9 +237,10 @@ export const fetchFundingPay = async (id) => {
 };
 
 // 펀딩 결제페이지 API - post
-export const FundingPayDonationReady = async (id) => {
+export const fundingPayDonationReady = async ( {id, sponsorNickname, sponsorComment, donation} ) => {
   try {
-    const response = await instance.post(`/api/funding/${id}/donation/ready`);
+    console.log("펀딩 결제페이지 id API", id);
+    const response = await instance.post(`/api/funding/${id}/donation/ready`, {sponsorNickname, sponsorComment, donation}); 
     console.log("펀딩 결제페이지 POST API", response);
     return response.data; // 응답 데이터 반환
   } catch (error) {
