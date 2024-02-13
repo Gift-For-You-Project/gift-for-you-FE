@@ -10,7 +10,13 @@ export const instance = axios.create({
 
 // 구글 API
 export const getGoogleLogin = async () => {
-  const response = await instance.get(process.env.REACT_APP_GOOGLE_URL);
+  const response = await axios.get(process.env.REACT_APP_GOOGLE_URL, {
+    withCredentials: true,
+    headers: {
+      "Access-Control-Allow-Origin": `${process.env.REACT_APP_API_URL}`,
+    },
+  });
+  
   console.log(response.data);
 };
 
