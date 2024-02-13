@@ -224,14 +224,6 @@ const FundingModify = () => {
                   handleImageSelection={handleImageSelection}
                 />
               )}
-              {/* <SponsorComment mt="10px">
-                                <Button w="70px" h="40px" color="white" fs="12px" fw="600" bc="gray" pb="5px">
-                                    변경
-                                </Button>
-                                <Button w="70px" h="40px" mt="10px" color="white" fs="12px" fw="600" bc="gray">
-                                    변경
-                                </Button>
-                            </SponsorComment> */}
             </SponsorDiv>
             {/* 펀딩 내용 및 공개 여부 입력 부분 */}
             <SponsorDiv>

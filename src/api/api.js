@@ -8,6 +8,26 @@ export const instance = axios.create({
   },
 });
 
+// 구글 API
+
+// 카카오 API
+export const getKakaoLogin = async (credentials) => {
+  try {
+    const response = await instance.get(
+      process.env.REACT_APP_KAKAO_URL,
+      credentials
+    );
+
+    if (response.data.isSuccess) {
+      alert(response.data.message);
+      return response.data.result;
+    }
+  } catch (error) {
+    console.error("카카오 로그인 오류:", error);
+    throw error;
+  }
+};
+
 // 회원가입 API
 export const signup = async (userData) => {
   try {
@@ -33,6 +53,7 @@ export const signup = async (userData) => {
       const { code, message } = error.response.data;
 
       if (code === 4000) {
+        console.log("Error 4000:", message);
         alert(message);
       } else {
         console.error("올바르지 않은 응답 형식 또는 값");
