@@ -34,8 +34,7 @@ const LoginModal = ({ closeModal }) => {
   const KakaoLogin = async () => {
     try {
       // 카카오 로그인 URL로 리다이렉트
-      window.location.href = process.env.REACT_APP_KAKAO_URL;
-
+      // window.location.href = process.env.REACT_APP_KAKAO_URL;
       // 카카오 로그인 완료 후 백엔드에서 받아온 응답 처리
       const response = await getKakaoLogin();
 
