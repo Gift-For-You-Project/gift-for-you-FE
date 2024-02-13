@@ -19,11 +19,11 @@ const LoginModal = ({ closeModal }) => {
   // const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const GoogleLogin = (response) => {
+  const GoogleLogin = () => {
     window.location.href = process.env.REACT_APP_GOOGLE_URL;
-    console.log("응답1: ", response);
+    console.log("응답1: ");
     dispatch(googleLogin());
-    console.log("응답2: ", response);
+    console.log("응답2: ");
   };
 
   // const KakaoLogin = () => {
@@ -33,7 +33,8 @@ const LoginModal = ({ closeModal }) => {
 
   const KakaoLogin = async () => {
     try {
-      window.location.href = process.env.REACT_APP_KAKAO_URL;
+      // window.location.href = process.env.REACT_APP_KAKAO_URL;
+
       const response = await getKakaoLogin();
 
       if (response.data.isSuccess) {
