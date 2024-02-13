@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { fetchFundingDetail } from "../../../api/api"; // 펀딩 상세 정보를 가져오는 API 함수 import
-import Navbar from "../../../components/Navbar"; // 추가된 코드
-import { useDispatch, useSelector } from "react-redux"; // 추가된 코드
-import { userLogout } from "../../../redux/authSlice"; // 추가된 코드
+import Navbar from "../../../components/Navbar";
+import { useDispatch, useSelector } from "react-redux";
+import { userLogout } from "../../../redux/authSlice";
 import {
   MainContainer,
   LeftContainer,
@@ -30,8 +30,8 @@ import {
 const FundingDetail = () => {
   const navigate = useNavigate(); // React Router의 네비게이션 기능을 사용하기 위한 hook
   const { id } = useParams(); // URL 매개변수(id)를 가져옴
-  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn); // 추가된 코드
-  const dispatch = useDispatch(); // 추가된 코드
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+  const dispatch = useDispatch();
 
   // 펀딩 상세 정보를 담는 상태 변수 초기화
   const [detailData, setDetailData] = useState({
@@ -100,7 +100,6 @@ const FundingDetail = () => {
     fetchData();
   }, [id]); // 빈 배열을 전달하여 한 번만 실행하도록 설정
 
-  // 추가된 코드
   const handleLogoutClick = () => {
     dispatch(userLogout()); // 로그아웃 액션 디스패치
     navigate("/");
