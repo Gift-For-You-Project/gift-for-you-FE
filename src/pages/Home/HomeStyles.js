@@ -110,6 +110,11 @@ export const NavbarIconContainer = styled.div`
   gap: 10px;
 `;
 
+export const NavbarNotificationIconDiv = styled.div`
+  font-size: 24px;
+  cursor: pointer;
+`;
+
 export const NavbarIconDiv = styled.div`
   font-size: 24px;
   cursor: pointer;

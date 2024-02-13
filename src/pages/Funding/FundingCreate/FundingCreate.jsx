@@ -33,8 +33,8 @@ const FundingCreate = () => {
     const { id } = useParams(); // URL 매개변수(id)를 가져옴
     const [itemImage, setItemImage] = useState(false);
     const [isFundingModalOpen, setIsFundingModalOpen] = useState(false); // 모달 창의 열림 여부 상태 변수
-    const isLoggedIn = useSelector((state) => state.auth.isLoggedIn); // 추가된 코드
-    const dispatch = useDispatch(); // 추가된 코드
+    const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+    const dispatch = useDispatch();
 
     // 펀딩 생성 페이지에서 사용될 상태 변수 초기화
     const [createData, setCreateData] = useState({
@@ -229,8 +229,6 @@ const FundingCreate = () => {
                                             누구나 볼 수 있어요
                                         </P>
                                     </SponserDiv>
-
-                                    {/* 여기까지*/}
                                     <SponserDiv>
                                         <RadioInput
                                             value="false"
@@ -301,7 +299,6 @@ const FundingCreate = () => {
                                 pt="10px"
                             />
                         </FundingDiv>
-
                         <TogetherDiv>
                             <P pl="130px" fs="14px" fw="800">
                                 펀딩 금액은 계좌로 전달돼요
