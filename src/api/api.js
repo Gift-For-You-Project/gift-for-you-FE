@@ -16,6 +16,7 @@ export const getGoogleLogin = async () => {
       "Access-Control-Allow-Origin": `${process.env.REACT_APP_API_URL}`,
     },
   });
+  
   console.log(response.data);
 };
 
