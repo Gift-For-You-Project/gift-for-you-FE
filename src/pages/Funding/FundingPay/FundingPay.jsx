@@ -21,7 +21,7 @@ import {
 import CheckBox from '../FundingPay/CheckBox/CheckBox';
 // import KakaoPay from './KakaoPay/KakaoPay';
 import { fetchFundingPay } from '../../../api/api'; // 펀딩 상세 정보를 가져오는 API 함수 import
-import { FundingPayDonationReady } from '../../../api/api'; // 펀딩 상세 정보를 가져오는 API 함수 import
+import { fundingPayDonationReady } from '../../../api/api'; // 펀딩 상세 정보를 가져오는 API 함수 import
 
 const FundingPay = () => {
     const navigate = useNavigate();
@@ -30,7 +30,6 @@ const FundingPay = () => {
 
     // FundingPay 컴포넌트의 showName 상태 변수 설정 부분 추가
     const [sponsorDonation, setSponsorDonation] = useState({
-        itemImage: '',
         showName: '',
         donation: '',
         donationRanking: '',
@@ -38,19 +37,24 @@ const FundingPay = () => {
         sponsorComment: '',
     });
 
-    // 기존의 useEffect를 사용하여 donation 값을 설정하는 부분
+    //기존의 useEffect를 사용하여 donation 값을 설정하는 부분
     useEffect(() => {
         const params = new URLSearchParams(location.search);
-        const price = params.get('price');
-        if (price) {
-            setSponsorDonation((prevPrice) => ({ ...prevPrice, donation: parseInt(price) }));
+        const donation = params.get('donation');
+        if (donation) {
+            setSponsorDonation((prevDonation) => ({ ...prevDonation, donation: parseInt(donation) }));
+            console.log('setSponsorDonation:',setSponsorDonation)
         }
     }, [location.search, id]);
 
     // 수정한 useEffect를 사용하여 showName 값을 설정하는 부분
     useEffect(() => {
         const params = new URLSearchParams(location.search);
+        console.log('params:',params)
         const showName = params.get('showName');
+        const donation = params.get('donation');
+        console.log('showName:',showName)
+        console.log('donation:', donation)
         if (showName) {
             setSponsorDonation((prevState) => ({ ...prevState, showName }));
         }
@@ -67,7 +71,7 @@ const FundingPay = () => {
                 // 펀딩 ID를 설정하여 특정 펀딩의 상세 정보 가져오기
                 // const fundingid = 1; // 예: 펀딩 ID가 1인 경우
                 const data = await fetchFundingPay(id);
-                setSponsorDonation(data.donationRanking); // 가져온 데이터를 상태 변수에 설정
+                setSponsorDonation(prevState => ({ ...prevState, donationRanking: data.result.donationRanking }));
                 console.log('펀딩 랭킹 가져오기:', data);
             } catch (error) {
                 if (error.response) {
@@ -87,26 +91,27 @@ const FundingPay = () => {
         try {
             if (
                 sponsorDonation.sponsorNickname === '' ||
-                sponsorDonation.sponsorComment === '' ||
-                sponsorDonation.donation === ''
+                sponsorDonation.sponsorComment === ''
             ) {
-                alert('내용을 입력해주세요');
+                console.log('+++:', sponsorDonation);
+                // alert('내용을 입력해주세요');
                 return;
             }
             // 펀딩 생성 API 호출 및 데이터 전송
-            const response = await FundingPayDonationReady({
+            const response = await fundingPayDonationReady({
                 id,
                 sponsorNickname: sponsorDonation.sponsorNickname,
                 sponsorComment: sponsorDonation.sponsorComment,
                 donation: sponsorDonation.donation,
             });
             console.log('펀딩 생성 성공:', response);
-            navigate(`/fundingdetail/${response.id}`);
+            navigate(`/fundingdetail/${id}`);
         } catch (error) {
             if (error.response) {
                 const statusCode = error.response.status;
                 const errorMessage = error.response.data.message;
                 if (statusCode === 400) {
+                    // alert(errorMessage);
                     alert('펀딩 생성 실패 :', errorMessage);
                 }
             }
@@ -136,7 +141,6 @@ const FundingPay = () => {
                     <FundingDiv>
                         <SponserMoney>
                             <SponsorImg src="/imgs/junjihyun.jpg" alt="logo" />
-                            {/* <SponsorImg src={sponsorDonation.itemImage} alt="logo" /> */}
                             <P pt="10px" fs="16px" fw="800" pb="5px">
                                 {sponsorDonation.showName} 님에게
                             </P>
@@ -156,7 +160,10 @@ const FundingPay = () => {
                                 <P pl="10px" pb="5px" fs="13px" fw="800">
                                     이름
                                 </P>
-                                <InputTag type="text" placeholder="남길 이름을 입력해주세요" h="40px" />
+                                <InputTag type="text" placeholder="남길 이름을 입력해주세요" value={sponsorDonation.sponsorNickname}
+                            onChange={(e) => {
+                                setSponsorDonation({ ...sponsorDonation, sponsorNickname: e.target.value });
+                            }} h="40px" />
                                 <P pl="10px" fs="10px" fw="800">
                                     주최자에게 이름이 모두 공개되고, 후원자 목록에는 두번째 글자부터 *으로 표시됩니다.
                                     예) 김 * *
@@ -172,7 +179,10 @@ const FundingPay = () => {
                         <P pt="10px" pl="10px" pb="5px" fs="13px" fw="800">
                             메시지
                         </P>
-                        <InputTag type="text" placeholder="남길 메시지를 입력해주세요" pb="50px" h="100px" />
+                        <InputTag type="text" placeholder="남길 메시지를 입력해주세요" value={sponsorDonation.sponsorComment}
+                            onChange={(e) => {
+                                setSponsorDonation({ ...sponsorDonation, sponsorComment: e.target.value });
+                            }} pb="50px" h="100px" />
 
                         <P pl="10px" fs="10px" fw="800">
                             현재는 테스트 기간으로, 실제 결제가 이루어지지 않습니다. 대신 1명이 참여할 때마다 개설자에게

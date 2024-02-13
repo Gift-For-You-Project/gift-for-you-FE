@@ -59,17 +59,17 @@ const FundingDetail = () => {
 
     const [sponsorDonation, setSponsorDonation] = useState({
         donation5000: 5000,
-        price10000: 10000,
-        priceinput: '직접입력',
+        donation10000: 10000,
+        donationInput: '직접입력',
     });
 
     // 
     const handledonation5000Change = (e) => {
-        navigate(`/fundingpay/${id}?price=${sponsorDonation.donation5000}&showName=${detailData.showName}`);
+        navigate(`/fundingpay/${id}?donation=${sponsorDonation.donation5000}&showName=${detailData.showName}`);
     };
 
-    const handleprice10000Change = () => {
-        navigate(`/fundingpay/${id}?price=${sponsorDonation.price10000}`);
+    const handledonation10000Change = () => {
+        navigate(`/fundingpay/${id}?donation=${sponsorDonation.donation10000}&showName=${detailData.showName}`);
     };
 
     useEffect(() => {
@@ -239,13 +239,13 @@ const FundingDetail = () => {
                                 </P>
                             </BetweenDiv>
                         </Button>
-                        <Button onClick={handleprice10000Change} mt="10px" w="375px" h="60px" bc="orange">
+                        <Button onClick={handledonation10000Change} mt="10px" w="375px" h="60px" bc="orange">
                             <BetweenDiv>
                                 <P pt="2px" pl="20px" fs="15px" fw="800" color="black">
                                     파인트 아이스크림 선물하기
                                 </P>
                                 <P pt="2px" pr="20px" fs="15px" fw="700" color="black">
-                                    {sponsorDonation.price10000}원
+                                    {sponsorDonation.donation10000}원
                                 </P>
                             </BetweenDiv>
                         </Button>
@@ -255,7 +255,7 @@ const FundingDetail = () => {
                                     원하는 만큼 선물하기
                                 </P>
                                 <P pt="2px" pr="20px" fs="15px" fw="700" color="black">
-                                    {sponsorDonation.priceinput}
+                                    {sponsorDonation.donationInput}
                                 </P>
                             </BetweenDiv>
                         </Button>
