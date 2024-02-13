@@ -114,7 +114,7 @@ const FundingPay = () => {
                     // alert(errorMessage);
                     alert('펀딩 생성 실패 :', errorMessage);
                 }
-            }
+            } 
         }
     };
 
