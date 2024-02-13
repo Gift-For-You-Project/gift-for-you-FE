@@ -3,6 +3,7 @@ import { IoClose } from "react-icons/io5";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { googleLogin, kakaoLogin } from "../../../redux/authSlice";
+import { getKakaoLogin } from "../../../api/api";
 import {
   ModalContainer,
   Background,
@@ -21,15 +22,32 @@ const LoginModal = ({ closeModal }) => {
   const GoogleLogin = () => {
     window.location.href = process.env.REACT_APP_GOOGLE_URL;
     dispatch(googleLogin());
-    alert("구글 로그인이 완료되었습니다.");
     navigate("/");
   };
 
-  const KakaoLogin = () => {
-    window.location.href = process.env.REACT_APP_KAKAO_URL;
-    dispatch(kakaoLogin());
-    alert("카카오 로그인이 완료되었습니다.");
-    navigate("/");
+  // const KakaoLogin = () => {
+  //   window.location.href = process.env.REACT_APP_KAKAO_URL;
+  //   dispatch(kakaoLogin());
+  //   navigate("/");
+  // };
+
+  const KakaoLogin = async () => {
+    try {
+      // 카카오 로그인 URL로 리다이렉트
+      window.location.href = process.env.REACT_APP_KAKAO_URL;
+
+      // 카카오 로그인 완료 후 백엔드에서 받아온 응답 처리
+      const response = await getKakaoLogin();
+
+      if (response.data.isSuccess) {
+        dispatch(kakaoLogin());
+        navigate("/");
+        alert(response.data.message);
+      }
+    } catch (error) {
+      console.error("카카오 로그인 오류:", error);
+      throw error;
+    }
   };
 
   return (

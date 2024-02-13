@@ -116,28 +116,6 @@ const Signup = () => {
 
   const handleSignupClick = async () => {
     try {
-      // 가입 전에 유효성 검사 수행
-      if (!isValidEmailFormat(email)) {
-        setShowEmailHelp(true);
-        return;
-      }
-
-      if (!isValidNicknameFormat(nickname)) {
-        setShowNicknameHelp(true);
-        return;
-      }
-
-      if (!isValidPasswordFormat(password)) {
-        setShowPasswordHelp(true);
-        return;
-      }
-
-      if (!isValidPhoneNumberFormat(phoneNumber)) {
-        setShowPhoneNumberHelp(true);
-        return;
-      }
-
-      // 가입 로직 수행
       await signup({ email, nickname, password, phoneNumber });
       navigate("/login");
     } catch (error) {
@@ -175,13 +153,13 @@ const Signup = () => {
               placeholder="Email"
             />
             {showEmailHelp && email.trim() === "" && (
-              <SignupEmailHelpDiv>이메일을 입력해주세요.</SignupEmailHelpDiv>
+              <SignupEmailHelpDiv>이메일을 입력해 주세요.</SignupEmailHelpDiv>
             )}
             {showEmailHelp &&
               !isValidEmailFormat(email) &&
               email.trim() !== "" && (
                 <SignupEmailHelpDiv>
-                  올바른 이메일 주소 형식으로 다시 입력해주세요.
+                  유효한 이메일 형식이어야 합니다.
                 </SignupEmailHelpDiv>
               )}
             <BlankLine h="30px" />
@@ -210,8 +188,8 @@ const Signup = () => {
             {showPasswordHelp && (
               <SignupPasswordHelpDiv>
                 {password.trim() === ""
-                  ? "비밀번호를 입력해주세요."
-                  : "비밀번호는 8자에서 15자 사이이어야 하며, 영문, 숫자, 특수문자(@$!%*?&)를 포함해야 합니다."}
+                  ? "비밀번호를 입력해 주세요."
+                  : "비밀번호는 8자에서 15자 사이의 알파벳 대소문자, 숫자, 특수문자로 구성되어야 합니다."}
               </SignupPasswordHelpDiv>
             )}
             <BlankLine h="30px" />
@@ -226,9 +204,9 @@ const Signup = () => {
             {showPhoneNumberHelp && (
               <SignupPhoneNumberHelpDiv>
                 {phoneNumber.trim() === ""
-                  ? "휴대폰 번호를 입력해주세요."
+                  ? "휴대폰 번호를 입력해 주세요."
                   : !isValidPhoneNumberFormat(phoneNumber)
-                  ? "휴대폰 번호는 10자에서 11자 사이의 숫자로 구성되어야 합니다."
+                  ? "휴대전화 번호는 10자에서 11자 사이의 숫자로 구성되어야 합니다."
                   : null}
               </SignupPhoneNumberHelpDiv>
             )}
