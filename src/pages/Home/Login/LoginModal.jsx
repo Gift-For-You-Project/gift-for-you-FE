@@ -3,7 +3,6 @@ import { IoClose } from "react-icons/io5";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { googleLogin, kakaoLogin } from "../../../redux/authSlice";
-import { getGoogleLogin } from "../../../api/api";
 import {
   ModalContainer,
   Background,
@@ -19,7 +18,7 @@ const LoginModal = ({ closeModal }) => {
   // const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const GoogleLogin = async () => {
+  const GoogleLogin = () => {
     window.location.href = process.env.REACT_APP_GOOGLE_URL;
     dispatch(googleLogin());
   };
