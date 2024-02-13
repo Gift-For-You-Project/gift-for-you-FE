@@ -100,7 +100,7 @@ export const login = async (credentials) => {
   }
 };
 
-// 펀딩 생성페이지 API
+// 펀딩 생성페이지 API - post
 export const fundingCreate = async (fundingData) => {
   try {
     const response = await instance.post("/api/funding/create", fundingData); // 펀딩 생성 요청
@@ -217,11 +217,34 @@ export const deleteFundingModify = async (id, data) => {
 // 펀딩 수정페이지 API - 종료버튼 API - patch
 export const completeFundingModify = async (id, data) => {
   try {
-    const response = await instance.patch(`/api/funding/${id}/finish`, data); // 펀딩 수정페이지 요청
+    const response = await instance.patch(`/api/funding/${id}/finish`, data); 
     console.log("펀딩 종료 API", response);
     if (response.status === 200) {
-      return response.data; // 응답 데이터 반환
+      return response.data; 
     }
+  } catch (error) {
+    throw error; 
+  }
+};
+
+// 펀딩 결제페이지 API - get
+export const fetchFundingPay = async (id) => {
+  try {
+    const response = await instance.get(`/api/funding/${id}/donation`); 
+    console.log("펀딩 결제페이지-랭킹 API호출 성공:", response);
+    return response.data; // 응답 데이터 반환
+  } catch (error) {
+    console.error("펀딩 결제페이지-랭킹 API호출 오류:", error); // 오류 로깅
+    throw error; // 에러 다시 throw 또는 다른 적절한 처리를 수행
+  }
+};
+
+// 펀딩 결제페이지 API - post
+export const FundingPayDonationReady = async (id) => {
+  try {
+    const response = await instance.post(`/api/funding/${id}/donation/ready`); 
+    console.log("펀딩 결제페이지 POST API", response);
+    return response.data; // 응답 데이터 반환
   } catch (error) {
     throw error; // 실패 시 예외 처리
   }
