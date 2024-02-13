@@ -8,8 +8,6 @@ export const instance = axios.create({
   },
 });
 
-// 구글 API
-
 // 카카오 API
 export const getKakaoLogin = async (credentials) => {
   try {
@@ -27,6 +25,8 @@ export const getKakaoLogin = async (credentials) => {
     throw error;
   }
 };
+
+// 구글 API
 
 // 회원가입 API
 export const signup = async (userData) => {
