@@ -13,6 +13,7 @@ export const getGoogleLogin = async () => {
   const response = await axios.get(process.env.REACT_APP_GOOGLE_URL, {
     withCredentials: true,
   });
+  
   console.log(response.data);
 };
 
