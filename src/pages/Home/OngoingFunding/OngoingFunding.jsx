@@ -4,7 +4,7 @@ import LoginModal from "../Login/LoginModal";
 import { useDispatch, useSelector } from "react-redux";
 import { userLogout } from "../../../redux/authSlice";
 import Navbar from "../../../components/Navbar";
-import { getOngoingFundingList } from "../../../api/homeApi";
+import { getOngoingFundingList } from "../../../apis/home";
 import {
   MainContainer,
   LeftContainer,

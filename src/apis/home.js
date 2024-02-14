@@ -1,4 +1,4 @@
-import { instance } from "./api";
+import { instance } from "./auth";
 
 // 내 펀딩 데이터를 가져오는 API
 // export const getMyFunding = async () => {

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { FaAngleLeft } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
-import { signup } from "../../../api/api";
+import { signup } from "../../../apis/auth";
 import {
   MainContainer,
   LeftContainer,

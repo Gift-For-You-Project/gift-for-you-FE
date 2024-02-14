@@ -1,128 +1,4 @@
-import axios from "axios";
-
-export const instance = axios.create({
-  baseURL: process.env.REACT_APP_API_URL,
-  withCredentials: true, // Cookies에 브라우저가 자동으로 쿠키를 넣어줌
-  headers: {
-    "Access-Control-Allow-Origin": `${process.env.REACT_APP_API_URL}`,
-  },
-});
-
-// 구글 API
-
-// 카카오 API
-// export const getKakaoLogin = async (credentials) => {
-//   try {
-//     const response = await instance.get("/api/kakao/callback", credentials);
-
-//     if (response.data.isSuccess) {
-//       alert(response.data.message);
-//       return response.data.result;
-//     }
-//   } catch (error) {
-//     console.error("카카오 로그인 오류:", error);
-//     throw error;
-//   }
-// };
-
-export const getUserInfo = async (accessToken) => {
-  try {
-    const response = await axios.get("https://kapi.kakao.com/v2/user/me", {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-    });
-
-    // 응답에서 사용자 정보 확인
-    const userInfo = response.data;
-
-    // 액세스 토큰이 포함되어 있는지 여부 확인
-    const userAccessToken = userInfo.kakao_account?.access_token;
-
-    if (userAccessToken) {
-      // 액세스 토큰이 존재하면 로그인이 성공한 것으로 간주
-      console.log("사용자가 로그인되어 있습니다.");
-      alert(response.data.message);
-    } else {
-      // 액세스 토큰이 존재하지 않으면 로그인이 실패한 것으로 간주
-      console.log("사용자가 로그인되어 있지 않습니다.");
-    }
-  } catch (error) {
-    console.error("사용자 정보를 가져오는 데 실패했습니다.", error);
-  }
-};
-
-// 회원가입 API
-export const signup = async (userData) => {
-  try {
-    const response = await instance.post("/api/signup", userData);
-
-    if (response.status === 201) {
-      const { code, message } = response.data;
-
-      if (code === 2000) {
-        alert(message);
-        console.log("가입 성공! 환영합니다.");
-      } else {
-        console.error("올바르지 않은 응답 형식 또는 값");
-        throw new Error("회원가입 처리 중 오류가 발생했습니다.");
-      }
-    }
-
-    return response.data;
-  } catch (error) {
-    console.error("회원가입 오류:", error);
-
-    if (error.response && error.response.status === 400) {
-      const { code, message } = error.response.data;
-
-      if (code === 4000) {
-        console.log("Error 4000:", message);
-        alert(message);
-      } else {
-        console.error("올바르지 않은 응답 형식 또는 값");
-        alert("회원가입 처리 중 오류가 발생했습니다.");
-      }
-    }
-
-    throw error;
-  }
-};
-
-// 로그인 API
-export const login = async (credentials) => {
-  try {
-    const response = await instance.post("/api/login", credentials);
-
-    if (response.status === 200) {
-      const { code, message, result } = response.data;
-
-      if (code === 2000 && result) {
-        alert(message);
-      } else {
-        console.error("올바르지 않은 응답 형식 또는 값");
-        throw new Error("로그인 처리 중 오류가 발생했습니다.");
-      }
-    }
-
-    return response.data;
-  } catch (error) {
-    console.error("로그인 오류:", error);
-
-    if (error.response && error.response.status === 401) {
-      const { code, message } = error.response.data;
-
-      if (code === 4000) {
-        alert(message);
-      } else {
-        console.error("올바르지 않은 응답 형식 또는 값");
-        alert("로그인 처리 중 오류가 발생했습니다.");
-      }
-    }
-
-    throw error;
-  }
-};
+import { instance } from "./auth";
 
 // 펀딩 생성페이지 API - post
 export const fundingCreate = async (fundingData) => {
@@ -152,8 +28,13 @@ export const fetchFundingDetail = async (id) => {
     console.log("펀딩 상세페이지 API", response);
     return response.data; // 응답 데이터 반환
   } catch (error) {
-    console.error("펀딩 상세페이지 API 호출 오류:", error); // 오류 로깅
-    throw error; // 에러 다시 throw 또는 다른 적절한 처리를 수행
+    if (error.response) {
+      const statusCode = error.response.status;
+      const errorMessage = error.response.data.message;
+      if (statusCode === 400) {
+        alert(errorMessage);
+      }
+    }
   }
 };
 
@@ -251,19 +132,25 @@ export const completeFundingModify = async (id, data) => {
   }
 };
 
-// 펀딩 결제페이지 API - get
-export const fetchFundingPay = async (id) => {
+// 펀딩 결제페이지 랭킹 API
+export const getFundingDonation = async (id) => {
   try {
     const response = await instance.get(`/api/funding/${id}/donation`);
-    console.log("펀딩 결제페이지-랭킹 API호출 성공:", response);
-    return response.data; // 응답 데이터 반환
+
+    console.log("결제랭킹 API 호출 성공: ", response);
+    return response.data;
   } catch (error) {
-    console.error("펀딩 결제페이지-랭킹 API호출 오류:", error); // 오류 로깅
-    throw error; // 에러 다시 throw 또는 다른 적절한 처리를 수행
+    if (error.response) {
+      const statusCode = error.response.status;
+      const errorMessage = error.response.data.message;
+      if (statusCode === 400) {
+        alert("결제 오류", errorMessage);
+      }
+    }
   }
 };
 
-// 펀딩 결제페이지 API - post
+// 펀딩 결제페이지 결제 준비 API
 export const fundingPayDonationReady = async ({
   id,
   sponsorNickname,
@@ -271,15 +158,24 @@ export const fundingPayDonationReady = async ({
   donation,
 }) => {
   try {
-    console.log("펀딩 결제페이지 id API", id);
+    console.log("결제 ID정보 API: ", id);
     const response = await instance.post(`/api/funding/${id}/donation/ready`, {
       sponsorNickname,
       sponsorComment,
       donation,
     });
-    console.log("펀딩 결제페이지 POST API", response);
-    return response.data; // 응답 데이터 반환
+
+    console.log("결제 준비 API: ", response);
+    return response.data;
   } catch (error) {
-    throw error; // 실패 시 예외 처리
+    if (error.response) {
+      const statusCode = error.response.status;
+      const errorMessage = error.response.data.message;
+      if (statusCode === 400) {
+        alert("펀딩 생성 오류 :", errorMessage);
+      }
+    }
   }
 };
+
+// 펀딩 결제페이지 결제승인 API
