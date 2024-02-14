@@ -8,7 +8,7 @@ import { bootChannelTalk } from "../../redux/channelTalkSlice";
 import { userLogout } from "../../redux/authSlice";
 import Navbar from "../../components/Navbar";
 import { getHomeFundingList } from "../../apis/home";
-import { getKakaoResponse } from "../../../apis/auth";
+import { getKakaoResponse } from "../../apis/auth";
 import {
   MainContainer,
   LeftContainer,
