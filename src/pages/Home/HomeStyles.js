@@ -120,6 +120,21 @@ export const NavbarIconDiv = styled.div`
   cursor: pointer;
 `;
 
+export const LoginIcon = styled.img`
+  width: 25px;
+  height: 25px;
+  margin: 10px;
+`;
+
+export const LogoIcon = styled.img`
+  height: 35px;
+  margin: 10px;
+`;
+
+export const LogoTextIcon = styled.img`
+  height: 25px;
+`;
+
 // 바디 영역
 export const Body = styled.div`
   display: flex;

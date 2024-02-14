@@ -157,7 +157,15 @@ const FundingPay = () => {
                                 <P pl="10px" pb="5px" fs="13px" fw="800">
                                     이름
                                 </P>
-                                <InputTag type="text" placeholder="남길 이름을 입력해주세요" h="40px" />
+                                <InputTag
+                                    type="text"
+                                    placeholder="남길 이름을 입력해주세요"
+                                    value={sponsorDonation.sponsorNickname}
+                                    onChange={(e) => {
+                                        setSponsorDonation({ ...sponsorDonation, sponsorNickname: e.target.value });
+                                    }}
+                                    h="40px"
+                                />
                                 <P pl="10px" fs="10px" fw="800">
                                     주최자에게 이름이 모두 공개되고, 후원자 목록에는 두번째 글자부터 *으로 표시됩니다.
                                     예) 김 * *
