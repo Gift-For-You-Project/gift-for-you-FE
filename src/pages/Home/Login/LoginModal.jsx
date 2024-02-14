@@ -1,6 +1,6 @@
 import React from "react";
 import { IoClose } from "react-icons/io5";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { googleLogin, kakaoLogin } from "../../../redux/authSlice";
 import {
@@ -13,9 +13,9 @@ import {
   KakaoBtn,
   LoginModalBtn,
 } from "./LoginModalStyles";
+import { getUserInfo } from "../../../api/api";
 
 const LoginModal = ({ closeModal }) => {
-  // const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const GoogleLogin = () => {
@@ -23,10 +23,46 @@ const LoginModal = ({ closeModal }) => {
     dispatch(googleLogin());
   };
 
-  const KakaoLogin = () => {
-    window.location.href = process.env.REACT_APP_KAKAO_URL;
-    dispatch(kakaoLogin());
+  const KakaoLogin = async () => {
+    try {
+      window.location.href = process.env.REACT_APP_KAKAO_URL;
+
+      // 현재 URL에서 쿼리 파라미터 추출
+      const location = useLocation();
+      const urlSearchParams = new URLSearchParams(location.search);
+
+      // "code" 파라미터 값 추출
+      const code = urlSearchParams.get("code");
+
+      if (code) {
+        // 코드가 존재할 때 로그인 후 로직을 수행
+        const response = await getUserInfo(code);
+
+        // 응답에서 사용자 정보 확인
+        const userInfo = response.data;
+
+        // 액세스 토큰이 포함되어 있는지 여부 확인
+        const userAccessToken = userInfo.kakao_account?.access_token;
+
+        if (userAccessToken) {
+          // 액세스 토큰이 존재하면 로그인이 성공한 것으로 간주
+          dispatch(kakaoLogin());
+          alert("카카오 로그인 성공");
+        } else {
+          // 액세스 토큰이 존재하지 않으면 로그인이 실패한 것으로 간주
+          console.log("카카오 로그인 실패");
+        }
+      }
+    } catch (error) {
+      console.error("카카오 로그인 오류:", error);
+      throw error;
+    }
   };
+
+  // const KakaoLogin = () => {
+  //   window.location.href = process.env.REACT_APP_KAKAO_URL;
+  //   dispatch(kakaoLogin());
+  // };
 
   // const KakaoLogin = async () => {
   //   try {

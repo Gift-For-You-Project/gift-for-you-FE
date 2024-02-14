@@ -25,6 +25,33 @@ export const instance = axios.create({
 //   }
 // };
 
+export const getUserInfo = async (accessToken) => {
+  try {
+    const response = await axios.get("https://kapi.kakao.com/v2/user/me", {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+
+    // 응답에서 사용자 정보 확인
+    const userInfo = response.data;
+
+    // 액세스 토큰이 포함되어 있는지 여부 확인
+    const userAccessToken = userInfo.kakao_account?.access_token;
+
+    if (userAccessToken) {
+      // 액세스 토큰이 존재하면 로그인이 성공한 것으로 간주
+      console.log("사용자가 로그인되어 있습니다.");
+      alert(response.data.message);
+    } else {
+      // 액세스 토큰이 존재하지 않으면 로그인이 실패한 것으로 간주
+      console.log("사용자가 로그인되어 있지 않습니다.");
+    }
+  } catch (error) {
+    console.error("사용자 정보를 가져오는 데 실패했습니다.", error);
+  }
+};
+
 // 회원가입 API
 export const signup = async (userData) => {
   try {
@@ -237,10 +264,19 @@ export const fetchFundingPay = async (id) => {
 };
 
 // 펀딩 결제페이지 API - post
-export const fundingPayDonationReady = async ( {id, sponsorNickname, sponsorComment, donation} ) => {
+export const fundingPayDonationReady = async ({
+  id,
+  sponsorNickname,
+  sponsorComment,
+  donation,
+}) => {
   try {
     console.log("펀딩 결제페이지 id API", id);
-    const response = await instance.post(`/api/funding/${id}/donation/ready`, {sponsorNickname, sponsorComment, donation}); 
+    const response = await instance.post(`/api/funding/${id}/donation/ready`, {
+      sponsorNickname,
+      sponsorComment,
+      donation,
+    });
     console.log("펀딩 결제페이지 POST API", response);
     return response.data; // 응답 데이터 반환
   } catch (error) {
