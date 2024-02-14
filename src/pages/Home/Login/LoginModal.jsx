@@ -21,7 +21,6 @@ const LoginModal = ({ closeModal }) => {
   const GoogleLogin = () => {
     window.location.href = process.env.REACT_APP_GOOGLE_URL;
     dispatch(googleLogin());
-    navigate("/");
   };
 
   const KakaoLogin = () => {
