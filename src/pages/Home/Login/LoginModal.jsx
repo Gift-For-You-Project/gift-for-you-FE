@@ -1,6 +1,6 @@
 import React from "react";
 import { IoClose } from "react-icons/io5";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { googleLogin, kakaoLogin } from "../../../redux/authSlice";
 import {
@@ -16,18 +16,15 @@ import {
 
 const LoginModal = ({ closeModal }) => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const GoogleLogin = () => {
     window.location.href = process.env.REACT_APP_GOOGLE_URL;
     dispatch(googleLogin());
-    navigate("/");
   };
 
   const KakaoLogin = () => {
     window.location.href = process.env.REACT_APP_KAKAO_URL;
     dispatch(kakaoLogin());
-    navigate("/");
   };
 
   return (
