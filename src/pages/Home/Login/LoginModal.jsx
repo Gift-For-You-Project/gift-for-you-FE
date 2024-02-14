@@ -13,21 +13,32 @@ import {
   KakaoBtn,
   LoginModalBtn,
 } from "./LoginModalStyles";
+import { googleLoginApi } from "../../../apis/auth";
 
 const LoginModal = ({ closeModal }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const GoogleLogin = () => {
-    window.location.href = process.env.REACT_APP_GOOGLE_URL;
-    dispatch(googleLogin());
-    navigate("/fundingcreate");
-  };
+  // const GoogleLogin = () => {
+  //   window.location.href = process.env.REACT_APP_GOOGLE_URL;
+  //   dispatch(googleLogin());
+  //   navigate("/fundingcreate");
+  // };
 
   const KakaoLogin = () => {
     window.location.href = process.env.REACT_APP_KAKAO_URL;
     dispatch(kakaoLogin());
     navigate("/");
+  };
+
+  const GoogleLogin = async () => {
+    try {
+      window.location.href = process.env.REACT_APP_GOOGLE_URL;
+      // 호출할 API 함수
+      await googleLoginApi();
+    } catch (error) {
+      console.error("API 호출 중 에러 발생: ", error);
+    }
   };
 
   return (

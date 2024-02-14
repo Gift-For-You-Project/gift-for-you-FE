@@ -8,6 +8,16 @@ export const instance = axios.create({
   },
 });
 
+export const googleLoginApi = async () => {
+  try {
+    const response = await instance.get("process.env.REACT_APP_GOOGLE_URL");
+    alert(response.data.message);
+    return response.data;
+  } catch (error) {
+    console.error("API 호출 중 에러 발생: ", error);
+  }
+};
+
 // 회원가입 API
 export const signup = async (userData) => {
   try {
