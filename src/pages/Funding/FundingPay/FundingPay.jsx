@@ -121,84 +121,91 @@ const FundingPay = () => {
         </Button>
       </LeftContainer>
 
-      <RightContainer>
-        <Body>
-          <FundingDiv>
-            <SponserMoney>
-              <SponsorImg src="/imgs/junjihyun.jpg" alt="logo" />
-              {/* <SponsorImg src={sponsorDonation.itemImage} alt="logo" /> */}
-              <P pt="10px" fs="16px" fw="800" pb="5px">
-                {sponsorDonation.showName} 님에게
-              </P>
-              <P fs="16px" fw="800" pb="5px">
-                {sponsorDonation.donation}원
-              </P>
-              <P fs="16px" fw="800">
-                후원하기
-              </P>
-            </SponserMoney>
-            <P pt="20px" pb="20px" fs="16px" fw="900">
-              후원자
-            </P>
-            <SponserDiv>
-              <SponserComment mt="10px">
-                <P pl="10px" pb="5px" fs="13px" fw="800">
-                  이름
-                </P>
-                <InputTag
-                  type="text"
-                  placeholder="남길 이름을 입력해주세요"
-                  value={sponsorDonation.sponsorNickname}
-                  onChange={(e) => {
-                    setSponsorDonation({
-                      ...sponsorDonation,
-                      sponsorNickname: e.target.value,
-                    });
-                  }}
-                  h="40px"
-                />
-                <P pl="10px" fs="10px" fw="800">
-                  주최자에게 이름이 모두 공개되고, 후원자 목록에는 두번째
-                  글자부터 *으로 표시됩니다. 예) 김 * *
-                </P>
-              </SponserComment>
-            </SponserDiv>
-            <P pt="10px" pl="10px" pb="5px" fs="13px" fw="800">
-              메시지
-            </P>
-            <InputTag
-              type="text"
-              placeholder="남길 메시지를 입력해주세요"
-              value={sponsorDonation.sponsorComment}
-              onChange={(e) => {
-                setSponsorDonation({
-                  ...sponsorDonation,
-                  sponsorComment: e.target.value,
-                });
-              }}
-              pb="50px"
-              h="100px"
-            />
-            <P pl="10px" fs="10px" fw="800">
-              현재는 테스트 기간으로, 실제 결제가 이루어지지 않습니다. 대신
-              1명이 참여할 때마다 개설자에게 1,000원이 적립됩니다.
-            </P>
-          </FundingDiv>
-          <CheckBox />
-          <TogetherDiv pt="10px" bc="orange">
-            <P pl="140px" fs="14px" fw="800">
-              <br />
-              지금 선물하면 {sponsorDonation.donationRanking}등이에요!
-              <br />
-            </P>
-          </TogetherDiv>
-          <KakaoButton onClick={handleFundingDonationClick}>
-            <KakaoPayLogo src="/imgs/kakaopay.png" alt="image" />
-          </KakaoButton>
-        </Body>
-      </RightContainer>
-    </MainContainer>
-  );
-};
+            <RightContainer>
+                <Body>
+                    <FundingDiv>
+                        <SponserMoney>
+                            <SponsorImg src="/imgs/junjihyun.jpg" alt="logo" />
+                            {/* <SponsorImg src={sponsorDonation.itemImage} alt="logo" /> */}
+                            <P pt="10px" fs="16px" fw="800" pb="5px">
+                                {sponsorDonation.showName} 님에게
+                            </P>
+                            <P fs="16px" fw="800" pb="5px">
+                                {sponsorDonation.donation}원
+                            </P>
+                            <P fs="16px" fw="800">
+                                후원하기
+                            </P>
+                        </SponserMoney>
+                        <P pt="20px" pb="20px" fs="16px" fw="900">
+                            후원자
+                        </P>
+
+                        <SponserDiv>
+                            <SponserComment mt="10px">
+                                <P pl="10px" pb="5px" fs="13px" fw="800">
+                                    이름
+                                </P>
+                                <InputTag
+                                    type="text"
+                                    placeholder="남길 이름을 입력해주세요"
+                                    value={sponsorDonation.sponsorNickname}
+                                    onChange={(e) => {
+                                        setSponsorDonation({ ...sponsorDonation, sponsorNickname: e.target.value });
+                                    }}
+                                    h="40px"
+                                />
+                                <P pl="10px" fs="10px" fw="800">
+                                    주최자에게 이름이 모두 공개되고, 후원자 목록에는 두번째 글자부터 *으로 표시됩니다.
+                                    예) 김 * *
+                                </P>
+                            </SponserComment>
+                        </SponserDiv>
+
+                        {/* <P pt="10px" pl="10px" pb="5px" fs="13px" fw="800">
+                            후원금
+                        </P>
+                        <InputTag type="text" placeholder="남길 이름을 입력해주세요" h="40px" /> */}
+
+                        <P pt="10px" pl="10px" pb="5px" fs="13px" fw="800">
+                            메시지
+                        </P>
+                        <InputTag
+                            type="text"
+                            placeholder="남길 메시지를 입력해주세요"
+                            value={sponsorDonation.sponsorComment}
+                            onChange={(e) => {
+                                setSponsorDonation({ ...sponsorDonation, sponsorComment: e.target.value });
+                            }}
+                            pb="50px"
+                            h="100px"
+                        />
+
+                        <P pl="10px" fs="10px" fw="800">
+                            현재는 테스트 기간으로, 실제 결제가 이루어지지 않습니다. 대신 1명이 참여할 때마다 개설자에게
+                            1,000원이 적립됩니다.
+                        </P>
+                    </FundingDiv>
+
+                    <CheckBox />
+
+                    <TogetherDiv pt="10px" bc="orange">
+                        <P pl="140px" fs="14px" fw="800">
+                            <br />
+                            지금 선물하면 {sponsorDonation.donationRanking}등이에요!
+                            <br />
+                        </P>
+                    </TogetherDiv>
+
+                    <KakaoButton onClick={handleFundingDonationClick}>
+                        <KakaoPayLogo src="/imgs/kakaopay.png" alt="image" />
+                    </KakaoButton>
+
+                    {/* <KakaoPay /> */}
+                </Body>
+            </RightContainer>
+        </MainContainer>
+    );
+}
 
 export default FundingPay;

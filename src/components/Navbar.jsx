@@ -9,6 +9,9 @@ import {
   NavbarIconDiv,
   NavbarBtnDiv,
   NavbarBtn,
+  LoginIcon,
+  LogoIcon,
+  LogoTextIcon,
 } from "../pages/Home/HomeStyles";
 import {
   NotificationContainer,
@@ -114,15 +117,16 @@ const Navbar = ({ isLoggedIn, handleLoginClick, handleLogoutClick }) => {
   ) : (
     <>
       <NavbarBtn onClick={handleLoginClick} fs="13px" fw="600">
-        로그인
+      <LoginIcon src="/imgs/Icon/user.png" alt="icon" />
       </NavbarBtn>
     </>
   );
 
   return (
     <>
-      <NavbarBtn onClick={handleNavbarIconClick} fs="20px" fw="600" pl="15px">
-        🥧 Giftipie
+      <NavbarBtn onClick={handleNavbarIconClick} fs="20px" fw="600" pl="15px" color="white">
+      <LogoIcon src="/imgs/Icon/Frame 7413.png"/>
+      <LogoTextIcon src="/imgs/Logo/Giftipie.png"/>
       </NavbarBtn>
       <NavbarBtnDiv>{navbarContents}</NavbarBtnDiv>
     </>
@@ -130,3 +134,4 @@ const Navbar = ({ isLoggedIn, handleLoginClick, handleLogoutClick }) => {
 };
 
 export default Navbar;
+

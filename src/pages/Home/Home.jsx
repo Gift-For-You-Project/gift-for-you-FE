@@ -166,7 +166,7 @@ const Home = () => {
           </MainTitle>
           <MainDiv>
             <MainFunding>
-              <MainImg src="/imgs/airpods.jpeg" alt="airpods" />
+              <MainImg src="/imgs/Product/airpods.jpeg" alt="airpods" />
               <ProgressDivBar>
                 <ProgressDiv width={(36 / 100) * 100} />
               </ProgressDivBar>
@@ -240,7 +240,7 @@ const Home = () => {
             <TogetherGrids>
               <TogetherGrid>
                 <TogetherImg
-                  src="/imgs/participation.png"
+                  src="/imgs/Icon/participation.png"
                   alt="participation"
                 />
                 <P fs="14px" fw="400">
@@ -253,7 +253,7 @@ const Home = () => {
                 </P>
               </TogetherGrid>
               <TogetherGrid>
-                <TogetherImg src="/imgs/receive.png" alt="receive" />
+                <TogetherImg src="/imgs/Icon/receive.png" alt="receive" />
                 <P fs="14px" fw="400">
                   &nbsp; 선물을
                   <br />
@@ -264,7 +264,7 @@ const Home = () => {
                 </P>
               </TogetherGrid>
               <TogetherGrid>
-                <TogetherImg src="/imgs/amount.png" alt="amount" />
+                <TogetherImg src="/imgs/Icon/amount.png" alt="amount" />
                 <P fs="14px" fw="400">
                   &nbsp;&nbsp;&nbsp; 모인
                   <br /> 펀딩 금액
@@ -287,28 +287,28 @@ const Home = () => {
                 <ProductBlank />
               </ProductGrid>
               <ProductGridComponent
-                imgSrc="/imgs/iphone15pro.jpeg"
+                imgSrc="/imgs/Product/iphone15pro.jpeg"
                 altText="iphone"
                 brand="Apple"
                 itemName="아이폰 15 Pro 256BG 자급제"
                 price="1,550,000원"
               />
               <ProductGridComponent
-                imgSrc="/imgs/iphone15.jpeg"
+                imgSrc="/imgs/Product/iphone15.jpeg"
                 altText="iphone"
                 brand="Apple"
                 itemName="아이폰 15 256BG 자급제"
                 price="1,250,000원"
               />
               <ProductGridComponent
-                imgSrc="/imgs/iphone14.jpeg"
+                imgSrc="/imgs/Product/iphone14.jpeg"
                 altText="iphone"
                 brand="Apple"
                 itemName="아이폰 14 256BG 자급제"
                 price="1,090,000원"
               />
               <ProductGridComponent
-                imgSrc="/imgs/iphonese.jpeg"
+                imgSrc="/imgs/Product/iphonese.jpeg"
                 altText="iphone"
                 brand="Apple"
                 itemName="아이폰SE 256BG 자급제"
