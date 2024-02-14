@@ -93,9 +93,10 @@ const FundingPay = () => {
       console.log("결제 준비 성공: ", response);
       window.location.href = response.result.next_redirect_pc_url;
       // 결제 승인 API
-      await getDonationApproval();
+      const pgToken = "";
+      if (pgToken) await getDonationApproval();
       console.log("결제 승인 성공: ", response);
-      navigate("/fundingdetail");
+      navigate("/fundingdetail/:id");
     } catch (error) {
       console.error("결제 오류:", error);
     }
