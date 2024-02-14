@@ -178,4 +178,23 @@ export const fundingPayDonationReady = async ({
   }
 };
 
-// 펀딩 결제페이지 결제승인 API
+// 펀딩 결제페이지 결제 승인 API
+export const getDonationApproval = async (pgToken) => {
+  try {
+    const response = await instance.get(
+      `/api/donation/approve?pg_token=${pgToken}`
+    );
+
+    if (response.data.isSuccess) {
+      const { sponsorNickname, sponsorComment, donationRanking } =
+        response.data.result;
+      console.log("후원 결제승인 성공:", {
+        sponsorNickname,
+        sponsorComment,
+        donationRanking,
+      });
+    }
+  } catch (error) {
+    console.error("후원 결제승인 오류:", error.message);
+  }
+};
