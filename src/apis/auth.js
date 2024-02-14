@@ -8,6 +8,19 @@ export const instance = axios.create({
   },
 });
 
+// 구글 로그인 API
+// export const getGoogleResponse = async () => {
+//   try {
+//     const response = await instance.get("/api/google/response");
+//     if (response.data.isSuccess) {
+//       console.log(response.data.message);
+//     }
+//   } catch (error) {
+//     console.error("API 호출 중 에러 발생: ", error);
+//     return null;
+//   }
+// };
+
 // 카카오 로그인 API
 export const getKakaoResponse = async () => {
   try {
