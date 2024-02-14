@@ -1,136 +1,125 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate, useParams, useLocation } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import { useNavigate, useParams, useLocation } from "react-router-dom";
+import CheckBox from "../FundingPay/CheckBox/CheckBox";
 import {
-    MainContainer,
-    LeftContainer,
-    Logo,
-    P,
-    Button,
-    RightContainer,
-    SponserMoney,
-    InputTag,
-    Body,
-    FundingDiv,
-    SponserDiv,
-    SponserComment,
-    SponsorImg,
-    TogetherDiv,
-    KakaoButton,
-    KakaoPayLogo,
-} from './FundingPayStyles';
-import CheckBox from '../FundingPay/CheckBox/CheckBox';
-// import KakaoPay from './KakaoPay/KakaoPay';
-import { fetchFundingPay } from '../../../api/api'; // 펀딩 상세 정보를 가져오는 API 함수 import
-import { fundingPayDonationReady } from '../../../api/api'; // 펀딩 상세 정보를 가져오는 API 함수 import
+  fundingPayDonationReady,
+  getFundingDonation,
+} from "../../../apis/funding";
+import {
+  MainContainer,
+  LeftContainer,
+  Logo,
+  P,
+  Button,
+  RightContainer,
+  SponserMoney,
+  InputTag,
+  Body,
+  FundingDiv,
+  SponserDiv,
+  SponserComment,
+  SponsorImg,
+  TogetherDiv,
+  KakaoButton,
+  KakaoPayLogo,
+} from "./FundingPayStyles";
 
 const FundingPay = () => {
-    const navigate = useNavigate();
-    const { id } = useParams(); // URL 매개변수(id)를 가져옴
-    const location = useLocation();
+  const navigate = useNavigate();
+  const { id } = useParams(); // URL 매개변수(id)를 가져옴
+  const location = useLocation();
 
-    // FundingPay 컴포넌트의 showName 상태 변수 설정 부분 추가
-    const [sponsorDonation, setSponsorDonation] = useState({
-        showName: '',
-        donation: '',
-        donationRanking: '',
-        sponsorNickname: '',
-        sponsorComment: '',
-    });
+  // 후원자 정보 및 펀딩 정보를 관리할 상태 변수들을 설정
+  const [sponsorDonation, setSponsorDonation] = useState({
+    showName: "",
+    donation: "",
+    donationRanking: "",
+    sponsorNickname: "",
+    sponsorComment: "",
+  });
 
-    //기존의 useEffect를 사용하여 donation 값을 설정하는 부분
-    useEffect(() => {
+  // useEffect를 이용하여 URL 매개변수에서 donation, showName 값을 가져오는 부분 합침
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        if (!id) {
+          return;
+        }
         const params = new URLSearchParams(location.search);
-        const donation = params.get('donation');
-        if (donation) {
-            setSponsorDonation((prevDonation) => ({ ...prevDonation, donation: parseInt(donation) }));
-            console.log('setSponsorDonation:', setSponsorDonation);
-        }
-    }, [location.search, id]);
+        const donation = params.get("donation");
+        const showName = params.get("showName");
 
-    // 수정한 useEffect를 사용하여 showName 값을 설정하는 부분
-    useEffect(() => {
-        const params = new URLSearchParams(location.search);
-        console.log('params:', params);
-        const showName = params.get('showName');
-        const donation = params.get('donation');
-        console.log('showName:', showName);
-        console.log('donation:', donation);
-        if (showName) {
-            setSponsorDonation((prevState) => ({ ...prevState, showName }));
-        }
-    }, [location.search]);
+        // 특정 펀딩의 상세 정보를 가져오기
+        const response = await getFundingDonation(id);
 
-    useEffect(() => {
-        // API를 호출하여 펀딩 상세 정보를 가져오는 함수 정의
-        const fetchData = async () => {
-            try {
-                if (!id) {
-                    // 유효한 id가 없으면 데이터를 요청하지 않음
-                    return;
-                }
-                // 펀딩 ID를 설정하여 특정 펀딩의 상세 정보 가져오기
-                // const fundingid = 1; // 예: 펀딩 ID가 1인 경우
-                const data = await fetchFundingPay(id);
-                setSponsorDonation((prevState) => ({ ...prevState, donationRanking: data.result.donationRanking }));
-                console.log('펀딩 랭킹 가져오기:', data);
-            } catch (error) {
-                if (error.response) {
-                    const statusCode = error.response.status;
-                    const errorMessage = error.response.data.message;
-                    if (statusCode === 400) {
-                        alert('결제 오류', errorMessage);
-                    }
-                }
-            }
-        };
-        // 컴포넌트가 마운트될 때 API 호출 함수 실행
-        fetchData();
-    }, [id]); // 빈 배열을 전달하여 한 번만 실행하도록 설정
+        // 후원자 정보 업데이트
+        setSponsorDonation((prev) => ({
+          ...prev,
+          donation: donation ? parseInt(donation) : "",
+          showName: showName || prev.showName,
+          donationRanking: response.result.donationRanking,
+        }));
 
-    const handleFundingDonationClick = async () => {
-        try {
-            if (sponsorDonation.sponsorNickname === '' || sponsorDonation.sponsorComment === '') {
-                console.log('+++:', sponsorDonation);
-                // alert('내용을 입력해주세요');
-                return;
-            }
-            // 펀딩 생성 API 호출 및 데이터 전송
-            const response = await fundingPayDonationReady({
-                id,
-                sponsorNickname: sponsorDonation.sponsorNickname,
-                sponsorComment: sponsorDonation.sponsorComment,
-                donation: sponsorDonation.donation,
-            });
-            console.log('펀딩 생성 성공:', response);
-            navigate(`/fundingdetail/${id}`);
-        } catch (error) {
-            if (error.response) {
-                const statusCode = error.response.status;
-                const errorMessage = error.response.data.message;
-                if (statusCode === 400) {
-                    alert('펀딩 생성 실패 :', errorMessage);
-                }
-            }
-        }
+        console.log("펀딩 랭킹 가져오기:", response);
+      } catch (error) {
+        console.error("결제 오류:", error);
+      }
     };
 
-    return (
-        <MainContainer>
-            <LeftContainer>
-                <Logo>😉 Giftipie</Logo>
-                <P pt="25px" fs="16px" fw="800" pb="5px">
-                    기프티파이에서
-                </P>
-                <P fs="16px" fw="800" pb="5px">
-                    정말 원하는 선물을
-                </P>
-                <P fs="16px" fw="800">
-                    주고 받아요
-                </P>
-                <Button onClick={() => navigate('/')} mt="20px" w="180px" h="50px" fs="16px" color="white" bc="orange">
-                    펀딩 시작하기
-                </Button>
-            </LeftContainer>
+    // 컴포넌트가 마운트될 때와 id가 변경될 때 API 호출 함수 실행
+    fetchData();
+  }, [id, location.search]);
+
+  // 펀딩 생성 API 호출 함수
+  const handleFundingDonationClick = async () => {
+    try {
+      if (
+        sponsorDonation.sponsorNickname === "" ||
+        sponsorDonation.sponsorComment === ""
+      ) {
+        console.log("후원자 정보 :", sponsorDonation);
+        // alert('내용을 입력해주세요');
+        return;
+      }
+      // 펀딩 생성 API 호출 및 데이터 전송
+      const response = await fundingPayDonationReady({
+        id,
+        sponsorNickname: sponsorDonation.sponsorNickname,
+        sponsorComment: sponsorDonation.sponsorComment,
+        donation: sponsorDonation.donation,
+      });
+      console.log("펀딩 생성 성공:", response);
+      // navigate(`/fundingdetail/${id}`);
+    } catch (error) {
+      console.error("펀딩 생성 오류:", error);
+    }
+  };
+
+  return (
+    <MainContainer>
+      <LeftContainer>
+        <Logo>😉 Giftipie</Logo>
+        <P pt="25px" fs="16px" fw="800" pb="5px">
+          기프티파이에서
+        </P>
+        <P fs="16px" fw="800" pb="5px">
+          정말 원하는 선물을
+        </P>
+        <P fs="16px" fw="800">
+          주고 받아요
+        </P>
+        <Button
+          onClick={() => navigate("/")}
+          mt="20px"
+          w="180px"
+          h="50px"
+          fs="16px"
+          color="white"
+          bc="orange"
+        >
+          펀딩 시작하기
+        </Button>
+      </LeftContainer>
 
             <RightContainer>
                 <Body>
@@ -217,6 +206,6 @@ const FundingPay = () => {
             </RightContainer>
         </MainContainer>
     );
-};
+}
 
 export default FundingPay;

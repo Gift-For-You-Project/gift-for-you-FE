@@ -1,9 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { IoClose } from "react-icons/io5";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { googleLogin, kakaoLogin } from "../../../redux/authSlice";
-import { getGoogleLogin } from "../../../api/api";
 import {
   ModalContainer,
   Background,
@@ -14,12 +13,13 @@ import {
   KakaoBtn,
   LoginModalBtn,
 } from "./LoginModalStyles";
+import { getKakaoResponse } from "../../../apis/auth";
 
 const LoginModal = ({ closeModal }) => {
-  // const navigate = useNavigate();
   const dispatch = useDispatch();
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
 
-  const GoogleLogin = async () => {
+  const GoogleLogin = () => {
     window.location.href = process.env.REACT_APP_GOOGLE_URL;
     dispatch(googleLogin());
   };
@@ -29,21 +29,13 @@ const LoginModal = ({ closeModal }) => {
     dispatch(kakaoLogin());
   };
 
-  // const KakaoLogin = async () => {
-  //   try {
-  //     window.location.href = process.env.REACT_APP_KAKAO_URL;
+  useEffect(() => {
+    const kakaoResponseData = async () => {
+      await getKakaoResponse();
+    };
 
-  //     const response = await getKakaoLogin();
-
-  //     if (response.data.isSuccess) {
-  //       dispatch(kakaoLogin());
-  //       alert(response.data.message);
-  //     }
-  //   } catch (error) {
-  //     console.error("카카오 로그인 오류:", error);
-  //     throw error;
-  //   }
-  // };
+    kakaoResponseData();
+  }, [isLoggedIn]);
 
   return (
     <>

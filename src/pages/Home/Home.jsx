@@ -7,7 +7,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { bootChannelTalk } from "../../redux/channelTalkSlice";
 import { userLogout } from "../../redux/authSlice";
 import Navbar from "../../components/Navbar";
-import { getHomeFundingList } from "../../api/homeApi";
+import { getHomeFundingList } from "../../apis/home";
+// import { getKakaoResponse } from "../../apis/auth";
 import {
   MainContainer,
   LeftContainer,
@@ -98,6 +99,14 @@ const Home = () => {
     homeFundingListData();
   }, [dispatch]);
 
+  // useEffect(() => {
+  //   const kakaoResponseData = async () => {
+  //     await getKakaoResponse();
+  //   };
+
+  //   kakaoResponseData();
+  // }, [isLoggedIn]);
+
   const ProductGridComponent = ({
     imgSrc,
     altText,
@@ -123,6 +132,9 @@ const Home = () => {
     <MainContainer>
       <LeftContainer>
         <Logo>🥧 Giftipie</Logo>
+        <P pt="100px" fs="16px" fw="800" pb="5px">
+          Vercel 배포 환경 테스트
+        </P>
         <P pt="25px" fs="16px" fw="800" pb="5px">
           기프티파이에서
         </P>

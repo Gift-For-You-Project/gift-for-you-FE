@@ -4,12 +4,12 @@ import { useParams } from "react-router-dom"; // React Router에서 URL 매개�
 import Navbar from "../../../components/Navbar"; // 추가된 코드
 import { useDispatch, useSelector } from "react-redux"; // 추가된 코드
 import { userLogout } from "../../../redux/authSlice"; // 추가된 코드
-import { updateFundingModify } from "../../../api/api"; // 펀딩 수정 API를 호출하기 위한 함수 import
-import { deleteFundingModify } from "../../../api/api"; // 펀딩 수정 API를 호출하기 위한 함수 import
-import { FundingModifyGet } from "../../../api/api"; // 펀딩 상세 정보를 가져오기 위한 함수 import
-import { completeFundingModify } from "../../../api/api"; // 펀딩 상세 정보를 가져오기 위한 함수 import
-
-// import ModifyModal from './ModifyModal'; // 이미지 선택 모달 컴포넌트 import
+import {
+  updateFundingModify,
+  deleteFundingModify,
+  FundingModifyGet,
+  completeFundingModify,
+} from "../../../apis/funding"; // 펀딩 수정 API, 펀딩 상세 정보 API
 import {
   MainContainer,
   LeftContainer,
