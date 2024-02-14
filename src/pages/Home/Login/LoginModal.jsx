@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { IoClose } from "react-icons/io5";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { googleLogin, kakaoLogin } from "../../../redux/authSlice";
 import {
   ModalContainer,
@@ -13,9 +13,11 @@ import {
   KakaoBtn,
   LoginModalBtn,
 } from "./LoginModalStyles";
+import { getKakaoResponse } from "../../../apis/auth";
 
 const LoginModal = ({ closeModal }) => {
   const dispatch = useDispatch();
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
 
   const GoogleLogin = () => {
     window.location.href = process.env.REACT_APP_GOOGLE_URL;
@@ -26,6 +28,14 @@ const LoginModal = ({ closeModal }) => {
     window.location.href = process.env.REACT_APP_KAKAO_URL;
     dispatch(kakaoLogin());
   };
+
+  useEffect(() => {
+    const kakaoResponseData = async () => {
+      await getKakaoResponse();
+    };
+
+    kakaoResponseData();
+  }, [isLoggedIn]);
 
   return (
     <>
