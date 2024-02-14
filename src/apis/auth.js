@@ -27,6 +27,7 @@ export const getKakaoResponse = async () => {
     const response = await instance.get("/api/kakao/response");
     if (response.status === 302) {
       console.log(response.data.message);
+      alert(response.data.message);
     }
   } catch (error) {
     console.error("API 호출 중 에러 발생: ", error);

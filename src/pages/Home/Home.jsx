@@ -101,8 +101,7 @@ const Home = () => {
 
   useEffect(() => {
     const kakaoResponseData = async () => {
-      const response = await getKakaoResponse();
-      alert(response.message);
+      await getKakaoResponse();
     };
 
     kakaoResponseData();
