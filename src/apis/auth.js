@@ -25,7 +25,7 @@ export const instance = axios.create({
 export const getKakaoResponse = async () => {
   try {
     const response = await instance.get("/api/kakao/response");
-    if (response.data.isSuccess) {
+    if (response.status === 302) {
       console.log(response.data.message);
     }
   } catch (error) {
