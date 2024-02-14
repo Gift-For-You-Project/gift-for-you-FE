@@ -70,7 +70,6 @@ const FundingPay = () => {
     fetchData();
   }, [id, location.search]);
 
-  // 펀딩 생성 API 호출 함수
   const handleFundingDonationClick = async () => {
     try {
       if (
@@ -81,7 +80,7 @@ const FundingPay = () => {
         // alert('내용을 입력해주세요');
         return;
       }
-      // 펀딩 생성 API 호출 및 데이터 전송
+      // 펀딩 결제페이지 결제 준비 API
       const response = await fundingPayDonationReady({
         id,
         sponsorNickname: sponsorDonation.sponsorNickname,
@@ -89,7 +88,7 @@ const FundingPay = () => {
         donation: sponsorDonation.donation,
       });
       console.log("펀딩 생성 성공:", response);
-      // navigate(`/fundingdetail/${id}`);
+      window.location.href = response.result.next_redirect_pc_url;
     } catch (error) {
       console.error("펀딩 생성 오류:", error);
     }

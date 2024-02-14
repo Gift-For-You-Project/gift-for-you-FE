@@ -22,18 +22,18 @@ export const instance = axios.create({
 // };
 
 // 카카오 로그인 API
-export const getKakaoResponse = async () => {
-  try {
-    const response = await instance.get("/api/kakao/callback");
-    if (response.status === 302) {
-      console.log(response.data.message);
-      alert(response.data.message);
-    }
-  } catch (error) {
-    console.error("API 호출 중 에러 발생: ", error);
-    return null;
-  }
-};
+// export const getKakaoResponse = async () => {
+//   try {
+//     const response = await instance.get("/api/kakao/callback");
+//     if (response.status === 302) {
+//       console.log(response.data.message);
+//       alert(response.data.message);
+//     }
+//   } catch (error) {
+//     console.error("API 호출 중 에러 발생: ", error);
+//     return null;
+//   }
+// };
 
 // 회원가입 API
 export const signup = async (userData) => {
