@@ -98,12 +98,6 @@ const Home = () => {
     homeFundingListData();
   }, [dispatch]);
 
-  useEffect(() => {
-    if (isLoggedIn) {
-      alert("구글 로그인이 완료되었습니다.");
-    }
-  }, [isLoggedIn]);
-
   const ProductGridComponent = ({
     imgSrc,
     altText,
