@@ -19,11 +19,11 @@ const LoginModal = ({ closeModal }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  // const GoogleLogin = () => {
-  //   window.location.href = process.env.REACT_APP_GOOGLE_URL;
-  //   dispatch(googleLogin());
-  //   navigate("/fundingcreate");
-  // };
+  const GoogleLogin = () => {
+    window.location.href = process.env.REACT_APP_GOOGLE_URL;
+    dispatch(googleLogin());
+    navigate("/fundingcreate");
+  };
 
   const KakaoLogin = () => {
     window.location.href = process.env.REACT_APP_KAKAO_URL;
@@ -31,9 +31,8 @@ const LoginModal = ({ closeModal }) => {
     navigate("/");
   };
 
-  const GoogleLogin = async () => {
+  const GoogleLoginApi = async () => {
     try {
-      window.location.href = process.env.REACT_APP_GOOGLE_URL;
       // 호출할 API 함수
       await googleLoginApi();
     } catch (error) {
@@ -69,12 +68,14 @@ const LoginModal = ({ closeModal }) => {
           </LoginModalBtn>
         </Link>
         <GoogleBtn onClick={GoogleLogin}>
-          <LoginModalImg
-            src="/imgs/Login/google.png"
-            alt="google"
-            w="65%"
-            mt="10px"
-          />
+          <button onClick={GoogleLoginApi}>
+            <LoginModalImg
+              src="/imgs/Login/google.png"
+              alt="google"
+              w="65%"
+              mt="10px"
+            />
+          </button>
         </GoogleBtn>
         <KakaoBtn onClick={KakaoLogin}>
           <LoginModalImg
