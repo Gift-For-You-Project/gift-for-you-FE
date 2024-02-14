@@ -27,7 +27,7 @@ const LoginModal = ({ closeModal }) => {
   const KakaoLogin = () => {
     window.location.href = process.env.REACT_APP_KAKAO_URL;
     dispatch(kakaoLogin());
-    navigate("/");
+    // navigate("/");
   };
 
   return (
