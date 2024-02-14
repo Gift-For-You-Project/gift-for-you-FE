@@ -8,13 +8,16 @@ export const instance = axios.create({
   },
 });
 
-export const googleLoginApi = async () => {
+// 카카오 로그인 API
+export const getKakaoResponse = async () => {
   try {
-    const response = await instance.get("process.env.REACT_APP_GOOGLE_URL");
-    alert(response.data.message);
-    return response.data;
+    const response = await instance.get("/api/kakao/response");
+    if (response.data.isSuccess) {
+      console.log(response.data.message);
+    }
   } catch (error) {
     console.error("API 호출 중 에러 발생: ", error);
+    return null;
   }
 };
 

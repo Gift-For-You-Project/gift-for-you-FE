@@ -8,6 +8,7 @@ import { bootChannelTalk } from "../../redux/channelTalkSlice";
 import { userLogout } from "../../redux/authSlice";
 import Navbar from "../../components/Navbar";
 import { getHomeFundingList } from "../../apis/home";
+import { getKakaoResponse } from "../../../apis/auth";
 import {
   MainContainer,
   LeftContainer,
@@ -97,6 +98,16 @@ const Home = () => {
     // myFundingData();
     homeFundingListData();
   }, [dispatch]);
+
+  useEffect(() => {
+    const kakaoResponseData = async () => {
+      const response = await getKakaoResponse();
+
+      if (response) alert(response.message);
+    };
+
+    kakaoResponseData();
+  }, [isLoggedIn]);
 
   const ProductGridComponent = ({
     imgSrc,

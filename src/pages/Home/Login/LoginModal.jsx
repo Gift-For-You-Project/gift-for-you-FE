@@ -13,7 +13,6 @@ import {
   KakaoBtn,
   LoginModalBtn,
 } from "./LoginModalStyles";
-import { googleLoginApi } from "../../../apis/auth";
 
 const LoginModal = ({ closeModal }) => {
   const dispatch = useDispatch();
@@ -29,15 +28,6 @@ const LoginModal = ({ closeModal }) => {
     window.location.href = process.env.REACT_APP_KAKAO_URL;
     dispatch(kakaoLogin());
     navigate("/");
-  };
-
-  const GoogleLoginApi = async () => {
-    try {
-      // 호출할 API 함수
-      await googleLoginApi();
-    } catch (error) {
-      console.error("API 호출 중 에러 발생: ", error);
-    }
   };
 
   return (
@@ -68,14 +58,12 @@ const LoginModal = ({ closeModal }) => {
           </LoginModalBtn>
         </Link>
         <GoogleBtn onClick={GoogleLogin}>
-          <button onClick={GoogleLoginApi}>
-            <LoginModalImg
-              src="/imgs/Login/google.png"
-              alt="google"
-              w="65%"
-              mt="10px"
-            />
-          </button>
+          <LoginModalImg
+            src="/imgs/Login/google.png"
+            alt="google"
+            w="65%"
+            mt="10px"
+          />
         </GoogleBtn>
         <KakaoBtn onClick={KakaoLogin}>
           <LoginModalImg
