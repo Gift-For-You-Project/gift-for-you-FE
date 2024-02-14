@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { bootChannelTalk } from "../../redux/channelTalkSlice";
 import { userLogout } from "../../redux/authSlice";
 import Navbar from "../../components/Navbar";
-import { getHomeFundingList } from "../../api/homeApi";
+import { getHomeFundingList } from "../../apis/home";
 import {
   MainContainer,
   LeftContainer,

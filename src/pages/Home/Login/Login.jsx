@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { FaAngleLeft } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 import InputField from "../../../components/LoginInput";
-import { login } from "../../../api/api";
+import { login } from "../../../apis/auth";
 import { useDispatch } from "react-redux";
 import { userLogin } from "../../../redux/authSlice";
 import {

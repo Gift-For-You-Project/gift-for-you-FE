@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useParams } from 'react-router-dom';
-import { fetchSponsorDetail } from '../../../../api/api'; // 펀딩 상세 정보를 가져오는 API 함수 import
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import { fetchSponsorDetail } from "../../../../apis/funding"; // 펀딩 상세 정보를 가져오는 API 함수 import
 import {
   MainContainer,
   LeftContainer,
@@ -20,9 +20,9 @@ import {
 } from "./SponsorStyles";
 
 const Sponsor = () => {
-    const navigate = useNavigate();
-    const { fundingId } = useParams(); // URL 매개변수(id)를 가져옴
-  
+  const navigate = useNavigate();
+  const { fundingId } = useParams(); // URL 매개변수(id)를 가져옴
+
   // 펀딩 상세 정보를 담는 상태 변수 초기화
   const [sponsorData, setSponsorData] = useState({
     // 초기 상태를 명세서에 따라 설정
@@ -31,28 +31,28 @@ const Sponsor = () => {
     content: "",
     showName: "",
   });
-  
-    useEffect(() => {
-        // API를 호출하여 펀딩 상세 정보를 가져오는 함수 정의
-        const fetchData = async () => {
-            try {
-                if (!fundingId) {
-                    // 유효한 id가 없으면 데이터를 요청하지 않음
-                    return;
-                }
-                // 펀딩 ID를 설정하여 특정 펀딩의 상세 정보 가져오기
-                // const fundingId = 1; // 예: 펀딩 ID가 1인 경우
-                const data = await fetchSponsorDetail(fundingId);
-                setSponsorData(data); // 가져온 데이터를 상태 변수에 설정
-            } catch (error) {
-                // API 호출 실패 시 에러 처리
-                console.error('API 호출 오류:', error);
-            }
-        };
 
-        // 컴포넌트가 마운트될 때 API 호출 함수 실행
-        fetchData();
-    }, [fundingId]); // 빈 배열을 전달하여 한 번만 실행하도록 설정
+  useEffect(() => {
+    // API를 호출하여 펀딩 상세 정보를 가져오는 함수 정의
+    const fetchData = async () => {
+      try {
+        if (!fundingId) {
+          // 유효한 id가 없으면 데이터를 요청하지 않음
+          return;
+        }
+        // 펀딩 ID를 설정하여 특정 펀딩의 상세 정보 가져오기
+        // const fundingId = 1; // 예: 펀딩 ID가 1인 경우
+        const data = await fetchSponsorDetail(fundingId);
+        setSponsorData(data); // 가져온 데이터를 상태 변수에 설정
+      } catch (error) {
+        // API 호출 실패 시 에러 처리
+        console.error("API 호출 오류:", error);
+      }
+    };
+
+    // 컴포넌트가 마운트될 때 API 호출 함수 실행
+    fetchData();
+  }, [fundingId]); // 빈 배열을 전달하여 한 번만 실행하도록 설정
 
   return (
     <MainContainer>
@@ -79,20 +79,25 @@ const Sponsor = () => {
           펀딩 시작하기
         </Button>
       </LeftContainer>
-            <RightContainer>
-                <Navbar>
-                    <NavbarBtn onClick={() => navigate(`/fundingdetail/${fundingId}`)} fs="15px" fw="800" pl="15px">
-                        😉 펀딩 상세페이지로 이동
-                    </NavbarBtn>
-                    <NavbarBtnDiv pr="15px">
-                        <NavbarBtn fs="13px" fw="600">
-                            문의
-                        </NavbarBtn>
-                        <NavbarBtn fs="13px" fw="600">
-                            로그인/회원가입
-                        </NavbarBtn>
-                    </NavbarBtnDiv>
-                </Navbar>
+      <RightContainer>
+        <Navbar>
+          <NavbarBtn
+            onClick={() => navigate(`/fundingdetail/${fundingId}`)}
+            fs="15px"
+            fw="800"
+            pl="15px"
+          >
+            😉 펀딩 상세페이지로 이동
+          </NavbarBtn>
+          <NavbarBtnDiv pr="15px">
+            <NavbarBtn fs="13px" fw="600">
+              문의
+            </NavbarBtn>
+            <NavbarBtn fs="13px" fw="600">
+              로그인/회원가입
+            </NavbarBtn>
+          </NavbarBtnDiv>
+        </Navbar>
 
         <Body>
           <FundingDiv>

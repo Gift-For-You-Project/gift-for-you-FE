@@ -38,46 +38,68 @@ const FundingPay = () => {
     sponsorComment: "",
   });
 
-  // useEffect를 이용하여 URL 매개변수에서 donation, showName 값을 가져오는 부분 합침
+  // URL 매개변수에서 donation 값을 가져와 설정하는 useEffect
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const donation = params.get("donation");
+    if (donation) {
+      setSponsorDonation((prevDonation) => ({
+        ...prevDonation,
+        donation: parseInt(donation),
+      }));
+      console.log("setSponsorDonation:", setSponsorDonation);
+    }
+  }, [location.search, id]);
+
+  // URL 매개변수에서 showName 값을 가져와 설정하는 useEffect
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    console.log("params:", params);
+    const showName = params.get("showName");
+    const donation = params.get("donation");
+    console.log("showName:", showName);
+    console.log("donation:", donation);
+    if (showName) {
+      setSponsorDonation((prevState) => ({ ...prevState, showName }));
+    }
+  }, [location.search]);
+
+  // 특정 펀딩의 상세 정보를 가져오는 useEffect
   useEffect(() => {
     const fetchData = async () => {
       try {
         if (!id) {
           return;
         }
-        const params = new URLSearchParams(location.search);
-        const donation = params.get("donation");
-        const showName = params.get("showName");
-
-        // 특정 펀딩의 상세 정보를 가져오기
-        const response = await getFundingDonation(id);
-
-        // 후원자 정보 업데이트
-        setSponsorDonation((prev) => ({
-          ...prev,
-          donation: donation ? parseInt(donation) : "",
-          showName: showName || prev.showName,
-          donationRanking: response.result.donationRanking,
+        // 펀딩 ID를 설정하여 특정 펀딩의 상세 정보 가져오기
+        // const fundingid = 1; // 예: 펀딩 ID가 1인 경우
+        const data = await getFundingDonation(id);
+        setSponsorDonation((prevState) => ({
+          ...prevState,
+          donationRanking: data.result.donationRanking,
         }));
-
-        console.log("펀딩 랭킹 가져오기:", response);
+        console.log("펀딩 랭킹 가져오기:", data);
       } catch (error) {
-        console.error("결제 오류:", error);
+        if (error.response) {
+          const statusCode = error.response.status;
+          const errorMessage = error.response.data.message;
+          if (statusCode === 400) {
+            alert("결제 오류", errorMessage);
+          }
+        }
       }
     };
-
-    // 컴포넌트가 마운트될 때와 id가 변경될 때 API 호출 함수 실행
+    // 컴포넌트가 마운트될 때 API 호출 함수 실행
     fetchData();
-  }, [id, location.search]);
+  }, [id]); // 빈 배열을 전달하여 한 번만 실행하도록 설정
 
-  // 펀딩 생성 API 호출 함수
   const handleFundingDonationClick = async () => {
     try {
       if (
         sponsorDonation.sponsorNickname === "" ||
         sponsorDonation.sponsorComment === ""
       ) {
-        console.log("후원자 정보 :", sponsorDonation);
+        console.log("+++:", sponsorDonation);
         // alert('내용을 입력해주세요');
         return;
       }
@@ -89,9 +111,15 @@ const FundingPay = () => {
         donation: sponsorDonation.donation,
       });
       console.log("펀딩 생성 성공:", response);
-      // navigate(`/fundingdetail/${id}`);
+      navigate(`/fundingdetail/${id}`);
     } catch (error) {
-      console.error("펀딩 생성 오류:", error);
+      if (error.response) {
+        const statusCode = error.response.status;
+        const errorMessage = error.response.data.message;
+        if (statusCode === 400) {
+          alert("펀딩 생성 실패 :", errorMessage);
+        }
+      }
     }
   };
 
@@ -148,13 +176,6 @@ const FundingPay = () => {
                 <InputTag
                   type="text"
                   placeholder="남길 이름을 입력해주세요"
-                  value={sponsorDonation.sponsorNickname}
-                  onChange={(e) => {
-                    setSponsorDonation({
-                      ...sponsorDonation,
-                      sponsorNickname: e.target.value,
-                    });
-                  }}
                   h="40px"
                 />
                 <P pl="10px" fs="10px" fw="800">
@@ -192,6 +213,7 @@ const FundingPay = () => {
               <br />
             </P>
           </TogetherDiv>
+
           <KakaoButton onClick={handleFundingDonationClick}>
             <KakaoPayLogo src="/imgs/kakaopay.png" alt="image" />
           </KakaoButton>
