@@ -33,7 +33,7 @@ import {
   Progress,
   BetweenDiv,
   TogetherDiv,
-  FloatingButton,
+  FloatingBtn,
 } from "./FundingDetailStyles";
 
 // 펀딩 상세 페이지 컴포넌트
@@ -76,7 +76,6 @@ const FundingDetail = () => {
     donationInput: "직접입력",
   });
 
-  //
   const handledonation5000Change = () => {
     navigate(
       `/fundingpay/${id}?donation=${sponsorDonation.donation5000}&showName=${detailData.showName}`
@@ -180,7 +179,6 @@ const FundingDetail = () => {
             handleLogoutClick={handleLogoutClick}
           />
         </NavbarDiv>
-
         <Body>
           <TitleDiv>
             <P pt="20px" fs="13px" fw="800" color="gray">
@@ -209,11 +207,9 @@ const FundingDetail = () => {
                 {detailData.itemName}
               </P>
             </BetweenDiv>
-
             <ProgressBar>
               <Progress width={(65 / 100) * 100} />
             </ProgressBar>
-
             <BetweenDiv>
               <P fs="20px" fw="900" color="#FF7C7C">
                 {detailData.achievementRate}%
@@ -225,7 +221,6 @@ const FundingDetail = () => {
                 {detailData.targetAmount}원
               </P>
             </BetweenDiv>
-
             <BetweenDiv>
               <P pt="20px" fs="13px" fw="800" color="gray">
                 {detailData.dday}
@@ -239,7 +234,6 @@ const FundingDetail = () => {
             <P pt="20px" pl="23px" pb="20px" fs="16px" fw="900">
               후원자
             </P>
-
             <BetweenDiv>
               <SponsorImg src="/imgs/Character/iu.jpg" alt="image" />
               <SponserComment mt="10px">
@@ -251,7 +245,6 @@ const FundingDetail = () => {
                 </SponsorCommentDiv>
               </SponserComment>
             </BetweenDiv>
-
             <SponserDiv>
               <SponsorImg src="/imgs/Character/songjoongy.jpg" alt="image" />
               <SponserComment mt="10px">
@@ -263,7 +256,6 @@ const FundingDetail = () => {
                 </SponsorCommentDiv>
               </SponserComment>
             </SponserDiv>
-
             <SponserDiv>
               <SponsorImg src="/imgs/Character/junjihyun.jpg" alt="img" />
               <SponserComment mt="10px">
@@ -291,7 +283,6 @@ const FundingDetail = () => {
             <P pt="20px" pl="10px" fs="16px" fw="900">
               펀딩 참여하기
             </P>
-
             <Button
               onClick={handledonation5000Change}
               mt="30px"
@@ -318,7 +309,6 @@ const FundingDetail = () => {
                 </BetweenDiv>
               </SponsorimgDiv>
             </Button>
-
             <Button
               onClick={handledonation10000Change}
               mt="10px"
@@ -345,7 +335,6 @@ const FundingDetail = () => {
                 </BetweenDiv>
               </SponsorimgDiv>
             </Button>
-
             <Button
               onClick={handledonation20000Change}
               mt="10px"
@@ -372,7 +361,6 @@ const FundingDetail = () => {
                 </BetweenDiv>
               </SponsorimgDiv>
             </Button>
-
             <Button
               onClick={handledonation30000Change}
               mt="10px"
@@ -399,7 +387,6 @@ const FundingDetail = () => {
                 </BetweenDiv>
               </SponsorimgDiv>
             </Button>
-
             <Button
               onClick={handledonationAllChange}
               mt="10px"
@@ -416,7 +403,6 @@ const FundingDetail = () => {
                 </P>
               </BetweenDiv>
             </Button>
-
             <Button
               onClick={handledonationInputChange}
               mt="10px"
@@ -434,7 +420,6 @@ const FundingDetail = () => {
               </BetweenDiv>
             </Button>
           </FundingDiv>
-
           <Button
             onClick={() => navigate("/fundingpay")}
             w="100%"
@@ -442,7 +427,7 @@ const FundingDetail = () => {
             color="black"
             fs="20px"
             bc="#FF7C7C"
-            as={FloatingButton} // FloatingButton 스타일을 적용
+            as={FloatingBtn} // FloatingBtn 스타일을 적용
           >
             선물하기
           </Button>
