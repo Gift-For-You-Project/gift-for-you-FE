@@ -96,21 +96,19 @@ const FundingPay = () => {
   };
 
   // 결제 승인 API
-  const fetchData = async () => {
-    try {
-      await getDonationApproval();
-    } catch (error) {
-      console.error("페이지에서 결제 승인 오류:", error);
-    }
-  };
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        await getDonationApproval();
+      } catch (error) {
+        console.error("페이지에서 결제 승인 오류:", error);
+      }
+    };
 
-  if (window.location.href.includes("pgToken=")) {
-    fetchData();
-  } else {
-    console.error(
-      "에러: pgToken이 비어있습니다. 결제 승인이 처리되지 않습니다."
-    );
-  }
+    if (window.location.href.includes("pgToken=")) {
+      fetchData();
+    }
+  }, []);
 
   return (
     <MainContainer>
