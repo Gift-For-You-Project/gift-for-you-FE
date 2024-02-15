@@ -33,7 +33,7 @@ import {
     Progress,
     BetweenDiv,
     TogetherDiv,
-    FloatingButton,
+    FloatingBtn,
 } from './FundingDetailStyles';
 
 // 펀딩 상세 페이지 컴포넌트
@@ -152,14 +152,17 @@ const FundingDetail = () => {
                             {detailData.showName}
                         </P>
                     </TitleDiv>
+
                     <BannerImgDiv>
                         <IllustImg src="/imgs/Icon/right-pangpang.png" alt="img" />
                         <BannerImg src={detailData.itemImage} alt="image" />
                         <IllustImg src="/imgs/Icon/left-pangpang.png" alt="img" />
                     </BannerImgDiv>
+
                     <NavigateDiv>
                         <NavigateBtn onClick={() => navigate(`/fundingModify/${id}`)}>🖍 수정하기</NavigateBtn>
                     </NavigateDiv>
+                    
                     <TogetherDiv bc="white">
                         <BetweenDiv pt="20px">
                             <P pt="5px" fs="13px" fw="900">
@@ -232,7 +235,7 @@ const FundingDetail = () => {
                             </P>
                         </SponsorTotal>
                     </FundingDiv>
-                    <FundingDiv p="20px">
+                    <FundingDiv p="20px" >
                         <P pt="20px" pl="10px" fs="16px" fw="900">
                             펀딩 참여하기
                         </P>
@@ -301,7 +304,7 @@ const FundingDetail = () => {
                         color="black"
                         fs="20px"
                         bc="#FF7C7C"
-                        as={FloatingButton} // FloatingButton 스타일을 적용
+                        as={FloatingBtn} // FloatingButton 스타일을 적용
                     >
                         선물하기
                     </Button>
