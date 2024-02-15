@@ -31,7 +31,6 @@ export const getHomeFundingList = async () => {
     const response = await instance.get("/api/funding");
 
     if (response.status === 200) {
-      console.log("펀딩 리스트 데이터를 가져오는 API 호출 성공: ", response);
       return response.data.content;
     }
   } catch (error) {
@@ -58,10 +57,6 @@ export const getOngoingFundingList = async (page) => {
     );
 
     if (response.status === 200) {
-      console.log(
-        "진행중인 펀딩 리스트 데이터를 가져오는 API 호출 성공: ",
-        response
-      );
       return response.data.content;
     }
   } catch (error) {

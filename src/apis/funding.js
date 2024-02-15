@@ -1,4 +1,5 @@
 import { instance } from "./auth";
+import { errorToast, infoToast } from "../components/toast";
 
 // 펀딩 생성페이지 API - post
 export const fundingCreate = async (fundingData) => {
@@ -29,10 +30,10 @@ export const fetchFundingDetail = async (id) => {
     return response.data; // 응답 데이터 반환
   } catch (error) {
     if (error.response) {
-      const statusCode = error.response.status;
-      const errorMessage = error.response.data.message;
-      if (statusCode === 400) {
-        alert(errorMessage);
+      const code = error.response.status;
+      const message = error.response.data.message;
+      if (code === 400) {
+        errorToast(message);
       }
     }
   }
@@ -43,7 +44,7 @@ export const fetchSponsorDetail = async (id) => {
   try {
     const response = await instance.get(`/api/fundingsponsordetail/${id}`); // 펀딩 후원자 상세페이지 요청
     if (response.status === 200) {
-      alert("후원자 상세페이지입니다.");
+      infoToast("후원자 상세페이지입니다.");
       return response.data; // 응답 데이터 반환
     }
   } catch (error) {
@@ -94,7 +95,7 @@ export const modalLinkModify = async (linkModifyData) => {
       const statusCode = error.response.status;
       const errorMessage = error.response.data.message;
       if (statusCode === 400) {
-        alert(errorMessage);
+        errorToast(errorMessage);
       }
     }
   }
@@ -113,7 +114,7 @@ export const deleteFundingModify = async (id, data) => {
       const statusCode = error.response.status;
       const errorMessage = error.response.data.message;
       if (statusCode === 400) {
-        alert(errorMessage);
+        errorToast(errorMessage);
       }
     }
   }
@@ -144,7 +145,7 @@ export const getFundingDonation = async (id) => {
       const statusCode = error.response.status;
       const errorMessage = error.response.data.message;
       if (statusCode === 400) {
-        alert("결제 오류", errorMessage);
+        errorToast("결제 오류", errorMessage);
       }
     }
   }
@@ -159,11 +160,12 @@ export const fundingPayDonationReady = async ({
 }) => {
   try {
     console.log("결제 ID정보 API: ", id);
-    const response = await instance.post(`/api/funding/${id}/donation/ready`, {
+    const response = await instance.post(
+      `/api/funding/${id}/donation/ready`,
       sponsorNickname,
       sponsorComment,
-      donation,
-    });
+      donation
+    );
 
     console.log("결제 준비 API: ", response);
     return response.data;
@@ -172,7 +174,7 @@ export const fundingPayDonationReady = async ({
       const statusCode = error.response.status;
       const errorMessage = error.response.data.message;
       if (statusCode === 400) {
-        alert("펀딩 생성 오류 :", errorMessage);
+        errorToast("결제 준비 오류 :", errorMessage);
       }
     }
   }
@@ -185,15 +187,8 @@ export const getDonationApproval = async (pgToken) => {
       `/api/donation/approve?pg_token=${pgToken}`
     );
 
-    if (response.data.isSuccess) {
-      const { sponsorNickname, sponsorComment, donationRanking } =
-        response.data.result;
-      console.log("후원 결제승인 성공:", {
-        sponsorNickname,
-        sponsorComment,
-        donationRanking,
-      });
-    }
+    console.log("결제 승인 API: ", response);
+    return response.data;
   } catch (error) {
     console.error("후원 결제승인 오류:", error.message);
   }
