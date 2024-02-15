@@ -63,7 +63,7 @@ export const Button = styled.button`
   padding-right: ${(props) => props.pr};
   &:hover {
     color: white;
-    background-color: #FF7C7C;
+    background-color: #ff7c7c;
     cursor: pointer;
   }
 `;
@@ -73,12 +73,12 @@ export const SponsorCommentDiv = styled.div`
   padding: 10px;
   justify-content: center;
   align-items: center;
-  background-color: #FFE6C1;
+  background-color: #ffe6c1;
   margin-top: ${(props) => props.mt};
   width: 100%;
   font-size: 13px;
   font-weight: 600;
-`
+`;
 
 // 오른쪽 컨테이너
 export const RightContainer = styled.div`
@@ -137,18 +137,17 @@ export const IllustImg = styled.img`
 export const NavigateDiv = styled.div`
   text-align: right;
   margin-right: 22px;
-`
+`;
 export const NavigateBtn = styled.button`
   font-size: 13px;
   font-weight: 600;
   color: white;
   margin-bottom: 7px;
-  
 `;
 
 export const TitleDiv = styled.div`
   display: flex;
-  flex-direction: column; 
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 100%;
@@ -278,16 +277,15 @@ export const SponsorimgDiv = styled.div`
   align-items: center;
 `;
 
-export const FloatingButton = styled.button`
-  position: fixed;
-  bottom: 0;
-  left: 50%; /* 뷰포트의 가운데로 이동 */
-  transform: translateX(-50%); /* 가운데 정렬 */
-  margin-bottom: 30px;
+export const FloatingBtn = styled.button`
+  position: sticky;
+  bottom: 10px;
+  left: 85px;
+  margin-bottom: 25px;
   width: 220px; /* 버튼의 너비 조정 */
   height: 50px; /* 버튼의 높이 조정 */
   border-radius: 25px; /* 버튼의 모양을 둥글게 만듭니다. */
-  background-color: #FF7C7C; /* 버튼의 배경색을 지정합니다. */
+  background-color: #ff7c7c; /* 버튼의 배경색을 지정합니다. */
   color: white; /* 버튼 텍스트의 색상을 지정합니다. */
   font-size: 16px; /* 버튼 텍스트의 크기를 지정합니다. */
   font-weight: bold; /* 버튼 텍스트의 굵기를 지정합니다. */

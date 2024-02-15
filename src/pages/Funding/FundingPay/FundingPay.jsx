@@ -94,9 +94,9 @@ const FundingPay = () => {
 
       // 결제 승인 API
       const pgToken = "";
-      console.log("결제 승인 성공: ", response);
       if (pgToken !== "") {
-        await getDonationApproval();
+        const response = await getDonationApproval();
+        console.log("결제 승인 성공: ", response);
       } else {
         console.error(
           "에러: pgToken이 비어있습니다. 결제 승인이 처리되지 않습니다."
