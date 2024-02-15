@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams, useLocation } from "react-router-dom";
 import CheckBox from "../FundingPay/CheckBox/CheckBox";
+import { warnToast } from "../../../components/toast";
 import {
   fundingPayDonationReady,
   getDonationApproval,
@@ -77,8 +78,7 @@ const FundingPay = () => {
         sponsorDonation.sponsorNickname === "" ||
         sponsorDonation.sponsorComment === ""
       ) {
-        console.log("후원자 정보: ", sponsorDonation);
-        // alert('내용을 입력해주세요');
+        warnToast("내용을 입력해주세요");
         return;
       }
 
@@ -89,21 +89,21 @@ const FundingPay = () => {
         sponsorComment: sponsorDonation.sponsorComment,
         donation: sponsorDonation.donation,
       });
-      console.log("펀딩 생성 성공:", response);
-      window.location.href = response.result.next_redirect_pc_url;
+
+      let redirectUrl = response.result.next_redirect_pc_url;
+      window.location.href = redirectUrl;
 
       // 결제 승인 API
-      const pgToken = "";
-      if (pgToken !== "") {
+      if (redirectUrl) {
         const response = await getDonationApproval();
-        console.log("결제 승인 성공: ", response);
+        console.log("페이지에서 결제 승인 성공: ", response);
       } else {
         console.error(
           "에러: pgToken이 비어있습니다. 결제 승인이 처리되지 않습니다."
         );
       }
     } catch (error) {
-      console.error("결제 오류:", error);
+      console.error("결제 준비 오류:", error);
     }
   };
 
