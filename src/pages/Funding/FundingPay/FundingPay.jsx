@@ -102,6 +102,7 @@ const FundingPay = () => {
     const fetchData = async () => {
       try {
         // 여기에서 window.location.href 사용하면서 변경된 부분
+        console.log("API 호출 전");
         const response = await getDonationApproval();
         console.log("페이지에서 결제 승인 성공: ", response);
         // 여기에서 상태를 업데이트하거나 다른 작업을 수행할 수 있습니다.
@@ -113,6 +114,7 @@ const FundingPay = () => {
 
     // 여기에서도 window.location.href를 사용하면서 변경된 부분
     if (window.location.href.includes("redirected=true")) {
+      console.log("fetchData 호출 전");
       fetchData();
     } else {
       console.error(
