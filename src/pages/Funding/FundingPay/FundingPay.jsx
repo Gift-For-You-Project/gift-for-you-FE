@@ -61,8 +61,6 @@ const FundingPay = () => {
           showName: showName || prev.showName,
           donationRanking: response.result.donationRanking,
         }));
-
-        console.log("펀딩 랭킹 가져오기:", response);
       } catch (error) {
         console.error("결제 오류:", error);
       }
@@ -101,20 +99,13 @@ const FundingPay = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // 여기에서 window.location.href 사용하면서 변경된 부분
-        console.log("API 호출 전");
-        const response = await getDonationApproval();
-        console.log("페이지에서 결제 승인 성공: ", response);
-        // 여기에서 상태를 업데이트하거나 다른 작업을 수행할 수 있습니다.
+        await getDonationApproval();
       } catch (error) {
         console.error("페이지에서 결제 승인 오류:", error);
-        // 오류가 발생한 경우에 대한 처리를 여기에 추가할 수 있습니다.
       }
     };
 
-    // 여기에서도 window.location.href를 사용하면서 변경된 부분
-    if (window.location.href.includes("redirected=true")) {
-      console.log("fetchData 호출 전");
+    if (window.location.href.includes("pgToken=")) {
       fetchData();
     } else {
       console.error(
