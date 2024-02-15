@@ -71,7 +71,6 @@ const FundingPay = () => {
     fetchData();
   }, [id, location.search]);
 
-  // 결제 준비 API
   const handleFundingDonationClick = async () => {
     try {
       if (
@@ -82,6 +81,7 @@ const FundingPay = () => {
         // alert('내용을 입력해주세요');
         return;
       }
+
       // 결제 준비 API
       const response = await fundingPayDonationReady({
         id,
@@ -89,14 +89,19 @@ const FundingPay = () => {
         sponsorComment: sponsorDonation.sponsorComment,
         donation: sponsorDonation.donation,
       });
-
-      console.log("결제 준비 성공: ", response);
+      console.log("펀딩 생성 성공:", response);
       window.location.href = response.result.next_redirect_pc_url;
+
       // 결제 승인 API
       const pgToken = "";
-      if (pgToken) await getDonationApproval();
       console.log("결제 승인 성공: ", response);
-      navigate("/fundingdetail/:id");
+      if (pgToken !== "") {
+        await getDonationApproval();
+      } else {
+        console.error(
+          "에러: pgToken이 비어있습니다. 결제 승인이 처리되지 않습니다."
+        );
+      }
     } catch (error) {
       console.error("결제 오류:", error);
     }
@@ -133,7 +138,6 @@ const FundingPay = () => {
           <FundingDiv>
             <SponserMoney>
               <SponsorImg src="/imgs/junjihyun.jpg" alt="logo" />
-              {/* <SponsorImg src={sponsorDonation.itemImage} alt="logo" /> */}
               <P pt="10px" fs="16px" fw="800" pb="5px">
                 {sponsorDonation.showName} 님에게
               </P>
