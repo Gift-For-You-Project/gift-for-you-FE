@@ -1,4 +1,5 @@
 import axios from "axios";
+import { successToast, errorToast } from "../components/toast";
 
 export const instance = axios.create({
   baseURL: process.env.REACT_APP_API_URL,
@@ -22,18 +23,18 @@ export const instance = axios.create({
 // };
 
 // 카카오 로그인 API
-export const getKakaoResponse = async () => {
-  try {
-    const response = await instance.get("/api/kakao/callback");
-    if (response.status === 302) {
-      console.log(response.data.message);
-      alert(response.data.message);
-    }
-  } catch (error) {
-    console.error("API 호출 중 에러 발생: ", error);
-    return null;
-  }
-};
+// export const getKakaoResponse = async () => {
+//   try {
+//     const response = await instance.get("/api/kakao/callback");
+//     if (response.status === 302) {
+//       console.log(response.data.message);
+//       alert(response.data.message);
+//     }
+//   } catch (error) {
+//     console.error("API 호출 중 에러 발생: ", error);
+//     return null;
+//   }
+// };
 
 // 회원가입 API
 export const signup = async (userData) => {
@@ -44,7 +45,7 @@ export const signup = async (userData) => {
       const { code, message } = response.data;
 
       if (code === 2000) {
-        alert(message);
+        successToast(message);
         console.log("가입 성공! 환영합니다.");
       } else {
         console.error("올바르지 않은 응답 형식 또는 값");
@@ -61,7 +62,7 @@ export const signup = async (userData) => {
 
       if (code === 4000) {
         console.log("Error 4000:", message);
-        alert(message);
+        errorToast(message);
       } else {
         console.error("올바르지 않은 응답 형식 또는 값");
         alert("회원가입 처리 중 오류가 발생했습니다.");
@@ -81,7 +82,7 @@ export const login = async (credentials) => {
       const { code, message, result } = response.data;
 
       if (code === 2000 && result) {
-        alert(message);
+        successToast(message);
       } else {
         console.error("올바르지 않은 응답 형식 또는 값");
         throw new Error("로그인 처리 중 오류가 발생했습니다.");
@@ -96,7 +97,7 @@ export const login = async (credentials) => {
       const { code, message } = error.response.data;
 
       if (code === 4000) {
-        alert(message);
+        errorToast(message);
       } else {
         console.error("올바르지 않은 응답 형식 또는 값");
         alert("로그인 처리 중 오류가 발생했습니다.");

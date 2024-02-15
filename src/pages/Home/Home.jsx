@@ -1,14 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import { FaChevronRight } from 'react-icons/fa';
-import { FaPlus } from 'react-icons/fa6';
-import { useNavigate } from 'react-router-dom';
-import LoginModal from '../Home/Login/LoginModal';
-import { useDispatch, useSelector } from 'react-redux';
-import { bootChannelTalk } from '../../redux/channelTalkSlice';
-import { userLogout } from '../../redux/authSlice';
-import Navbar from '../../components/Navbar';
-import { getHomeFundingList } from '../../apis/home';
-// import { getKakaoResponse } from "../../apis/auth";
+import React, { useEffect, useState } from "react";
+import { FaChevronRight } from "react-icons/fa";
+import { FaPlus } from "react-icons/fa6";
+import { useNavigate } from "react-router-dom";
+import LoginModal from "../Home/Login/LoginModal";
+import { useDispatch, useSelector } from "react-redux";
+import { bootChannelTalk } from "../../redux/channelTalkSlice";
+import Navbar from "../../components/Navbar";
+import { getHomeFundingList } from "../../apis/home";
+import { userLogout } from "../../redux/authSlice";
 import {
     MainContainer,
     LeftContainer,
@@ -95,13 +94,15 @@ const Home = () => {
         homeFundingListData();
     }, [dispatch]);
 
-    // useEffect(() => {
-    //   const kakaoResponseData = async () => {
-    //     await getKakaoResponse();
-    //   };
-
-    //   kakaoResponseData();
-    // }, [isLoggedIn]);
+  // useEffect(() => {
+  //   if (isLoggedIn) {
+  //     if () {
+  //       alert("구글 로그인이 성공했습니다.");
+  //     } else if () {
+  //       alert("카카오 로그인이 성공했습니다.");
+  //     }
+  //   }
+  // }, [isLoggedIn]);
 
     const ProductGridComponent = ({ imgSrc, altText, brand, itemName, price }) => (
         <ProductGrid>

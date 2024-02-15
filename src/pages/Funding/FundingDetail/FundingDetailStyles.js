@@ -66,7 +66,7 @@ export const Button = styled.button`
   padding-right: ${(props) => props.pr};
   &:hover {
     color: white;
-    background-color: #FF7C7C;
+    background-color: #ff7c7c;
     cursor: pointer;
   }
 `;
@@ -128,18 +128,17 @@ export const IllustImg = styled.img`
 export const NavigateDiv = styled.div`
   text-align: right;
   margin-right: 22px;
-`
+`;
 export const NavigateBtn = styled.button`
   font-size: 13px;
   font-weight: 600;
   color: white;
   margin-bottom: 7px;
-  
 `;
 
 export const TitleDiv = styled.div`
   display: flex;
-  flex-direction: column; 
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 100%;
