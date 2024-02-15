@@ -3,6 +3,7 @@ import { useNavigate, useParams, useLocation } from "react-router-dom";
 import CheckBox from "../FundingPay/CheckBox/CheckBox";
 import {
   fundingPayDonationReady,
+  getDonationApproval,
   getFundingDonation,
 } from "../../../apis/funding";
 import {
@@ -89,6 +90,17 @@ const FundingPay = () => {
       });
       console.log("펀딩 생성 성공:", response);
       window.location.href = response.result.next_redirect_pc_url;
+
+      // 결제 승인 API
+      const pgToken = "";
+      console.log("결제 승인 성공: ", response);
+      if (pgToken !== "") {
+        await getDonationApproval();
+      } else {
+        console.error(
+          "에러: pgToken이 비어있습니다. 결제 승인이 처리되지 않습니다."
+        );
+      }
     } catch (error) {
       console.error("펀딩 생성 오류:", error);
     }
@@ -125,7 +137,6 @@ const FundingPay = () => {
           <FundingDiv>
             <SponserMoney>
               <SponsorImg src="/imgs/junjihyun.jpg" alt="logo" />
-              {/* <SponsorImg src={sponsorDonation.itemImage} alt="logo" /> */}
               <P pt="10px" fs="16px" fw="800" pb="5px">
                 {sponsorDonation.showName} 님에게
               </P>
