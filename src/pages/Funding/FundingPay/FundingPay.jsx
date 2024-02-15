@@ -90,22 +90,36 @@ const FundingPay = () => {
         donation: sponsorDonation.donation,
       });
 
-      let redirectUrl = response.result.next_redirect_pc_url;
-      window.location.href = redirectUrl;
-
-      // 결제 승인 API
-      if (redirectUrl) {
-        const response = await getDonationApproval();
-        console.log("페이지에서 결제 승인 성공: ", response);
-      } else {
-        console.error(
-          "에러: pgToken이 비어있습니다. 결제 승인이 처리되지 않습니다."
-        );
-      }
+      // 리다이렉션을 원하면
+      window.location.href = response.result.next_redirect_pc_url;
     } catch (error) {
       console.error("결제 준비 오류:", error);
     }
   };
+
+  // 결제 승인 API
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        // 여기에서 window.location.href 사용하면서 변경된 부분
+        const response = await getDonationApproval();
+        console.log("페이지에서 결제 승인 성공: ", response);
+        // 여기에서 상태를 업데이트하거나 다른 작업을 수행할 수 있습니다.
+      } catch (error) {
+        console.error("페이지에서 결제 승인 오류:", error);
+        // 오류가 발생한 경우에 대한 처리를 여기에 추가할 수 있습니다.
+      }
+    };
+
+    // 여기에서도 window.location.href를 사용하면서 변경된 부분
+    if (window.location.href.includes("redirected=true")) {
+      fetchData();
+    } else {
+      console.error(
+        "에러: pgToken이 비어있습니다. 결제 승인이 처리되지 않습니다."
+      );
+    }
+  }, []);
 
   return (
     <MainContainer>
