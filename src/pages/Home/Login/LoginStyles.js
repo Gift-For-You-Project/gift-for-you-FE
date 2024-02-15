@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import theme from "../../../styles/theme";
 
 // 전체 컨테이너
 export const MainContainer = styled.div`
@@ -19,7 +20,7 @@ export const LeftContainer = styled.div`
   width: 500px;
   height: 100vh;
   padding: 20px;
-  border: 1px solid lightgray;
+  /* border: 1px solid lightgray; */
   margin-right: 100px;
 
   @media (max-width: 1024px) {
@@ -49,7 +50,7 @@ export const RightContainer = styled.div`
   position: relative;
   width: 442px;
   height: 100vh;
-  border: 1px solid lightgray;
+  /* border: 1px solid lightgray; */
   overflow-y: scroll;
 
   &::-webkit-scrollbar {
@@ -79,7 +80,7 @@ export const InputFieldContainer = styled.div`
   align-items: center;
   margin-top: auto;
   width: 100%;
-  max-width: 442px;
+  max-width: 390px;
 `;
 
 export const BlankLine = styled.div`
@@ -114,6 +115,7 @@ export const LoginInput = styled.input`
   height: 40px;
   font-size: 16px;
   padding-left: 10px;
+  border-radius: 5px;
 `;
 
 export const LoginBtn = styled.button`
@@ -122,11 +124,13 @@ export const LoginBtn = styled.button`
   height: 50px;
   font-size: 20px;
   margin-top: auto;
-  background-color: snow;
+  margin-bottom: auto;
+  background-color: ${theme.primary};
   transition: all 300ms ease-in-out;
+  border-radius: 7px;
 
   &:hover {
-    background-color: orange;
+    background-color: ${theme.secondary};
   }
 `;
 

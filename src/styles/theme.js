@@ -13,3 +13,7 @@ const theme = {
 };
 
 export default theme;
+
+/* 예시 */
+// background-color: ${theme.primary};
+// import theme from "../../styles/theme";

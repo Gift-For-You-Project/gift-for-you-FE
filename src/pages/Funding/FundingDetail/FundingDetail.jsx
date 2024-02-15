@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
+import theme from "../../../styles/theme";
 import { fetchFundingDetail } from "../../../apis/funding";
 import Navbar from "../../../components/Navbar";
 import { useDispatch, useSelector } from "react-redux";
