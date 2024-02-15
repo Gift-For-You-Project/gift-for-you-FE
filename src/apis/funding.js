@@ -160,12 +160,11 @@ export const fundingPayDonationReady = async ({
 }) => {
   try {
     console.log("결제 ID정보 API: ", id);
-    const response = await instance.post(
-      `/api/funding/${id}/donation/ready`,
+    const response = await instance.post(`/api/funding/${id}/donation/ready`, {
       sponsorNickname,
       sponsorComment,
-      donation
-    );
+      donation,
+    });
 
     console.log("결제 준비 API: ", response);
     return response.data;
