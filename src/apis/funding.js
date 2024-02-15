@@ -178,7 +178,7 @@ export const fundingPayDonationReady = async ({
   }
 };
 
-// 펀딩 결제페이지 결제승인 API
+// 펀딩 결제페이지 결제 승인 API
 export const getDonationApproval = async (pgToken) => {
   try {
     const response = await instance.get(

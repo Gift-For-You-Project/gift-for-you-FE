@@ -27,7 +27,7 @@ import {
 
 const FundingPay = () => {
   const navigate = useNavigate();
-  const { id } = useParams(); // URL 매개변수(id)를 가져옴
+  const { id } = useParams();
   const location = useLocation();
 
   // 후원자 정보 및 펀딩 정보를 관리할 상태 변수들을 설정
@@ -77,11 +77,12 @@ const FundingPay = () => {
         sponsorDonation.sponsorNickname === "" ||
         sponsorDonation.sponsorComment === ""
       ) {
-        console.log("후원자 정보 :", sponsorDonation);
+        console.log("후원자 정보: ", sponsorDonation);
         // alert('내용을 입력해주세요');
         return;
       }
-      // 펀딩 결제페이지 결제 준비 API
+
+      // 결제 준비 API
       const response = await fundingPayDonationReady({
         id,
         sponsorNickname: sponsorDonation.sponsorNickname,
@@ -102,7 +103,7 @@ const FundingPay = () => {
         );
       }
     } catch (error) {
-      console.error("펀딩 생성 오류:", error);
+      console.error("결제 오류:", error);
     }
   };
 
