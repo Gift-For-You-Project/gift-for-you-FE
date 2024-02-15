@@ -88,7 +88,7 @@ const Login = () => {
   return (
     <MainContainer>
       <LeftContainer>
-        <Logo>🥧 Giftipie</Logo>
+        <Logo>Giftipie</Logo>
         <P pt="25px" fs="16px" fw="800" pb="5px">
           기프티파이에서
         </P>
@@ -105,7 +105,7 @@ const Login = () => {
             <FaAngleLeft onClick={handleBackClick} />
           </LoginIconDiv>
           <InputFieldContainer>
-            <LoginImg src="/imgs/Login/pie.png" alt="pie" />
+            <LoginImg src="/imgs/Character/giftipie-02.png" alt="pie" />
             <InputField
               value={email}
               onChange={handleEmailChange}

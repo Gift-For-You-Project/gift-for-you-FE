@@ -24,7 +24,7 @@ import {
 // InputField 컴포넌트
 const InputField = ({ onChange, onKeyDown, title, type, placeholder }) => (
   <div>
-    <P fs="20px" pb="10px">
+    <P fs="20px" pb="10px" color="#FFFFFF">
       {title}
     </P>
     <SignupInput
@@ -126,7 +126,7 @@ const Signup = () => {
   return (
     <MainContainer>
       <LeftContainer>
-        <Logo>🥧 Giftipie</Logo>
+        <Logo>Giftipie</Logo>
         <P pt="25px" fs="16px" fw="800" pb="5px">
           기프티파이에서
         </P>
@@ -143,7 +143,7 @@ const Signup = () => {
             <FaAngleLeft onClick={handleBackClick} />
           </SignupIconDiv>
           <SignupFieldContainer>
-            <SignupImg src="/imgs/Login/pie.png" alt="pie" />
+            <SignupImg src="/imgs/Character/giftipie-02.png" alt="pie" />
             <InputField
               value={email}
               onChange={handleEmailChange}
