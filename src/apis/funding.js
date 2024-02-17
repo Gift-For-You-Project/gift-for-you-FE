@@ -1,29 +1,37 @@
 import { instance } from "./auth";
 import { successToast, errorToast, infoToast } from "../components/toast";
 
-// 펀딩 생성페이지 API - post
-export const fundingCreate = async (fundingData) => {
+// 펀딩 추가 API
+export const postFundingCreate = async (fundingData) => {
   try {
-    const response = await instance.post("/api/funding/create", fundingData); // 펀딩 생성 요청
-    console.log("펀딩 생성페이지 API", response);
-    return response.data; // 응답 데이터 반환
+    const response = await instance.post("/api/funding/create", fundingData);
+
+    if (response.status === 200 || response.status === 201) {
+      console.log("펀딩 생성페이지 API", response);
+      successToast(response.data.msg);
+      return response.data;
+    }
   } catch (error) {
-    throw error; // 실패 시 예외 처리
+    throw error;
   }
 };
 
 // 펀딩 생성페이지 모달창(ItemLink) API
 export const postModalItemLink = async (LinkData) => {
   try {
-    const response = await instance.post("/api/funding/addLink", LinkData); // 모달창(ItemLink) API 호출
+    const response = await instance.post("/api/funding/addLink", LinkData);
     if (response.status === 200) {
       successToast("펀딩 상품 이미지가 생성되었습니다.");
       return response.data;
     }
   } catch (error) {
     if (error.response) {
-      const code = error.response.status;
-      console.error(`모달창 API 호출 실패 - 응답 코드: ${code}`);
+      const status = error.response.status;
+      if (status === 404) {
+        console.error("API 호출 중 404 에러 발생: ", error);
+      } else if (status === 500) {
+        console.error("API 호출 중 500 에러 발생: ", error);
+      }
     }
   }
 };
