@@ -130,13 +130,6 @@ export const SponserComment = styled.div`
   align-items: start;
 `;
 
-export const SponsorImg = styled.img`
-  width: 60px;
-  height: 60px;
-  border-radius: 100px;
-  margin-top: 10px;
-`;
-
 export const InputTag = styled.input`
   width: 98%;
   height: ${(props) => props.h};

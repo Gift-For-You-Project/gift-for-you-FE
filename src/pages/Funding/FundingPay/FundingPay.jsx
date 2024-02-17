@@ -25,7 +25,6 @@ import {
   FundingDiv,
   SponserDiv,
   SponserComment,
-  SponsorImg,
   TogetherDiv,
   KakaoButton,
   KakaoPayLogo,

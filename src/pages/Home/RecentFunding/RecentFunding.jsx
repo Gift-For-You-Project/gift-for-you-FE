@@ -4,7 +4,7 @@ import LoginModal from '../Login/LoginModal';
 import { useDispatch, useSelector } from 'react-redux';
 import { userLogout } from '../../../redux/authSlice';
 import Navbar from '../../../components/Navbar';
-import { getOngoingFundingList } from '../../../apis/home';
+import { getRecentFundingList } from '../../../apis/home';
 import {
     MainContainer,
     LeftContainer,
@@ -23,9 +23,9 @@ import {
     TogetherImg,
     TogetherGrids,
     TogetherGrid,
-} from './OngoingFundingStyles';
+} from './RecentFundingStyles';
 
-const OngoingFunding = () => {
+const RecentFunding = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
@@ -53,7 +53,7 @@ const OngoingFunding = () => {
             try {
                 // 데이터를 가져오기 전에 로딩 상태를 true로 설정
                 setLoading(true);
-                const response = await getOngoingFundingList(page);
+                const response = await getRecentFundingList(page);
 
                 setOngoingFundingList((prevList) => [...prevList, ...response]);
             } catch (error) {
@@ -200,4 +200,4 @@ const OngoingFunding = () => {
     );
 };
 
-export default OngoingFunding;
+export default RecentFunding;

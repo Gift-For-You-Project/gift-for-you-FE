@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { HiBell } from 'react-icons/hi';
-import { BsPersonCircle } from 'react-icons/bs'; // 로그인
+import { BsPersonCircle } from 'react-icons/bs';
 import { FaAngleLeft } from 'react-icons/fa6';
-// import { RiLogoutBoxRLine } from "react-icons/ri";
-import { IoLogOutSharp } from "react-icons/io5"; // 로그아웃
+import { IoLogOutSharp } from "react-icons/io5"; 
 import { useNavigate } from 'react-router-dom';
 import {
     NavbarIconContainer,
@@ -11,7 +10,6 @@ import {
     NavbarIconDiv,
     NavbarBtnDiv,
     NavbarBtn,
-    LoginIcon,
     LogoIcon,
     LogoTextIcon,
     LogoDiv,
@@ -122,8 +120,8 @@ const Navbar = ({ isLoggedIn, handleLoginClick, handleLogoutClick }) => {
         <>
             <NavbarBtn onClick={handleNavbarIconClick} fs="20px" fw="600" pl="25px" color="white">
                 <LogoDiv>
-                    <LogoIcon src="/imgs/Icon/Frame 7413.png" />
-                    <LogoTextIcon src="/imgs/Logo/Giftipie.png" />           
+                    <LogoIcon src="/imgs/Common/pie-navbar.png" />
+                    <LogoTextIcon src="/imgs/Common/Giftipie.png" />           
                     
                 </LogoDiv>
             </NavbarBtn>

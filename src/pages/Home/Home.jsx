@@ -38,6 +38,7 @@ import {
     Progress,
     BetweenDiv,
     BannerProgressDiv,
+    TogetherBetween,
     TogetherDiv,
     TogetherImg,
     TogetherGrids,
@@ -70,7 +71,7 @@ const Home = () => {
         navigate(`/fundingdetail/${id}`);
     };
 
-    const handleOngoingFundingClick = () => navigate('/ongoingfunding');
+    const handleRecentFundingClick = () => navigate('/recentfunding');
 
     const handleFundingCreate = () => navigate('/fundingcreate');
 
@@ -128,41 +129,60 @@ const Home = () => {
     return (
         <MainContainer>
             <LeftContainer>
-                <LeftImgContainer>
-                    <div>
-                        <LeftLogoTextIcon src="/imgs/Logo/Giftipie.png" />
-                    </div>
-                    <div>
-                        <P pt="45px" pl="200px" fs="23px" fw="800" color="#FFFFFF">
-                            생일선물
-                            <br />뭐 받고싶어?
-                        </P>
-                        <BubbleImg src="/imgs/Icon/speech-bubble.png" />
-                    </div>
-                </LeftImgContainer>
-                <LeftRowdiv ml="30px">
-                    <LeftRowdiv color="#3F3F3F" mr="10px" bc="#FF7C7C" br="25px" p="8px">
-                        <LeftImg src="/imgs/Icon/giftbox-02.png" w="30px" h="25px" mr="10px" pl="10px" />
-                        <P fs="20px" fw="900" pr="10px">
-                            정말 원하는 선물
-                        </P>
+                <LeftContainer pt="70px">
+                    <LeftImgContainer>
+                        <div>
+                            <LeftLogoTextIcon src="/imgs/Common/giftipie.png" />
+                        </div>
+                        <div>
+                            <P pt="60px" pl="355px" fs="23px" fw="800" color="#FFFFFF">
+                                생일선물
+                                <br />뭐 받고싶어?
+                            </P>
+                            <BubbleImg src="/imgs/Home/speech-bubble.png" />
+                        </div>
+                        {/* <BubbleImg src="/imgs/Home/speech-bubble.png" /> */}
+                    </LeftImgContainer>
+
+                    <LeftRowdiv ml="30px">
+                        <LeftRowdiv color="#3F3F3F" mr="10px" bc="#FF7C7C" br="25px" p="8px">
+                            <LeftImg src="/imgs/Home/giftbox-red.png" w="30px" h="25px" mr="10px" pl="10px" />
+                            <P fs="20px" fw="900" pr="10px">
+                                정말 원하는 선물
+                            </P>
+                        </LeftRowdiv>
+                        <div>
+                            <P mt="6px" pt="2px" fs="20px" fw="700" color="#FFFFFF">
+                                을 주고 받아요!
+                            </P>
+                        </div>
                     </LeftRowdiv>
-                    <P pt="2px" fs="20px" fw="700" color="#FFFFFF">
-                        을 주고 받아요!
-                    </P>
-                </LeftRowdiv>
-                <LeftRowdiv ml="50px">
-                    <Leftcolumndiv>
+
+                    <LeftRowdiv>
+                        <Leftcolumndiv ml="30px">
+                            <P fs="16px" fw="500" pt="30px" pb="5px" color="#FFFFFF">
+                                지금은 유저테스트 진행 중 입니다
+                            </P>
+                            <P pb="100px" fs="16px" fw="500" color="#FFFFFF">
+                                6명의 개발자와 1명의 디자이너가 함께 개발하고 있습니다
+                            </P>
+                        </Leftcolumndiv>
+                        <LeftImg src="/imgs/Home/pie-hi.png" w="340px" pl="100px" />
+                    </LeftRowdiv>
+                </LeftContainer>
+
+                <LeftRowdiv ml="30px">
+                    {/* <Leftcolumndiv>
                         <P fs="16px" fw="500" pb="5px" color="#FFFFFF">
                             지금은 유저테스트 진행 중 입니다
                         </P>
-                        <P pb="140px" fs="16px" fw="500" color="#FFFFFF">
+                        <P pb="100px" fs="16px" fw="500" color="#FFFFFF">
                             6명의 개발자와 1명의 디자이너가 함께 개발하고 있습니다
                         </P>
                     </Leftcolumndiv>
-                    <LeftImg src="/imgs/Character/hello-giftipie.png" w="340px" pl="90px" />
+                    <LeftImg src="/imgs/Home/pie-hi.png" w="340px" pl="90px" /> */}
                 </LeftRowdiv>
-                <IpadLoveImg src="/imgs/Character/ipad-love.png" w="370px" />
+                <IpadLoveImg src="/imgs/Home/pie-ipad.png" w="330px" />
             </LeftContainer>
 
             <RightContainer>
@@ -181,7 +201,7 @@ const Home = () => {
                                 <br />
                                 진행할 수 있어요
                             </P>
-                            <CharacterImg src="/imgs/Character/giftipie-02.png" h="20px" />
+                            <CharacterImg src="/imgs/Home/pie-banner.png" h="20px" />
                         </BetweenDiv>
                     </TogetherDiv>
 
@@ -199,7 +219,7 @@ const Home = () => {
                             </MainBtnContainer>
                         </BetweenDiv>
                         <BetweenDiv>
-                            <BannerImg src="/imgs/Product/airpods.jpeg" />
+                            <BannerImg src="/imgs/Home/airpods.jpeg" />
                             <BannerProgressDiv>
                                 <OneLine fs="11px" fw="800" color="gray">
                                     에어팟
@@ -236,7 +256,7 @@ const Home = () => {
                     <TogetherDiv bc="white">
                         <FundingDiv>
                             <BetweenDiv>
-                                <button onClick={handleOngoingFundingClick}>
+                                <button onClick={handleRecentFundingClick}>
                                     <P fs="16px" fw="900" pt="20px" pb="5px" pl="23px">
                                         최근 펀딩 구경하기 &nbsp;
                                         <FaChevronRight />
@@ -248,6 +268,7 @@ const Home = () => {
                                     비공개 펀딩은 이곳에 공개되지 않아요
                                 </P>
                             </BetweenDiv>
+
                             <FundingSection>
                                 {homeFundingList.map((funding) => (
                                     <FundingGrid key={funding.id} onClick={() => handleFundingClick(funding.id)}>
@@ -277,13 +298,18 @@ const Home = () => {
                     </TogetherDiv>
 
                     <>
-                        <P pt="40px" pb="40px" fs="18px" fw="600" color="white">
-                            Giftipie에서 함께한 선물
-                        </P>
+                        <TogetherBetween>
+                            <P pt="40px" pb="40px" fs="18px" fw="600" color="#FF7C7C">
+                                Giftipie
+                            </P>
+                            <P pt="40px" pb="40px" fs="18px" fw="600" color="white">
+                                에서 함께한 선물
+                            </P>
+                        </TogetherBetween>
 
                         <TogetherGrids>
                             <TogetherGrid>
-                                <TogetherImg src="/imgs/Icon/hearthand.png" alt="hearthand" />
+                                <TogetherImg src="/imgs/Common/heart-hand.png" alt="hearthand" />
                                 <P pt="10px" fs="14px" fw="400">
                                     &nbsp;&nbsp;&nbsp;펀딩에
                                     <br />
@@ -294,7 +320,7 @@ const Home = () => {
                                 </P>
                             </TogetherGrid>
                             <TogetherGrid>
-                                <TogetherImg src="/imgs/Icon/giftbox.png" alt="receive" />
+                                <TogetherImg src="/imgs/Common/giftbox-yellow.png" alt="receive" />
                                 <P fs="14px" fw="400">
                                     &nbsp; 선물을
                                     <br />
@@ -305,7 +331,7 @@ const Home = () => {
                                 </P>
                             </TogetherGrid>
                             <TogetherGrid>
-                                <TogetherImg src="/imgs/Icon/fundingdonation.png" alt="amount" />
+                                <TogetherImg src="/imgs/Common/donation.png" alt="amount" />
                                 <P fs="14px" fw="400">
                                     &nbsp;&nbsp;&nbsp; 모인
                                     <br /> 펀딩 금액
