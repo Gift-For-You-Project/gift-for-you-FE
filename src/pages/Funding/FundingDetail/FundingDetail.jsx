@@ -125,9 +125,8 @@ const FundingDetail = () => {
     getData();
   }, [id]);
 
-  // 추가된 코드
   const handleLogoutClick = () => {
-    dispatch(userLogout()); // 로그아웃 액션 디스패치
+    dispatch(userLogout());
     navigate("/");
   };
 
@@ -157,7 +156,6 @@ const FundingDetail = () => {
       </LeftContainer>
 
       <RightContainer>
-        {/* 추가된 코드 */}
         <NavbarDiv>
           <Navbar
             isLoggedIn={isLoggedIn}
@@ -412,7 +410,7 @@ const FundingDetail = () => {
             color="black"
             fs="20px"
             bc="#FF7C7C"
-            as={FloatingBtn} // FloatingBtn 스타일을 적용
+            as={FloatingBtn}
           >
             선물하기
           </Button>
