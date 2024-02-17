@@ -9,7 +9,6 @@ import {
   fundingPayDonationReady,
   getFundingDonation,
   getDonationApproval,
-  getDonationApprovalResponse,
 } from "../../../apis/funding";
 import {
   MainContainer,
@@ -48,7 +47,7 @@ const FundingPay = () => {
 
   // useEffect를 이용하여 URL 매개변수에서 donation, showName 값을 가져오는 부분 합침
   useEffect(() => {
-    const fetchData = async () => {
+    const getData = async () => {
       try {
         if (!id) {
           return;
@@ -67,14 +66,21 @@ const FundingPay = () => {
           showName: showName || prev.showName,
           donationRanking: response.result.donationRanking,
         }));
+
+        // 후원 결제승인 API 호출
+        if (params.has("pg_token")) {
+          const pg_token = params.get("pg_token");
+          await getDonationApproval(pg_token);
+          navigate("/");
+        }
       } catch (error) {
         console.error("결제 오류:", error);
       }
     };
 
     // 컴포넌트가 마운트될 때와 id가 변경될 때 API 호출 함수 실행
-    fetchData();
-  }, [id, location.search]);
+    getData();
+  }, [id, location.search, navigate]);
 
   const handleFundingDonationClick = async () => {
     try {
@@ -101,31 +107,6 @@ const FundingPay = () => {
     }
   };
 
-  let pg_token = new URL(window.location.href).searchParams.get("pg_token");
-
-  // 후원 결제승인 API
-  useEffect(() => {
-    const getData = async () => {
-      try {
-        // 후원 결제승인 API
-        if (pg_token !== "") {
-          await getDonationApproval(pg_token);
-        }
-
-        // 후원 결제 승인 응답 API
-        if (id) {
-          const result = await getDonationApprovalResponse(id);
-          setSponsorDonation(result);
-        }
-      } catch (error) {
-        console.error("후원 결제승인 응답 오류:", error);
-      }
-    };
-
-    getData();
-  }, [id, pg_token]);
-
-  // 추가된 코드
   const handleLogoutClick = () => {
     dispatch(userLogout()); // 로그아웃 액션 디스패치
     navigate("/");
@@ -242,3 +223,27 @@ const FundingPay = () => {
 };
 
 export default FundingPay;
+
+// let pg_token = new URL(window.location.href).searchParams.get("pg_token");
+
+// // 후원 결제승인 API
+// useEffect(() => {
+//   const getData = async () => {
+//     try {
+//       // 후원 결제승인 API
+//       if (pg_token !== "") {
+//         await getDonationApproval(pg_token);
+//       }
+
+//       // 후원 결제 승인 응답 API
+//       if (id) {
+//         const result = await getDonationApprovalResponse(id);
+//         setSponsorDonation(result);
+//       }
+//     } catch (error) {
+//       console.error("후원 결제승인 응답 오류:", error);
+//     }
+//   };
+
+//   getData();
+// }, [id, pg_token]);
