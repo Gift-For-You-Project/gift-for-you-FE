@@ -48,7 +48,7 @@ const Sponsor = () => {
   return (
     <MainContainer>
       <LeftContainer>
-        <Logo>😉 Giftipie</Logo>
+        <Logo>Giftipie</Logo>
         <P pt="25px" fs="16px" fw="800" pb="5px">
           기프티파이에서
         </P>
@@ -58,28 +58,17 @@ const Sponsor = () => {
         <P fs="16px" fw="800">
           주고 받아요
         </P>
-        <Button
-          onClick={() => navigate("/")}
-          mt="20px"
-          w="180px"
-          h="50px"
-          fs="16px"
-          color="white"
-          bc="orange"
-        >
-          펀딩 시작하기
-        </Button>
       </LeftContainer>
 
       <RightContainer>
         <Navbar>
           <NavbarBtn
-            onClick={() => navigate(`/fundingdetail/${fundingId}`)}
+            onClick={() => navigate(`/`)}
             fs="15px"
             fw="800"
             pl="15px"
           >
-            😉 펀딩 상세페이지로 이동
+            펀딩 상세페이지로 이동
           </NavbarBtn>
           <NavbarBtnDiv pr="15px">
             <NavbarBtn fs="13px" fw="600">
@@ -92,14 +81,14 @@ const Sponsor = () => {
         </Navbar>
         <Body>
           <FundingDiv>
-            <P pt="20px" pb="20px" fs="16px" fw="900">
+            <P pt="20px" pb="20px" fs="16px" fw="900" color="#FFFFFF">
               후원자
             </P>
             <SponserDiv>
-              <SponsorImg src="/imgs/iu.jpg" alt="image" />
+              <SponsorImg src="/imgs/Character/iu.jpg" alt="image" />
               <SponserComment mt="10px">
-                <P pl="5px" fs="13px" fw="800">
-                  아**
+                <P pl="5px" fs="13px" fw="800" color="#FFFFFF">
+                  후원자 보여줄 이름
                 </P>
                 <Button
                   mt="5px"
@@ -107,16 +96,16 @@ const Sponsor = () => {
                   h="40px"
                   pr="90px"
                   fs="13px"
-                  bc="violet"
+                  bc="#ECECEC"
                 >
-                  줄이어폰 그만써~ 생일축하해!!
+                  후원자 남길 메시지
                 </Button>
               </SponserComment>
             </SponserDiv>
             <SponserDiv>
-              <SponsorImg src="/imgs/songjoongy.jpg" alt="logo" />
+            <SponsorImg src="/imgs/Character/songjoongy.jpg" alt="image" />
               <SponserComment mt="10px">
-                <P pl="5px" fs="13px" fw="800">
+                <P pl="5px" fs="13px" fw="800" color="#FFFFFF">
                   {sponsorData.showName}
                 </P>
                 <Button
@@ -125,16 +114,16 @@ const Sponsor = () => {
                   h="40px"
                   pr="90px"
                   fs="13px"
-                  bc="violet"
+                  bc="#ECECEC"
                 >
                   {sponsorData.content}
                 </Button>
               </SponserComment>
             </SponserDiv>
             <SponserDiv>
-              <SponsorImg src="/imgs/junjihyun.jpg" alt="logo" />
+            <SponsorImg src="/imgs/Character/junjihyun.jpg" alt="image" />
               <SponserComment mt="10px">
-                <P pl="5px" fs="13px" fw="800">
+                <P pl="5px" fs="13px" fw="800" color="#FFFFFF">
                   {sponsorData.showName}
                 </P>
                 <Button
@@ -143,24 +132,73 @@ const Sponsor = () => {
                   h="40px"
                   pr="90px"
                   fs="13px"
-                  bc="violet"
+                  bc="#ECECEC"
                 >
                   {sponsorData.content}
+                </Button>
+              </SponserComment>
+            </SponserDiv>
+            <SponserDiv>
+              <SponsorImg src="/imgs/Character/iu.jpg" alt="image" />
+              <SponserComment mt="10px">
+                <P pl="5px" fs="13px" fw="800" color="#FFFFFF">
+                  후원자 보여줄 이름
+                </P>
+                <Button
+                  mt="5px"
+                  w="300px"
+                  h="40px"
+                  pr="90px"
+                  fs="13px"
+                  bc="#ECECEC"
+                >
+                  후원자 남길 메시지
+                </Button>
+              </SponserComment>
+            </SponserDiv>
+
+            <SponserDiv>
+            <SponsorImg src="/imgs/Character/songjoongy.jpg" alt="image" />
+              <SponserComment mt="10px">
+                <P pl="5px" fs="13px" fw="800" color="#FFFFFF">
+                후원자 보여줄 이름
+                  {/* {sponsorData.showName} */}
+                </P>
+                <Button
+                  mt="5px"
+                  w="300px"
+                  h="40px"
+                  pr="90px"
+                  fs="13px"
+                  bc="#ECECEC"
+                >
+                  {/* {sponsorData.content} */}
+                  후원자 남길 메시지
+                </Button>
+              </SponserComment>
+            </SponserDiv>
+
+            <SponserDiv>
+            <SponsorImg src="/imgs/Character/junjihyun.jpg" alt="image" />
+              <SponserComment mt="10px">
+                <P pl="5px" fs="13px" fw="800" color="#FFFFFF">
+                후원자 보여줄 이름
+                  {/* {sponsorData.showName} */}
+                </P>
+                <Button
+                  mt="5px"
+                  w="300px"
+                  h="40px"
+                  pr="90px"
+                  fs="13px"
+                  bc="#ECECEC"
+                >
+                  {/* {sponsorData.content} */}
+                  후원자 남길 메시지
                 </Button>
               </SponserComment>
             </SponserDiv>
           </FundingDiv>
-          <Button
-            onClick={() => navigate("/fundingpay")}
-            mt="20px"
-            w="442px"
-            h="60px"
-            color="black"
-            fs="19px"
-            bc="orange"
-          >
-            선물하기
-          </Button>
         </Body>
       </RightContainer>
     </MainContainer>

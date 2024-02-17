@@ -62,11 +62,6 @@ export const Button = styled.button`
   margin-bottom: ${(props) => props.mb};
   padding-left: ${(props) => props.pl};
   padding-right: ${(props) => props.pr};
-  &:hover {
-    color: white;
-    background-color: violet;
-    cursor: pointer;
-  }
 `;
 
 // 오른쪽 컨테이너
@@ -100,6 +95,7 @@ export const NavbarBtn = styled.button`
   font-weight: ${(props) => props.fw};
   padding-left: ${(props) => props.pl};
   padding-right: ${(props) => props.pr};
+  color: #FFFFFF;
 `;
 
 export const NavbarBtnDiv = styled.div`

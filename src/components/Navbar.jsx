@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { HiBell } from 'react-icons/hi';
-import { BsPersonCircle } from 'react-icons/bs';
+import { BsPersonCircle } from 'react-icons/bs'; // 로그인
 import { FaAngleLeft } from 'react-icons/fa6';
+// import { RiLogoutBoxRLine } from "react-icons/ri";
+import { IoLogOutSharp } from "react-icons/io5"; // 로그아웃
 import { useNavigate } from 'react-router-dom';
 import {
     NavbarIconContainer,
@@ -71,13 +73,13 @@ const Navbar = ({ isLoggedIn, handleLoginClick, handleLogoutClick }) => {
             <NavbarIconContainer>
                 {/* HiBell 아이콘 클릭 시 알림 리스트 표시 */}
                 <NavbarNotificationIconDiv onClick={toggleNotification}>
-                    <HiBell />
+                    <HiBell size="" color="#FFFFFF"/>
                 </NavbarNotificationIconDiv>
                 {isNotificationOpen && (
                     <NotificationContainer>
                         <NotificationDiv>
                             <button onClick={toggleNotification}>
-                                <FaAngleLeft />
+                                <FaAngleLeft size="" color='white'/>
                             </button>
                             <div>
                                 <button onClick={handleDeleteSelected}>선택삭제</button>
@@ -100,27 +102,29 @@ const Navbar = ({ isLoggedIn, handleLoginClick, handleLogoutClick }) => {
                     </NotificationContainer>
                 )}
                 <NavbarIconDiv>
-                    <BsPersonCircle />
+                    <BsPersonCircle color="#FFFFFF"/>
                 </NavbarIconDiv>
                 <NavbarBtn onClick={handleLogoutClick} fs="13px" fw="600">
-                    로그아웃
+                    {/* <RiLogoutBoxRLine /> */}
+                    <IoLogOutSharp size="28px" color="#FFFFFF"/>
                 </NavbarBtn>
             </NavbarIconContainer>
         </>
     ) : (
         <>
-            <NavbarBtn onClick={handleLoginClick} fs="13px" fw="600">
-                <LoginIcon src="/imgs/Icon/user.png" alt="icon" />
+            <NavbarBtn onClick={handleLoginClick} pt="10px" fs="20px" fw="600">
+            <BsPersonCircle color="#FFFFFF"/>
             </NavbarBtn>
         </>
     );
 
     return (
         <>
-            <NavbarBtn onClick={handleNavbarIconClick} fs="20px" fw="600" pl="15px" color="white">
+            <NavbarBtn onClick={handleNavbarIconClick} fs="20px" fw="600" pl="25px" color="white">
                 <LogoDiv>
                     <LogoIcon src="/imgs/Icon/Frame 7413.png" />
-                    <LogoTextIcon src="/imgs/Logo/Giftipie.png" />
+                    <LogoTextIcon src="/imgs/Logo/Giftipie.png" />           
+                    
                 </LogoDiv>
             </NavbarBtn>
             <NavbarBtnDiv>{navbarContents}</NavbarBtnDiv>

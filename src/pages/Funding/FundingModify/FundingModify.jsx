@@ -173,7 +173,7 @@ const FundingModify = () => {
       {/* 왼쪽 컨테이너 */}
       <LeftContainer>
         {/* 로고 및 간단한 설명 */}
-        <Logo>😉 Giftipie</Logo>
+        <Logo>Giftipie</Logo>
         <P pt="25px" fs="16px" fw="800" pb="5px">
           기프티파이에서
         </P>
@@ -184,17 +184,6 @@ const FundingModify = () => {
           주고 받아요
         </P>
         {/* 펀딩 시작하기 버튼 */}
-        <Button
-          onClick={() => navigate("/")}
-          mt="20px"
-          w="180px"
-          h="50px"
-          fs="16px"
-          color="white"
-          bc="orange"
-        >
-          펀딩 시작하기
-        </Button>
       </LeftContainer>
 
       {/* 오른쪽 컨테이너 */}
@@ -211,10 +200,10 @@ const FundingModify = () => {
           {/* 펀딩 상품 정보 입력 및 이미지 변경 */}
           <FundingDiv>
             {/* 펀딩 페이지에 노출되는 상품명 및 이미지 변경 버튼 */}
-            <P pb="10px" fs="16px" fw="900">
+            <P pb="10px" fs="16px" fw="900" color="#FF7C7C">
               펀딩 수정페이지
             </P>
-            <P pb="20px" fs="10px" fw="900">
+            <P pb="20px" fs="10px" fw="900" color="#E4E4E4">
               펀딩페이지의 상품명, 가격, 이미지는 변경할 수 없습니다.
             </P>
 
@@ -261,11 +250,11 @@ const FundingModify = () => {
             {/* 펀딩 내용 및 공개 여부 입력 부분 */}
             <SponsorDiv>
               <SponsorComment mt="50px">
-                <P pb="10px" fs="16px" fw="900">
+                <P pb="10px" fs="16px" fw="900" color="#FF7C7C">
                   펀딩 내용
                 </P>
-                <P pb="20px" fs="13px" fw="900">
-                  공개 방식
+                <P pb="20px" fs="13px" fw="900" color="#E4E4E4">
+                  공개 방식을 설정해주세요.
                 </P>
                 <SponsorDiv>
                   <RadioInput
@@ -280,10 +269,10 @@ const FundingModify = () => {
                     type="radio"
                     mb="21px"
                   />
-                  <P pb="20px" fs="13px" fw="900" pl="20px">
+                  <P pb="20px" fs="13px" fw="900" pl="20px" color="#E4E4E4">
                     공개
                   </P>
-                  <P pb="20px" fs="10px" fw="900" pl="42px">
+                  <P pb="20px" fs="10px" fw="900" pl="42px" color="#E4E4E4">
                     누구나 볼 수 있어요
                   </P>
                 </SponsorDiv>
@@ -301,16 +290,16 @@ const FundingModify = () => {
                     type="radio"
                     mb="21px"
                   />
-                  <P pb="20px" fs="13px" fw="900" pl="20px">
+                  <P pb="20px" fs="13px" fw="900" pl="20px" color="#E4E4E4">
                     비공개
                   </P>
-                  <P pb="20px" fs="10px" fw="900" pl="30px">
+                  <P pb="20px" fs="10px" fw="900" pl="30px" color="#E4E4E4">
                     링크를 통해서만 방문할 수 있어요
                   </P>
                 </SponsorDiv>
               </SponsorComment>
             </SponsorDiv>
-            <P pt="30px" pb="5px" fs="13px" fw="800">
+            <P pt="30px" pb="5px" fs="13px" fw="800" color="#E4E4E4">
               이름
             </P>
             <InputTag
@@ -325,7 +314,7 @@ const FundingModify = () => {
               mb="10px"
               pl="10px"
             />
-            <P pt="10px" pb="5px" fs="13px" fw="800">
+            <P pt="10px" pb="5px" fs="13px" fw="800" color="#E4E4E4">
               제목
             </P>
             <InputTag
@@ -340,7 +329,7 @@ const FundingModify = () => {
               mb="10px"
               pl="10px"
             />
-            <P pt="10px" pb="5px" fs="13px" fw="800">
+            <P pt="10px" pb="5px" fs="13px" fw="800" color="#E4E4E4">
               본문
             </P>
             <InputTag
@@ -356,7 +345,7 @@ const FundingModify = () => {
               pl="10px"
               pb="50px"
             />
-            <P pt="10px" pb="5px" fs="13px" fw="800">
+            <P pt="10px" pb="5px" fs="13px" fw="800" color="#E4E4E4">
               마감일 설정
             </P>
             <InputTag
@@ -373,10 +362,10 @@ const FundingModify = () => {
           </FundingDiv>
           {/* 펀딩 안내 문구 */}
           <TogetherDiv>
-            <P pl="130px" fs="14px" fw="800">
+            <P pl="130px" fs="14px" fw="800" color="#FFE6C1">
               펀딩 금액은 계좌로 전달돼요
             </P>
-            <P pl="95px" fs="14px" fw="800">
+            <P pl="95px" fs="14px" fw="800" color="#FFE6C1">
               펀딩에 성공하면 카톡으로 알림이 가요
             </P>
           </TogetherDiv>
@@ -397,9 +386,9 @@ const FundingModify = () => {
             w="442px"
             h="60px"
             mt="10px"
-            color="white"
+            color="#5F5F5F"
             fs="19px"
-            bc="orange"
+            bc="#FFE6C1"
           >
             펀딩 종료하기
           </Button>
@@ -410,7 +399,7 @@ const FundingModify = () => {
             mt="10px"
             color="white"
             fs="19px"
-            bc="red"
+            bc="#FF7C7C"
           >
             펀딩 삭제하기
           </Button>

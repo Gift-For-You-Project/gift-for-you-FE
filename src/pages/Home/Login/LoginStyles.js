@@ -81,6 +81,7 @@ export const InputFieldContainer = styled.div`
   margin-top: auto;
   width: 100%;
   max-width: 390px;
+  color: white;
 `;
 
 export const BlankLine = styled.div`

@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 import { useNavigate, useParams, useLocation } from "react-router-dom";
 import CheckBox from "../FundingPay/CheckBox/CheckBox";
 import { warnToast } from "../../../components/toast";
+import { useDispatch, useSelector } from "react-redux"; // 추가된 코드
+import { userLogout } from "../../../redux/authSlice"; // 추가된 코드
+import Navbar from "../../../components/Navbar"; // 추가된 코드
 import {
   fundingPayDonationReady,
   getDonationApproval,
@@ -14,6 +17,7 @@ import {
   Logo,
   P,
   Button,
+  NavbarDiv,
   RightContainer,
   SponserMoney,
   InputTag,
@@ -31,6 +35,8 @@ const FundingPay = () => {
   const navigate = useNavigate();
   const { id } = useParams();
   const location = useLocation();
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn); // 추가된 코드
+  const dispatch = useDispatch(); // 추가된 코드
 
   // 후원자 정보 및 펀딩 정보를 관리할 상태 변수들을 설정
   const [sponsorDonation, setSponsorDonation] = useState({
@@ -120,10 +126,16 @@ const FundingPay = () => {
     getData();
   }, [id, pgToken]);
 
+  // 추가된 코드
+  const handleLogoutClick = () => {
+    dispatch(userLogout()); // 로그아웃 액션 디스패치
+    navigate("/");
+  };
+
   return (
     <MainContainer>
       <LeftContainer>
-        <Logo>😉 Giftipie</Logo>
+        <Logo>Giftipie</Logo>
         <P pt="25px" fs="16px" fw="800" pb="5px">
           기프티파이에서
         </P>
@@ -139,34 +151,41 @@ const FundingPay = () => {
           w="180px"
           h="50px"
           fs="16px"
-          color="white"
-          bc="orange"
+          color="#2C2C2C"
+          bc="#FF7C7C"
         >
-          펀딩 시작하기
+          Home
         </Button>
       </LeftContainer>
 
       <RightContainer>
+        {/* 추가된 코드 */}
+        <NavbarDiv>
+          <Navbar
+            isLoggedIn={isLoggedIn}
+            handleLogoutClick={handleLogoutClick}
+          />
+        </NavbarDiv>
         <Body>
           <FundingDiv>
             <SponserMoney>
-              <SponsorImg src="/imgs/junjihyun.jpg" alt="logo" />
-              <P pt="10px" fs="16px" fw="800" pb="5px">
+              {/* <SponsorImg src="/imgs/junjihyun.jpg" alt="logo" /> */}
+              <P pt="10px" fs="16px" fw="800" pb="5px" color="#FFFFFF">
                 {sponsorDonation.showName} 님에게
               </P>
-              <P fs="16px" fw="800" pb="5px">
+              <P fs="16px" fw="800" pb="5px" color="#FFFFFF">
                 {sponsorDonation.donation}원
               </P>
-              <P fs="16px" fw="800">
+              <P fs="16px" fw="800" color="#FFFFFF">
                 후원하기
               </P>
             </SponserMoney>
-            <P pt="20px" pb="20px" fs="16px" fw="900">
+            <P pt="20px" pb="20px" fs="16px" fw="900" color="#FFFFFF">
               후원자
             </P>
             <SponserDiv>
               <SponserComment mt="10px">
-                <P pl="10px" pb="5px" fs="13px" fw="800">
+                <P pl="10px" pb="5px" fs="13px" fw="800" color="#FFFFFF">
                   이름
                 </P>
                 <InputTag
@@ -181,13 +200,13 @@ const FundingPay = () => {
                   }}
                   h="40px"
                 />
-                <P pl="10px" fs="10px" fw="800">
+                <P pl="10px" fs="10px" fw="800" color="#FFFFFF">
                   주최자에게 이름이 모두 공개되고, 후원자 목록에는 두번째
                   글자부터 *으로 표시됩니다. 예) 김 * *
                 </P>
               </SponserComment>
             </SponserDiv>
-            <P pt="10px" pl="10px" pb="5px" fs="13px" fw="800">
+            <P pt="10px" pl="10px" pb="5px" fs="13px" fw="800" color="#FFFFFF">
               메시지
             </P>
             <InputTag
@@ -203,21 +222,19 @@ const FundingPay = () => {
               pb="50px"
               h="100px"
             />
-            <P pl="10px" fs="10px" fw="800">
+            <P pl="10px" fs="10px" fw="800" color="#FFFFFF">
               현재는 테스트 기간으로, 실제 결제가 이루어지지 않습니다. 대신
               1명이 참여할 때마다 개설자에게 1,000원이 적립됩니다.
             </P>
           </FundingDiv>
           <CheckBox />
-          <TogetherDiv pt="10px" bc="orange">
-            <P pl="140px" fs="14px" fw="800">
-              <br />
+          <TogetherDiv pt="10px">
+            <P pl="140px" pt="11px" pb="19px" fs="14px" fw="800" bc="#FF7C7C">
               지금 선물하면 {sponsorDonation.donationRanking}등이에요!
-              <br />
             </P>
           </TogetherDiv>
           <KakaoButton onClick={handleFundingDonationClick}>
-            <KakaoPayLogo src="/imgs/kakaopay.png" alt="image" />
+            <KakaoPayLogo src="/imgs/Logo/kakaopay.png" alt="image"/>
           </KakaoButton>
         </Body>
       </RightContainer>

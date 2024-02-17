@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import theme from "../../../styles/theme";
 
 export const ModalContainer = styled.div`
   display: flex;
@@ -8,7 +9,7 @@ export const ModalContainer = styled.div`
   width: 100%;
   max-width: 350px;
   height: 550px;
-  background-color: snow;
+  background-color: ${theme.gray1};
   position: fixed;
   bottom: 50%;
   right: 50%;
@@ -73,10 +74,12 @@ export const KakaoBtn = styled.button``;
 
 export const LoginModalBtn = styled.button`
   background-color: ${(props) => props.color};
-  padding: 16px 20px;
+  padding: 12px 12px;
   font-size: 18px;
   font-weight: 500;
-  border-radius: 6px;
-  width: 227.5px;
-  margin-top: 8px;
+  color: white;
+  border-radius: 8px;
+  width: 220px;
+  margin: 6px;
+  border: 1px solid lightgray;
 `;

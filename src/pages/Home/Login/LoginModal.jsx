@@ -35,23 +35,28 @@ const LoginModal = ({ closeModal }) => {
           <IoClose />
         </IoCloseDiv>
         <LoginModalImg
-          src="/imgs/Login/pie.png"
+          src="/imgs/Character/giftipie-01.png"
           alt="pie"
           w="100px"
           h="100px"
         />
-        <P fs="20px" fw="700" mt="20px">
+        <P fs="20px" fw="700" mt="20px" color="white">
           Giftipie에서
         </P>
-        <P fs="20px" fw="700" mt="4px">
+        <P fs="20px" fw="700" mt="4px" color="white">
           정말 원하는 선물을
         </P>
-        <P fs="20px" fw="700" mt="4px" mb="20px">
+        <P fs="20px" fw="700" mt="4px" mb="20px" color="white">
           주고받아요
         </P>
         <Link to="/signup">
-          <LoginModalBtn color="orange" hover="#f19900">
+          <LoginModalBtn>
             가입하기
+          </LoginModalBtn>
+        </Link>
+        <Link to="/login">
+          <LoginModalBtn>
+            로그인하기
           </LoginModalBtn>
         </Link>
         <GoogleBtn onClick={GoogleLogin}>
@@ -70,11 +75,6 @@ const LoginModal = ({ closeModal }) => {
             mt="10px"
           />
         </KakaoBtn>
-        <Link to="/login">
-          <LoginModalBtn color="orange" hover="#f19900">
-            로그인하기
-          </LoginModalBtn>
-        </Link>
       </ModalContainer>
     </>
   );

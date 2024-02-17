@@ -19,7 +19,7 @@ export const LeftContainer = styled.div`
   width: 500px;
   height: 100vh;
   padding: 20px;
-  border: 1px solid lightgray;
+  /* border: 1px solid lightgray; */
   border-radius: 8px;
   margin-right: 100px;
 
@@ -71,6 +71,7 @@ export const RightContainer = styled.div`
   position: relative;
   width: 442px;
   border: 1px solid lightgray;
+  border-radius: 20px;
   height: 100vh;
   overflow-y: scroll;
 
