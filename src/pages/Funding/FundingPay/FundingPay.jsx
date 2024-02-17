@@ -9,7 +9,6 @@ import {
   fundingPayDonationReady,
   getDonationApproval,
   getFundingDonation,
-  getDonationApprovalResponse,
 } from "../../../apis/funding";
 import {
   MainContainer,
@@ -113,10 +112,10 @@ const FundingPay = () => {
         }
 
         // 후원 결제 승인 응답 API
-        if (id) {
-          const result = await getDonationApprovalResponse(id);
-          setSponsorDonation(result);
-        }
+        // if (id) {
+        //   const result = await getDonationApprovalResponse(id);
+        //   setSponsorDonation(result);
+        // }
       } catch (error) {
         console.error("후원 결제승인 응답 오류:", error);
       }
