@@ -8,6 +8,7 @@ import Navbar from "../../../components/Navbar"; // 추가된 코드
 import {
   fundingPayDonationReady,
   getFundingDonation,
+  getDonationApprovalResponse,
 } from "../../../apis/funding";
 import {
   MainContainer,
@@ -109,6 +110,8 @@ const FundingPay = () => {
         );
         console.log("결제승인: ", response);
         if (response.status === 200) {
+          console.log("무슨 데이터가 들었을까: ", response);
+          getDonationApprovalResponse(response);
           navigate("/");
           return response.data;
         }
