@@ -112,17 +112,15 @@ export const BannerImgDiv = styled.div`
 
 export const BannerImg = styled.img`
   width: 100%;
-  max-width: 150px;
+  max-width: 140px;
   height: 100%;
-  max-height: 150px;
+  max-height: 140px;
   border-radius: 20px;
 `;
 
 export const IllustImg = styled.img`
   width: 100%;
   max-width: 90px;
-  height: 100%;
-  max-height: 90px;
   margin: 10px;
 `;
 export const NavigateDiv = styled.div`

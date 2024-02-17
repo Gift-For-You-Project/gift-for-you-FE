@@ -19,7 +19,7 @@ export const LeftContainer = styled.div`
   width: 500px;
   height: 100vh;
   padding: 20px;
-  border: 1px solid lightgray;
+  /* border: 1px solid lightgray; */
   margin-right: 100px;
 
   @media (max-width: 1024px) {
@@ -224,6 +224,8 @@ export const TogetherGrid = styled.div`
   max-width: 100px;
   height: 130px;
   border-radius: 8px;
+  padding-bottom: 30px;
+  margin-bottom: 50px;
 `;
 
 export const FundingBtn = styled.button`

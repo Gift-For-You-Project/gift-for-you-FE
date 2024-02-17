@@ -19,8 +19,6 @@ export const LeftContainer = styled.div`
   width: 500px;
   height: 100vh;
   padding: 20px;
-  border: 1px solid lightgray;
-  border-radius: 8px;
   margin-right: 100px;
 
   @media (max-width: 1024px) {
@@ -41,6 +39,7 @@ export const P = styled.p`
   font-size: ${(props) => props.fs};
   font-weight: ${(props) => props.fw};
   color: ${(props) => props.color};
+  background-color: ${(props) => props.bc};
   align-items: center;
 `;
 
@@ -65,11 +64,21 @@ export const Button = styled.button`
   }
 `;
 
+// 네브바 영역
+export const NavbarDiv = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 70px;
+`;
+
 // 오른쪽 컨테이너
 export const RightContainer = styled.div`
   position: relative;
   width: 442px;
   border: 1px solid lightgray;
+  border-radius: 20px;
   height: 100vh;
   overflow-y: scroll;
 
@@ -165,7 +174,7 @@ export const KakaoButton = styled.button`
   border-radius: 7px;
   font-size: 19px;
   font-weight: 600;
-  margin-top: ${(props) => props.mt};
+  margin-top: 14px;
   margin-bottom: ${(props) => props.mb};
   padding-left: ${(props) => props.pl};
   padding-right: ${(props) => props.pr};

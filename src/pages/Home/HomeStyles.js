@@ -6,7 +6,6 @@ export const MainContainer = styled.div`
   display: flex;
   justify-content: center;
   max-width: 1200px;
-  /* min-height: 100vh; */
   height: 100vh;
   margin: 0 auto;
   flex-wrap: wrap;
@@ -17,14 +16,77 @@ export const LeftContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
-  width: 500px;
   height: 100vh;
-  margin-right: 100px;
 
-  @media (max-width: 1024px) {
+  @media (max-width: 1200px) {
     display: none;
   }
+`;
+
+export const LeftImgContainer = styled.div`
+  position: relative; /* 상대 위치 지정 */
+  //width: 300px; /* 이미지 너비 */
+  height: 200px; /* 이미지 높이 */
+  padding-left: 100px; /* 이미지 왼쪽 간격 조정 */
+  justify-content: space-between;
+`;
+
+export const BubbleImg = styled.img`
+  position: absolute; /* 절대 위치 지정 */
+  top: 0; /* 위쪽 정렬 */
+  left: 220px; /* 왼쪽 정렬 */
+  width: 270px; /* 부모 요소에 대한 상대적인 너비 */
+  height: 100%; /* 부모 요소에 대한 상대적인 높이 */
+`;
+
+export const LeftLogoTextIcon = styled.img`
+  height: 40px;
+  margin-left: 10px;
+  position: absolute; /* 절대 위치 지정 */
+  bottom: 20px; /* 아래쪽 위치 조정 */
+  left: 20px; /* 왼쪽 위치 조정 */
+`;
+
+export const LeftRowdiv = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  padding-top: ${(props) => props.pt};
+  margin-top: ${(props) => props.mt};
+  padding-bottom: ${(props) => props.pb};
+  padding-left: ${(props) => props.pl};
+  padding-right: ${(props) => props.pr};
+  margin-right: ${(props) => props.mr};
+  margin-left: ${(props) => props.ml};
+  font-size: ${(props) => props.fs};
+  font-weight: ${(props) => props.fw};
+  color: ${(props) => props.color};
+  background-color: ${(props) => props.bc};
+  border-radius: ${(props) => props.br};
+  padding: ${(props) => props.p};
+  border: none;
+`;
+
+export const Leftcolumndiv = styled.div`
+  flex-direction: column;
+`;
+
+export const LeftImg = styled.img`
+  margin-top: ${(props) => props.mt};
+  margin-right: ${(props) => props.mr};
+  padding-right: ${(props) => props.pr};
+  padding-left: ${(props) => props.pl};
+  width: ${(props) => props.w};
+  height: ${(props) => props.h};
+`;
+
+export const IpadLoveImg = styled.img`
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: ${(props) => props.w};
+  height: ${(props) => props.h};
 `;
 
 /* 로고 */
@@ -38,16 +100,37 @@ export const Logo = styled.h1`
 export const P = styled.p`
 /* display: flex; */
   padding-top: ${(props) => props.pt};
+  margin-top: ${(props) => props.mt};
   padding-bottom: ${(props) => props.pb};
   padding-left: ${(props) => props.pl};
   padding-right: ${(props) => props.pr};
+  margin-right: ${(props) => props.mr};
   font-size: ${(props) => props.fs};
   font-weight: ${(props) => props.fw};
   color: ${(props) => props.color};
+  background-color: ${(props) => props.bc};
+  border-radius: ${(props) => props.br};
+  padding: ${(props) => props.p};
+  border: none;
   align-items: center;
-  &:hover {
-    cursor: pointer;
-  }
+`;
+
+/* 한줄만 보이게 */
+export const OneLine = styled.div`
+  display: block;
+  width: 100%;
+  max-width: ${(props) => props.w};
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  align-items: center;
+  color: ${(props) => props.color};
+  font-size: ${(props) => props.fs};
+  font-weight: ${(props) => props.fw};
+  padding-top: ${(props) => props.pt};
+  padding-bottom: ${(props) => props.pb};
+  padding-left: ${(props) => props.pl};
+  padding-right: ${(props) => props.pr};
 `;
 
 /* 다용도 버튼 */
@@ -112,6 +195,7 @@ export const NavbarBtnDiv = styled.div`
 export const NavbarBtn = styled.button`
   font-size: ${(props) => props.fs};
   font-weight: ${(props) => props.fw};
+  padding-top: ${(props) => props.pt};
   padding-left: ${(props) => props.pl};
   padding-right: ${(props) => props.pr};
 `;
@@ -149,6 +233,12 @@ export const LogoIcon = styled.img`
   height: 35px;
   margin-top: 10px;
 `;
+
+// export const LeftLogoTextIcon = styled.img`
+//   height: 40px;
+//   margin-left: 10px;
+//   margin-top: 200px;
+// `;
 
 export const LogoTextIcon = styled.img`
   height: 25px;
@@ -199,7 +289,7 @@ export const FundingSection = styled.section`
   justify-content: space-around;
   flex-wrap: wrap;
   width: 100%;
-  height: 265px;
+  height: 475px;
   gap: 10px;
   padding: 10px;
 `;
@@ -209,13 +299,13 @@ export const EndingSection = styled.section`
   justify-content: space-around;
   flex-wrap: wrap;
   width: 100%;
-  height: 265px;
+  height: 235px;
   gap: 10px;
   padding: 10px;
 `;
 
 export const FundingGrid = styled.div`
-width: 100%;
+  width: 100%;
   max-width: 110px;
   overflow: hidden;
 
@@ -229,15 +319,6 @@ export const CharacterImg = styled.img`
   margin: 20px;
 `;
 
-export const FundingImg = styled.img`
-width: 100%;
-  max-width: 110px;
-  height: 100%;
-  max-height: 110px;
-  border: 2px solid #e9e9e9;
-  margin-top: 10px;
-`;
-
 export const BannerImg = styled.img`
   width: 100%;
   max-width: 100px;
@@ -248,6 +329,15 @@ export const BannerImg = styled.img`
   /* border: 2px solid #e9e9e9; */
   border: 0.3px solid lightgray;
   box-shadow: 0px 0.3px 0px 0.3px lightgray;
+`;
+
+export const FundingImg = styled.img`
+width: 100%;
+  max-width: 110px;
+  height: 100%;
+  max-height: 110px;
+  border: 2px solid #e9e9e9;
+  margin-top: 10px;
 `;
 
 export const ProgressBar = styled.div`
@@ -422,6 +512,6 @@ export const Footer = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
-  max-width: 442px;
+  max-width: 390px;
 `;
 

@@ -16,4 +16,5 @@ export const Checkbox = styled.input`
 export const FontSize5 = styled.h5`
     font-size: 10px;
     font-weight: 500;
+    color: #FFFFFF;
 `;
