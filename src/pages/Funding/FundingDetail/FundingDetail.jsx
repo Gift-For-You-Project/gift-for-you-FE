@@ -36,17 +36,12 @@ import {
   FloatingBtn,
 } from "./FundingDetailStyles";
 
-// 펀딩 상세 페이지 컴포넌트
 const FundingDetail = () => {
-  const navigate = useNavigate(); // React Router의 네비게이션 기능을 사용하기 위한 hook
-  const { id } = useParams(); // URL 매개변수(id)를 가져옴
-  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn); // 추가된 코드
-  const dispatch = useDispatch(); // 추가된 코드
-
-  // 펀딩 상세 정보를 담는 상태 변수 초기화
+  const navigate = useNavigate();
+  const { id } = useParams();
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+  const dispatch = useDispatch();
   const [detailData, setDetailData] = useState({
-    // 초기 상태를 명세서에 따라 설정
-    // FundingCreate에서 받아올 Data 초기값
     itemImage: "",
     itemName: "",
     targetAmount: 0,
@@ -115,23 +110,20 @@ const FundingDetail = () => {
   };
 
   useEffect(() => {
-    const fundingDetailData = async () => {
+    const getData = async () => {
       try {
         if (!id) {
-          // 유효한 id가 없으면 데이터를 요청하지 않음
           return;
         }
-        // 펀딩 ID를 설정하여 특정 펀딩의 상세 정보 가져오기
-        // const fundingid = 1; // 예: 펀딩 ID가 1인 경우
         const data = await getFundingDetail(id);
-        setDetailData(data); // 가져온 데이터를 상태 변수에 설정
+        setDetailData(data);
       } catch (error) {
         console.error("펀딩 상세페이지 오류:", error);
       }
     };
-    // 컴포넌트가 마운트될 때 API 호출 함수 실행
-    fundingDetailData();
-  }, [id]); // 빈 배열을 전달하여 한 번만 실행하도록 설정
+
+    getData();
+  }, [id]);
 
   // 추가된 코드
   const handleLogoutClick = () => {

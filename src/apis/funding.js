@@ -7,7 +7,7 @@ export const postFundingCreate = async (fundingData) => {
     const response = await instance.post("/api/funding/create", fundingData);
 
     if (response.status === 200 || response.data.status === 201) {
-      successToast("펀딩이 추가되었습니다."); // 나중에 수정할 부분
+      successToast("펀딩이 추가되었습니다.");
       return response.data;
     }
   } catch (error) {
@@ -22,7 +22,7 @@ export const postFundingCreate = async (fundingData) => {
   }
 };
 
-// 펀딩 생성페이지 모달창(ItemLink) API
+// 생성페이지 모달창(ItemLink) API
 export const postModalItemLink = async (LinkData) => {
   try {
     const response = await instance.post("/api/funding/addLink", LinkData);
@@ -42,38 +42,42 @@ export const postModalItemLink = async (LinkData) => {
   }
 };
 
-// 펀딩 상세페이지 API
+// 상세페이지 API
 export const getFundingDetail = async (id) => {
   try {
-    const response = await instance.get(`/api/funding/${id}`); // 펀딩 상세페이지 요청
-    console.log("펀딩 상세페이지 API", response);
-    return response.data; // 응답 데이터 반환
+    const response = await instance.get(`/api/funding/${id}`);
+    console.log("상세페이지 API", response);
+    return response.data;
   } catch (error) {
-    if (error.response) {
-      const code = error.response.status;
-      const message = error.response.data.message;
-      if (code === 400) {
-        errorToast(message);
-      }
+    const status = error.response.status;
+    if (status === 404) {
+      console.error("API 호출 중 404 에러 발생: ", error);
+    } else if (status === 500) {
+      console.error("API 호출 중 500 에러 발생: ", error);
     }
   }
 };
 
-// 펀딩 후원자 상세페이지 API
-export const fetchSponsorDetail = async (id) => {
+// 후원자 상세페이지 API -> 아직 없음
+export const getSponsorDetail = async (id) => {
   try {
-    const response = await instance.get(`/api/fundingsponsordetail/${id}`); // 펀딩 후원자 상세페이지 요청
+    const response = await instance.get(`/api/fundingsponsordetail/${id}`);
     if (response.status === 200) {
+      console.log("상세페이지 API", response);
       infoToast("후원자 상세페이지입니다.");
-      return response.data; // 응답 데이터 반환
+      return response.data;
     }
   } catch (error) {
-    console.error("펀딩 상세페이지 API 호출 오류:", error); // 오류 로깅
-    throw error; // 에러 다시 throw 또는 다른 적절한 처리를 수행
+    const status = error.response.status;
+    if (status === 404) {
+      console.error("API 호출 중 404 에러 발생: ", error);
+    } else if (status === 500) {
+      console.error("API 호출 중 500 에러 발생: ", error);
+    }
   }
 };
 
-// 펀딩 수정페이지 불러오기 API - get
+// 수정페이지 불러오기 API - get
 export const FundingModifyGet = async (id, data) => {
   try {
     const response = await instance.get(`/api/funding/${id}`, data); // 펀딩 수정페이지 요청
@@ -87,7 +91,7 @@ export const FundingModifyGet = async (id, data) => {
   }
 };
 
-// 펀딩 수정페이지 API - 변경버튼 - patch
+// 수정페이지 API - 변경버튼 - patch
 export const updateFundingModify = async (id, data) => {
   try {
     const response = await instance.patch(`/api/funding/${id}/update`, data); // 펀딩 수정페이지 요청
@@ -100,7 +104,7 @@ export const updateFundingModify = async (id, data) => {
   }
 };
 
-// 펀딩 수정페이지 - 상품링크 변경 모달창(ItemLink) API
+// 수정페이지 - 상품링크 변경 모달창(ItemLink) API
 export const modalLinkModify = async (linkModifyData) => {
   try {
     const response = await instance.post(
@@ -121,7 +125,7 @@ export const modalLinkModify = async (linkModifyData) => {
   }
 };
 
-// 펀딩 수정페이지 - 삭제하기 버튼 API - delete
+// 수정페이지 - 삭제하기 버튼 API - delete
 export const deleteFundingModify = async (id, data) => {
   try {
     const response = await instance.delete(`/api/funding/${id}`, data);
@@ -140,7 +144,7 @@ export const deleteFundingModify = async (id, data) => {
   }
 };
 
-// 펀딩 수정페이지 API - 종료버튼 API - patch
+// 수정페이지 API - 종료버튼 API - patch
 export const completeFundingModify = async (id, data) => {
   try {
     const response = await instance.patch(`/api/funding/${id}/finish`, data);
@@ -153,7 +157,7 @@ export const completeFundingModify = async (id, data) => {
   }
 };
 
-// 펀딩 결제페이지 랭킹 API
+// 결제페이지 랭킹 API
 export const getFundingDonation = async (id) => {
   try {
     const response = await instance.get(`/api/funding/${id}/donation`);
@@ -171,7 +175,7 @@ export const getFundingDonation = async (id) => {
   }
 };
 
-// 후원 결제준비
+// 후원 결제준비 API
 export const fundingPayDonationReady = async ({
   id,
   sponsorNickname,
@@ -199,7 +203,7 @@ export const fundingPayDonationReady = async ({
   }
 };
 
-// 후원 결제승인
+// 후원 결제승인 API
 export const getDonationApproval = async (pgToken) => {
   try {
     const response = await instance.get(
@@ -213,7 +217,7 @@ export const getDonationApproval = async (pgToken) => {
   }
 };
 
-// 후원 결제승인 응답
+// 후원 결제승인 응답 API
 export const getDonationApprovalResponse = async (id) => {
   try {
     const response = await instance.get(`/api/fundingdetail/${id}`);
@@ -225,6 +229,6 @@ export const getDonationApprovalResponse = async (id) => {
   }
 };
 
-// 후원 결제실패
+// 후원 결제실패 API
 
-// 후원 결제취소
+// 후원 결제취소 API
