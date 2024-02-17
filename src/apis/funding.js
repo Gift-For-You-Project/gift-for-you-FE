@@ -46,7 +46,6 @@ export const postModalItemLink = async (LinkData) => {
 export const getFundingDetail = async (id) => {
   try {
     const response = await instance.get(`/api/funding/${id}`);
-    console.log("상세페이지 API", response);
     return response.data;
   } catch (error) {
     const status = error.response.status;
@@ -63,7 +62,7 @@ export const getSponsorDetail = async (id) => {
   try {
     const response = await instance.get(`/api/fundingsponsordetail/${id}`);
     if (response.status === 200) {
-      console.log("상세페이지 API", response);
+      console.log("후원자 상세페이지 API", response);
       infoToast("후원자 상세페이지입니다.");
       return response.data;
     }
