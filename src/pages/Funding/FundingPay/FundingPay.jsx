@@ -8,6 +8,7 @@ import Navbar from "../../../components/Navbar"; // 추가된 코드
 import {
   fundingPayDonationReady,
   getFundingDonation,
+  getDonationApproval,
   getDonationApprovalResponse,
 } from "../../../apis/funding";
 import {
@@ -28,7 +29,6 @@ import {
   KakaoButton,
   KakaoPayLogo,
 } from "./FundingPayStyles";
-import { instance } from "../../../apis/auth";
 
 const FundingPay = () => {
   const navigate = useNavigate();
@@ -101,55 +101,29 @@ const FundingPay = () => {
     }
   };
 
-  // 후원 결제승인
+  let pg_token = new URL(window.location.href).searchParams.get("pg_token");
+
+  // 후원 결제승인 API
   useEffect(() => {
-    const getDonationApproval = async (pg_token) => {
+    const getData = async () => {
       try {
-        const response = await instance.get(
-          `https://api.giftipie.me/api/donation/approve?pg_token=${pg_token}`
-        );
-        console.log(response.status);
-        if (response.status === 200) {
-          getDonationApprovalResponse(response);
-          return response.data;
+        // 후원 결제승인 API
+        if (pg_token !== "") {
+          await getDonationApproval(pg_token);
+        }
+
+        // 후원 결제 승인 응답 API
+        if (id) {
+          const result = await getDonationApprovalResponse(id);
+          setSponsorDonation(result);
         }
       } catch (error) {
-        console.error("후원 결제승인 오류:", error.message);
+        console.error("후원 결제승인 응답 오류:", error);
       }
     };
 
-    const serachParams = new URLSearchParams(location.search);
-    const pg_token = serachParams.get("pg_token");
-    if (pg_token) {
-      alert("pg_token = " + pg_token);
-      getDonationApproval(pg_token);
-    }
-    navigate("/");
-  }, [location.search, navigate]);
-
-  // let pg_token = new URL(window.location.href).searchParams.get("pg_token");
-
-  // 후원 결제승인 API
-  // useEffect(() => {
-  //   const getData = async () => {
-  //     try {
-  //       // 후원 결제승인 API
-  //       if (pg_token !== "") {
-  //         await getDonationApproval(pg_token);
-  //       }
-
-  //       // 후원 결제 승인 응답 API
-  //       if (id) {
-  //         const result = await getDonationApprovalResponse(id);
-  //         setSponsorDonation(result);
-  //       }
-  //     } catch (error) {
-  //       console.error("후원 결제승인 응답 오류:", error);
-  //     }
-  //   };
-
-  //   getData();
-  // }, [id, pg_token]);
+    getData();
+  }, [id, pg_token]);
 
   // 추가된 코드
   const handleLogoutClick = () => {
