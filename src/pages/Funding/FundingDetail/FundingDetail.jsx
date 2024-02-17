@@ -58,8 +58,9 @@ const FundingDetail = () => {
     achievementRate: 0,
     ownerFlag: false, // true면 수정 페이지 버튼 보여지게
     modifiedAt: "", // 수정 날짜
-    // 후원자 이름 추가
-    // 후원자 댓글 추가
+    sponsorNickname: "", // 후원자 이름 추가
+    sponsorComment: "", // 후원자 댓글 추가
+    donationRanking: "", // 후원자 랭킹 추가
   });
 
   const [sponsorDonation, setSponsorDonation] = useState({
@@ -243,10 +244,10 @@ const FundingDetail = () => {
               <SponsorImg src="/imgs/Character/junjihyun.jpg" alt="img" />
               <SponserComment mt="10px">
                 <P pl="5px" fs="13px" fw="800">
-                  후원자 보여줄 이름
+                  {detailData.sponsorNickname}
                 </P>
                 <SponsorCommentDiv mt="5px">
-                  생일 축하 축하~!!!
+                  {detailData.sponsorComment}
                 </SponsorCommentDiv>
               </SponserComment>
             </SponserDiv>
