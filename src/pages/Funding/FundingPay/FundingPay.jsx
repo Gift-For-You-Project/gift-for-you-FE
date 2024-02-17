@@ -101,15 +101,15 @@ const FundingPay = () => {
     }
   };
 
-  let pgToken = new URL(window.location.href).searchParams.get("pgToken");
+  let pg_token = new URL(window.location.href).searchParams.get("pg_token");
 
   // 후원 결제승인 API
   useEffect(() => {
     const getData = async () => {
       try {
         // 후원 결제승인 API
-        if (pgToken !== undefined && pgToken !== null && pgToken !== "") {
-          await getDonationApproval(pgToken);
+        if (pg_token !== "") {
+          await getDonationApproval(pg_token);
         }
 
         // 후원 결제 승인 응답 API
@@ -123,7 +123,8 @@ const FundingPay = () => {
     };
 
     getData();
-  }, [id, pgToken]);
+  }, [id, pg_token]);
+  // pg_token !== undefined && pg_token !== null &&
 
   // 추가된 코드
   const handleLogoutClick = () => {
