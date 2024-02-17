@@ -233,7 +233,7 @@ export const SponsorCommentDiv = styled.div`
   padding: 10px;
   justify-content: center;
   align-items: center;
-  background-color: #FFE6C1;
+  background-color: #ffe6c1;
   margin-top: ${(props) => props.mt};
   width: 100%;
   font-size: 13px;

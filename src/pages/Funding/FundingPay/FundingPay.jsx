@@ -7,9 +7,8 @@ import { userLogout } from "../../../redux/authSlice"; // 추가된 코드
 import Navbar from "../../../components/Navbar"; // 추가된 코드
 import {
   fundingPayDonationReady,
-  getDonationApproval,
   getFundingDonation,
-  getDonationApprovalResponse,
+  getDonationApproval,
 } from "../../../apis/funding";
 import {
   MainContainer,
@@ -34,8 +33,8 @@ const FundingPay = () => {
   const navigate = useNavigate();
   const { id } = useParams();
   const location = useLocation();
-  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn); // 추가된 코드
-  const dispatch = useDispatch(); // 추가된 코드
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+  const dispatch = useDispatch();
 
   // 후원자 정보 및 펀딩 정보를 관리할 상태 변수들을 설정
   const [sponsorDonation, setSponsorDonation] = useState({
@@ -45,36 +44,6 @@ const FundingPay = () => {
     sponsorNickname: "",
     sponsorComment: "",
   });
-
-  // useEffect를 이용하여 URL 매개변수에서 donation, showName 값을 가져오는 부분 합침
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        if (!id) {
-          return;
-        }
-        const params = new URLSearchParams(location.search);
-        const donation = params.get("donation");
-        const showName = params.get("showName");
-
-        // 특정 펀딩의 상세 정보를 가져오기
-        const response = await getFundingDonation(id);
-
-        // 후원자 정보 업데이트
-        setSponsorDonation((prev) => ({
-          ...prev,
-          donation: donation ? parseInt(donation) : "",
-          showName: showName || prev.showName,
-          donationRanking: response.result.donationRanking,
-        }));
-      } catch (error) {
-        console.error("결제 오류:", error);
-      }
-    };
-
-    // 컴포넌트가 마운트될 때와 id가 변경될 때 API 호출 함수 실행
-    fetchData();
-  }, [id, location.search]);
 
   const handleFundingDonationClick = async () => {
     try {
@@ -94,38 +63,51 @@ const FundingPay = () => {
         donation: sponsorDonation.donation,
       });
 
-      // 리다이렉션을 원하면
+      console.log("결제 준비 성공: ", response);
       window.location.href = response.result.next_redirect_pc_url;
     } catch (error) {
       console.error("결제 준비 오류:", error);
     }
   };
 
-  let pgToken = new URL(window.location.href).searchParams.get("pgToken");
-
-  // 후원 결제승인 API
+  // useEffect를 이용하여 URL 매개변수에서 donation, showName 값을 가져오는 부분 합침
   useEffect(() => {
     const getData = async () => {
       try {
-        // 후원 결제승인 API
-        if (pgToken !== undefined && pgToken !== null && pgToken !== "") {
-          await getDonationApproval(pgToken);
+        if (!id) {
+          return;
         }
+        const params = new URLSearchParams(location.search);
+        const donation = params.get("donation");
+        const showName = params.get("showName");
 
-        // 후원 결제 승인 응답 API
-        if (id) {
-          const result = await getDonationApprovalResponse(id);
-          setSponsorDonation(result);
+        // 특정 펀딩의 상세 정보를 가져오기
+        const response = await getFundingDonation(id);
+
+        // 후원자 정보 업데이트
+        setSponsorDonation((prev) => ({
+          ...prev,
+          donation: donation ? parseInt(donation) : "",
+          showName: showName || prev.showName,
+          donationRanking: response.result.donationRanking,
+        }));
+
+        // 후원 결제승인 API 호출
+        if (params.has("pg_token")) {
+          const pg_token = params.get("pg_token");
+          await getDonationApproval(pg_token);
+
+          navigate(`/fundingdetail/${id}`);
         }
       } catch (error) {
-        console.error("후원 결제승인 응답 오류:", error);
+        console.error("결제 오류:", error);
       }
     };
 
+    // 컴포넌트가 마운트될 때와 id가 변경될 때 API 호출 함수 실행
     getData();
-  }, [id, pgToken]);
+  }, [id, location.search, navigate]);
 
-  // 추가된 코드
   const handleLogoutClick = () => {
     dispatch(userLogout()); // 로그아웃 액션 디스패치
     navigate("/");
@@ -233,7 +215,7 @@ const FundingPay = () => {
             </P>
           </TogetherDiv>
           <KakaoButton onClick={handleFundingDonationClick}>
-            <KakaoPayLogo src="/imgs/Logo/kakaopay.png" alt="image"/>
+            <KakaoPayLogo src="/imgs/Logo/kakaopay.png" alt="image" />
           </KakaoButton>
         </Body>
       </RightContainer>
