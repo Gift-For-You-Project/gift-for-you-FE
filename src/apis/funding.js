@@ -7,8 +7,7 @@ export const postFundingCreate = async (fundingData) => {
     const response = await instance.post("/api/funding/create", fundingData);
 
     if (response.status === 200 || response.status === 201) {
-      console.log("펀딩 생성페이지 API", response);
-      successToast(response.data.msg);
+      successToast(response.message);
       return response.data;
     }
   } catch (error) {
