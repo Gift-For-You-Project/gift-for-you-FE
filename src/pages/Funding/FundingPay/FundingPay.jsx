@@ -28,6 +28,7 @@ import {
   KakaoButton,
   KakaoPayLogo,
 } from "./FundingPayStyles";
+import { Redirect } from "react-router-dom";
 
 const FundingPay = () => {
   const navigate = useNavigate();
@@ -98,6 +99,7 @@ const FundingPay = () => {
           await getDonationApproval(pg_token);
           console.log("결제승인: ", response.data.result);
           navigate("/");
+          return <Redirect to="/fundingdetail/:id" />;
         }
       } catch (error) {
         console.error("결제 오류:", error);
