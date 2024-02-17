@@ -116,7 +116,6 @@ const FundingPay = () => {
         if (id) {
           const result = await getDonationApprovalResponse(id);
           setSponsorDonation(result);
-          navigate("/fundingdetails/:id");
         }
       } catch (error) {
         console.error("후원 결제승인 응답 오류:", error);
@@ -124,7 +123,9 @@ const FundingPay = () => {
     };
 
     getData();
-  }, [id, pgToken, navigate]);
+  }, [id, pgToken]);
+
+  navigate("/fundingdetail/:id");
 
   // 추가된 코드
   const handleLogoutClick = () => {
