@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { fundingCreate } from "../../../apis/funding"; // 펀딩 생성 API import
+import { postFundingCreate } from "../../../apis/funding";
 import { useParams } from "react-router-dom";
 import CreateModal from "./Modal/CreateModal";
-import Navbar from "../../../components/Navbar"; // 추가된 코드
-import { useDispatch, useSelector } from "react-redux"; // 추가된 코드
-import { userLogout } from "../../../redux/authSlice"; // 추가된 코드
+import Navbar from "../../../components/Navbar";
+import { useDispatch, useSelector } from "react-redux";
+import { userLogout } from "../../../redux/authSlice";
+import { infoToast } from "../../../components/toast";
 import {
   MainContainer,
   LeftContainer,
@@ -27,16 +28,13 @@ import {
   ImgText,
 } from "./FundingCreateStyles";
 
-// 펀딩 생성 페이지 컴포넌트
 const FundingCreate = () => {
-  const navigate = useNavigate(); // React Router의 네비게이션 기능을 사용하기 위한 hook
+  const navigate = useNavigate();
   const { id } = useParams(); // URL 매개변수(id)를 가져옴
   const [itemImage, setItemImage] = useState(false);
-  const [isFundingModalOpen, setIsFundingModalOpen] = useState(false); // 모달 창의 열림 여부 상태 변수
+  const [isFundingModalOpen, setIsFundingModalOpen] = useState(false);
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const dispatch = useDispatch();
-
-  // 펀딩 생성 페이지에서 사용될 상태 변수 초기화
   const [createData, setCreateData] = useState({
     itemName: "",
     targetAmount: "",
@@ -60,7 +58,7 @@ const FundingCreate = () => {
   // 모달 내에서 이미지를 선택하고 설정하는 함수
   const handleImageSelection = (itemImage) => {
     setItemImage(itemImage);
-    setIsFundingModalOpen(false); // 이미지 선택 후 모달을 닫습니다.
+    setIsFundingModalOpen(false);
   };
 
   // 각 입력값에 대한 상태 업데이트 핸들러
@@ -87,7 +85,7 @@ const FundingCreate = () => {
     const value = e.target.value === "true" ? true : false;
     setCreateData({ ...createData, publicFlag: value });
   };
-  // 펀딩 생성 요청 처리 함수
+
   const handleFundingClick = async () => {
     try {
       if (
@@ -100,11 +98,12 @@ const FundingCreate = () => {
         createData.content === "" ||
         createData.endDate === ""
       ) {
-        alert("내용을 입력해주세요");
+        infoToast("내용을 입력해주세요");
         return;
       }
-      // 펀딩 생성 API 호출 및 데이터 전송
-      const response = await fundingCreate({
+
+      // 펀딩 추가 API
+      const data = await postFundingCreate({
         id,
         itemImage,
         itemName: createData.itemName,
@@ -115,21 +114,12 @@ const FundingCreate = () => {
         content: createData.content,
         endDate: createData.endDate,
       });
-      console.log("펀딩 생성 성공:", response);
-      navigate(`/fundingdetail/${response.id}`);
+      navigate(`/fundingdetail/${data.id}`);
     } catch (error) {
-      if (error.response) {
-        const statusCode = error.response.status;
-        const errorMessage = error.response.data.message;
-        if (statusCode === 400) {
-          // alert(errorMessage);
-          alert("펀딩 생성 실패 :", errorMessage);
-        }
-      }
+      console.error("펀딩 추가 API 호출 실패: ", error);
     }
   };
 
-  // 추가된 코드
   const handleLogoutClick = () => {
     dispatch(userLogout()); // 로그아웃 액션 디스패치
     navigate("/");

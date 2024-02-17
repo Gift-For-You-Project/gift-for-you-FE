@@ -9,6 +9,7 @@ import {
   fundingPayDonationReady,
   getDonationApproval,
   getFundingDonation,
+  getDonationApprovalResponse,
 } from "../../../apis/funding";
 import {
   MainContainer,
@@ -67,8 +68,6 @@ const FundingPay = () => {
           showName: showName || prev.showName,
           donationRanking: response.result.donationRanking,
         }));
-
-        console.log("펀딩 랭킹 가져오기:", response);
       } catch (error) {
         console.error("결제 오류:", error);
       }
@@ -88,7 +87,7 @@ const FundingPay = () => {
         return;
       }
 
-      // 결제 준비 API
+      // 후원 결제준비 API
       const response = await fundingPayDonationReady({
         id,
         sponsorNickname: sponsorDonation.sponsorNickname,
@@ -103,31 +102,29 @@ const FundingPay = () => {
     }
   };
 
-  // 결제 승인 API
+  let pgToken = new URL(window.location.href).searchParams.get("pgToken");
+
+  // 후원 결제승인 API
   useEffect(() => {
-    const fetchData = async () => {
+    const getData = async () => {
       try {
-        // 여기에서 window.location.href 사용하면서 변경된 부분
-        console.log("API 호출 전");
-        const response = await getDonationApproval();
-        console.log("페이지에서 결제 승인 성공: ", response);
-        // 여기에서 상태를 업데이트하거나 다른 작업을 수행할 수 있습니다.
+        // 후원 결제승인 API
+        if (pgToken !== undefined && pgToken !== null && pgToken !== "") {
+          await getDonationApproval(pgToken);
+        }
+
+        // 후원 결제 승인 응답 API
+        if (id) {
+          const result = await getDonationApprovalResponse(id);
+          setSponsorDonation(result);
+        }
       } catch (error) {
-        console.error("페이지에서 결제 승인 오류:", error);
-        // 오류가 발생한 경우에 대한 처리를 여기에 추가할 수 있습니다.
+        console.error("후원 결제승인 응답 오류:", error);
       }
     };
 
-    // 여기에서도 window.location.href를 사용하면서 변경된 부분
-    if (window.location.href.includes("redirected=true")) {
-      console.log("fetchData 호출 전");
-      fetchData();
-    } else {
-      console.error(
-        "에러: pgToken이 비어있습니다. 결제 승인이 처리되지 않습니다."
-      );
-    }
-  }, []);
+    getData();
+  }, [id, pgToken]);
 
   // 추가된 코드
   const handleLogoutClick = () => {

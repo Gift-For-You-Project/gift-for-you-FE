@@ -84,11 +84,11 @@ const Home = () => {
     //   }
     // };
 
-    const homeFundingListData = async () => {
+    const getData = async () => {
         try {
-            const response = await getHomeFundingList();
+            const content = await getHomeFundingList();
 
-            setHomeFundingList(response);
+            setHomeFundingList(content);
         } catch (error) {
             console.error('펀딩 리스트 정보를 가져오는 함수 호출 실패: ', error);
         }
@@ -97,7 +97,7 @@ const Home = () => {
     useEffect(() => {
         dispatch(bootChannelTalk());
         // myFundingData();
-        homeFundingListData();
+        getData();
     }, [dispatch]);
 
     // useEffect(() => {
@@ -173,7 +173,6 @@ const Home = () => {
                         handleLogoutClick={handleLogoutClick}
                     />
                 </NavbarDiv>
-
                 <Body>
                     <TogetherDiv bc="#3F3F3F">
                         <BetweenDiv>
@@ -249,17 +248,16 @@ const Home = () => {
                                     비공개 펀딩은 이곳에 공개되지 않아요
                                 </P>
                             </BetweenDiv>
-
                             <FundingSection>
                                 {homeFundingList.map((funding) => (
                                     <FundingGrid key={funding.id} onClick={() => handleFundingClick(funding.id)}>
                                         <FundingImg src={funding.itemImage} alt={funding.itemName} />
-                                        {/* <ProgressBar>
-                                            <Progress width={(funding.achievementRate / 100) * 100} />
-                                        </ProgressBar> */}
                                         <ProgressBar>
-                                            <Progress width={(65 / 100) * 100} />
+                                            <Progress width={(funding.achievementRate / 100) * 100} />
                                         </ProgressBar>
+                                        {/* <ProgressBar>
+                      <Progress width={(65 / 100) * 100} />
+                    </ProgressBar> // 퍼센트 바 스타일 확인용 */}
                                         <BetweenDiv>
                                             <P pt="2px" fs="13px" fw="800" color="#FF7C7C">
                                                 {funding.achievementRate}%
@@ -368,7 +366,6 @@ const Home = () => {
                         </ProductGrids>
                     </TogetherDiv>
                 </Body>
-
                 <Footer>
                     <P fs="18px" fw="600" pt="30px" pb="10px" color="lightgray">
                         GiftiPie란?
@@ -395,7 +392,6 @@ const Home = () => {
                 </Footer>
             </RightContainer>
 
-            {/* </Footer> */}
             {/* 로그인 모달 */}
             {isLoginModalOpen && <LoginModal closeModal={closeModal} />}
         </MainContainer>

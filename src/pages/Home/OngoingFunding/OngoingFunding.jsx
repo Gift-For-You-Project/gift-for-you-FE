@@ -10,7 +10,6 @@ import {
     LeftContainer,
     Logo,
     P,
-    Button,
     RightContainer,
     NavbarDiv,
     Body,
@@ -21,7 +20,6 @@ import {
     ProgressBar,
     Progress,
     BetweenDiv,
-    TogetherDiv,
     TogetherImg,
     TogetherGrids,
     TogetherGrid,
@@ -47,7 +45,7 @@ const OngoingFunding = () => {
 
     const handleFundingClick = (id) => {
         navigate(`/fundingdetail/${id}`);
-    };
+    }; 
 
     useEffect(() => {
         // 펀딩 리스트를 가져오는 함수 정의

@@ -1,53 +1,47 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
-import theme from "../../../styles/theme";
-import { fetchFundingDetail } from "../../../apis/funding";
+import { getFundingDetail } from "../../../apis/funding";
 import Navbar from "../../../components/Navbar";
 import { useDispatch, useSelector } from "react-redux";
 import { userLogout } from "../../../redux/authSlice";
 import {
-    MainContainer,
-    LeftContainer,
-    Logo,
-    P,
-    Button,
-    RightContainer,
-    NavbarDiv,
-    NavigateBtn,
-    NavigateDiv,
-    SponsorTotal,
-    Body,
-    BannerImgDiv,
-    BannerImg,
-    IllustImg,
-    TitleDiv,
-    FundingDiv,
-    SponserDiv,
-    SponsorimgDiv,
-    SponserComment,
-    SponsorCommentDiv,
-    FundingImgDiv,
-    SponsorImg,
-    FundingImg,
-    ProgressBar,
-    Progress,
-    BetweenDiv,
-    TogetherDiv,
-    FloatingBtn,
-} from './FundingDetailStyles';
+  MainContainer,
+  LeftContainer,
+  Logo,
+  P,
+  Button,
+  RightContainer,
+  NavbarDiv,
+  NavigateBtn,
+  NavigateDiv,
+  SponsorTotal,
+  Body,
+  BannerImgDiv,
+  BannerImg,
+  IllustImg,
+  TitleDiv,
+  FundingDiv,
+  SponserDiv,
+  SponsorimgDiv,
+  SponserComment,
+  SponsorCommentDiv,
+  FundingImgDiv,
+  SponsorImg,
+  FundingImg,
+  ProgressBar,
+  Progress,
+  BetweenDiv,
+  TogetherDiv,
+  FloatingBtn,
+} from "./FundingDetailStyles";
 
-// 펀딩 상세 페이지 컴포넌트
 const FundingDetail = () => {
-  const navigate = useNavigate(); // React Router의 네비게이션 기능을 사용하기 위한 hook
-  const { id } = useParams(); // URL 매개변수(id)를 가져옴
-  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn); // 추가된 코드
-  const dispatch = useDispatch(); // 추가된 코드
-
-  // 펀딩 상세 정보를 담는 상태 변수 초기화
+  const navigate = useNavigate();
+  const { id } = useParams();
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+  const dispatch = useDispatch();
   const [detailData, setDetailData] = useState({
-    // 초기 상태를 명세서에 따라 설정
-    // FundingCreate에서 받아올 Data 초기값
     itemImage: "",
     itemName: "",
     targetAmount: 0,
@@ -116,34 +110,23 @@ const FundingDetail = () => {
   };
 
   useEffect(() => {
-    // API를 호출하여 펀딩 상세 정보를 가져오는 함수 정의
-    const fetchData = async () => {
+    const getData = async () => {
       try {
         if (!id) {
-          // 유효한 id가 없으면 데이터를 요청하지 않음
           return;
         }
-        // 펀딩 ID를 설정하여 특정 펀딩의 상세 정보 가져오기
-        // const fundingid = 1; // 예: 펀딩 ID가 1인 경우
-        const data = await fetchFundingDetail(id);
-        setDetailData(data); // 가져온 데이터를 상태 변수에 설정
+        const data = await getFundingDetail(id);
+        setDetailData(data);
       } catch (error) {
-        if (error.response) {
-          const statusCode = error.response.status;
-          const errorMessage = error.response.data.message;
-          if (statusCode === 400) {
-            alert(errorMessage);
-          }
-        }
+        console.error("펀딩 상세페이지 오류:", error);
       }
     };
-    // 컴포넌트가 마운트될 때 API 호출 함수 실행
-    fetchData();
-  }, [id]); // 빈 배열을 전달하여 한 번만 실행하도록 설정
 
-  // 추가된 코드
+    getData();
+  }, [id]);
+
   const handleLogoutClick = () => {
-    dispatch(userLogout()); // 로그아웃 액션 디스패치
+    dispatch(userLogout());
     navigate("/");
   };
 
@@ -173,7 +156,6 @@ const FundingDetail = () => {
       </LeftContainer>
 
       <RightContainer>
-        {/* 추가된 코드 */}
         <NavbarDiv>
           <Navbar
             isLoggedIn={isLoggedIn}
@@ -428,7 +410,7 @@ const FundingDetail = () => {
             color="black"
             fs="20px"
             bc="#FF7C7C"
-            as={FloatingBtn} // FloatingBtn 스타일을 적용
+            as={FloatingBtn}
           >
             선물하기
           </Button>
