@@ -106,7 +106,6 @@ const FundingPay = () => {
 
     // 컴포넌트가 마운트될 때와 id가 변경될 때 API 호출 함수 실행
     getData();
-    navigate("/");
   }, [id, location.search, navigate]);
 
   const handleLogoutClick = () => {
