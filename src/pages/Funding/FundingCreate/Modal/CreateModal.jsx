@@ -9,7 +9,7 @@ import {
   ModalButton,
   XButton,
 } from "./CreateModalStyles";
-import { modalItemLink } from "../../../../apis/funding";
+import { postModalItemLink } from "../../../../apis/funding";
 import { useNavigate } from "react-router-dom";
 
 // 모달 컴포넌트
@@ -21,25 +21,17 @@ function CreateModal({ closeModal, handleImageSelection }) {
   const handleModalButtonClick = async () => {
     try {
       // API를 호출하여 상품 링크를 등록하는 함수 호출
-      const linkData = await modalItemLink({
+      const data = await postModalItemLink({
         itemLink,
       });
-      console.log("펀딩 모달 성공:", linkData);
-      // if (linkData.response.status === 200) {
+      console.log("펀딩 모달 성공:", data);
+
       alert("펀딩 상품 이미지가 생성되었습니다.");
-      handleImageSelection(linkData.itemImage);
+      handleImageSelection(data.itemImage);
       closeModal();
       navigate("/fundingcreate");
-      // }
-      // 성공 시 처리: 새 페이지로 이동하거나 성공 메시지 표시 등
     } catch (error) {
-      if (error.response) {
-        const statusCode = error.response.status;
-        const errorMessage = error.response.data.message;
-        if (statusCode === 404) {
-          alert(errorMessage);
-        }
-      }
+      console.error(error);
     }
   };
 
@@ -47,11 +39,6 @@ function CreateModal({ closeModal, handleImageSelection }) {
     <Container>
       <Background>
         <ModalBox>
-          {/* <form
-                        onSubmit={(e) => {
-                            e.preventDefault();
-                        }}
-                    > */}
           <ModalTitleXBox>
             <P>상품 링크</P>
             <XButton onClick={closeModal}>X</XButton>

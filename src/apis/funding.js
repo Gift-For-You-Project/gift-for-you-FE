@@ -13,17 +13,23 @@ export const fundingCreate = async (fundingData) => {
 };
 
 // 펀딩 생성페이지 모달창(ItemLink) API
-export const modalItemLink = async (LinkData) => {
+export const postModalItemLink = async (LinkData) => {
   try {
     const response = await instance.post("/api/funding/addLink", LinkData); // 모달창(ItemLink) API 호출
-    return response.data; // 응답 데이터 반환
+    if (response.status === 200) {
+      alert("펀딩 상품 이미지가 생성되었습니다.");
+      return response.data;
+    }
   } catch (error) {
-    throw error; // 실패 시 예외 처리
+    if (error.response) {
+      const code = error.response.status;
+      console.error(`모달창 API 호출 실패 - 응답 코드: ${code}`);
+    }
   }
 };
 
 // 펀딩 상세페이지 API
-export const fetchFundingDetail = async (id) => {
+export const getFundingDetail = async (id) => {
   try {
     const response = await instance.get(`/api/funding/${id}`); // 펀딩 상세페이지 요청
     console.log("펀딩 상세페이지 API", response);
@@ -151,7 +157,7 @@ export const getFundingDonation = async (id) => {
   }
 };
 
-// 펀딩 결제페이지 결제 준비 API
+// 후원 결제준비
 export const fundingPayDonationReady = async ({
   id,
   sponsorNickname,
@@ -159,36 +165,52 @@ export const fundingPayDonationReady = async ({
   donation,
 }) => {
   try {
-    console.log("결제 ID정보 API: ", id);
+    console.log("결제 ID정보: ", id);
     const response = await instance.post(`/api/funding/${id}/donation/ready`, {
       sponsorNickname,
       sponsorComment,
       donation,
     });
 
-    console.log("결제 준비 API: ", response);
+    console.log("결제준비: ", response);
     return response.data;
   } catch (error) {
     if (error.response) {
       const statusCode = error.response.status;
       const errorMessage = error.response.data.message;
       if (statusCode === 400) {
-        errorToast("결제 준비 오류 :", errorMessage);
+        errorToast("결제준비 오류 :", errorMessage);
       }
     }
   }
 };
 
-// 펀딩 결제페이지 결제 승인 API
+// 후원 결제승인
 export const getDonationApproval = async (pgToken) => {
   try {
     const response = await instance.get(
       `/api/donation/approve?pg_token=${pgToken}`
     );
 
-    console.log("결제 승인 API: ", response);
+    console.log("결제승인: ", response);
     return response.data;
   } catch (error) {
     console.error("후원 결제승인 오류:", error.message);
   }
 };
+
+// 후원 결제승인 응답
+export const getDonationApprovalResponse = async (id) => {
+  try {
+    const response = await instance.get(`/api/fundingdetail/${id}`);
+
+    console.log("결제 승인 응답: ", response);
+    return response.data.result;
+  } catch (error) {
+    console.error("후원 결제승인 응답 오류:", error.message);
+  }
+};
+
+// 후원 결제실패
+
+// 후원 결제취소
