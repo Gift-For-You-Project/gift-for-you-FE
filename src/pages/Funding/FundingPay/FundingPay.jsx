@@ -114,7 +114,7 @@ const FundingPay = () => {
 
         // 후원 결제 승인 응답 API
         if (id) {
-          const result = await getDonationApprovalResponse(id, navigate);
+          const result = await getDonationApprovalResponse(id);
           setSponsorDonation(result);
         }
       } catch (error) {
@@ -123,7 +123,7 @@ const FundingPay = () => {
     };
 
     getData();
-  }, [id, pgToken, navigate]);
+  }, [id, pgToken]);
 
   // 추가된 코드
   const handleLogoutClick = () => {
