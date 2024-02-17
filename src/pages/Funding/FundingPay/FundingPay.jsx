@@ -45,6 +45,31 @@ const FundingPay = () => {
     sponsorComment: "",
   });
 
+  const handleFundingDonationClick = async () => {
+    try {
+      if (
+        sponsorDonation.sponsorNickname === "" ||
+        sponsorDonation.sponsorComment === ""
+      ) {
+        warnToast("내용을 입력해주세요");
+        return;
+      }
+
+      // 후원 결제준비 API
+      const response = await fundingPayDonationReady({
+        id,
+        sponsorNickname: sponsorDonation.sponsorNickname,
+        sponsorComment: sponsorDonation.sponsorComment,
+        donation: sponsorDonation.donation,
+      });
+
+      console.log("결제 준비 성공: ", response);
+      window.location.href = response.result.next_redirect_pc_url;
+    } catch (error) {
+      console.error("결제 준비 오류:", error);
+    }
+  };
+
   // useEffect를 이용하여 URL 매개변수에서 donation, showName 값을 가져오는 부분 합침
   useEffect(() => {
     const getData = async () => {
@@ -77,36 +102,13 @@ const FundingPay = () => {
       } catch (error) {
         console.error("결제 오류:", error);
       }
+
+      navigate("/");
     };
 
     // 컴포넌트가 마운트될 때와 id가 변경될 때 API 호출 함수 실행
     getData();
   }, [id, location.search, navigate]);
-
-  const handleFundingDonationClick = async () => {
-    try {
-      if (
-        sponsorDonation.sponsorNickname === "" ||
-        sponsorDonation.sponsorComment === ""
-      ) {
-        warnToast("내용을 입력해주세요");
-        return;
-      }
-
-      // 후원 결제준비 API
-      const response = await fundingPayDonationReady({
-        id,
-        sponsorNickname: sponsorDonation.sponsorNickname,
-        sponsorComment: sponsorDonation.sponsorComment,
-        donation: sponsorDonation.donation,
-      });
-
-      console.log("결제 준비 성공: ", response);
-      window.location.href = response.result.next_redirect_pc_url;
-    } catch (error) {
-      console.error("결제 준비 오류:", error);
-    }
-  };
 
   const handleLogoutClick = () => {
     dispatch(userLogout()); // 로그아웃 액션 디스패치
