@@ -6,13 +6,18 @@ export const postFundingCreate = async (fundingData) => {
   try {
     const response = await instance.post("/api/funding/create", fundingData);
 
-    if (response.status === 200 || response.status === 201) {
-      console.log("펀딩 생성페이지 API", response);
-      successToast(response.data.message);
+    if (response.status === 200 || response.data.status === 201) {
       return response.data;
     }
   } catch (error) {
-    throw error;
+    if (error.response) {
+      const status = error.response.status;
+      if (status === 404) {
+        console.error("API 호출 중 404 에러 발생: ", error);
+      } else if (status === 500) {
+        console.error("API 호출 중 500 에러 발생: ", error);
+      }
+    }
   }
 };
 
