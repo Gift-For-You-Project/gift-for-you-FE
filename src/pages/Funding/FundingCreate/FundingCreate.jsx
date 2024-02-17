@@ -6,7 +6,7 @@ import CreateModal from "./Modal/CreateModal";
 import Navbar from "../../../components/Navbar";
 import { useDispatch, useSelector } from "react-redux";
 import { userLogout } from "../../../redux/authSlice";
-import { infoToast, successToast } from "../../../components/toast";
+import { infoToast } from "../../../components/toast";
 import {
   MainContainer,
   LeftContainer,
@@ -114,7 +114,6 @@ const FundingCreate = () => {
         content: createData.content,
         endDate: createData.endDate,
       });
-      successToast(data.msg);
       navigate(`/fundingdetail/${data.id}`);
     } catch (error) {
       console.error("펀딩 추가 API 호출 실패: ", error);
