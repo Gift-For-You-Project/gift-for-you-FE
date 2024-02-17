@@ -208,10 +208,11 @@ export const getDonationApproval = async (pg_token, navigate) => {
     const response = await instance.get(
       `https://api.giftipie.me/api/donation/approve?pg_token=${pg_token}`
     );
-
-    console.log("결제승인: ", response);
-    navigate("/");
-    return response.data;
+    if (response.data.isSuccess) {
+      console.log("결제승인: ", response.data.result);
+      navigate("/");
+      return response.data;
+    }
   } catch (error) {
     console.error("후원 결제승인 오류:", error.message);
   }

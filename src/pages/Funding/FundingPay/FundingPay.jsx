@@ -71,6 +71,7 @@ const FundingPay = () => {
         if (params.has("pg_token")) {
           const pg_token = params.get("pg_token");
           await getDonationApproval(pg_token);
+          console.log("결제승인: ", response.data.result);
           navigate("/");
         }
       } catch (error) {
