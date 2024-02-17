@@ -7,7 +7,6 @@ import { userLogout } from "../../../redux/authSlice"; // 추가된 코드
 import Navbar from "../../../components/Navbar"; // 추가된 코드
 import {
   fundingPayDonationReady,
-  getDonationApproval,
   getFundingDonation,
 } from "../../../apis/funding";
 import {
@@ -28,13 +27,14 @@ import {
   KakaoButton,
   KakaoPayLogo,
 } from "./FundingPayStyles";
+import { instance } from "../../../apis/auth";
 
 const FundingPay = () => {
   const navigate = useNavigate();
   const { id } = useParams();
   const location = useLocation();
-  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn); // 추가된 코드
-  const dispatch = useDispatch(); // 추가된 코드
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+  const dispatch = useDispatch();
 
   // 후원자 정보 및 펀딩 정보를 관리할 상태 변수들을 설정
   const [sponsorDonation, setSponsorDonation] = useState({
@@ -93,37 +93,61 @@ const FundingPay = () => {
         donation: sponsorDonation.donation,
       });
 
-      // 리다이렉션을 원하면
+      console.log("결제 준비 성공: ", response);
       window.location.href = response.result.next_redirect_pc_url;
     } catch (error) {
       console.error("결제 준비 오류:", error);
     }
   };
 
-  let pg_token = new URL(window.location.href).searchParams.get("pg_token");
-
-  // 후원 결제승인 API
+  // 후원 결제승인
   useEffect(() => {
-    const getData = async () => {
+    const getDonationApproval = async (pg_token) => {
       try {
-        // 후원 결제승인 API
-        if (pg_token !== "") {
-          await getDonationApproval(pg_token);
+        const response = await instance.get(
+          `https://api.giftipie.me/api/donation/approve?pg_token=${pg_token}`
+        );
+        console.log("결제승인: ", response);
+        if (response.status === 200) {
+          navigate("/");
+          return response.data;
         }
-
-        // 후원 결제 승인 응답 API
-        // if (id) {
-        //   const result = await getDonationApprovalResponse(id);
-        //   setSponsorDonation(result);
-        // }
       } catch (error) {
-        console.error("후원 결제승인 응답 오류:", error);
+        console.error("후원 결제승인 오류:", error.message);
       }
     };
 
-    getData();
-  }, [id, pg_token]);
-  // pg_token !== undefined && pg_token !== null &&
+    const serachParams = new URLSearchParams(location.search);
+    const pg_token = serachParams.get("pg_token");
+    if (pg_token) {
+      alert("pg_token = " + pg_token);
+      getDonationApproval(pg_token);
+    }
+  }, [location.search, navigate]);
+
+  // let pg_token = new URL(window.location.href).searchParams.get("pg_token");
+
+  // 후원 결제승인 API
+  // useEffect(() => {
+  //   const getData = async () => {
+  //     try {
+  //       // 후원 결제승인 API
+  //       if (pg_token !== "") {
+  //         await getDonationApproval(pg_token);
+  //       }
+
+  //       // 후원 결제 승인 응답 API
+  //       if (id) {
+  //         const result = await getDonationApprovalResponse(id);
+  //         setSponsorDonation(result);
+  //       }
+  //     } catch (error) {
+  //       console.error("후원 결제승인 응답 오류:", error);
+  //     }
+  //   };
+
+  //   getData();
+  // }, [id, pg_token]);
 
   // 추가된 코드
   const handleLogoutClick = () => {
