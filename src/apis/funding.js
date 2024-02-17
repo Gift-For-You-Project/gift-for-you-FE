@@ -1,5 +1,5 @@
 import { instance } from "./auth";
-import { errorToast, infoToast } from "../components/toast";
+import { successToast, errorToast, infoToast } from "../components/toast";
 
 // 펀딩 생성페이지 API - post
 export const fundingCreate = async (fundingData) => {
@@ -17,7 +17,7 @@ export const postModalItemLink = async (LinkData) => {
   try {
     const response = await instance.post("/api/funding/addLink", LinkData); // 모달창(ItemLink) API 호출
     if (response.status === 200) {
-      alert("펀딩 상품 이미지가 생성되었습니다.");
+      successToast("펀딩 상품 이미지가 생성되었습니다.");
       return response.data;
     }
   } catch (error) {

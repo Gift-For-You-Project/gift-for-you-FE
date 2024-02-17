@@ -25,8 +25,6 @@ function CreateModal({ closeModal, handleImageSelection }) {
         itemLink,
       });
       console.log("펀딩 모달 성공:", data);
-
-      alert("펀딩 상품 이미지가 생성되었습니다.");
       handleImageSelection(data.itemImage);
       closeModal();
       navigate("/fundingcreate");
