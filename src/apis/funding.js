@@ -7,7 +7,7 @@ export const postFundingCreate = async (fundingData) => {
     const response = await instance.post("/api/funding/create", fundingData);
 
     if (response.status === 200 || response.status === 201) {
-      successToast(response.message);
+      successToast(response.msg);
       return response.data;
     }
   } catch (error) {
