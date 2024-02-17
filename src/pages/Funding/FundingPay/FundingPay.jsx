@@ -25,7 +25,6 @@ import {
   FundingDiv,
   SponserDiv,
   SponserComment,
-  SponsorImg,
   TogetherDiv,
   KakaoButton,
   KakaoPayLogo,
@@ -117,6 +116,7 @@ const FundingPay = () => {
         if (id) {
           const result = await getDonationApprovalResponse(id);
           setSponsorDonation(result);
+          navigate("/fundingdetails/:id");
         }
       } catch (error) {
         console.error("후원 결제승인 응답 오류:", error);
@@ -124,7 +124,7 @@ const FundingPay = () => {
     };
 
     getData();
-  }, [id, pgToken]);
+  }, [id, pgToken, navigate]);
 
   // 추가된 코드
   const handleLogoutClick = () => {
@@ -234,7 +234,7 @@ const FundingPay = () => {
             </P>
           </TogetherDiv>
           <KakaoButton onClick={handleFundingDonationClick}>
-            <KakaoPayLogo src="/imgs/Logo/kakaopay.png" alt="image"/>
+            <KakaoPayLogo src="/imgs/Logo/kakaopay.png" alt="image" />
           </KakaoButton>
         </Body>
       </RightContainer>
