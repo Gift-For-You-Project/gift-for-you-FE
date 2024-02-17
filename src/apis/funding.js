@@ -203,13 +203,14 @@ export const fundingPayDonationReady = async ({
 };
 
 // 후원 결제승인 API
-export const getDonationApproval = async (pg_token) => {
+export const getDonationApproval = async (pg_token, navigate) => {
   try {
     const response = await instance.get(
       `https://api.giftipie.me/api/donation/approve?pg_token=${pg_token}`
     );
 
     console.log("결제승인: ", response);
+    navigate("/");
     return response.data;
   } catch (error) {
     console.error("후원 결제승인 오류:", error.message);
@@ -217,17 +218,17 @@ export const getDonationApproval = async (pg_token) => {
 };
 
 // 후원 결제승인 응답 API
-export const getDonationApprovalResponse = async (id, navigate) => {
-  try {
-    const response = await instance.get(`/api/fundingdetail/${id}`);
+// export const getDonationApprovalResponse = async (id, navigate) => {
+//   try {
+//     const response = await instance.get(`/api/fundingdetail/${id}`);
 
-    console.log("결제 승인 응답: ", response);
-    navigate("/");
-    return response.data.result;
-  } catch (error) {
-    console.error("후원 결제승인 응답 오류:", error.message);
-  }
-};
+//     console.log("결제 승인 응답: ", response);
+//     navigate("/");
+//     return response.data.result;
+//   } catch (error) {
+//     console.error("후원 결제승인 응답 오류:", error.message);
+//   }
+// };
 
 // 후원 결제실패 API
 
