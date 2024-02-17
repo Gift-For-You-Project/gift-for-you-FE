@@ -28,7 +28,6 @@ import {
   KakaoButton,
   KakaoPayLogo,
 } from "./FundingPayStyles";
-import { Redirect } from "react-router-dom";
 
 const FundingPay = () => {
   const navigate = useNavigate();
@@ -97,9 +96,8 @@ const FundingPay = () => {
         if (params.has("pg_token")) {
           const pg_token = params.get("pg_token");
           await getDonationApproval(pg_token);
-          console.log("결제승인: ", response.data.result);
-          navigate("/");
-          return <Redirect to="/fundingdetail/:id" />;
+
+          navigate(`/fundingdetail/${id}`);
         }
       } catch (error) {
         console.error("결제 오류:", error);
@@ -226,27 +224,3 @@ const FundingPay = () => {
 };
 
 export default FundingPay;
-
-// let pg_token = new URL(window.location.href).searchParams.get("pg_token");
-
-// // 후원 결제승인 API
-// useEffect(() => {
-//   const getData = async () => {
-//     try {
-//       // 후원 결제승인 API
-//       if (pg_token !== "") {
-//         await getDonationApproval(pg_token);
-//       }
-
-//       // 후원 결제 승인 응답 API
-//       if (id) {
-//         const result = await getDonationApprovalResponse(id);
-//         setSponsorDonation(result);
-//       }
-//     } catch (error) {
-//       console.error("후원 결제승인 응답 오류:", error);
-//     }
-//   };
-
-//   getData();
-// }, [id, pg_token]);
