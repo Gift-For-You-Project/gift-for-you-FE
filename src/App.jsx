@@ -4,7 +4,7 @@ import NotFound from "./pages/NotFound/NotFound";
 import Home from "./pages/Home/Home";
 import Login from "./pages/Home/Login/Login";
 import Signup from "./pages/Home/Signup/Signup";
-import OngoingFunding from "./pages/Home/OngoingFunding/OngoingFunding";
+import RecentFunding from "./pages/Home/RecentFunding/RecentFunding";
 import FundingCreate from "./pages/Funding/FundingCreate/FundingCreate";
 import FundingDetail from "./pages/Funding/FundingDetail/FundingDetail";
 import Sponsor from "./pages/Funding/FundingDetail/Sponsor/Sponsor";
@@ -19,7 +19,7 @@ function App() {
         <Route path="/kakao/callback" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
-        <Route path="/ongoingfunding" element={<OngoingFunding />} />
+        <Route path="/recentfunding" element={<RecentFunding />} />
         <Route path="/fundingcreate" element={<FundingCreate />} />
         <Route path="/fundingdetail/:id" element={<FundingDetail />} />
         <Route path="/fundingsponsordetail" element={<Sponsor />} />
