@@ -51,13 +51,13 @@ const OngoingFunding = () => {
 
   useEffect(() => {
     // 펀딩 리스트를 가져오는 함수 정의
-    const OngoingFundingListData = async () => {
+    const getData = async () => {
       try {
         // 데이터를 가져오기 전에 로딩 상태를 true로 설정
         setLoading(true);
-        const response = await getOngoingFundingList(page);
+        const content = await getOngoingFundingList(page);
 
-        setOngoingFundingList((prevList) => [...prevList, ...response]);
+        setOngoingFundingList((prevList) => [...prevList, ...content]);
       } catch (error) {
         console.error("펀딩 리스트 정보를 가져오는 함수 호출 실패: ", error);
       } finally {
@@ -67,7 +67,7 @@ const OngoingFunding = () => {
     };
 
     // 페이지가 변경될 때마다 펀딩 리스트를 가져오는 함수 호출
-    OngoingFundingListData();
+    getData();
   }, [page]);
 
   useEffect(() => {

@@ -6,6 +6,7 @@ import {
   fundingPayDonationReady,
   getDonationApproval,
   getFundingDonation,
+  getDonationApprovalResponse,
 } from "../../../apis/funding";
 import {
   MainContainer,
@@ -80,7 +81,7 @@ const FundingPay = () => {
         return;
       }
 
-      // 결제 준비 API
+      // 후원 결제준비 API
       const response = await fundingPayDonationReady({
         id,
         sponsorNickname: sponsorDonation.sponsorNickname,
@@ -95,20 +96,29 @@ const FundingPay = () => {
     }
   };
 
-  // 결제 승인 API
+  let pgToken = new URL(window.location.href).searchParams.get("pgToken");
+
+  // 후원 결제승인 API
   useEffect(() => {
-    const fetchData = async () => {
+    const getData = async () => {
       try {
-        await getDonationApproval();
+        // 후원 결제승인 API
+        if (pgToken !== undefined && pgToken !== null && pgToken !== "") {
+          await getDonationApproval(pgToken);
+        }
+
+        // 후원 결제 승인 응답 API
+        if (id) {
+          const result = await getDonationApprovalResponse(id);
+          setSponsorDonation(result);
+        }
       } catch (error) {
-        console.error("페이지에서 결제 승인 오류:", error);
+        console.error("후원 결제승인 응답 오류:", error);
       }
     };
 
-    if (window.location.href.includes("pgToken=")) {
-      fetchData();
-    }
-  }, []);
+    getData();
+  }, [id, pgToken]);
 
   return (
     <MainContainer>

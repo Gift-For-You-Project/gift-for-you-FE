@@ -1,41 +1,40 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
-import theme from "../../../styles/theme";
-import { fetchFundingDetail } from "../../../apis/funding";
+import { getFundingDetail } from "../../../apis/funding";
 import Navbar from "../../../components/Navbar";
 import { useDispatch, useSelector } from "react-redux";
 import { userLogout } from "../../../redux/authSlice";
 import {
-    MainContainer,
-    LeftContainer,
-    Logo,
-    P,
-    Button,
-    RightContainer,
-    NavbarDiv,
-    NavigateBtn,
-    NavigateDiv,
-    SponsorTotal,
-    Body,
-    BannerImgDiv,
-    BannerImg,
-    IllustImg,
-    TitleDiv,
-    FundingDiv,
-    SponserDiv,
-    SponsorimgDiv,
-    SponserComment,
-    SponsorCommentDiv,
-    FundingImgDiv,
-    SponsorImg,
-    FundingImg,
-    ProgressBar,
-    Progress,
-    BetweenDiv,
-    TogetherDiv,
-    FloatingBtn,
-} from './FundingDetailStyles';
+  MainContainer,
+  LeftContainer,
+  Logo,
+  P,
+  Button,
+  RightContainer,
+  NavbarDiv,
+  NavigateBtn,
+  NavigateDiv,
+  SponsorTotal,
+  Body,
+  BannerImgDiv,
+  BannerImg,
+  IllustImg,
+  TitleDiv,
+  FundingDiv,
+  SponserDiv,
+  SponsorimgDiv,
+  SponserComment,
+  SponsorCommentDiv,
+  FundingImgDiv,
+  SponsorImg,
+  FundingImg,
+  ProgressBar,
+  Progress,
+  BetweenDiv,
+  TogetherDiv,
+  FloatingBtn,
+} from "./FundingDetailStyles";
 
 // 펀딩 상세 페이지 컴포넌트
 const FundingDetail = () => {
@@ -116,8 +115,7 @@ const FundingDetail = () => {
   };
 
   useEffect(() => {
-    // API를 호출하여 펀딩 상세 정보를 가져오는 함수 정의
-    const fetchData = async () => {
+    const fundingDetailData = async () => {
       try {
         if (!id) {
           // 유효한 id가 없으면 데이터를 요청하지 않음
@@ -125,20 +123,14 @@ const FundingDetail = () => {
         }
         // 펀딩 ID를 설정하여 특정 펀딩의 상세 정보 가져오기
         // const fundingid = 1; // 예: 펀딩 ID가 1인 경우
-        const data = await fetchFundingDetail(id);
+        const data = await getFundingDetail(id);
         setDetailData(data); // 가져온 데이터를 상태 변수에 설정
       } catch (error) {
-        if (error.response) {
-          const statusCode = error.response.status;
-          const errorMessage = error.response.data.message;
-          if (statusCode === 400) {
-            alert(errorMessage);
-          }
-        }
+        console.error("펀딩 상세페이지 오류:", error);
       }
     };
     // 컴포넌트가 마운트될 때 API 호출 함수 실행
-    fetchData();
+    fundingDetailData();
   }, [id]); // 빈 배열을 전달하여 한 번만 실행하도록 설정
 
   // 추가된 코드
