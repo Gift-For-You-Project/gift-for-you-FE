@@ -108,11 +108,9 @@ const FundingPay = () => {
         const response = await instance.get(
           `https://api.giftipie.me/api/donation/approve?pg_token=${pg_token}`
         );
-        console.log("결제승인: ", response);
+        console.log(response.status);
         if (response.status === 200) {
-          console.log("무슨 데이터가 들었을까: ", response);
           getDonationApprovalResponse(response);
-          navigate("/");
           return response.data;
         }
       } catch (error) {
@@ -126,6 +124,7 @@ const FundingPay = () => {
       alert("pg_token = " + pg_token);
       getDonationApproval(pg_token);
     }
+    navigate("/");
   }, [location.search, navigate]);
 
   // let pg_token = new URL(window.location.href).searchParams.get("pg_token");
