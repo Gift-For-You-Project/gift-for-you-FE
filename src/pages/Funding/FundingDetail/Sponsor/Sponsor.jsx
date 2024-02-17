@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
-import { fetchSponsorDetail } from "../../../../apis/funding"; // 펀딩 상세 정보를 가져오는 API 함수 import
+import { getSponsorDetail } from "../../../../apis/funding";
 import {
   MainContainer,
   LeftContainer,
@@ -21,11 +21,8 @@ import {
 
 const Sponsor = () => {
   const navigate = useNavigate();
-  const { fundingId } = useParams(); // URL 매개변수(id)를 가져옴
-
-  // 펀딩 상세 정보를 담는 상태 변수 초기화
+  const { fundingId } = useParams();
   const [sponsorData, setSponsorData] = useState({
-    // 초기 상태를 명세서에 따라 설정
     fundingid: 0,
     itemImage: "",
     content: "",
@@ -33,26 +30,20 @@ const Sponsor = () => {
   });
 
   useEffect(() => {
-    // API를 호출하여 펀딩 상세 정보를 가져오는 함수 정의
-    const fetchData = async () => {
+    const getData = async () => {
       try {
         if (!fundingId) {
-          // 유효한 id가 없으면 데이터를 요청하지 않음
           return;
         }
-        // 펀딩 ID를 설정하여 특정 펀딩의 상세 정보 가져오기
-        // const fundingId = 1; // 예: 펀딩 ID가 1인 경우
-        const data = await fetchSponsorDetail(fundingId);
-        setSponsorData(data); // 가져온 데이터를 상태 변수에 설정
+        const data = await getSponsorDetail(fundingId);
+        setSponsorData(data);
       } catch (error) {
-        // API 호출 실패 시 에러 처리
-        console.error("API 호출 오류:", error);
+        console.error("후원자 상세페이지 API 호출 오류:", error);
       }
     };
 
-    // 컴포넌트가 마운트될 때 API 호출 함수 실행
-    fetchData();
-  }, [fundingId]); // 빈 배열을 전달하여 한 번만 실행하도록 설정
+    getData();
+  }, [fundingId]);
 
   return (
     <MainContainer>
@@ -79,6 +70,7 @@ const Sponsor = () => {
           펀딩 시작하기
         </Button>
       </LeftContainer>
+
       <RightContainer>
         <Navbar>
           <NavbarBtn
@@ -98,7 +90,6 @@ const Sponsor = () => {
             </NavbarBtn>
           </NavbarBtnDiv>
         </Navbar>
-
         <Body>
           <FundingDiv>
             <P pt="20px" pb="20px" fs="16px" fw="900">
@@ -122,7 +113,6 @@ const Sponsor = () => {
                 </Button>
               </SponserComment>
             </SponserDiv>
-
             <SponserDiv>
               <SponsorImg src="/imgs/songjoongy.jpg" alt="logo" />
               <SponserComment mt="10px">
@@ -141,7 +131,6 @@ const Sponsor = () => {
                 </Button>
               </SponserComment>
             </SponserDiv>
-
             <SponserDiv>
               <SponsorImg src="/imgs/junjihyun.jpg" alt="logo" />
               <SponserComment mt="10px">
@@ -161,7 +150,6 @@ const Sponsor = () => {
               </SponserComment>
             </SponserDiv>
           </FundingDiv>
-
           <Button
             onClick={() => navigate("/fundingpay")}
             mt="20px"
