@@ -17,6 +17,7 @@ export const LeftContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   height: 100vh;
+  padding-top: ${(props) => props.pt};
 
   @media (max-width: 1200px) {
     display: none;
@@ -24,7 +25,7 @@ export const LeftContainer = styled.div`
 `;
 
 export const LeftImgContainer = styled.div`
-  position: relative; /* 상대 위치 지정 */
+  position: relative; /*상대 위치 지정*/
   //width: 300px; /* 이미지 너비 */
   height: 200px; /* 이미지 높이 */
   padding-left: 100px; /* 이미지 왼쪽 간격 조정 */
@@ -34,23 +35,22 @@ export const LeftImgContainer = styled.div`
 export const BubbleImg = styled.img`
   position: absolute; /* 절대 위치 지정 */
   top: 0; /* 위쪽 정렬 */
-  left: 220px; /* 왼쪽 정렬 */
-  width: 270px; /* 부모 요소에 대한 상대적인 너비 */
-  height: 100%; /* 부모 요소에 대한 상대적인 높이 */
+  left: 368px; /* 왼쪽 정렬 */
+  width: 290px; /* 부모 요소에 대한 상대적인 너비 */
+  height: 230px; /* 부모 요소에 대한 상대적인 높이 */
 `;
 
 export const LeftLogoTextIcon = styled.img`
   height: 40px;
-  margin-left: 10px;
   position: absolute; /* 절대 위치 지정 */
   bottom: 20px; /* 아래쪽 위치 조정 */
-  left: 20px; /* 왼쪽 위치 조정 */
+  left: 30px; /* 왼쪽 위치 조정 */
 `;
 
 export const LeftRowdiv = styled.div`
   display: flex;
   flex-direction: row;
-  align-items: center;
+  /* align-items: center; */
 
   padding-top: ${(props) => props.pt};
   margin-top: ${(props) => props.mt};
@@ -70,6 +70,7 @@ export const LeftRowdiv = styled.div`
 
 export const Leftcolumndiv = styled.div`
   flex-direction: column;
+  margin-left: ${(props) => props.ml};
 `;
 
 export const LeftImg = styled.img`
@@ -289,9 +290,9 @@ export const FundingSection = styled.section`
   justify-content: space-around;
   flex-wrap: wrap;
   width: 100%;
-  height: 475px;
   gap: 10px;
   padding: 10px;
+  padding-bottom: 20px;
 `;
 
 export const EndingSection = styled.section`
@@ -332,11 +333,13 @@ export const BannerImg = styled.img`
 `;
 
 export const FundingImg = styled.img`
-width: 100%;
+  width: 100%;
   max-width: 110px;
-  height: 100%;
-  max-height: 110px;
+  height: auto; /* 변경된 부분 */
+  /* height: 100%; */
+  /* max-height: 110px; */
   border: 2px solid #e9e9e9;
+  border-radius: 5px;
   margin-top: 10px;
 `;
 
@@ -364,7 +367,15 @@ export const BetweenDiv = styled.div`
   flex-direction: row;
   justify-content: space-between;
   width: 100%;
+  max-width: ${(props) => props.mw};
   max-width: 442px;
+`;
+
+export const TogetherBetween = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 220px;
 `;
 
 export const TogetherDiv = styled.div`
