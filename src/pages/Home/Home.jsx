@@ -105,6 +105,7 @@ const Home = () => {
         const myFundingData = data.filter(
           (funding) => funding.ownerFlag === true
         );
+        console.log("받아오고 있니? ", myFundingData);
         setMyFunding(myFundingData);
       }
     } catch (error) {
