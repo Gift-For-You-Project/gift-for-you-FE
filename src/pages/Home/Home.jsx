@@ -99,7 +99,7 @@ const Home = () => {
   const getMyData = async () => {
     try {
       const data = await getMyFunding();
-
+      console.log("받아오고 있니? ", data);
       // data가 존재하고 ownerFlag가 true인 데이터만 필터링
       if (data && Array.isArray(data)) {
         const myFundingData = data.filter(
