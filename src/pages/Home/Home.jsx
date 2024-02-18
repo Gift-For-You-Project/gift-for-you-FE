@@ -58,26 +58,26 @@ const Home = () => {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [homeFundingList, setHomeFundingList] = useState([]);
-  const [myFunding, setMyFunding] = useState([]);
-  //   {
-  //     id: "",
-  //     itemLink: "",
-  //     itemImage: "",
-  //     itemName: "",
-  //     title: "",
-  //     showName: "",
-  //     content: "",
-  //     currentAmount: 0,
-  //     targetAmount: 0,
-  //     publicFlag: false,
-  //     endData: "",
-  //     dday: "",
-  //     status: false,
-  //     achievementRate: 0,
-  //     ownerFlag: false,
-  //     modifiedAt: "",
-  //   },
-  // ]);
+  const [myFunding, setMyFunding] = useState([
+    {
+      id: "",
+      itemLink: "",
+      itemImage: "",
+      itemName: "",
+      title: "",
+      showName: "",
+      content: "",
+      currentAmount: 0,
+      targetAmount: 0,
+      publicFlag: false,
+      endData: "",
+      dday: "",
+      status: false,
+      achievementRate: 0,
+      ownerFlag: false,
+      modifiedAt: "",
+    },
+  ]);
 
   const closeModal = () => setIsLoginModalOpen(false);
 
@@ -101,12 +101,13 @@ const Home = () => {
     try {
       const data = await getMyFunding();
       console.log("받아오고 있니? ", data);
-      // id가 존재할 때만 호출
-      if (data && Array.isArray(data)) {
-        const myFundingData = data.filter((funding) => funding.id);
-        console.log("받아오고 있는거니? ", myFundingData);
-        setMyFunding(myFundingData);
-      }
+      // id가 존재하는 데이터만 필터링
+      const myFundingData = data.filter(
+        (funding) => funding.id !== undefined && funding.id !== null
+      );
+
+      console.log("받아오고 있는거니? ", data);
+      setMyFunding(myFundingData);
     } catch (error) {
       console.error("API 호출 중 에러 발생: ", error);
     }
