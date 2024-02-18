@@ -107,3 +107,17 @@ export const login = async (credentials) => {
     throw error;
   }
 };
+
+// 로그아웃 API
+export const logout = async () => {
+  try {
+    const response = await axios.delete("/api/logout");
+
+    if (response.data.isSuccess) {
+      successToast(response.data.message);
+      console.log("로그아웃이 완료되었습니다.");
+    }
+  } catch (error) {
+    console.error("API 호출 중 오류 발생:", error.message);
+  }
+};

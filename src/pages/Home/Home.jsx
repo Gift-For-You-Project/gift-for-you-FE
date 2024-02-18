@@ -97,17 +97,14 @@ const Home = () => {
   const handleFundingCreate = () => navigate("/fundingcreate");
 
   // 내 펀딩 데이터를 가져오는 API
-  const getMyData = async () => {
+  const getMyData = async (id) => {
     try {
-      const data = await getMyFunding();
-      console.log("받아오고 있니? ", data);
-      // data가 존재하고 ownerFlag가 true인 데이터만 필터링
-      if (data && Array.isArray(data)) {
-        const myFundingData = data.filter(
-          (funding) => funding.ownerFlag === true
-        );
-        console.log("받아오고 있는거니? ", myFundingData);
-        setMyFunding(myFundingData);
+      // id가 존재할 때만 API 호출
+      if (id) {
+        const data = await getMyFunding(id);
+
+        console.log("받아오고 있니? ", data);
+        setMyFunding(data);
       }
     } catch (error) {
       console.error("API 호출 중 에러 발생: ", error);
