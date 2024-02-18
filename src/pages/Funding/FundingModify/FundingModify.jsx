@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom"; // React Router에서 네비게이션 기능을 사용하기 위한 hook
-import { useParams } from "react-router-dom"; // React Router에서 URL 매개변수를 가져오기 위한 hook
-import Navbar from "../../../components/Navbar"; // 추가된 코드
-import { useDispatch, useSelector } from "react-redux"; // 추가된 코드
-import { userLogout } from "../../../redux/authSlice"; // 추가된 코드
+import { useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import Navbar from "../../../components/Navbar";
+import { useDispatch, useSelector } from "react-redux";
+import { userLogout } from "../../../redux/authSlice";
+import theme from "../../../styles/theme";
 import {
   updateFundingModify,
   deleteFundingModify,
   FundingModifyGet,
   completeFundingModify,
-} from "../../../apis/funding"; // 펀딩 수정 API, 펀딩 상세 정보 API
+} from "../../../apis/funding";
 import {
   MainContainer,
   LeftContainer,
@@ -27,16 +28,13 @@ import {
   FundingImg,
   // ImgText,
   TogetherDiv,
-} from "./FundingModifyStyles"; // 스타일 컴포넌트 import
+} from "./FundingModifyStyles";
 
-// 펀딩 수정 페이지 컴포넌트
 const FundingModify = () => {
-  const navigate = useNavigate(); // React Router의 네비게이션 기능을 사용하기 위한 hook
-  const { id } = useParams(); // URL 매개변수(id)를 가져옴
-  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn); // 추가된 코드
-  const dispatch = useDispatch(); // 추가된 코드
-
-  // 펀딩 데이터 상태와 상태 설정 함수 초기화
+  const navigate = useNavigate();
+  const { id } = useParams();
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+  const dispatch = useDispatch();
   const [fundingData, setFundingData] = useState({
     itemName: "",
     showName: "",
@@ -48,9 +46,8 @@ const FundingModify = () => {
     itemImage: "",
   });
 
-  // 추가된 코드
   const handleLogoutClick = () => {
-    dispatch(userLogout()); // 로그아웃 액션 디스패치
+    dispatch(userLogout());
     navigate("/");
   };
   // const [isFundingModalOpen, setIsFundingModalOpen] = useState(false); // 모달 창의 열림 여부 상태 변수
@@ -133,19 +130,6 @@ const FundingModify = () => {
       await deleteFundingModify(id, fundingData);
       console.log("펀딩 삭제 성공:", id);
       navigate(`/`);
-      // if (id) {
-      //     alert('정말 삭제하시겠습니까?');
-      //     return;
-      // }
-      // const data = await deleteFundingModify(id, fundingData);
-      // const data = await deleteFundingModify(id);
-      // setFundingData(
-      //     fundingData.filter((data) => {
-      //         return data.id !== id;
-      //     })
-      // );
-      // console.log('펀딩 삭제 성공:', data);
-      // navigate(`/`);
     } catch (error) {
       console.error("펀딩 삭제 실패:", error);
       // 에러 핸들링
@@ -200,7 +184,7 @@ const FundingModify = () => {
           {/* 펀딩 상품 정보 입력 및 이미지 변경 */}
           <FundingDiv>
             {/* 펀딩 페이지에 노출되는 상품명 및 이미지 변경 버튼 */}
-            <P pb="10px" fs="16px" fw="900" color="#FF7C7C">
+            <P pb="10px" fs="16px" fw="900" color={theme.primary}>
               펀딩 수정페이지
             </P>
             <P pb="20px" fs="10px" fw="900" color="#E4E4E4">
@@ -250,7 +234,7 @@ const FundingModify = () => {
             {/* 펀딩 내용 및 공개 여부 입력 부분 */}
             <SponsorDiv>
               <SponsorComment mt="50px">
-                <P pb="10px" fs="16px" fw="900" color="#FF7C7C">
+                <P pb="10px" fs="16px" fw="900" color={theme.primary}>
                   펀딩 내용
                 </P>
                 <P pb="20px" fs="13px" fw="900" color="#E4E4E4">
@@ -399,7 +383,7 @@ const FundingModify = () => {
             mt="10px"
             color="white"
             fs="19px"
-            bc="#FF7C7C"
+            bc={theme.primary}
           >
             펀딩 삭제하기
           </Button>

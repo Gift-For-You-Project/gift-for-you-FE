@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { userLogout } from "../../../redux/authSlice";
 import Navbar from "../../../components/Navbar";
 import { getRecentFundingList } from "../../../apis/home";
+import theme from "../../../styles/theme";
 import {
   MainContainer,
   LeftContainer,
@@ -118,7 +119,7 @@ const RecentFunding = () => {
         <Body>
           <FundingDiv>
             <button>
-              <P fs="18px" fw="600" pt="30px" pb="10px" color="#FF7C7C">
+              <P fs="18px" fw="600" pt="30px" pb="10px" color={theme.primary}>
                 지금 진행중인 펀딩
               </P>
             </button>
@@ -136,7 +137,7 @@ const RecentFunding = () => {
                     <Progress width={(funding.achievementRate / 100) * 100} />
                   </ProgressBar>
                   <BetweenDiv>
-                    <P pt="2px" fs="14px" fw="800" color="#FF7C7C">
+                    <P pt="2px" fs="14px" fw="800" color={theme.primary}>
                       {funding.achievementRate}%
                     </P>
                     <P pt="2px" pl="90px" fs="14px" fw="800" color="#FFFFFF">

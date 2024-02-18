@@ -4,6 +4,7 @@ import { BsPersonCircle } from "react-icons/bs";
 import { FaAngleLeft } from "react-icons/fa6";
 import { IoLogOutSharp } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
+import theme from "../styles/theme";
 import {
   NavbarIconContainer,
   NavbarNotificationIconDiv,
@@ -79,13 +80,13 @@ const Navbar = ({ isLoggedIn, handleLoginClick, handleLogoutClick }) => {
       <NavbarIconContainer>
         {/* HiBell 아이콘 클릭 시 알림 리스트 표시 */}
         <NavbarNotificationIconDiv onClick={toggleNotification}>
-          <HiBell size="" color="#FFFFFF" />
+          <HiBell size="" color={theme.white} />
         </NavbarNotificationIconDiv>
         {isNotificationOpen && (
           <NotificationContainer>
             <NotificationDiv>
               <button onClick={toggleNotification}>
-                <FaAngleLeft size="" color="white" />
+                <FaAngleLeft size="" color={theme.white} />
               </button>
               <div>
                 <button onClick={handleDeleteSelected}>선택삭제</button>
@@ -108,18 +109,18 @@ const Navbar = ({ isLoggedIn, handleLoginClick, handleLogoutClick }) => {
           </NotificationContainer>
         )}
         <NavbarIconDiv>
-          <BsPersonCircle color="#FFFFFF" />
+          <BsPersonCircle color={theme.white} />
         </NavbarIconDiv>
         <NavbarBtn onClick={handleLogoutClick} fs="13px" fw="600">
           {/* <RiLogoutBoxRLine /> */}
-          <IoLogOutSharp size="28px" color="#FFFFFF" />
+          <IoLogOutSharp size="28px" color={theme.white} />
         </NavbarBtn>
       </NavbarIconContainer>
     </>
   ) : (
     <>
       <NavbarBtn onClick={handleLoginClick} pt="10px" fs="20px" fw="600">
-        <BsPersonCircle color="#FFFFFF" />
+        <BsPersonCircle color={theme.white} />
       </NavbarBtn>
     </>
   );

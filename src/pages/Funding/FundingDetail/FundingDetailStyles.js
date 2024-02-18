@@ -30,7 +30,7 @@ export const LeftContainer = styled.div`
 export const Logo = styled.h1`
   font-size: 30px;
   font-weight: 700;
-  color: white;
+  color: ${theme.white};
 `;
 
 /* 다용도 P 태그 */
@@ -65,8 +65,8 @@ export const Button = styled.button`
   padding-left: ${(props) => props.pl};
   padding-right: ${(props) => props.pr};
   &:hover {
-    color: white;
-    background-color: #ff7c7c;
+    color: ${theme.white};
+    background-color: ${theme.primary};
     cursor: pointer;
   }
 `;
@@ -130,7 +130,7 @@ export const NavigateDiv = styled.div`
 export const NavigateBtn = styled.button`
   font-size: 13px;
   font-weight: 600;
-  color: white;
+  color: ${theme.white};
   margin-bottom: 7px;
 `;
 
@@ -143,9 +143,9 @@ export const TitleDiv = styled.div`
 `;
 
 export const FundingDiv = styled.div`
-  background-color: white;
+  background-color: ${theme.white};
   border-radius: 20px;
-  border: 0.3px solid lightgray;
+  border: 0.3px solid ${theme.gray4};
   width: -webkit-fill-available; /* 사용 가능한 너비로 채움 */
   max-width: 390px; /* 최대 너비를 390px로 제한 */
   margin: 0 auto; /* 가운데 정렬을 위해 margin을 auto로 설정 */
@@ -166,7 +166,7 @@ export const FundingNewline = styled.div`
 export const ProgressBar = styled.div`
   width: 85%;
   height: 15px;
-  background-color: #dedede;
+  background-color: ${theme.gray6};
   border-radius: 12px;
   font-weight: 600;
   font-size: 0.8rem;
@@ -208,8 +208,8 @@ export const BetweenDiv = styled.div`
 export const TogetherDiv = styled.div`
   background-color: ${(props) => props.bc};
   border-radius: 30px;
-  border: 0.3px solid lightgray;
-  box-shadow: 0px 5px 0px 0px lightgray;
+  border: 0.3px solid ${theme.gray4};
+  box-shadow: 0px 5px 0px 0px ${theme.gray4};
   width: -webkit-fill-available; /* 사용 가능한 너비로 채움 */
   max-width: 390px; /* 최대 너비를 390px로 제한 */
   margin: 0 auto; /* 가운데 정렬을 위해 margin을 auto로 설정 */
@@ -233,7 +233,7 @@ export const SponsorCommentDiv = styled.div`
   padding: 10px;
   justify-content: center;
   align-items: center;
-  background-color: #ffe6c1;
+  background-color: ${theme.secondary};
   margin-top: ${(props) => props.mt};
   width: 100%;
   font-size: 13px;
@@ -287,8 +287,8 @@ export const FloatingBtn = styled.button`
   width: 220px; /* 버튼의 너비 조정 */
   height: 50px; /* 버튼의 높이 조정 */
   border-radius: 25px; /* 버튼의 모양을 둥글게 만듭니다. */
-  background-color: #ff7c7c; /* 버튼의 배경색을 지정합니다. */
-  color: white; /* 버튼 텍스트의 색상을 지정합니다. */
+  background-color: ${theme.primary}; /* 버튼의 배경색을 지정합니다. */
+  color: ${theme.white}; /* 버튼 텍스트의 색상을 지정합니다. */
   font-size: 16px; /* 버튼 텍스트의 크기를 지정합니다. */
   font-weight: bold; /* 버튼 텍스트의 굵기를 지정합니다. */
   border: none; /* 버튼의 테두리를 없앱니다. */
