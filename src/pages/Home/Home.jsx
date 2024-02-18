@@ -58,7 +58,7 @@ const Home = () => {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [homeFundingList, setHomeFundingList] = useState([]);
-  const [myFunding, setMyFunding] = useState(null);
+  const [myFunding, setMyFunding] = useState([]);
   //   {
   //     id: "",
   //     itemLink: "",
@@ -240,36 +240,35 @@ const Home = () => {
               </MainBtnContainer>
             </BetweenDiv>
             {/* 내 펀딩 데이터 불러오기 */}
-            {myFunding &&
-              myFunding.map((funding) => (
-                <BetweenDiv key={funding.id}>
-                  <BannerImg src={funding.itemImage} />
-                  <BannerProgressDiv>
-                    <OneLine fs="11px" fw="800" color="gray">
-                      {funding.itemName}
-                    </OneLine>
-                    <OneLine pt="5px" fs="13px" fw="800">
-                      {funding.title}
-                    </OneLine>
-                    <P pt="10px" fs="15px" fw="900" color={theme.primary}>
-                      {funding.achievementRate}%
+            {myFunding.map((funding) => (
+              <BetweenDiv key={funding.id}>
+                <BannerImg src={funding.itemImage} />
+                <BannerProgressDiv>
+                  <OneLine fs="11px" fw="800" color="gray">
+                    {funding.itemName}
+                  </OneLine>
+                  <OneLine pt="5px" fs="13px" fw="800">
+                    {funding.title}
+                  </OneLine>
+                  <P pt="10px" fs="15px" fw="900" color={theme.primary}>
+                    {funding.achievementRate}%
+                  </P>
+                  <RoundProgressBar>
+                    <RoundProgress
+                      width={(funding.achievementRate / 100) * 100}
+                    />
+                  </RoundProgressBar>
+                  <BetweenDiv>
+                    <P pl="0px" fs="10px" fw="800" color="gray">
+                      현재&nbsp;{funding.currentAmount}원
                     </P>
-                    <RoundProgressBar>
-                      <RoundProgress
-                        width={(funding.achievementRate / 100) * 100}
-                      />
-                    </RoundProgressBar>
-                    <BetweenDiv>
-                      <P pl="0px" fs="10px" fw="800" color="gray">
-                        현재&nbsp;{funding.currentAmount}원
-                      </P>
-                      <P fs="10px" fw="800" color="gray">
-                        {funding.targetAmount}원
-                      </P>
-                    </BetweenDiv>
-                  </BannerProgressDiv>
-                </BetweenDiv>
-              ))}
+                    <P fs="10px" fw="800" color="gray">
+                      {funding.targetAmount}원
+                    </P>
+                  </BetweenDiv>
+                </BannerProgressDiv>
+              </BetweenDiv>
+            ))}
           </TogetherDiv>
 
           <TogetherDiv bc="white">
