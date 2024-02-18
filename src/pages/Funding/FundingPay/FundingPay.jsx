@@ -2,9 +2,10 @@ import React, { useState, useEffect } from "react";
 import { useNavigate, useParams, useLocation } from "react-router-dom";
 import CheckBox from "../FundingPay/CheckBox/CheckBox";
 import { warnToast } from "../../../components/toast";
-import { useDispatch, useSelector } from "react-redux"; // 추가된 코드
-import { userLogout } from "../../../redux/authSlice"; // 추가된 코드
-import Navbar from "../../../components/Navbar"; // 추가된 코드
+import { useDispatch, useSelector } from "react-redux";
+import { userLogout } from "../../../redux/authSlice";
+import Navbar from "../../../components/Navbar";
+import theme from "../../../styles/theme";
 import {
   fundingPayDonationReady,
   getFundingDonation,
@@ -133,7 +134,7 @@ const FundingPay = () => {
           h="50px"
           fs="16px"
           color="#2C2C2C"
-          bc="#FF7C7C"
+          bc={theme.primary}
         >
           Home
         </Button>
@@ -210,7 +211,14 @@ const FundingPay = () => {
           </FundingDiv>
           <CheckBox />
           <TogetherDiv pt="10px">
-            <P pl="140px" pt="11px" pb="19px" fs="14px" fw="800" bc="#FF7C7C">
+            <P
+              pl="140px"
+              pt="11px"
+              pb="19px"
+              fs="14px"
+              fw="800"
+              bc={theme.primary}
+            >
               지금 선물하면 {sponsorDonation.donationRanking}등이에요!
             </P>
           </TogetherDiv>

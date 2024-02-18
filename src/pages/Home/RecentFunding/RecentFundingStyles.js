@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import theme from "../../../styles/theme";
 
 // 전체 컨테이너
 export const MainContainer = styled.div`
@@ -69,7 +70,7 @@ export const RightContainer = styled.div`
   position: relative;
   width: 442px;
   height: 100vh;
-  border: 1px solid lightgray;
+  border: 1px solid ${theme.gray4};
   overflow-y: scroll;
 
   &::-webkit-scrollbar {

@@ -36,7 +36,7 @@ export const IoCloseDiv = styled.div`
   width: 100%;
   max-width: 442px;
   font-size: 30px;
-  color: lightgray;
+  color: ${theme.gray4};
   padding: 8px;
 
   &:hover {
@@ -81,5 +81,5 @@ export const LoginModalBtn = styled.button`
   border-radius: 8px;
   width: 220px;
   margin: 6px;
-  border: 1px solid lightgray;
+  border: 1px solid ${theme.gray4};
 `;

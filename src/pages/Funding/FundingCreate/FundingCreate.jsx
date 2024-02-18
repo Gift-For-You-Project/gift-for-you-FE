@@ -7,6 +7,7 @@ import Navbar from "../../../components/Navbar";
 import { useDispatch, useSelector } from "react-redux";
 import { userLogout } from "../../../redux/authSlice";
 import { infoToast } from "../../../components/toast";
+import theme from "../../../styles/theme";
 import {
   MainContainer,
   LeftContainer,
@@ -156,10 +157,10 @@ const FundingCreate = () => {
             }}
           >
             <FundingDiv>
-              <P pb="10px" fs="16px" fw="900" color="#FF7C7C">
+              <P pb="10px" fs="16px" fw="900" color={theme.primary}>
                 펀딩 생성페이지
               </P>
-              <P pb="20px" fs="10px" fw="900" color="#E4E4E4">
+              <P pb="20px" fs="10px" fw="900" color={theme.gray5}>
                 펀딩 생성 페이지에 상품명과 이미지가 노출돼요.
               </P>
               <ProducImgtDiv>
@@ -205,10 +206,10 @@ const FundingCreate = () => {
               {/* 펀딩 내용 및 공개 여부 입력 폼 */}
               <SponserDiv>
                 <SponserComment mt="50px">
-                  <P pb="10px" fs="16px" fw="900" color="#FF7C7C">
+                  <P pb="10px" fs="16px" fw="900" color={theme.primary}>
                     펀딩 내용
                   </P>
-                  <P pb="20px" fs="13px" fw="900" color="#E4E4E4">
+                  <P pb="20px" fs="13px" fw="900" color={theme.gray5}>
                     공개 방식을 설정해주세요.
                   </P>
                   <SponserDiv>
@@ -219,10 +220,22 @@ const FundingCreate = () => {
                       type="radio"
                       mb="21px"
                     />
-                    <P pb="20px" fs="13px" fw="900" pl="20px" color="#E4E4E4">
+                    <P
+                      pb="20px"
+                      fs="13px"
+                      fw="900"
+                      pl="20px"
+                      color={theme.gray5}
+                    >
                       공개
                     </P>
-                    <P pb="20px" fs="10px" fw="900" pl="42px" color="#E4E4E4">
+                    <P
+                      pb="20px"
+                      fs="10px"
+                      fw="900"
+                      pl="42px"
+                      color={theme.gray5}
+                    >
                       누구나 볼 수 있어요
                     </P>
                   </SponserDiv>
@@ -234,16 +247,28 @@ const FundingCreate = () => {
                       type="radio"
                       mb="21px"
                     />
-                    <P pb="20px" fs="13px" fw="900" pl="20px" color="#E4E4E4">
+                    <P
+                      pb="20px"
+                      fs="13px"
+                      fw="900"
+                      pl="20px"
+                      color={theme.gray5}
+                    >
                       비공개
                     </P>
-                    <P pb="20px" fs="10px" fw="900" pl="30px" color="#E4E4E4">
+                    <P
+                      pb="20px"
+                      fs="10px"
+                      fw="900"
+                      pl="30px"
+                      color={theme.gray5}
+                    >
                       링크를 통해서만 방문할 수 있어요
                     </P>
                   </SponserDiv>
                 </SponserComment>
               </SponserDiv>
-              <P pt="30px" pb="5px" fs="13px" fw="800" color="#E4E4E4">
+              <P pt="30px" pb="5px" fs="13px" fw="800" color={theme.gray5}>
                 보여줄 이름
               </P>
               <InputTag
@@ -256,7 +281,7 @@ const FundingCreate = () => {
                 mb="10px"
                 pl="10px"
               />
-              <P pt="10px" pb="5px" fs="13px" fw="800" color="#E4E4E4">
+              <P pt="10px" pb="5px" fs="13px" fw="800" color={theme.gray5}>
                 제목
               </P>
               <InputTag
@@ -269,7 +294,7 @@ const FundingCreate = () => {
                 mb="10px"
                 pl="10px"
               />
-              <P pt="10px" pb="5px" fs="13px" fw="800" color="#E4E4E4">
+              <P pt="10px" pb="5px" fs="13px" fw="800" color={theme.gray5}>
                 본문
               </P>
               <InputTag
@@ -283,7 +308,7 @@ const FundingCreate = () => {
                 pl="10px"
                 pb="50px"
               />
-              <P pt="10px" pb="5px" fs="13px" fw="800" color="#E4E4E4">
+              <P pt="10px" pb="5px" fs="13px" fw="800" color={theme.gray5}>
                 마감일 설정
               </P>
               <InputTag
@@ -297,10 +322,10 @@ const FundingCreate = () => {
               />
             </FundingDiv>
             <TogetherDiv>
-              <P pl="130px" fs="14px" fw="800" color="#FFE6C1">
+              <P pl="130px" fs="14px" fw="800" color={theme.secondary}>
                 펀딩 금액은 계좌로 전달돼요
               </P>
-              <P pl="95px" fs="14px" fw="800" color="#FFE6C1">
+              <P pl="95px" fs="14px" fw="800" color={theme.secondary}>
                 펀딩에 성공하면 카톡으로 알림이 가요
               </P>
             </TogetherDiv>
@@ -312,7 +337,7 @@ const FundingCreate = () => {
               mt="10px"
               color="white"
               fs="19px"
-              bc="#FF7C7C"
+              bc={theme.primary}
             >
               펀딩 등록하기
             </Button>

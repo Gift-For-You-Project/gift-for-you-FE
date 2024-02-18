@@ -8,6 +8,7 @@ import { bootChannelTalk } from "../../redux/channelTalkSlice";
 import Navbar from "../../components/Navbar";
 import { getMyFunding, getHomeFundingList } from "../../apis/home";
 import { userLogout } from "../../redux/authSlice";
+import theme from "../../styles/theme";
 import {
   MainContainer,
   LeftContainer,
@@ -96,17 +97,14 @@ const Home = () => {
   const handleFundingCreate = () => navigate("/fundingcreate");
 
   // 내 펀딩 데이터를 가져오는 API
-  const getMyData = async () => {
+  const getMyData = async (id) => {
     try {
-      const data = await getMyFunding();
-      console.log("받아오고 있니? ", data);
-      // data가 존재하고 ownerFlag가 true인 데이터만 필터링
-      if (data && Array.isArray(data)) {
-        const myFundingData = data.filter(
-          (funding) => funding.ownerFlag === true
-        );
-        console.log("받아오고 있니? ", myFundingData);
-        setMyFunding(myFundingData);
+      // id가 존재할 때만 API 호출
+      if (id) {
+        const data = await getMyFunding(id);
+
+        console.log("받아오고 있니? ", data);
+        setMyFunding(data);
       }
     } catch (error) {
       console.error("API 호출 중 에러 발생: ", error);
@@ -160,7 +158,7 @@ const Home = () => {
               <LeftLogoTextIcon src="/imgs/Common/giftipie.png" />
             </div>
             <div>
-              <P pt="60px" pl="355px" fs="23px" fw="800" color="#FFFFFF">
+              <P pt="60px" pl="355px" fs="23px" fw="800" color={theme.white}>
                 생일선물
                 <br />뭐 받고싶어?
               </P>
@@ -169,9 +167,9 @@ const Home = () => {
           </LeftImgContainer>
           <LeftRowdiv ml="30px">
             <LeftRowdiv
-              color="#3F3F3F"
+              color={theme.gray1}
               mr="10px"
-              bc="#FF7C7C"
+              bc={theme.primary}
               br="25px"
               p="8px"
             >
@@ -187,17 +185,17 @@ const Home = () => {
               </P>
             </LeftRowdiv>
             <div>
-              <P mt="6px" pt="2px" fs="20px" fw="700" color="#FFFFFF">
+              <P mt="6px" pt="2px" fs="20px" fw="700" color={theme.white}>
                 을 주고 받아요!
               </P>
             </div>
           </LeftRowdiv>
           <LeftRowdiv>
             <Leftcolumndiv ml="30px">
-              <P fs="16px" fw="500" pt="30px" pb="5px" color="#FFFFFF">
+              <P fs="16px" fw="500" pt="30px" pb="5px" color={theme.white}>
                 지금은 유저테스트 진행 중 입니다
               </P>
-              <P pb="100px" fs="16px" fw="500" color="#FFFFFF">
+              <P pb="100px" fs="16px" fw="500" color={theme.white}>
                 6명의 개발자와 1명의 디자이너가 함께 개발하고 있습니다
               </P>
             </Leftcolumndiv>
@@ -218,9 +216,9 @@ const Home = () => {
         </NavbarDiv>
 
         <Body>
-          <TogetherDiv bc="#3F3F3F">
+          <TogetherDiv bc={theme.gray1}>
             <BetweenDiv>
-              <P pt="45px" pl="50px" fs="17px" fw="800" color="#FFE6C1">
+              <P pt="45px" pl="50px" fs="17px" fw="800" color={theme.secondary}>
                 펀딩은 1개만
                 <br />
                 진행할 수 있어요
@@ -237,7 +235,7 @@ const Home = () => {
               <MainBtnContainer>
                 <MainBtn>링크 복사</MainBtn>
                 <MainBtn>수정</MainBtn>
-                <MainBtn color="#FF7C7C">삭제</MainBtn>
+                <MainBtn color={theme.primary}>삭제</MainBtn>
               </MainBtnContainer>
             </BetweenDiv>
             {/* 내 펀딩 데이터 불러오기 */}
@@ -251,7 +249,7 @@ const Home = () => {
                   <OneLine pt="5px" fs="13px" fw="800">
                     {funding.title}
                   </OneLine>
-                  <P pt="10px" fs="15px" fw="900" color="#FF7C7C">
+                  <P pt="10px" fs="15px" fw="900" color={theme.primary}>
                     {funding.achievementRate}%
                   </P>
                   <RoundProgressBar>
@@ -304,7 +302,7 @@ const Home = () => {
                       <Progress width={(65 / 100) * 100} />
                     </ProgressBar> // 퍼센트 바 스타일 확인용 */}
                     <BetweenDiv>
-                      <P pt="2px" fs="13px" fw="800" color="#FF7C7C">
+                      <P pt="2px" fs="13px" fw="800" color={theme.primary}>
                         {funding.achievementRate}%
                       </P>
                     </BetweenDiv>
@@ -322,7 +320,7 @@ const Home = () => {
 
           <>
             <TogetherBetween>
-              <P pt="40px" pb="40px" fs="18px" fw="600" color="#FF7C7C">
+              <P pt="40px" pb="40px" fs="18px" fw="600" color={theme.primary}>
                 Giftipie
               </P>
               <P pt="40px" pb="40px" fs="18px" fw="600" color="white">
@@ -423,7 +421,7 @@ const Home = () => {
         </Body>
 
         <Footer>
-          <P fs="18px" fw="600" pt="30px" pb="10px" color="lightgray">
+          <P fs="18px" fw="600" pt="30px" pb="10px" color={theme.gray4}>
             GiftiPie란?
           </P>
           <P fs="14px" color="dimgray" pb="4px">
@@ -438,7 +436,7 @@ const Home = () => {
             h="60px"
             color="black"
             fs="20px"
-            bc="#FF7C7C"
+            bc={theme.primary}
             as={FloatingBtn}
           >
             <FaPlus />
