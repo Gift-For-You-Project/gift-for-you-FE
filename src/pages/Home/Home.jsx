@@ -99,10 +99,9 @@ const Home = () => {
   // 내 펀딩 데이터를 가져오는 API
   const getMyData = async () => {
     try {
-      const response = await getMyFunding();
+      const data = await getMyFunding();
 
-      console.log("받아오고 있니? ", response.data);
-      setMyFunding(response.data);
+      setMyFunding(data);
     } catch (error) {
       console.error("API 호출 중 에러 발생: ", error);
     }
@@ -236,35 +235,36 @@ const Home = () => {
               </MainBtnContainer>
             </BetweenDiv>
             {/* 내 펀딩 데이터 불러오기 */}
-            {myFunding.map((myfunding) => (
-              <BetweenDiv key={myfunding.id}>
-                <BannerImg src={myfunding.itemImage} />
-                <BannerProgressDiv>
-                  <OneLine fs="11px" fw="800" color="gray">
-                    {myfunding.itemName}
-                  </OneLine>
-                  <OneLine pt="5px" fs="13px" fw="800">
-                    {myfunding.title}
-                  </OneLine>
-                  <P pt="10px" fs="15px" fw="900" color={theme.primary}>
-                    {myfunding.achievementRate}%
-                  </P>
-                  <RoundProgressBar>
-                    <RoundProgress
-                      width={(myfunding.achievementRate / 100) * 100}
-                    />
-                  </RoundProgressBar>
-                  <BetweenDiv>
-                    <P pl="0px" fs="10px" fw="800" color="gray">
-                      현재&nbsp;{myfunding.currentAmount}원
+            {myFunding &&
+              myFunding.map((funding) => (
+                <BetweenDiv key={funding.id}>
+                  <BannerImg src={funding.itemImage} />
+                  <BannerProgressDiv>
+                    <OneLine fs="11px" fw="800" color="gray">
+                      {funding.itemName}
+                    </OneLine>
+                    <OneLine pt="5px" fs="13px" fw="800">
+                      {funding.title}
+                    </OneLine>
+                    <P pt="10px" fs="15px" fw="900" color={theme.primary}>
+                      {funding.achievementRate}%
                     </P>
-                    <P fs="10px" fw="800" color="gray">
-                      {myfunding.targetAmount}원
-                    </P>
-                  </BetweenDiv>
-                </BannerProgressDiv>
-              </BetweenDiv>
-            ))}
+                    <RoundProgressBar>
+                      <RoundProgress
+                        width={(funding.achievementRate / 100) * 100}
+                      />
+                    </RoundProgressBar>
+                    <BetweenDiv>
+                      <P pl="0px" fs="10px" fw="800" color="gray">
+                        현재&nbsp;{funding.currentAmount}원
+                      </P>
+                      <P fs="10px" fw="800" color="gray">
+                        {funding.targetAmount}원
+                      </P>
+                    </BetweenDiv>
+                  </BannerProgressDiv>
+                </BetweenDiv>
+              ))}
           </TogetherDiv>
 
           <TogetherDiv bc="white">
