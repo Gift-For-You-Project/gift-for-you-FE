@@ -355,35 +355,35 @@ const Home = () => {
                                 <ProductBlank />
                             </ProductGrid>
                             <ProductGridComponent
-                                imgSrc="/imgs/Product/iphone15pro.jpeg"
+                                imgSrc="/imgs/Home/iphone15pro.jpeg"
                                 altText="iphone"
                                 brand="Apple"
                                 itemName="아이폰 15 Pro 256BG 자급제"
                                 price="1,550,000원"
                             />
                             <ProductGridComponent
-                                imgSrc="/imgs/Product/iphone15pro.jpeg"
+                                imgSrc="/imgs/Home/iphone15pro.jpeg"
                                 altText="iphone"
                                 brand="Apple"
                                 itemName="아이폰 14 256BG 자급제"
                                 price="1,090,000원"
                             />
                             <ProductGridComponent
-                                imgSrc="/imgs/Product/iphone15pro.jpeg"
+                                imgSrc="/imgs/Home/iphone15pro.jpeg"
                                 altText="iphone"
                                 brand="Apple"
                                 itemName="아이폰 15 Pro 256BG 자급제"
                                 price="1,550,000원"
                             />
                             <ProductGridComponent
-                                imgSrc="/imgs/Product/iphone15pro.jpeg"
+                                imgSrc="/imgs/Home/iphone15pro.jpeg"
                                 altText="iphone"
                                 brand="Apple"
                                 itemName="아이폰 14 256BG 자급제"
                                 price="1,090,000원"
                             />
                             <ProductGridComponent
-                                imgSrc="/imgs/Product/iphone15pro.jpeg"
+                                imgSrc="/imgs/Home/iphone15pro.jpeg"
                                 altText="iphone"
                                 brand="Apple"
                                 itemName="아이폰 14 256BG 자급제"

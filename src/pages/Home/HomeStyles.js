@@ -32,19 +32,19 @@ export const LeftImgContainer = styled.div`
   justify-content: space-between;
 `;
 
+export const LeftLogoTextIcon = styled.img`
+  height: 40px;
+  position: absolute; /* 절대 위치 지정 */
+  bottom: 20px; /* 아래쪽 위치 조정 */
+  left: 30px; /* 왼쪽 위치 조정 */
+`;
+
 export const BubbleImg = styled.img`
   position: absolute; /* 절대 위치 지정 */
   top: 0; /* 위쪽 정렬 */
   left: 368px; /* 왼쪽 정렬 */
   width: 290px; /* 부모 요소에 대한 상대적인 너비 */
   height: 230px; /* 부모 요소에 대한 상대적인 높이 */
-`;
-
-export const LeftLogoTextIcon = styled.img`
-  height: 40px;
-  position: absolute; /* 절대 위치 지정 */
-  bottom: 20px; /* 아래쪽 위치 조정 */
-  left: 30px; /* 왼쪽 위치 조정 */
 `;
 
 export const LeftRowdiv = styled.div`
@@ -68,11 +68,6 @@ export const LeftRowdiv = styled.div`
   border: none;
 `;
 
-export const Leftcolumndiv = styled.div`
-  flex-direction: column;
-  margin-left: ${(props) => props.ml};
-`;
-
 export const LeftImg = styled.img`
   margin-top: ${(props) => props.mt};
   margin-right: ${(props) => props.mr};
@@ -81,6 +76,12 @@ export const LeftImg = styled.img`
   width: ${(props) => props.w};
   height: ${(props) => props.h};
 `;
+
+export const Leftcolumndiv = styled.div`
+  flex-direction: column;
+  margin-left: ${(props) => props.ml};
+`;
+
 
 export const IpadLoveImg = styled.img`
   position: absolute;
@@ -162,7 +163,6 @@ export const RightContainer = styled.div`
   position: relative;
   width: -webkit-fill-available; /* 사용 가능한 너비로 채움 */
   max-width: 390px; /* 최대 너비를 390px로 제한 */
-  margin: 0 auto; /* 가운데 정렬을 위해 margin을 auto로 설정 */
   /* border: 1px solid lightgray; */
   height: 100vh;
   overflow-y: scroll;
@@ -335,9 +335,8 @@ export const BannerImg = styled.img`
 export const FundingImg = styled.img`
   width: 100%;
   max-width: 110px;
-  height: auto; /* 변경된 부분 */
-  /* height: 100%; */
-  /* max-height: 110px; */
+  height: 100%;
+  max-height: 110px;
   border: 2px solid #e9e9e9;
   border-radius: 5px;
   margin-top: 10px;

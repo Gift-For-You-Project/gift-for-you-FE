@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
-import { getSponsorDetail } from "../../../../apis/funding";
+// import { getSponsorDetail } from "../../../../apis/funding";
 import {
   MainContainer,
   LeftContainer,
@@ -22,12 +22,12 @@ import {
 const Sponsor = () => {
   const navigate = useNavigate();
   const { fundingId } = useParams();
-  const [sponsorData, setSponsorData] = useState({
-    fundingid: 0,
-    itemImage: "",
-    content: "",
-    showName: "",
-  });
+  // const [sponsorData, setSponsorData] = useState({
+  //   fundingid: 0,
+  //   itemImage: "",
+  //   content: "",
+  //   showName: "",
+  // });
 
   useEffect(() => {
     const getData = async () => {
@@ -35,8 +35,8 @@ const Sponsor = () => {
         if (!fundingId) {
           return;
         }
-        const data = await getSponsorDetail(fundingId);
-        setSponsorData(data);
+        // const data = await getSponsorDetail(fundingId);
+        // setSponsorData(data);
       } catch (error) {
         console.error("후원자 상세페이지 API 호출 오류:", error);
       }
@@ -85,7 +85,7 @@ const Sponsor = () => {
               후원자
             </P>
             <SponserDiv>
-              <SponsorImg src="/imgs/Character/iu.jpg" alt="image" />
+              <SponsorImg src="/imgs/Common/profile-1.svg" alt="image" />
               <SponserComment mt="10px">
                 <P pl="5px" fs="13px" fw="800" color="#FFFFFF">
                   후원자 보여줄 이름
@@ -103,66 +103,11 @@ const Sponsor = () => {
               </SponserComment>
             </SponserDiv>
             <SponserDiv>
-            <SponsorImg src="/imgs/Character/songjoongy.jpg" alt="image" />
+            <SponsorImg src="/imgs/Common/profile-2.svg" alt="image" />
               <SponserComment mt="10px">
                 <P pl="5px" fs="13px" fw="800" color="#FFFFFF">
-                  {sponsorData.showName}
-                </P>
-                <Button
-                  mt="5px"
-                  w="300px"
-                  h="40px"
-                  pr="90px"
-                  fs="13px"
-                  bc="#ECECEC"
-                >
-                  {sponsorData.content}
-                </Button>
-              </SponserComment>
-            </SponserDiv>
-            <SponserDiv>
-            <SponsorImg src="/imgs/Character/junjihyun.jpg" alt="image" />
-              <SponserComment mt="10px">
-                <P pl="5px" fs="13px" fw="800" color="#FFFFFF">
-                  {sponsorData.showName}
-                </P>
-                <Button
-                  mt="5px"
-                  w="300px"
-                  h="40px"
-                  pr="90px"
-                  fs="13px"
-                  bc="#ECECEC"
-                >
-                  {sponsorData.content}
-                </Button>
-              </SponserComment>
-            </SponserDiv>
-            <SponserDiv>
-              <SponsorImg src="/imgs/Character/iu.jpg" alt="image" />
-              <SponserComment mt="10px">
-                <P pl="5px" fs="13px" fw="800" color="#FFFFFF">
-                  후원자 보여줄 이름
-                </P>
-                <Button
-                  mt="5px"
-                  w="300px"
-                  h="40px"
-                  pr="90px"
-                  fs="13px"
-                  bc="#ECECEC"
-                >
-                  후원자 남길 메시지
-                </Button>
-              </SponserComment>
-            </SponserDiv>
-
-            <SponserDiv>
-            <SponsorImg src="/imgs/Character/songjoongy.jpg" alt="image" />
-              <SponserComment mt="10px">
-                <P pl="5px" fs="13px" fw="800" color="#FFFFFF">
-                후원자 보여줄 이름
                   {/* {sponsorData.showName} */}
+                  후원자 보여줄 이름
                 </P>
                 <Button
                   mt="5px"
@@ -177,9 +122,46 @@ const Sponsor = () => {
                 </Button>
               </SponserComment>
             </SponserDiv>
-
             <SponserDiv>
-            <SponsorImg src="/imgs/Character/junjihyun.jpg" alt="image" />
+            <SponsorImg src="/imgs/Common/profile-3.svg" alt="image" />
+              <SponserComment mt="10px">
+                <P pl="5px" fs="13px" fw="800" color="#FFFFFF">
+                  {/* {sponsorData.showName} */}
+                  후원자 보여줄 이름
+                </P>
+                <Button
+                  mt="5px"
+                  w="300px"
+                  h="40px"
+                  pr="90px"
+                  fs="13px"
+                  bc="#ECECEC"
+                >
+                  {/* {sponsorData.content} */}
+                  후원자 남길 메시지
+                </Button>
+              </SponserComment>
+            </SponserDiv>
+            <SponserDiv>
+              <SponsorImg src="/imgs/Common/profile-4.svg" alt="image" />
+              <SponserComment mt="10px">
+                <P pl="5px" fs="13px" fw="800" color="#FFFFFF">
+                  후원자 보여줄 이름
+                </P>
+                <Button
+                  mt="5px"
+                  w="300px"
+                  h="40px"
+                  pr="90px"
+                  fs="13px"
+                  bc="#ECECEC"
+                >
+                  후원자 남길 메시지
+                </Button>
+              </SponserComment>
+            </SponserDiv>
+            <SponserDiv>
+            <SponsorImg src="/imgs/Common/profile-5.svg" alt="image" />
               <SponserComment mt="10px">
                 <P pl="5px" fs="13px" fw="800" color="#FFFFFF">
                 후원자 보여줄 이름
