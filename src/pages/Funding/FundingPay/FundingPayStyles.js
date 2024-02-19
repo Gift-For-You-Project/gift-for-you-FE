@@ -11,20 +11,84 @@ export const MainContainer = styled.div`
   flex-wrap: wrap;
 `;
 
-// 왼쪽 컨테이너
+/* 왼쪽 컨테이너 */
 export const LeftContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
-  width: 500px;
   height: 100vh;
-  padding: 20px;
-  margin-right: 100px;
+  padding-top: ${(props) => props.pt};
 
-  @media (max-width: 1024px) {
+  @media (max-width: 1200px) {
     display: none;
   }
+`;
+
+export const LeftImgContainer = styled.div`
+  position: relative; /*상대 위치 지정*/
+  //width: 300px; /* 이미지 너비 */
+  height: 200px; /* 이미지 높이 */
+  padding-left: 100px; /* 이미지 왼쪽 간격 조정 */
+  justify-content: space-between;
+`;
+
+export const LeftLogoTextIcon = styled.img`
+  height: 40px;
+  position: absolute; /* 절대 위치 지정 */
+  bottom: 20px; /* 아래쪽 위치 조정 */
+  left: 30px; /* 왼쪽 위치 조정 */
+`;
+
+export const BubbleImg = styled.img`
+  position: absolute; /* 절대 위치 지정 */
+  top: 0; /* 위쪽 정렬 */
+  left: 368px; /* 왼쪽 정렬 */
+  width: 290px; /* 부모 요소에 대한 상대적인 너비 */
+  height: 230px; /* 부모 요소에 대한 상대적인 높이 */
+`;
+
+export const LeftRowdiv = styled.div`
+  display: flex;
+  flex-direction: row;
+  /* align-items: center; */
+
+  padding-top: ${(props) => props.pt};
+  margin-top: ${(props) => props.mt};
+  padding-bottom: ${(props) => props.pb};
+  padding-left: ${(props) => props.pl};
+  padding-right: ${(props) => props.pr};
+  margin-right: ${(props) => props.mr};
+  margin-left: ${(props) => props.ml};
+  font-size: ${(props) => props.fs};
+  font-weight: ${(props) => props.fw};
+  color: ${(props) => props.color};
+  background-color: ${(props) => props.bc};
+  border-radius: ${(props) => props.br};
+  padding: ${(props) => props.p};
+  border: none;
+`;
+
+export const LeftImg = styled.img`
+  margin-top: ${(props) => props.mt};
+  margin-right: ${(props) => props.mr};
+  padding-right: ${(props) => props.pr};
+  padding-left: ${(props) => props.pl};
+  width: ${(props) => props.w};
+  height: ${(props) => props.h};
+`;
+
+export const Leftcolumndiv = styled.div`
+  flex-direction: column;
+  margin-left: ${(props) => props.ml};
+`;
+
+
+export const IpadLoveImg = styled.img`
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: ${(props) => props.w};
+  height: ${(props) => props.h};
 `;
 
 export const Logo = styled.h1`
@@ -41,7 +105,12 @@ export const P = styled.p`
   font-weight: ${(props) => props.fw};
   color: ${(props) => props.color};
   background-color: ${(props) => props.bc};
+  margin-top: ${(props) => props.mt};
+  margin-right: ${(props) => props.mr};
+  border-radius: ${(props) => props.br};
+  padding: ${(props) => props.p};
   align-items: center;
+  border: none;
 `;
 
 export const Button = styled.button`
@@ -74,21 +143,20 @@ export const NavbarDiv = styled.div`
   height: 70px;
 `;
 
-// 오른쪽 컨테이너
+/* 오른쪽 컨테이너 */
 export const RightContainer = styled.div`
   position: relative;
-  width: 442px;
-  border: 1px solid ${theme.gray4};
-  border-radius: 20px;
+  width: -webkit-fill-available; /* 사용 가능한 너비로 채움 */
+  max-width: 390px; /* 최대 너비를 390px로 제한 */
+  /* border: 1px solid lightgray; */
   height: 100vh;
   overflow-y: scroll;
-
   &::-webkit-scrollbar {
     display: none;
   }
 
-  @media (max-width: 442px) {
-    width: 100%;
+  @media screen and (max-width: 390px) {
+    max-width: 100%; /* 최대 너비를 100%로 설정하여 가득 차게 함 */
   }
 `;
 
@@ -154,7 +222,7 @@ export const FundingNewline = styled.div`
 
 export const TogetherDiv = styled.div`
   margin-top: 30px;
-  width: 442px;
+  width: 100%;
   height: 45px;
   background-color: ${(props) => props.bc};
   color: ${(props) => props.color};
