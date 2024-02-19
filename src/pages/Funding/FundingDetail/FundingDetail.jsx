@@ -177,9 +177,15 @@ const FundingDetail = () => {
             </P>
           </TitleDiv>
           <BannerImgDiv>
-            <IllustImg src="/imgs/Icon/right-pangpang.png" alt="img" />
+            <IllustImg
+              src="/imgs/Funding/FundingDetail/pangpang-left.png"
+              alt="img"
+            />
             <BannerImg src={detailData.itemImage} alt="image" />
-            <IllustImg src="/imgs/Icon/left-pangpang.png" alt="img" />
+            <IllustImg
+              src="/imgs/Funding/FundingDetail/pangpang-right.png"
+              alt="img"
+            />
           </BannerImgDiv>
           <NavigateDiv>
             <NavigateBtn onClick={() => navigate(`/fundingModify/${id}`)}>
@@ -220,7 +226,7 @@ const FundingDetail = () => {
               후원자
             </P>
             <BetweenDiv>
-              <SponsorImg src="/imgs/Character/iu.jpg" alt="image" />
+              <SponsorImg src="/imgs/Common/profile-1.svg" alt="image" />
               <SponserComment mt="10px">
                 <P pl="5px" fs="13px" fw="800">
                   후원자 보여줄 이름
@@ -231,24 +237,24 @@ const FundingDetail = () => {
               </SponserComment>
             </BetweenDiv>
             <SponserDiv>
-              <SponsorImg src="/imgs/Character/songjoongy.jpg" alt="image" />
+              <SponsorImg src="/imgs/Common/profile-2.svg" alt="image" />
               <SponserComment mt="10px">
                 <P pl="5px" fs="13px" fw="800">
                   후원자 보여줄 이름
                 </P>
                 <SponsorCommentDiv mt="5px">
-                  줄이어폰 그만써~ 생일축하해!!
+                  후원자 보여줄 내용
                 </SponsorCommentDiv>
               </SponserComment>
             </SponserDiv>
             <SponserDiv>
-              <SponsorImg src="/imgs/Character/junjihyun.jpg" alt="img" />
+              <SponsorImg src="/imgs/Common/profile-3.svg" alt="img" />
               <SponserComment mt="10px">
                 <P pl="5px" fs="13px" fw="800">
-                  {detailData.sponsorNickname}
+                  후원자 보여줄 이름
                 </P>
                 <SponsorCommentDiv mt="5px">
-                  {detailData.sponsorComment}
+                  후원자 보여줄 내용
                 </SponsorCommentDiv>
               </SponserComment>
             </SponserDiv>
@@ -278,7 +284,7 @@ const FundingDetail = () => {
               <SponsorimgDiv>
                 <FundingImgDiv>
                   <FundingImg
-                    src="/imgs/Gift/coffee.png"
+                    src="/imgs/Funding/FundingDetail/coffee.png"
                     alt="image"
                     h="38px"
                     ml="25px"
@@ -304,7 +310,7 @@ const FundingDetail = () => {
               <SponsorimgDiv>
                 <FundingImgDiv>
                   <FundingImg
-                    src="/imgs/Gift/icecream.png"
+                    src="/imgs/Funding/FundingDetail/icecream.png"
                     alt="image"
                     h="50px"
                     ml="10px"
@@ -330,7 +336,7 @@ const FundingDetail = () => {
               <SponsorimgDiv>
                 <FundingImgDiv>
                   <FundingImg
-                    src="/imgs/Gift/icecream.png"
+                    src="/imgs/Funding/FundingDetail/chicken.png"
                     alt="image"
                     h="50px"
                     ml="10px"
@@ -356,7 +362,7 @@ const FundingDetail = () => {
               <SponsorimgDiv>
                 <FundingImgDiv>
                   <FundingImg
-                    src="/imgs/Gift/icecream.png"
+                    src="/imgs/Funding/FundingDetail/cake.png"
                     alt="image"
                     h="50px"
                     ml="10px"

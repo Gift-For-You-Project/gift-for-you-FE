@@ -162,7 +162,6 @@ export const RightContainer = styled.div`
   position: relative;
   width: -webkit-fill-available; /* 사용 가능한 너비로 채움 */
   max-width: 390px; /* 최대 너비를 390px로 제한 */
-  margin: 0 auto; /* 가운데 정렬을 위해 margin을 auto로 설정 */
   /* border: 1px solid lightgray; */
   height: 100vh;
   overflow-y: scroll;
@@ -181,9 +180,7 @@ export const NavbarDiv = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  /* height: 70px; */
-  padding-left: 2px;
-  padding-right: 10px;
+  margin: 10px 10px 0 10px;
 `;
 
 /* 네브바 버튼 영역 */
@@ -335,9 +332,8 @@ export const BannerImg = styled.img`
 export const FundingImg = styled.img`
   width: 100%;
   max-width: 110px;
-  height: auto; /* 변경된 부분 */
-  /* height: 100%; */
-  /* max-height: 110px; */
+  height: 100%;
+  max-height: 110px;
   border: 2px solid #e9e9e9;
   border-radius: 5px;
   margin-top: 10px;
@@ -485,7 +481,7 @@ export const ProductImg = styled.img`
 export const ProductBlank = styled.div`
   width: 150px;
   height: 150px;
-  background-color: white;
+  background-color: ${theme.white};
 `;
 
 export const FundingProductGrid = styled.div`

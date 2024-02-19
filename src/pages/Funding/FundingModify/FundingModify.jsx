@@ -50,24 +50,6 @@ const FundingModify = () => {
     dispatch(userLogout());
     navigate("/");
   };
-  // const [isFundingModalOpen, setIsFundingModalOpen] = useState(false); // 모달 창의 열림 여부 상태 변수
-
-  // 펀딩 이미지를 클릭하여 모달을 열고 이미지를 설정하는 함수
-  // const handleFundingModalClick = (e) => {
-  //     setIsFundingModalOpen(true);
-  // };
-
-  // 모달을 닫는 함수
-  // const closeModal = () => {
-  //     setIsFundingModalOpen(false);
-  //     // setItemImage(''); // 이미지 상태를 초기화하여 이미지를 숨김
-  // };
-
-  // 모달 내에서 이미지를 선택하고 설정하는 함수
-  // const handleImageSelection = (itemImage) => {
-  //     setFundingData(itemImage);
-  //     setIsFundingModalOpen(false); // 이미지 선택 후 모달 닫기
-  // };
 
   useEffect(() => {
     // API를 호출하여 펀딩 상세 정보를 가져오는 함수 정의
