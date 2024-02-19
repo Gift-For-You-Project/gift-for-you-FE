@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useParams } from 'react-router-dom';
-import { getFundingDetail } from '../../../apis/funding';
-import Navbar from '../../../components/Navbar';
-import { useDispatch, useSelector } from 'react-redux';
-import { userLogout } from '../../../redux/authSlice';
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import { getFundingDetail } from "../../../apis/funding";
+import Navbar from "../../../components/Navbar";
+import { useDispatch, useSelector } from "react-redux";
+import { userLogout } from "../../../redux/authSlice";
+import theme from "../../../styles/theme";
 import {
     MainContainer,
     LeftContainer,
@@ -90,6 +91,9 @@ const FundingDetail = () => {
         navigate(`/fundingpay/${id}?donation=${sponsorDonation.donation20000}&showName=${detailData.showName}`);
     };
 
+
+
+
     const handledonation30000Change = () => {
         navigate(`/fundingpay/${id}?donation=${sponsorDonation.donation30000}&showName=${detailData.showName}`);
     };
@@ -134,24 +138,23 @@ const FundingDetail = () => {
                             <LeftLogoTextIcon src="/imgs/Common/giftipie.png" />
                         </div>
                         <div>
-                            <P pt="60px" pl="355px" fs="23px" fw="800" color="#FFFFFF">
+                            <P pt="60px" pl="355px" fs="23px" fw="800" color={theme.white}>
                                 생일선물
                                 <br />뭐 받고싶어?
                             </P>
                             <BubbleImg src="/imgs/Home/speech-bubble.png" />
                         </div>
-                        {/* <BubbleImg src="/imgs/Home/speech-bubble.png" /> */}
                     </LeftImgContainer>
 
                     <LeftRowdiv ml="30px">
-                        <LeftRowdiv color="#3F3F3F" mr="10px" bc="#FF7C7C" br="25px" p="8px">
+                        <LeftRowdiv color={theme.gray1} mr="10px" bc={theme.primary} br="25px" p="8px">
                             <LeftImg src="/imgs/Home/giftbox-red.png" w="30px" h="25px" mr="10px" pl="10px" />
                             <P fs="20px" fw="900" pr="10px">
                                 정말 원하는 선물
                             </P>
                         </LeftRowdiv>
                         <div>
-                            <P mt="6px" pt="2px" fs="20px" fw="700" color="#FFFFFF">
+                            <P mt="6px" pt="2px" fs="20px" fw="700" color={theme.white}>
                                 을 주고 받아요!
                             </P>
                         </div>
@@ -159,10 +162,10 @@ const FundingDetail = () => {
 
                     <LeftRowdiv>
                         <Leftcolumndiv ml="30px">
-                            <P fs="16px" fw="500" pt="30px" pb="5px" color="#FFFFFF">
+                            <P fs="16px" fw="500" pt="30px" pb="5px" color={theme.white}>
                                 지금은 유저테스트 진행 중 입니다
                             </P>
-                            <P pb="100px" fs="16px" fw="500" color="#FFFFFF">
+                            <P pb="100px" fs="16px" fw="500" color={theme.white}>
                                 6명의 개발자와 1명의 디자이너가 함께 개발하고 있습니다
                             </P>
                         </Leftcolumndiv>
@@ -171,15 +174,6 @@ const FundingDetail = () => {
                 </LeftContainer>
 
                 <LeftRowdiv ml="30px">
-                    {/* <Leftcolumndiv>
-                        <P fs="16px" fw="500" pb="5px" color="#FFFFFF">
-                            지금은 유저테스트 진행 중 입니다
-                        </P>
-                        <P pb="100px" fs="16px" fw="500" color="#FFFFFF">
-                            6명의 개발자와 1명의 디자이너가 함께 개발하고 있습니다
-                        </P>
-                    </Leftcolumndiv>
-                    <LeftImg src="/imgs/Home/pie-hi.png" w="340px" pl="90px" /> */}
                 </LeftRowdiv>
                 <IpadLoveImg src="/imgs/Home/pie-ipad.png" w="330px" />
             </LeftContainer>
@@ -190,13 +184,13 @@ const FundingDetail = () => {
                 </NavbarDiv>
                 <Body>
                     <TitleDiv>
-                        <P pt="20px" fs="13px" fw="800" color="gray">
+                        <P pt="20px" fs="13px" fw="800" color={theme.gray3}>
                             {detailData.status}
                         </P>
-                        <P pt="10px" fs="20px" fw="900" color="white">
+                        <P pt="10px" fs="20px" fw="900" color={theme.white}>
                             {detailData.title}
                         </P>
-                        <P pt="10px" pb="10px" fs="13px" fw="800" color="white">
+                        <P pt="10px" pb="10px" fs="13px" fw="800" color={theme.white}>
                             {detailData.showName}
                         </P>
                     </TitleDiv>
@@ -208,7 +202,7 @@ const FundingDetail = () => {
                     <NavigateDiv>
                         <NavigateBtn onClick={() => navigate(`/fundingModify/${id}`)}>🖍 수정하기</NavigateBtn>
                     </NavigateDiv>
-                    <TogetherDiv bc="white">
+                    <TogetherDiv bc={theme.white}>
                         <BetweenDiv pt="20px">
                             <P pt="5px" fs="13px" fw="900">
                                 {detailData.itemName}
@@ -218,21 +212,21 @@ const FundingDetail = () => {
                             <Progress width={(65 / 100) * 100} />
                         </ProgressBar>
                         <BetweenDiv>
-                            <P fs="20px" fw="900" color="#FF7C7C">
+                            <P fs="20px" fw="900" color={theme.primary}>
                                 {detailData.achievementRate}%
                             </P>
-                            <P pl="60px" fs="13px" fw="800" color="gray">
+                            <P pl="60px" fs="13px" fw="800" color={theme.gray3}>
                                 현재&nbsp;{detailData.currentAmount}원
                             </P>
-                            <P pl="30px" fs="13px" fw="800" color="gray">
+                            <P pl="30px" fs="13px" fw="800" color={theme.gray3}>
                                 {detailData.targetAmount}원
                             </P>
                         </BetweenDiv>
                         <BetweenDiv>
-                            <P pt="20px" fs="13px" fw="800" color="gray">
+                            <P pt="20px" fs="13px" fw="800" color={theme.gray3}>
                                 {detailData.dday}
                             </P>
-                            <P pt="20px" pb="20px" fs="13px" fw="800" color="gray">
+                            <P pt="20px" pb="20px" fs="13px" fw="800" color={theme.gray3}>
                                 {detailData.endDate}
                             </P>
                         </BetweenDiv>
@@ -280,7 +274,7 @@ const FundingDetail = () => {
                         <P pt="20px" pl="10px" fs="16px" fw="900">
                             펀딩 참여하기
                         </P>
-                        <Button onClick={handledonation5000Change} mt="30px" w="100%" h="60px" bc="lightgray">
+                        <Button onClick={handledonation5000Change} mt="30px" w="100%" h="60px" bc={theme.gray4}>
                             <SponsorimgDiv>
                                 <FundingImgDiv>
                                     <FundingImg src="/imgs/Funding/FundingDetail/coffee.png" alt="image" h="38px" ml="25px" />
@@ -295,7 +289,7 @@ const FundingDetail = () => {
                                 </BetweenDiv>
                             </SponsorimgDiv>
                         </Button>
-                        <Button onClick={handledonation10000Change} mt="10px" w="100%" h="60px" bc="lightgray">
+                        <Button onClick={handledonation10000Change} mt="10px" w="100%" h="60px" bc={theme.gray4}>
                             <SponsorimgDiv>
                                 <FundingImgDiv>
                                     <FundingImg src="/imgs/Funding/FundingDetail/icecream.png" alt="image" h="50px" ml="10px" />
@@ -310,7 +304,7 @@ const FundingDetail = () => {
                                 </BetweenDiv>
                             </SponsorimgDiv>
                         </Button>
-                        <Button onClick={handledonation20000Change} mt="10px" w="100%" h="60px" bc="lightgray">
+                        <Button onClick={handledonation20000Change} mt="10px" w="100%" h="60px" bc={theme.gray4}>
                             <SponsorimgDiv>
                                 <FundingImgDiv>
                                     <FundingImg src="/imgs/Funding/FundingDetail/chicken.png" alt="image" h="50px" ml="10px" />
@@ -325,7 +319,7 @@ const FundingDetail = () => {
                                 </BetweenDiv>
                             </SponsorimgDiv>
                         </Button>
-                        <Button onClick={handledonation30000Change} mt="10px" w="100%" h="60px" bc="lightgray">
+                        <Button onClick={handledonation30000Change} mt="10px" w="100%" h="60px" bc={theme.gray4}>
                             <SponsorimgDiv>
                                 <FundingImgDiv>
                                     <FundingImg src="/imgs/Funding/FundingDetail/cake.png" alt="image" h="50px" ml="10px" />
@@ -340,7 +334,7 @@ const FundingDetail = () => {
                                 </BetweenDiv>
                             </SponsorimgDiv>
                         </Button>
-                        <Button onClick={handledonationAllChange} mt="10px" w="100%" h="60px" bc="lightgray">
+                        <Button onClick={handledonationAllChange} mt="10px" w="100%" h="60px" bc={theme.gray4}>
                             <BetweenDiv>
                                 <P pt="3px" fs="14px" fw="800">
                                     이 펀딩 끝내러 왔다
@@ -350,7 +344,7 @@ const FundingDetail = () => {
                                 </P>
                             </BetweenDiv>
                         </Button>
-                        <Button onClick={handledonationInputChange} mt="10px" w="100%" h="60px" bc="lightgray">
+                        <Button onClick={handledonationInputChange} mt="10px" w="100%" h="60px" bc={theme.gray4}>
                             <BetweenDiv>
                                 <P pt="3px" fs="14px" fw="800">
                                     원하는 만큼 선물하기
@@ -365,9 +359,9 @@ const FundingDetail = () => {
                         onClick={() => navigate('/fundingpay')}
                         w="100%"
                         h="60px"
-                        color="black"
+                        color={theme.black}
                         fs="20px"
-                        bc="#FF7C7C"
+                        bc={theme.primary}
                         as={FloatingBtn}
                     >
                         선물하기

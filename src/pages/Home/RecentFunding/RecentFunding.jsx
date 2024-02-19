@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import LoginModal from "../Login/LoginModal";
+import { useDispatch, useSelector } from "react-redux";
+import { userLogout } from "../../../redux/authSlice";
+import Navbar from "../../../components/Navbar";
+import { getRecentFundingList } from "../../../apis/home";
 import { FaChevronRight } from 'react-icons/fa';
-import { useNavigate } from 'react-router-dom';
-import LoginModal from '../Login/LoginModal';
-import { useDispatch, useSelector } from 'react-redux';
-import { userLogout } from '../../../redux/authSlice';
-import Navbar from '../../../components/Navbar';
-import { getRecentFundingList } from '../../../apis/home';
+import theme from "../../../styles/theme";
 import {
     MainContainer,
     LeftContainer,

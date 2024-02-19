@@ -1,17 +1,18 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom'; // React Router에서 네비게이션 기능을 사용하기 위한 hook
-import { useParams } from 'react-router-dom'; // React Router에서 URL 매개변수를 가져오기 위한 hook
-import Navbar from '../../../components/Navbar'; // 추가된 코드
-import { useDispatch, useSelector } from 'react-redux'; // 추가된 코드
-import { userLogout } from '../../../redux/authSlice'; // 추가된 코드
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import Navbar from "../../../components/Navbar";
+import { useDispatch, useSelector } from "react-redux";
+import { userLogout } from "../../../redux/authSlice";
+import theme from "../../../styles/theme";
 import {
-    updateFundingModify,
-    deleteFundingModify,
-    FundingModifyGet,
-    completeFundingModify,
-} from '../../../apis/funding'; // 펀딩 수정 API, 펀딩 상세 정보 API
+  updateFundingModify,
+  deleteFundingModify,
+  FundingModifyGet,
+  completeFundingModify,
+} from "../../../apis/funding";
 import {
-    MainContainer,
+  MainContainer,
     LeftContainer,
     LeftImgContainer,
     LeftLogoTextIcon,
@@ -31,52 +32,29 @@ import {
     RadioInput,
     SponsorComment,
     FundingImg,
-    // ImgText,
     TogetherDiv,
-} from './FundingModifyStyles'; // 스타일 컴포넌트 import
+} from "./FundingModifyStyles";
 
-// 펀딩 수정 페이지 컴포넌트
 const FundingModify = () => {
-    const navigate = useNavigate(); // React Router의 네비게이션 기능을 사용하기 위한 hook
-    const { id } = useParams(); // URL 매개변수(id)를 가져옴
-    const isLoggedIn = useSelector((state) => state.auth.isLoggedIn); // 추가된 코드
-    const dispatch = useDispatch(); // 추가된 코드
+  const navigate = useNavigate();
+  const { id } = useParams();
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+  const dispatch = useDispatch();
+  const [fundingData, setFundingData] = useState({
+    itemName: "",
+    showName: "",
+    title: "",
+    content: "",
+    targetAmount: 0,
+    publicFlag: "",
+    endDate: "",
+    itemImage: "",
+  });
 
-    // 펀딩 데이터 상태와 상태 설정 함수 초기화
-    const [fundingData, setFundingData] = useState({
-        itemName: '',
-        showName: '',
-        title: '',
-        content: '',
-        targetAmount: 0,
-        publicFlag: '',
-        endDate: '',
-        itemImage: '',
-    });
-
-    // 추가된 코드
-    const handleLogoutClick = () => {
-        dispatch(userLogout()); // 로그아웃 액션 디스패치
-        navigate('/');
-    };
-    // const [isFundingModalOpen, setIsFundingModalOpen] = useState(false); // 모달 창의 열림 여부 상태 변수
-
-    // 펀딩 이미지를 클릭하여 모달을 열고 이미지를 설정하는 함수
-    // const handleFundingModalClick = (e) => {
-    //     setIsFundingModalOpen(true);
-    // };
-
-    // 모달을 닫는 함수
-    // const closeModal = () => {
-    //     setIsFundingModalOpen(false);
-    //     // setItemImage(''); // 이미지 상태를 초기화하여 이미지를 숨김
-    // };
-
-    // 모달 내에서 이미지를 선택하고 설정하는 함수
-    // const handleImageSelection = (itemImage) => {
-    //     setFundingData(itemImage);
-    //     setIsFundingModalOpen(false); // 이미지 선택 후 모달 닫기
-    // };
+  const handleLogoutClick = () => {
+    dispatch(userLogout());
+    navigate("/");
+  };
 
     useEffect(() => {
         // API를 호출하여 펀딩 상세 정보를 가져오는 함수 정의
@@ -138,20 +116,7 @@ const FundingModify = () => {
 
             await deleteFundingModify(id, fundingData);
             console.log('펀딩 삭제 성공:', id);
-            navigate(`/`);
-            // if (id) {
-            //     alert('정말 삭제하시겠습니까?');
-            //     return;
-            // }
-            // const data = await deleteFundingModify(id, fundingData);
-            // const data = await deleteFundingModify(id);
-            // setFundingData(
-            //     fundingData.filter((data) => {
-            //         return data.id !== id;
-            //     })
-            // );
-            // console.log('펀딩 삭제 성공:', data);
-            // navigate(`/`);
+            navigate("/");
         } catch (error) {
             console.error('펀딩 삭제 실패:', error);
             // 에러 핸들링
@@ -167,16 +132,14 @@ const FundingModify = () => {
             const data = await completeFundingModify(id); // 펀딩 상세 정보 가져오기
             setFundingData(data); // 가져온 데이터를 상태 변수에 설정
             console.log('펀딩 종료 성공', data);
-            navigate(`/`);
+            navigate("/");
         } catch (error) {
             console.error('펀딩 종료 오류:', error);
         }
     };
 
-    // UI 렌더링
     return (
         <MainContainer>
-            {/* 왼쪽 컨테이너 */}
             <LeftContainer>
                 <LeftContainer pt="70px">
                     <LeftImgContainer>
@@ -184,24 +147,23 @@ const FundingModify = () => {
                             <LeftLogoTextIcon src="/imgs/Common/giftipie.png" />
                         </div>
                         <div>
-                            <P pt="60px" pl="355px" fs="23px" fw="800" color="#FFFFFF">
+                            <P pt="60px" pl="355px" fs="23px" fw="800" color={theme.white}>
                                 생일선물
                                 <br />뭐 받고싶어?
                             </P>
                             <BubbleImg src="/imgs/Home/speech-bubble.png" />
                         </div>
-                        {/* <BubbleImg src="/imgs/Home/speech-bubble.png" /> */}
                     </LeftImgContainer>
 
                     <LeftRowdiv ml="30px">
-                        <LeftRowdiv color="#3F3F3F" mr="10px" bc="#FF7C7C" br="25px" p="8px">
+                        <LeftRowdiv color={theme.gray1} mr="10px" bc={theme.primary} br="25px" p="8px">
                             <LeftImg src="/imgs/Home/giftbox-red.png" w="30px" h="25px" mr="10px" pl="10px" />
                             <P fs="20px" fw="900" pr="10px">
                                 정말 원하는 선물
                             </P>
                         </LeftRowdiv>
                         <div>
-                            <P mt="6px" pt="2px" fs="20px" fw="700" color="#FFFFFF">
+                            <P mt="6px" pt="2px" fs="20px" fw="700" color={theme.white}>
                                 을 주고 받아요!
                             </P>
                         </div>
@@ -209,10 +171,10 @@ const FundingModify = () => {
 
                     <LeftRowdiv>
                         <Leftcolumndiv ml="30px">
-                            <P fs="16px" fw="500" pt="30px" pb="5px" color="#FFFFFF">
+                            <P fs="16px" fw="500" pt="30px" pb="5px" color={theme.white}>
                                 지금은 유저테스트 진행 중 입니다
                             </P>
-                            <P pb="100px" fs="16px" fw="500" color="#FFFFFF">
+                            <P pb="100px" fs="16px" fw="500" color={theme.white}>
                                 6명의 개발자와 1명의 디자이너가 함께 개발하고 있습니다
                             </P>
                         </Leftcolumndiv>
@@ -221,52 +183,31 @@ const FundingModify = () => {
                 </LeftContainer>
 
                 <LeftRowdiv ml="30px">
-                    {/* <Leftcolumndiv>
-                        <P fs="16px" fw="500" pb="5px" color="#FFFFFF">
-                            지금은 유저테스트 진행 중 입니다
-                        </P>
-                        <P pb="100px" fs="16px" fw="500" color="#FFFFFF">
-                            6명의 개발자와 1명의 디자이너가 함께 개발하고 있습니다
-                        </P>
-                    </Leftcolumndiv>
-                    <LeftImg src="/imgs/Home/pie-hi.png" w="340px" pl="90px" /> */}
                 </LeftRowdiv>
                 <IpadLoveImg src="/imgs/Home/pie-ipad.png" w="330px" />
             </LeftContainer>
 
-            {/* 오른쪽 컨테이너 */}
             <RightContainer>
-                {/* 추가된 코드 */}
                 <NavbarDiv>
                     <Navbar isLoggedIn={isLoggedIn} handleLogoutClick={handleLogoutClick} />
                 </NavbarDiv>
-                {/* 펀딩 수정 내용 입력 부분 */}
                 <Body>
-                    {/* 펀딩 상품 정보 입력 및 이미지 변경 */}
                     <FundingDiv>
-                        {/* 펀딩 페이지에 노출되는 상품명 및 이미지 변경 버튼 */}
-                        <P pb="10px" fs="16px" fw="900" color="#FF7C7C">
+                        <P pb="10px" fs="16px" fw="900" color={theme.primary}>
                             펀딩 수정페이지
                         </P>
-                        <P pb="20px" fs="10px" fw="900" color="#E4E4E4">
+                        <P pb="20px" fs="10px" fw="900" color={theme.gray5}>
                             펀딩페이지의 상품명, 가격, 이미지는 변경할 수 없습니다.
                         </P>
 
                         <SponsorDiv>
-                            {/* <SponsorComment pointer="pointer" onClick={handleFundingModalClick}> */}
-                            {/* <FundingImg  onClick={handleFundingModalClick} src={fundingData.itemImage} alt="logo"/> */}
                             <FundingImg src={fundingData.itemImage} alt="logo" />
-                            {/* <ImgText>이미지 변경</ImgText> */}
-                            {/* </SponsorComment> */}
                             <SponsorComment mt="10px">
                                 <div>
                                     <InputTag
                                         type="text"
                                         placeholder="상품명을 입력해주세요"
                                         value={fundingData.itemName}
-                                        // onChange={(e) => {
-                                        //     setFundingData({ ...fundingData, itemName: e.target.value });
-                                        // }}
                                         h="40px"
                                         w="92%"
                                         ml="10px"
@@ -277,9 +218,6 @@ const FundingModify = () => {
                                         type="text"
                                         placeholder="가격을 입력해주세요"
                                         value={fundingData.targetAmount}
-                                        // onChange={(e) => {
-                                        //     setFundingData({ ...fundingData, targetAmount: e.target.value });
-                                        // }}
                                         h="40px"
                                         w="92%"
                                         ml="10px"
@@ -287,18 +225,14 @@ const FundingModify = () => {
                                     />
                                 </div>
                             </SponsorComment>
-                            {/* 모달 컴포넌트 표시 여부 확인 후 표시 */}
-                            {/* {isFundingModalOpen && (
-                                <ModifyModal closeModal={closeModal} handleImageSelection={handleImageSelection} />
-                            )} */}
                         </SponsorDiv>
                         {/* 펀딩 내용 및 공개 여부 입력 부분 */}
                         <SponsorDiv>
                             <SponsorComment mt="50px">
-                                <P pb="10px" fs="16px" fw="900" color="#FF7C7C">
+                                <P pb="10px" fs="16px" fw="900" color={theme.primary}>
                                     펀딩 내용
                                 </P>
-                                <P pb="20px" fs="13px" fw="900" color="#E4E4E4">
+                                <P pb="20px" fs="13px" fw="900" color={theme.gray5}>
                                     공개 방식을 설정해주세요.
                                 </P>
                                 <SponsorDiv>
@@ -314,10 +248,10 @@ const FundingModify = () => {
                                         type="radio"
                                         mb="21px"
                                     />
-                                    <P pb="20px" fs="13px" fw="900" pl="20px" color="#E4E4E4">
+                                    <P pb="20px" fs="13px" fw="900" pl="20px" color={theme.gray5}>
                                         공개
                                     </P>
-                                    <P pb="20px" fs="10px" fw="900" pl="42px" color="#E4E4E4">
+                                    <P pb="20px" fs="10px" fw="900" pl="42px" color={theme.gray5}>
                                         누구나 볼 수 있어요
                                     </P>
                                 </SponsorDiv>
@@ -335,16 +269,16 @@ const FundingModify = () => {
                                         type="radio"
                                         mb="21px"
                                     />
-                                    <P pb="20px" fs="13px" fw="900" pl="20px" color="#E4E4E4">
+                                    <P pb="20px" fs="13px" fw="900" pl="20px" color={theme.gray5}>
                                         비공개
                                     </P>
-                                    <P pb="20px" fs="10px" fw="900" pl="30px" color="#E4E4E4">
+                                    <P pb="20px" fs="10px" fw="900" pl="30px" color={theme.gray5}>
                                         링크를 통해서만 방문할 수 있어요
                                     </P>
                                 </SponsorDiv>
                             </SponsorComment>
                         </SponsorDiv>
-                        <P pt="30px" pb="5px" fs="13px" fw="800" color="#E4E4E4">
+                        <P pt="30px" pb="5px" fs="13px" fw="800" color={theme.gray5}>
                             이름
                         </P>
                         <InputTag
@@ -359,7 +293,7 @@ const FundingModify = () => {
                             mb="10px"
                             pl="10px"
                         />
-                        <P pt="10px" pb="5px" fs="13px" fw="800" color="#E4E4E4">
+                        <P pt="10px" pb="5px" fs="13px" fw="800" color={theme.gray5}>
                             제목
                         </P>
                         <InputTag
@@ -374,7 +308,7 @@ const FundingModify = () => {
                             mb="10px"
                             pl="10px"
                         />
-                        <P pt="10px" pb="5px" fs="13px" fw="800" color="#E4E4E4">
+                        <P pt="10px" pb="5px" fs="13px" fw="800" color={theme.gray5}>
                             본문
                         </P>
                         <InputTag
@@ -390,15 +324,12 @@ const FundingModify = () => {
                             pl="10px"
                             pb="50px"
                         />
-                        <P pt="10px" pb="5px" fs="13px" fw="800" color="#E4E4E4">
+                        <P pt="10px" pb="5px" fs="13px" fw="800" color={theme.gray5}>
                             마감일 설정
                         </P>
                         <InputTag
                             type="date"
                             value={fundingData.endDate}
-                            // onChange={(e) => {
-                            //     setFundingData({ ...fundingData, endDate: e.target.value });
-                            // }}
                             h="40px"
                             w="97%"
                             pl="10px"
@@ -407,10 +338,10 @@ const FundingModify = () => {
                     </FundingDiv>
                     {/* 펀딩 안내 문구 */}
                     <TogetherDiv>
-                        <P pl="130px" fs="14px" fw="800" color="#FFE6C1">
+                        <P pl="130px" fs="14px" fw="800" color={theme.secondary}>
                             펀딩 금액은 계좌로 전달돼요
                         </P>
-                        <P pl="95px" fs="14px" fw="800" color="#FFE6C1">
+                        <P pl="95px" fs="14px" fw="800" color={theme.secondary}>
                             펀딩에 성공하면 카톡으로 알림이 가요
                         </P>
                     </TogetherDiv>

@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import theme from "../../../styles/theme";
 
 // 전체 컨테이너
 export const MainContainer = styled.div`
@@ -209,7 +210,7 @@ export const FundingImg = styled.img`
   align-items: start;
   &:hover {
     cursor: pointer;
-    }
+  }
 `;
 
 export const SponsorComment = styled.div`
@@ -228,7 +229,7 @@ export const ImgText = styled.h1`
   /* position: absolute; 핵심코드 */
   top: 47%; // 핵심코드
   right: 25%; //핵심코드 */
-  transform: translate( 10%, -140%); // 핵심코드
+  transform: translate(10%, -140%); // 핵심코드
   color: gray;
 `;
 

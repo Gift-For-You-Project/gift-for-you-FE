@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { postFundingCreate } from '../../../apis/funding';
-import { useParams } from 'react-router-dom';
-import CreateModal from './Modal/CreateModal';
-import Navbar from '../../../components/Navbar';
-import { useDispatch, useSelector } from 'react-redux';
-import { userLogout } from '../../../redux/authSlice';
-import { infoToast } from '../../../components/toast';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { postFundingCreate } from "../../../apis/funding";
+import { useParams } from "react-router-dom";
+import CreateModal from "./Modal/CreateModal";
+import Navbar from "../../../components/Navbar";
+import { useDispatch, useSelector } from "react-redux";
+import { userLogout } from "../../../redux/authSlice";
+import { infoToast } from "../../../components/toast";
+import theme from "../../../styles/theme";
 import {
     MainContainer,
     LeftContainer,
@@ -140,7 +141,7 @@ const FundingCreate = () => {
                             <LeftLogoTextIcon src="/imgs/Common/giftipie.png" />
                         </div>
                         <div>
-                            <P pt="60px" pl="355px" fs="23px" fw="800" color="#FFFFFF">
+                            <P pt="60px" pl="355px" fs="23px" fw="800" color={theme.white}>
                                 생일선물
                                 <br />뭐 받고싶어?
                             </P>
@@ -150,25 +151,27 @@ const FundingCreate = () => {
                     </LeftImgContainer>
 
                     <LeftRowdiv ml="30px">
-                        <LeftRowdiv color="#3F3F3F" mr="10px" bc="#FF7C7C" br="25px" p="8px">
+                        <LeftRowdiv color="#3F3F3F" mr="10px" bc={theme.primary} br="25px" p="8px">
                             <LeftImg src="/imgs/Home/giftbox-red.png" w="30px" h="25px" mr="10px" pl="10px" />
                             <P fs="20px" fw="900" pr="10px">
                                 정말 원하는 선물
                             </P>
                         </LeftRowdiv>
                         <div>
-                            <P mt="6px" pt="2px" fs="20px" fw="700" color="#FFFFFF">
+                            <P mt="6px" pt="2px" fs="20px" fw="700" color={theme.white}>
                                 을 주고 받아요!
                             </P>
                         </div>
                     </LeftRowdiv>
 
+
+
                     <LeftRowdiv>
                         <Leftcolumndiv ml="30px">
-                            <P fs="16px" fw="500" pt="30px" pb="5px" color="#FFFFFF">
+                            <P fs="16px" fw="500" pt="30px" pb="5px" color={theme.white}>
                                 지금은 유저테스트 진행 중 입니다
                             </P>
-                            <P pb="100px" fs="16px" fw="500" color="#FFFFFF">
+                            <P pb="100px" fs="16px" fw="500" color={theme.white}>
                                 6명의 개발자와 1명의 디자이너가 함께 개발하고 있습니다
                             </P>
                         </Leftcolumndiv>
@@ -177,15 +180,6 @@ const FundingCreate = () => {
                 </LeftContainer>
 
                 <LeftRowdiv ml="30px">
-                    {/* <Leftcolumndiv>
-                        <P fs="16px" fw="500" pb="5px" color="#FFFFFF">
-                            지금은 유저테스트 진행 중 입니다
-                        </P>
-                        <P pb="100px" fs="16px" fw="500" color="#FFFFFF">
-                            6명의 개발자와 1명의 디자이너가 함께 개발하고 있습니다
-                        </P>
-                    </Leftcolumndiv>
-                    <LeftImg src="/imgs/Home/pie-hi.png" w="340px" pl="90px" /> */}
                 </LeftRowdiv>
                 <IpadLoveImg src="/imgs/Home/pie-ipad.png" w="330px" />
             </LeftContainer>
@@ -203,10 +197,10 @@ const FundingCreate = () => {
                         }}
                     >
                         <FundingDiv>
-                            <P pb="10px" fs="16px" fw="900" color="#FF7C7C">
+                            <P pb="10px" fs="16px" fw="900" color={theme.primary}>
                                 펀딩 생성페이지
                             </P>
-                            <P pb="20px" fs="10px" fw="900" color="#E4E4E4">
+                            <P pb="20px" fs="10px" fw="900" color={theme.gray5}>
                                 펀딩 생성 페이지에 상품명과 이미지가 노출돼요.
                             </P>
                             <ProducImgtDiv>
@@ -245,10 +239,10 @@ const FundingCreate = () => {
                             {/* 펀딩 내용 및 공개 여부 입력 폼 */}
                             <SponserDiv>
                                 <SponserComment mt="50px">
-                                    <P pb="10px" fs="16px" fw="900" color="#FF7C7C">
+                                    <P pb="10px" fs="16px" fw="900" color={theme.primary}>
                                         펀딩 내용
                                     </P>
-                                    <P pb="20px" fs="13px" fw="900" color="#E4E4E4">
+                                    <P pb="20px" fs="13px" fw="900" color={theme.gray5}>
                                         공개 방식을 설정해주세요.
                                     </P>
                                     <SponserDiv>
@@ -259,10 +253,10 @@ const FundingCreate = () => {
                                             type="radio"
                                             mb="21px"
                                         />
-                                        <P pb="20px" fs="13px" fw="900" pl="20px" color="#E4E4E4">
+                                        <P pb="20px" fs="13px" fw="900" pl="20px" color={theme.gray5}>
                                             공개
                                         </P>
-                                        <P pb="20px" fs="10px" fw="900" pl="42px" color="#E4E4E4">
+                                        <P pb="20px" fs="10px" fw="900" pl="42px" color={theme.gray5}>
                                             누구나 볼 수 있어요
                                         </P>
                                     </SponserDiv>
@@ -274,16 +268,16 @@ const FundingCreate = () => {
                                             type="radio"
                                             mb="21px"
                                         />
-                                        <P pb="20px" fs="13px" fw="900" pl="20px" color="#E4E4E4">
+                                        <P pb="20px" fs="13px" fw="900" pl="20px" color={theme.gray5}>
                                             비공개
                                         </P>
-                                        <P pb="20px" fs="10px" fw="900" pl="30px" color="#E4E4E4">
+                                        <P pb="20px" fs="10px" fw="900" pl="30px" color={theme.gray5}>
                                             링크를 통해서만 방문할 수 있어요
                                         </P>
                                     </SponserDiv>
                                 </SponserComment>
                             </SponserDiv>
-                            <P pt="30px" pb="5px" fs="13px" fw="800" color="#E4E4E4">
+                            <P pt="30px" pb="5px" fs="13px" fw="800" color={theme.gray5}>
                                 보여줄 이름
                             </P>
                             <InputTag
@@ -296,7 +290,7 @@ const FundingCreate = () => {
                                 mb="10px"
                                 pl="10px"
                             />
-                            <P pt="10px" pb="5px" fs="13px" fw="800" color="#E4E4E4">
+                            <P pt="10px" pb="5px" fs="13px" fw="800" color={theme.gray5}>
                                 제목
                             </P>
                             <InputTag
@@ -309,7 +303,7 @@ const FundingCreate = () => {
                                 mb="10px"
                                 pl="10px"
                             />
-                            <P pt="10px" pb="5px" fs="13px" fw="800" color="#E4E4E4">
+                            <P pt="10px" pb="5px" fs="13px" fw="800" color={theme.gray5}>
                                 본문
                             </P>
                             <InputTag
@@ -323,7 +317,7 @@ const FundingCreate = () => {
                                 pl="10px"
                                 pb="50px"
                             />
-                            <P pt="10px" pb="5px" fs="13px" fw="800" color="#E4E4E4">
+                            <P pt="10px" pb="5px" fs="13px" fw="800" color={theme.gray5}>
                                 마감일 설정
                             </P>
                             <InputTag
@@ -337,10 +331,10 @@ const FundingCreate = () => {
                             />
                         </FundingDiv>
                         <TogetherDiv>
-                            <P pl="130px" fs="14px" fw="800" color="#FFE6C1">
+                            <P pl="130px" fs="14px" fw="800" color={theme.secondary}>
                                 펀딩 금액은 계좌로 전달돼요
                             </P>
-                            <P pl="95px" fs="14px" fw="800" color="#FFE6C1">
+                            <P pl="95px" fs="14px" fw="800" color={theme.secondary}>
                                 펀딩에 성공하면 카톡으로 알림이 가요
                             </P>
                         </TogetherDiv>
@@ -352,7 +346,7 @@ const FundingCreate = () => {
                             mt="10px"
                             color="white"
                             fs="19px"
-                            bc="#FF7C7C"
+                            bc={theme.primary}
                         >
                             펀딩 등록하기
                         </Button>
@@ -361,6 +355,6 @@ const FundingCreate = () => {
             </RightContainer>
         </MainContainer>
     );
-};
+}
 
 export default FundingCreate;
