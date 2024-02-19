@@ -4,12 +4,13 @@ import { useParams } from "react-router-dom";
 import Navbar from "../../../components/Navbar";
 import { useDispatch, useSelector } from "react-redux";
 import { userLogout } from "../../../redux/authSlice";
+import { infoToast } from "../../../components/toast";
 import theme from "../../../styles/theme";
 import {
-  updateFundingModify,
+  patchFundingModify,
   deleteFundingModify,
-  FundingModifyGet,
-  completeFundingModify,
+  getFundingDetail,
+  endFundingModify,
 } from "../../../apis/funding";
 import {
   MainContainer,
@@ -40,102 +41,100 @@ const FundingModify = () => {
   const { id } = useParams();
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const dispatch = useDispatch();
-  const [fundingData, setFundingData] = useState({
-    itemName: "",
-    showName: "",
-    title: "",
-    content: "",
-    targetAmount: 0,
-    publicFlag: "",
-    endDate: "",
-    itemImage: "",
-  });
-
+  const [fundingData, setFundingData] = useState([
+    {
+      itemName: "",
+      showName: "",
+      title: "",
+      content: "",
+      targetAmount: 0,
+      publicFlag: "",
+      endDate: "",
+      itemImage: "",
+    },
+  ]);
+  
   const handleLogoutClick = () => {
     dispatch(userLogout());
     navigate("/");
   };
 
+    // 수정페이지로 상세페이지 데이터 불러오기
     useEffect(() => {
-        // API를 호출하여 펀딩 상세 정보를 가져오는 함수 정의
-        const fetchData = async () => {
-            try {
-                if (!id) {
-                    // 유효한 id가 없으면 데이터를 요청하지 않음
-                    return;
-                }
-                const data = await FundingModifyGet(id); // 펀딩 상세 정보 가져오기
-                setFundingData(data); // 가져온 데이터를 상태 변수에 설정
-                console.log('펀딩상세 가져오기 성공', data);
-            } catch (error) {
-                console.error('펀딩상세 가져오기 오류:', error);
-            }
-        };
-
-        // 컴포넌트가 마운트될 때 API 호출 함수 실행
-        fetchData();
-    }, [id]); // 빈 배열을 전달하여 한 번만 실행하도록 설정
-
-    // 펀딩 수정 요청 함수
+      const getData = async () => {
+        try {
+          if (!id) {
+            return;
+          }
+          const data = await getFundingDetail(id);
+          setFundingData(data);
+        } catch (error) {
+          console.error("펀딩상세 가져오기 오류:", error);
+        }
+      };
+  
+      getData();
+    }, [id]);
+  
+    // 펀딩 수정 API
     const handlefundingModifyClick = async () => {
-        try {
-            if (
-                fundingData.publicFlag === '' ||
-                fundingData.showName === '' ||
-                fundingData.title === '' ||
-                fundingData.content === ''
-            ) {
-                alert('내용을 입력해주세요');
-                return;
-            }
-            const data = await updateFundingModify(id, fundingData); // 펀딩 수정 API 호출
-            // setFundingData(fundingData.map((data) => {
-            //     if (data.id === id) {
-            //         return { ...data, fundingData };
-            //     } else {
-            //         return data;
-            //     }
-            // }))
-            console.log('펀딩 수정 성공:', data);
-            navigate(`/fundingdetail/${data.id}`); // 펀딩 상세 페이지로 이동
-        } catch (error) {
-            if (error.response) {
-                const statusCode = error.response.status;
-                const errorMessage = error.response.data.message;
-                if (statusCode === 400) {
-                    alert('펀딩 수정 실패 :', errorMessage);
-                }
-            }
+      try {
+        if (
+          fundingData.publicFlag === "" ||
+          fundingData.showName === "" ||
+          fundingData.title === "" ||
+          fundingData.content === ""
+        ) {
+          infoToast("내용을 입력해주세요");
+          return;
         }
+  
+        const data = await patchFundingModify(id, fundingData);
+  
+        setFundingData(
+          fundingData.map((data) => {
+            if (data.id === id) {
+              return { ...data, fundingData };
+            } else {
+              return data;
+            }
+          })
+        );
+  
+        navigate(`/fundingdetail/${data.id}`);
+      } catch (error) {
+        console.error("펀딩 수정 오류:", error);
+      }
     };
-
+  
+    // 펀딩 삭제 API
     const handledeleteFundingClick = async () => {
-        try {
-            const confirmDelete = window.confirm('정말 삭제하시겠습니까?');
-            if (!confirmDelete) return;
-
-            await deleteFundingModify(id, fundingData);
-            console.log('펀딩 삭제 성공:', id);
-            navigate("/");
-        } catch (error) {
-            console.error('펀딩 삭제 실패:', error);
-            // 에러 핸들링
-        }
+      try {
+        const confirmDelete = window.confirm("정말 삭제하시겠습니까?");
+        if (!confirmDelete) return;
+  
+        await deleteFundingModify(id, fundingData);
+        console.log("펀딩 삭제 성공:", id);
+        navigate("/");
+      } catch (error) {
+        console.error("펀딩 삭제 실패:", error);
+      }
     };
-
+  
+    // 펀딩 종료 API
     const handlecompleteFundingClick = async () => {
-        try {
-            if (!id) {
-                // 유효한 id가 없으면 데이터를 요청하지 않음
-                return;
-            }
-            const data = await completeFundingModify(id); // 펀딩 상세 정보 가져오기
-            setFundingData(data); // 가져온 데이터를 상태 변수에 설정
-            console.log('펀딩 종료 성공', data);
-            navigate("/");
-        } catch (error) {
-            console.error('펀딩 종료 오류:', error);
+      try {
+        if (!id) {
+          // 유효한 id가 없으면 데이터를 요청하지 않음
+          return;
         }
+        const data = await endFundingModify(id); // 펀딩 상세 정보 가져오기
+        setFundingData(data); // 가져온 데이터를 상태 변수에 설정
+        console.log("펀딩 종료 성공", data);
+        navigate("/");
+      } catch (error) {
+        console.error("펀딩 종료 오류:", error);
+      }
     };
 
     return (

@@ -27,7 +27,7 @@ function CreateModal({ closeModal, handleImageSelection }) {
       closeModal();
       navigate("/fundingcreate");
     } catch (error) {
-      console.error(error);
+      console.error("펀딩 모달 오류: ", error);
     }
   };
 

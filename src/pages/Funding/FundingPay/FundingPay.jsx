@@ -121,7 +121,7 @@ const FundingPay = () => {
                             <LeftLogoTextIcon src="/imgs/Common/giftipie.png" />
                         </div>
                         <div>
-                            <P pt="60px" pl="355px" fs="23px" fw="800" color="#FFFFFF">
+                            <P pt="60px" pl="355px" fs="23px" fw="800" color={theme.white}>
                                 생일선물
                                 <br />뭐 받고싶어?
                             </P>
