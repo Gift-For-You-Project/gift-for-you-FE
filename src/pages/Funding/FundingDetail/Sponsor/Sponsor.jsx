@@ -152,13 +152,11 @@ const Sponsor = () => {
                 </Button>
               </SponserComment>
             </SponserDiv>
-
             <SponserDiv>
               <SponsorImg src="/imgs/Common/profile-5.svg" alt="image" />
               <SponserComment mt="10px">
                 <P pl="5px" fs="13px" fw="800" color="#FFFFFF">
                   후원자 보여줄 이름
-                  {/* {sponsorData.showName} */}
                 </P>
                 <Button
                   mt="5px"
@@ -168,7 +166,6 @@ const Sponsor = () => {
                   fs="13px"
                   bc="#ECECEC"
                 >
-                  {/* {sponsorData.content} */}
                   후원자 남길 메시지
                 </Button>
               </SponserComment>
