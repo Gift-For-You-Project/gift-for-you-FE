@@ -145,7 +145,6 @@ const FundingDetail = () => {
                             <BubbleImg src="/imgs/Home/speech-bubble.png" />
                         </div>
                     </LeftImgContainer>
-
                     <LeftRowdiv ml="30px">
                         <LeftRowdiv color={theme.gray1} mr="10px" bc={theme.primary} br="25px" p="8px">
                             <LeftImg src="/imgs/Home/giftbox-red.png" w="30px" h="25px" mr="10px" pl="10px" />

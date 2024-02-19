@@ -112,7 +112,6 @@ const Navbar = ({ isLoggedIn, handleLoginClick, handleLogoutClick }) => {
           <BsPersonCircle color={theme.white} />
         </NavbarIconDiv>
         <NavbarBtn onClick={handleLogoutClick} fs="13px" fw="600">
-          {/* <RiLogoutBoxRLine /> */}
           <IoLogOutSharp size="28px" color={theme.white} />
         </NavbarBtn>
       </NavbarIconContainer>
@@ -131,7 +130,6 @@ const Navbar = ({ isLoggedIn, handleLoginClick, handleLogoutClick }) => {
         onClick={handleNavbarIconClick}
         fs="20px"
         fw="600"
-        pl="25px"
         color="white"
       >
         <LogoDiv>

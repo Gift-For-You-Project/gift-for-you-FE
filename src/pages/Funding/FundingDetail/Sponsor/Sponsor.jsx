@@ -18,6 +18,7 @@ import {
   SponserComment,
   SponsorImg,
 } from "./SponsorStyles";
+import theme from "../../../../styles/theme";
 
 const Sponsor = () => {
   const navigate = useNavigate();
@@ -62,12 +63,7 @@ const Sponsor = () => {
 
       <RightContainer>
         <Navbar>
-          <NavbarBtn
-            onClick={() => navigate(`/`)}
-            fs="15px"
-            fw="800"
-            pl="15px"
-          >
+          <NavbarBtn onClick={() => navigate("/")} fs="15px" fw="800" pl="15px">
             펀딩 상세페이지로 이동
           </NavbarBtn>
           <NavbarBtnDiv pr="15px">
@@ -81,12 +77,30 @@ const Sponsor = () => {
         </Navbar>
         <Body>
           <FundingDiv>
-            <P pt="20px" pb="20px" fs="16px" fw="900" color="#FFFFFF">
+            <P pt="20px" pb="20px" fs="16px" fw="900" color={theme.white}>
               후원자
             </P>
             <SponserDiv>
               <SponsorImg src="/imgs/Common/profile-1.svg" alt="image" />
               <SponserComment mt="10px">
+                <P pl="5px" fs="13px" fw="800" color={theme.white}>
+                  후원자 보여줄 이름
+                </P>
+                <Button
+                  mt="5px"
+                  w="300px"
+                  h="40px"
+                  pr="90px"
+                  fs="13px"
+                  bc="#ECECEC"
+                >
+                  후원자 남길 메시지
+                </Button>
+              </SponserComment>
+            </SponserDiv>
+            <SponserDiv>
+              <SponsorImg src="/imgs/Common/profile-2.svg" alt="image" />
+              <SponserComment mt="10px">
                 <P pl="5px" fs="13px" fw="800" color="#FFFFFF">
                   후원자 보여줄 이름
                 </P>
@@ -103,10 +117,9 @@ const Sponsor = () => {
               </SponserComment>
             </SponserDiv>
             <SponserDiv>
-            <SponsorImg src="/imgs/Common/profile-2.svg" alt="image" />
+              <SponsorImg src="/imgs/Common/profile-3.svg" alt="image" />
               <SponserComment mt="10px">
                 <P pl="5px" fs="13px" fw="800" color="#FFFFFF">
-                  {/* {sponsorData.showName} */}
                   후원자 보여줄 이름
                 </P>
                 <Button
@@ -117,27 +130,6 @@ const Sponsor = () => {
                   fs="13px"
                   bc="#ECECEC"
                 >
-                  {/* {sponsorData.content} */}
-                  후원자 남길 메시지
-                </Button>
-              </SponserComment>
-            </SponserDiv>
-            <SponserDiv>
-            <SponsorImg src="/imgs/Common/profile-3.svg" alt="image" />
-              <SponserComment mt="10px">
-                <P pl="5px" fs="13px" fw="800" color="#FFFFFF">
-                  {/* {sponsorData.showName} */}
-                  후원자 보여줄 이름
-                </P>
-                <Button
-                  mt="5px"
-                  w="300px"
-                  h="40px"
-                  pr="90px"
-                  fs="13px"
-                  bc="#ECECEC"
-                >
-                  {/* {sponsorData.content} */}
                   후원자 남길 메시지
                 </Button>
               </SponserComment>
@@ -161,11 +153,10 @@ const Sponsor = () => {
               </SponserComment>
             </SponserDiv>
             <SponserDiv>
-            <SponsorImg src="/imgs/Common/profile-5.svg" alt="image" />
+              <SponsorImg src="/imgs/Common/profile-5.svg" alt="image" />
               <SponserComment mt="10px">
                 <P pl="5px" fs="13px" fw="800" color="#FFFFFF">
-                후원자 보여줄 이름
-                  {/* {sponsorData.showName} */}
+                  후원자 보여줄 이름
                 </P>
                 <Button
                   mt="5px"
@@ -175,7 +166,6 @@ const Sponsor = () => {
                   fs="13px"
                   bc="#ECECEC"
                 >
-                  {/* {sponsorData.content} */}
                   후원자 남길 메시지
                 </Button>
               </SponserComment>

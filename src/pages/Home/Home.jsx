@@ -6,7 +6,7 @@ import LoginModal from "../Home/Login/LoginModal";
 import { useDispatch, useSelector } from "react-redux";
 import { bootChannelTalk } from "../../redux/channelTalkSlice";
 import Navbar from "../../components/Navbar";
-import { getMyFunding, getHomeFundingList } from "../../apis/home";
+import { getHomeFundingList } from "../../apis/home";
 import { userLogout } from "../../redux/authSlice";
 import theme from "../../styles/theme";
 import {
@@ -58,26 +58,26 @@ const Home = () => {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [homeFundingList, setHomeFundingList] = useState([]);
-  const [myFunding, setMyFunding] = useState([
-    {
-      id: "",
-      itemLink: "",
-      itemImage: "",
-      itemName: "",
-      title: "",
-      showName: "",
-      content: "",
-      currentAmount: 0,
-      targetAmount: 0,
-      publicFlag: false,
-      endData: "",
-      dday: "",
-      status: false,
-      achievementRate: 0,
-      ownerFlag: false,
-      modifiedAt: "",
-    },
-  ]);
+  // const [myFunding, setMyFunding] = useState([]);
+  //   {
+  //     id: "",
+  //     itemLink: "",
+  //     itemImage: "",
+  //     itemName: "",
+  //     title: "",
+  //     showName: "",
+  //     content: "",
+  //     currentAmount: 0,
+  //     targetAmount: 0,
+  //     publicFlag: false,
+  //     endData: "",
+  //     dday: "",
+  //     status: false,
+  //     achievementRate: 0,
+  //     ownerFlag: false,
+  //     modifiedAt: "",
+  //   },
+  // ]);
 
   const closeModal = () => setIsLoginModalOpen(false);
 
@@ -97,20 +97,16 @@ const Home = () => {
   const handleFundingCreate = () => navigate("/fundingcreate");
 
   // 내 펀딩 데이터를 가져오는 API
-  const getMyData = async () => {
-    try {
-      const data = await getMyFunding();
-      console.log("받아오고 있니? ", data);
-      // id가 존재할 때만 호출
-      if (data && Array.isArray(data)) {
-        const myFundingData = data.filter((funding) => funding.id);
-        console.log("받아오고 있는거니? ", myFundingData);
-        setMyFunding(myFundingData);
-      }
-    } catch (error) {
-      console.error("API 호출 중 에러 발생: ", error);
-    }
-  };
+  // const getMyData = async () => {
+  //   try {
+  //     const data = await getMyFunding();
+  //     console.log("받아오고 있니? ", data);
+
+  //     setMyFunding([data]);
+  //   } catch (error) {
+  //     console.error("API 호출 중 에러 발생: ", error);
+  //   }
+  // };
 
   // 펀딩 리스트 데이터를 가져오는 API
   const getData = async () => {
@@ -125,7 +121,7 @@ const Home = () => {
 
   useEffect(() => {
     dispatch(bootChannelTalk());
-    getMyData();
+    // getMyData();
     getData();
   }, [dispatch]);
 
@@ -153,7 +149,7 @@ const Home = () => {
   return (
     <MainContainer>
       <LeftContainer>
-        <LeftContainer pt="70px">
+        <LeftContainer>
           <LeftImgContainer>
             <div>
               <LeftLogoTextIcon src="/imgs/Common/giftipie.png" />
@@ -204,7 +200,7 @@ const Home = () => {
           </LeftRowdiv>
         </LeftContainer>
         <LeftRowdiv ml="30px"></LeftRowdiv>
-        <IpadLoveImg src="/imgs/Home/pie-ipad.png" w="330px" />
+        <IpadLoveImg src="/imgs/Home/pie-ipad.png" w="300px" />
       </LeftContainer>
 
       <RightContainer>
@@ -228,7 +224,7 @@ const Home = () => {
             </BetweenDiv>
           </TogetherDiv>
 
-          <TogetherDiv bc="white">
+          <TogetherDiv bc={theme.white}>
             <BetweenDiv pt="40px">
               <P pt="20px" pl="23px" pb="10px" fs="16px" fw="900">
                 내 펀딩
@@ -236,11 +232,43 @@ const Home = () => {
               <MainBtnContainer>
                 <MainBtn>링크 복사</MainBtn>
                 <MainBtn>수정</MainBtn>
-                <MainBtn color={theme.primary}>삭제</MainBtn>
               </MainBtnContainer>
             </BetweenDiv>
+            <BetweenDiv>
+              <BannerImg src="/imgs/Home/airpods.jpeg" />
+              <BannerProgressDiv>
+                <OneLine fs="11px" fw="800" color="gray">
+                  에어팟
+                </OneLine>
+                <OneLine pt="5px" fs="13px" fw="800">
+                  인생 첫 에어팟을 선물해주세요
+                </OneLine>
+                <P pt="10px" fs="15px" fw="900" color={theme.primary}>
+                  36%
+                </P>
+                <RoundProgressBar>
+                  <RoundProgress width={(65 / 100) * 100} />
+                </RoundProgressBar>
+                <BetweenDiv>
+                  <P pl="0px" fs="10px" fw="800" color="gray">
+                    현재&nbsp;852000원
+                  </P>
+                  <P fs="10px" fw="800" color="gray">
+                    5686000원
+                  </P>
+                </BetweenDiv>
+              </BannerProgressDiv>
+            </BetweenDiv>
+            <BetweenDiv>
+              <P pt="15px" pl="30px" fs="13px" fw="800" color="gray">
+                D-12
+              </P>
+              <P pt="15px" pr="30px" pb="20px" fs="13px" fw="800" color="gray">
+                2024-03-08
+              </P>
+            </BetweenDiv>
             {/* 내 펀딩 데이터 불러오기 */}
-            {myFunding.map((funding) => (
+            {/* {myFunding.map((funding) => (
               <BetweenDiv key={funding.id}>
                 <BannerImg src={funding.itemImage} />
                 <BannerProgressDiv>
@@ -268,7 +296,7 @@ const Home = () => {
                   </BetweenDiv>
                 </BannerProgressDiv>
               </BetweenDiv>
-            ))}
+            ))} */}
           </TogetherDiv>
 
           <TogetherDiv bc="white">

@@ -58,7 +58,7 @@ const FundingModify = () => {
     dispatch(userLogout());
     navigate("/");
   };
-
+  
     // 수정페이지로 상세페이지 데이터 불러오기
     useEffect(() => {
       const getData = async () => {

@@ -181,9 +181,7 @@ export const NavbarDiv = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  /* height: 70px; */
-  padding-left: 2px;
-  padding-right: 10px;
+  margin: 10px 10px 0 10px;
 `;
 
 /* 네브바 버튼 영역 */
@@ -484,7 +482,7 @@ export const ProductImg = styled.img`
 export const ProductBlank = styled.div`
   width: 150px;
   height: 150px;
-  background-color: white;
+  background-color: ${theme.white};
 `;
 
 export const FundingProductGrid = styled.div`
