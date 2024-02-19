@@ -82,7 +82,6 @@ export const Leftcolumndiv = styled.div`
   margin-left: ${(props) => props.ml};
 `;
 
-
 export const IpadLoveImg = styled.img`
   position: absolute;
   bottom: 0;
@@ -129,7 +128,7 @@ export const Button = styled.button`
   padding-left: ${(props) => props.pl};
   padding-right: ${(props) => props.pr};
   &:hover {
-    color: white;
+    color: ${theme.white};
     background-color: black;
     cursor: pointer;
   }

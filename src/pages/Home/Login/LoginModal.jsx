@@ -35,7 +35,7 @@ const LoginModal = ({ closeModal }) => {
           <IoClose />
         </IoCloseDiv>
         <LoginModalImg
-          src="/imgs/Character/giftipie-01.png"
+          src="/imgs/Home/pie-banner.png"
           alt="pie"
           w="100px"
           h="100px"
@@ -50,14 +50,10 @@ const LoginModal = ({ closeModal }) => {
           주고받아요
         </P>
         <Link to="/signup">
-          <LoginModalBtn>
-            가입하기
-          </LoginModalBtn>
+          <LoginModalBtn>가입하기</LoginModalBtn>
         </Link>
         <Link to="/login">
-          <LoginModalBtn>
-            로그인하기
-          </LoginModalBtn>
+          <LoginModalBtn>로그인하기</LoginModalBtn>
         </Link>
         <GoogleBtn onClick={GoogleLogin}>
           <LoginModalImg
