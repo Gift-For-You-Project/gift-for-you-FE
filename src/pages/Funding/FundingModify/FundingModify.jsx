@@ -4,12 +4,12 @@ import { useParams } from "react-router-dom";
 import Navbar from "../../../components/Navbar";
 import { useDispatch, useSelector } from "react-redux";
 import { userLogout } from "../../../redux/authSlice";
-import theme from "../../../styles/theme";
+import { infoToast } from "../../../components/toast";
 import {
-  updateFundingModify,
+  patchFundingModify,
   deleteFundingModify,
-  FundingModifyGet,
-  completeFundingModify,
+  getFundingDetail,
+  endFundingModify,
 } from "../../../apis/funding";
 import {
   MainContainer,
@@ -35,61 +35,42 @@ const FundingModify = () => {
   const { id } = useParams();
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const dispatch = useDispatch();
-  const [fundingData, setFundingData] = useState({
-    itemName: "",
-    showName: "",
-    title: "",
-    content: "",
-    targetAmount: 0,
-    publicFlag: "",
-    endDate: "",
-    itemImage: "",
-  });
-
+  const [fundingData, setFundingData] = useState([
+    {
+      itemName: "",
+      showName: "",
+      title: "",
+      content: "",
+      targetAmount: 0,
+      publicFlag: "",
+      endDate: "",
+      itemImage: "",
+    },
+  ]);
+  
   const handleLogoutClick = () => {
     dispatch(userLogout());
     navigate("/");
   };
-  // const [isFundingModalOpen, setIsFundingModalOpen] = useState(false); // 모달 창의 열림 여부 상태 변수
 
-  // 펀딩 이미지를 클릭하여 모달을 열고 이미지를 설정하는 함수
-  // const handleFundingModalClick = (e) => {
-  //     setIsFundingModalOpen(true);
-  // };
-
-  // 모달을 닫는 함수
-  // const closeModal = () => {
-  //     setIsFundingModalOpen(false);
-  //     // setItemImage(''); // 이미지 상태를 초기화하여 이미지를 숨김
-  // };
-
-  // 모달 내에서 이미지를 선택하고 설정하는 함수
-  // const handleImageSelection = (itemImage) => {
-  //     setFundingData(itemImage);
-  //     setIsFundingModalOpen(false); // 이미지 선택 후 모달 닫기
-  // };
-
+  // 수정페이지로 상세페이지 데이터 불러오기
   useEffect(() => {
-    // API를 호출하여 펀딩 상세 정보를 가져오는 함수 정의
-    const fetchData = async () => {
+    const getData = async () => {
       try {
         if (!id) {
-          // 유효한 id가 없으면 데이터를 요청하지 않음
           return;
         }
-        const data = await FundingModifyGet(id); // 펀딩 상세 정보 가져오기
-        setFundingData(data); // 가져온 데이터를 상태 변수에 설정
-        console.log("펀딩상세 가져오기 성공", data);
+        const data = await getFundingDetail(id);
+        setFundingData(data);
       } catch (error) {
         console.error("펀딩상세 가져오기 오류:", error);
       }
     };
 
-    // 컴포넌트가 마운트될 때 API 호출 함수 실행
-    fetchData();
-  }, [id]); // 빈 배열을 전달하여 한 번만 실행하도록 설정
+    getData();
+  }, [id]);
 
-  // 펀딩 수정 요청 함수
+  // 펀딩 수정 API
   const handlefundingModifyClick = async () => {
     try {
       if (
@@ -98,30 +79,29 @@ const FundingModify = () => {
         fundingData.title === "" ||
         fundingData.content === ""
       ) {
-        alert("내용을 입력해주세요");
+        infoToast("내용을 입력해주세요");
         return;
       }
-      const data = await updateFundingModify(id, fundingData); // 펀딩 수정 API 호출
-      // setFundingData(fundingData.map((data) => {
-      //     if (data.id === id) {
-      //         return { ...data, fundingData };
-      //     } else {
-      //         return data;
-      //     }
-      // }))
-      console.log("펀딩 수정 성공:", data);
-      navigate(`/fundingdetail/${data.id}`); // 펀딩 상세 페이지로 이동
+
+      const data = await patchFundingModify(id, fundingData);
+
+      setFundingData(
+        fundingData.map((data) => {
+          if (data.id === id) {
+            return { ...data, fundingData };
+          } else {
+            return data;
+          }
+        })
+      );
+
+      navigate(`/fundingdetail/${data.id}`);
     } catch (error) {
-      if (error.response) {
-        const statusCode = error.response.status;
-        const errorMessage = error.response.data.message;
-        if (statusCode === 400) {
-          alert("펀딩 수정 실패 :", errorMessage);
-        }
-      }
+      console.error("펀딩 수정 오류:", error);
     }
   };
 
+  // 펀딩 삭제 API
   const handledeleteFundingClick = async () => {
     try {
       const confirmDelete = window.confirm("정말 삭제하시겠습니까?");
@@ -129,23 +109,23 @@ const FundingModify = () => {
 
       await deleteFundingModify(id, fundingData);
       console.log("펀딩 삭제 성공:", id);
-      navigate(`/`);
+      navigate("/");
     } catch (error) {
       console.error("펀딩 삭제 실패:", error);
-      // 에러 핸들링
     }
   };
 
+  // 펀딩 종료 API
   const handlecompleteFundingClick = async () => {
     try {
       if (!id) {
         // 유효한 id가 없으면 데이터를 요청하지 않음
         return;
       }
-      const data = await completeFundingModify(id); // 펀딩 상세 정보 가져오기
+      const data = await endFundingModify(id); // 펀딩 상세 정보 가져오기
       setFundingData(data); // 가져온 데이터를 상태 변수에 설정
       console.log("펀딩 종료 성공", data);
-      navigate(`/`);
+      navigate("/");
     } catch (error) {
       console.error("펀딩 종료 오류:", error);
     }
@@ -335,9 +315,9 @@ const FundingModify = () => {
             <InputTag
               type="date"
               value={fundingData.endDate}
-              // onChange={(e) => {
-              //     setFundingData({ ...fundingData, endDate: e.target.value });
-              // }}
+              onChange={(e) => {
+                setFundingData({ ...fundingData, endDate: e.target.value });
+              }}
               h="40px"
               w="97%"
               pl="10px"

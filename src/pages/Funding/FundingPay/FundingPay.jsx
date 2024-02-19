@@ -141,7 +141,6 @@ const FundingPay = () => {
       </LeftContainer>
 
       <RightContainer>
-        {/* 추가된 코드 */}
         <NavbarDiv>
           <Navbar
             isLoggedIn={isLoggedIn}
@@ -151,7 +150,6 @@ const FundingPay = () => {
         <Body>
           <FundingDiv>
             <SponserMoney>
-              {/* <SponsorImg src="/imgs/junjihyun.jpg" alt="logo" /> */}
               <P pt="10px" fs="16px" fw="800" pb="5px" color="#FFFFFF">
                 {sponsorDonation.showName} 님에게
               </P>
