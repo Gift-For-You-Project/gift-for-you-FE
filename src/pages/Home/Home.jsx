@@ -370,84 +370,84 @@ const Home = () => {
               </TogetherGrid>
             </TogetherGrids>
           </>
+                    <TogetherDiv bc="white">
+                        <button>
+                            <P fs="16px" fw="900" pt="20px" pb="5px" pl="23px">
+                                추천 상품 &nbsp;
+                                <FaChevronRight />
+                            </P>
+                        </button>
+                        <ProductGrids>
+                            <ProductGrid>
+                                <ProductBlank />
+                            </ProductGrid>
+                            <ProductGridComponent
+                                imgSrc="/imgs/Home/iphone15pro.jpeg"
+                                altText="iphone"
+                                brand="Apple"
+                                itemName="아이폰 15 Pro 256BG 자급제"
+                                price="1,550,000원"
+                            />
+                            <ProductGridComponent
+                                imgSrc="/imgs/Home/iphone15pro.jpeg"
+                                altText="iphone"
+                                brand="Apple"
+                                itemName="아이폰 14 256BG 자급제"
+                                price="1,090,000원"
+                            />
+                            <ProductGridComponent
+                                imgSrc="/imgs/Home/iphone15pro.jpeg"
+                                altText="iphone"
+                                brand="Apple"
+                                itemName="아이폰 15 Pro 256BG 자급제"
+                                price="1,550,000원"
+                            />
+                            <ProductGridComponent
+                                imgSrc="/imgs/Home/iphone15pro.jpeg"
+                                altText="iphone"
+                                brand="Apple"
+                                itemName="아이폰 14 256BG 자급제"
+                                price="1,090,000원"
+                            />
+                            <ProductGridComponent
+                                imgSrc="/imgs/Home/iphone15pro.jpeg"
+                                altText="iphone"
+                                brand="Apple"
+                                itemName="아이폰 14 256BG 자급제"
+                                price="1,090,000원"
+                            />
+                        </ProductGrids>
+                    </TogetherDiv>
+                </Body>
+                <Footer>
+                    <P fs="18px" fw="600" pt="30px" pb="10px" color="lightgray">
+                        GiftiPie란?
+                    </P>
+                    <P fs="14px" color="dimgray" pb="4px">
+                        커피 기프티콘 대신, 친구가 정말로 원하는 선물을
+                    </P>
+                    <P fs="14px" color="dimgray" pb="50px">
+                        함께 모금해서 선물하는 서비스예요!
+                    </P>
+                    <Button
+                        onClick={handleFundingCreate}
+                        w="100%"
+                        h="60px"
+                        color="black"
+                        fs="20px"
+                        bc="#FF7C7C"
+                        as={FloatingBtn} // FloatingButton 스타일을 적용
+                    >
+                        <FaPlus />
+                        &nbsp; 펀딩 만들기
+                    </Button>
+                </Footer>
+            </RightContainer>
 
-          <TogetherDiv bc="white">
-            <button>
-              <P fs="16px" fw="900" pt="20px" pb="5px" pl="23px">
-                추천 상품 &nbsp;
-                <FaChevronRight />
-              </P>
-            </button>
-            <ProductGrids>
-              <ProductGrid>
-                <ProductBlank />
-              </ProductGrid>
-              <ProductGridComponent
-                imgSrc="/imgs/Product/iphone15pro.jpeg"
-                altText="iphone"
-                brand="Apple"
-                itemName="아이폰 15 Pro 256BG 자급제"
-                price="1,550,000원"
-              />
-              <ProductGridComponent
-                imgSrc="/imgs/Product/iphone15pro.jpeg"
-                altText="iphone"
-                brand="Apple"
-                itemName="아이폰 14 256BG 자급제"
-                price="1,090,000원"
-              />
-              <ProductGridComponent
-                imgSrc="/imgs/Product/iphone15pro.jpeg"
-                altText="iphone"
-                brand="Apple"
-                itemName="아이폰 15 Pro 256BG 자급제"
-                price="1,550,000원"
-              />
-              <ProductGridComponent
-                imgSrc="/imgs/Product/iphone15pro.jpeg"
-                altText="iphone"
-                brand="Apple"
-                itemName="아이폰 14 256BG 자급제"
-                price="1,090,000원"
-              />
-              <ProductGridComponent
-                imgSrc="/imgs/Product/iphone15pro.jpeg"
-                altText="iphone"
-                brand="Apple"
-                itemName="아이폰 14 256BG 자급제"
-                price="1,090,000원"
-              />
-            </ProductGrids>
-          </TogetherDiv>
-        </Body>
-
-        <Footer>
-          <P fs="18px" fw="600" pt="30px" pb="10px" color={theme.gray4}>
-            GiftiPie란?
-          </P>
-          <P fs="14px" color="dimgray" pb="4px">
-            커피 기프티콘 대신, 친구가 정말로 원하는 선물을
-          </P>
-          <P fs="14px" color="dimgray" pb="50px">
-            함께 모금해서 선물하는 서비스예요!
-          </P>
-          <Button
-            onClick={handleFundingCreate}
-            w="100%"
-            h="60px"
-            color="black"
-            fs="20px"
-            bc={theme.primary}
-            as={FloatingBtn}
-          >
-            <FaPlus />
-            &nbsp; 펀딩 만들기
-          </Button>
-        </Footer>
-      </RightContainer>
-      {isLoginModalOpen && <LoginModal closeModal={closeModal} />}
-    </MainContainer>
-  );
+            {/* 로그인 모달 */}
+            {isLoginModalOpen && <LoginModal closeModal={closeModal} />}
+        </MainContainer>
+    );
 };
 
 export default Home;
