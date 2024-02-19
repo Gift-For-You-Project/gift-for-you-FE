@@ -30,7 +30,6 @@ import {
   TogetherDiv,
 } from "./FundingModifyStyles";
 
-// 펀딩 수정 페이지 컴포넌트
 const FundingModify = () => {
   const navigate = useNavigate();
   const { id } = useParams();
@@ -48,7 +47,7 @@ const FundingModify = () => {
       itemImage: "",
     },
   ]);
-
+  
   const handleLogoutClick = () => {
     dispatch(userLogout());
     navigate("/");
@@ -165,7 +164,7 @@ const FundingModify = () => {
           {/* 펀딩 상품 정보 입력 및 이미지 변경 */}
           <FundingDiv>
             {/* 펀딩 페이지에 노출되는 상품명 및 이미지 변경 버튼 */}
-            <P pb="10px" fs="16px" fw="900" color="#FF7C7C">
+            <P pb="10px" fs="16px" fw="900" color={theme.primary}>
               펀딩 수정페이지
             </P>
             <P pb="20px" fs="10px" fw="900" color="#E4E4E4">
@@ -215,7 +214,7 @@ const FundingModify = () => {
             {/* 펀딩 내용 및 공개 여부 입력 부분 */}
             <SponsorDiv>
               <SponsorComment mt="50px">
-                <P pb="10px" fs="16px" fw="900" color="#FF7C7C">
+                <P pb="10px" fs="16px" fw="900" color={theme.primary}>
                   펀딩 내용
                 </P>
                 <P pb="20px" fs="13px" fw="900" color="#E4E4E4">
@@ -364,7 +363,7 @@ const FundingModify = () => {
             mt="10px"
             color="white"
             fs="19px"
-            bc="#FF7C7C"
+            bc={theme.primary}
           >
             펀딩 삭제하기
           </Button>

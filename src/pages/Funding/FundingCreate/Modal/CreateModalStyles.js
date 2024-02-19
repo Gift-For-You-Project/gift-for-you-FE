@@ -1,26 +1,27 @@
 import styled from "styled-components";
+import theme from "../../../../styles/theme";
 
 export const Container = styled.div`
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    z-index: 100;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: 100;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
 `;
 
 export const Background = styled.div`
-    width: 100%;
-    height: 100%;
-    /* background-color: rgba(255,255,255,0.15); */
-    background: #00000080;
-    backdrop-filter: blur(1px);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  width: 100%;
+  height: 100%;
+  /* background-color: rgba(255,255,255,0.15); */
+  background: #00000080;
+  backdrop-filter: blur(1px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `;
 export const ModalBox = styled.div`
   display: flex;
@@ -32,8 +33,8 @@ export const ModalBox = styled.div`
   padding: 10px 20px 20px 20px;
   position: absolute;
   background: white;
-  border: 0.3px solid lightgray;
-  box-shadow: 0.3px 0.3px 0.3px 0.3px lightgray;
+  border: 0.3px solid ${theme.gray4};
+  box-shadow: 0.3px 0.3px 0.3px 0.3px ${theme.gray4};
   border-radius: 10px;
 `;
 export const ModalTitleXBox = styled.div`
@@ -71,4 +72,4 @@ export const ModalButton = styled.button`
   color: white;
   border-radius: 6px;
   border: none;
-`
+`;

@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import theme from "../../../../styles/theme";
 
 // 전체 컨테이너
 export const MainContainer = styled.div`
@@ -19,7 +20,7 @@ export const LeftContainer = styled.div`
   width: 500px;
   height: 100vh;
   padding: 20px;
-  border: 1px solid lightgray;
+  border: 1px solid ${theme.gray4};
   border-radius: 8px;
   margin-right: 100px;
 
@@ -68,7 +69,7 @@ export const Button = styled.button`
 export const RightContainer = styled.div`
   position: relative;
   width: 442px;
-  border: 1px solid lightgray;
+  border: 1px solid ${theme.gray4};
   height: 100vh;
   overflow-y: scroll;
 
@@ -95,7 +96,7 @@ export const NavbarBtn = styled.button`
   font-weight: ${(props) => props.fw};
   padding-left: ${(props) => props.pl};
   padding-right: ${(props) => props.pr};
-  color: #FFFFFF;
+  color: #ffffff;
 `;
 
 export const NavbarBtnDiv = styled.div`

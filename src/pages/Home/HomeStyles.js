@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 import theme from "../../styles/theme";
 
 /* 전체 컨테이너 */
@@ -99,7 +99,7 @@ export const Logo = styled.h1`
 
 /* 다용도 P 태그 */
 export const P = styled.p`
-/* display: flex; */
+  /* display: flex; */
   padding-top: ${(props) => props.pt};
   margin-top: ${(props) => props.mt};
   padding-bottom: ${(props) => props.pb};
@@ -152,7 +152,7 @@ export const Button = styled.button`
   padding-right: ${(props) => props.pr};
   &:hover {
     color: white;
-    background-color: #FF7C7C;
+    background-color: ${theme.primary};
     cursor: pointer;
   }
 `;
@@ -182,8 +182,8 @@ export const NavbarDiv = styled.div`
   justify-content: space-between;
   align-items: center;
   /* height: 70px; */
-   padding-left: 2px;
-   padding-right: 10px;
+  padding-left: 2px;
+  padding-right: 10px;
 `;
 
 /* 네브바 버튼 영역 */
@@ -228,7 +228,7 @@ export const LogoDiv = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-`
+`;
 
 export const LogoIcon = styled.img`
   height: 35px;
@@ -328,8 +328,8 @@ export const BannerImg = styled.img`
   border-radius: 20px;
   margin: 0px 20px 0px 25px;
   /* border: 2px solid #e9e9e9; */
-  border: 0.3px solid lightgray;
-  box-shadow: 0px 0.3px 0px 0.3px lightgray;
+  border: 0.3px solid ${theme.gray4};
+  box-shadow: 0px 0.3px 0px 0.3px ${theme.gray4};
 `;
 
 export const FundingImg = styled.img`
@@ -359,7 +359,7 @@ export const Progress = styled.div`
   text-align: center;
   background-color: ${theme.primary};
   /* border-radius: 15px; // 추가 */
-  color: #FF7C7C;
+  color: ${theme.primary};
 `;
 
 export const BetweenDiv = styled.div`
@@ -381,8 +381,8 @@ export const TogetherBetween = styled.div`
 export const TogetherDiv = styled.div`
   background-color: ${(props) => props.bc};
   border-radius: 30px;
-  border: 0.3px solid lightgray;
-  box-shadow: 0px 5px 0px 0px lightgray;
+  border: 0.3px solid ${theme.gray4};
+  box-shadow: 0px 5px 0px 0px ${theme.gray4};
   width: -webkit-fill-available; /* 사용 가능한 너비로 채움 */
   max-width: 390px; /* 최대 너비를 390px로 제한 */
   margin: 0 auto; /* 가운데 정렬을 위해 margin을 auto로 설정 */
@@ -436,7 +436,6 @@ export const RoundProgress = styled.div`
   border-radius: 15px;
 `;
 
-
 export const TogetherGrid = styled.div`
   background-color: snow;
   display: flex;
@@ -481,7 +480,6 @@ export const ProductImg = styled.img`
   height: 130px;
   border: 2px solid #e9e9e9;
   margin-top: 10px;
-
 `;
 
 export const ProductBlank = styled.div`
@@ -508,8 +506,8 @@ export const FloatingBtn = styled.button`
   width: 220px; /* 버튼의 너비 조정 */
   height: 50px; /* 버튼의 높이 조정 */
   border-radius: 25px; /* 버튼의 모양을 둥글게 만듭니다. */
-  background-color: #ff7c7c; /* 버튼의 배경색을 지정합니다. */
-  color: white; /* 버튼 텍스트의 색상을 지정합니다. */
+  background-color: ${theme.primary}; /* 버튼의 배경색을 지정합니다. */
+  color: ${theme.white}; /* 버튼 텍스트의 색상을 지정합니다. */
   font-size: 16px; /* 버튼 텍스트의 크기를 지정합니다. */
   font-weight: bold; /* 버튼 텍스트의 굵기를 지정합니다. */
   border: none; /* 버튼의 테두리를 없앱니다. */
@@ -525,4 +523,3 @@ export const Footer = styled.div`
   width: 100%;
   max-width: 390px;
 `;
-

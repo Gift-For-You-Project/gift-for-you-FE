@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import theme from "../../../styles/theme";
 
 // 전체 컨테이너
 export const MainContainer = styled.div`
@@ -18,7 +19,7 @@ export const LeftContainer = styled.div`
   align-items: center;
   width: 500px;
   height: 100vh;
-  padding: 20px;  
+  padding: 20px;
   margin-right: 100px;
 
   @media (max-width: 1024px) {
@@ -68,7 +69,7 @@ export const Button = styled.button`
 export const RightContainer = styled.div`
   position: relative;
   width: 442px;
-  border: 1px solid lightgray;
+  border: 1px solid ${theme.gray4};
   border-radius: 20px;
   height: 100vh;
   overflow-y: scroll;
