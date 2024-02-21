@@ -44,8 +44,8 @@ export const logoutAndApiCall = () => async (dispatch) => {
   // 로그아웃 API
   try {
     await logout();
-    window.location.href = "https://www.giftipie.me";
     successToast("로그아웃이 완료되었습니다.");
+    // window.location.href = "https://www.giftipie.me";
   } catch (error) {
     console.error("로그아웃 API 호출 중 오류 발생:", error.message);
   }
