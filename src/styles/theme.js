@@ -1,5 +1,6 @@
 const theme = {
   primary: "#FF7C7C",
+  primaryBtn: "#FFE6E6",
   primaryFont: "#FF5959",
   white: "#FFFFFF",
   black: "#2C2C2C",
@@ -11,11 +12,15 @@ const theme = {
   gray6: "#ECECEC",
   secondary: "#FFE6C1",
 
+  headline1: "24px",
+  headline2: "20px",
   logo: "18px",
   title: "18px",
+  title2: "16px",
   body1: "14px",
   body2: "14px",
   detail: "12px",
+  detail2: "10px",
 };
 
 export default theme;

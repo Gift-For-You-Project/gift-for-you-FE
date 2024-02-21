@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import LoginModal from "../Login/LoginModal";
-import { useDispatch, useSelector } from "react-redux";
-import { userLogout } from "../../../redux/authSlice";
-import Navbar from "../../../components/Navbar";
 import { getRecentFundingList } from "../../../apis/home";
 import { FaChevronRight } from "react-icons/fa";
 import theme from "../../../styles/theme";
@@ -32,14 +29,11 @@ import {
   Leftcolumndiv,
   IpadLoveImg,
   RightContainer,
-  NavbarDiv,
   Body,
 } from "./RecentFundingStyles";
 
 const RecentFunding = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [ongoingFundingList, setOngoingFundingList] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -47,16 +41,11 @@ const RecentFunding = () => {
 
   const closeModal = () => setIsLoginModalOpen(false);
 
-  const handleLoginClick = () => setIsLoginModalOpen(true);
-
-  const handleLogoutClick = () => {
-    dispatch(userLogout()); // 로그아웃 액션 디스패치
-    navigate("/");
-  };
-
   const handleFundingClick = (id) => {
     navigate(`/fundingdetail/${id}`);
   };
+
+  const handleLogoClick = () => navigate("/");
 
   useEffect(() => {
     // 펀딩 리스트를 가져오는 함수 정의
@@ -115,7 +104,10 @@ const RecentFunding = () => {
               </P>
             </BubbleTxt>
             <BubbleImg src="/imgs/Home/speech-bubble.png" />
-            <LeftLogoTextIcon src="/imgs/Common/giftipie.png" />
+            <LeftLogoTextIcon
+              onClick={handleLogoClick}
+              src="/imgs/Common/giftipie.png"
+            />
             <LeftPieImg src="/imgs/Home/pie-hi.png" />
           </LeftImgContainer>
           <LeftRowdiv ml="30px">
@@ -155,13 +147,6 @@ const RecentFunding = () => {
       </LeftContainer>
 
       <RightContainer>
-        <NavbarDiv>
-          <Navbar
-            isLoggedIn={isLoggedIn}
-            handleLoginClick={handleLoginClick}
-            handleLogoutClick={handleLogoutClick}
-          />
-        </NavbarDiv>
         <Body>
           <TogetherDiv bc="white">
             <FundingDiv>

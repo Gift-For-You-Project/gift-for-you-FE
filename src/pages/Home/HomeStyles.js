@@ -19,22 +19,23 @@ export const LeftContainer = styled.div`
   height: 100vh;
   padding-top: ${(props) => props.pt};
 
-  @media (max-width: 1200px) {
+  @media screen and (max-width: 1024px) {
     display: none;
   }
 `;
 
 export const LeftImgContainer = styled.div`
-  position: relative; /*상대 위치 지정*/
-  height: 0; /* 이미지 높이 */
-  padding-left: 150px; /* 이미지 왼쪽 간격 조정 */
+  position: relative;
+  height: 0;
+  padding-left: 150px;
 `;
 
 export const LeftLogoTextIcon = styled.img`
-  position: absolute; /* 절대 위치 지정 */
+  position: absolute;
   height: 40px;
-  bottom: 20px; /* 아래쪽 위치 조정 */
-  left: 30px; /* 왼쪽 위치 조정 */
+  bottom: 20px;
+  left: 30px;
+  cursor: pointer;
 `;
 
 export const BubbleTxt = styled.div`
@@ -45,10 +46,10 @@ export const BubbleTxt = styled.div`
 `;
 
 export const BubbleImg = styled.img`
-  position: absolute; /* 절대 위치 지정 */
+  position: absolute;
   bottom: 130px;
   right: 130px;
-  height: 200px; /* 부모 요소에 대한 상대적인 높이 */
+  height: 200px;
 `;
 
 export const LeftRowdiv = styled.div`
@@ -205,9 +206,15 @@ export const RightContainer = styled.div`
     display: none;
   }
 
+  /* 모바일뷰 */
   @media screen and (max-width: 390px) {
     max-width: 100%;
   }
+
+  /* 태블릿뷰는 추후에 적용예정 */
+  /* @media screen and (max-width: 1024px) {
+    max-width: 100%;
+  } */
 `;
 
 /* 네브바 영역 */
@@ -216,7 +223,7 @@ export const NavbarDiv = styled.div`
   top: 0;
   left: 0;
   width: 100%;
-  z-index: 1000;
+  z-index: 9;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -236,19 +243,23 @@ export const NavbarBtn = styled.button`
   transition: all 300ms ease;
 
   &:hover {
+    transform: scale(1.2);
     color: ${theme.primary};
   }
+`;
+
+export const NavbarLogoBtn = styled.button`
+  font-size: ${(props) => props.fs};
+  font-weight: ${(props) => props.fw};
+  padding-top: ${(props) => props.pt};
+  padding-left: ${(props) => props.pl};
+  padding-right: ${(props) => props.pr};
+  color: ${theme.white};
 `;
 
 export const NavbarIconContainer = styled.div`
   display: flex;
   align-items: center;
-`;
-
-export const LoginIcon = styled.img`
-  width: 25px;
-  height: 25px;
-  margin-top: 20px;
 `;
 
 export const LogoDiv = styled.div`
@@ -327,6 +338,10 @@ export const FundingSection = styled.section`
   gap: 10px;
   padding: 10px;
   padding-bottom: 20px;
+
+  @media screen and (max-width: 390px) {
+    gap: 2px;
+  }
 `;
 
 export const RecentFundingBtn = styled.button`
@@ -356,7 +371,7 @@ export const FundingGrid = styled.div`
   overflow: hidden;
   cursor: pointer;
 
-  @media (max-width: 100px) {
+  @media screen and (max-width: 390px) {
     width: 100%;
   }
 `;
@@ -395,6 +410,11 @@ export const MyFundingDate = styled.div`
   background-color: ${theme.gray3};
   border-top-right-radius: 10px;
   border-bottom-left-radius: 10px;
+
+  @media screen and (max-width: 390px) {
+    top: 426px;
+    left: 93px;
+  }
 `;
 
 export const FundingImg = styled.img`
@@ -407,6 +427,28 @@ export const FundingImg = styled.img`
   border-top-right-radius: 10px;
   margin-top: 10px;
   object-fit: cover;
+`;
+
+export const FundingDate = styled.div`
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 698px;
+  left: 82px;
+  width: 100%;
+  max-width: 48px;
+  padding-top: ${(props) => props.pt};
+  padding-bottom: ${(props) => props.pb};
+  color: ${theme.white};
+  background-color: ${theme.gray3};
+  border-top-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+
+  @media screen and (max-width: 390px) {
+    top: 682px;
+    left: 79px;
+  }
 `;
 
 export const ProgressBar = styled.div`
@@ -424,7 +466,6 @@ export const Progress = styled.div`
   padding: 0;
   text-align: center;
   background-color: ${theme.primary};
-  /* border-radius: 15px; // 추가 */
   color: ${theme.primary};
 `;
 
@@ -537,10 +578,12 @@ export const ProductContainer = styled.div`
   border: 0.3px solid ${theme.gray4};
   width: -webkit-fill-available;
   max-width: 390px;
-  margin-bottom: 48px;
+  margin-bottom: 26px;
 
-  @media screen and (max-width: 600px) {
-    margin-bottom: 100px;
+  @media screen and (max-width: 390px) {
+    padding-bottom: 80px;
+    margin-bottom: 0px;
+    border-radius: 30px;
   }
 `;
 
@@ -549,7 +592,7 @@ export const ProductGrids = styled.div`
   align-items: center;
   width: 100%;
   max-width: 390px;
-  gap: 8px;
+  gap: 10px;
   padding: 0 20px;
   overflow-x: scroll;
 
@@ -559,7 +602,7 @@ export const ProductGrids = styled.div`
 
   &::-webkit-scrollbar-thumb {
     width: 50%;
-    background: ${theme.gray4};
+    background: ${theme.primary};
   }
 
   &::-webkit-scrollbar-track {
@@ -572,7 +615,7 @@ export const ProductGrid = styled.div`
   width: -webkit-fill-available;
   max-width: 390px;
 
-  @media (max-width: 110px) {
+  @media screen and (max-width: 390px) {
     width: 100%;
   }
 `;
@@ -583,6 +626,24 @@ export const ProductImg = styled.img`
   border: 1px solid ${theme.gray5};
   margin-top: 10px;
   border-radius: 8px;
+  object-fit: cover;
+`;
+
+export const ProductP = styled.p`
+  padding-top: ${(props) => props.pt};
+  margin-top: ${(props) => props.mt};
+  padding-bottom: ${(props) => props.pb};
+  padding-left: ${(props) => props.pl};
+  padding-right: ${(props) => props.pr};
+  margin-right: ${(props) => props.mr};
+  font-size: ${(props) => props.fs};
+  font-weight: ${(props) => props.fw};
+  color: ${(props) => props.color};
+  align-items: center;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
 `;
 
 export const FundingProductGrid = styled.div`
@@ -590,14 +651,14 @@ export const FundingProductGrid = styled.div`
   max-width: 110px;
   object-fit: cover;
 
-  @media (max-width: 100px) {
+  @media screen and (max-width: 390px) {
     width: 100%;
   }
 `;
 
 export const FloatingBtn = styled.button`
   position: sticky;
-  bottom: 28px;
+  bottom: 18px;
   left: 50%;
   transform: translateX(-50%);
   margin-bottom: 10px;
@@ -607,29 +668,16 @@ export const FloatingBtn = styled.button`
   background-color: ${theme.primary};
   color: ${theme.white};
   font-size: ${theme.body2};
-  z-index: 1000;
+  z-index: 9;
 
   &:hover {
     background-color: ${theme.primaryFont};
   }
 
-  @media (max-width: 600px) {
-    /* 600px 이하의 화면에 대한 스타일 설정 */
-    position: fixed;
-    bottom: 18px;
-    left: 50%;
-    transform: translateX(-50%);
-    margin-bottom: 10px;
-    width: 132px;
-    height: 44px;
-    border-radius: 24px;
-    background-color: ${theme.primary};
-    color: ${theme.white};
-    font-size: ${theme.body2};
-    z-index: 1000;
+  box-shadow: 6px 6px 6px rgba(0, 0, 0, 0.2), -6px 6px 6px rgba(0, 0, 0, 0.2),
+    -6px -6px 6px rgba(0, 0, 0, 0.2), 6px -6px 6px rgba(0, 0, 0, 0.2);
 
-    &:hover {
-      background-color: ${theme.primaryFont};
-    }
+  @media screen and (max-width: 390px) {
+    position: fixed;
   }
 `;
