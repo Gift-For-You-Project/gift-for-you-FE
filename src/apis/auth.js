@@ -111,7 +111,7 @@ export const login = async (credentials) => {
 // 로그아웃 API
 export const logout = async () => {
   try {
-    const response = await axios.post("/api/logout");
+    const response = await instance.post("/api/logout");
 
     if (response.status === 200) {
       successToast(response.data.message);
