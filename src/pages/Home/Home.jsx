@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { bootChannelTalk } from "../../redux/channelTalkSlice";
 import Navbar from "../../components/Navbar";
 import { getMyFunding, getHomeFundingList } from "../../apis/home";
-import { userLogout } from "../../redux/authSlice";
+import { logoutAndApiCall } from "../../redux/authSlice";
 import theme from "../../styles/theme";
 import { infoToast } from "../../components/toast";
 import {
@@ -93,7 +93,7 @@ const Home = () => {
   const handleLoginClick = () => setIsLoginModalOpen(true);
 
   const handleLogoutClick = () => {
-    dispatch(userLogout());
+    dispatch(logoutAndApiCall());
     navigate("/");
   };
 
