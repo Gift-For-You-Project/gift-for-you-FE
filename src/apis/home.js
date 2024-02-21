@@ -6,7 +6,6 @@ export const getMyFunding = async () => {
     const response = await instance.get("/api/funding/myFunding");
 
     if (response.status === 200) {
-      console.log("내 펀딩 정보를 가져오는 API: ", response);
       return response.data;
     }
   } catch (error) {
