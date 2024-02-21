@@ -171,6 +171,7 @@ export const FundingItem = styled.div`
 
 /* 다용도 버튼 */
 export const Button = styled.button`
+  display: flex;
   justify-content: center;
   align-items: center;
   width: ${(props) => props.w};
@@ -536,10 +537,10 @@ export const ProductContainer = styled.div`
   border: 0.3px solid ${theme.gray4};
   width: -webkit-fill-available;
   max-width: 390px;
-  margin-bottom: 100px;
+  margin-bottom: 48px;
 
-  @media screen and (max-width: 390px) {
-    max-width: 100%;
+  @media screen and (max-width: 600px) {
+    margin-bottom: 100px;
   }
 `;
 
@@ -548,7 +549,7 @@ export const ProductGrids = styled.div`
   align-items: center;
   width: 100%;
   max-width: 390px;
-  gap: 10px;
+  gap: 8px;
   padding: 0 20px;
   overflow-x: scroll;
 
@@ -596,7 +597,7 @@ export const FundingProductGrid = styled.div`
 
 export const FloatingBtn = styled.button`
   position: sticky;
-  bottom: 10px;
+  bottom: 28px;
   left: 50%;
   transform: translateX(-50%);
   margin-bottom: 10px;
@@ -610,5 +611,25 @@ export const FloatingBtn = styled.button`
 
   &:hover {
     background-color: ${theme.primaryFont};
+  }
+
+  @media (max-width: 600px) {
+    /* 600px 이하의 화면에 대한 스타일 설정 */
+    position: fixed;
+    bottom: 18px;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-bottom: 10px;
+    width: 132px;
+    height: 44px;
+    border-radius: 24px;
+    background-color: ${theme.primary};
+    color: ${theme.white};
+    font-size: ${theme.body2};
+    z-index: 1000;
+
+    &:hover {
+      background-color: ${theme.primaryFont};
+    }
   }
 `;
