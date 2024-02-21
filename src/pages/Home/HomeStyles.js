@@ -478,6 +478,7 @@ export const BetweenDiv = styled.div`
   max-width: 390px;
   padding-top: ${(props) => props.pt};
   padding-bottom: ${(props) => props.pb};
+  cursor: ${(props) => props.cursor};
 `;
 
 export const TogetherBetween = styled.div`

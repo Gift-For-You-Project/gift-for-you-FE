@@ -15,6 +15,8 @@ export const getMyFunding = async () => {
         console.error("API 호출 중 401 에러 발생: ", error);
       }
     }
+
+    return null; // 에러 발생 시 데이터를 반환하지 않도록 수정
   }
 };
 
@@ -60,6 +62,6 @@ export const getRecentFundingList = async (page) => {
       }
     }
 
-    return null; // 에러 발생 시 데이터를 반환하지 않도록 수정
+    return null;
   }
 };
