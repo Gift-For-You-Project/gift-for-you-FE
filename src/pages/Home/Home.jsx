@@ -107,10 +107,10 @@ const Home = () => {
   const handleModifyClick = () => navigate(`/fundingModify/${myFunding.id}`);
 
   const handleCopyLink = () => {
-    const currentUrl = window.location.href;
+    const myFundingUrl = `https://www.giftipie.me/fundingdetail/${myFunding.id}`;
 
     navigator.clipboard
-      .writeText(currentUrl)
+      .writeText(myFundingUrl)
       .then(() => {
         infoToast("링크가 복사되었습니다.");
       })
