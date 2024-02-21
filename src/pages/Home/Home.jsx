@@ -250,8 +250,8 @@ const Home = () => {
           <BannerImg src="/imgs/Home/banner.svg" />
           {/* 내 펀딩 */}
           <TogetherDiv bc={theme.white}>
-            {/* 내 펀딩이 있을 때 */}
-            {myFunding && myFunding.status === "ACTIVE" && (
+            {/* 로그인 상태이면서 내 펀딩이 있을 때 */}
+            {isLoggedIn && myFunding && myFunding.status === "ACTIVE" && (
               <>
                 <BetweenDiv pt="20px" pb="10px">
                   <P pl="20px" fs={theme.title} fw="600">
@@ -297,8 +297,8 @@ const Home = () => {
                 </BetweenDiv>
               </>
             )}
-            {/* 내 펀딩이 없을 때 */}
-            {(!myFunding || myFunding.status !== "ACTIVE") && (
+            {/* 로그인 상태이면서 내 펀딩이 없을 때 */}
+            {isLoggedIn && (!myFunding || myFunding.status !== "ACTIVE") && (
               <>
                 <BetweenDiv pt="20px" pb="10px">
                   <P pl="20px" fs={theme.title} fw="600">
@@ -306,8 +306,24 @@ const Home = () => {
                   </P>
                 </BetweenDiv>
                 <MyFundingDiv>
-                  <MyFundingTitle>아직 만든 펀딩이 없어요</MyFundingTitle>
+                  <MyFundingTitle>진행 중인 펀딩이 없어요</MyFundingTitle>
                   <MyFundingBtn onClick={handleFundingCreate}>
+                    펀딩 만들기
+                  </MyFundingBtn>
+                </MyFundingDiv>
+              </>
+            )}
+            {/* 로그아웃 상태일 때 */}
+            {!isLoggedIn && (
+              <>
+                <BetweenDiv pt="20px" pb="10px">
+                  <P pl="20px" fs={theme.title} fw="600">
+                    내 펀딩
+                  </P>
+                </BetweenDiv>
+                <MyFundingDiv>
+                  <MyFundingTitle>진행 중인 펀딩이 없어요</MyFundingTitle>
+                  <MyFundingBtn onClick={handleLoginClick}>
                     펀딩 만들기
                   </MyFundingBtn>
                 </MyFundingDiv>
