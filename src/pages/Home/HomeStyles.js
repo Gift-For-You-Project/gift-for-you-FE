@@ -563,7 +563,7 @@ export const BannerProgressDiv = styled.div`
   justify-content: center;
   margin-right: 40px;
   width: 100%;
-  max-width: 250px;
+  max-width: 200px;
 `;
 
 export const RoundProgressBar = styled.div`
