@@ -29,6 +29,7 @@ const GlobalStyles = createGlobalStyle`
 
     /* Body 스타일 */
     body{
+        font-family: 'Pretendard', sans-serif;
         line-height: 1.5; // 줄 높이 설정
         margin-bottom: 100px;                     
         background-repeat: no-repeat;
