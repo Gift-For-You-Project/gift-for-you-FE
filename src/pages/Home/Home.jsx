@@ -66,24 +66,24 @@ const Home = () => {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [homeFundingList, setHomeFundingList] = useState([]);
-  const [myFunding, setMyFunding] = useState(null);
-  //   id: "",
-  //   itemLink: "",
-  //   itemImage: "",
-  //   itemName: "",
-  //   title: "",
-  //   showName: "",
-  //   content: "",
-  //   currentAmount: 0,
-  //   targetAmount: 0,
-  //   publicFlag: false,
-  //   endData: "",
-  //   dday: "",
-  //   status: false,
-  //   achievementRate: 0,
-  //   ownerFlag: false,
-  //   modifiedAt: "",
-  // });
+  const [myFunding, setMyFunding] = useState({
+    id: "",
+    itemLink: "",
+    itemImage: "",
+    itemName: "",
+    title: "",
+    showName: "",
+    content: "",
+    currentAmount: 0,
+    targetAmount: 0,
+    publicFlag: false,
+    endData: "",
+    dday: "",
+    status: false,
+    achievementRate: 0,
+    ownerFlag: false,
+    modifiedAt: "",
+  });
 
   const closeModal = () => setIsLoginModalOpen(false);
 
