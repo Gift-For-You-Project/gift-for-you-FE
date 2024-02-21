@@ -7,9 +7,6 @@ import { useNavigate } from "react-router-dom";
 import theme from "../styles/theme";
 import {
   NavbarIconContainer,
-  NavbarNotificationIconDiv,
-  NavbarIconDiv,
-  NavbarBtnDiv,
   NavbarBtn,
   LogoIcon,
   LogoTextIcon,
@@ -79,9 +76,9 @@ const Navbar = ({ isLoggedIn, handleLoginClick, handleLogoutClick }) => {
     <>
       <NavbarIconContainer>
         {/* HiBell 아이콘 클릭 시 알림 리스트 표시 */}
-        <NavbarNotificationIconDiv onClick={toggleNotification}>
-          <HiBell size="" color={theme.white} />
-        </NavbarNotificationIconDiv>
+        <NavbarBtn onClick={toggleNotification} fs="24px" pt="10px">
+          <HiBell />
+        </NavbarBtn>
         {isNotificationOpen && (
           <NotificationContainer>
             <NotificationDiv>
@@ -108,36 +105,31 @@ const Navbar = ({ isLoggedIn, handleLoginClick, handleLogoutClick }) => {
             ))}
           </NotificationContainer>
         )}
-        <NavbarIconDiv>
-          <BsPersonCircle color={theme.white} />
-        </NavbarIconDiv>
-        <NavbarBtn onClick={handleLogoutClick} fs="13px" fw="600">
-          <IoLogOutSharp size="28px" color={theme.white} />
+        <NavbarBtn fs="24px" pt="10px">
+          <BsPersonCircle />
+        </NavbarBtn>
+        <NavbarBtn onClick={handleLogoutClick} fs="24px" pt="10px">
+          <IoLogOutSharp />
         </NavbarBtn>
       </NavbarIconContainer>
     </>
   ) : (
     <>
-      <NavbarBtn onClick={handleLoginClick} pt="10px" fs="20px" fw="600">
-        <BsPersonCircle color={theme.white} />
+      <NavbarBtn onClick={handleLoginClick} pt="10px" fs="24px">
+        <BsPersonCircle />
       </NavbarBtn>
     </>
   );
 
   return (
     <>
-      <NavbarBtn
-        onClick={handleNavbarIconClick}
-        fs="20px"
-        fw="600"
-        color="white"
-      >
+      <NavbarBtn onClick={handleNavbarIconClick} fs="10px" color="white">
         <LogoDiv>
           <LogoIcon src="/imgs/Common/pie-navbar.png" />
           <LogoTextIcon src="/imgs/Common/giftipie.png" />
         </LogoDiv>
       </NavbarBtn>
-      <NavbarBtnDiv>{navbarContents}</NavbarBtnDiv>
+      {navbarContents}
     </>
   );
 };

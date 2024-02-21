@@ -12,10 +12,7 @@ import {
   LeftContainer,
   LeftImgContainer,
   LeftLogoTextIcon,
-  LeftPieImg,
-  LeftContent,
   BubbleImg,
-  BubbleTxt,
   TogetherDiv,
   FundingDiv,
   BetweenDiv,
@@ -25,8 +22,7 @@ import {
   FundingImg,
   ProgressBar,
   Progress,
-  FundingItem,
-  FundingTitle,
+  OneLine,
   LeftRowdiv,
   LeftImg,
   Leftcolumndiv,
@@ -106,23 +102,26 @@ const RecentFunding = () => {
   return (
     <MainContainer>
       <LeftContainer>
-        <LeftContainer>
+        <LeftContainer pt="70px">
           <LeftImgContainer>
-            <BubbleTxt>
-              <P fs="24px" fw="700" color={theme.white}>
+            <div>
+              <LeftLogoTextIcon src="/imgs/Common/giftipie.png" />
+            </div>
+            <div>
+              <P pt="60px" pl="355px" fs="23px" fw="800" color={theme.white}>
                 생일선물
                 <br />뭐 받고싶어?
               </P>
-            </BubbleTxt>
-            <BubbleImg src="/imgs/Home/speech-bubble.png" />
-            <LeftLogoTextIcon src="/imgs/Common/giftipie.png" />
-            <LeftPieImg src="/imgs/Home/pie-hi.png" />
+              <BubbleImg src="/imgs/Home/speech-bubble.png" />
+            </div>
+            {/* <BubbleImg src="/imgs/Home/speech-bubble.png" /> */}
           </LeftImgContainer>
+
           <LeftRowdiv ml="30px">
             <LeftRowdiv
-              color={theme.gray1}
+              color="#3F3F3F"
               mr="10px"
-              bc={theme.primary}
+              bc="#FF7C7C"
               br="25px"
               p="8px"
             >
@@ -133,25 +132,42 @@ const RecentFunding = () => {
                 mr="10px"
                 pl="10px"
               />
-              <P fs="20px" fw="900" pr="10px" color={theme.black}>
+              <P fs="20px" fw="900" pr="10px">
                 정말 원하는 선물
               </P>
             </LeftRowdiv>
-            <P fs="20px" fw="700" color={theme.white}>
-              을 주고 받아요!
-            </P>
+            <div>
+              <P mt="6px" pt="2px" fs="20px" fw="700" color="#FFFFFF">
+                을 주고 받아요!
+              </P>
+            </div>
           </LeftRowdiv>
-          <LeftContent>
+
+          <LeftRowdiv>
             <Leftcolumndiv ml="30px">
-              <P fs="16px" fw="500" pb="5px" pr="250px" color={theme.gray4}>
-                지금은 유저테스트 진행 중 입니다. <br />
-                6명의 개발자와 1명의 디자이너가 함께 개발하고 있습니다.
+              <P fs="16px" fw="500" pt="30px" pb="5px" color="#FFFFFF">
+                지금은 유저테스트 진행 중 입니다
+              </P>
+              <P pb="100px" fs="16px" fw="500" color="#FFFFFF">
+                6명의 개발자와 1명의 디자이너가 함께 개발하고 있습니다
               </P>
             </Leftcolumndiv>
-          </LeftContent>
+            <LeftImg src="/imgs/Home/pie-hi.png" w="340px" pl="100px" />
+          </LeftRowdiv>
         </LeftContainer>
-        <LeftRowdiv ml="30px"></LeftRowdiv>
-        <IpadLoveImg src="/imgs/Home/pie-ipad.png" w="300px" />
+
+        <LeftRowdiv ml="30px">
+          {/* <Leftcolumndiv>
+                        <P fs="16px" fw="500" pb="5px" color="#FFFFFF">
+                            지금은 유저테스트 진행 중 입니다
+                        </P>
+                        <P pb="100px" fs="16px" fw="500" color="#FFFFFF">
+                            6명의 개발자와 1명의 디자이너가 함께 개발하고 있습니다
+                        </P>
+                    </Leftcolumndiv>
+                    <LeftImg src="/imgs/Home/pie-hi.png" w="340px" pl="90px" /> */}
+        </LeftRowdiv>
+        <IpadLoveImg src="/imgs/Home/pie-ipad.png" w="330px" />
       </LeftContainer>
 
       <RightContainer>
@@ -201,12 +217,12 @@ const RecentFunding = () => {
                       </P>
                     </BetweenDiv>
 
-                    <FundingItem pt="10px" fs="11.5px" fw="600" color="gray">
+                    <OneLine pt="10px" fs="11.5px" fw="600" color="gray">
                       {funding.itemName}
-                    </FundingItem>
-                    <FundingTitle pt="10px" fs="12.5px" fw="600">
+                    </OneLine>
+                    <OneLine pt="10px" fs="12.5px" fw="600">
                       {funding.content}
-                    </FundingTitle>
+                    </OneLine>
                   </FundingGrid>
                 ))}
               </FundingSection>

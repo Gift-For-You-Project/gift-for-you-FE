@@ -4,7 +4,7 @@ import theme from "../../styles/theme";
 export const NotificationContainer = styled.div`
   position: absolute;
   top: 60px;
-  right: 40px;
+  right: 15px;
   background-color: ${theme.primary};
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
   padding: 10px;

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { FaChevronRight } from "react-icons/fa";
-import { FaPlus } from "react-icons/fa6";
+import { FaPlus, FaAngleRight } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 import LoginModal from "../Home/Login/LoginModal";
 import { useDispatch, useSelector } from "react-redux";
@@ -14,9 +13,13 @@ import {
   LeftContainer,
   LeftLogoTextIcon,
   LeftImg,
+  LeftPieImg,
   LeftRowdiv,
+  LeftContent,
   Leftcolumndiv,
   LeftImgContainer,
+  BannerImg,
+  BubbleTxt,
   BubbleImg,
   IpadLoveImg,
   P,
@@ -25,14 +28,18 @@ import {
   NavbarDiv,
   Body,
   MainBtnContainer,
-  CharacterImg,
   MainBtn,
-  BannerImg,
+  MyFundingImg,
+  MyFundingDate,
+  RecentFundingContainer,
+  RecentFundingDiv,
+  RecentFundingBtn,
   FundingDiv,
   FundingSection,
   FundingGrid,
   FundingImg,
-  OneLine,
+  FundingTitle,
+  FundingItem,
   RoundProgressBar,
   RoundProgress,
   ProgressBar,
@@ -44,11 +51,10 @@ import {
   TogetherImg,
   TogetherGrids,
   TogetherGrid,
+  ProductContainer,
   ProductGrids,
   ProductGrid,
   ProductImg,
-  ProductBlank,
-  Footer,
   FloatingBtn,
 } from "./HomeStyles";
 
@@ -134,13 +140,13 @@ const Home = () => {
   }) => (
     <ProductGrid>
       <ProductImg src={imgSrc} alt={altText} />
-      <P pt="8px" fs="12px" fw="600" color="gray">
+      <P pt="8px" fs={theme.body2} color={theme.gray3}>
         {brand}
       </P>
-      <P pt="8px" fs="13px" fw="600">
+      <P pt="8px" fs={theme.body2}>
         {itemName}
       </P>
-      <P pt="8px" pb="20px" fs="13px" fw="900">
+      <P pt="8px" pb="20px" fs="16px" fw="700">
         {price}
       </P>
     </ProductGrid>
@@ -151,16 +157,15 @@ const Home = () => {
       <LeftContainer>
         <LeftContainer>
           <LeftImgContainer>
-            <div>
-              <LeftLogoTextIcon src="/imgs/Common/giftipie.png" />
-            </div>
-            <div>
-              <P pt="60px" pl="355px" fs="23px" fw="800" color={theme.white}>
+            <BubbleTxt>
+              <P fs="24px" fw="700" color={theme.white}>
                 생일선물
                 <br />뭐 받고싶어?
               </P>
-              <BubbleImg src="/imgs/Home/speech-bubble.png" />
-            </div>
+            </BubbleTxt>
+            <BubbleImg src="/imgs/Home/speech-bubble.png" />
+            <LeftLogoTextIcon src="/imgs/Common/giftipie.png" />
+            <LeftPieImg src="/imgs/Home/pie-hi.png" />
           </LeftImgContainer>
           <LeftRowdiv ml="30px">
             <LeftRowdiv
@@ -177,27 +182,22 @@ const Home = () => {
                 mr="10px"
                 pl="10px"
               />
-              <P fs="20px" fw="900" pr="10px">
+              <P fs="20px" fw="900" pr="10px" color={theme.black}>
                 정말 원하는 선물
               </P>
             </LeftRowdiv>
-            <div>
-              <P mt="6px" pt="2px" fs="20px" fw="700" color={theme.white}>
-                을 주고 받아요!
-              </P>
-            </div>
+            <P fs="20px" fw="700" color={theme.white}>
+              을 주고 받아요!
+            </P>
           </LeftRowdiv>
-          <LeftRowdiv>
+          <LeftContent>
             <Leftcolumndiv ml="30px">
-              <P fs="16px" fw="500" pt="30px" pb="5px" color={theme.white}>
-                지금은 유저테스트 진행 중 입니다
-              </P>
-              <P pb="100px" fs="16px" fw="500" color={theme.white}>
-                6명의 개발자와 1명의 디자이너가 함께 개발하고 있습니다
+              <P fs="16px" fw="500" pb="5px" pr="250px" color={theme.gray4}>
+                지금은 유저테스트 진행 중 입니다. <br />
+                6명의 개발자와 1명의 디자이너가 함께 개발하고 있습니다.
               </P>
             </Leftcolumndiv>
-            <LeftImg src="/imgs/Home/pie-hi.png" w="340px" pl="100px" />
-          </LeftRowdiv>
+          </LeftContent>
         </LeftContainer>
         <LeftRowdiv ml="30px"></LeftRowdiv>
         <IpadLoveImg src="/imgs/Home/pie-ipad.png" w="300px" />
@@ -211,73 +211,51 @@ const Home = () => {
             handleLogoutClick={handleLogoutClick}
           />
         </NavbarDiv>
-
         <Body>
-          <TogetherDiv bc={theme.gray1}>
-            <BetweenDiv>
-              <P pt="45px" pl="50px" fs="17px" fw="800" color={theme.secondary}>
-                펀딩은 1개만
-                <br />
-                진행할 수 있어요
-              </P>
-              <CharacterImg src="/imgs/Home/pie-banner.png" h="20px" />
-            </BetweenDiv>
-          </TogetherDiv>
-
+          <BannerImg src="/imgs/Home/banner.svg" />
           <TogetherDiv bc={theme.white}>
-            <BetweenDiv pt="40px">
-              <P pt="20px" pl="23px" pb="10px" fs="16px" fw="900">
+            <BetweenDiv pt="20px" pb="10px">
+              <P pl="20px" fs={theme.title} fw="600">
                 내 펀딩
               </P>
               <MainBtnContainer>
-                <MainBtn>링크 복사</MainBtn>
+                <MainBtn>링크복사</MainBtn>
                 <MainBtn>수정</MainBtn>
               </MainBtnContainer>
             </BetweenDiv>
-            <BetweenDiv>
-              <BannerImg src="/imgs/Home/airpods.jpeg" />
+            <BetweenDiv pb="20px">
+              <MyFundingImg src="/imgs/Home/airpods.jpeg" />
+              <MyFundingDate>
+                <P pt="4px" fs={theme.detail}>
+                  D-16
+                </P>
+              </MyFundingDate>
               <BannerProgressDiv>
-                <OneLine fs="11px" fw="800" color="gray">
+                <FundingItem fs={theme.body2} color={theme.gray3}>
                   에어팟
-                </OneLine>
-                <OneLine pt="5px" fs="13px" fw="800">
-                  인생 첫 에어팟을 선물해주세요
-                </OneLine>
-                <P pt="10px" fs="15px" fw="900" color={theme.primary}>
+                </FundingItem>
+                <FundingTitle pt="4px" pb="4px" fs={theme.body2}>
+                  인생 첫 에어팟을 선물해주세요 😘
+                </FundingTitle>
+                <P pt="10px" fs={theme.detail} fw="600" color={theme.primary}>
                   36%
                 </P>
                 <RoundProgressBar>
                   <RoundProgress width={(65 / 100) * 100} />
                 </RoundProgressBar>
-                <BetweenDiv>
-                  <P pl="0px" fs="10px" fw="800" color="gray">
-                    현재&nbsp;852000원
-                  </P>
-                  <P fs="10px" fw="800" color="gray">
-                    5686000원
-                  </P>
-                </BetweenDiv>
               </BannerProgressDiv>
-            </BetweenDiv>
-            <BetweenDiv>
-              <P pt="15px" pl="30px" fs="13px" fw="800" color="gray">
-                D-12
-              </P>
-              <P pt="15px" pr="30px" pb="20px" fs="13px" fw="800" color="gray">
-                2024-03-08
-              </P>
             </BetweenDiv>
             {/* 내 펀딩 데이터 불러오기 */}
             {/* {myFunding.map((funding) => (
               <BetweenDiv key={funding.id}>
                 <BannerImg src={funding.itemImage} />
                 <BannerProgressDiv>
-                  <OneLine fs="11px" fw="800" color="gray">
+                  <FundingItem fs="11px" fw="800" color="gray">
                     {funding.itemName}
-                  </OneLine>
-                  <OneLine pt="5px" fs="13px" fw="800">
+                  </FundingItem>
+                  <FundingTitle pt="5px" fs="13px" fw="800">
                     {funding.title}
-                  </OneLine>
+                  </FundingTitle>
                   <P pt="10px" fs="15px" fw="900" color={theme.primary}>
                     {funding.achievementRate}%
                   </P>
@@ -299,18 +277,17 @@ const Home = () => {
             ))} */}
           </TogetherDiv>
 
-          <TogetherDiv bc="white">
+          <RecentFundingContainer bc={theme.white}>
             <FundingDiv>
               <BetweenDiv>
-                <button onClick={handleRecentFundingClick}>
-                  <P fs="16px" fw="900" pt="20px" pb="5px" pl="23px">
+                <RecentFundingDiv>
+                  <P fs={theme.title} fw="600" pb="2px" pl="12px">
                     최근 펀딩 구경하기 &nbsp;
-                    <FaChevronRight />
                   </P>
-                </button>
+                </RecentFundingDiv>
               </BetweenDiv>
               <BetweenDiv>
-                <P fs="14px" fw="400" pl="29px" color="gray">
+                <P fs={theme.body2} fw="400" pl="18px" color={theme.gray3}>
                   비공개 펀딩은 이곳에 공개되지 않아요
                 </P>
               </BetweenDiv>
@@ -331,44 +308,66 @@ const Home = () => {
                       <Progress width={(65 / 100) * 100} />
                     </ProgressBar> // 퍼센트 바 스타일 확인용 */}
                     <BetweenDiv>
-                      <P pt="2px" fs="13px" fw="800" color={theme.primary}>
+                      <P fs={theme.detail} fw="600" color={theme.primary}>
                         {funding.achievementRate}%
                       </P>
                     </BetweenDiv>
-                    <OneLine pt="10px" fs="11.5px" fw="600" color="gray">
+                    <FundingItem pt="2px" fs={theme.body2} color={theme.gray3}>
                       {funding.itemName}
-                    </OneLine>
-                    <OneLine pt="10px" fs="12.5px" fw="600">
+                    </FundingItem>
+                    <FundingTitle pt="2px" fs={theme.body2} color={theme.black}>
                       {funding.content}
-                    </OneLine>
+                    </FundingTitle>
                   </FundingGrid>
                 ))}
               </FundingSection>
+              <RecentFundingBtn>
+                <P
+                  onClick={handleRecentFundingClick}
+                  pt="4px"
+                  fs={theme.detail}
+                  color={theme.gray2}
+                >
+                  펀딩 더보기 &nbsp;
+                </P>
+                <FaAngleRight />
+              </RecentFundingBtn>
             </FundingDiv>
-          </TogetherDiv>
+          </RecentFundingContainer>
 
           <>
             <TogetherBetween>
-              <P pt="40px" pb="40px" fs="18px" fw="600" color={theme.primary}>
+              <P
+                pt="40px"
+                pb="40px"
+                fs={theme.title}
+                fw="600"
+                color={theme.primary}
+              >
                 Giftipie
               </P>
-              <P pt="40px" pb="40px" fs="18px" fw="600" color="white">
+              <P
+                pt="40px"
+                pb="40px"
+                fs={theme.title}
+                fw="500"
+                color={theme.white}
+              >
                 에서 함께한 선물
               </P>
             </TogetherBetween>
-
             <TogetherGrids>
               <TogetherGrid>
                 <TogetherImg
                   src="/imgs/Common/heart-hand.png"
                   alt="hearthand"
                 />
-                <P pt="10px" fs="14px" fw="400">
+                <P pt="10px" fs={theme.body2} fw="400">
                   &nbsp;&nbsp;&nbsp;펀딩에
                   <br />
                   참여한 사람
                 </P>
-                <P pt="10px" pb="10px" fs="14px" fw="700">
+                <P pt="10px" pb="10px" fs="16px" fw="700">
                   13명
                 </P>
               </TogetherGrid>
@@ -377,105 +376,89 @@ const Home = () => {
                   src="/imgs/Common/giftbox-yellow.png"
                   alt="receive"
                 />
-                <P fs="14px" fw="400">
+                <P fs={theme.body2} fw="400">
                   &nbsp; 선물을
                   <br />
                   받은 사람
                 </P>
-                <P pt="10px" pb="10px" fs="14px" fw="700">
+                <P pt="10px" pb="10px" fs="16px" fw="700">
                   6명
                 </P>
               </TogetherGrid>
               <TogetherGrid>
                 <TogetherImg src="/imgs/Common/donation.png" alt="amount" />
-                <P fs="14px" fw="400">
+                <P fs={theme.body2} fw="400">
                   &nbsp;&nbsp;&nbsp; 모인
                   <br /> 펀딩 금액
                 </P>
-                <P pt="10px" pb="10px" fs="14px" fw="700">
+                <P pt="10px" pb="10px" fs="16px" fw="700">
                   1억원
                 </P>
               </TogetherGrid>
             </TogetherGrids>
           </>
-                    <TogetherDiv bc="white">
-                        <button>
-                            <P fs="16px" fw="900" pt="20px" pb="5px" pl="23px">
-                                추천 상품 &nbsp;
-                                <FaChevronRight />
-                            </P>
-                        </button>
-                        <ProductGrids>
-                            <ProductGrid>
-                                <ProductBlank />
-                            </ProductGrid>
-                            <ProductGridComponent
-                                imgSrc="/imgs/Home/iphone15pro.jpeg"
-                                altText="iphone"
-                                brand="Apple"
-                                itemName="아이폰 15 Pro 256BG 자급제"
-                                price="1,550,000원"
-                            />
-                            <ProductGridComponent
-                                imgSrc="/imgs/Home/iphone15pro.jpeg"
-                                altText="iphone"
-                                brand="Apple"
-                                itemName="아이폰 14 256BG 자급제"
-                                price="1,090,000원"
-                            />
-                            <ProductGridComponent
-                                imgSrc="/imgs/Home/iphone15pro.jpeg"
-                                altText="iphone"
-                                brand="Apple"
-                                itemName="아이폰 15 Pro 256BG 자급제"
-                                price="1,550,000원"
-                            />
-                            <ProductGridComponent
-                                imgSrc="/imgs/Home/iphone15pro.jpeg"
-                                altText="iphone"
-                                brand="Apple"
-                                itemName="아이폰 14 256BG 자급제"
-                                price="1,090,000원"
-                            />
-                            <ProductGridComponent
-                                imgSrc="/imgs/Home/iphone15pro.jpeg"
-                                altText="iphone"
-                                brand="Apple"
-                                itemName="아이폰 14 256BG 자급제"
-                                price="1,090,000원"
-                            />
-                        </ProductGrids>
-                    </TogetherDiv>
-                </Body>
-                <Footer>
-                    <P fs="18px" fw="600" pt="30px" pb="10px" color="lightgray">
-                        GiftiPie란?
-                    </P>
-                    <P fs="14px" color="dimgray" pb="4px">
-                        커피 기프티콘 대신, 친구가 정말로 원하는 선물을
-                    </P>
-                    <P fs="14px" color="dimgray" pb="50px">
-                        함께 모금해서 선물하는 서비스예요!
-                    </P>
-                    <Button
-                        onClick={handleFundingCreate}
-                        w="100%"
-                        h="60px"
-                        color="black"
-                        fs="20px"
-                        bc="#FF7C7C"
-                        as={FloatingBtn} // FloatingButton 스타일을 적용
-                    >
-                        <FaPlus />
-                        &nbsp; 펀딩 만들기
-                    </Button>
-                </Footer>
-            </RightContainer>
 
-            {/* 로그인 모달 */}
-            {isLoginModalOpen && <LoginModal closeModal={closeModal} />}
-        </MainContainer>
-    );
+          <ProductContainer bc={theme.white}>
+            <P fs={theme.title} fw="600" pt="20px" pb="5px" pl="20px">
+              추천 상품 &nbsp;
+            </P>
+            <ProductGrids>
+              <ProductGridComponent
+                imgSrc="/imgs/Home/iphone15pro.jpeg"
+                altText="iphone"
+                brand="Apple"
+                itemName="아이폰 15 Pro 256BG 자급제"
+                price="1,550,000원"
+              />
+              <ProductGridComponent
+                imgSrc="/imgs/Home/iphone15pro.jpeg"
+                altText="iphone"
+                brand="Apple"
+                itemName="아이폰 14 256BG 자급제"
+                price="1,090,000원"
+              />
+              <ProductGridComponent
+                imgSrc="/imgs/Home/iphone15pro.jpeg"
+                altText="iphone"
+                brand="Apple"
+                itemName="아이폰 15 Pro 256BG 자급제"
+                price="1,550,000원"
+              />
+              <ProductGridComponent
+                imgSrc="/imgs/Home/iphone15pro.jpeg"
+                altText="iphone"
+                brand="Apple"
+                itemName="아이폰 15 Pro 256BG 자급제"
+                price="1,550,000원"
+              />
+              <ProductGridComponent
+                imgSrc="/imgs/Home/iphone15pro.jpeg"
+                altText="iphone"
+                brand="Apple"
+                itemName="아이폰 15 Pro 256BG 자급제"
+                price="1,550,000원"
+              />
+            </ProductGrids>
+          </ProductContainer>
+        </Body>
+        <Button
+          onClick={handleFundingCreate}
+          w="100%"
+          h="60px"
+          color="black"
+          fs="20px"
+          bc={theme.primary}
+          as={FloatingBtn}
+        >
+          <FaPlus />
+          &nbsp; 펀딩 만들기
+        </Button>
+      </RightContainer>
+
+      {/* 로그인 모달 */}
+      {isLoginModalOpen && <LoginModal closeModal={closeModal} />}
+    </MainContainer>
+  );
 };
 
 export default Home;
