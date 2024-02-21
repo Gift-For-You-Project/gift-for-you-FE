@@ -35,6 +35,7 @@ export const LeftLogoTextIcon = styled.img`
   height: 40px;
   bottom: 20px; /* 아래쪽 위치 조정 */
   left: 30px; /* 왼쪽 위치 조정 */
+  cursor: pointer;
 `;
 
 export const BubbleTxt = styled.div`
@@ -207,64 +208,6 @@ export const RightContainer = styled.div`
   @media screen and (max-width: 390px) {
     max-width: 100%;
   }
-`;
-
-/* 네브바 영역 */
-export const NavbarDiv = styled.div`
-  position: sticky;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 1000;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 10px 4px 10px;
-  background-color: ${theme.gray1};
-`;
-
-/* 네브바 버튼 */
-export const NavbarBtn = styled.button`
-  font-size: ${(props) => props.fs};
-  font-weight: ${(props) => props.fw};
-  padding-top: ${(props) => props.pt};
-  padding-left: ${(props) => props.pl};
-  padding-right: ${(props) => props.pr};
-  color: ${theme.white};
-  transition: all 300ms ease;
-
-  &:hover {
-    color: ${theme.primary};
-  }
-`;
-
-export const NavbarIconContainer = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
-export const LoginIcon = styled.img`
-  width: 25px;
-  height: 25px;
-  margin-top: 20px;
-`;
-
-export const LogoDiv = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-export const LogoIcon = styled.img`
-  height: 35px;
-  margin-top: 10px;
-`;
-
-export const LogoTextIcon = styled.img`
-  height: 25px;
-  margin-left: 10px;
-  margin-top: 10px;
 `;
 
 // 바디 영역

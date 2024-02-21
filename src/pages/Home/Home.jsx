@@ -5,7 +5,7 @@ import LoginModal from "../Home/Login/LoginModal";
 import { useDispatch, useSelector } from "react-redux";
 import { bootChannelTalk } from "../../redux/channelTalkSlice";
 import Navbar from "../../components/Navbar";
-import { getHomeFundingList } from "../../apis/home";
+import { getMyFunding, getHomeFundingList } from "../../apis/home";
 import { userLogout } from "../../redux/authSlice";
 import theme from "../../styles/theme";
 import {
@@ -55,6 +55,7 @@ import {
   ProductGrids,
   ProductGrid,
   ProductImg,
+  ProductP,
   FloatingBtn,
 } from "./HomeStyles";
 
@@ -64,7 +65,7 @@ const Home = () => {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [homeFundingList, setHomeFundingList] = useState([]);
-  // const [myFunding, setMyFunding] = useState([]);
+  const [myFunding, setMyFunding] = useState([]);
   //   {
   //     id: "",
   //     itemLink: "",
@@ -102,23 +103,28 @@ const Home = () => {
 
   const handleFundingCreate = () => navigate("/fundingcreate");
 
-  // 내 펀딩 데이터를 가져오는 API
-  // const getMyData = async () => {
-  //   try {
-  //     const data = await getMyFunding();
-  //     console.log("받아오고 있니? ", data);
+  const handleLogoClick = () => navigate("/");
 
-  //     setMyFunding([data]);
-  //   } catch (error) {
-  //     console.error("API 호출 중 에러 발생: ", error);
-  //   }
-  // };
+  const handleModifyClick = () => navigate(`/fundingModify/${myFunding.id}`);
+
+  // 내 펀딩 데이터를 가져오는 API
+  const getMyData = async () => {
+    try {
+      const data = await getMyFunding();
+      console.log("내 펀딩: ", data);
+
+      setMyFunding(data);
+    } catch (error) {
+      console.error("API 호출 중 에러 발생: ", error);
+    }
+  };
 
   // 펀딩 리스트 데이터를 가져오는 API
   const getData = async () => {
     try {
       const content = await getHomeFundingList();
 
+      console.log("최근 펀딩 구경하기: ", content);
       setHomeFundingList(content);
     } catch (error) {
       console.error("펀딩 리스트 정보를 가져오는 함수 호출 실패: ", error);
@@ -127,7 +133,7 @@ const Home = () => {
 
   useEffect(() => {
     dispatch(bootChannelTalk());
-    // getMyData();
+    getMyData();
     getData();
   }, [dispatch]);
 
@@ -140,15 +146,15 @@ const Home = () => {
   }) => (
     <ProductGrid>
       <ProductImg src={imgSrc} alt={altText} />
-      <P pt="8px" fs={theme.body2} color={theme.gray3}>
+      <ProductP pt="8px" fs={theme.body2} color={theme.gray3}>
         {brand}
-      </P>
-      <P pt="8px" fs={theme.body2}>
+      </ProductP>
+      <ProductP pt="8px" fs={theme.body2}>
         {itemName}
-      </P>
-      <P pt="8px" pb="20px" fs="16px" fw="700">
+      </ProductP>
+      <ProductP pt="8px" pb="20px" fs="16px" fw="700">
         {price}
-      </P>
+      </ProductP>
     </ProductGrid>
   );
 
@@ -164,7 +170,10 @@ const Home = () => {
               </P>
             </BubbleTxt>
             <BubbleImg src="/imgs/Home/speech-bubble.png" />
-            <LeftLogoTextIcon src="/imgs/Common/giftipie.png" />
+            <LeftLogoTextIcon
+              onClick={handleLogoClick}
+              src="/imgs/Common/giftipie.png"
+            />
             <LeftPieImg src="/imgs/Home/pie-hi.png" />
           </LeftImgContainer>
           <LeftRowdiv ml="30px">
@@ -220,7 +229,7 @@ const Home = () => {
               </P>
               <MainBtnContainer>
                 <MainBtn>링크복사</MainBtn>
-                <MainBtn>수정</MainBtn>
+                <MainBtn onClick={handleModifyClick}>수정</MainBtn>
               </MainBtnContainer>
             </BetweenDiv>
             <BetweenDiv pb="20px">
@@ -246,30 +255,30 @@ const Home = () => {
               </BannerProgressDiv>
             </BetweenDiv>
             {/* 내 펀딩 데이터 불러오기 */}
-            {/* {myFunding.map((funding) => (
-              <BetweenDiv key={funding.id}>
-                <BannerImg src={funding.itemImage} />
+            {/* {myFunding.map((myFunding) => (
+              <BetweenDiv key={myFunding.id}>
+                <BannerImg src={myFunding.itemImage} />
                 <BannerProgressDiv>
                   <FundingItem fs="11px" fw="800" color="gray">
-                    {funding.itemName}
+                    {myFunding.itemName}
                   </FundingItem>
                   <FundingTitle pt="5px" fs="13px" fw="800">
-                    {funding.title}
+                    {myFunding.title}
                   </FundingTitle>
                   <P pt="10px" fs="15px" fw="900" color={theme.primary}>
-                    {funding.achievementRate}%
+                    {myFunding.achievementRate}%
                   </P>
                   <RoundProgressBar>
                     <RoundProgress
-                      width={(funding.achievementRate / 100) * 100}
+                      width={(myFunding.achievementRate / 100) * 100}
                     />
                   </RoundProgressBar>
                   <BetweenDiv>
                     <P pl="0px" fs="10px" fw="800" color="gray">
-                      현재&nbsp;{funding.currentAmount}원
+                      현재&nbsp;{myFunding.currentAmount}원
                     </P>
                     <P fs="10px" fw="800" color="gray">
-                      {funding.targetAmount}원
+                      {myFunding.targetAmount}원
                     </P>
                   </BetweenDiv>
                 </BannerProgressDiv>
@@ -301,6 +310,11 @@ const Home = () => {
                       src={funding.itemImage}
                       alt={funding.itemName}
                     />
+                    {/* <FundingDate>
+                      <P pt="4px" fs={theme.detail}>
+                        {funding.dday}
+                      </P>
+                    </FundingDate> */}
                     <ProgressBar>
                       <Progress width={(funding.achievementRate / 100) * 100} />
                     </ProgressBar>
@@ -310,6 +324,9 @@ const Home = () => {
                     <BetweenDiv>
                       <P fs={theme.detail} fw="600" color={theme.primary}>
                         {funding.achievementRate}%
+                      </P>
+                      <P fs={theme.detail} color={theme.gray3} fw="600">
+                        {funding.dday}
                       </P>
                     </BetweenDiv>
                     <FundingItem pt="2px" fs={theme.body2} color={theme.gray3}>
@@ -321,16 +338,13 @@ const Home = () => {
                   </FundingGrid>
                 ))}
               </FundingSection>
-              <RecentFundingBtn>
-                <P
-                  onClick={handleRecentFundingClick}
-                  pt="4px"
-                  fs={theme.detail}
-                  color={theme.gray2}
-                >
+              <RecentFundingBtn onClick={handleRecentFundingClick}>
+                <P pt="2px" fs={theme.detail} color={theme.gray2}>
                   펀딩 더보기 &nbsp;
                 </P>
-                <FaAngleRight />
+                <P pt="4px" fs={theme.detail}>
+                  <FaAngleRight />
+                </P>
               </RecentFundingBtn>
             </FundingDiv>
           </RecentFundingContainer>
@@ -404,39 +418,39 @@ const Home = () => {
             </P>
             <ProductGrids>
               <ProductGridComponent
-                imgSrc="/imgs/Home/iphone15pro.jpeg"
-                altText="iphone"
+                imgSrc="/imgs/Home/airpods.jpeg"
+                altText="airpods"
                 brand="Apple"
-                itemName="아이폰 15 Pro 256BG 자급제"
-                price="1,550,000원"
+                itemName="AirPods Pro MagSafe 충전 케이스 모델(2세대, USB-C)"
+                price="359,000원"
               />
               <ProductGridComponent
-                imgSrc="/imgs/Home/iphone15pro.jpeg"
-                altText="iphone"
-                brand="Apple"
-                itemName="아이폰 14 256BG 자급제"
-                price="1,090,000원"
+                imgSrc="/imgs/Home/sony.jpeg"
+                altText="sonycamera"
+                brand="Sony"
+                itemName="렌즈 교환식 디지털 카메라 ILCE-9M3"
+                price="7,980,000원"
               />
               <ProductGridComponent
-                imgSrc="/imgs/Home/iphone15pro.jpeg"
-                altText="iphone"
-                brand="Apple"
-                itemName="아이폰 15 Pro 256BG 자급제"
-                price="1,550,000원"
+                imgSrc="/imgs/Home/jordan.png"
+                altText="airjordan"
+                brand="Nike"
+                itemName="에어 조던 1 미드 남성 신발"
+                price="159,000원"
               />
               <ProductGridComponent
-                imgSrc="/imgs/Home/iphone15pro.jpeg"
-                altText="iphone"
-                brand="Apple"
-                itemName="아이폰 15 Pro 256BG 자급제"
-                price="1,550,000원"
+                imgSrc="/imgs/Home/earring.png"
+                altText="earring"
+                brand="Minigold"
+                itemName="보니타 원터치 귀걸이 EMSM4965"
+                price="239,000원"
               />
               <ProductGridComponent
-                imgSrc="/imgs/Home/iphone15pro.jpeg"
-                altText="iphone"
-                brand="Apple"
-                itemName="아이폰 15 Pro 256BG 자급제"
-                price="1,550,000원"
+                imgSrc="/imgs/Home/zflip5.png"
+                altText="zfilp5"
+                brand="Samsung"
+                itemName="갤럭시 Z 플립5 자급제"
+                price="1,337,000원"
               />
             </ProductGrids>
           </ProductContainer>

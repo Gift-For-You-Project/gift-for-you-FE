@@ -11,8 +11,9 @@ const GlobalStyles = createGlobalStyle`
         color: inherit; // 부모 요소로부터 색상 상속
     }
 
-    /* 모든 요소의 상자 모델 설정 */
-    *{
+    /* 전역 설정 */
+    * {
+        font-family: 'Pretendard', sans-serif;
         box-sizing: border-box;
     }
 
@@ -29,7 +30,6 @@ const GlobalStyles = createGlobalStyle`
     /* Body 스타일 */
     body{
         line-height: 1.5; // 줄 높이 설정
-        font-family: 'Pretendard', sans-serif;  // 폰트 설정
         margin-bottom: 100px;                     
         background-repeat: no-repeat;
         background-size: cover;
