@@ -113,7 +113,7 @@ export const logout = async () => {
   try {
     const response = await axios.delete("/api/logout");
 
-    if (response.data.isSuccess) {
+    if (response.ok) {
       successToast(response.data.message);
       console.log("로그아웃이 완료되었습니다.");
     }

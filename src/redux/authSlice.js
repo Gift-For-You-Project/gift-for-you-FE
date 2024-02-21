@@ -14,6 +14,7 @@ const authReducer = createSlice({
     userLogin: (state) => {
       state.isLoggedIn = true;
       cookies.set("Authorization", true, { path: "/" });
+      console.log("일반 로그인 쿠키: ");
     },
     // 구글 로그인 액션
     googleLogin: (state) => {
@@ -43,7 +44,8 @@ export const logoutAndApiCall = () => async (dispatch) => {
   // 로그아웃 API
   try {
     await logout();
-    successToast("로그아웃 되었습니다.");
+    window.location.href = "https://www.giftipie.me";
+    successToast("로그아웃이 완료되었습니다.");
   } catch (error) {
     console.error("로그아웃 API 호출 중 오류 발생:", error.message);
   }
