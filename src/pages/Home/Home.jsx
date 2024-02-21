@@ -106,6 +106,8 @@ const Home = () => {
 
   const handleModifyClick = () => navigate(`/fundingModify/${myFunding.id}`);
 
+  const handleMyFundingClick = () => navigate(`/fundingDetail/${myFunding.id}`);
+
   const handleCopyLink = () => {
     const myFundingUrl = `https://www.giftipie.me/fundingdetail/${myFunding.id}`;
 
@@ -120,20 +122,6 @@ const Home = () => {
   };
 
   // 내 펀딩 데이터를 가져오는 API
-  // const getMyData = async () => {
-  //   try {
-  //     const data = await getMyFunding();
-  //     console.log("내 펀딩: ", data);
-
-  //     if (typeof data === "object" && data !== null) {
-  //       console.log("내 펀딩: ", data);
-  //       setMyFunding(data);
-  //     }
-  //   } catch (error) {
-  //     console.error("API 호출 중 에러 발생: ", error);
-  //   }
-  // };
-
   const getMyData = async () => {
     try {
       const data = await getMyFunding();
@@ -258,31 +246,12 @@ const Home = () => {
                 <MainBtn onClick={handleModifyClick}>수정</MainBtn>
               </MainBtnContainer>
             </BetweenDiv>
-            {/* <BetweenDiv pb="20px">
-              <MyFundingImg src="/imgs/Home/airpods.jpeg" />
-              <MyFundingDate>
-                <P pt="4px" fs={theme.detail}>
-                  D-16
-                </P>
-              </MyFundingDate>
-              <BannerProgressDiv>
-                <FundingItem fs={theme.body2} color={theme.gray3}>
-                  에어팟
-                </FundingItem>
-                <FundingTitle pt="4px" pb="4px" fs={theme.body2}>
-                  인생 첫 에어팟을 선물해주세요 😘
-                </FundingTitle>
-                <P pt="10px" fs={theme.detail} fw="600" color={theme.primary}>
-                  36%
-                </P>
-                <RoundProgressBar>
-                  <RoundProgress width={(65 / 100) * 100} />
-                </RoundProgressBar>
-              </BannerProgressDiv>
-            </BetweenDiv> */}
-            {/* 내 펀딩 데이터 불러오기 */}
             {myFunding && (
-              <BetweenDiv pb="20px">
+              <BetweenDiv
+                onClick={handleMyFundingClick}
+                pb="20px"
+                cursor="pointer"
+              >
                 <MyFundingImg src={myFunding.itemImage} />
                 <MyFundingDate>
                   <P pt="4px" fs={theme.detail}>
