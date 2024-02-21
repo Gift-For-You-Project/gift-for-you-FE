@@ -25,16 +25,16 @@ export const LeftContainer = styled.div`
 `;
 
 export const LeftImgContainer = styled.div`
-  position: relative; /*상대 위치 지정*/
-  height: 0; /* 이미지 높이 */
-  padding-left: 150px; /* 이미지 왼쪽 간격 조정 */
+  position: relative;
+  height: 0;
+  padding-left: 150px;
 `;
 
 export const LeftLogoTextIcon = styled.img`
-  position: absolute; /* 절대 위치 지정 */
+  position: absolute;
   height: 40px;
-  bottom: 20px; /* 아래쪽 위치 조정 */
-  left: 30px; /* 왼쪽 위치 조정 */
+  bottom: 20px;
+  left: 30px;
   cursor: pointer;
 `;
 
@@ -46,10 +46,10 @@ export const BubbleTxt = styled.div`
 `;
 
 export const BubbleImg = styled.img`
-  position: absolute; /* 절대 위치 지정 */
+  position: absolute;
   bottom: 130px;
   right: 130px;
-  height: 200px; /* 부모 요소에 대한 상대적인 높이 */
+  height: 200px;
 `;
 
 export const LeftRowdiv = styled.div`
@@ -466,7 +466,6 @@ export const Progress = styled.div`
   padding: 0;
   text-align: center;
   background-color: ${theme.primary};
-  /* border-radius: 15px; // 추가 */
   color: ${theme.primary};
 `;
 

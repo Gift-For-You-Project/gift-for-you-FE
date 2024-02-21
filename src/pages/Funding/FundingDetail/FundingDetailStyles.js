@@ -82,7 +82,6 @@ export const Leftcolumndiv = styled.div`
   margin-left: ${(props) => props.ml};
 `;
 
-
 export const IpadLoveImg = styled.img`
   position: absolute;
   bottom: 0;
@@ -179,15 +178,17 @@ export const BannerImgDiv = styled.div`
 
 export const BannerImg = styled.img`
   width: 100%;
-  max-width: 140px;
+  max-width: 121.82px;
   height: 100%;
-  max-height: 140px;
+  max-height: 121.82px;
   border-radius: 20px;
 `;
 
 export const IllustImg = styled.img`
   width: 100%;
-  max-width: 90px;
+  max-width: 56px;
+  height: 100%;
+  max-height: 76px;
   margin: 10px;
 `;
 export const NavigateDiv = styled.div`
@@ -195,8 +196,7 @@ export const NavigateDiv = styled.div`
   margin-right: 22px;
 `;
 export const NavigateBtn = styled.button`
-  font-size: 13px;
-  font-weight: 600;
+  font-size: ${theme.detail};
   color: ${theme.white};
   margin-bottom: 7px;
 `;
