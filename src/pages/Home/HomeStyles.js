@@ -149,7 +149,7 @@ export const FundingTitle = styled.div`
   padding-bottom: ${(props) => props.pb};
   padding-left: ${(props) => props.pl};
   padding-right: ${(props) => props.pr};
-  line-height: 1.4; /* 필요에 따라 조절하세요 */
+  line-height: 1.4;
 `;
 
 /* 펀딩 Item */
@@ -381,6 +381,23 @@ export const CharacterImg = styled.img`
   margin: 20px;
 `;
 
+export const MyFundingDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: -webkit-fill-available;
+  max-width: 390px;
+  height: 128px;
+`;
+
+export const MyFundingTitle = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: ${theme.body2};
+  padding: 12px 0 20px 0;
+`;
+
 export const MyFundingImg = styled.img`
   position: relative;
   width: 100%;
@@ -415,6 +432,15 @@ export const MyFundingDate = styled.div`
     top: 426px;
     left: 93px;
   }
+`;
+
+export const MyFundingBtn = styled.button`
+  width: 72px;
+  height: 34px;
+  background-color: ${theme.primaryBtn};
+  color: ${theme.primaryFont};
+  font-size: ${theme.detail};
+  border-radius: 8px;
 `;
 
 export const FundingImg = styled.img`
@@ -531,7 +557,6 @@ export const TogetherGrids = styled.div`
   gap: 5px;
 `;
 
-/* 프로그레스바 관련 */
 export const BannerProgressDiv = styled.div`
   display: flex;
   flex-direction: column;
@@ -628,6 +653,7 @@ export const ProductImg = styled.img`
   margin-top: 10px;
   border-radius: 8px;
   object-fit: cover;
+  cursor: pointer;
 `;
 
 export const ProductP = styled.p`

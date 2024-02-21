@@ -30,8 +30,11 @@ import {
   Body,
   MainBtnContainer,
   MainBtn,
+  MyFundingDiv,
+  MyFundingTitle,
   MyFundingImg,
   MyFundingDate,
+  MyFundingBtn,
   RecentFundingContainer,
   RecentFundingDiv,
   RecentFundingBtn,
@@ -141,7 +144,7 @@ const Home = () => {
       console.log("최근 펀딩 구경하기: ", content);
       setHomeFundingList(content);
     } catch (error) {
-      console.error("펀딩 리스트 정보를 가져오는 함수 호출 실패: ", error);
+      console.error("API 호출 중 에러 발생: ", error);
     }
   };
 
@@ -151,7 +154,12 @@ const Home = () => {
     getData();
   }, [dispatch]);
 
+  const handleProductImgClick = (link) => {
+    window.open(link, "_blank");
+  };
+
   const ProductGridComponent = ({
+    imgLink,
     imgSrc,
     altText,
     brand,
@@ -159,7 +167,11 @@ const Home = () => {
     price,
   }) => (
     <ProductGrid>
-      <ProductImg src={imgSrc} alt={altText} />
+      <ProductImg
+        onClick={() => handleProductImgClick(imgLink)}
+        src={imgSrc}
+        alt={altText}
+      />
       <ProductP pt="8px" fs={theme.body2} color={theme.gray3}>
         {brand}
       </ProductP>
@@ -236,48 +248,74 @@ const Home = () => {
         </NavbarDiv>
         <Body>
           <BannerImg src="/imgs/Home/banner.svg" />
+          {/* 내 펀딩 */}
           <TogetherDiv bc={theme.white}>
-            <BetweenDiv pt="20px" pb="10px">
-              <P pl="20px" fs={theme.title} fw="600">
-                내 펀딩
-              </P>
-              <MainBtnContainer>
-                <MainBtn onClick={handleCopyLink}>링크복사</MainBtn>
-                <MainBtn onClick={handleModifyClick}>수정</MainBtn>
-              </MainBtnContainer>
-            </BetweenDiv>
-            {myFunding && (
-              <BetweenDiv
-                onClick={handleMyFundingClick}
-                pb="20px"
-                cursor="pointer"
-              >
-                <MyFundingImg src={myFunding.itemImage} />
-                <MyFundingDate>
-                  <P pt="4px" fs={theme.detail}>
-                    {myFunding.dday}
+            {/* 내 펀딩이 있을 때 */}
+            {myFunding && myFunding.status === "ACTIVE" && (
+              <>
+                <BetweenDiv pt="20px" pb="10px">
+                  <P pl="20px" fs={theme.title} fw="600">
+                    내 펀딩
                   </P>
-                </MyFundingDate>
-                <BannerProgressDiv>
-                  <FundingItem fs={theme.body2} color={theme.gray3}>
-                    {myFunding.itemName}
-                  </FundingItem>
-                  <FundingTitle pt="4px" pb="4px" fs={theme.body2}>
-                    {myFunding.title}
-                  </FundingTitle>
-                  <P pt="10px" fs={theme.detail} fw="600" color={theme.primary}>
-                    {myFunding.achievementRate}%
+                  <MainBtnContainer>
+                    <MainBtn onClick={handleCopyLink}>링크복사</MainBtn>
+                    <MainBtn onClick={handleModifyClick}>수정</MainBtn>
+                  </MainBtnContainer>
+                </BetweenDiv>
+                <BetweenDiv
+                  onClick={handleMyFundingClick}
+                  pb="20px"
+                  cursor="pointer"
+                >
+                  <MyFundingImg src={myFunding.itemImage} />
+                  <MyFundingDate>
+                    <P pt="4px" fs={theme.detail}>
+                      {myFunding.dday}
+                    </P>
+                  </MyFundingDate>
+                  <BannerProgressDiv>
+                    <FundingItem fs={theme.body2} color={theme.gray3}>
+                      {myFunding.itemName}
+                    </FundingItem>
+                    <FundingTitle pt="4px" pb="4px" fs={theme.body2}>
+                      {myFunding.title}
+                    </FundingTitle>
+                    <P
+                      pt="10px"
+                      fs={theme.detail}
+                      fw="600"
+                      color={theme.primary}
+                    >
+                      {myFunding.achievementRate}%
+                    </P>
+                    <RoundProgressBar>
+                      <RoundProgress
+                        width={(myFunding.achievementRate / 100) * 100}
+                      />
+                    </RoundProgressBar>
+                  </BannerProgressDiv>
+                </BetweenDiv>
+              </>
+            )}
+            {/* 내 펀딩이 없을 때 */}
+            {(!myFunding || myFunding.status !== "ACTIVE") && (
+              <>
+                <BetweenDiv pt="20px" pb="10px">
+                  <P pl="20px" fs={theme.title} fw="600">
+                    내 펀딩
                   </P>
-                  <RoundProgressBar>
-                    <RoundProgress
-                      width={(myFunding.achievementRate / 100) * 100}
-                    />
-                  </RoundProgressBar>
-                </BannerProgressDiv>
-              </BetweenDiv>
+                </BetweenDiv>
+                <MyFundingDiv>
+                  <MyFundingTitle>아직 만든 펀딩이 없어요</MyFundingTitle>
+                  <MyFundingBtn onClick={handleFundingCreate}>
+                    펀딩 만들기
+                  </MyFundingBtn>
+                </MyFundingDiv>
+              </>
             )}
           </TogetherDiv>
 
+          {/* 최근 펀딩 */}
           <RecentFundingContainer bc={theme.white}>
             <FundingDiv>
               <BetweenDiv>
@@ -302,17 +340,9 @@ const Home = () => {
                       src={funding.itemImage}
                       alt={funding.itemName}
                     />
-                    {/* <FundingDate>
-                      <P pt="4px" fs={theme.detail}>
-                        {funding.dday}
-                      </P>
-                    </FundingDate> */}
                     <ProgressBar>
                       <Progress width={(funding.achievementRate / 100) * 100} />
                     </ProgressBar>
-                    {/* <ProgressBar>
-                      <Progress width={(65 / 100) * 100} />
-                    </ProgressBar> // 퍼센트 바 스타일 확인용 */}
                     <BetweenDiv>
                       <P fs={theme.detail} fw="600" color={theme.primary}>
                         {funding.achievementRate}%
@@ -341,75 +371,73 @@ const Home = () => {
             </FundingDiv>
           </RecentFundingContainer>
 
-          <>
-            <TogetherBetween>
-              <P
-                pt="40px"
-                pb="40px"
-                fs={theme.title}
-                fw="600"
-                color={theme.primary}
-              >
-                Giftipie
+          {/* 함께한 선물 */}
+          <TogetherBetween>
+            <P
+              pt="40px"
+              pb="40px"
+              fs={theme.title}
+              fw="600"
+              color={theme.primary}
+            >
+              Giftipie
+            </P>
+            <P
+              pt="40px"
+              pb="40px"
+              fs={theme.title}
+              fw="500"
+              color={theme.white}
+            >
+              에서 함께한 선물
+            </P>
+          </TogetherBetween>
+          <TogetherGrids>
+            <TogetherGrid>
+              <TogetherImg src="/imgs/Common/heart-hand.png" alt="hearthand" />
+              <P pt="10px" fs={theme.body2} fw="400">
+                &nbsp;&nbsp;&nbsp;펀딩에
+                <br />
+                참여한 사람
               </P>
-              <P
-                pt="40px"
-                pb="40px"
-                fs={theme.title}
-                fw="500"
-                color={theme.white}
-              >
-                에서 함께한 선물
+              <P pt="10px" pb="10px" fs="16px" fw="700">
+                13명
               </P>
-            </TogetherBetween>
-            <TogetherGrids>
-              <TogetherGrid>
-                <TogetherImg
-                  src="/imgs/Common/heart-hand.png"
-                  alt="hearthand"
-                />
-                <P pt="10px" fs={theme.body2} fw="400">
-                  &nbsp;&nbsp;&nbsp;펀딩에
-                  <br />
-                  참여한 사람
-                </P>
-                <P pt="10px" pb="10px" fs="16px" fw="700">
-                  13명
-                </P>
-              </TogetherGrid>
-              <TogetherGrid>
-                <TogetherImg
-                  src="/imgs/Common/giftbox-yellow.png"
-                  alt="receive"
-                />
-                <P fs={theme.body2} fw="400">
-                  &nbsp; 선물을
-                  <br />
-                  받은 사람
-                </P>
-                <P pt="10px" pb="10px" fs="16px" fw="700">
-                  6명
-                </P>
-              </TogetherGrid>
-              <TogetherGrid>
-                <TogetherImg src="/imgs/Common/donation.png" alt="amount" />
-                <P fs={theme.body2} fw="400">
-                  &nbsp;&nbsp;&nbsp; 모인
-                  <br /> 펀딩 금액
-                </P>
-                <P pt="10px" pb="10px" fs="16px" fw="700">
-                  1억원
-                </P>
-              </TogetherGrid>
-            </TogetherGrids>
-          </>
+            </TogetherGrid>
+            <TogetherGrid>
+              <TogetherImg
+                src="/imgs/Common/giftbox-yellow.png"
+                alt="receive"
+              />
+              <P fs={theme.body2} fw="400">
+                &nbsp; 선물을
+                <br />
+                받은 사람
+              </P>
+              <P pt="10px" pb="10px" fs="16px" fw="700">
+                6명
+              </P>
+            </TogetherGrid>
+            <TogetherGrid>
+              <TogetherImg src="/imgs/Common/donation.png" alt="amount" />
+              <P fs={theme.body2} fw="400">
+                &nbsp;&nbsp;&nbsp; 모인
+                <br /> 펀딩 금액
+              </P>
+              <P pt="10px" pb="10px" fs="16px" fw="700">
+                1억원
+              </P>
+            </TogetherGrid>
+          </TogetherGrids>
 
+          {/* 추천 상품 */}
           <ProductContainer bc={theme.white}>
             <P fs={theme.title} fw="600" pt="20px" pb="5px" pl="20px">
               추천 상품 &nbsp;
             </P>
             <ProductGrids>
               <ProductGridComponent
+                imgLink="https://www.apple.com/kr/shop/product/MTJV3KH/A/airpods-pro"
                 imgSrc="/imgs/Home/airpods.jpeg"
                 altText="airpods"
                 brand="Apple"
@@ -417,6 +445,7 @@ const Home = () => {
                 price="359,000원"
               />
               <ProductGridComponent
+                imgLink="https://store.sony.co.kr/product-view/115952023"
                 imgSrc="/imgs/Home/sony.jpeg"
                 altText="sonycamera"
                 brand="Sony"
@@ -424,6 +453,7 @@ const Home = () => {
                 price="7,980,000원"
               />
               <ProductGridComponent
+                imgLink="https://www.nike.com/kr/t/%EC%97%90%EC%96%B4-%EC%A1%B0%EB%8D%98-1-%EB%AF%B8%EB%93%9C-%EB%82%A8%EC%84%B1-%EC%8B%A0%EB%B0%9C-Fpo9YM44/DQ8426-106"
                 imgSrc="/imgs/Home/jordan.png"
                 altText="airjordan"
                 brand="Nike"
@@ -431,6 +461,7 @@ const Home = () => {
                 price="159,000원"
               />
               <ProductGridComponent
+                imgLink="https://minigold.co.kr/m/product/custom.php?code=&pcode=EMSM4965"
                 imgSrc="/imgs/Home/earring.png"
                 altText="earring"
                 brand="Minigold"
@@ -438,6 +469,7 @@ const Home = () => {
                 price="239,000원"
               />
               <ProductGridComponent
+                imgLink="https://www.samsung.com/sec/smartphones/galaxy-z-flip5-5g-sm-f731-cpo/SM-F731NZBEKOO/"
                 imgSrc="/imgs/Home/zflip5.png"
                 altText="zfilp5"
                 brand="Samsung"
