@@ -8,6 +8,7 @@ import Navbar from "../../components/Navbar";
 import { getMyFunding, getHomeFundingList } from "../../apis/home";
 import { userLogout } from "../../redux/authSlice";
 import theme from "../../styles/theme";
+import { infoToast } from "../../components/toast";
 import {
   MainContainer,
   LeftContainer,
@@ -65,26 +66,24 @@ const Home = () => {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [homeFundingList, setHomeFundingList] = useState([]);
-  const [myFunding, setMyFunding] = useState([]);
-  //   {
-  //     id: "",
-  //     itemLink: "",
-  //     itemImage: "",
-  //     itemName: "",
-  //     title: "",
-  //     showName: "",
-  //     content: "",
-  //     currentAmount: 0,
-  //     targetAmount: 0,
-  //     publicFlag: false,
-  //     endData: "",
-  //     dday: "",
-  //     status: false,
-  //     achievementRate: 0,
-  //     ownerFlag: false,
-  //     modifiedAt: "",
-  //   },
-  // ]);
+  const [myFunding, setMyFunding] = useState(null);
+  //   id: "",
+  //   itemLink: "",
+  //   itemImage: "",
+  //   itemName: "",
+  //   title: "",
+  //   showName: "",
+  //   content: "",
+  //   currentAmount: 0,
+  //   targetAmount: 0,
+  //   publicFlag: false,
+  //   endData: "",
+  //   dday: "",
+  //   status: false,
+  //   achievementRate: 0,
+  //   ownerFlag: false,
+  //   modifiedAt: "",
+  // });
 
   const closeModal = () => setIsLoginModalOpen(false);
 
@@ -107,12 +106,39 @@ const Home = () => {
 
   const handleModifyClick = () => navigate(`/fundingModify/${myFunding.id}`);
 
+  const handleCopyLink = () => {
+    const currentUrl = window.location.href;
+
+    navigator.clipboard
+      .writeText(currentUrl)
+      .then(() => {
+        infoToast("링크가 복사되었습니다.");
+      })
+      .catch((error) => {
+        console.error("링크 복사 실패: ", error);
+      });
+  };
+
   // 내 펀딩 데이터를 가져오는 API
+  // const getMyData = async () => {
+  //   try {
+  //     const data = await getMyFunding();
+  //     console.log("내 펀딩: ", data);
+
+  //     if (typeof data === "object" && data !== null) {
+  //       console.log("내 펀딩: ", data);
+  //       setMyFunding(data);
+  //     }
+  //   } catch (error) {
+  //     console.error("API 호출 중 에러 발생: ", error);
+  //   }
+  // };
+
   const getMyData = async () => {
     try {
       const data = await getMyFunding();
-      console.log("내 펀딩: ", data);
 
+      console.log("내 펀딩: ", data);
       setMyFunding(data);
     } catch (error) {
       console.error("API 호출 중 에러 발생: ", error);
@@ -228,11 +254,11 @@ const Home = () => {
                 내 펀딩
               </P>
               <MainBtnContainer>
-                <MainBtn>링크복사</MainBtn>
+                <MainBtn onClick={handleCopyLink}>링크복사</MainBtn>
                 <MainBtn onClick={handleModifyClick}>수정</MainBtn>
               </MainBtnContainer>
             </BetweenDiv>
-            <BetweenDiv pb="20px">
+            {/* <BetweenDiv pb="20px">
               <MyFundingImg src="/imgs/Home/airpods.jpeg" />
               <MyFundingDate>
                 <P pt="4px" fs={theme.detail}>
@@ -253,19 +279,24 @@ const Home = () => {
                   <RoundProgress width={(65 / 100) * 100} />
                 </RoundProgressBar>
               </BannerProgressDiv>
-            </BetweenDiv>
+            </BetweenDiv> */}
             {/* 내 펀딩 데이터 불러오기 */}
-            {/* {myFunding.map((myFunding) => (
-              <BetweenDiv key={myFunding.id}>
-                <BannerImg src={myFunding.itemImage} />
+            {myFunding && (
+              <BetweenDiv pb="20px">
+                <MyFundingImg src={myFunding.itemImage} />
+                <MyFundingDate>
+                  <P pt="4px" fs={theme.detail}>
+                    {myFunding.dday}
+                  </P>
+                </MyFundingDate>
                 <BannerProgressDiv>
-                  <FundingItem fs="11px" fw="800" color="gray">
+                  <FundingItem fs={theme.body2} color={theme.gray3}>
                     {myFunding.itemName}
                   </FundingItem>
-                  <FundingTitle pt="5px" fs="13px" fw="800">
+                  <FundingTitle pt="4px" pb="4px" fs={theme.body2}>
                     {myFunding.title}
                   </FundingTitle>
-                  <P pt="10px" fs="15px" fw="900" color={theme.primary}>
+                  <P pt="10px" fs={theme.detail} fw="600" color={theme.primary}>
                     {myFunding.achievementRate}%
                   </P>
                   <RoundProgressBar>
@@ -273,17 +304,9 @@ const Home = () => {
                       width={(myFunding.achievementRate / 100) * 100}
                     />
                   </RoundProgressBar>
-                  <BetweenDiv>
-                    <P pl="0px" fs="10px" fw="800" color="gray">
-                      현재&nbsp;{myFunding.currentAmount}원
-                    </P>
-                    <P fs="10px" fw="800" color="gray">
-                      {myFunding.targetAmount}원
-                    </P>
-                  </BetweenDiv>
                 </BannerProgressDiv>
               </BetweenDiv>
-            ))} */}
+            )}
           </TogetherDiv>
 
           <RecentFundingContainer bc={theme.white}>
