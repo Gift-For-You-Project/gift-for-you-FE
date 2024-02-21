@@ -111,9 +111,9 @@ export const login = async (credentials) => {
 // 로그아웃 API
 export const logout = async () => {
   try {
-    const response = await axios.delete("/api/logout");
+    const response = await axios.post("/api/logout");
 
-    if (response.ok) {
+    if (response.status === 200) {
       successToast(response.data.message);
       console.log("로그아웃이 완료되었습니다.");
     }
