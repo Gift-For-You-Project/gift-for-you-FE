@@ -4,7 +4,7 @@ import { successToast } from "../components/toast";
 import { logout } from "../apis/auth";
 
 // universal-cookie 라이브러리에서 Cookies 클래스의 인스턴스를 생성
-const cookies = new Cookies({ domain: "giftipie.me" });
+const cookies = new Cookies({ domain: "api.giftipie.me" });
 
 const authReducer = createSlice({
   name: "auth",
