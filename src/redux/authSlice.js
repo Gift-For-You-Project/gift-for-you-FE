@@ -12,23 +12,20 @@ const authReducer = createSlice({
   reducers: {
     // 로그인 액션: 사용자가 로그인하면 isLoggedIn을 true 설정
     userLogin: (state) => {
-      if (cookies.get("Authorization")) {
-        state.isLoggedIn = true;
-        console.log("일반 로그인 쿠키: ", cookies.get("Authorization"));
-      }
+      state.isLoggedIn = true;
+      console.log("일반 로그인 쿠키: ", cookies.get("Authorization"));
+      cookies.set("Authorization", true, { path: "/" }); // 세션 쿠키로 로그인 상태 유지
     },
     // 구글 로그인 액션
     googleLogin: (state) => {
-      if (cookies.get("Authorization")) {
-        state.isLoggedIn = true;
-      }
+      state.isLoggedIn = true;
+      cookies.set("Authorization", true, { path: "/" });
     },
     // 카카오 로그인 액션
     kakaoLogin: (state) => {
-      if (cookies.get("Authorization")) {
-        state.isLoggedIn = true;
-        console.log("카카오 로그인 쿠키: ", cookies.get("Authorization"));
-      }
+      state.isLoggedIn = true;
+      console.log("카카오 로그인 쿠키: ", cookies.get("Authorization"));
+      cookies.set("Authorization", true, { path: "/" });
     },
     // 로그아웃 액션: 사용자가 로그아웃하면 isLoggedIn을 false로 설정
     userLogout: (state) => {
