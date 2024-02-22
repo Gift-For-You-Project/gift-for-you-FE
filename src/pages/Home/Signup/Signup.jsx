@@ -26,27 +26,51 @@ import {
   SignupInput,
   SignupBtn,
   SignupHelpDiv,
+  CheckEmailBtn,
+  CheckCodeBtn,
   BlankLine,
 } from "./SignupStyles";
 
 // InputField 컴포넌트
-const InputField = ({ onChange, onKeyDown, title, type, placeholder }) => (
-  <SignupInputDiv>
-    <P fs={theme.detail2} color={theme.gray3} p="10px 10px 0 10px">
-      {title}
-    </P>
-    <SignupInput
-      type={type}
-      placeholder={`${placeholder}`}
-      onChange={onChange}
-      onKeyDown={onKeyDown}
-    />
-  </SignupInputDiv>
-);
+const InputField = ({ onChange, onKeyDown, title, type, placeholder }) => {
+  const [isCodeValid, setIsCodeValid] = useState(false);
+
+  // 인증번호가 4자리여야 유효하다고 가정
+  const handleCodeValidation = (code) => {
+    setIsCodeValid(code.length === 4);
+  };
+
+  return (
+    <SignupInputDiv>
+      <P fs={theme.detail2} color={theme.gray3} p="10px 10px 0 10px">
+        {title}
+      </P>
+      <SignupInput
+        type={type}
+        placeholder={`${placeholder}`}
+        onChange={(e) => {
+          onChange(e);
+          if (title === "이메일 인증") {
+            handleCodeValidation(e.target.value);
+          }
+        }}
+        onKeyDown={onKeyDown}
+      />
+      {/* 이메일 인증 버튼 */}
+      {title === "이메일" && (
+        <CheckEmailBtn disabled={!isCodeValid}>인증하기</CheckEmailBtn>
+      )}
+      {title === "이메일 인증" && (
+        <CheckCodeBtn disabled={!isCodeValid}>인증하기</CheckCodeBtn>
+      )}
+    </SignupInputDiv>
+  );
+};
 
 const Signup = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
+  const [code, setCode] = useState("");
   const [nickname, setNickname] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -96,6 +120,9 @@ const Signup = () => {
       e.target.value.trim() === "" || !isValidEmailFormat(e.target.value)
     );
   };
+
+  // 이메일 인증번호 확인
+  const handleCodeChange = (e) => setCode(e.target.value);
 
   // 닉네임이 비어있을 때 help 보여주기
   const handleNicknameChange = (e) => {
@@ -212,6 +239,15 @@ const Signup = () => {
               email.trim() !== "" && (
                 <SignupHelpDiv>유효한 이메일 형식이어야 합니다.</SignupHelpDiv>
               )}
+            <BlankLine h="20px" />
+            <InputField
+              value={code}
+              onChange={handleCodeChange}
+              onKeyDown={handleKeyDown}
+              title="이메일 인증"
+              type="string"
+              placeholder="Confrimation Code"
+            />
             <BlankLine h="20px" />
             <InputField
               value={nickname}
