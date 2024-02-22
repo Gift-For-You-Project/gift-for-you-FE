@@ -2,7 +2,7 @@ import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import channelTalkReducer from "./channelTalkSlice";
-import authReducer, { browserClosedLogout } from "./authSlice";
+import authReducer from "./authSlice"; // { browserClosedLogout }
 
 // 여러 개의 리듀서를 합쳐 rootReducer로 지정
 const rootReducer = combineReducers({
@@ -31,9 +31,9 @@ const store = configureStore({
 });
 
 // 브라우저 닫힘 이벤트 리스너 등록
-window.addEventListener("beforeunload", () => {
-  store.dispatch(browserClosedLogout());
-});
+// window.addEventListener("beforeunload", () => {
+//   store.dispatch(browserClosedLogout());
+// });
 
 // Persisted 스토어와 임시 스토어를 생성
 export const persistor = persistStore(store);
