@@ -5,12 +5,13 @@ import { warnToast } from "../../../components/toast";
 import { useDispatch, useSelector } from "react-redux";
 import { userLogout } from "../../../redux/authSlice";
 import Navbar from "../../../components/Navbar";
+import theme from "../../../styles/theme";
+import { isMobile } from "react-device-detect";
 import {
   fundingPayDonationReady,
   getFundingDonation,
   getDonationApproval,
 } from "../../../apis/funding";
-import theme from "../../../styles/theme";
 import {
   MainContainer,
   LeftContainer,
@@ -71,12 +72,19 @@ const FundingPay = () => {
 
       console.log("결제 준비 성공: ", response);
 
-      // 뷰포트 넓이가 768px 이하인 경우 모바일로 간주하고 모바일 URL로 리다이렉션
-      const redirectUrl = window.matchMedia("(max-width: 768px)").matches
-        ? response.result.next_redirect_mobile_url
-        : response.result.next_redirect_pc_url;
+      // 뷰포트 넓이가 768px 이하인 경우 모바일로 간주하고 모바일 URL로 리다이렉션 -> 데스크탑에서 화면을 줄이면 모바일 URL로 리다이렉트 되는 문제
+      // const redirectUrl = window.matchMedia("(max-width: 768px)").matches
+      //   ? response.result.next_redirect_mobile_url
+      //   : response.result.next_redirect_pc_url;
+      // window.location.href = redirectUrl;
 
-      window.location.href = redirectUrl;
+      // 모바일이면 모바일 전용 URL로 리다이렉션
+      if (isMobile) {
+        window.location.href = response.result.next_redirect_mobile_url;
+      } else {
+        // 데스크탑이면 데스크탑 전용 URL로 리다이렉션
+        window.location.href = response.result.next_redirect_pc_url;
+      }
     } catch (error) {
       console.error("결제 준비 오류:", error);
     }

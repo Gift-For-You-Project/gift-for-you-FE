@@ -202,6 +202,7 @@ export const SignupImg = styled.img`
 `;
 
 export const SignupInputDiv = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -218,7 +219,7 @@ export const SignupInputDiv = styled.div`
 
 export const SignupInput = styled.input`
   width: -webkit-fill-available;
-  max-width: 350px;
+  max-width: 330px;
   height: 40px;
   font-size: ${theme.title2};
   padding-left: 10px;
@@ -226,6 +227,46 @@ export const SignupInput = styled.input`
 
   &::placeholder {
     color: ${theme.gray4};
+  }
+`;
+
+export const CheckEmailBtn = styled.button`
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  width: -webkit-fill-available;
+  max-width: 64px;
+  height: 34px;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-size: ${theme.detail};
+  background-color: ${theme.primary};
+  color: ${theme.white};
+  border-radius: 8px;
+
+  &:hover {
+    background-color: ${theme.primaryFont};
+  }
+`;
+
+export const CheckCodeBtn = styled.button`
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  width: -webkit-fill-available;
+  max-width: 64px;
+  height: 34px;
+  transform: translateY(-50%);
+  font-size: ${theme.detail};
+  color: ${theme.white};
+  border-radius: 8px;
+  background-color: ${(props) =>
+    props.disabled ? theme.gray5 : theme.primary};
+  cursor: ${(props) => (props.disabled ? "not-allowed" : "pointer")};
+
+  &:hover {
+    background-color: ${(props) =>
+      props.disabled ? theme.gray5 : theme.primaryFont};
   }
 `;
 
