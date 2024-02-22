@@ -8,12 +8,13 @@ const cookies = new Cookies();
 
 const authReducer = createSlice({
   name: "auth",
-  initialState: { isLoggedIn: cookies.get("Authorization") === "true" }, // 쿠키에서 초기 상태 읽어오기
+  // 쿠키에서 초기 상태 읽어오기 +  명시적으로 불리언 값으로 변환
+  initialState: { isLoggedIn: !!cookies.get("Authorization") },
   reducers: {
     // 로그인 액션: 사용자가 로그인하면 isLoggedIn을 true 설정
     userLogin: (state) => {
       state.isLoggedIn = true;
-      cookies.set("Authorization", true, { path: "/" });
+      cookies.set("Authorization", true, { path: "/" }); // 세션 쿠키로 로그인 상태 유지
       console.log("일반 로그인 쿠키: ", cookies.get("Authorization"));
     },
     // 구글 로그인 액션
@@ -31,7 +32,7 @@ const authReducer = createSlice({
     // 로그아웃 액션: 사용자가 로그아웃하면 isLoggedIn을 false로 설정
     userLogout: (state) => {
       state.isLoggedIn = false;
-      cookies.remove("Authorization");
+      cookies.remove("Authorization"); // 세션 쿠키 삭제로 로그아웃 처리
     },
   },
 });
