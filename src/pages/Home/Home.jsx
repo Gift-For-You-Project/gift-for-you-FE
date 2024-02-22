@@ -493,6 +493,7 @@ const Home = () => {
                 price="1,337,000원"
               />
             </ProductGrids>
+            <P fw="600" pt="20px" pb="5px" pl="20px" />
           </ProductContainer>
         </Body>
         <Button
