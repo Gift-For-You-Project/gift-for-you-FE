@@ -72,7 +72,7 @@ const FundingPay = () => {
       console.log("결제 준비 성공: ", response);
 
       // 뷰포트 넓이가 768px 이하인 경우 모바일로 간주하고 모바일 URL로 리다이렉션
-      const redirectUrl = window.matchMedia("(max-width: 767px)").matches
+      const redirectUrl = window.matchMedia("(max-width: 768px)").matches
         ? response.result.next_redirect_mobile_url
         : response.result.next_redirect_pc_url;
 
