@@ -42,6 +42,8 @@ const InputField = ({
   type,
   placeholder,
   isButtonActive,
+  authBtnText,
+  verificationSuccess,
 }) => {
   return (
     <SignupInputDiv>
@@ -55,11 +57,16 @@ const InputField = ({
         onKeyDown={onKeyDown}
       />
       {title === "이메일" && (
-        <CheckEmailBtn onClick={onAuthBtnClick}>인증하기</CheckEmailBtn>
+        <CheckEmailBtn onClick={onAuthBtnClick}>
+          {authBtnText || "인증하기"}
+        </CheckEmailBtn>
       )}
       {title === "이메일 인증" && (
-        <CheckCodeBtn onClick={onCheckBtnClick} disabled={!isButtonActive}>
-          확인하기
+        <CheckCodeBtn
+          onClick={onCheckBtnClick}
+          disabled={!isButtonActive || verificationSuccess}
+        >
+          {verificationSuccess ? "인증성공" : "확인하기"}
         </CheckCodeBtn>
       )}
     </SignupInputDiv>
@@ -78,6 +85,8 @@ const Signup = () => {
   const [showConfirmPasswordHelp, setShowConfirmPasswordHelp] = useState(false);
   const [verificationCode, setVerificationCode] = useState("");
   const [receivedCode, setReceivedCode] = useState("");
+  const [authBtnText, setAuthBtnText] = useState("인증하기");
+  const [verificationSuccess, setVerificationSuccess] = useState(false);
 
   // 확인하기 버튼의 활성화 여부를 결정하는 함수
   const isCheckBtnActive = () => {
@@ -159,6 +168,7 @@ const Signup = () => {
       console.log("이메일 인증 코드 받기: ", code);
       // 이메일 인증 코드를 상태에 저장
       setReceivedCode(code);
+      setAuthBtnText("재인증");
     } catch (error) {
       console.error("인증 에러:", error);
     }
@@ -168,8 +178,10 @@ const Signup = () => {
   const handleCheckBtnClick = () => {
     if (verificationCode === receivedCode) {
       console.log("인증 성공!", receivedCode);
+      setVerificationSuccess(true);
     } else {
       console.log("인증 실패!", receivedCode);
+      setVerificationSuccess(false);
     }
   };
 
@@ -257,6 +269,7 @@ const Signup = () => {
               title="이메일"
               type="email"
               placeholder="ex) abcd1234@gmail.com"
+              authBtnText={authBtnText}
             />
             {showEmailHelp && email.trim() === "" && (
               <SignupHelpDiv>이메일을 입력해 주세요.</SignupHelpDiv>
@@ -276,6 +289,7 @@ const Signup = () => {
               type="string"
               placeholder="Confrimation Code"
               isButtonActive={isCheckBtnActive()}
+              verificationSuccess={verificationSuccess}
             />
             <BlankLine h="20px" />
             <InputField
