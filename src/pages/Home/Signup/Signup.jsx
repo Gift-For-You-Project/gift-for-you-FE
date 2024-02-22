@@ -2,29 +2,37 @@ import React, { useState } from "react";
 import { FaAngleLeft } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 import { signup } from "../../../apis/auth";
+import theme from "../../../styles/theme";
 import {
   MainContainer,
   LeftContainer,
-  Logo,
+  LeftLogoTextIcon,
+  LeftImg,
+  LeftPieImg,
+  LeftRowdiv,
+  LeftContent,
+  Leftcolumndiv,
+  LeftImgContainer,
+  BubbleTxt,
+  BubbleImg,
+  IpadLoveImg,
   P,
   RightContainer,
+  SignupNavbar,
   SignupFieldContainer,
   Body,
   SignupIconDiv,
-  SignupImg,
+  SignupInputDiv,
   SignupInput,
   SignupBtn,
-  SignupEmailHelpDiv,
-  SignupNicknameHelpDiv,
-  SignupPasswordHelpDiv,
-  SignupPhoneNumberHelpDiv,
+  SignupHelpDiv,
   BlankLine,
 } from "./SignupStyles";
 
 // InputField 컴포넌트
 const InputField = ({ onChange, onKeyDown, title, type, placeholder }) => (
-  <div>
-    <P fs="20px" pb="10px" color="#FFFFFF">
+  <SignupInputDiv>
+    <P fs={theme.detail2} color={theme.gray3} p="10px 10px 0 10px">
       {title}
     </P>
     <SignupInput
@@ -33,7 +41,7 @@ const InputField = ({ onChange, onKeyDown, title, type, placeholder }) => (
       onChange={onChange}
       onKeyDown={onKeyDown}
     />
-  </div>
+  </SignupInputDiv>
 );
 
 const Signup = () => {
@@ -41,15 +49,15 @@ const Signup = () => {
   const [email, setEmail] = useState("");
   const [nickname, setNickname] = useState("");
   const [password, setPassword] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [showEmailHelp, setShowEmailHelp] = useState(false);
   const [showNicknameHelp, setShowNicknameHelp] = useState(false);
   const [showPasswordHelp, setShowPasswordHelp] = useState(false);
-  const [showPhoneNumberHelp, setShowPhoneNumberHelp] = useState(false);
+  const [showConfirmPasswordHelp, setShowConfirmPasswordHelp] = useState(false);
 
-  const handleBackClick = () => {
-    navigate("/");
-  };
+  const handleBackClick = () => navigate("/");
+
+  const handleLogoClick = () => navigate("/");
 
   // Enter키가 눌렸을 때 로그인 처리
   const handleKeyDown = (e) => {
@@ -76,10 +84,9 @@ const Signup = () => {
     return passwordRegex.test(password);
   };
 
-  // 10자에서 11자 사이의 숫자
-  const isValidPhoneNumberFormat = (phoneNumber) => {
-    const phoneNumberRegex = /^[0-9]{10,11}$/;
-    return phoneNumberRegex.test(phoneNumber);
+  // 비밀번호 확인
+  const isValidConfirmPassword = (confirmPassword) => {
+    return confirmPassword === password;
   };
 
   // 이메일이 비어있을 때 help 보여주기
@@ -106,17 +113,17 @@ const Signup = () => {
     );
   };
 
-  // 휴대폰 번호가 비어있을 때 help 보여주기
-  const handlePhoneNumberChange = (e) => {
-    setPhoneNumber(e.target.value);
-    setShowPhoneNumberHelp(
-      e.target.value.trim() === "" || !isValidPhoneNumberFormat(e.target.value)
+  // 비밀번호 확인이 비어있을 때 help 보여주기
+  const handleConfirmPasswordChange = (e) => {
+    setConfirmPassword(e.target.value);
+    setShowConfirmPasswordHelp(
+      e.target.value.trim() === "" || !isValidPasswordFormat(e.target.value)
     );
   };
 
   const handleSignupClick = async () => {
     try {
-      await signup({ email, nickname, password, phoneNumber });
+      await signup({ email, nickname, password, confirmPassword });
       navigate("/login");
     } catch (error) {
       console.error("가입 오류:", error);
@@ -126,43 +133,86 @@ const Signup = () => {
   return (
     <MainContainer>
       <LeftContainer>
-        <Logo>Giftipie</Logo>
-        <P pt="25px" fs="16px" fw="800" pb="5px">
-          기프티파이에서
-        </P>
-        <P fs="16px" fw="800" pb="5px">
-          정말 원하는 선물을
-        </P>
-        <P fs="16px" fw="800">
-          주고 받아요
-        </P>
+        <LeftContainer>
+          <LeftImgContainer>
+            <BubbleTxt>
+              <P fs="24px" fw="700" color={theme.white}>
+                생일선물
+                <br />뭐 받고싶어?
+              </P>
+            </BubbleTxt>
+            <BubbleImg src="/imgs/Home/speech-bubble.png" />
+            <LeftLogoTextIcon
+              onClick={handleLogoClick}
+              src="/imgs/Common/giftipie.png"
+            />
+            <LeftPieImg src="/imgs/Home/pie-hi.png" />
+          </LeftImgContainer>
+          <LeftRowdiv ml="30px">
+            <LeftRowdiv
+              color={theme.gray1}
+              mr="10px"
+              bc={theme.primary}
+              br="25px"
+              p="8px"
+            >
+              <LeftImg
+                src="/imgs/Home/giftbox-red.png"
+                w="30px"
+                h="25px"
+                mr="10px"
+                pl="10px"
+              />
+              <P fs="20px" fw="900" pr="10px" color={theme.black}>
+                정말 원하는 선물
+              </P>
+            </LeftRowdiv>
+            <P fs="20px" fw="700" color={theme.white}>
+              을 주고 받아요!
+            </P>
+          </LeftRowdiv>
+          <LeftContent>
+            <Leftcolumndiv ml="30px">
+              <P fs="16px" fw="500" pb="5px" pr="250px" color={theme.gray4}>
+                지금은 유저테스트 진행 중 입니다. <br />
+                6명의 개발자와 1명의 디자이너가 함께 개발하고 있습니다.
+              </P>
+            </Leftcolumndiv>
+          </LeftContent>
+        </LeftContainer>
+        <LeftRowdiv ml="30px"></LeftRowdiv>
+        <IpadLoveImg src="/imgs/Home/pie-ipad.png" w="300px" />
       </LeftContainer>
+
       <RightContainer>
         <Body>
-          <SignupIconDiv>
-            <FaAngleLeft onClick={handleBackClick} />
-          </SignupIconDiv>
+          <SignupNavbar>
+            <SignupIconDiv>
+              <FaAngleLeft onClick={handleBackClick} />
+            </SignupIconDiv>
+            <P fs={theme.body2} color={theme.white}>
+              회원가입
+            </P>
+          </SignupNavbar>
+
           <SignupFieldContainer>
-            <SignupImg src="/imgs/Character/giftipie-02.png" alt="pie" />
             <InputField
               value={email}
               onChange={handleEmailChange}
               onKeyDown={handleKeyDown}
               title="이메일"
               type="email"
-              placeholder="Email"
+              placeholder="ex) abcd1234@gmail.com"
             />
             {showEmailHelp && email.trim() === "" && (
-              <SignupEmailHelpDiv>이메일을 입력해 주세요.</SignupEmailHelpDiv>
+              <SignupHelpDiv>이메일을 입력해 주세요.</SignupHelpDiv>
             )}
             {showEmailHelp &&
               !isValidEmailFormat(email) &&
               email.trim() !== "" && (
-                <SignupEmailHelpDiv>
-                  유효한 이메일 형식이어야 합니다.
-                </SignupEmailHelpDiv>
+                <SignupHelpDiv>유효한 이메일 형식이어야 합니다.</SignupHelpDiv>
               )}
-            <BlankLine h="30px" />
+            <BlankLine h="20px" />
             <InputField
               value={nickname}
               onChange={handleNicknameChange}
@@ -172,11 +222,9 @@ const Signup = () => {
               placeholder="Nickname"
             />
             {showNicknameHelp && nickname.trim() === "" && (
-              <SignupNicknameHelpDiv>
-                닉네임을 입력해 주세요.
-              </SignupNicknameHelpDiv>
+              <SignupHelpDiv>닉네임을 입력해 주세요.</SignupHelpDiv>
             )}
-            <BlankLine h="30px" />
+            <BlankLine h="20px" />
             <InputField
               value={password}
               onChange={handlePasswordChange}
@@ -186,32 +234,32 @@ const Signup = () => {
               placeholder="Password"
             />
             {showPasswordHelp && (
-              <SignupPasswordHelpDiv>
+              <SignupHelpDiv>
                 {password.trim() === ""
                   ? "비밀번호를 입력해 주세요."
                   : "비밀번호는 8자에서 15자 사이의 알파벳 대소문자, 숫자, 특수문자로 구성되어야 합니다."}
-              </SignupPasswordHelpDiv>
+              </SignupHelpDiv>
             )}
-            <BlankLine h="30px" />
+            <BlankLine h="20px" />
             <InputField
-              value={phoneNumber}
-              onChange={handlePhoneNumberChange}
+              value={confirmPassword}
+              onChange={handleConfirmPasswordChange}
               onKeyDown={handleKeyDown}
-              title="휴대폰 번호"
-              type="text"
-              placeholder="Phone Number"
+              title="비밀번호 확인"
+              type="password"
+              placeholder="Confirm Password"
             />
-            {showPhoneNumberHelp && (
-              <SignupPhoneNumberHelpDiv>
-                {phoneNumber.trim() === ""
-                  ? "휴대폰 번호를 입력해 주세요."
-                  : !isValidPhoneNumberFormat(phoneNumber)
-                  ? "휴대전화 번호는 10자에서 11자 사이의 숫자로 구성되어야 합니다."
+            {showConfirmPasswordHelp && (
+              <SignupHelpDiv>
+                {confirmPassword.trim() === ""
+                  ? "비밀번호를 입력해 주세요."
+                  : !isValidConfirmPassword(confirmPassword)
+                  ? "비밀번호가 일치하지 않습니다."
                   : null}
-              </SignupPhoneNumberHelpDiv>
+              </SignupHelpDiv>
             )}
+            <SignupBtn onClick={handleSignupClick}>회원가입하기</SignupBtn>
           </SignupFieldContainer>
-          <SignupBtn onClick={handleSignupClick}>회원가입하기</SignupBtn>
         </Body>
       </RightContainer>
     </MainContainer>

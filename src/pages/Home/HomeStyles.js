@@ -599,8 +599,7 @@ export const TogetherGrid = styled.div`
 
 export const ProductContainer = styled.div`
   background-color: ${(props) => props.bc};
-  border-top-left-radius: 30px;
-  border-top-right-radius: 30px;
+  border-radius: 30px;
   border: 0.3px solid ${theme.gray4};
   width: -webkit-fill-available;
   max-width: 390px;
