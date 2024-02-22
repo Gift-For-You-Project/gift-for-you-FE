@@ -34,6 +34,11 @@ const authReducer = createSlice({
       state.isLoggedIn = false;
       cookies.remove("Authorization"); // 세션 쿠키 삭제로 로그아웃 처리
     },
+    // 브라우저 닫으면 로그아웃 액션
+    browserClosedLogout: (state) => {
+      state.isLoggedIn = false;
+      cookies.remove("Authorization");
+    },
   },
 });
 
@@ -52,7 +57,12 @@ export const logoutAndApiCall = () => async (dispatch) => {
 };
 
 // 액션 생성자 내보내기
-export const { userLogin, googleLogin, kakaoLogin, userLogout } =
-  authReducer.actions;
+export const {
+  userLogin,
+  googleLogin,
+  kakaoLogin,
+  userLogout,
+  browserClosedLogout,
+} = authReducer.actions;
 // 리듀서 내보내기
 export default authReducer.reducer;
