@@ -4,7 +4,7 @@ import { successToast } from "../components/toast";
 import { logout } from "../apis/auth";
 
 // universal-cookie 라이브러리에서 Cookies 클래스의 인스턴스를 생성
-const cookies = new Cookies({ domain: "api.giftipie.me" });
+const cookies = new Cookies();
 
 const authReducer = createSlice({
   name: "auth",
@@ -27,7 +27,6 @@ const authReducer = createSlice({
     kakaoLogin: (state) => {
       state.isLoggedIn = true;
       cookies.set("Authorization", true, { path: "/" });
-      successToast("로그인 되었습니다.");
     },
     // 로그아웃 액션: 사용자가 로그아웃하면 isLoggedIn을 false로 설정
     userLogout: (state) => {
