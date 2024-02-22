@@ -73,6 +73,22 @@ export const signup = async (userData) => {
   }
 };
 
+// 회원가입 시 이메일 인증 API
+export const postSendMail = async (email) => {
+  try {
+    const response = await instance.post("/api/mailSend", { mail: email });
+
+    if (response.status === 200) {
+      console.log("이메일 인증: ", response);
+      return response.data.code;
+    }
+  } catch (error) {
+    if (error.response.status === 401) {
+      console.error("API 호출 중 401 에러 발생", error);
+    }
+  }
+};
+
 // 로그인 API
 export const login = async (credentials) => {
   try {

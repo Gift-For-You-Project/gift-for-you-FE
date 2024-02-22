@@ -3,6 +3,7 @@ import { FaAngleLeft } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 import { signup } from "../../../apis/auth";
 import theme from "../../../styles/theme";
+import { postSendMail } from "../../../apis/auth";
 import {
   MainContainer,
   LeftContainer,
@@ -32,14 +33,16 @@ import {
 } from "./SignupStyles";
 
 // InputField 컴포넌트
-const InputField = ({ onChange, onKeyDown, title, type, placeholder }) => {
-  const [isCodeValid, setIsCodeValid] = useState(false);
-
-  // 인증번호가 4자리여야 유효하다고 가정
-  const handleCodeValidation = (code) => {
-    setIsCodeValid(code.length === 4);
-  };
-
+const InputField = ({
+  onChange,
+  onKeyDown,
+  onAuthBtnClick,
+  onCheckBtnClick,
+  title,
+  type,
+  placeholder,
+  isButtonActive,
+}) => {
   return (
     <SignupInputDiv>
       <P fs={theme.detail2} color={theme.gray3} p="10px 10px 0 10px">
@@ -48,20 +51,16 @@ const InputField = ({ onChange, onKeyDown, title, type, placeholder }) => {
       <SignupInput
         type={type}
         placeholder={`${placeholder}`}
-        onChange={(e) => {
-          onChange(e);
-          if (title === "이메일 인증") {
-            handleCodeValidation(e.target.value);
-          }
-        }}
+        onChange={onChange}
         onKeyDown={onKeyDown}
       />
-      {/* 이메일 인증 버튼 */}
       {title === "이메일" && (
-        <CheckEmailBtn disabled={!isCodeValid}>인증하기</CheckEmailBtn>
+        <CheckEmailBtn onClick={onAuthBtnClick}>인증하기</CheckEmailBtn>
       )}
       {title === "이메일 인증" && (
-        <CheckCodeBtn disabled={!isCodeValid}>인증하기</CheckCodeBtn>
+        <CheckCodeBtn onClick={onCheckBtnClick} disabled={!isButtonActive}>
+          확인하기
+        </CheckCodeBtn>
       )}
     </SignupInputDiv>
   );
@@ -70,7 +69,6 @@ const InputField = ({ onChange, onKeyDown, title, type, placeholder }) => {
 const Signup = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
-  const [code, setCode] = useState("");
   const [nickname, setNickname] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -78,6 +76,13 @@ const Signup = () => {
   const [showNicknameHelp, setShowNicknameHelp] = useState(false);
   const [showPasswordHelp, setShowPasswordHelp] = useState(false);
   const [showConfirmPasswordHelp, setShowConfirmPasswordHelp] = useState(false);
+  const [verificationCode, setVerificationCode] = useState("");
+  const [receivedCode, setReceivedCode] = useState("");
+
+  // 확인하기 버튼의 활성화 여부를 결정하는 함수
+  const isCheckBtnActive = () => {
+    return isValidEmailFormat(email) && verificationCode.length === 4;
+  };
 
   const handleBackClick = () => navigate("/");
 
@@ -121,8 +126,7 @@ const Signup = () => {
     );
   };
 
-  // 이메일 인증번호 확인
-  const handleCodeChange = (e) => setCode(e.target.value);
+  const handleCodeChange = (e) => setVerificationCode(e.target.value);
 
   // 닉네임이 비어있을 때 help 보여주기
   const handleNicknameChange = (e) => {
@@ -148,6 +152,28 @@ const Signup = () => {
     );
   };
 
+  // 이메일 인증 API 호출
+  const handleAuthBtnClick = async () => {
+    try {
+      const code = await postSendMail(email);
+      console.log("이메일 인증 코드 받기: ", code);
+      // 이메일 인증 코드를 상태에 저장
+      setReceivedCode(code);
+    } catch (error) {
+      console.error("인증 에러:", error);
+    }
+  };
+
+  // 사용자가 입력한 코드와 서버에서 받아온 코드를 비교
+  const handleCheckBtnClick = () => {
+    if (verificationCode === receivedCode) {
+      console.log("인증 성공!", receivedCode);
+    } else {
+      console.log("인증 실패!", receivedCode);
+    }
+  };
+
+  // 회원가입 API
   const handleSignupClick = async () => {
     try {
       await signup({ email, nickname, password, confirmPassword });
@@ -227,6 +253,7 @@ const Signup = () => {
               value={email}
               onChange={handleEmailChange}
               onKeyDown={handleKeyDown}
+              onAuthBtnClick={handleAuthBtnClick}
               title="이메일"
               type="email"
               placeholder="ex) abcd1234@gmail.com"
@@ -241,12 +268,14 @@ const Signup = () => {
               )}
             <BlankLine h="20px" />
             <InputField
-              value={code}
+              value={verificationCode}
               onChange={handleCodeChange}
+              onCheckBtnClick={handleCheckBtnClick}
               onKeyDown={handleKeyDown}
               title="이메일 인증"
               type="string"
               placeholder="Confrimation Code"
+              isButtonActive={isCheckBtnActive()}
             />
             <BlankLine h="20px" />
             <InputField
