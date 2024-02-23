@@ -51,7 +51,6 @@ import {
     StartRowDiv,
     GiftCoverImg,
 } from './FundingDetailStyles';
-import { infoToast } from '../../../components/toast';
 
 const FundingDetail = () => {
     const navigate = useNavigate();
@@ -249,14 +248,7 @@ const FundingDetail = () => {
                     </BannerImgDiv>
 
                     <NavigateDiv>
-                        <NavigateBtn
-                            onClick={() => {
-                                navigator.clipboard.writeText(window.location.href);
-                                infoToast('상품 링크가 복사되었습니다.');
-                            }}
-                        >
-                            링크복사
-                        </NavigateBtn>
+                        <NavigateBtn>링크복사</NavigateBtn>
                         <NavigateBtn onClick={() => navigate(`/fundingModify/${id}`)}>수정</NavigateBtn>
                     </NavigateDiv>
 

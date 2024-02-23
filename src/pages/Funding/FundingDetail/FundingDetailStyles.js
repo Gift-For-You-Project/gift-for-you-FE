@@ -81,6 +81,7 @@ export const Leftcolumndiv = styled.div`
   margin-left: ${(props) => props.ml};
 `;
 
+
 export const IpadLoveImg = styled.img`
   position: absolute;
   bottom: 0;
