@@ -285,11 +285,11 @@ const Signup = () => {
     try {
       if (!authBtnClicked) {
         const code = await postSendMail(formData.email);
+        infoToast("인증 메일이 발송되었습니다.");
         console.log("이메일 인증 코드 받기: ", code);
         // 이메일 인증 코드를 상태에 저장
         setReceivedCode(code);
         setAuthBtnClicked(true); // 버튼 클릭 상태를 true로 변경
-        infoToast("인증 메일이 발송되었습니다.");
       } else {
         // 이미 버튼을 누른 상태에서 다시 누를 경우
         warnToast(
