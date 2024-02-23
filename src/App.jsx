@@ -5,6 +5,8 @@ import Home from "./pages/Home/Home";
 import Login from "./pages/Home/Login/Login";
 import Signup from "./pages/Home/Signup/Signup";
 import RecentFunding from "./pages/Home/RecentFunding/RecentFunding";
+import RecentFundingProgress from "./pages/Home/RecentFunding/RecentFundingProgress";
+import RecentFundingComplete from "./pages/Home/RecentFunding/RecentFundingComplete";
 import FundingCreate from "./pages/Funding/FundingCreate/FundingCreate";
 import FundingDetail from "./pages/Funding/FundingDetail/FundingDetail";
 import Sponsor from "./pages/Funding/FundingDetail/Sponsor/Sponsor";
@@ -20,6 +22,14 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/recentfunding" element={<RecentFunding />} />
+        <Route
+          path="/recentfunding/progress"
+          element={<RecentFundingProgress />}
+        />
+        <Route
+          path="/recentfunding/complete"
+          element={<RecentFundingComplete />}
+        />
         <Route path="/fundingcreate" element={<FundingCreate />} />
         <Route path="/fundingdetail/:id" element={<FundingDetail />} />
         <Route path="/fundingsponsordetail" element={<Sponsor />} />

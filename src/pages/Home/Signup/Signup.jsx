@@ -1,9 +1,16 @@
 import React, { useState } from "react";
-import { FaAngleLeft } from "react-icons/fa6";
+import { FaAngleLeft, FaAngleRight } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 import { signup } from "../../../apis/auth";
 import theme from "../../../styles/theme";
 import { postSendMail } from "../../../apis/auth";
+import Checkbox from "../../../components/Checkbox";
+import {
+  infoToast,
+  warnToast,
+  successToast,
+  errorToast,
+} from "../../../components/toast";
 import {
   MainContainer,
   LeftContainer,
@@ -19,10 +26,10 @@ import {
   IpadLoveImg,
   P,
   RightContainer,
-  SignupNavbar,
+  NavbarDiv,
   SignupFieldContainer,
   Body,
-  SignupIconDiv,
+  IconDiv,
   SignupInputDiv,
   SignupInput,
   SignupBtn,
@@ -30,6 +37,10 @@ import {
   CheckEmailBtn,
   CheckCodeBtn,
   BlankLine,
+  TermsAgreementContainer,
+  TermsAgreementDiv,
+  CheckDiv,
+  SeeMoreDiv,
 } from "./SignupStyles";
 
 // InputField 컴포넌트
@@ -44,6 +55,7 @@ const InputField = ({
   isButtonActive,
   authBtnText,
   verificationSuccess,
+  isAuthBtnClicked,
 }) => {
   return (
     <SignupInputDiv>
@@ -57,7 +69,7 @@ const InputField = ({
         onKeyDown={onKeyDown}
       />
       {title === "이메일" && (
-        <CheckEmailBtn onClick={onAuthBtnClick}>
+        <CheckEmailBtn onClick={onAuthBtnClick} disabled={isAuthBtnClicked}>
           {authBtnText || "인증하기"}
         </CheckEmailBtn>
       )}
@@ -85,17 +97,77 @@ const Signup = () => {
   const [showConfirmPasswordHelp, setShowConfirmPasswordHelp] = useState(false);
   const [verificationCode, setVerificationCode] = useState("");
   const [receivedCode, setReceivedCode] = useState("");
-  const [authBtnText, setAuthBtnText] = useState("인증하기");
   const [verificationSuccess, setVerificationSuccess] = useState(false);
+  const [authBtnClicked, setAuthBtnClicked] = useState(false);
+  const [checkboxState, setCheckboxState] = useState({
+    isCheckedTerms: false,
+    isCheckedService: false,
+    isCheckedPrivacy: false,
+    isCheckedMarketing: false,
+  });
+
+  const handleCheckboxChange = (type) => {
+    setCheckboxState((prevState) => {
+      const allChecked =
+        prevState.isCheckedService &&
+        prevState.isCheckedPrivacy &&
+        prevState.isCheckedMarketing;
+
+      switch (type) {
+        // "전체 동의" 체크박스가 선택되었을 때
+        case "all":
+          return {
+            ...prevState,
+            // 모든 개별 체크박스의 상태를 반전
+            isCheckedTerms: !allChecked,
+            isCheckedService: !allChecked,
+            isCheckedPrivacy: !allChecked,
+            isCheckedMarketing: !allChecked,
+          };
+
+        // 개별 체크박스들의 선택 상태가 변경되었을 때
+        case "service":
+          return {
+            ...prevState,
+            // 해당 개별 체크박스의 상태를 반전
+            isCheckedService: !prevState.isCheckedService,
+            // "전체 동의" 체크박스는 개별 체크박스가 하나라도 선택되지 않은 경우만 선택
+            isCheckedTerms:
+              prevState.isCheckedPrivacy &&
+              prevState.isCheckedMarketing &&
+              !prevState.isCheckedService,
+          };
+
+        case "privacy":
+          return {
+            ...prevState,
+            isCheckedPrivacy: !prevState.isCheckedPrivacy,
+            isCheckedTerms:
+              prevState.isCheckedService &&
+              prevState.isCheckedMarketing &&
+              !prevState.isCheckedPrivacy,
+          };
+
+        case "marketing":
+          return {
+            ...prevState,
+            isCheckedMarketing: !prevState.isCheckedMarketing,
+            isCheckedTerms:
+              prevState.isCheckedService &&
+              prevState.isCheckedPrivacy &&
+              !prevState.isCheckedMarketing,
+          };
+
+        default:
+          return prevState;
+      }
+    });
+  };
 
   // 확인하기 버튼의 활성화 여부를 결정하는 함수
   const isCheckBtnActive = () => {
     return isValidEmailFormat(email) && verificationCode.length === 4;
   };
-
-  const handleBackClick = () => navigate("/");
-
-  const handleLogoClick = () => navigate("/");
 
   // Enter키가 눌렸을 때 로그인 처리
   const handleKeyDown = (e) => {
@@ -122,7 +194,7 @@ const Signup = () => {
     return passwordRegex.test(password);
   };
 
-  // 비밀번호 확인
+  // 비밀번호 확인이 비밀번호와 일치하는지 확인
   const isValidConfirmPassword = (confirmPassword) => {
     return confirmPassword === password;
   };
@@ -164,11 +236,19 @@ const Signup = () => {
   // 이메일 인증 API 호출
   const handleAuthBtnClick = async () => {
     try {
-      const code = await postSendMail(email);
-      console.log("이메일 인증 코드 받기: ", code);
-      // 이메일 인증 코드를 상태에 저장
-      setReceivedCode(code);
-      setAuthBtnText("재인증");
+      if (!authBtnClicked) {
+        const code = await postSendMail(email);
+        console.log("이메일 인증 코드 받기: ", code);
+        // 이메일 인증 코드를 상태에 저장
+        setReceivedCode(receivedCode);
+        setAuthBtnClicked(true); // 버튼 클릭 상태를 true로 변경
+        infoToast("인증 메일이 발송되었습니다.");
+      } else {
+        // 이미 버튼을 누른 상태에서 다시 누를 경우
+        warnToast(
+          "이미 인증 메일을 발송했습니다. 새로고침 후 다시 시도해 주세요."
+        );
+      }
     } catch (error) {
       console.error("인증 에러:", error);
     }
@@ -179,16 +259,18 @@ const Signup = () => {
     if (verificationCode === receivedCode) {
       console.log("인증 성공!", receivedCode);
       setVerificationSuccess(true);
+      successToast("이메일 인증이 완료되었습니다.");
     } else {
       console.log("인증 실패!", receivedCode);
       setVerificationSuccess(false);
+      errorToast("이메일 인증에 실패하였습니다.");
     }
   };
 
   // 회원가입 API
   const handleSignupClick = async () => {
     try {
-      await signup({ email, nickname, password, confirmPassword });
+      await signup({ email, nickname, password });
       navigate("/login");
     } catch (error) {
       console.error("가입 오류:", error);
@@ -208,7 +290,7 @@ const Signup = () => {
             </BubbleTxt>
             <BubbleImg src="/imgs/Home/speech-bubble.png" />
             <LeftLogoTextIcon
-              onClick={handleLogoClick}
+              onClick={() => navigate("/")}
               src="/imgs/Common/giftipie.png"
             />
             <LeftPieImg src="/imgs/Home/pie-hi.png" />
@@ -251,14 +333,14 @@ const Signup = () => {
 
       <RightContainer>
         <Body>
-          <SignupNavbar>
-            <SignupIconDiv>
-              <FaAngleLeft onClick={handleBackClick} />
-            </SignupIconDiv>
+          <NavbarDiv>
+            <IconDiv>
+              <FaAngleLeft onClick={() => navigate("/")} />
+            </IconDiv>
             <P fs={theme.body2} color={theme.white}>
               회원가입
             </P>
-          </SignupNavbar>
+          </NavbarDiv>
 
           <SignupFieldContainer>
             <InputField
@@ -269,7 +351,7 @@ const Signup = () => {
               title="이메일"
               type="email"
               placeholder="ex) abcd1234@gmail.com"
-              authBtnText={authBtnText}
+              isButtonActive={!authBtnClicked}
             />
             {showEmailHelp && email.trim() === "" && (
               <SignupHelpDiv>이메일을 입력해 주세요.</SignupHelpDiv>
@@ -337,6 +419,54 @@ const Signup = () => {
                   : null}
               </SignupHelpDiv>
             )}
+            <TermsAgreementContainer>
+              <TermsAgreementDiv>
+                <CheckDiv fs={theme.title2}>
+                  <Checkbox
+                    checked={checkboxState.isCheckedTerms}
+                    onChange={() => handleCheckboxChange("all")}
+                  />
+                  약관 전체동의{" "}
+                </CheckDiv>
+              </TermsAgreementDiv>
+              <BlankLine />
+              <TermsAgreementDiv>
+                <CheckDiv fs={theme.body2}>
+                  <Checkbox
+                    checked={checkboxState.isCheckedService}
+                    onChange={() => handleCheckboxChange("service")}
+                  />
+                  [필수] 서비스 이용약관
+                </CheckDiv>
+                <SeeMoreDiv>
+                  <FaAngleRight />
+                </SeeMoreDiv>
+              </TermsAgreementDiv>
+              <TermsAgreementDiv>
+                <CheckDiv fs={theme.body2}>
+                  <Checkbox
+                    checked={checkboxState.isCheckedPrivacy}
+                    onChange={() => handleCheckboxChange("privacy")}
+                  />
+                  [필수] 개인정보 처리방침
+                </CheckDiv>
+                <SeeMoreDiv>
+                  <FaAngleRight />
+                </SeeMoreDiv>
+              </TermsAgreementDiv>
+              <TermsAgreementDiv>
+                <CheckDiv fs={theme.body2}>
+                  <Checkbox
+                    checked={checkboxState.isCheckedMarketing}
+                    onChange={() => handleCheckboxChange("marketing")}
+                  />
+                  [선택] 광고 마케팅 정보 수신 동의
+                </CheckDiv>
+                <SeeMoreDiv>
+                  <FaAngleRight />
+                </SeeMoreDiv>
+              </TermsAgreementDiv>
+            </TermsAgreementContainer>
             <SignupBtn onClick={handleSignupClick}>회원가입하기</SignupBtn>
           </SignupFieldContainer>
         </Body>
