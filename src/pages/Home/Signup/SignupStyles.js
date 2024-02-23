@@ -332,4 +332,5 @@ export const CheckDiv = styled.div`
 export const SeeMoreDiv = styled.div`
   display: flex;
   font-size: ${theme.title2};
+  cursor: pointer;
 `;
