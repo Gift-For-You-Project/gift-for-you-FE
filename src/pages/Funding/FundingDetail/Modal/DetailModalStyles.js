@@ -72,7 +72,7 @@ export const ModalInput = styled.input`
   border-radius: 10px;
   border: 0.3px solid ${theme.gray5};
   text-align: center;
-  font-weight: 500;
+  font-weight: 400;
   font-size: ${theme.detail};
   margin-bottom: 10px;
   color: ${theme.black};

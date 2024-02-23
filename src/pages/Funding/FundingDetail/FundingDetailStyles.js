@@ -51,7 +51,6 @@ export const LeftRowdiv = styled.div`
   display: flex;
   flex-direction: row;
   /* align-items: center; */
-
   padding-top: ${(props) => props.pt};
   margin-top: ${(props) => props.mt};
   padding-bottom: ${(props) => props.pb};
@@ -93,7 +92,7 @@ export const IpadLoveImg = styled.img`
 /* 로고 */
 export const Logo = styled.h1`
   font-size: 30px;
-  font-weight: 700;
+  /* font-weight: 700; */
   color: ${theme.white};
 `;
 
@@ -121,14 +120,14 @@ export const Button = styled.button`
   align-items: center;
   width: ${(props) => props.w};
   height: ${(props) => props.h};
-  padding: 10px;
   background-color: ${(props) => props.bc};
   border-radius: 7px;
   color: ${(props) => props.color};
   font-size: ${(props) => props.fs};
-  font-weight: 600;
   margin-top: ${(props) => props.mt};
   margin-bottom: ${(props) => props.mb};
+  margin-left: ${(props) => props.ml};
+  margin-right: ${(props) => props.mr};
   padding-left: ${(props) => props.pl};
   padding-right: ${(props) => props.pr};
   &:hover {
@@ -166,29 +165,49 @@ export const NavbarDiv = styled.div`
 
 // 바디 영역
 export const Body = styled.div`
-  font-size: 24px;
-  font-weight: 800;
   height: auto;
 `;
 
 export const BannerImgDiv = styled.div`
-  text-align: center;
-  margin-bottom: 10px;
+  position: relative; /* 상대 위치 설정 */
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 15px;
+  padding-right: 20px;
+`;
+
+export const GiftCoverImg = styled.img`
+  width: 50%; /* 이미지의 너비를 50%로 설정하여 반쯤 걸쳐지도록 함 */
+  max-width: 121.82px;
+  /* border-radius: 0px 0px 20px 20px; */
+  position: absolute; /* 절대 위치 지정 */
+  top: 50%; /* 부모 요소의 중앙에 위치하도록 설정 */
+  left: 50%; /* 부모 요소의 중앙에 위치하도록 설정 */
+  transform: translate(-50%, -51%); /* 부모 요소의 중앙에 위치하도록 설정 */
+  z-index: 1; /* 다른 내용 위에 렌더링되도록 z-index 설정 */
+  /* border: 0.3px solid ${theme.gray4};
+  box-shadow: 0px 3px 3px 0px ${theme.gray4}; */
 `;
 
 export const BannerImg = styled.img`
-  width: 100%;
-  max-width: 121.82px;
+  width: 50%; /* 이미지의 너비를 50%로 설정하여 반쯤 걸쳐지도록 함 */
+  max-width: 121.8px;
   height: 100%;
-  max-height: 121.82px;
-  border-radius: 20px;
+  max-height: 101.82px;
+  border-radius: 0px 0px 20px 20px;
+  position: absolute; /* 절대 위치 지정 */
+  top: 50%; /* 부모 요소의 중앙에 위치하도록 설정 */
+  left: 50%; /* 부모 요소의 중앙에 위치하도록 설정 */
+  transform: translate(-50%, 12%); /* 부모 요소의 중앙에 위치하도록 설정 */
+  z-index: 1; /* 다른 내용 위에 렌더링되도록 z-index 설정 */
+  box-shadow: 2px 2px 5px 2px ${theme.black};
 `;
 
 export const IllustImg = styled.img`
   width: 100%;
-  max-width: 56px;
-  height: 100%;
-  max-height: 76px;
+  max-width: 76px;
   margin: 10px;
 `;
 export const NavigateDiv = styled.div`
@@ -215,14 +234,24 @@ export const FundingDiv = styled.div`
   border: 0.3px solid ${theme.gray4};
   width: -webkit-fill-available; /* 사용 가능한 너비로 채움 */
   max-width: 390px; /* 최대 너비를 390px로 제한 */
-  margin: 0 auto; /* 가운데 정렬을 위해 margin을 auto로 설정 */
-  margin-bottom: 15px;
-  padding: ${(props) => props.p};
+  margin: 10px auto 0 auto;
   padding-bottom: ${(props) => props.pb};
+  padding: ${(props) => props.p};
 
   @media screen and (max-width: 390px) {
     max-width: 100%; /* 최대 너비를 100%로 설정하여 가득 차게 함 */
   }
+`;
+
+export const MassageBtn = styled.button`
+  display: flex;
+  width: -webkit-fill-available;
+  max-width: 390px;
+  justify-content: center;
+  align-items: center;
+  border-top: 1px solid ${theme.gray5};
+  padding-top: 15px;
+  margin-top: 20px;
 `;
 
 export const FundingNewline = styled.div`
@@ -235,7 +264,6 @@ export const ProgressBar = styled.div`
   height: 15px;
   background-color: ${theme.gray6};
   border-radius: 12px;
-  font-weight: 600;
   font-size: 0.8rem;
   margin: 10px 30px 10px 30px;
   text-align: center;
@@ -277,10 +305,11 @@ export const TogetherDiv = styled.div`
   border-radius: 30px;
   border: 0.3px solid ${theme.gray4};
   box-shadow: 0px 5px 0px 0px ${theme.gray4};
+  height: 130px;
   width: -webkit-fill-available; /* 사용 가능한 너비로 채움 */
   max-width: 390px; /* 최대 너비를 390px로 제한 */
   margin: 0 auto; /* 가운데 정렬을 위해 margin을 auto로 설정 */
-  margin-bottom: 15px;
+  position: relative; /* 상대 위치 설정 */
 
   @media screen and (max-width: 390px) {
     max-width: 100%; /* 최대 너비를 100%로 설정하여 가득 차게 함 */
@@ -290,21 +319,58 @@ export const TogetherDiv = styled.div`
 export const SponserDiv = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
   align-items: center;
-  padding: 0px 33px 0px 33px;
+  padding: 20px 0px 0px 20px;
 `;
 
-export const SponsorCommentDiv = styled.div`
-  border-radius: 7px;
-  padding: 10px;
+// 네브바 영역
+export const NamingDiv = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+export const MakerDiv = styled.div`
+  border: 1.5px solid ${theme.primary};
+  border-radius: 5px;
+  color: ${theme.primary};
+  font-size: ${theme.detail2};
+  /* font-weight: 600; */
+  padding: 2px 5px 1.5px 5px;
+  margin-left: 7px;
+`;
+
+export const DdayDiv = styled.p`
+  border-radius: 8px;
+  color: ${theme.gray2};
+  font-size: ${theme.detail};
+  background-color: ${theme.gray6};
+  font-weight: 600;
+  padding: 4px 15px 4px 15px;
+`;
+
+export const FundingComment = styled.div`
+  margin-top: ${(props) => props.mt};
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: end;
+`;
+
+export const CommentDiv = styled.div`
   justify-content: center;
   align-items: center;
-  background-color: ${theme.secondary};
+  width: 290px; /* 최대 너비를 390px로 제한 */
+  padding: 14px;
+  border-radius: ${(props) => props.br};
+  background-color: ${(props) => props.bc};
+  color: ${theme.black};
+  font-size: ${theme.detail};
   margin-top: ${(props) => props.mt};
-  width: 100%;
-  font-size: 13px;
-  font-weight: 600;
+  margin-bottom: ${(props) => props.mb};
+  padding-left: ${(props) => props.pl};
+  padding-right: ${(props) => props.pr};
 `;
 
 export const SponserComment = styled.div`
@@ -316,49 +382,86 @@ export const SponserComment = styled.div`
   width: 100%;
 `;
 
+export const GiftTitle = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: start;
+`;
+
 export const SponsorImg = styled.img`
-  width: 50px;
-  height: 50px;
+  width: 45px;
+  height: 45px;
   border-radius: 100px;
-  margin: 10px;
+  margin-top: 10px;
 `;
 
-export const SponsorTotal = styled.div`
-  text-align: center;
-`;
-
-export const FundingImgDiv = styled.div`
-  height: 50px;
-  width: 50px;
+export const SponsorDiv = styled.div`
+  background-color: ${theme.primary};
+  border-radius: 5px;
+  color: ${theme.white};
+  font-size: ${theme.detail2};
+  /* font-weight: 600; */
+  padding: 2px 5px 1.5px 5px;
+  margin-left: 7px;
 `;
 
 export const FundingImg = styled.img`
-  height: ${(props) => props.h};
+  height: 48px;
+  width: 48px;
   margin-left: ${(props) => props.ml};
   margin-bottom: ${(props) => props.mb};
-  margin-bottom: 1px;
 `;
 
 export const SponsorimgDiv = styled.div`
+  padding-top: ${(props) => props.pt};
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
 `;
 
+export const StartRowDiv = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: center;
+`;
+
 export const FloatingBtn = styled.button`
   position: sticky;
-  bottom: 10px;
-  left: 85px;
-  margin-bottom: 25px;
-  width: 220px; /* 버튼의 너비 조정 */
-  height: 50px; /* 버튼의 높이 조정 */
-  border-radius: 25px; /* 버튼의 모양을 둥글게 만듭니다. */
-  background-color: ${theme.primary}; /* 버튼의 배경색을 지정합니다. */
-  color: ${theme.white}; /* 버튼 텍스트의 색상을 지정합니다. */
-  font-size: 16px; /* 버튼 텍스트의 크기를 지정합니다. */
-  font-weight: bold; /* 버튼 텍스트의 굵기를 지정합니다. */
-  border: none; /* 버튼의 테두리를 없앱니다. */
-  cursor: pointer; /* 버튼에 마우스를 올리면 커서를 포인터로 변경합니다. */
-  z-index: 1000; /* 다른 요소 위에 버튼을 표시합니다. */
+  bottom: 25px;
+  left: 50%;
+  transform: translateX(-5.5%);
+  margin-bottom: 10px;
+  width: 350px;
+  height: 48px;
+  border-radius: 15px;
+  background-color: ${theme.primary};
+  color: ${theme.white};
+  font-size: ${theme.body2};
+  z-index: 1000;
+
+  &:hover {
+    background-color: ${theme.primaryFont};
+  }
+
+  @media screen and (max-width: 390px) {
+    position: fixed;
+    bottom: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-bottom: 10px;
+    width: 132px;
+    height: 44px;
+    border-radius: 24px;
+    background-color: ${theme.primary};
+    color: ${theme.white};
+    font-size: ${theme.body2};
+    z-index: 1000;
+
+    &:hover {
+      background-color: ${theme.primaryFont};
+    }
+  }
 `;

@@ -1,17 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams, useLocation } from "react-router-dom";
-import CheckBox from "../FundingPay/CheckBox/CheckBox";
 import { warnToast } from "../../../components/toast";
-import { useDispatch, useSelector } from "react-redux";
-import { userLogout } from "../../../redux/authSlice";
-import Navbar from "../../../components/Navbar";
-import theme from "../../../styles/theme";
-import { isMobile } from "react-device-detect";
 import {
   fundingPayDonationReady,
   getFundingDonation,
   getDonationApproval,
 } from "../../../apis/funding";
+import { IoIosArrowBack } from "react-icons/io";
+import theme from "../../../styles/theme";
 import {
   MainContainer,
   LeftContainer,
@@ -26,22 +22,28 @@ import {
   NavbarDiv,
   RightContainer,
   SponserMoney,
-  InputTag,
   Body,
   FundingDiv,
   SponserDiv,
-  SponserComment,
   TogetherDiv,
   KakaoButton,
   KakaoPayLogo,
+  InputLabel,
+  InputSpan,
+  InputInput,
+  Textarea,
+  ProfileImageRow,
+  ProfileImg,
+  Checkbox,
+  PayDiv,
 } from "./FundingPayStyles";
 
-const FundingPay = () => {
+const FundingPay = ({ donation }) => {
   const navigate = useNavigate();
   const { id } = useParams();
   const location = useLocation();
-  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
-  const dispatch = useDispatch();
+
+  const [isChecked, setIsChecked] = useState(false); // 체크박스의 상태를 관리합니다.
 
   // 후원자 정보 및 펀딩 정보를 관리할 상태 변수들을 설정
   const [sponsorDonation, setSponsorDonation] = useState({
@@ -50,10 +52,18 @@ const FundingPay = () => {
     donationRanking: "",
     sponsorNickname: "",
     sponsorComment: "",
+    isChecked: false, // 체크박스의 상태를 관리합니다.
   });
 
   const handleFundingDonationClick = async () => {
     try {
+      if (!isChecked) {
+        warnToast(
+          "카카오페이 테스트 결제에 필요한 개인정보 제공에 동의해주세요."
+        );
+        return;
+      }
+
       if (
         sponsorDonation.sponsorNickname === "" ||
         sponsorDonation.sponsorComment === ""
@@ -71,20 +81,7 @@ const FundingPay = () => {
       });
 
       console.log("결제 준비 성공: ", response);
-
-      // 뷰포트 넓이가 768px 이하인 경우 모바일로 간주하고 모바일 URL로 리다이렉션 -> 데스크탑에서 화면을 줄이면 모바일 URL로 리다이렉트 되는 문제
-      // const redirectUrl = window.matchMedia("(max-width: 768px)").matches
-      //   ? response.result.next_redirect_mobile_url
-      //   : response.result.next_redirect_pc_url;
-      // window.location.href = redirectUrl;
-
-      // 모바일이면 모바일 전용 URL로 리다이렉션
-      if (isMobile) {
-        window.location.href = response.result.next_redirect_mobile_url;
-      } else {
-        // 데스크탑이면 데스크탑 전용 URL로 리다이렉션
-        window.location.href = response.result.next_redirect_pc_url;
-      }
+      window.location.href = response.result.next_redirect_pc_url;
     } catch (error) {
       console.error("결제 준비 오류:", error);
     }
@@ -128,10 +125,8 @@ const FundingPay = () => {
     getData();
   }, [id, location.search, navigate]);
 
-  const handleLogoutClick = () => {
-    dispatch(userLogout()); // 로그아웃 액션 디스패치
-    navigate("/");
-  };
+  // donation 값 사용
+  console.log(`펀딩 금액: ${donation}`);
 
   return (
     <MainContainer>
@@ -190,51 +185,52 @@ const FundingPay = () => {
           </LeftRowdiv>
         </LeftContainer>
 
-        <LeftRowdiv ml="30px">
-          {/* <Leftcolumndiv>
-                        <P fs="16px" fw="500" pb="5px" color="#FFFFFF">
-                            지금은 유저테스트 진행 중 입니다
-                        </P>
-                        <P pb="100px" fs="16px" fw="500" color="#FFFFFF">
-                            6명의 개발자와 1명의 디자이너가 함께 개발하고 있습니다
-                        </P>
-                    </Leftcolumndiv>
-                    <LeftImg src="/imgs/Home/pie-hi.png" w="340px" pl="90px" /> */}
-        </LeftRowdiv>
+        <LeftRowdiv ml="30px"></LeftRowdiv>
         <IpadLoveImg src="/imgs/Home/pie-ipad.png" w="330px" />
       </LeftContainer>
 
       <RightContainer>
-        {/* 추가된 코드 */}
         <NavbarDiv>
-          <Navbar
-            isLoggedIn={isLoggedIn}
-            handleLogoutClick={handleLogoutClick}
+          <IoIosArrowBack
+            onClick={() => navigate("/")}
+            color={theme.white}
+            size="20px"
           />
+          <P pl="80px" fs={theme.body2} color={theme.white}>
+            지금 선물하면
+          </P>
+          <P pl="5px" fs={theme.body2} color={theme.primary}>
+            {sponsorDonation.donationRanking}등
+          </P>
+          <P pl="0px" fs={theme.body2} color={theme.white}>
+            이에요!
+          </P>
         </NavbarDiv>
         <Body>
           <FundingDiv>
-            <SponserMoney>
-              {/* <SponsorImg src="/imgs/junjihyun.jpg" alt="logo" /> */}
-              <P pt="10px" fs="16px" fw="800" pb="5px" color="#FFFFFF">
-                {sponsorDonation.showName} 님에게
-              </P>
-              <P fs="16px" fw="800" pb="5px" color="#FFFFFF">
-                {sponsorDonation.donation}원
-              </P>
-              <P fs="16px" fw="800" color="#FFFFFF">
-                후원하기
-              </P>
-            </SponserMoney>
-            <P pt="20px" pb="20px" fs="16px" fw="900" color="#FFFFFF">
-              후원자
-            </P>
-            <SponserDiv>
-              <SponserComment mt="10px">
-                <P pl="10px" pb="5px" fs="13px" fw="800" color="#FFFFFF">
-                  이름
+            <TogetherDiv bc={theme.white} br="30px" mb="15px">
+              <SponserMoney>
+                <P pt="50px" fs={theme.headline1} fw="700" pb="5px">
+                  {sponsorDonation.showName} 님에게
                 </P>
-                <InputTag
+                <LeftRowdiv>
+                  <P
+                    fs={theme.headline1}
+                    fw="700"
+                    pb="5px"
+                    color={theme.primaryFont}
+                  >
+                    {sponsorDonation.donation}원
+                  </P>
+                  <P pl="10px" fs={theme.headline1} fw="700">
+                    선물하기
+                  </P>
+                </LeftRowdiv>
+              </SponserMoney>
+
+              <InputLabel mt="60px">
+                <InputSpan>남길 이름</InputSpan>
+                <InputInput
                   type="text"
                   placeholder="남길 이름을 입력해주세요"
                   value={sponsorDonation.sponsorNickname}
@@ -244,44 +240,97 @@ const FundingPay = () => {
                       sponsorNickname: e.target.value,
                     });
                   }}
-                  h="40px"
+                ></InputInput>
+              </InputLabel>
+              <P pl="10px" fs={theme.detail2} color={theme.gray2}>
+                만든이와 방문자 모두에게 표시됩니다.
+              </P>
+
+              <InputLabel mt="25px">
+                <InputSpan>남길 메시지</InputSpan>
+                <Textarea
+                  type="text"
+                  placeholder="남길 메시지를 입력해주세요"
+                  value={sponsorDonation.sponsorComment}
+                  onChange={(e) => {
+                    setSponsorDonation({
+                      ...sponsorDonation,
+                      sponsorComment: e.target.value,
+                    });
+                  }}
                 />
-                <P pl="10px" fs="10px" fw="800" color="#FFFFFF">
-                  주최자에게 이름이 모두 공개되고, 후원자 목록에는 두번째
-                  글자부터 *으로 표시됩니다. 예) 김 * *
+              </InputLabel>
+
+              <P
+                fs={theme.body1}
+                color={theme.gray2}
+                fw="600"
+                pl="5px"
+                pt="8px"
+                pb="10px"
+              >
+                프로필 이미지
+              </P>
+              <ProfileImageRow>
+                <ProfileImg
+                  src="/imgs/Funding/FundingPay/blue-dog.svg"
+                  alt="image"
+                  mr="9px"
+                />
+                <ProfileImg
+                  src="/imgs/Funding/FundingPay/water-melon.svg"
+                  alt="image"
+                  mr="9px"
+                />
+                <ProfileImg
+                  src="/imgs/Funding/FundingPay/icecream.svg"
+                  alt="image"
+                  mr="9px"
+                />
+                <ProfileImg
+                  src="/imgs/Funding/FundingPay/yellow-tube.svg"
+                  alt="image"
+                  mr="9px"
+                />
+                <ProfileImg
+                  src="/imgs/Funding/FundingPay/violet-star.svg"
+                  alt="image"
+                />
+              </ProfileImageRow>
+              <P
+                fs={theme.detail2}
+                color={theme.gray2}
+                pl="5px"
+                pt="8px"
+                pb="25px"
+              >
+                프로필 이미지는 랜덤으로 생성됩니다.
+              </P>
+            </TogetherDiv>
+
+            <PayDiv bc={theme.white} br="30px 30px 0px 0px">
+              <SponserDiv>
+                <P fs={theme.body2} color={theme.gray2} pl="10px" pt="25px">
+                  카카오페이 테스트 결제에 필요한 개인정보 <br />
+                  제공에 동의하십니까?
                 </P>
-              </SponserComment>
-            </SponserDiv>
-            <P pt="10px" pl="10px" pb="5px" fs="13px" fw="800" color="#FFFFFF">
-              메시지
-            </P>
-            <InputTag
-              type="text"
-              placeholder="남길 메시지를 입력해주세요"
-              value={sponsorDonation.sponsorComment}
-              onChange={(e) => {
-                setSponsorDonation({
-                  ...sponsorDonation,
-                  sponsorComment: e.target.value,
-                });
-              }}
-              pb="50px"
-              h="100px"
-            />
-            <P pl="10px" fs="10px" fw="800" color="#FFFFFF">
-              현재는 테스트 기간으로, 실제 결제가 이루어지지 않습니다. 대신
-              1명이 참여할 때마다 개설자에게 1,000원이 적립됩니다.
-            </P>
+                <Checkbox
+                  type="checkbox"
+                  checked={isChecked}
+                  onChange={(e) => setIsChecked(e.target.checked)}
+                />
+              </SponserDiv>
+              <KakaoButton
+                onClick={handleFundingDonationClick}
+                disabled={!isChecked}
+              >
+                <KakaoPayLogo src="/imgs/Logo/kakao.png" alt="image" />
+                <P fs={theme.body1} color={theme.black}>
+                  카카오페이로 테스트 결제하기
+                </P>
+              </KakaoButton>
+            </PayDiv>
           </FundingDiv>
-          <CheckBox />
-          <TogetherDiv pt="10px">
-            <P pl="120px" pt="11px" pb="19px" fs="14px" fw="800" bc="#FF7C7C">
-              지금 선물하면 {sponsorDonation.donationRanking}등이에요!
-            </P>
-          </TogetherDiv>
-          <KakaoButton onClick={handleFundingDonationClick}>
-            <KakaoPayLogo src="/imgs/Logo/kakaopay.png" alt="image" />
-          </KakaoButton>
         </Body>
       </RightContainer>
     </MainContainer>

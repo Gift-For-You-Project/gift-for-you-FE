@@ -181,12 +181,12 @@ const Signup = () => {
   const isSignupBtnActive = () => {
     return (
       isValidEmailFormat(formData.email) &&
-      formData.code.length === 4 &&
       isValidNicknameFormat(formData.nickname) &&
       isValidPasswordFormat(formData.password) &&
       isValidConfirmPasswordFormat(formData.confirmPassword) &&
       checkboxState.isCheckedService && // 서비스 이용약관 체크박스가 선택되어야 함
-      checkboxState.isCheckedPrivacy // 개인정보 처리방침 체크박스가 선택되어야 함
+      checkboxState.isCheckedPrivacy && // 개인정보 처리방침 체크박스가 선택되어야 함
+      verificationSuccess // 이메일 인증 확인이 성공한 경우에만 활성화
     );
   };
 
@@ -518,7 +518,7 @@ const Signup = () => {
                     checked={checkboxState.isCheckedMarketing}
                     onChange={() => handleCheckboxChange("marketing")}
                   />
-                  [선택] 광고 마케팅 정보 수신 동의
+                  [선택] 마케팅 정보 수신 동의
                 </CheckDiv>
                 <SeeMoreDiv>
                   <FaAngleRight />

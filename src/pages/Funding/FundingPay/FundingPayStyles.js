@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import theme from "../../../styles/theme";
 
 // 전체 컨테이너
 export const MainContainer = styled.div`
@@ -65,6 +66,75 @@ export const LeftRowdiv = styled.div`
   border-radius: ${(props) => props.br};
   padding: ${(props) => props.p};
   border: none;
+`;
+
+// 입력한 영역
+export const InputLabel = styled.label`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+  width: 100%;
+  max-width: 390px;
+  border-radius: 10px;
+  margin-top: ${(props) => props.mt};
+  border: 0.3px solid ${theme.gray5};
+  margin-bottom: 8px;
+  &:hover {
+    border: 0.5px solid ${theme.gray3};
+  }
+`;
+
+export const InputSpan = styled.span`
+  padding-top: 10px;
+  padding-bottom: 5px;
+  padding-left: 10px;
+  font-size: ${theme.detail2};
+  color: ${theme.gray2};
+`;
+
+export const InputInput = styled.input`
+  border: none;
+  width: 95%;
+  padding-left: 10px;
+  padding-bottom: 10px;
+  font-weight: 500;
+  font-size: ${theme.body1};
+  color: ${theme.black};
+  border-radius: 10px;
+  justify-content: start;
+  align-items: start;
+  font-family: "Pretendard", sans-serif;
+`;
+
+export const Textarea = styled.textarea`
+  width: 98%;
+  height: 128px;
+  outline: none;
+  border: none;
+  resize: none;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  padding-left: 10px;
+  font-size: ${theme.body1};
+  color: ${theme.black};
+  justify-content: start;
+  align-items: start;
+`;
+
+export const ProfileImageRow = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: start;
+  margin-bottom: ${(props) => props.mb};
+`;
+
+export const ProfileImg = styled.img`
+  height: 62px;
+  width: 62px;
+  border-radius: 3px;
+  margin-right: ${(props) => props.mr};
 `;
 
 export const LeftImg = styled.img`
@@ -136,9 +206,9 @@ export const Button = styled.button`
 export const NavbarDiv = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
   align-items: center;
   height: 70px;
+  padding-left: 20px;
 `;
 
 /* 오른쪽 컨테이너 */
@@ -160,17 +230,19 @@ export const RightContainer = styled.div`
 
 // 바디 영역
 export const Body = styled.div`
-  font-size: 24px;
-  font-weight: 800;
-  height: 2100px;
+  height: auto;
 `;
 
 export const FundingDiv = styled.div`
   justify-content: center;
-  width: 100%;
-  max-width: 442px;
+  max-width: 390px; /* 최대 너비를 390px로 제한 */
   height: auto;
-  padding: 30px;
+  width: -webkit-fill-available; /* 사용 가능한 너비로 채움 */
+  margin: 0 auto; /* 가운데 정렬을 위해 margin을 auto로 설정 */
+
+  @media screen and (max-width: 390px) {
+    max-width: 100%; /* 최대 너비를 100%로 설정하여 가득 차게 함 */
+  }
 `;
 
 export const SponserDiv = styled.div`
@@ -189,62 +261,77 @@ export const SponserMoney = styled.div`
   align-items: center;
 `;
 
-export const SponserComment = styled.div`
-  margin-top: ${(props) => props.mt};
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: start;
-`;
-
-export const InputTag = styled.input`
-  width: 98%;
-  height: ${(props) => props.h};
-  background-color: #eae7de;
-  border-radius: 4px;
-  border: none;
-  margin-left: 10px;
-  margin-bottom: 10px;
-  padding-left: 10px;
-  padding-bottom: ${(props) => props.pb};
-  font-weight: 500;
-  font-size: 11px;
-  justify-content: start;
-  align-items: start;
-`;
-
 export const FundingNewline = styled.div`
   width: 100%;
   height: 12px;
 `;
 
 export const TogetherDiv = styled.div`
-  margin-top: 30px;
-  width: 100%;
-  height: 45px;
   background-color: ${(props) => props.bc};
-  color: ${(props) => props.color};
+  border-radius: ${(props) => props.br};
+  width: -webkit-fill-available; /* 사용 가능한 너비로 채움 */
+  max-width: 390px; /* 최대 너비를 390px로 제한 */
+  margin: 0 auto; /* 가운데 정렬을 위해 margin을 auto로 설정 */
+  margin-bottom: ${(props) => props.mb};
+  padding: 20px;
+  position: relative; //상대 위치 설정
+
+  @media screen and (max-width: 390px) {
+    max-width: 100%; /* 최대 너비를 100%로 설정하여 가득 차게 함 */
+  }
 `;
+
+export const PayDiv = styled.div`
+  background-color: ${(props) => props.bc};
+  border-radius: ${(props) => props.br};
+  width: -webkit-fill-available; /* 사용 가능한 너비로 채움 */
+  max-width: 390px; /* 최대 너비를 390px로 제한 */
+  margin: 0 auto; /* 가운데 정렬을 위해 margin을 auto로 설정 */
+  margin-bottom: ${(props) => props.mb};
+  padding: 20px;
+  position: fixed; //상대 위치 설정
+  height: 100vh;
+  max-height: -webkit-fill-available; //사용 가능한 너비로 채움
+
+  @media screen and (max-width: 390px) {
+    max-width: 100%; /* 최대 너비를 100%로 설정하여 가득 차게 함 */
+  }
+`;
+
+export const Checkbox = styled.input.attrs({ type: "checkbox" })`
+  margin-top: 50px;
+  margin-right: 15px;
+  width: 25px;
+  height: 25px;
+  accent-color: ${theme.primary};
+  border: 2px solid ${(props) => (props.checked ? "#FFFFFF" : "#fae101")};
+  background-color: ${(props) => (props.checked ? "#808080" : "#fae101")};
+`;
+
+// 카카오버튼
 export const KakaoButton = styled.button`
+  display: flex;
   justify-content: center;
+  flex-direction: row;
   align-items: center;
   width: 100%;
   height: 60px;
-  background-color: #fae101;
-  border-radius: 7px;
+  background-color: ${(props) => (props.disabled ? "#FFFFFF" : "#fae101")};
+  border: 2px solid ${(props) => (props.disabled ? "#808080" : "#fae101")};
+  border-radius: 20px;
   font-size: 19px;
   font-weight: 600;
-  margin-top: 14px;
+  margin-top: 20px;
   margin-bottom: ${(props) => props.mb};
   padding-left: ${(props) => props.pl};
   padding-right: ${(props) => props.pr};
   &:hover {
-    background-color: #fae102;
-    cursor: pointer;
+    background-color: ${(props) => (props.disabled ? "#FFFFFF" : "#fae102")};
+    cursor: ${(props) => (props.disabled ? "not-allowed" : "pointer")};
   }
 `;
 
 export const KakaoPayLogo = styled.img`
-  height: 35px;
-  margin-top: 5px;
+  width: 28px;
+  margin-right: 10px;
 `;

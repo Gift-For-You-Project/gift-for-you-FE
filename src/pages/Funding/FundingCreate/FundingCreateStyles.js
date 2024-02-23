@@ -119,7 +119,7 @@ export const Button = styled.button`
   height: ${(props) => props.h};
   padding: 10px;
   background-color: ${(props) => props.bc};
-  border-radius: 7px;
+  border-radius: 15px;
   color: ${(props) => props.color};
   font-size: ${(props) => props.fs};
   font-weight: 600;
@@ -127,8 +127,9 @@ export const Button = styled.button`
   margin-bottom: ${(props) => props.mb};
   padding-left: ${(props) => props.pl};
   padding-right: ${(props) => props.pr};
+  padding-right: ${(props) => props.pr};
   &:hover {
-    color: ${theme.white};
+    color: white;
     background-color: black;
     cursor: pointer;
   }
@@ -139,7 +140,6 @@ export const RightContainer = styled.div`
   position: relative;
   width: -webkit-fill-available; /* 사용 가능한 너비로 채움 */
   max-width: 390px; /* 최대 너비를 390px로 제한 */
-  /* border: 1px solid lightgray; */
   height: 100vh;
   overflow-y: scroll;
   &::-webkit-scrollbar {
@@ -155,32 +155,44 @@ export const RightContainer = styled.div`
 export const NavbarDiv = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
   align-items: center;
   height: 70px;
+  padding-left: 20px;
 `;
 
 // 바디 영역
 export const Body = styled.div`
-  font-size: 24px;
-  font-weight: 800;
   height: auto;
+`;
+export const TogetherDiv = styled.div`
+  background-color: ${(props) => props.bc};
+  border-radius: 30px;
+  border-radius: ${(props) => props.br};
+  width: -webkit-fill-available; /* 사용 가능한 너비로 채움 */
+  max-width: 390px; /* 최대 너비를 390px로 제한 */
+  margin: 0 auto; /* 가운데 정렬을 위해 margin을 auto로 설정 */
+  margin-bottom: 15px;
+  padding: 20px;
+
+  @media screen and (max-width: 390px) {
+    width: 100%; /* 최대 너비를 100%로 설정하여 가득 차게 함 */
+  }
 `;
 
 export const FundingDiv = styled.div`
   justify-content: center;
   width: 100%;
-  max-width: 442px;
+  max-width: 390px;
   height: auto;
-  padding: 30px;
 `;
 
 export const ProducImgtDiv = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
+  justify-content: start;
+  align-items: start;
 `;
+
 export const SponserDiv = styled.div`
   display: flex;
   flex-direction: row;
@@ -188,7 +200,7 @@ export const SponserDiv = styled.div`
   align-items: center;
 `;
 
-export const SponserComment = styled.div`
+export const OpenPrivateComment = styled.div`
   margin-top: ${(props) => props.mt};
   display: flex;
   flex-direction: column;
@@ -197,16 +209,15 @@ export const SponserComment = styled.div`
 `;
 
 export const FundingImg = styled.img`
-  width: ${(props) => props.w};
-  height: ${(props) => props.h};
-  padding-left: ${(props) => props.pl};
-  border-radius: 4px;
-  border: none;
-  background-color: #eae7de;
-  font-weight: 500;
-  font-size: 12px;
   justify-content: start;
   align-items: start;
+  width: ${(props) => props.w};
+  height: ${(props) => props.h};
+  background-color: ${theme.gray5};
+  padding-left: ${(props) => props.pl};
+  border: 0.3px solid ${theme.gray6};
+  border-radius: 10px;
+  height: 133px;
   &:hover {
     cursor: pointer;
   }
@@ -214,37 +225,39 @@ export const FundingImg = styled.img`
 
 export const SponsorComment = styled.div`
   margin-top: ${(props) => props.mt};
+  margin-right: 10px;
   border: none;
-  display: flex;
-  flex-direction: column;
-  justify-content: start;
-  align-items: start;
-  &:hover {
-    cursor: ${(props) => props.pointer};
-  }
+  border-radius: 10px;
+  height: 100px;
+`;
+
+export const ImgPlus = styled.h1`
+  transform: translate(42%, -405%); // 핵심코드
 `;
 
 export const ImgText = styled.h1`
-  /* position: absolute; 핵심코드 */
+  /* position: absolute; // 핵심코드
   top: 47%; // 핵심코드
   right: 25%; //핵심코드 */
-  transform: translate(10%, -140%); // 핵심코드
-  color: gray;
+  transform: translate(22%, -215%); // 핵심코드
+  color: ${theme.gray3};
+  font-size: ${theme.detail};
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
-export const InputTag = styled.input`
-  width: ${(props) => props.w};
-  height: ${(props) => props.h};
-  background-color: #eae7de;
-  border-radius: 4px;
+export const Textarea = styled.textarea`
+  width: 98%;
+  height: 128px;
+  outline: none;
   border: none;
-  margin-left: ${(props) => props.ml};
-  margin-bottom: ${(props) => props.mb};
-  padding-left: ${(props) => props.pl};
-  padding-top: ${(props) => props.pt};
-  padding-bottom: ${(props) => props.pb};
-  font-weight: 500;
-  font-size: 12px;
+  resize: none;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  padding-left: 10px;
+  font-size: ${theme.body1};
+  color: ${theme.black};
   justify-content: start;
   align-items: start;
 `;
@@ -259,12 +272,59 @@ export const FundingNewline = styled.div`
   height: 12px;
 `;
 
-export const TogetherDiv = styled.div`
-  margin-top: 30px;
-  width: 442px;
-  height: 45px;
-  background-color: ${(props) => props.bc};
-  color: ${(props) => props.color};
+export const ColumnDiv = styled.div`
+  display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+`;
+
+export const InputLabel = styled.label`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+  border-radius: 10px;
+  border: 0.3px solid ${theme.gray5};
+  margin-bottom: 10px;
+  &:hover {
+    border: 0.5px solid ${theme.gray3};
+  }
+`;
+
+export const TitleLabel = styled.label`
+  width: 230px;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+  border-radius: 10px;
+  border: 0.3px solid ${theme.gray5};
+  margin-bottom: 10px;
+  &:hover {
+    border: 0.5px solid ${theme.gray3};
+  }
+`;
+
+export const InputSpan = styled.span`
+  padding-top: 10px;
+  padding-bottom: 5px;
+  padding-left: 10px;
+  font-size: ${theme.detail2};
+  color: ${theme.gray2};
+`;
+
+export const InputInput = styled.input`
+  border: none;
+  width: 95%;
+  padding-left: 10px;
+  padding-bottom: 10px;
+  font-weight: 500;
+  font-size: ${theme.title2};
+  color: ${theme.black};
+  border-radius: 10px;
+  justify-content: start;
+  align-items: start;
+  font-family: "Pretendard", sans-serif;
 `;
