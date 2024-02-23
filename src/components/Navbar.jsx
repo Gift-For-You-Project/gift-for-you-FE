@@ -102,9 +102,9 @@ const Navbar = ({ isLoggedIn, handleLoginClick, handleLogoutClick }) => {
             ))}
           </NotificationContainer>
         )}
-        <NavbarBtn pt="10px">
+        {/* <NavbarBtn pt="10px">
           <img src="/imgs/Home/login.svg" alt="login" />
-        </NavbarBtn>
+        </NavbarBtn> */}
         <NavbarBtn onClick={handleLogoutClick} fs="24px" pt="10px">
           <img src="/imgs/Home/logout.svg" alt="logout" />
         </NavbarBtn>
