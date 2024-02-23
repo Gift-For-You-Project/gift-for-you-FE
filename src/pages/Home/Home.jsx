@@ -5,7 +5,11 @@ import LoginModal from "../Home/Login/LoginModal";
 import { useDispatch, useSelector } from "react-redux";
 import { bootChannelTalk } from "../../redux/channelTalkSlice";
 import Navbar from "../../components/Navbar";
-import { getMyFunding, getHomeFundingList } from "../../apis/home";
+import {
+  getMyFunding,
+  getHomeFundingList,
+  getFundingSummary,
+} from "../../apis/home";
 import { logoutAndApiCall } from "../../redux/authSlice";
 import theme from "../../styles/theme";
 import { infoToast } from "../../components/toast";
@@ -69,6 +73,7 @@ const Home = () => {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [homeFundingList, setHomeFundingList] = useState([]);
+  const [fundingSummary, setFundingSummary] = useState([]);
   const [myFunding, setMyFunding] = useState({
     id: "",
     itemLink: "",
@@ -89,7 +94,6 @@ const Home = () => {
   });
 
   const closeModal = () => setIsLoginModalOpen(false);
-
   const handleLoginClick = () => setIsLoginModalOpen(true);
 
   const handleLogoutClick = () => {
@@ -97,19 +101,7 @@ const Home = () => {
     navigate("/");
   };
 
-  const handleFundingClick = (id) => {
-    navigate(`/fundingdetail/${id}`);
-  };
-
-  const handleRecentFundingClick = () => navigate("/recentfunding");
-
-  const handleFundingCreate = () => navigate("/fundingcreate");
-
-  const handleLogoClick = () => navigate("/");
-
-  const handleModifyClick = () => navigate(`/fundingModify/${myFunding.id}`);
-
-  const handleMyFundingClick = () => navigate(`/fundingDetail/${myFunding.id}`);
+  const handleFundingClick = (id) => navigate(`/fundingdetail/${id}`);
 
   const handleCopyLink = () => {
     const myFundingUrl = `https://www.giftipie.me/fundingdetail/${myFunding.id}`;
@@ -148,10 +140,23 @@ const Home = () => {
     }
   };
 
+  // 함께한 선물 데이터를 가져오는 API
+  const getPieData = async () => {
+    try {
+      const data = await getFundingSummary();
+
+      console.log("내 펀딩: ", data);
+      setFundingSummary(data);
+    } catch (error) {
+      console.error("API 호출 중 에러 발생: ", error);
+    }
+  };
+
   useEffect(() => {
     dispatch(bootChannelTalk());
     getMyData();
     getData();
+    getPieData();
   }, [dispatch]);
 
   const handleProductImgClick = (link) => {
@@ -197,7 +202,7 @@ const Home = () => {
             </BubbleTxt>
             <BubbleImg src="/imgs/Home/speech-bubble.png" />
             <LeftLogoTextIcon
-              onClick={handleLogoClick}
+              onClick={() => navigate("/")}
               src="/imgs/Common/giftipie.png"
             />
             <LeftPieImg src="/imgs/Home/pie-hi.png" />
@@ -259,11 +264,15 @@ const Home = () => {
                   </P>
                   <MainBtnContainer>
                     <MainBtn onClick={handleCopyLink}>링크복사</MainBtn>
-                    <MainBtn onClick={handleModifyClick}>수정</MainBtn>
+                    <MainBtn
+                      onClick={() => navigate(`/fundingModify/${myFunding.id}`)}
+                    >
+                      수정
+                    </MainBtn>
                   </MainBtnContainer>
                 </BetweenDiv>
                 <BetweenDiv
-                  onClick={handleMyFundingClick}
+                  onClick={() => navigate(`/fundingDetail/${myFunding.id}`)}
                   pb="20px"
                   cursor="pointer"
                 >
@@ -307,7 +316,7 @@ const Home = () => {
                 </BetweenDiv>
                 <MyFundingDiv>
                   <MyFundingTitle>진행 중인 펀딩이 없어요</MyFundingTitle>
-                  <MyFundingBtn onClick={handleFundingCreate}>
+                  <MyFundingBtn onClick={() => navigate("/fundingcreate")}>
                     펀딩 만들기
                   </MyFundingBtn>
                 </MyFundingDiv>
@@ -376,7 +385,7 @@ const Home = () => {
                   </FundingGrid>
                 ))}
               </FundingSection>
-              <RecentFundingBtn onClick={handleRecentFundingClick}>
+              <RecentFundingBtn onClick={() => navigate("/recentfunding")}>
                 <P pt="2px" fs={theme.detail} color={theme.gray2}>
                   펀딩 더보기 &nbsp;
                 </P>
@@ -417,7 +426,7 @@ const Home = () => {
                 참여한 사람
               </P>
               <P pt="10px" pb="10px" fs="16px" fw="700">
-                13명
+                {fundingSummary.totalDonationsCount}명
               </P>
             </TogetherGrid>
             <TogetherGrid>
@@ -431,7 +440,7 @@ const Home = () => {
                 받은 사람
               </P>
               <P pt="10px" pb="10px" fs="16px" fw="700">
-                6명
+                {fundingSummary.successfulFundingsCount}명
               </P>
             </TogetherGrid>
             <TogetherGrid>
@@ -441,7 +450,7 @@ const Home = () => {
                 <br /> 펀딩 금액
               </P>
               <P pt="10px" pb="10px" fs="16px" fw="700">
-                1억원
+                {fundingSummary.totalFundingAmount}원
               </P>
             </TogetherGrid>
           </TogetherGrids>
@@ -497,7 +506,7 @@ const Home = () => {
           </ProductContainer>
         </Body>
         <Button
-          onClick={handleFundingCreate}
+          onClick={() => navigate("/fundingcreate")}
           w="100%"
           h="60px"
           color="black"

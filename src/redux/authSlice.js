@@ -33,15 +33,6 @@ const authReducer = createSlice({
       console.log("로그아웃 쿠키: ", cookies.get("Authorization"));
       cookies.remove("Authorization"); // 세션 쿠키 삭제로 로그아웃 처리
     },
-    // 브라우저 닫으면 로그아웃 액션
-    // browserClosedLogout: (state) => {
-    //   state.isLoggedIn = false;
-    //   console.log(
-    //     "브라우저 닫을 때 로그아웃 쿠키: ",
-    //     cookies.get("Authorization")
-    //   );
-    //   cookies.remove("Authorization");
-    // },
   },
 });
 

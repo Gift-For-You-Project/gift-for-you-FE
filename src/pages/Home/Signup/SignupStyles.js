@@ -156,7 +156,7 @@ export const Body = styled.div`
   bottom: 0;
 `;
 
-export const SignupNavbar = styled.div`
+export const NavbarDiv = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -182,9 +182,10 @@ export const SignupFieldContainer = styled.div`
 export const BlankLine = styled.div`
   width: ${(props) => props.w};
   height: ${(props) => props.h};
+  border-bottom: 1px solid ${theme.gray5};
 `;
 
-export const SignupIconDiv = styled.div`
+export const IconDiv = styled.div`
   position: absolute;
   display: flex;
   justify-content: start;
@@ -238,14 +239,16 @@ export const CheckEmailBtn = styled.button`
   max-width: 64px;
   height: 34px;
   transform: translateY(-50%);
-  cursor: pointer;
   font-size: ${theme.detail};
-  background-color: ${theme.primary};
   color: ${theme.white};
   border-radius: 8px;
+  background-color: ${(props) =>
+    props.disabled ? theme.gray5 : theme.primary};
+  cursor: ${(props) => (props.disabled ? "not-allowed" : "pointer")};
 
   &:hover {
-    background-color: ${theme.primaryFont};
+    background-color: ${(props) =>
+      props.disabled ? theme.gray5 : theme.primaryFont};
   }
 `;
 
@@ -295,4 +298,33 @@ export const SignupHelpDiv = styled.div`
   font-size: ${theme.detail};
   margin-top: 4px;
   color: ${theme.primaryFont};
+`;
+
+export const TermsAgreementContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: -webkit-fill-available;
+  max-width: 330px;
+  padding-top: 30px;
+`;
+
+export const TermsAgreementDiv = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: ${theme.gray2};
+  margin: 10px 0 10px 0;
+`;
+
+export const CheckDiv = styled.div`
+  display: flex;
+  align-items: center;
+  font-size: ${(props) => props.fs};
+  gap: 6px;
+`;
+
+export const SeeMoreDiv = styled.div`
+  display: flex;
+  font-size: ${theme.title2};
 `;

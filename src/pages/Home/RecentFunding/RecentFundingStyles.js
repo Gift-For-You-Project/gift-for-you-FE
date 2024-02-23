@@ -269,6 +269,11 @@ export const FundingSection = styled.section`
   gap: 10px;
   padding: 10px;
   padding-bottom: 20px;
+  height: 900px;
+  overflow-y: auto;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 export const RecentFundingBtn = styled.button`
@@ -400,6 +405,31 @@ export const TogetherDiv = styled.div`
 
   @media screen and (max-width: 390px) {
     max-width: 100%; /* 최대 너비를 100%로 설정하여 가득 차게 함 */
+  }
+`;
+
+export const CategoryContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: -webkit-fill-available;
+  max-width: 390px;
+  height: 40px;
+`;
+
+export const CategoryDiv = styled.div`
+  display: flex;
+  justify-content: center;
+  border-bottom: 2px solid ${theme.gray4};
+  width: -webkit-fill-available;
+  max-width: 116px;
+  padding-top: 20px;
+  padding-bottom: 6px;
+
+  a {
+    font-size: ${theme.body2};
+    color: ${theme.gray1};
+    text-decoration: none;
   }
 `;
 
