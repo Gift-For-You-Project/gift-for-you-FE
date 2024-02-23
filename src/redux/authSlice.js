@@ -60,4 +60,3 @@ export const {
 } = authReducer.actions;
 // 리듀서 내보내기
 export default authReducer.reducer;
-

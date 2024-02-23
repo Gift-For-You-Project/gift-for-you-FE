@@ -1,12 +1,10 @@
 import React, { useState } from "react";
-import { HiBell } from "react-icons/hi";
-import { BsPersonCircle } from "react-icons/bs";
 import { FaAngleLeft } from "react-icons/fa6";
-import { IoLogOutSharp } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 import theme from "../styles/theme";
 import {
   NavbarIconContainer,
+  NavbarLogoBtn,
   NavbarBtn,
   LogoIcon,
   LogoTextIcon,
@@ -75,9 +73,8 @@ const Navbar = ({ isLoggedIn, handleLoginClick, handleLogoutClick }) => {
   const navbarContents = isLoggedIn ? (
     <>
       <NavbarIconContainer>
-        {/* HiBell 아이콘 클릭 시 알림 리스트 표시 */}
-        <NavbarBtn onClick={toggleNotification} fs="24px" pt="10px">
-          <HiBell />
+        <NavbarBtn onClick={toggleNotification} pt="10px">
+          <img src="/imgs/Home/no-notification.svg" alt="notification" />
         </NavbarBtn>
         {isNotificationOpen && (
           <NotificationContainer>
@@ -105,30 +102,30 @@ const Navbar = ({ isLoggedIn, handleLoginClick, handleLogoutClick }) => {
             ))}
           </NotificationContainer>
         )}
-        <NavbarBtn fs="24px" pt="10px">
-          <BsPersonCircle />
+        <NavbarBtn pt="10px">
+          <img src="/imgs/Home/login.svg" alt="login" />
         </NavbarBtn>
         <NavbarBtn onClick={handleLogoutClick} fs="24px" pt="10px">
-          <IoLogOutSharp />
+          <img src="/imgs/Home/logout.svg" alt="logout" />
         </NavbarBtn>
       </NavbarIconContainer>
     </>
   ) : (
     <>
-      <NavbarBtn onClick={handleLoginClick} pt="10px" fs="24px">
-        <BsPersonCircle />
+      <NavbarBtn onClick={handleLoginClick} pt="10px">
+        <img src="/imgs/Home/login.svg" alt="login" />
       </NavbarBtn>
     </>
   );
 
   return (
     <>
-      <NavbarBtn onClick={handleNavbarIconClick} fs="10px" color="white">
+      <NavbarLogoBtn onClick={handleNavbarIconClick} fs="10px" color="white">
         <LogoDiv>
           <LogoIcon src="/imgs/Common/pie-navbar.png" />
           <LogoTextIcon src="/imgs/Common/giftipie.png" />
         </LogoDiv>
-      </NavbarBtn>
+      </NavbarLogoBtn>
       {navbarContents}
     </>
   );

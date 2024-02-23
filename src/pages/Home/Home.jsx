@@ -455,10 +455,10 @@ const Home = () => {
                 </Button>
             </RightContainer>
 
-            {/* 로그인 모달 */}
-            {isLoginModalOpen && <LoginModal closeModal={closeModal} />}
-        </MainContainer>
-    );
+      {/* 로그인 모달 */}
+      {isLoginModalOpen && <LoginModal closeModal={closeModal} />}
+    </MainContainer>
+  );
 };
 
 export default Home;

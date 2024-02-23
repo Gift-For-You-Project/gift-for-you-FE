@@ -12,8 +12,8 @@ const theme = {
   gray6: "#ECECEC",
   secondary: "#FFE6C1",
 
-  headline1: '24px',
-  headline2: '20px',
+  headline1: "24px",
+  headline2: "20px",
   logo: "18px",
   title: "18px",
   title2: "16px",

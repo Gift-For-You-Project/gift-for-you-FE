@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import theme from "../../../styles/theme";
 
 // 전체 컨테이너
 export const MainContainer = styled.div`
@@ -152,7 +151,6 @@ export const Leftcolumndiv = styled.div`
   flex-direction: column;
   margin-left: ${(props) => props.ml};
 `;
-
 
 export const IpadLoveImg = styled.img`
   position: absolute;
