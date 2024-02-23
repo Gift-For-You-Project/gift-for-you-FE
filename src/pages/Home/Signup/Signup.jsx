@@ -494,7 +494,7 @@ const Signup = () => {
                     checked={checkboxState.isCheckedService}
                     onChange={() => handleCheckboxChange("service")}
                   />
-                  [필수] 서비스 이용약관
+                  서비스 이용약관
                 </CheckDiv>
                 <SeeMoreDiv>
                   <FaAngleRight />
@@ -506,7 +506,7 @@ const Signup = () => {
                     checked={checkboxState.isCheckedPrivacy}
                     onChange={() => handleCheckboxChange("privacy")}
                   />
-                  [필수] 개인정보 처리방침
+                  개인정보 처리방침
                 </CheckDiv>
                 <SeeMoreDiv>
                   <FaAngleRight />
@@ -518,7 +518,7 @@ const Signup = () => {
                     checked={checkboxState.isCheckedMarketing}
                     onChange={() => handleCheckboxChange("marketing")}
                   />
-                  [선택] 마케팅 정보 수신 동의
+                  마케팅 정보 수신 동의
                 </CheckDiv>
                 <SeeMoreDiv>
                   <FaAngleRight />
