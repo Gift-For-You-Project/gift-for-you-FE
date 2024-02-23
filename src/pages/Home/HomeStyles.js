@@ -417,8 +417,8 @@ export const MyFundingDate = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  top: 443px;
-  left: 93px;
+  top: 44.7vh;
+  left: 7.9vw;
   width: 100%;
   max-width: 48px;
   padding-top: ${(props) => props.pt};
