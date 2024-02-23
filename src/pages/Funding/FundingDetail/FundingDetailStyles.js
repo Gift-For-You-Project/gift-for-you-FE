@@ -81,6 +81,7 @@ export const Leftcolumndiv = styled.div`
   margin-left: ${(props) => props.ml};
 `;
 
+
 export const IpadLoveImg = styled.img`
   position: absolute;
   bottom: 0;
@@ -193,7 +194,7 @@ export const GiftCoverImg = styled.img`
 
 export const BannerImg = styled.img`
   width: 50%; /* 이미지의 너비를 50%로 설정하여 반쯤 걸쳐지도록 함 */
-  max-width: 121.8px;
+  max-width: 121.80px;
   height: 100%;
   max-height: 101.82px;
   border-radius: 0px 0px 20px 20px;

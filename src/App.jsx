@@ -32,7 +32,7 @@ function App() {
         />
         <Route path="/fundingcreate" element={<FundingCreate />} />
         <Route path="/fundingdetail/:id" element={<FundingDetail />} />
-        <Route path="/fundingsponsordetail" element={<Sponsor />} />
+        <Route path="/fundingsponsordetail/:id" element={<Sponsor />} />
         <Route path="/fundingmodify/:id" element={<FundingModify />} />
         <Route path="/fundingpay/:id" element={<FundingPay />} />
         <Route path="*" element={<NotFound />} />

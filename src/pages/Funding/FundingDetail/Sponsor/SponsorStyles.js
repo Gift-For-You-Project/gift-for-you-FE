@@ -114,7 +114,7 @@ export const MakerDiv = styled.div`
   font-weight: 600;
   padding: 2px 5px 1.5px 5px;
   margin-left: 7px;
-`;
+`
 
 export const SponsorDiv = styled.div`
   background-color: ${theme.primary};
@@ -124,7 +124,7 @@ export const SponsorDiv = styled.div`
   font-weight: 600;
   padding: 2px 5px 1.5px 5px;
   margin-left: 7px;
-`;
+`
 
 /* 오른쪽 컨테이너 */
 export const RightContainer = styled.div`

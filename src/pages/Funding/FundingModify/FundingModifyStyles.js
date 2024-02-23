@@ -82,6 +82,7 @@ export const Leftcolumndiv = styled.div`
   margin-left: ${(props) => props.ml};
 `;
 
+
 export const IpadLoveImg = styled.img`
   position: absolute;
   bottom: 0;
@@ -139,8 +140,8 @@ export const Button = styled.button`
 /* 오른쪽 컨테이너 */
 export const RightContainer = styled.div`
   position: relative;
-  width: -webkit-fill-available;
-  max-width: 390px;
+  width: -webkit-fill-available; 
+  max-width: 390px; 
   height: 100vh;
   overflow-y: scroll;
   &::-webkit-scrollbar {
@@ -171,14 +172,14 @@ export const TogetherDiv = styled.div`
   background-color: ${(props) => props.bc};
   border-radius: 30px;
   border-radius: ${(props) => props.br};
-  width: -webkit-fill-available;
-  max-width: 390px;
-  margin: 0 auto;
+  width: -webkit-fill-available; 
+  max-width: 390px; 
+  margin: 0 auto; 
   margin-bottom: 15px;
   padding: 20px;
 
   @media screen and (max-width: 390px) {
-    width: 100%;
+    width: 100%; 
   }
 `;
 
@@ -187,6 +188,7 @@ export const FundingDiv = styled.div`
   width: 100%;
   max-width: 390px;
   height: auto;
+
 `;
 
 export const ProducImgtDiv = styled.div`
@@ -238,7 +240,7 @@ export const Textarea = styled.textarea`
   border-radius: 10px;
   border: none;
   resize: none;
-  overflow: hidden;
+  overflow:hidden;
   margin-bottom: 10px;
   padding-left: 10px;
   font-weight: 500;
@@ -293,7 +295,7 @@ export const InputLabel = styled.label`
   &:hover {
     border: 0.5px solid ${theme.gray3};
   }
-`;
+`
 
 export const InputSpan = styled.span`
   padding-top: 10px;
