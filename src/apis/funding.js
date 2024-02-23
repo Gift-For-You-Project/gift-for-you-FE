@@ -65,7 +65,8 @@ export const getFundingDetail = async (id, data) => {
 // 후원자 상세 API -> 아직 없음
 export const getSponsorDetail = async (id) => {
   try {
-    const response = await instance.get(`/api/fundingsponsordetail/${id}`);
+    // const response = await instance.get(`/api/fundingsponsordetail/${id}`);
+    const response = await instance.get(`/api/funding/${id}/donations`);
 
     if (response.status === 200) {
       console.log("후원자 상세페이지 API", response);

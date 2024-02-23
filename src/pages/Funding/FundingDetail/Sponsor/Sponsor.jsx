@@ -1,190 +1,166 @@
-import React, { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { useParams } from "react-router-dom";
-// import { getSponsorDetail } from "../../../../apis/funding";
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+import { IoIosArrowBack } from 'react-icons/io';
+import theme from '../../../../styles/theme';
+import { getSponsorDetail } from "../../../../apis/funding";
 import {
-  MainContainer,
-  LeftContainer,
-  Logo,
-  P,
-  Button,
-  RightContainer,
-  Navbar,
-  NavbarBtn,
-  NavbarBtnDiv,
-  Body,
-  FundingDiv,
-  SponserDiv,
-  SponserComment,
-  SponsorImg,
-} from "./SponsorStyles";
+    MainContainer,
+    LeftContainer,
+    Logo,
+    P,
+    RightContainer,
+    Body,
+    FundingDiv,
+    SponserDiv,
+    SponserComment,
+    SponsorImg,
+    NavbarDiv,
+    TogetherDiv,
+    CommentDiv,
+    FundingComment,
+    NamingDiv,
+    MakerDiv,
+    SponsorDiv,
+} from './SponsorStyles';
 
 const Sponsor = () => {
-  const navigate = useNavigate();
-  const { fundingId } = useParams();
-  // const [sponsorData, setSponsorData] = useState({
-  //   fundingid: 0,
-  //   itemImage: "",
-  //   content: "",
-  //   showName: "",
-  // });
+    const navigate = useNavigate();
+    const { fundingId } = useParams();
+    const [sponsorData, setSponsorData] = useState({
+      itemImage: '',
+      content: '',
+      showName: '',
+      sponsorNickname: '', // 후원자 이름 추가
+      sponsorComment: '', // 후원자 댓글 추가
+      donationRanking: '', // 후원자 랭킹 추가
+    });
 
-  useEffect(() => {
-    const getData = async () => {
-      try {
-        if (!fundingId) {
-          return;
-        }
-        // const data = await getSponsorDetail(fundingId);
-        // setSponsorData(data);
-      } catch (error) {
-        console.error("후원자 상세페이지 API 호출 오류:", error);
-      }
-    };
+    useEffect(() => {
+        const getData = async () => {
+            try {
+                if (!fundingId) {
+                    return;
+                }
+                const data = await getSponsorDetail(fundingId);
+                setSponsorData(data);
+            } catch (error) {
+                console.error('후원자 상세페이지 API 호출 오류:', error);
+            }
+        };
 
-    getData();
-  }, [fundingId]);
+        getData();
+    }, [fundingId]);
 
-  return (
-    <MainContainer>
-      <LeftContainer>
-        <Logo>Giftipie</Logo>
-        <P pt="25px" fs="16px" fw="800" pb="5px">
-          기프티파이에서
-        </P>
-        <P fs="16px" fw="800" pb="5px">
-          정말 원하는 선물을
-        </P>
-        <P fs="16px" fw="800">
-          주고 받아요
-        </P>
-      </LeftContainer>
+    return (
+        <MainContainer>
+            <LeftContainer>
+                <Logo>Giftipie</Logo>
+                <P pt="25px" fs="16px" fw="800" pb="5px">
+                    기프티파이에서
+                </P>
+                <P fs="16px" fw="800" pb="5px">
+                    정말 원하는 선물을
+                </P>
+                <P fs="16px" fw="800">
+                    주고 받아요
+                </P>
+            </LeftContainer>
 
-      <RightContainer>
-        <Navbar>
-          <NavbarBtn
-            onClick={() => navigate(`/`)}
-            fs="15px"
-            fw="800"
-            pl="15px"
-          >
-            펀딩 상세페이지로 이동
-          </NavbarBtn>
-          <NavbarBtnDiv pr="15px">
-            <NavbarBtn fs="13px" fw="600">
-              문의
-            </NavbarBtn>
-            <NavbarBtn fs="13px" fw="600">
-              로그인/회원가입
-            </NavbarBtn>
-          </NavbarBtnDiv>
-        </Navbar>
-        <Body>
-          <FundingDiv>
-            <P pt="20px" pb="20px" fs="16px" fw="900" color="#FFFFFF">
-              후원자
-            </P>
-            <SponserDiv>
-              <SponsorImg src="/imgs/Common/profile-1.svg" alt="image" />
-              <SponserComment mt="10px">
-                <P pl="5px" fs="13px" fw="800" color="#FFFFFF">
-                  후원자 보여줄 이름
-                </P>
-                <Button
-                  mt="5px"
-                  w="300px"
-                  h="40px"
-                  pr="90px"
-                  fs="13px"
-                  bc="#ECECEC"
-                >
-                  후원자 남길 메시지
-                </Button>
-              </SponserComment>
-            </SponserDiv>
-            <SponserDiv>
-            <SponsorImg src="/imgs/Common/profile-2.svg" alt="image" />
-              <SponserComment mt="10px">
-                <P pl="5px" fs="13px" fw="800" color="#FFFFFF">
-                  {/* {sponsorData.showName} */}
-                  후원자 보여줄 이름
-                </P>
-                <Button
-                  mt="5px"
-                  w="300px"
-                  h="40px"
-                  pr="90px"
-                  fs="13px"
-                  bc="#ECECEC"
-                >
-                  {/* {sponsorData.content} */}
-                  후원자 남길 메시지
-                </Button>
-              </SponserComment>
-            </SponserDiv>
-            <SponserDiv>
-            <SponsorImg src="/imgs/Common/profile-3.svg" alt="image" />
-              <SponserComment mt="10px">
-                <P pl="5px" fs="13px" fw="800" color="#FFFFFF">
-                  {/* {sponsorData.showName} */}
-                  후원자 보여줄 이름
-                </P>
-                <Button
-                  mt="5px"
-                  w="300px"
-                  h="40px"
-                  pr="90px"
-                  fs="13px"
-                  bc="#ECECEC"
-                >
-                  {/* {sponsorData.content} */}
-                  후원자 남길 메시지
-                </Button>
-              </SponserComment>
-            </SponserDiv>
-            <SponserDiv>
-              <SponsorImg src="/imgs/Common/profile-4.svg" alt="image" />
-              <SponserComment mt="10px">
-                <P pl="5px" fs="13px" fw="800" color="#FFFFFF">
-                  후원자 보여줄 이름
-                </P>
-                <Button
-                  mt="5px"
-                  w="300px"
-                  h="40px"
-                  pr="90px"
-                  fs="13px"
-                  bc="#ECECEC"
-                >
-                  후원자 남길 메시지
-                </Button>
-              </SponserComment>
-            </SponserDiv>
-            <SponserDiv>
-            <SponsorImg src="/imgs/Common/profile-5.svg" alt="image" />
-              <SponserComment mt="10px">
-                <P pl="5px" fs="13px" fw="800" color="#FFFFFF">
-                후원자 보여줄 이름
-                  {/* {sponsorData.showName} */}
-                </P>
-                <Button
-                  mt="5px"
-                  w="300px"
-                  h="40px"
-                  pr="90px"
-                  fs="13px"
-                  bc="#ECECEC"
-                >
-                  {/* {sponsorData.content} */}
-                  후원자 남길 메시지
-                </Button>
-              </SponserComment>
-            </SponserDiv>
-          </FundingDiv>
-        </Body>
-      </RightContainer>
-    </MainContainer>
-  );
+            <RightContainer>
+                <NavbarDiv>
+                    <IoIosArrowBack onClick={() => navigate('/')} color={theme.white} size="20px" />
+                    <P pl="120px" fs="13px" fw="900" color={theme.white}>
+                        펀딩 만들기
+                    </P>
+                </NavbarDiv>
+
+                <Body>
+                    <FundingDiv>
+                        <TogetherDiv bc={theme.white}>
+                            <SponserDiv>
+                                <FundingComment mt="10px">
+                                    <NamingDiv>
+                                        <P fs={theme.detail2} color={theme.gray2}>
+                                            후원자 보여줄 이름
+                                            {sponsorData.showName}
+                                        </P>
+                                        <MakerDiv>만든이</MakerDiv>
+                                    </NamingDiv>
+                                    <CommentDiv mt="5px" fs="13px" bc={theme.secondary}>
+                                    {sponsorData.content} 
+                                    후원자 남길 메시지
+                                    </CommentDiv>
+                                </FundingComment>
+                                <SponsorImg src="/imgs/Funding/FundingPay/blue-dog.svg" alt="image" />
+                            </SponserDiv>
+                            <SponserDiv>
+                                <SponsorImg src="/imgs/Funding/FundingPay/water-melon.svg" alt="image" />
+                                <SponserComment mt="20px">
+                                    <NamingDiv>
+                                        <P fs={theme.detail2} color={theme.gray2}>
+                                        {sponsorData.sponsorNickname}
+                                        후원자1등 보여줄 이름
+                                        </P>
+                                        <SponsorDiv>1등{sponsorData.donationRanking}</SponsorDiv>
+                                    </NamingDiv>
+                                    <CommentDiv mt="5px" fs="13px" bc={theme.gray6}>
+                                    {sponsorData.sponsorComment}
+                                    후원자1등 남길 메시지
+                                    </CommentDiv>
+                                </SponserComment>
+                            </SponserDiv>
+                            <SponserDiv>
+                                <SponsorImg src="/imgs/Funding/FundingPay/icecream.svg" alt="image" />
+                                <SponserComment mt="20px">
+                                    <NamingDiv>
+                                        <P fs={theme.detail2} color={theme.gray2}>
+                                            {sponsorData.sponsorNickname}
+                                            후원자2등 보여줄 이름
+                                        </P>
+                                        <SponsorDiv>2등{sponsorData.donationRanking}</SponsorDiv>
+                                    </NamingDiv>
+                                    <CommentDiv mt="5px" fs="13px" bc={theme.gray6}>
+                                        {sponsorData.sponsorComment}
+                                        후원자2등 남길 메시지
+                                    </CommentDiv>
+                                </SponserComment>
+                            </SponserDiv>
+                            <SponserDiv>
+                                <SponsorImg src="/imgs/Funding/FundingPay/yellow-tube.svg" alt="image" />
+                                <SponserComment mt="20px">
+                                    <NamingDiv>
+                                        <P fs={theme.detail2} color={theme.gray2}>
+                                            {sponsorData.sponsorNickname}
+                                            후원자3등 보여줄 이름
+                                        </P>
+                                        <SponsorDiv>3등{sponsorData.donationRanking}</SponsorDiv>
+                                    </NamingDiv>
+                                    <CommentDiv mt="5px" fs="13px" bc={theme.gray6}>
+                                    {sponsorData.sponsorComment}
+                                    후원자3등 남길 메시지
+                                    </CommentDiv>
+                                </SponserComment>
+                            </SponserDiv>
+                            <SponserDiv>
+                                <SponsorImg src="/imgs/Funding/FundingPay/violet-star.svg" alt="image" />
+                                <SponserComment mt="20px">
+                                    <P fs={theme.detail2} color={theme.gray2}>
+                                        후원자4부터 보여줄 이름
+                                        {sponsorData.sponsorNickname}
+                                    </P>
+                                    <CommentDiv mt="5px" fs="13px" bc={theme.gray6}>
+                                        {sponsorData.sponsorComment}
+                                        후원자4등 남길 메시지 후원자4등 남길 메시지 후원자4등 남길 메시지 후원자4등 남길 메시지 후원자4등 남길 메시지 후원자4등 남길 메시지 후원자4등 남길 메시지 후원자4등 남길 메시지 
+                                    </CommentDiv>
+                                </SponserComment>
+                            </SponserDiv>
+                        </TogetherDiv>
+                    </FundingDiv>
+                </Body>
+            </RightContainer>
+        </MainContainer>
+    );
 };
 
 export default Sponsor;

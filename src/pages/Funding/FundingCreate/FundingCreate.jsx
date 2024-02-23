@@ -1,13 +1,12 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { postFundingCreate } from "../../../apis/funding";
-import { useParams } from "react-router-dom";
-import CreateModal from "./Modal/CreateModal";
-import Navbar from "../../../components/Navbar";
-import { useDispatch, useSelector } from "react-redux";
-import { userLogout } from "../../../redux/authSlice";
-import { infoToast } from "../../../components/toast";
-import theme from "../../../styles/theme";
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { postFundingCreate } from '../../../apis/funding';
+import { useParams } from 'react-router-dom';
+import CreateModal from './Modal/CreateModal';
+import { infoToast } from '../../../components/toast';
+import { IoIosArrowBack } from 'react-icons/io';
+import { GrAdd } from 'react-icons/gr';
+import theme from '../../../styles/theme';
 import {
     MainContainer,
     LeftContainer,
@@ -22,17 +21,23 @@ import {
     Button,
     RightContainer,
     NavbarDiv,
+    ImgPlus,
     ProducImgtDiv,
-    InputTag,
     FundingImg,
     Body,
     FundingDiv,
     SponserDiv,
     RadioInput,
-    SponserComment,
+    OpenPrivateComment,
     TogetherDiv,
     SponsorComment,
+    Textarea,
     ImgText,
+    ColumnDiv,
+    InputLabel,
+    TitleLabel,
+    InputSpan,
+    InputInput,
 } from './FundingCreateStyles';
 
 const FundingCreate = () => {
@@ -40,8 +45,6 @@ const FundingCreate = () => {
     const { id } = useParams(); // URL 매개변수(id)를 가져옴
     const [itemImage, setItemImage] = useState(false);
     const [isFundingModalOpen, setIsFundingModalOpen] = useState(false);
-    const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
-    const dispatch = useDispatch();
     const [createData, setCreateData] = useState({
         itemName: '',
         targetAmount: '',
@@ -127,10 +130,10 @@ const FundingCreate = () => {
         }
     };
 
-    const handleLogoutClick = () => {
-        dispatch(userLogout()); // 로그아웃 액션 디스패치
-        navigate('/');
-    };
+    // const handleLogoutClick = () => {
+    //     dispatch(userLogout()); // 로그아웃 액션 디스패치
+    //     navigate('/');
+    // };
 
     return (
         <MainContainer>
@@ -147,7 +150,6 @@ const FundingCreate = () => {
                             </P>
                             <BubbleImg src="/imgs/Home/speech-bubble.png" />
                         </div>
-                        {/* <BubbleImg src="/imgs/Home/speech-bubble.png" /> */}
                     </LeftImgContainer>
 
                     <LeftRowdiv ml="30px">
@@ -164,8 +166,6 @@ const FundingCreate = () => {
                         </div>
                     </LeftRowdiv>
 
-
-
                     <LeftRowdiv>
                         <Leftcolumndiv ml="30px">
                             <P fs="16px" fw="500" pt="30px" pb="5px" color={theme.white}>
@@ -179,15 +179,16 @@ const FundingCreate = () => {
                     </LeftRowdiv>
                 </LeftContainer>
 
-                <LeftRowdiv ml="30px">
-                </LeftRowdiv>
+                <LeftRowdiv ml="30px"></LeftRowdiv>
                 <IpadLoveImg src="/imgs/Home/pie-ipad.png" w="330px" />
             </LeftContainer>
 
             <RightContainer>
-                {/* 추가된 코드 */}
                 <NavbarDiv>
-                    <Navbar isLoggedIn={isLoggedIn} handleLogoutClick={handleLogoutClick} />
+                    <IoIosArrowBack onClick={() => navigate('/')} color={theme.white} size="20px" />
+                    <P pl="120px" fs="13px" fw="900" color={theme.white}>
+                        메시지 더보기
+                    </P>
                 </NavbarDiv>
 
                 <Body>
@@ -197,164 +198,162 @@ const FundingCreate = () => {
                         }}
                     >
                         <FundingDiv>
-                            <P pb="10px" fs="16px" fw="900" color={theme.primary}>
-                                펀딩 생성페이지
-                            </P>
-                            <P pb="20px" fs="10px" fw="900" color={theme.gray5}>
-                                펀딩 생성 페이지에 상품명과 이미지가 노출돼요.
-                            </P>
-                            <ProducImgtDiv>
-                                <SponsorComment mt="10px" pointer="pointer" onClick={handleFundingModalClick}>
-                                    <FundingImg src={itemImage} h="90px" w="80px" />
-                                    <ImgText>상품 링크 URL</ImgText>
-                                </SponsorComment>
-                                <div>
-                                    <InputTag
-                                        type="text"
-                                        value={createData.itemName}
-                                        onChange={handleItemNameChange}
-                                        placeholder="상품명을 입력해주세요"
-                                        h="40px"
-                                        w="97%"
-                                        ml="10px"
-                                        mb="10px"
-                                        pl="10px"
-                                    />
-                                    <InputTag
-                                        type="text"
-                                        value={createData.targetAmount}
-                                        onChange={handleTargetAmountChange}
-                                        placeholder="가격을 입력해주세요"
-                                        h="40px"
-                                        w="97%"
-                                        ml="10px"
-                                        pl="10px"
-                                    />
-                                </div>
-                            </ProducImgtDiv>
-                            {/* 모달 컴포넌트 표시 여부 확인 후 표시 */}
-                            {isFundingModalOpen && (
-                                <CreateModal closeModal={closeModal} handleImageSelection={handleImageSelection} />
-                            )}
-                            {/* 펀딩 내용 및 공개 여부 입력 폼 */}
-                            <SponserDiv>
-                                <SponserComment mt="50px">
-                                    <P pb="10px" fs="16px" fw="900" color={theme.primary}>
-                                        펀딩 내용
-                                    </P>
-                                    <P pb="20px" fs="13px" fw="900" color={theme.gray5}>
-                                        공개 방식을 설정해주세요.
-                                    </P>
-                                    <SponserDiv>
-                                        <RadioInput
-                                            value="true"
-                                            checked={createData.publicFlag === true}
-                                            onChange={handlePublicFlagChange}
-                                            type="radio"
-                                            mb="21px"
-                                        />
-                                        <P pb="20px" fs="13px" fw="900" pl="20px" color={theme.gray5}>
-                                            공개
-                                        </P>
-                                        <P pb="20px" fs="10px" fw="900" pl="42px" color={theme.gray5}>
-                                            누구나 볼 수 있어요
-                                        </P>
-                                    </SponserDiv>
-                                    <SponserDiv>
-                                        <RadioInput
-                                            value="false"
-                                            checked={createData.publicFlag === false}
-                                            onChange={handlePublicFlagChange}
-                                            type="radio"
-                                            mb="21px"
-                                        />
-                                        <P pb="20px" fs="13px" fw="900" pl="20px" color={theme.gray5}>
-                                            비공개
-                                        </P>
-                                        <P pb="20px" fs="10px" fw="900" pl="30px" color={theme.gray5}>
-                                            링크를 통해서만 방문할 수 있어요
-                                        </P>
-                                    </SponserDiv>
-                                </SponserComment>
-                            </SponserDiv>
-                            <P pt="30px" pb="5px" fs="13px" fw="800" color={theme.gray5}>
-                                보여줄 이름
-                            </P>
-                            <InputTag
-                                type="text"
-                                value={createData.showName}
-                                onChange={handleShowNameChange}
-                                placeholder="이름을 입력해주세요"
-                                h="40px"
-                                w="97%"
-                                mb="10px"
-                                pl="10px"
-                            />
-                            <P pt="10px" pb="5px" fs="13px" fw="800" color={theme.gray5}>
-                                제목
-                            </P>
-                            <InputTag
-                                type="text"
-                                value={createData.title}
-                                onChange={handleTitleChange}
-                                placeholder="제목을 입력해주세요"
-                                h="40px"
-                                w="97%"
-                                mb="10px"
-                                pl="10px"
-                            />
-                            <P pt="10px" pb="5px" fs="13px" fw="800" color={theme.gray5}>
-                                본문
-                            </P>
-                            <InputTag
-                                type="text"
-                                value={createData.content}
-                                onChange={handleContentChange}
-                                placeholder="본문을 입력해주세요"
-                                h="90px"
-                                w="97%"
-                                mb="10px"
-                                pl="10px"
-                                pb="50px"
-                            />
-                            <P pt="10px" pb="5px" fs="13px" fw="800" color={theme.gray5}>
-                                마감일 설정
-                            </P>
-                            <InputTag
-                                type="date"
-                                value={createData.endDate}
-                                onChange={handleEndDateChange}
-                                h="40px"
-                                w="97%"
-                                pl="10px"
-                                pt="10px"
-                            />
-                        </FundingDiv>
-                        <TogetherDiv>
-                            <P pl="130px" fs="14px" fw="800" color={theme.secondary}>
-                                펀딩 금액은 계좌로 전달돼요
-                            </P>
-                            <P pl="95px" fs="14px" fw="800" color={theme.secondary}>
-                                펀딩에 성공하면 카톡으로 알림이 가요
-                            </P>
-                        </TogetherDiv>
+                            <TogetherDiv bc={theme.white}>
+                                <P pt="5px" pb="5px" fw="600" fs={theme.title} color={theme.black}>
+                                    펀딩 제품
+                                </P>
+                                <P pb="20px" fs={theme.body2} color={theme.gray3}>
+                                    펀딩 생성 페이지에 상품명과 이미지가 노출돼요.
+                                </P>
+                                <ProducImgtDiv>
+                                    <SponsorComment onClick={handleFundingModalClick}>
+                                        <FundingImg src={itemImage} h="120px" w="110px" />
+                                        <ImgPlus>
+                                            <GrAdd fontSize={theme.title} color={theme.gray3} />
+                                        </ImgPlus>
+                                        <ImgText>
+                                            상품 이미지
+                                            <br />
+                                            &nbsp;&nbsp; &nbsp;&nbsp;등록
+                                        </ImgText>
+                                    </SponsorComment>
+                                    <ColumnDiv>
+                                        <TitleLabel>
+                                            <InputSpan>상품명</InputSpan>
+                                            <InputInput
+                                                type="text"
+                                                value={createData.itemName}
+                                                onChange={handleItemNameChange}
+                                                placeholder="상품명을 입력해주세요"
+                                            ></InputInput>
+                                        </TitleLabel>
 
-                        <Button
-                            onClick={handleFundingClick}
-                            w="100%"
-                            h="60px"
-                            mt="10px"
-                            color="white"
-                            fs="19px"
-                            bc={theme.primary}
-                        >
-                            펀딩 등록하기
-                        </Button>
+                                        <TitleLabel>
+                                            <InputSpan>목표 금액</InputSpan>
+                                            <InputInput
+                                                type="text"
+                                                value={createData.targetAmount}
+                                                onChange={handleTargetAmountChange}
+                                                placeholder="목표 금액을 입력해주세요"
+                                            ></InputInput>
+                                        </TitleLabel>
+                                    </ColumnDiv>
+                                </ProducImgtDiv>
+                                {isFundingModalOpen && (
+                                    <CreateModal closeModal={closeModal} handleImageSelection={handleImageSelection} />
+                                )}
+                            </TogetherDiv>
+
+                            <TogetherDiv bc={theme.white}>
+                                <SponserDiv>
+                                    <OpenPrivateComment mt="5px">
+                                        <P pb="10px" fw="600" fs={theme.title} color={theme.black}>
+                                            펀딩 내용
+                                        </P>
+                                        <P pb="20px" fs={theme.detail} color={theme.gray2}>
+                                            공개 방식
+                                        </P>
+                                        <SponserDiv>
+                                            <RadioInput
+                                                value="true"
+                                                checked={createData.publicFlag === true}
+                                                onChange={handlePublicFlagChange}
+                                                type="radio"
+                                                mb="21px"
+                                            />
+                                            <P pb="20px" pl="20px" fs={theme.body2} color={theme.black}>
+                                                공개
+                                            </P>
+                                            <P pb="20px" pl="42px" fs={theme.detail} color={theme.gray2}>
+                                                누구나 볼 수 있어요
+                                            </P>
+                                        </SponserDiv>
+                                        <SponserDiv>
+                                            <RadioInput
+                                                value="false"
+                                                checked={createData.publicFlag === false}
+                                                onChange={handlePublicFlagChange}
+                                                type="radio"
+                                                mb="21px"
+                                            />
+                                            <P pb="20px" pl="20px" fs={theme.body2} color={theme.black}>
+                                                비공개
+                                            </P>
+                                            <P pb="20px" pl="30px" fs={theme.detail} color={theme.gray2}>
+                                                링크를 통해서만 방문할 수 있어요
+                                            </P>
+                                        </SponserDiv>
+                                    </OpenPrivateComment>
+                                </SponserDiv>
+
+                                <InputLabel>
+                                    <InputSpan>보여줄 이름</InputSpan>
+                                    <InputInput
+                                        type="text"
+                                        value={createData.showName}
+                                        onChange={handleShowNameChange}
+                                        placeholder="이름을 입력해주세요"
+                                    ></InputInput>
+                                </InputLabel>
+
+                                <InputLabel>
+                                    <InputSpan>제목</InputSpan>
+                                    <InputInput
+                                        type="text"
+                                        value={createData.title}
+                                        onChange={handleTitleChange}
+                                        placeholder="제목을 입력해주세요"
+                                    ></InputInput>
+                                </InputLabel>
+
+                                <InputLabel>
+                                    <InputSpan>본문</InputSpan>
+                                    <Textarea
+                                        type="textarea"
+                                        value={createData.content}
+                                        onChange={handleContentChange}
+                                        placeholder="본문을 입력해주세요"
+                                    />
+                                </InputLabel>
+                            </TogetherDiv>
+
+                            <TogetherDiv bc={theme.white} br="30px 30px 0px 0px">
+                                <InputLabel>
+                                    <InputSpan>마감일 설정</InputSpan>
+                                    <InputInput
+                                        type="date"
+                                        value={createData.endDate}
+                                        onChange={handleEndDateChange}
+                                    ></InputInput>
+                                </InputLabel>
+
+                                <Button
+                                    onClick={handleFundingClick}
+                                    w="100%"
+                                    h="60px"
+                                    mt="10px"
+                                    mb="10px"
+                                    color="white"
+                                    fs="19px"
+                                    bc={theme.primary}
+                                >
+                                    펀딩 등록하기
+                                </Button>
+                                <ColumnDiv>
+                                    <P fs={theme.body2} color={theme.gray3}>
+                                        펀딩 금액은 계좌로 전달돼요
+                                    </P>
+                                    <P pb="40px" fs={theme.body2} color={theme.gray3}>
+                                        펀딩에 성공하면 카톡으로 알림이 가요
+                                    </P>
+                                </ColumnDiv>
+                            </TogetherDiv>
+                        </FundingDiv>
                     </form>
                 </Body>
             </RightContainer>
         </MainContainer>
     );
-}
+};
 
 export default FundingCreate;

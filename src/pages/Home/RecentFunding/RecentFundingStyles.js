@@ -229,11 +229,11 @@ export const FundingDiv = styled.div`
 
 export const FundingSection = styled.section`
   display: flex;
-  justify-content: space-around;
+  /* justify-content: space-around; */
   flex-wrap: wrap;
   width: 100%;
   gap: 10px;
-  padding: 10px;
+  padding: 10px 19px;
   padding-bottom: 20px;
 `;
 
