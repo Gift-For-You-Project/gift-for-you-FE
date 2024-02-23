@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
-import { getFundingDetail } from '../../../apis/funding';
+import { getFundingDetail, getSponsorDetail } from '../../../apis/funding';
 import Navbar from '../../../components/Navbar';
 import { useDispatch, useSelector } from 'react-redux';
 import { userLogout } from '../../../redux/authSlice';
@@ -49,6 +49,7 @@ import {
     MassageBtn,
     GiftTitle,
     StartRowDiv,
+    GiftCoverImg,
 } from './FundingDetailStyles';
 
 const FundingDetail = () => {
@@ -99,7 +100,7 @@ const FundingDetail = () => {
     const closeModal = () => {
         setIsFundingModalOpen(false);
     };
-    
+
     // 모달 내에서 입력값을 설정하는 함수
     const handleInputSelection = (donationInput) => {
         setSponsorDonation({ ...sponsorDonation, donationInput });
@@ -121,6 +122,10 @@ const FundingDetail = () => {
 
     const handledonation30000Change = () => {
         navigate(`/fundingpay/${id}?donation=${sponsorDonation.donation30000}&showName=${detailData.showName}`);
+    };
+
+    const handledonation50000Change = () => {
+        navigate(`/fundingpay/${id}?donation=${sponsorDonation.donation50000}&showName=${detailData.showName}`);
     };
 
     // const handledonationAllChange = () => {
@@ -147,6 +152,22 @@ const FundingDetail = () => {
         };
 
         getData();
+    }, [id]);
+
+    useEffect(() => {
+        const getSponsorInfo = async () => {
+            try {
+                if (!id) {
+                    return;
+                }
+                const data = await getSponsorDetail(id);
+                setDetailData(data);
+            } catch (error) {
+                console.error('펀딩 상세페이지 오류:', error);
+            }
+        };
+
+        getSponsorInfo();
     }, [id]);
 
     const handleLogoutClick = () => {
@@ -214,13 +235,14 @@ const FundingDetail = () => {
                         <P pt="10px" fs="20px" fw="900" color={theme.white}>
                             {detailData.title}
                         </P>
-                        <P pt="10px" pb="10px" fs="13px" fw="800" color={theme.white}>
+                        <P pt="10px" pb="0px" fs="13px" fw="800" color={theme.white}>
                             {detailData.showName}
                         </P>
                     </TitleDiv>
 
                     <BannerImgDiv>
                         <IllustImg src="/imgs/Funding/FundingDetail/pangpang-left.png" alt="img" />
+                        <GiftCoverImg src="/imgs/Funding/FundingDetail/gift-cover.svg" alt="image" />
                         <BannerImg src={detailData.itemImage} alt="image" />
                         <IllustImg src="/imgs/Funding/FundingDetail/pangpang-right.png" alt="img" />
                     </BannerImgDiv>
@@ -260,70 +282,71 @@ const FundingDetail = () => {
                                     <MakerDiv>만든이</MakerDiv>
                                 </NamingDiv>
                                 <CommentDiv mt="5px" fs="13px" bc={theme.secondary}>
-                                {detailData.content}
+                                    {detailData.content}
                                 </CommentDiv>
                             </FundingComment>
-                            <SponsorImg src="/imgs/Common/profile-1.svg" alt="image" />
+                            <SponsorImg src="/imgs/Funding/FundingPay/blue-dog.svg" alt="image" />
                         </SponserDiv>
                         <SponserDiv>
-                            <SponsorImg src="/imgs/Common/profile-2.svg" alt="image" />
-                            <SponserComment mt="15px">
+                            <SponsorImg src="/imgs/Funding/FundingPay/water-melon.svg" alt="image" />
+                            <SponserComment>
                                 <NamingDiv>
                                     <P fs={theme.detail2} color={theme.gray2}>
-                                    {detailData.sponsorNickname}
+                                        {detailData.sponsorNickname}
                                         후원자1등 보여줄 이름
                                     </P>
+                                    {/* <SponsorDiv>1등{detailData.donationRanking}</SponsorDiv> */}
                                     <SponsorDiv>1등{detailData.donationRanking}</SponsorDiv>
                                 </NamingDiv>
                                 <CommentDiv mt="5px" fs="13px" bc={theme.gray6}>
-                                {detailData.sponsorComment}
+                                    {/* {detailData.sponsorComment} */}
+                                    {detailData.sponsorComment}
                                     후원자1등 남길 메시지
                                 </CommentDiv>
                             </SponserComment>
                         </SponserDiv>
                         <SponserDiv>
-                            <SponsorImg src="/imgs/Common/profile-3.svg" alt="image" />
-                            <SponserComment mt="15px">
+                            <SponsorImg src="/imgs/Funding/FundingPay/icecream.svg" alt="image" />
+                            <SponserComment>
                                 <NamingDiv>
                                     <P fs={theme.detail2} color={theme.gray2}>
-                                    {detailData.sponsorNickname}
+                                        {detailData.sponsorNickname}
                                         후원자2등 보여줄 이름
                                     </P>
                                     <SponsorDiv>2등{detailData.donationRanking}</SponsorDiv>
                                 </NamingDiv>
                                 <CommentDiv mt="5px" fs="13px" bc={theme.gray6}>
-                                {detailData.sponsorComment}
+                                    {detailData.sponsorComment}
                                     후원자2등 남길 메시지
                                 </CommentDiv>
                             </SponserComment>
                         </SponserDiv>
                         <SponserDiv>
-                            <SponsorImg src="/imgs/Common/profile-4.svg" alt="image" />
-                            <SponserComment mt="15px">
+                            <SponsorImg src="/imgs/Funding/FundingPay/yellow-tube.svg" alt="image" />
+                            <SponserComment>
                                 <NamingDiv>
                                     <P fs={theme.detail2} color={theme.gray2}>
-                                    {detailData.sponsorNickname}
+                                        {detailData.sponsorNickname}
                                         후원자3등 보여줄 이름
                                     </P>
                                     <SponsorDiv>3등{detailData.donationRanking}</SponsorDiv>
                                 </NamingDiv>
                                 <CommentDiv mt="5px" fs="13px" bc={theme.gray6}>
-                                {detailData.sponsorComment}
-                                후원자3등 남길 메시지
+                                    {detailData.sponsorComment}
+                                    후원자3등 남길 메시지
                                 </CommentDiv>
                             </SponserComment>
                         </SponserDiv>
-
-                        <MassageBtn onClick={() => navigate('/fundingsponsordetail')}>
-                            <P pt="2px" fs={theme.detail} color={theme.gray2}>
+                        <MassageBtn onClick={() => navigate(`/fundingsponsordetail/${id}`)}>
+                            <P pt="4px" pb="18px" fs={theme.detail} color={theme.gray2}>
                                 펀딩 더보기 &nbsp;
                             </P>
-                            <P pt="4px" fs={theme.detail}>
+                            <P pt="4px" pb="18px" fs={theme.detail}>
                                 <FaAngleRight />
                             </P>
                         </MassageBtn>
                     </FundingDiv>
-                    <FundingDiv p="20px" pb="40px">
+                    <FundingDiv p="20px">
                         <P pt="20px" pl="10px" fs={theme.headline2} color={theme.black}>
                             펀딩 참여하여
                         </P>
@@ -347,7 +370,7 @@ const FundingDetail = () => {
                             </P>
                         </GiftTitle>
 
-                        <SponsorimgDiv pt="40px">
+                        <SponsorimgDiv p="0px 20px 0px 20px" pt="40px">
                             <StartRowDiv>
                                 <FundingImg src="/imgs/Funding/FundingDetail/coffee.svg" alt="image" ml="10px" />
                                 <div>
@@ -465,7 +488,7 @@ const FundingDetail = () => {
                             </StartRowDiv>
                             <Button
                                 mr="10px"
-                                onClick={handledonation30000Change}
+                                onClick={handledonation50000Change}
                                 w="58px"
                                 h="34px"
                                 bc={theme.primaryBtn}
@@ -491,10 +514,7 @@ const FundingDetail = () => {
                     원하는 금액만큼 펀딩 참여하기
                 </Button>
                 {isFundingModalOpen && (
-                    <DetailModal
-                        closeModal={closeModal}
-                        handleInputSelection={handleInputSelection}
-                    />
+                    <DetailModal closeModal={closeModal} handleInputSelection={handleInputSelection} />
                 )}
             </RightContainer>
         </MainContainer>

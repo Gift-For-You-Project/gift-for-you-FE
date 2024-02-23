@@ -123,7 +123,7 @@ export const Textarea = styled.textarea`
   align-items: start;
   `;
 
-  export const ProfileImageRow = styled.div`
+export const ProfileImageRow = styled.div`
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -219,6 +219,7 @@ export const RightContainer = styled.div`
   position: relative;
   width: -webkit-fill-available; /* 사용 가능한 너비로 채움 */
   max-width: 390px; /* 최대 너비를 390px로 제한 */
+  /* border: 1px solid lightgray; */
   height: 100vh;
   overflow-y: scroll;
   &::-webkit-scrollbar {
@@ -237,9 +238,14 @@ export const Body = styled.div`
 
 export const FundingDiv = styled.div`
   justify-content: center;
-  width: 100%;
-  max-width: 442px;
+  max-width: 390px; /* 최대 너비를 390px로 제한 */
   height: auto;
+  width: -webkit-fill-available; /* 사용 가능한 너비로 채움 */
+  margin: 0 auto; /* 가운데 정렬을 위해 margin을 auto로 설정 */
+
+  @media screen and (max-width: 390px) {
+  max-width: 100%; /* 최대 너비를 100%로 설정하여 가득 차게 함 */
+  }
 `;
 
 export const SponserDiv = styled.div`
@@ -265,52 +271,71 @@ export const FundingNewline = styled.div`
 
 export const TogetherDiv = styled.div`
   background-color: ${(props) => props.bc};
-  border-radius: 30px;
   border-radius: ${(props) => props.br};
   width: -webkit-fill-available; /* 사용 가능한 너비로 채움 */
   max-width: 390px; /* 최대 너비를 390px로 제한 */
   margin: 0 auto; /* 가운데 정렬을 위해 margin을 auto로 설정 */
   margin-bottom: ${(props) => props.mb};
   padding: 20px;
+  position: relative; //상대 위치 설정
 
   @media screen and (max-width: 390px) {
-    width: 100%; /* 최대 너비를 100%로 설정하여 가득 차게 함 */
+    max-width: 100%; /* 최대 너비를 100%로 설정하여 가득 차게 함 */
   }
 `;
 
-// 체크박스 
-export const Checkbox = styled.input`
-    margin-top: 30px;
+
+export const PayDiv = styled.div`
+  background-color: ${(props) => props.bc};
+  border-radius: ${(props) => props.br};
+  width: -webkit-fill-available; /* 사용 가능한 너비로 채움 */
+  max-width: 390px; /* 최대 너비를 390px로 제한 */
+  margin: 0 auto; /* 가운데 정렬을 위해 margin을 auto로 설정 */
+  margin-bottom: ${(props) => props.mb};
+  padding: 20px;
+  position: fixed; //상대 위치 설정
+  height: 100vh;
+  max-height: -webkit-fill-available; //사용 가능한 너비로 채움
+
+  @media screen and (max-width: 390px) {
+    max-width: 100%; /* 최대 너비를 100%로 설정하여 가득 차게 함 */
+  }
+`;
+
+export const Checkbox = styled.input.attrs({ type: 'checkbox' })`
+    margin-top: 50px;
     margin-right: 15px;
     width: 25px;
     height: 25px;
     accent-color: ${theme.primary};
-    border-radius: 50px;
-    color: ${theme.white};
-    background-color: ${theme.primary};
+    border: 2px solid ${(props) => (props.checked ? '#FFFFFF' : '#fae101')};
+    background-color: ${(props) => (props.checked ? '#808080' : '#fae101')};
 `;
 
 // 카카오버튼 
 export const KakaoButton = styled.button`
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 60px;
-  background-color: #fae101;
-  border-radius: 7px;
-  font-size: 19px;
-  font-weight: 600;
-  margin-top: 14px;
-  margin-bottom: ${(props) => props.mb};
-  padding-left: ${(props) => props.pl};
-  padding-right: ${(props) => props.pr};
-  &:hover {
-    background-color: #fae102;
-    cursor: pointer;
-  }
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    height: 60px;
+    background-color: ${(props) => (props.disabled ? '#FFFFFF' : '#fae101')};
+    border: 2px solid ${(props) => (props.disabled ? '#808080' : '#fae101')};
+    border-radius: 20px;
+    font-size: 19px;
+    font-weight: 600;
+    margin-top: 20px;
+    margin-bottom: ${(props) => props.mb};
+    padding-left: ${(props) => props.pl};
+    padding-right: ${(props) => props.pr};
+    &:hover {
+        background-color: ${(props) => (props.disabled ? '#FFFFFF' : '#fae102')};
+        cursor: ${(props) => (props.disabled ? 'not-allowed' : 'pointer')};
+    }
 `;
 
 export const KakaoPayLogo = styled.img`
-  height: 35px;
-  margin-top: 5px;
+  width: 28px;
+  margin-right: 10px;
 `;

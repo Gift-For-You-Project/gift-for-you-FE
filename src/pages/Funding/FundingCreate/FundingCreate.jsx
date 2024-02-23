@@ -187,7 +187,7 @@ const FundingCreate = () => {
                 <NavbarDiv>
                     <IoIosArrowBack onClick={() => navigate('/')} color={theme.white} size="20px" />
                     <P pl="120px" fs="13px" fw="900" color={theme.white}>
-                        메시지 더보기
+                        펀딩 만들기
                     </P>
                 </NavbarDiv>
 
@@ -343,7 +343,7 @@ const FundingCreate = () => {
                                     <P fs={theme.body2} color={theme.gray3}>
                                         펀딩 금액은 계좌로 전달돼요
                                     </P>
-                                    <P pb="40px" fs={theme.body2} color={theme.gray3}>
+                                    <P pb="20px" fs={theme.body2} color={theme.gray3}>
                                         펀딩에 성공하면 카톡으로 알림이 가요
                                     </P>
                                 </ColumnDiv>

@@ -63,16 +63,12 @@ export const getFundingDetail = async (id, data) => {
 };
 
 // 후원자 상세 API -> 아직 없음
-export const getSponsorDetail = async (id) => {
+export const getSponsorDetail = async (id, data) => {
   try {
     // const response = await instance.get(`/api/fundingsponsordetail/${id}`);
-    const response = await instance.get(`/api/funding/${id}/donations`);
+    const response = await instance.get(`/api/funding/${id}/donations`, data);
 
-    if (response.status === 200) {
-      console.log("후원자 상세페이지 API", response);
-      infoToast("후원자 상세페이지입니다.");
-      return response.data;
-    }
+    return response.data;
   } catch (error) {
     const status = error.response.status;
 

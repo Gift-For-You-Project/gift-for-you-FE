@@ -207,7 +207,7 @@ const FundingModify = () => {
                                         <P pl="10px" pt="5px" fs={theme.detail2} color={theme.gray3}>
                                             상품명
                                         </P>
-                                        <P pl="10px" pb="5px" fw="500" fs={theme.body1} color={theme.black}>
+                                        <P pl="10px" pr="10px" pb="5px" fw="500" fs={theme.body1} color={theme.gray3}>
                                             {fundingData.itemName}
                                         </P>
                                     </NonInputTag>
@@ -215,7 +215,7 @@ const FundingModify = () => {
                                         <P pl="10px" pt="5px" fs={theme.detail2} color={theme.gray3}>
                                             목표 금액
                                         </P>
-                                        <P pl="10px" pb="5px" fw="500" fs={theme.body1} color={theme.black}>
+                                        <P pl="10px" pb="5px" fw="500" fs={theme.body1} color={theme.gray3}>
                                             {fundingData.targetAmount}원
                                         </P>
                                     </NonInputTag>
@@ -321,7 +321,7 @@ const FundingModify = () => {
                                 <P pl="10px" pt="5px" w="240px" fs={theme.detail2} color={theme.gray3}>
                                     마감일 설정
                                 </P>
-                                <P pl="10px" pb="5px" fw="500" fs={theme.title2} color={theme.gray4}>
+                                <P pl="10px" pb="5px" fw="500" fs={theme.title2} color={theme.gray3}>
                                     {fundingData.endDate}
                                 </P>
                             </NonInputTag>
@@ -367,10 +367,10 @@ const FundingModify = () => {
                             </BetweenDiv>
 
                             <ColumnDiv>
-                                <P fs={theme.body2} color={theme.gray4}>
+                                <P fs={theme.body2} color={theme.gray3}>
                                     펀딩 금액은 계좌로 전달돼요
                                 </P>
-                                <P pb="40px" fs={theme.body2} color={theme.gray4}>
+                                <P pb="40px" fs={theme.body2} color={theme.gray3}>
                                     펀딩에 성공하면 카톡으로 알림이 가요
                                 </P>
                             </ColumnDiv>

@@ -31,12 +31,15 @@ import {
     ProfileImageRow,
     ProfileImg,
     Checkbox,
+    PayDiv,
 } from './FundingPayStyles';
 
 const FundingPay = ({ donation }) => {
     const navigate = useNavigate();
     const { id } = useParams();
     const location = useLocation();
+
+    const [isChecked, setIsChecked] = useState(false); // 체크박스의 상태를 관리합니다.
 
     // 후원자 정보 및 펀딩 정보를 관리할 상태 변수들을 설정
     const [sponsorDonation, setSponsorDonation] = useState({
@@ -45,10 +48,23 @@ const FundingPay = ({ donation }) => {
         donationRanking: '',
         sponsorNickname: '',
         sponsorComment: '',
+        isChecked: false, // 체크박스의 상태를 관리합니다.
     });
+
+    const handleCheckboxChange = (e) => {
+        setSponsorDonation({
+            ...sponsorDonation,
+            isChecked: e.target.checked,
+        });
+    };
 
     const handleFundingDonationClick = async () => {
         try {
+            if (!isChecked) {
+                warnToast('카카오페이 테스트 결제에 필요한 개인정보 제공에 동의해주세요.');
+                return;
+            }
+
             if (sponsorDonation.sponsorNickname === '' || sponsorDonation.sponsorComment === '') {
                 warnToast('내용을 입력해주세요');
                 return;
@@ -155,8 +171,7 @@ const FundingPay = ({ donation }) => {
                     </LeftRowdiv>
                 </LeftContainer>
 
-                <LeftRowdiv ml="30px">
-                </LeftRowdiv>
+                <LeftRowdiv ml="30px"></LeftRowdiv>
                 <IpadLoveImg src="/imgs/Home/pie-ipad.png" w="330px" />
             </LeftContainer>
 
@@ -175,9 +190,9 @@ const FundingPay = ({ donation }) => {
                 </NavbarDiv>
                 <Body>
                     <FundingDiv>
-                        <TogetherDiv bc={theme.white} mb="15px">
+                        <TogetherDiv bc={theme.white} br="30px" mb="15px">
                             <SponserMoney>
-                                <P pt="40px" fs={theme.headline1} fw="700" pb="5px">
+                                <P pt="50px" fs={theme.headline1} fw="700" pb="5px">
                                     {sponsorDonation.showName} 님에게
                                 </P>
                                 <LeftRowdiv>
@@ -190,7 +205,7 @@ const FundingPay = ({ donation }) => {
                                 </LeftRowdiv>
                             </SponserMoney>
 
-                            <InputLabel mt="50px">
+                            <InputLabel mt="60px">
                                 <InputSpan>남길 이름</InputSpan>
                                 <InputInput
                                     type="text"
@@ -223,29 +238,40 @@ const FundingPay = ({ donation }) => {
                                 />
                             </InputLabel>
 
-                            <P fs={theme.detail2} color={theme.gray2} pb="10px">
+                            <P fs={theme.body1} color={theme.gray2} fw="600" pl="5px" pt="8px" pb="10px">
                                 프로필 이미지
                             </P>
-                            <ProfileImageRow mb="25px">
+                            <ProfileImageRow>
                                 <ProfileImg src="/imgs/Funding/FundingPay/blue-dog.svg" alt="image" mr="9px" />
                                 <ProfileImg src="/imgs/Funding/FundingPay/water-melon.svg" alt="image" mr="9px" />
                                 <ProfileImg src="/imgs/Funding/FundingPay/icecream.svg" alt="image" mr="9px" />
                                 <ProfileImg src="/imgs/Funding/FundingPay/yellow-tube.svg" alt="image" mr="9px" />
                                 <ProfileImg src="/imgs/Funding/FundingPay/violet-star.svg" alt="image" />
                             </ProfileImageRow>
+                            <P fs={theme.detail2} color={theme.gray2} pl="5px" pt="8px" pb="25px">
+                                프로필 이미지는 랜덤으로 생성됩니다.
+                            </P>
                         </TogetherDiv>
 
-                        <TogetherDiv bc={theme.white} br="30px 30px 0px 0px">
+                        <PayDiv bc={theme.white} br="30px 30px 0px 0px">
                             <SponserDiv>
-                            <P fs={theme.body2} color={theme.gray2} pl="10px" pt="19px">
-                                카카오페이 테스트 결제에 필요한 개인정보 <br/>제공에 동의하십니까?
-                            </P>
-                            <Checkbox type="checkbox" />
+                                <P fs={theme.body2} color={theme.gray2} pl="10px" pt="25px">
+                                    카카오페이 테스트 결제에 필요한 개인정보 <br />
+                                    제공에 동의하십니까?
+                                </P>
+                                <Checkbox
+                                    type="checkbox"
+                                    checked={isChecked}
+                                    onChange={(e) => setIsChecked(e.target.checked)}
+                                />
                             </SponserDiv>
-                            <KakaoButton onClick={handleFundingDonationClick}>
-                                <KakaoPayLogo src="/imgs/Funding/FundingPay/kakao-pay.svg" alt="image" />
+                            <KakaoButton onClick={handleFundingDonationClick} disabled={!isChecked}>
+                                <KakaoPayLogo src="/imgs/Logo/kakao.png" alt="image" />
+                                <P fs={theme.body1} color={theme.black}>
+                                    카카오페이로 테스트 결제하기
+                                </P>
                             </KakaoButton>
-                        </TogetherDiv>
+                        </PayDiv>
                     </FundingDiv>
                 </Body>
             </RightContainer>
