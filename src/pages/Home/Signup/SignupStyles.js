@@ -284,7 +284,7 @@ export const SignupBtn = styled.button`
   background-color: ${theme.primary};
   transition: all 300ms ease-in-out;
   border-radius: 16px;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 
   &:hover {
     background-color: ${theme.primaryFont};
@@ -319,7 +319,7 @@ export const TermsAgreementDiv = styled.div`
   justify-content: space-between;
   align-items: center;
   color: ${theme.gray2};
-  margin: 10px 0 10px 0;
+  margin: 8px 0 8px 0;
 `;
 
 export const CheckDiv = styled.div`
