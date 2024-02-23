@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
-import { signup } from "../../../apis/auth";
+import { postSendMail, signup } from "../../../apis/auth";
 import theme from "../../../styles/theme";
-import { postSendMail } from "../../../apis/auth";
 import Checkbox from "../../../components/Checkbox";
 import {
   infoToast,
@@ -111,7 +110,7 @@ const Signup = () => {
     isCheckedService: false,
     isCheckedPrivacy: false,
     isCheckedMarketing: false,
-    isEmailNotificationAgreed: false,
+    isEmailNotificationAgreed: null,
   });
 
   const handleCheckboxChange = (type) => {
@@ -119,7 +118,8 @@ const Signup = () => {
       const allChecked =
         prevState.isCheckedService &&
         prevState.isCheckedPrivacy &&
-        prevState.isCheckedMarketing;
+        prevState.isCheckedMarketing &&
+        prevState.isEmailNotificationAgreed;
 
       switch (type) {
         // 전체 동의 체크박스가 선택되었을 때
@@ -131,6 +131,7 @@ const Signup = () => {
             isCheckedService: !allChecked,
             isCheckedPrivacy: !allChecked,
             isCheckedMarketing: !allChecked,
+            isEmailNotificationAgreed: !allChecked,
           };
 
         // 개별 체크박스들의 선택 상태가 변경되었을 때
@@ -143,6 +144,7 @@ const Signup = () => {
             isCheckedTerms:
               prevState.isCheckedPrivacy &&
               prevState.isCheckedMarketing &&
+              prevState.isEmailNotificationAgreed &&
               !prevState.isCheckedService,
           };
 
@@ -153,6 +155,7 @@ const Signup = () => {
             isCheckedTerms:
               prevState.isCheckedService &&
               prevState.isCheckedMarketing &&
+              prevState.isEmailNotificationAgreed &&
               !prevState.isCheckedPrivacy,
           };
 
@@ -163,7 +166,19 @@ const Signup = () => {
             isCheckedTerms:
               prevState.isCheckedService &&
               prevState.isCheckedPrivacy &&
+              prevState.isEmailNotificationAgreed &&
               !prevState.isCheckedMarketing,
+          };
+
+        case "emailNotification":
+          return {
+            ...prevState,
+            isEmailNotificationAgreed: !prevState.isEmailNotificationAgreed,
+            isCheckedTerms:
+              prevState.isCheckedService &&
+              prevState.isCheckedPrivacy &&
+              prevState.isCheckedMarketing &&
+              !prevState.isEmailNotificationAgreed,
           };
 
         default:
@@ -184,8 +199,9 @@ const Signup = () => {
       isValidNicknameFormat(formData.nickname) &&
       isValidPasswordFormat(formData.password) &&
       isValidConfirmPasswordFormat(formData.confirmPassword) &&
-      checkboxState.isCheckedService && // 서비스 이용약관 체크박스가 선택되어야 함
-      checkboxState.isCheckedPrivacy && // 개인정보 처리방침 체크박스가 선택되어야 함
+      checkboxState.isCheckedService &&
+      checkboxState.isCheckedPrivacy &&
+      checkboxState.isCheckedMarketing &&
       verificationSuccess // 이메일 인증 확인이 성공한 경우에만 활성화
     );
   };
@@ -389,16 +405,15 @@ const Signup = () => {
       </LeftContainer>
 
       <RightContainer>
+        <NavbarDiv>
+          <IconDiv>
+            <FaAngleLeft onClick={() => navigate("/")} />
+          </IconDiv>
+          <P fs={theme.body2} color={theme.white}>
+            회원가입
+          </P>
+        </NavbarDiv>
         <Body>
-          <NavbarDiv>
-            <IconDiv>
-              <FaAngleLeft onClick={() => navigate("/")} />
-            </IconDiv>
-            <P fs={theme.body2} color={theme.white}>
-              회원가입
-            </P>
-          </NavbarDiv>
-
           <SignupFieldContainer>
             <InputField
               value={formData.email}
@@ -494,9 +509,9 @@ const Signup = () => {
                     checked={checkboxState.isCheckedService}
                     onChange={() => handleCheckboxChange("service")}
                   />
-                  서비스 이용약관
+                  [필수] 서비스 이용약관
                 </CheckDiv>
-                <SeeMoreDiv>
+                <SeeMoreDiv onClick={() => navigate("/signup/service")}>
                   <FaAngleRight />
                 </SeeMoreDiv>
               </TermsAgreementDiv>
@@ -506,9 +521,9 @@ const Signup = () => {
                     checked={checkboxState.isCheckedPrivacy}
                     onChange={() => handleCheckboxChange("privacy")}
                   />
-                  개인정보 처리방침
+                  [필수] 개인정보 처리방침
                 </CheckDiv>
-                <SeeMoreDiv>
+                <SeeMoreDiv onClick={() => navigate("/signup/privacy")}>
                   <FaAngleRight />
                 </SeeMoreDiv>
               </TermsAgreementDiv>
@@ -518,11 +533,20 @@ const Signup = () => {
                     checked={checkboxState.isCheckedMarketing}
                     onChange={() => handleCheckboxChange("marketing")}
                   />
-                  마케팅 정보 수신 동의
+                  [필수] 마케팅 정보 수신 동의
                 </CheckDiv>
-                <SeeMoreDiv>
+                <SeeMoreDiv onClick={() => navigate("/signup/marketing")}>
                   <FaAngleRight />
                 </SeeMoreDiv>
+              </TermsAgreementDiv>
+              <TermsAgreementDiv>
+                <CheckDiv fs={theme.body2}>
+                  <Checkbox
+                    checked={checkboxState.isEmailNotificationAgreed}
+                    onChange={() => handleCheckboxChange("emailNotification")}
+                  />
+                  [선택] 유저테스트를 위한 이메일 수신 동의
+                </CheckDiv>
               </TermsAgreementDiv>
             </TermsAgreementContainer>
             <SignupBtn
