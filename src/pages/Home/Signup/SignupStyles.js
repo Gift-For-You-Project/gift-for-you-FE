@@ -289,6 +289,11 @@ export const SignupBtn = styled.button`
   &:hover {
     background-color: ${theme.primaryFont};
   }
+
+  &:disabled {
+    background-color: ${theme.gray5};
+    cursor: not-allowed;
+  }
 `;
 
 export const SignupHelpDiv = styled.div`

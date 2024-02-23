@@ -87,23 +87,31 @@ const InputField = ({
 
 const Signup = () => {
   const navigate = useNavigate();
-  const [email, setEmail] = useState("");
-  const [nickname, setNickname] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [showEmailHelp, setShowEmailHelp] = useState(false);
-  const [showNicknameHelp, setShowNicknameHelp] = useState(false);
-  const [showPasswordHelp, setShowPasswordHelp] = useState(false);
-  const [showConfirmPasswordHelp, setShowConfirmPasswordHelp] = useState(false);
-  const [verificationCode, setVerificationCode] = useState("");
-  const [receivedCode, setReceivedCode] = useState("");
-  const [verificationSuccess, setVerificationSuccess] = useState(false);
-  const [authBtnClicked, setAuthBtnClicked] = useState(false);
+  const [receivedCode, setReceivedCode] = useState(""); // 이메일로 받은 인증코드
+  const [verificationSuccess, setVerificationSuccess] = useState(false); // 인증코드 성공 여부
+  const [authBtnClicked, setAuthBtnClicked] = useState(false); // 인증버튼 클릭 여부와 상태변경
+  // 입력폼
+  const [formData, setFormData] = useState({
+    email: "",
+    code: "",
+    nickname: "",
+    password: "",
+    confirmPassword: "",
+  });
+  // 도움말
+  const [helpVisibility, setHelpVisibility] = useState({
+    showEmailHelp: false,
+    showNicknameHelp: false,
+    showPasswordHelp: false,
+    showConfirmPasswordHelp: false,
+  });
+  // 체크박스
   const [checkboxState, setCheckboxState] = useState({
     isCheckedTerms: false,
     isCheckedService: false,
     isCheckedPrivacy: false,
     isCheckedMarketing: false,
+    isEmailNotificationAgreed: false,
   });
 
   const handleCheckboxChange = (type) => {
@@ -114,7 +122,7 @@ const Signup = () => {
         prevState.isCheckedMarketing;
 
       switch (type) {
-        // "전체 동의" 체크박스가 선택되었을 때
+        // 전체 동의 체크박스가 선택되었을 때
         case "all":
           return {
             ...prevState,
@@ -131,7 +139,7 @@ const Signup = () => {
             ...prevState,
             // 해당 개별 체크박스의 상태를 반전
             isCheckedService: !prevState.isCheckedService,
-            // "전체 동의" 체크박스는 개별 체크박스가 하나라도 선택되지 않은 경우만 선택
+            // 전체 동의 체크박스는 개별 체크박스가 하나라도 선택되지 않은 경우에 false
             isCheckedTerms:
               prevState.isCheckedPrivacy &&
               prevState.isCheckedMarketing &&
@@ -166,7 +174,20 @@ const Signup = () => {
 
   // 확인하기 버튼의 활성화 여부를 결정하는 함수
   const isCheckBtnActive = () => {
-    return isValidEmailFormat(email) && verificationCode.length === 4;
+    return isValidEmailFormat(formData.email) && formData.code.length === 4;
+  };
+
+  // 회원가입 버튼의 활성화 여부를 결정하는 함수
+  const isSignupBtnActive = () => {
+    return (
+      isValidEmailFormat(formData.email) &&
+      formData.code.length === 4 &&
+      isValidNicknameFormat(formData.nickname) &&
+      isValidPasswordFormat(formData.password) &&
+      isValidConfirmPasswordFormat(formData.confirmPassword) &&
+      checkboxState.isCheckedService && // 서비스 이용약관 체크박스가 선택되어야 함
+      checkboxState.isCheckedPrivacy // 개인정보 처리방침 체크박스가 선택되어야 함
+    );
   };
 
   // Enter키가 눌렸을 때 로그인 처리
@@ -195,52 +216,78 @@ const Signup = () => {
   };
 
   // 비밀번호 확인이 비밀번호와 일치하는지 확인
-  const isValidConfirmPassword = (confirmPassword) => {
-    return confirmPassword === password;
+  const isValidConfirmPasswordFormat = (confirmPassword) => {
+    return confirmPassword === formData.password;
   };
 
   // 이메일이 비어있을 때 help 보여주기
   const handleEmailChange = (e) => {
-    setEmail(e.target.value);
-    setShowEmailHelp(
-      e.target.value.trim() === "" || !isValidEmailFormat(e.target.value)
-    );
+    setFormData((prevData) => ({
+      ...prevData,
+      email: e.target.value,
+    }));
+    setHelpVisibility((prev) => ({
+      ...prev,
+      showEmailHelp:
+        e.target.value.trim() === "" || !isValidEmailFormat(e.target.value),
+    }));
   };
 
-  const handleCodeChange = (e) => setVerificationCode(e.target.value);
+  const handleCodeChange = (e) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      code: e.target.value, // code 상태를 업데이트
+    }));
+  };
 
   // 닉네임이 비어있을 때 help 보여주기
   const handleNicknameChange = (e) => {
-    setNickname(e.target.value);
-    setShowNicknameHelp(
-      e.target.value.trim() === "" || !isValidNicknameFormat(e.target.value)
-    );
+    setFormData((prevData) => ({
+      ...prevData,
+      nickname: e.target.value, // nickname 상태를 업데이트
+    }));
+    setHelpVisibility((prev) => ({
+      ...prev,
+      showNicknameHelp:
+        e.target.value.trim() === "" || !isValidNicknameFormat(e.target.value),
+    }));
   };
 
   // 비밀번호가 비어있을 때 help 보여주기
   const handlePasswordChange = (e) => {
-    setPassword(e.target.value);
-    setShowPasswordHelp(
-      e.target.value.trim() === "" || !isValidPasswordFormat(e.target.value)
-    );
+    setFormData((prevData) => ({
+      ...prevData,
+      password: e.target.value,
+    }));
+    setHelpVisibility((prev) => ({
+      ...prev,
+      showPasswordHelp:
+        e.target.value.trim() === "" || !isValidPasswordFormat(e.target.value),
+    }));
   };
 
   // 비밀번호 확인이 비어있을 때 help 보여주기
   const handleConfirmPasswordChange = (e) => {
-    setConfirmPassword(e.target.value);
-    setShowConfirmPasswordHelp(
-      e.target.value.trim() === "" || !isValidPasswordFormat(e.target.value)
-    );
+    setFormData((prevData) => ({
+      ...prevData,
+      confirmPassword: e.target.value,
+    }));
+    setHelpVisibility((prev) => ({
+      ...prev,
+      showConfirmPasswordHelp:
+        e.target.value.trim() === "" ||
+        !isValidConfirmPasswordFormat(e.target.value),
+    }));
   };
 
   // 이메일 인증 API 호출
   const handleAuthBtnClick = async () => {
     try {
       if (!authBtnClicked) {
-        const code = await postSendMail(email);
+        const code = await postSendMail(formData.email);
         console.log("이메일 인증 코드 받기: ", code);
         // 이메일 인증 코드를 상태에 저장
-        setReceivedCode(receivedCode);
+        setReceivedCode(code);
         setAuthBtnClicked(true); // 버튼 클릭 상태를 true로 변경
         infoToast("인증 메일이 발송되었습니다.");
       } else {
@@ -256,7 +303,12 @@ const Signup = () => {
 
   // 사용자가 입력한 코드와 서버에서 받아온 코드를 비교
   const handleCheckBtnClick = () => {
-    if (verificationCode === receivedCode) {
+    if (verificationSuccess) {
+      successToast("이미 인증이 완료되었습니다.");
+      return;
+    }
+
+    if (formData.code === receivedCode) {
       console.log("인증 성공!", receivedCode);
       setVerificationSuccess(true);
       successToast("이메일 인증이 완료되었습니다.");
@@ -270,7 +322,12 @@ const Signup = () => {
   // 회원가입 API
   const handleSignupClick = async () => {
     try {
-      await signup({ email, nickname, password });
+      await signup({
+        email: formData.email,
+        nickname: formData.nickname,
+        password: formData.password,
+        isEmailNotificationAgreed: checkboxState.isEmailNotificationAgreed,
+      });
       navigate("/login");
     } catch (error) {
       console.error("가입 오류:", error);
@@ -344,7 +401,7 @@ const Signup = () => {
 
           <SignupFieldContainer>
             <InputField
-              value={email}
+              value={formData.email}
               onChange={handleEmailChange}
               onKeyDown={handleKeyDown}
               onAuthBtnClick={handleAuthBtnClick}
@@ -353,17 +410,17 @@ const Signup = () => {
               placeholder="ex) abcd1234@gmail.com"
               isButtonActive={!authBtnClicked}
             />
-            {showEmailHelp && email.trim() === "" && (
+            {helpVisibility.showEmailHelp && formData.email.trim() === "" && (
               <SignupHelpDiv>이메일을 입력해 주세요.</SignupHelpDiv>
             )}
-            {showEmailHelp &&
-              !isValidEmailFormat(email) &&
-              email.trim() !== "" && (
+            {helpVisibility.showEmailHelp &&
+              !isValidEmailFormat(formData.email) &&
+              formData.email.trim() !== "" && (
                 <SignupHelpDiv>유효한 이메일 형식이어야 합니다.</SignupHelpDiv>
               )}
             <BlankLine h="20px" />
             <InputField
-              value={verificationCode}
+              value={formData.code}
               onChange={handleCodeChange}
               onCheckBtnClick={handleCheckBtnClick}
               onKeyDown={handleKeyDown}
@@ -375,46 +432,47 @@ const Signup = () => {
             />
             <BlankLine h="20px" />
             <InputField
-              value={nickname}
+              value={formData.nickname}
               onChange={handleNicknameChange}
               onKeyDown={handleKeyDown}
               title="닉네임"
               type="string"
               placeholder="Nickname"
             />
-            {showNicknameHelp && nickname.trim() === "" && (
-              <SignupHelpDiv>닉네임을 입력해 주세요.</SignupHelpDiv>
-            )}
+            {helpVisibility.showNicknameHelp &&
+              formData.nickname.trim() === "" && (
+                <SignupHelpDiv>닉네임을 입력해 주세요.</SignupHelpDiv>
+              )}
             <BlankLine h="20px" />
             <InputField
-              value={password}
+              value={formData.password}
               onChange={handlePasswordChange}
               onKeyDown={handleKeyDown}
               title="비밀번호"
               type="password"
               placeholder="Password"
             />
-            {showPasswordHelp && (
+            {helpVisibility.showPasswordHelp && (
               <SignupHelpDiv>
-                {password.trim() === ""
+                {formData.password.trim() === ""
                   ? "비밀번호를 입력해 주세요."
                   : "비밀번호는 8자에서 15자 사이의 알파벳 대소문자, 숫자, 특수문자로 구성되어야 합니다."}
               </SignupHelpDiv>
             )}
             <BlankLine h="20px" />
             <InputField
-              value={confirmPassword}
+              value={formData.confirmPassword}
               onChange={handleConfirmPasswordChange}
               onKeyDown={handleKeyDown}
               title="비밀번호 확인"
               type="password"
               placeholder="Confirm Password"
             />
-            {showConfirmPasswordHelp && (
+            {helpVisibility.showConfirmPasswordHelp && (
               <SignupHelpDiv>
-                {confirmPassword.trim() === ""
+                {formData.confirmPassword.trim() === ""
                   ? "비밀번호를 입력해 주세요."
-                  : !isValidConfirmPassword(confirmPassword)
+                  : !isValidConfirmPasswordFormat(formData.confirmPassword)
                   ? "비밀번호가 일치하지 않습니다."
                   : null}
               </SignupHelpDiv>
@@ -467,7 +525,12 @@ const Signup = () => {
                 </SeeMoreDiv>
               </TermsAgreementDiv>
             </TermsAgreementContainer>
-            <SignupBtn onClick={handleSignupClick}>회원가입하기</SignupBtn>
+            <SignupBtn
+              onClick={handleSignupClick}
+              disabled={!isSignupBtnActive()}
+            >
+              회원가입하기
+            </SignupBtn>
           </SignupFieldContainer>
         </Body>
       </RightContainer>
