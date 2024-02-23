@@ -284,8 +284,8 @@ const Signup = () => {
   const handleAuthBtnClick = async () => {
     try {
       if (!authBtnClicked) {
-        const code = await postSendMail(formData.email);
         infoToast("인증 메일이 발송되었습니다.");
+        const code = await postSendMail(formData.email);
         console.log("이메일 인증 코드 받기: ", code);
         // 이메일 인증 코드를 상태에 저장
         setReceivedCode(code);
