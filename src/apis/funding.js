@@ -1,5 +1,5 @@
 import { instance } from "./auth";
-import { successToast, errorToast, infoToast } from "../components/toast";
+import { successToast, errorToast } from "../components/toast";
 
 // 펀딩 추가 API
 export const postFundingCreate = async (fundingData) => {
@@ -62,10 +62,9 @@ export const getFundingDetail = async (id, data) => {
   }
 };
 
-// 후원자 상세 API -> 아직 없음
+// 후원자 상세 API
 export const getSponsorDetail = async (id, data) => {
   try {
-    // const response = await instance.get(`/api/fundingsponsordetail/${id}`);
     const response = await instance.get(`/api/funding/${id}/donations`, data);
 
     return response.data;

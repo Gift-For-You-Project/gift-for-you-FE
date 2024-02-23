@@ -139,7 +139,7 @@ const Sponsor = () => {
                                         </P>
                                         <MakerDiv>만든이</MakerDiv>
                                     </NamingDiv>
-                                    <CommentDiv mt="5px" fs="13px" bc={theme.secondary}>
+                                    <CommentDiv mt="5px" fs="13px" br="7px 0px 7px 7px" bc={theme.secondary}>
                                         {sponsorData.content}
                                     </CommentDiv>
                                 </FundingComment>
@@ -156,7 +156,7 @@ const Sponsor = () => {
                                         </P>
                                         <SponsorDiv>예시 1등{sponsorData.donationRanking}</SponsorDiv>
                                     </NamingDiv>
-                                    <CommentDiv mt="5px" fs="13px" bc={theme.gray6}>
+                                    <CommentDiv mt="5px" fs="13px" br="0px 7px 7px 7px" bc={theme.gray6}>
                                         {sponsorData.sponsorComment}
                                         예시 후원자1등 남길 메시지
                                     </CommentDiv>
@@ -215,7 +215,7 @@ const SponsorItem = ({ imageSrc, sponsorNickname, ranking, comment }) => {
                         {ranking}등{ranking}
                     </SponsorDiv>
                 </NamingDiv>
-                <CommentDiv mt="5px" fs="13px" bc={theme.gray6}>
+                <CommentDiv mt="5px" fs="13px" br="0px 7px 7px 7px" bc={theme.gray6}>
                     {comment}
                     {ranking}등 후원자 남길 메시지
                 </CommentDiv>

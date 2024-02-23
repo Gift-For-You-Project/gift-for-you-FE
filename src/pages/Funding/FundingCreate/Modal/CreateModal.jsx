@@ -45,7 +45,7 @@ function CreateModal({ closeModal, handleImageSelection }) {
           <ModalInput
             type="text"
             value={itemLink}
-            placeholder="https://www.musinsa.com/372?loc=goods_rank"
+            placeholder=" https://www.giftipie.com/32?sdc=goods_rank"
             onChange={(e) => setItemLink(e.target.value)}
           ></ModalInput>
           <ModalButton onClick={handleModalButtonClick}>등록하기</ModalButton>

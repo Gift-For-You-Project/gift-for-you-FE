@@ -175,13 +175,13 @@ export const BannerImgDiv = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  padding-left: 15px;
+  padding-right: 20px;
 `;
 
 export const GiftCoverImg = styled.img`
   width: 50%; /* 이미지의 너비를 50%로 설정하여 반쯤 걸쳐지도록 함 */
   max-width: 121.82px;
-  height: 100%;
-  max-height: 121.82px;
   /* border-radius: 0px 0px 20px 20px; */
   position: absolute; /* 절대 위치 지정 */
   top: 50%; /* 부모 요소의 중앙에 위치하도록 설정 */
@@ -203,7 +203,6 @@ export const BannerImg = styled.img`
   left: 50%; /* 부모 요소의 중앙에 위치하도록 설정 */
   transform: translate(-50%, 12%); /* 부모 요소의 중앙에 위치하도록 설정 */
   z-index: 1; /* 다른 내용 위에 렌더링되도록 z-index 설정 */
-  /* border: 0.3px solid ${theme.gray4}; */
   box-shadow: 2px 2px 5px 2px ${theme.black};
 `;
 
@@ -236,8 +235,7 @@ export const FundingDiv = styled.div`
   border: 0.3px solid ${theme.gray4};
   width: -webkit-fill-available; /* 사용 가능한 너비로 채움 */
   max-width: 390px; /* 최대 너비를 390px로 제한 */
-  margin: 0 auto; /* 가운데 정렬을 위해 margin을 auto로 설정 */
-  margin-top: 15px;
+  margin: 10px auto 0 auto;
   padding-bottom: ${(props) => props.pb};
   padding: ${(props) => props.p};
 
@@ -345,12 +343,12 @@ export const MakerDiv = styled.div`
 `;
 
 export const DdayDiv = styled.p`
-  border-radius: 5px;
+  border-radius: 8px;
   color: ${theme.gray2};
-  font-size: ${theme.detail2};
+  font-size: ${theme.detail};
   background-color: ${theme.gray6};
-  /* font-weight: 600; */
-  padding: 5px 15px 5px 15px;
+  font-weight: 600;
+  padding: 4px 15px 4px 15px;
 `;
 
 export const FundingComment = styled.div`
@@ -366,7 +364,7 @@ export const CommentDiv = styled.div`
   align-items: center;
   width: 290px; /* 최대 너비를 390px로 제한 */
   padding: 14px;
-  border-radius: 7px;
+  border-radius: ${(props) => props.br};
   background-color: ${(props) => props.bc};
   color: ${theme.black};
   font-size: ${theme.detail};
@@ -393,8 +391,8 @@ export const GiftTitle = styled.div`
 `;
 
 export const SponsorImg = styled.img`
-  width: 60px;
-  height: 60px;
+  width: 45px;
+  height: 45px;
   border-radius: 100px;
   margin-top: 10px;
 `;

@@ -243,6 +243,7 @@ export const Textarea = styled.textarea`
   overflow:hidden;
   margin-bottom: 10px;
   padding-left: 10px;
+  font-weight: 500;
   font-size: ${theme.body1};
   color: ${theme.black};
   justify-content: start;
@@ -309,6 +310,7 @@ export const InputInput = styled.input`
   width: 95%;
   padding-left: 10px;
   padding-bottom: 10px;
+  font-weight: 500;
   font-size: ${theme.body1};
   color: ${theme.black};
   border-radius: 10px;

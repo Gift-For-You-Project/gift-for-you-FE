@@ -198,8 +198,8 @@ export const CommentDiv = styled.div`
   justify-content: center;
   align-items: center;
   width: 290px; /* 최대 너비를 390px로 제한 */
-  padding: 10px;
-  border-radius: 7px;
+  padding: 12px;
+  border-radius: ${(props) => props.br};
   font-weight: 600;
   background-color: ${(props) => props.bc};
   color: ${theme.black};

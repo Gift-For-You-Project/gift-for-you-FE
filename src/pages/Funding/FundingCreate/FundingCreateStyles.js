@@ -322,7 +322,7 @@ export const InputInput = styled.input`
   padding-left: 10px;
   padding-bottom: 10px;
   font-weight: 500;
-  font-size: ${theme.body1};
+  font-size: ${theme.title2};
   color: ${theme.black};
   border-radius: 10px;
   justify-content: start;

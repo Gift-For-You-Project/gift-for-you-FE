@@ -51,6 +51,7 @@ import {
     StartRowDiv,
     GiftCoverImg,
 } from './FundingDetailStyles';
+import { infoToast } from '../../../components/toast';
 
 const FundingDetail = () => {
     const navigate = useNavigate();
@@ -248,13 +249,20 @@ const FundingDetail = () => {
                     </BannerImgDiv>
 
                     <NavigateDiv>
-                        <NavigateBtn>링크복사</NavigateBtn>
+                        <NavigateBtn
+                            onClick={() => {
+                                navigator.clipboard.writeText(window.location.href);
+                                infoToast('상품 링크가 복사되었습니다.');
+                            }}
+                        >
+                            링크복사
+                        </NavigateBtn>
                         <NavigateBtn onClick={() => navigate(`/fundingModify/${id}`)}>수정</NavigateBtn>
                     </NavigateDiv>
 
                     <TogetherDiv bc={theme.white}>
                         <BetweenDiv pt="27px">
-                            <P fs="20px" color={theme.primary}>
+                            <P fs="20px" fw="600" color={theme.primary}>
                                 {detailData.achievementRate}%
                             </P>
                         </BetweenDiv>
@@ -262,7 +270,7 @@ const FundingDetail = () => {
                             {/* <P fs={theme.body2} color={theme.gray2}>
                                 {detailData.itemName}
                             </P> */}
-                            <P fs={theme.body2} color={theme.gray2}>
+                            <P fs={theme.body1} color={theme.gray2} fw="500">
                                 {detailData.targetAmount - detailData.currentAmount}원 남았어요
                             </P>
                             <DdayDiv>{detailData.dday}</DdayDiv>
@@ -281,7 +289,7 @@ const FundingDetail = () => {
                                     </P>
                                     <MakerDiv>만든이</MakerDiv>
                                 </NamingDiv>
-                                <CommentDiv mt="5px" fs="13px" bc={theme.secondary}>
+                                <CommentDiv mt="5px" fs="13px" bc={theme.secondary} br="7px 0px 7px 7px">
                                     {detailData.content}
                                 </CommentDiv>
                             </FundingComment>
@@ -298,7 +306,7 @@ const FundingDetail = () => {
                                     {/* <SponsorDiv>1등{detailData.donationRanking}</SponsorDiv> */}
                                     <SponsorDiv>1등{detailData.donationRanking}</SponsorDiv>
                                 </NamingDiv>
-                                <CommentDiv mt="5px" fs="13px" bc={theme.gray6}>
+                                <CommentDiv mt="5px" fs="13px" bc={theme.gray6} br="0px 7px 7px 7px">
                                     {/* {detailData.sponsorComment} */}
                                     {detailData.sponsorComment}
                                     후원자1등 남길 메시지
@@ -315,7 +323,7 @@ const FundingDetail = () => {
                                     </P>
                                     <SponsorDiv>2등{detailData.donationRanking}</SponsorDiv>
                                 </NamingDiv>
-                                <CommentDiv mt="5px" fs="13px" bc={theme.gray6}>
+                                <CommentDiv mt="5px" fs="13px" bc={theme.gray6} br="0px 7px 7px 7px">
                                     {detailData.sponsorComment}
                                     후원자2등 남길 메시지
                                 </CommentDiv>
@@ -331,7 +339,7 @@ const FundingDetail = () => {
                                     </P>
                                     <SponsorDiv>3등{detailData.donationRanking}</SponsorDiv>
                                 </NamingDiv>
-                                <CommentDiv mt="5px" fs="13px" bc={theme.gray6}>
+                                <CommentDiv mt="5px" fs="13px" bc={theme.gray6} br="0px 7px 7px 7px">
                                     {detailData.sponsorComment}
                                     후원자3등 남길 메시지
                                 </CommentDiv>
@@ -374,10 +382,10 @@ const FundingDetail = () => {
                             <StartRowDiv>
                                 <FundingImg src="/imgs/Funding/FundingDetail/coffee.svg" alt="image" ml="10px" />
                                 <div>
-                                    <P pl="20px" fs={theme.body1} color={theme.black}>
+                                    <P pl="20px" fs={theme.body1} fw="600" color={theme.black}>
                                         {sponsorDonation.donation5000}원
                                     </P>
-                                    <P pl="20px" fs={theme.detail} color={theme.gray4}>
+                                    <P pl="20px" fs={theme.detail2} color={theme.gray4}>
                                         커피 한 잔 만큼
                                     </P>
                                 </div>
@@ -400,10 +408,10 @@ const FundingDetail = () => {
                             <StartRowDiv>
                                 <FundingImg src="/imgs/Funding/FundingDetail/icecream.svg" alt="image" ml="10px" />
                                 <div>
-                                    <P pl="20px" fs={theme.body1} color={theme.black}>
+                                    <P pl="20px" fs={theme.body1} fw="600" color={theme.black}>
                                         {sponsorDonation.donation10000}원
                                     </P>
-                                    <P pl="20px" fs={theme.detail} color={theme.gray4}>
+                                    <P pl="20px" fs={theme.detail2} color={theme.gray4}>
                                         파인트 아이스크림 만큼
                                     </P>
                                 </div>
@@ -426,10 +434,10 @@ const FundingDetail = () => {
                             <StartRowDiv>
                                 <FundingImg src="/imgs/Funding/FundingDetail/chicken.svg" alt="image" ml="10px" />
                                 <div>
-                                    <P pl="20px" fs={theme.body1} color={theme.black}>
+                                    <P pl="20px" fs={theme.body1} fw="600" color={theme.black}>
                                         {sponsorDonation.donation20000}원
                                     </P>
-                                    <P pl="20px" fs={theme.detail} color={theme.gray4}>
+                                    <P pl="20px" fs={theme.detail2} color={theme.gray4}>
                                         치킨 한 마리 만큼
                                     </P>
                                 </div>
@@ -452,10 +460,10 @@ const FundingDetail = () => {
                             <StartRowDiv>
                                 <FundingImg src="/imgs/Funding/FundingDetail/cake.svg" alt="image" ml="10px" />
                                 <div>
-                                    <P pl="20px" fs={theme.body1} color={theme.black}>
+                                    <P pl="20px" fs={theme.body1} fw="600" color={theme.black}>
                                         {sponsorDonation.donation30000}원
                                     </P>
-                                    <P pl="20px" fs={theme.detail} color={theme.gray4}>
+                                    <P pl="20px" fs={theme.detail2} color={theme.gray4}>
                                         2호 케이크 만큼
                                     </P>
                                 </div>
@@ -478,10 +486,10 @@ const FundingDetail = () => {
                             <StartRowDiv>
                                 <FundingImg src="/imgs/Funding/FundingDetail/shimsaimdang.svg" alt="image" ml="10px" />
                                 <div>
-                                    <P pl="20px" fs={theme.body1} color={theme.black}>
+                                    <P pl="20px" fs={theme.body1} fw="600" color={theme.black}>
                                         {sponsorDonation.donation50000}원
                                     </P>
-                                    <P pl="20px" fs={theme.detail} color={theme.gray4}>
+                                    <P pl="20px" fs={theme.detail2} color={theme.gray4}>
                                         심사임당 만큼
                                     </P>
                                 </div>

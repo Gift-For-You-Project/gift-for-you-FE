@@ -51,13 +51,6 @@ const FundingPay = ({ donation }) => {
         isChecked: false, // 체크박스의 상태를 관리합니다.
     });
 
-    const handleCheckboxChange = (e) => {
-        setSponsorDonation({
-            ...sponsorDonation,
-            isChecked: e.target.checked,
-        });
-    };
-
     const handleFundingDonationClick = async () => {
         try {
             if (!isChecked) {

@@ -261,7 +261,7 @@ const FundingCreate = () => {
                                                 type="radio"
                                                 mb="21px"
                                             />
-                                            <P pb="20px" pl="20px" fs={theme.body2} color={theme.black}>
+                                            <P pb="20px" pl="20px" fw="600" fs={theme.body2} color={theme.black}>
                                                 공개
                                             </P>
                                             <P pb="20px" pl="42px" fs={theme.detail} color={theme.gray2}>
@@ -276,7 +276,7 @@ const FundingCreate = () => {
                                                 type="radio"
                                                 mb="21px"
                                             />
-                                            <P pb="20px" pl="20px" fs={theme.body2} color={theme.black}>
+                                            <P pb="20px" pl="20px" fw="600" fs={theme.body2} color={theme.black}>
                                                 비공개
                                             </P>
                                             <P pb="20px" pl="30px" fs={theme.detail} color={theme.gray2}>
@@ -337,7 +337,7 @@ const FundingCreate = () => {
                                     fs="19px"
                                     bc={theme.primary}
                                 >
-                                    펀딩 등록하기
+                                    펀딩 만들기
                                 </Button>
                                 <ColumnDiv>
                                     <P fs={theme.body2} color={theme.gray3}>
