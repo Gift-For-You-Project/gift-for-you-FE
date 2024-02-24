@@ -45,7 +45,7 @@ import { IconDiv, NavbarDiv } from "../../Home/Signup/SignupStyles";
 
 const FundingCreate = () => {
   const navigate = useNavigate();
-  const { id } = useParams(); // URL 매개변수(id)를 가져옴
+  const { id } = useParams();
   const [itemImage, setItemImage] = useState(false);
   const [isFundingModalOpen, setIsFundingModalOpen] = useState(false);
   const [createData, setCreateData] = useState({
