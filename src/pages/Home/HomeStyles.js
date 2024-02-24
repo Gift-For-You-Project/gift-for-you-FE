@@ -626,12 +626,11 @@ export const ProductGrids = styled.div`
   }
 
   &::-webkit-scrollbar-thumb {
-    width: 50%;
-    background: ${theme.primary};
+    background: ${theme.gray5};
+    border-radius: 100px;
   }
 
   &::-webkit-scrollbar-track {
-    width: 50%;
     background: ${theme.white};
   }
 `;
