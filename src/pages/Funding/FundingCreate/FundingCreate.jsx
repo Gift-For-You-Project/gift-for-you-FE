@@ -306,7 +306,7 @@ const FundingCreate = () => {
                                 </InputLabel>
                             </TogetherDiv>
 
-                            <TogetherDiv bc={theme.white} br="30px 30px 0px 0px">
+                            <TogetherDiv h="30vh" bc={theme.white} br="30px 30px 0px 0px">
                                 <InputLabel>
                                     <InputSpan>마감일 설정</InputSpan>
                                     <InputInput
