@@ -1,23 +1,52 @@
 import React, { useState } from "react";
 import { FaAngleLeft } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
-import InputField from "../../../components/LoginInput";
 import { login } from "../../../apis/auth";
 import { useDispatch } from "react-redux";
 import { userLogin } from "../../../redux/authSlice";
+import theme from "../../../styles/theme";
 import {
   MainContainer,
   LeftContainer,
-  Logo,
   P,
   RightContainer,
   InputFieldContainer,
   Body,
-  LoginIconDiv,
-  LoginImg,
   LoginBtn,
   BlankLine,
+  LoginInputDiv,
+  LoginInput,
 } from "./LoginStyles";
+import {
+  LeftContent,
+  LeftRowdiv,
+  LeftImg,
+  Leftcolumndiv,
+  IpadLoveImg,
+  LeftImgContainer,
+  BubbleTxt,
+  BubbleImg,
+  LeftLogoTextIcon,
+  LeftPieImg,
+} from "../HomeStyles";
+import { NavbarDiv, IconDiv } from "../Signup/SignupStyles";
+
+// InputField 컴포넌트
+const InputField = ({ onChange, onKeyDown, title, type, placeholder }) => {
+  return (
+    <LoginInputDiv>
+      <P fs={theme.detail2} color={theme.gray3} p="10px 10px 0 10px">
+        {title}
+      </P>
+      <LoginInput
+        type={type}
+        placeholder={`${placeholder}`}
+        onChange={onChange}
+        onKeyDown={onKeyDown}
+      />
+    </LoginInputDiv>
+  );
+};
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -26,8 +55,6 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [showEmailHelp, setShowEmailHelp] = useState(false);
   const [showPasswordHelp, setShowPasswordHelp] = useState(false);
-
-  const handleBackClick = () => navigate("/");
 
   // Enter키가 눌렸을 때 로그인 처리
   const handleKeyDown = (e) => {
@@ -88,31 +115,75 @@ const Login = () => {
   return (
     <MainContainer>
       <LeftContainer>
-        <Logo>Giftipie</Logo>
-        <P pt="25px" fs="16px" fw="800" pb="5px">
-          기프티파이에서
-        </P>
-        <P fs="16px" fw="800" pb="5px">
-          정말 원하는 선물을
-        </P>
-        <P fs="16px" fw="800">
-          주고 받아요
-        </P>
+        <LeftContainer>
+          <LeftImgContainer>
+            <BubbleTxt>
+              <P fs="24px" fw="700" color={theme.white}>
+                생일선물
+                <br />뭐 받고싶어?
+              </P>
+            </BubbleTxt>
+            <BubbleImg src="/imgs/Home/speech-bubble.png" />
+            <LeftLogoTextIcon
+              onClick={() => navigate("/")}
+              src="/imgs/Common/giftipie.png"
+            />
+            <LeftPieImg src="/imgs/Home/pie-hi.png" />
+          </LeftImgContainer>
+          <LeftRowdiv ml="30px">
+            <LeftRowdiv
+              color={theme.gray1}
+              mr="10px"
+              bc={theme.primary}
+              br="25px"
+              p="8px"
+            >
+              <LeftImg
+                src="/imgs/Home/giftbox-red.png"
+                w="30px"
+                h="25px"
+                mr="10px"
+                pl="10px"
+              />
+              <P fs="20px" fw="900" pr="10px" color={theme.black}>
+                정말 원하는 선물
+              </P>
+            </LeftRowdiv>
+            <P fs="20px" fw="700" color={theme.white}>
+              을 주고 받아요!
+            </P>
+          </LeftRowdiv>
+          <LeftContent>
+            <Leftcolumndiv ml="30px">
+              <P fs="16px" fw="500" pb="5px" pr="250px" color={theme.gray4}>
+                지금은 유저테스트 진행 중 입니다. <br />
+                6명의 개발자와 1명의 디자이너가 함께 개발하고 있습니다.
+              </P>
+            </Leftcolumndiv>
+          </LeftContent>
+        </LeftContainer>
+        <LeftRowdiv ml="30px"></LeftRowdiv>
+        <IpadLoveImg src="/imgs/Home/pie-ipad.png" w="300px" />
       </LeftContainer>
+
       <RightContainer>
+        <NavbarDiv>
+          <IconDiv>
+            <FaAngleLeft onClick={() => navigate("/")} />
+          </IconDiv>
+          <P fs={theme.body2} color={theme.white}>
+            로그인
+          </P>
+        </NavbarDiv>
         <Body>
-          <LoginIconDiv>
-            <FaAngleLeft onClick={handleBackClick} />
-          </LoginIconDiv>
           <InputFieldContainer>
-            <LoginImg src="/imgs/Character/giftipie-02.png" alt="pie" />
             <InputField
               value={email}
               onChange={handleEmailChange}
               onKeyDown={handleKeyDown}
               title="이메일"
               type="email"
-              placeholder="Email"
+              placeholder="ex) abcd1234@gmail.com"
               showHelp={showEmailHelp}
               helpMessage={
                 showEmailHelp && !isValidEmailFormat(email)
@@ -120,7 +191,7 @@ const Login = () => {
                   : ""
               }
             />
-            <BlankLine h="50px" />
+            <BlankLine h="30px" />
             <InputField
               value={password}
               onChange={handlePasswordChange}

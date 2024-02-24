@@ -11,26 +11,100 @@ export const MainContainer = styled.div`
   flex-wrap: wrap;
 `;
 
-// 왼쪽 컨테이너
+/* 왼쪽 컨테이너 */
 export const LeftContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
-  width: 500px;
   height: 100vh;
-  padding: 20px;
-  /* border: 1px solid lightgray; */
-  margin-right: 100px;
+  padding-top: ${(props) => props.pt};
 
-  @media (max-width: 1024px) {
+  @media screen and (max-width: 1024px) {
     display: none;
   }
 `;
 
-export const Logo = styled.h1`
-  font-size: 24px;
-  font-weight: 800;
+export const LeftImgContainer = styled.div`
+  position: relative;
+  height: 0;
+  padding-left: 150px;
+`;
+
+export const LeftLogoTextIcon = styled.img`
+  position: absolute;
+  height: 40px;
+  bottom: 20px;
+  left: 30px;
+  cursor: pointer;
+`;
+
+export const BubbleTxt = styled.div`
+  position: absolute;
+  bottom: 208px;
+  left: 26px;
+  padding: 100px 0 0 300px;
+`;
+
+export const BubbleImg = styled.img`
+  position: absolute;
+  bottom: 130px;
+  right: 130px;
+  height: 200px;
+`;
+
+export const LeftRowdiv = styled.div`
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  padding-top: ${(props) => props.pt};
+  margin-top: ${(props) => props.mt};
+  padding-bottom: ${(props) => props.pb};
+  padding-left: ${(props) => props.pl};
+  padding-right: ${(props) => props.pr};
+  margin-right: ${(props) => props.mr};
+  margin-left: ${(props) => props.ml};
+  font-size: ${(props) => props.fs};
+  font-weight: ${(props) => props.fw};
+  color: ${(props) => props.color};
+  background-color: ${(props) => props.bc};
+  border-radius: ${(props) => props.br};
+  padding: ${(props) => props.p};
+  border: none;
+`;
+
+export const LeftContent = styled.div`
+  display: flex;
+  flex-direction: row;
+  padding-top: 30px;
+`;
+
+export const LeftImg = styled.img`
+  margin-top: ${(props) => props.mt};
+  margin-right: ${(props) => props.mr};
+  padding-right: ${(props) => props.pr};
+  padding-left: ${(props) => props.pl};
+  width: ${(props) => props.w};
+  height: ${(props) => props.h};
+`;
+
+export const LeftPieImg = styled.img`
+  position: absolute;
+  width: 250px;
+  right: 0;
+  bottom: -100px;
+`;
+
+export const Leftcolumndiv = styled.div`
+  flex-direction: column;
+  margin-left: ${(props) => props.ml};
+`;
+
+export const IpadLoveImg = styled.img`
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: ${(props) => props.w};
+  height: ${(props) => props.h};
 `;
 
 export const P = styled.p`
@@ -38,6 +112,7 @@ export const P = styled.p`
   padding-bottom: ${(props) => props.pb};
   padding-left: ${(props) => props.pl};
   padding-right: ${(props) => props.pr};
+  padding: ${(props) => props.p};
   font-size: ${(props) => props.fs};
   font-weight: ${(props) => props.fw};
   color: ${(props) => props.color};
@@ -48,16 +123,17 @@ export const P = styled.p`
 // 오른쪽 컨테이너
 export const RightContainer = styled.div`
   position: relative;
-  width: 442px;
+  width: -webkit-fill-available;
+  max-width: 390px;
   height: 100vh;
-  /* border: 1px solid lightgray; */
+  margin: 0 10px;
   overflow-y: scroll;
 
   &::-webkit-scrollbar {
     display: none;
   }
 
-  @media (max-width: 442px) {
+  @media (max-width: 390px) {
     width: 100%;
   }
 `;
@@ -68,25 +144,44 @@ export const Body = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100%;
-  max-width: 442px;
+  width: -webkit-fill-available;
+  max-width: 390px;
   height: 100vh;
-  margin: 0 auto;
+  bottom: 0;
 `;
 
 export const InputFieldContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: auto;
-  width: 100%;
+  width: -webkit-fill-available;
   max-width: 390px;
-  color: white;
+  height: 100vh;
+  background-color: ${theme.white};
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  padding-top: 40px;
 `;
 
 export const BlankLine = styled.div`
   width: ${(props) => props.w};
   height: ${(props) => props.h};
+`;
+
+export const LoginInputDiv = styled.div`
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border: 2px solid ${theme.gray5};
+  border-radius: 8px;
+  width: -webkit-fill-available;
+  max-width: 350px;
+  height: 60px;
+
+  &:focus-within {
+    border: 2px solid ${theme.gray2};
+  }
 `;
 
 export const LoginIconDiv = styled.div`
@@ -111,34 +206,45 @@ export const LoginImg = styled.img`
   margin-bottom: 50px;
 `;
 
-export const LoginInput = styled.input`
-  width: 300px;
-  height: 40px;
-  font-size: 16px;
-  padding-left: 10px;
-  border-radius: 5px;
-`;
-
 export const LoginBtn = styled.button`
-  width: 100%;
-  max-width: 442px;
-  height: 50px;
-  font-size: 20px;
-  margin-top: auto;
-  margin-bottom: auto;
+  position: absolute;
+  bottom: 0;
+  width: -webkit-fill-available;
+  max-width: 336px;
+  height: 48px;
+  font-size: ${theme.body1};
+  color: ${theme.white};
   background-color: ${theme.primary};
   transition: all 300ms ease-in-out;
-  border-radius: 7px;
+  border-radius: 16px;
+  margin-bottom: 20px;
 
   &:hover {
-    background-color: ${theme.secondary};
+    background-color: ${theme.primaryFont};
   }
 `;
 
 export const LoginHelpDiv = styled.div`
-  width: 300px;
+  display: flex;
+  position: absolute;
+  align-items: center;
+  width: -webkit-fill-available;
+  max-width: 350px;
   height: 20px;
-  font-size: 14px;
-  margin-top: 10px;
-  color: #f45757;
+  font-size: ${theme.detail};
+  color: ${theme.primaryFont};
+  padding: 8px;
+`;
+
+export const LoginInput = styled.input`
+  width: -webkit-fill-available;
+  max-width: 330px;
+  height: 40px;
+  font-size: ${theme.title2};
+  padding-left: 10px;
+  border-radius: 5px;
+
+  &::placeholder {
+    color: ${theme.gray4};
+  }
 `;

@@ -110,7 +110,7 @@ const Signup = () => {
     isCheckedService: false,
     isCheckedPrivacy: false,
     isCheckedMarketing: false,
-    isEmailNotificationAgreed: null,
+    isEmailNotificationAgreed: false,
   });
 
   const handleCheckboxChange = (type) => {
