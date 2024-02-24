@@ -240,6 +240,7 @@ export const NavbarBtn = styled.button`
   padding-left: ${(props) => props.pl};
   padding-right: ${(props) => props.pr};
   color: ${theme.white};
+  cursor: pointer;
   transition: all 300ms ease;
 
   &:hover {
@@ -313,7 +314,6 @@ export const FundingDiv = styled.div`
   align-items: center;
   width: 100%;
   max-width: 390px;
-  height: auto;
   margin-bottom: 10px;
 `;
 
@@ -626,12 +626,11 @@ export const ProductGrids = styled.div`
   }
 
   &::-webkit-scrollbar-thumb {
-    width: 50%;
-    background: ${theme.primary};
+    background: ${theme.gray5};
+    border-radius: 100px;
   }
 
   &::-webkit-scrollbar-track {
-    width: 50%;
     background: ${theme.white};
   }
 `;

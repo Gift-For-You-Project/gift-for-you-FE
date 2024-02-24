@@ -193,7 +193,7 @@ export const NavbarDiv = styled.div`
 
 // 바디 영역
 export const Body = styled.div`
-  display: flex;
+  /* display: flex; */
   flex-direction: column;
   justify-content: center;
   align-items: center;

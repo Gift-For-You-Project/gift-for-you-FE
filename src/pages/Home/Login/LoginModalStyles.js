@@ -4,19 +4,19 @@ import theme from "../../../styles/theme";
 export const ModalContainer = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  width: 100%;
-  max-width: 350px;
-  height: 550px;
-  background-color: ${theme.gray1};
+  width: -webkit-fill-available;
+  max-width: 360px;
+  height: 520px;
+  background-color: ${theme.white};
   position: fixed;
   bottom: 50%;
   right: 50%;
   transform: translate(50%, 50%);
-  border-radius: 10px;
+  border-radius: 32px;
   z-index: 10;
   padding-bottom: 30px;
+  gap: 10px;
 `;
 
 export const Background = styled.div`
@@ -37,7 +37,7 @@ export const IoCloseDiv = styled.div`
   max-width: 442px;
   font-size: 30px;
   color: ${theme.gray4};
-  padding: 8px;
+  padding: 10px;
 
   &:hover {
     color: darkgray;
@@ -64,22 +64,38 @@ export const P = styled.p`
   font-size: ${(props) => props.fs};
   font-weight: ${(props) => props.fw};
   color: ${(props) => props.color};
+  cursor: ${(props) => props.cursor};
   display: flex;
   align-items: center;
 `;
 
-export const GoogleBtn = styled.button``;
-
-export const KakaoBtn = styled.button``;
-
 export const LoginModalBtn = styled.button`
-  background-color: ${(props) => props.color};
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: ${(props) => props.bc};
+  color: ${(props) => props.color};
   padding: 12px 12px;
-  font-size: 18px;
-  font-weight: 500;
-  color: white;
-  border-radius: 8px;
-  width: 220px;
-  margin: 6px;
-  border: 1px solid ${theme.gray4};
+  font-size: ${theme.body2};
+  color: ${(props) => props.color};
+  border-radius: 16px;
+  width: -webkit-fill-available;
+  max-width: 336px;
+  height: 48px;
+`;
+
+export const TxtDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  line-height: 1.2;
+  padding-bottom: 30px;
+`;
+
+export const KakaoImg = styled.img`
+  width: -webkit-fill-available;
+  max-width: 20px;
+  height: 20px;
+  margin-right: 6px;
 `;
