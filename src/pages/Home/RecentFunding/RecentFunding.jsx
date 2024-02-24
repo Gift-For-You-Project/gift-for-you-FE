@@ -3,7 +3,7 @@ import { useNavigate, Link } from "react-router-dom";
 import LoginModal from "../Login/LoginModal";
 import { getRecentFundingList } from "../../../apis/home";
 import theme from "../../../styles/theme";
-import { FaAngleLeft } from "react-icons/fa6";
+import { FaPlus, FaAngleLeft } from "react-icons/fa6";
 import {
   MainContainer,
   LeftContainer,
@@ -34,6 +34,7 @@ import {
   CategoryDiv,
 } from "./RecentFundingStyles";
 import { NavbarDiv, IconDiv } from "../Signup/SignupStyles";
+import { Button, FloatingBtn } from "../HomeStyles";
 
 const RecentFunding = () => {
   const navigate = useNavigate();
@@ -197,6 +198,18 @@ const RecentFunding = () => {
               </FundingSection>
             </FundingDiv>
           </TogetherDiv>
+          <Button
+            onClick={() => navigate("/fundingcreate")}
+            w="100%"
+            h="60px"
+            color="black"
+            fs="20px"
+            bc={theme.primary}
+            as={FloatingBtn}
+          >
+            <FaPlus />
+            &nbsp; 펀딩 만들기
+          </Button>
         </Body>
       </RightContainer>
 

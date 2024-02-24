@@ -17,6 +17,7 @@ import theme from "../../../../styles/theme";
 function CreateModal({ closeModal, handleImageSelection }) {
   const navigate = useNavigate();
   const [itemLink, setItemLink] = useState("");
+  const [isPlaceholderVisible, setIsPlaceholderVisible] = useState(true);
 
   const handleModalButtonClick = async () => {
     try {
@@ -38,16 +39,29 @@ function CreateModal({ closeModal, handleImageSelection }) {
       <Background>
         <ModalBox>
           <ModalTitleXBox>
-            <P fs={theme.title} color={theme.gray1}>상품 이미지 등록</P>
-            <XButton onClick={closeModal}><IoClose /></XButton>
+            <P fs={theme.title} color={theme.gray1}>
+              상품 이미지 등록
+            </P>
+            <XButton onClick={closeModal}>
+              <IoClose />
+            </XButton>
           </ModalTitleXBox>
-            <P fs={theme.detail} color={theme.gray4}>원하는 상품의 판매페이지 링크를 넣어서 손쉽게 제품 이미지를 가져오세요!</P>
+          <P fs={theme.detail} color={theme.gray4}>
+            원하는 상품의 판매페이지 링크를 넣어서 손쉽게 제품 이미지를
+            가져오세요!
+          </P>
           <ModalInput
             type="text"
             value={itemLink}
-            placeholder=" https://www.giftipie.com/32?sdc=goods_rank"
+            placeholder={
+              isPlaceholderVisible
+                ? " https://www.giftipie.com/32?sdc=goods_rank"
+                : ""
+            }
+            onFocus={() => setIsPlaceholderVisible(false)}
+            onBlur={() => setIsPlaceholderVisible(itemLink === "")}
             onChange={(e) => setItemLink(e.target.value)}
-          ></ModalInput>
+          />
           <ModalButton onClick={handleModalButtonClick}>등록하기</ModalButton>
         </ModalBox>
       </Background>

@@ -395,13 +395,13 @@ export const TogetherBetween = styled.div`
 
 export const TogetherDiv = styled.div`
   background-color: ${(props) => props.bc};
-  border-radius: 30px;
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
   border: 0.3px solid ${theme.gray4};
-  box-shadow: 0px 5px 0px 0px ${theme.gray4};
   width: -webkit-fill-available; /* 사용 가능한 너비로 채움 */
   max-width: 390px; /* 최대 너비를 390px로 제한 */
   margin: 0 auto; /* 가운데 정렬을 위해 margin을 auto로 설정 */
-  margin-bottom: 15px;
+  padding-bottom: 50px;
 
   @media screen and (max-width: 390px) {
     max-width: 100%; /* 최대 너비를 100%로 설정하여 가득 차게 함 */
@@ -414,7 +414,7 @@ export const CategoryContainer = styled.div`
   align-items: center;
   width: -webkit-fill-available;
   max-width: 390px;
-  height: 40px;
+  height: 50px;
 `;
 
 export const CategoryDiv = styled.div`

@@ -83,7 +83,7 @@ export const ModalInput = styled.input`
 export const XButton = styled.button`
   width: 30px;
   font-weight: 700;
-  padding-left: 125px;
+  padding-left: 145px;
   font-size: 20px;
   color: ${theme.gray3};
 `;

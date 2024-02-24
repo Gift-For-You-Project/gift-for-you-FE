@@ -314,7 +314,6 @@ export const FundingDiv = styled.div`
   align-items: center;
   width: 100%;
   max-width: 390px;
-  height: auto;
   margin-bottom: 10px;
 `;
 
