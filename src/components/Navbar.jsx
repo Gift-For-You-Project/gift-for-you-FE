@@ -15,10 +15,11 @@ import {
   NotificationDiv,
   NotificationItem,
 } from "../pages/Home/NotificationStyles";
+import { warnToast } from "./toast";
 
 const Navbar = ({ isLoggedIn, handleLoginClick, handleLogoutClick }) => {
   const navigate = useNavigate();
-  const [isNotificationOpen, setIsNotificationOpen] = useState(false);
+  const [isNotificationOpen] = useState(false); // setIsNotificationOpen
   const [notifications, setNotifications] = useState([
     { id: 1, text: "알림1" },
     { id: 32, text: "알림2" },
@@ -32,7 +33,8 @@ const Navbar = ({ isLoggedIn, handleLoginClick, handleLogoutClick }) => {
   const [selectedNotifications, setSelectedNotifications] = useState([]);
 
   const toggleNotification = () => {
-    setIsNotificationOpen(!isNotificationOpen);
+    // setIsNotificationOpen(!isNotificationOpen);
+    warnToast("알림 서비스 개발 중입니다.");
   };
 
   const handleNotificationClick = (notification) => {

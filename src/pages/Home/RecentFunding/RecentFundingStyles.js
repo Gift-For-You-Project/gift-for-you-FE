@@ -419,17 +419,21 @@ export const CategoryContainer = styled.div`
 
 export const CategoryDiv = styled.div`
   display: flex;
-  justify-content: center;
   border-bottom: 2px solid ${theme.gray4};
   width: -webkit-fill-available;
-  max-width: 116px;
-  padding-top: 20px;
-  padding-bottom: 6px;
-
   a {
     font-size: ${theme.body2};
     color: ${theme.gray1};
-    text-decoration: none;
+    // text-decoration: none;
+    display: block;
+    width: 100%;
+    text-align: center;
+    padding: 20px 0px 6px 0px;
+  }
+  &.active {
+    color: ${theme.black};
+    font-weight: bold; /* Active 상태일 때의 글꼴 굵기 */
+    border-bottom: 2px solid ${theme.gray2};
   }
 `;
 

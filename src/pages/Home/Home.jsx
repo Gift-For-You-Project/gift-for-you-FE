@@ -5,14 +5,14 @@ import LoginModal from "../Home/Login/LoginModal";
 import { useDispatch, useSelector } from "react-redux";
 import { bootChannelTalk } from "../../redux/channelTalkSlice";
 import Navbar from "../../components/Navbar";
+import { logoutAndApiCall } from "../../redux/authSlice";
+import theme from "../../styles/theme";
+import { infoToast } from "../../components/toast";
 import {
   getMyFunding,
   getHomeFundingList,
   getFundingSummary,
 } from "../../apis/home";
-import { logoutAndApiCall } from "../../redux/authSlice";
-import theme from "../../styles/theme";
-import { infoToast } from "../../components/toast";
 import {
   MainContainer,
   LeftContainer,
@@ -95,7 +95,6 @@ const Home = () => {
 
   const closeModal = () => setIsLoginModalOpen(false);
   const handleLoginClick = () => setIsLoginModalOpen(true);
-
   const handleLogoutClick = () => {
     dispatch(logoutAndApiCall());
     navigate("/");
@@ -189,13 +188,19 @@ const Home = () => {
     </ProductGrid>
   );
 
+  const formatAmount = (amount) => {
+    // 만 원 단위로 끊어서 표시
+    const formattedAmount = Math.floor(amount / 10000);
+    return formattedAmount.toLocaleString();
+  };
+
   return (
     <MainContainer>
       <LeftContainer>
         <LeftContainer>
           <LeftImgContainer>
             <BubbleTxt>
-              <P fs="24px" fw="700" color={theme.white}>
+              <P fs={theme.headline1} fw="700" color={theme.white}>
                 생일선물
                 <br />뭐 받고싶어?
               </P>
@@ -450,7 +455,7 @@ const Home = () => {
                 <br /> 펀딩 금액
               </P>
               <P pt="10px" pb="10px" fs="16px" fw="700">
-                {fundingSummary.totalFundingAmount}원
+                {formatAmount(fundingSummary.totalFundingAmount)}만 원
               </P>
             </TogetherGrid>
           </TogetherGrids>
@@ -470,12 +475,12 @@ const Home = () => {
                 price="359,000원"
               />
               <ProductGridComponent
-                imgLink="https://store.sony.co.kr/product-view/115952023"
+                imgLink="https://www.ssg.com/item/itemView.ssg?itemId=1000572753927"
                 imgSrc="/imgs/Home/sony.jpeg"
                 altText="sonycamera"
                 brand="Sony"
                 itemName="렌즈 교환식 디지털 카메라 ILCE-9M3"
-                price="7,980,000원"
+                price="7,790,000원"
               />
               <ProductGridComponent
                 imgLink="https://www.nike.com/kr/t/%EC%97%90%EC%96%B4-%EC%A1%B0%EB%8D%98-1-%EB%AF%B8%EB%93%9C-%EB%82%A8%EC%84%B1-%EC%8B%A0%EB%B0%9C-Fpo9YM44/DQ8426-106"

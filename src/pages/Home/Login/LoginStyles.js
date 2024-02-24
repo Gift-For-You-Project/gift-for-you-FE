@@ -116,6 +116,7 @@ export const P = styled.p`
   font-size: ${(props) => props.fs};
   font-weight: ${(props) => props.fw};
   color: ${(props) => props.color};
+  cursor: ${(props) => props.cursor};
   display: flex;
   align-items: center;
 `;
@@ -247,4 +248,9 @@ export const LoginInput = styled.input`
   &::placeholder {
     color: ${theme.gray4};
   }
+`;
+
+export const InfoDiv = styled.div`
+  position: absolute;
+  bottom: 90px;
 `;
