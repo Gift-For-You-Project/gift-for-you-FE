@@ -14,6 +14,9 @@ import {
     LeftImgContainer,
     LeftLogoTextIcon,
     BubbleImg,
+    BubbleTxt,
+    LeftPieImg,
+    LeftContent,
     P,
     LeftRowdiv,
     LeftImg,
@@ -50,12 +53,14 @@ import {
     GiftTitle,
     StartRowDiv,
     GiftCoverImg,
+    IconButtonImg,
 } from './FundingDetailStyles';
 import { infoToast } from '../../../components/toast';
 
 const FundingDetail = () => {
     const navigate = useNavigate();
     const { id } = useParams();
+    const [sponsorDetail, setSponsorDetail] = useState([]);
     const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
     const dispatch = useDispatch();
     const [detailData, setDetailData] = useState({
@@ -89,6 +94,14 @@ const FundingDetail = () => {
         donationAll: '남은금액',
         donationInput: '직접입력',
     });
+
+    const imageSources = [
+        '/imgs/Funding/FundingPay/water-melon.svg',
+        '/imgs/Funding/FundingPay/icecream.svg',
+        '/imgs/Funding/FundingPay/yellow-tube.svg',
+        '/imgs/Funding/FundingPay/blue-dog.svg',
+        '/imgs/Funding/FundingPay/violet-star.svg',
+    ];
 
     const [isFundingModalOpen, setIsFundingModalOpen] = useState(false);
 
@@ -162,7 +175,8 @@ const FundingDetail = () => {
                     return;
                 }
                 const data = await getSponsorDetail(id);
-                setDetailData(data);
+                console.log('후원자 상세 data', data);
+                setSponsorDetail(data);
             } catch (error) {
                 console.error('펀딩 상세페이지 오류:', error);
             }
@@ -179,49 +193,40 @@ const FundingDetail = () => {
     return (
         <MainContainer>
             <LeftContainer>
-                <LeftContainer pt="70px">
+                <LeftContainer>
                     <LeftImgContainer>
-                        <div>
-                            <LeftLogoTextIcon src="/imgs/Common/giftipie.png" />
-                        </div>
-                        <div>
-                            <P pt="60px" pl="355px" fs="23px" fw="800" color={theme.white}>
+                        <BubbleTxt>
+                            <P fs="24px" fw="700" color={theme.white}>
                                 생일선물
                                 <br />뭐 받고싶어?
                             </P>
-                            <BubbleImg src="/imgs/Home/speech-bubble.png" />
-                        </div>
+                        </BubbleTxt>
+                        <BubbleImg src="/imgs/Home/speech-bubble.png" />
+                        <LeftLogoTextIcon onClick={() => navigate('/')} src="/imgs/Common/giftipie.png" />
+                        <LeftPieImg src="/imgs/Home/pie-hi.png" />
                     </LeftImgContainer>
-
                     <LeftRowdiv ml="30px">
                         <LeftRowdiv color={theme.gray1} mr="10px" bc={theme.primary} br="25px" p="8px">
                             <LeftImg src="/imgs/Home/giftbox-red.png" w="30px" h="25px" mr="10px" pl="10px" />
-                            <P fs="20px" fw="900" pr="10px">
+                            <P fs="20px" fw="900" pr="10px" color={theme.black}>
                                 정말 원하는 선물
                             </P>
                         </LeftRowdiv>
-                        <div>
-                            <P mt="6px" pt="2px" fs="20px" fw="700" color={theme.white}>
-                                을 주고 받아요!
-                            </P>
-                        </div>
+                        <P fs="20px" fw="700" color={theme.white}>
+                            을 주고 받아요!
+                        </P>
                     </LeftRowdiv>
-
-                    <LeftRowdiv>
+                    <LeftContent>
                         <Leftcolumndiv ml="30px">
-                            <P fs="16px" fw="500" pt="30px" pb="5px" color={theme.white}>
-                                지금은 유저테스트 진행 중 입니다
-                            </P>
-                            <P pb="100px" fs="16px" fw="500" color={theme.white}>
-                                6명의 개발자와 1명의 디자이너가 함께 개발하고 있습니다
+                            <P fs="16px" fw="500" pb="5px" pr="250px" color={theme.gray4}>
+                                지금은 유저테스트 진행 중 입니다. <br />
+                                6명의 개발자와 1명의 디자이너가 함께 개발하고 있습니다.
                             </P>
                         </Leftcolumndiv>
-                        <LeftImg src="/imgs/Home/pie-hi.png" w="340px" pl="100px" />
-                    </LeftRowdiv>
+                    </LeftContent>
                 </LeftContainer>
-
                 <LeftRowdiv ml="30px"></LeftRowdiv>
-                <IpadLoveImg src="/imgs/Home/pie-ipad.png" w="330px" />
+                <IpadLoveImg src="/imgs/Home/pie-ipad.png" w="300px" />
             </LeftContainer>
 
             <RightContainer>
@@ -236,9 +241,6 @@ const FundingDetail = () => {
                         <P pt="10px" fs="20px" fw="900" color={theme.white}>
                             {detailData.title}
                         </P>
-                        <P pt="10px" pb="0px" fs="13px" fw="800" color={theme.white}>
-                            {detailData.showName}
-                        </P>
                     </TitleDiv>
 
                     <BannerImgDiv>
@@ -248,39 +250,48 @@ const FundingDetail = () => {
                         <IllustImg src="/imgs/Funding/FundingDetail/pangpang-right.png" alt="img" />
                     </BannerImgDiv>
 
-                    <NavigateDiv>
-                        <NavigateBtn
-                            onClick={() => {
-                                navigator.clipboard.writeText(window.location.href);
-                                infoToast('상품 링크가 복사되었습니다.');
-                            }}
-                        >
-                            링크복사
-                        </NavigateBtn>
-                        <NavigateBtn onClick={() => navigate(`/fundingModify/${id}`)}>수정</NavigateBtn>
-                    </NavigateDiv>
-
                     <TogetherDiv bc={theme.white}>
-                        <BetweenDiv pt="27px">
+                        <NavigateDiv></NavigateDiv>
+                        <BetweenDiv pt="10px">
+                            <DdayDiv>{detailData.dday}</DdayDiv>
+                            <NavigateBtn
+                                onClick={() => {
+                                    navigator.clipboard.writeText(window.location.href);
+                                    infoToast('상품 링크가 복사되었습니다.');
+                                }}
+                            >
+                                <IconButtonImg src="/imgs/Funding/FundingDetail/link-copy.svg" /> 링크복사
+                            </NavigateBtn>
+                        </BetweenDiv>
+
+                        <BetweenDiv pt="20px">
                             <P fs="20px" fw="600" color={theme.primary}>
                                 {detailData.achievementRate}%
                             </P>
+                            {detailData.targetAmount - detailData.currentAmount <= 0 ? (
+                                <P pt="5px" fs={theme.body2} color={theme.gray2} fw="500">
+                                    종료된 펀딩입니다
+                                </P>
+                            ) : (
+                                <P pt="5px" fs={theme.body2} color={theme.gray2} fw="500">
+                                    {detailData.targetAmount - detailData.currentAmount}원 남았어요
+                                </P>
+                            )}
                         </BetweenDiv>
-                        <BetweenDiv pt="0px">
-                            {/* <P fs={theme.body2} color={theme.gray2}>
-                                {detailData.itemName}
-                            </P> */}
-                            <P fs={theme.body1} color={theme.gray2} fw="500">
-                                {detailData.targetAmount - detailData.currentAmount}원 남았어요
-                            </P>
-                            <DdayDiv>{detailData.dday}</DdayDiv>
-                        </BetweenDiv>
-
                         <ProgressBar>
                             <Progress width={(detailData.achievementRate / 100) * 100} />
                         </ProgressBar>
+                        <BetweenDiv pb="10px">
+                            <P fs={theme.detail2} color={theme.gray2} pt="5px" fw="500">
+                                내 펀딩 관리
+                            </P>
+                            <NavigateBtn onClick={() => navigate(`/fundingModify/${id}`)}>
+                                <IconButtonImg src="/imgs/Funding/FundingDetail/modify-icon.svg" /> 수정하기
+                            </NavigateBtn>
+                        </BetweenDiv>
                     </TogetherDiv>
-                    <FundingDiv>
+
+                    <FundingDiv p="0px 20px 0px 20px">
                         <SponserDiv>
                             <FundingComment mt="10px">
                                 <NamingDiv>
@@ -293,61 +304,34 @@ const FundingDetail = () => {
                                     {detailData.content}
                                 </CommentDiv>
                             </FundingComment>
-                            <SponsorImg src="/imgs/Funding/FundingPay/blue-dog.svg" alt="image" />
+                            <SponsorImg
+                                src={imageSources[Math.floor(Math.random() * imageSources.length)]}
+                                alt="image"
+                            />
                         </SponserDiv>
-                        <SponserDiv>
-                            <SponsorImg src="/imgs/Funding/FundingPay/water-melon.svg" alt="image" />
-                            <SponserComment>
-                                <NamingDiv>
-                                    <P fs={theme.detail2} color={theme.gray2}>
-                                        {detailData.sponsorNickname}
-                                        후원자1등 보여줄 이름
-                                    </P>
-                                    {/* <SponsorDiv>1등{detailData.donationRanking}</SponsorDiv> */}
-                                    <SponsorDiv>1등{detailData.donationRanking}</SponsorDiv>
-                                </NamingDiv>
-                                <CommentDiv mt="5px" fs="13px" bc={theme.gray6} br="0px 7px 7px 7px">
-                                    {/* {detailData.sponsorComment} */}
-                                    {detailData.sponsorComment}
-                                    후원자1등 남길 메시지
-                                </CommentDiv>
-                            </SponserComment>
-                        </SponserDiv>
-                        <SponserDiv>
-                            <SponsorImg src="/imgs/Funding/FundingPay/icecream.svg" alt="image" />
-                            <SponserComment>
-                                <NamingDiv>
-                                    <P fs={theme.detail2} color={theme.gray2}>
-                                        {detailData.sponsorNickname}
-                                        후원자2등 보여줄 이름
-                                    </P>
-                                    <SponsorDiv>2등{detailData.donationRanking}</SponsorDiv>
-                                </NamingDiv>
-                                <CommentDiv mt="5px" fs="13px" bc={theme.gray6} br="0px 7px 7px 7px">
-                                    {detailData.sponsorComment}
-                                    후원자2등 남길 메시지
-                                </CommentDiv>
-                            </SponserComment>
-                        </SponserDiv>
-                        <SponserDiv>
-                            <SponsorImg src="/imgs/Funding/FundingPay/yellow-tube.svg" alt="image" />
-                            <SponserComment>
-                                <NamingDiv>
-                                    <P fs={theme.detail2} color={theme.gray2}>
-                                        {detailData.sponsorNickname}
-                                        후원자3등 보여줄 이름
-                                    </P>
-                                    <SponsorDiv>3등{detailData.donationRanking}</SponsorDiv>
-                                </NamingDiv>
-                                <CommentDiv mt="5px" fs="13px" bc={theme.gray6} br="0px 7px 7px 7px">
-                                    {detailData.sponsorComment}
-                                    후원자3등 남길 메시지
-                                </CommentDiv>
-                            </SponserComment>
-                        </SponserDiv>
+                        {sponsorDetail.slice(0, 3).map((sponsor, index) => (
+                            <SponserDiv key={index}>
+                                <SponsorImg
+                                    src={imageSources[Math.floor(Math.random() * imageSources.length)]}
+                                    alt="image"
+                                />
+                                <SponserComment>
+                                    <NamingDiv>
+                                        <P fs={theme.detail2} color={theme.gray2}>
+                                            {sponsor.sponsorNickname} {/* 후원자 이름 */}
+                                        </P>
+                                        <SponsorDiv>{sponsor.donationRanking}등</SponsorDiv>
+                                    </NamingDiv>
+                                    <CommentDiv mt="5px" fs="13px" bc={theme.gray6} br="0px 7px 7px 7px">
+                                        {sponsor.sponsorComment} {/* 후원자 메시지 */}
+                                    </CommentDiv>
+                                </SponserComment>
+                            </SponserDiv>
+                        ))}
+
                         <MassageBtn onClick={() => navigate(`/fundingsponsordetail/${id}`)}>
                             <P pt="4px" pb="18px" fs={theme.detail} color={theme.gray2}>
-                                펀딩 더보기 &nbsp;
+                                메시지 더보기 &nbsp;
                             </P>
                             <P pt="4px" pb="18px" fs={theme.detail}>
                                 <FaAngleRight />
@@ -490,7 +474,7 @@ const FundingDetail = () => {
                                         {sponsorDonation.donation50000}원
                                     </P>
                                     <P pl="20px" fs={theme.detail2} color={theme.gray4}>
-                                        심사임당 만큼
+                                        신사임당 만큼
                                     </P>
                                 </div>
                             </StartRowDiv>

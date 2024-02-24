@@ -15,6 +15,7 @@ import theme from '../../../../styles/theme';
 
 function DetailModal({ closeModal, handleInputSelection, id, detailData }) {
     const [donationInput, setDonationInput] = useState('');
+    const [isPlaceholderVisible, setIsPlaceholderVisible] = useState(true); // 새로운 state 추가
     const navigate = useNavigate();
 
     const handleModalButtonClick = () => {
@@ -27,6 +28,15 @@ function DetailModal({ closeModal, handleInputSelection, id, detailData }) {
     } else {
         console.error('detailData가 유효하지 않거나 showName 속성이 없습니다.');
     }
+    };
+
+    const handleDonationInputChange = (e) => {
+        let input = e.target.value;
+        // 입력값이 숫자가 아니거나 6자리를 넘을 때 값을 변경하지 않음
+        if (!/^\d{0,6}$/.test(input)) {
+            return;
+        }
+        setDonationInput(input);
     };
 
     return (
@@ -47,9 +57,11 @@ function DetailModal({ closeModal, handleInputSelection, id, detailData }) {
                     <ModalInput
                         type="text"
                         value={donationInput}
-                        placeholder="원하는 금액만큼 입력하세요"
-                        onChange={(e) => setDonationInput(e.target.value)}
-                    ></ModalInput>
+                        placeholder={isPlaceholderVisible ? "원하는 금액만큼 입력하세요" : ""}
+                        onFocus={() => setIsPlaceholderVisible(false)} // 입력창을 클릭할 때 placeholder가 사라지도록 설정
+                        onBlur={() => setIsPlaceholderVisible(donationInput === '')} // 입력창을 벗어났을 때 placeholder가 다시 나타나도록 설정
+                        onChange={handleDonationInputChange} // 숫자만 입력되도록 및 1000000 이하로 제한
+                    />
                     <ModalButton onClick={handleModalButtonClick}>참여하기</ModalButton>
                 </ModalBox>
             </Background>

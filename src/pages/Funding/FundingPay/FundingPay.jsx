@@ -12,6 +12,9 @@ import {
     BubbleImg,
     LeftRowdiv,
     LeftImg,
+    BubbleTxt,
+    LeftPieImg,
+    LeftContent,
     Leftcolumndiv,
     IpadLoveImg,
     P,
@@ -122,55 +125,45 @@ const FundingPay = ({ donation }) => {
     return (
         <MainContainer>
             <LeftContainer>
-                <LeftContainer pt="70px">
+                <LeftContainer>
                     <LeftImgContainer>
-                        <div>
-                            <LeftLogoTextIcon src="/imgs/Common/giftipie.png" />
-                        </div>
-                        <div>
-                            <P pt="60px" pl="355px" fs="23px" fw="800" color={theme.white}>
+                        <BubbleTxt>
+                            <P fs="24px" fw="700" color={theme.white}>
                                 생일선물
                                 <br />뭐 받고싶어?
                             </P>
-                            <BubbleImg src="/imgs/Home/speech-bubble.png" />
-                        </div>
-                        {/* <BubbleImg src="/imgs/Home/speech-bubble.png" /> */}
+                        </BubbleTxt>
+                        <BubbleImg src="/imgs/Home/speech-bubble.png" />
+                        <LeftLogoTextIcon onClick={() => navigate('/')} src="/imgs/Common/giftipie.png" />
+                        <LeftPieImg src="/imgs/Home/pie-hi.png" />
                     </LeftImgContainer>
-
                     <LeftRowdiv ml="30px">
-                        <LeftRowdiv color="#3F3F3F" mr="10px" bc="#FF7C7C" br="25px" p="8px">
+                        <LeftRowdiv color={theme.gray1} mr="10px" bc={theme.primary} br="25px" p="8px">
                             <LeftImg src="/imgs/Home/giftbox-red.png" w="30px" h="25px" mr="10px" pl="10px" />
-                            <P fs="20px" fw="900" pr="10px">
+                            <P fs="20px" fw="900" pr="10px" color={theme.black}>
                                 정말 원하는 선물
                             </P>
                         </LeftRowdiv>
-                        <div>
-                            <P mt="6px" pt="2px" fs="20px" fw="700" color="#FFFFFF">
-                                을 주고 받아요!
-                            </P>
-                        </div>
+                        <P fs="20px" fw="700" color={theme.white}>
+                            을 주고 받아요!
+                        </P>
                     </LeftRowdiv>
-
-                    <LeftRowdiv>
+                    <LeftContent>
                         <Leftcolumndiv ml="30px">
-                            <P fs="16px" fw="500" pt="30px" pb="5px" color="#FFFFFF">
-                                지금은 유저테스트 진행 중 입니다
-                            </P>
-                            <P pb="100px" fs="16px" fw="500" color="#FFFFFF">
-                                6명의 개발자와 1명의 디자이너가 함께 개발하고 있습니다
+                            <P fs="16px" fw="500" pb="5px" pr="250px" color={theme.gray4}>
+                                지금은 유저테스트 진행 중 입니다. <br />
+                                6명의 개발자와 1명의 디자이너가 함께 개발하고 있습니다.
                             </P>
                         </Leftcolumndiv>
-                        <LeftImg src="/imgs/Home/pie-hi.png" w="340px" pl="100px" />
-                    </LeftRowdiv>
+                    </LeftContent>
                 </LeftContainer>
-
                 <LeftRowdiv ml="30px"></LeftRowdiv>
-                <IpadLoveImg src="/imgs/Home/pie-ipad.png" w="330px" />
+                <IpadLoveImg src="/imgs/Home/pie-ipad.png" w="300px" />
             </LeftContainer>
 
             <RightContainer>
                 <NavbarDiv>
-                    <IoIosArrowBack onClick={() => navigate('/')} color={theme.white} size="20px" />
+                    <IoIosArrowBack onClick={() => navigate(`/fundingdetail/${id}`)} color={theme.white} size="20px" />
                     <P pl="80px" fs={theme.body2} color={theme.white}>
                         지금 선물하면
                     </P>
@@ -189,7 +182,7 @@ const FundingPay = ({ donation }) => {
                                     {sponsorDonation.showName} 님에게
                                 </P>
                                 <LeftRowdiv>
-                                    <P fs={theme.headline1} fw="700" pb="5px" color={theme.primaryFont}>
+                                    <P fs={theme.headline1} fw="700" color={theme.primaryFont}>
                                         {sponsorDonation.donation}원
                                     </P>
                                     <P pl="10px" fs={theme.headline1} fw="700">
@@ -199,33 +192,33 @@ const FundingPay = ({ donation }) => {
                             </SponserMoney>
 
                             <InputLabel mt="60px">
-                                <InputSpan>남길 이름</InputSpan>
+                                <InputSpan>남길 이름 (10자 이내)</InputSpan>
                                 <InputInput
                                     type="text"
-                                    placeholder="남길 이름을 입력해주세요"
                                     value={sponsorDonation.sponsorNickname}
                                     onChange={(e) => {
+                                        const inputValue = e.target.value.slice(0, 10);
                                         setSponsorDonation({
                                             ...sponsorDonation,
-                                            sponsorNickname: e.target.value,
+                                            sponsorNickname: inputValue,
                                         });
                                     }}
-                                ></InputInput>
+                                />
                             </InputLabel>
                             <P pl="10px" fs={theme.detail2} color={theme.gray2}>
                                 만든이와 방문자 모두에게 표시됩니다.
                             </P>
 
                             <InputLabel mt="25px">
-                                <InputSpan>남길 메시지</InputSpan>
+                                <InputSpan>남길 메시지 (120자 이내)</InputSpan>
                                 <Textarea
                                     type="text"
-                                    placeholder="남길 메시지를 입력해주세요"
                                     value={sponsorDonation.sponsorComment}
                                     onChange={(e) => {
+                                        const inputValue = e.target.value.slice(0, 120);
                                         setSponsorDonation({
                                             ...sponsorDonation,
-                                            sponsorComment: e.target.value,
+                                            sponsorComment: inputValue,
                                         });
                                     }}
                                 />
@@ -241,14 +234,14 @@ const FundingPay = ({ donation }) => {
                                 <ProfileImg src="/imgs/Funding/FundingPay/yellow-tube.svg" alt="image" mr="9px" />
                                 <ProfileImg src="/imgs/Funding/FundingPay/violet-star.svg" alt="image" />
                             </ProfileImageRow>
-                            <P fs={theme.detail2} color={theme.gray2} pl="5px" pt="8px" pb="25px">
+                            <P fs={theme.detail2} color={theme.gray2} pl="5px" pt="8px" pb="15px">
                                 프로필 이미지는 랜덤으로 생성됩니다.
                             </P>
                         </TogetherDiv>
 
                         <PayDiv bc={theme.white} br="30px 30px 0px 0px">
                             <SponserDiv>
-                                <P fs={theme.body2} color={theme.gray2} pl="10px" pt="25px">
+                                <P pt="20px" fs={theme.body2} color={theme.gray2} pl="10px">
                                     카카오페이 테스트 결제에 필요한 개인정보 <br />
                                     제공에 동의하십니까?
                                 </P>
@@ -259,7 +252,7 @@ const FundingPay = ({ donation }) => {
                                 />
                             </SponserDiv>
                             <KakaoButton onClick={handleFundingDonationClick} disabled={!isChecked}>
-                                <KakaoPayLogo src="/imgs/Logo/kakao.png" alt="image" />
+                                <KakaoPayLogo src="/imgs/Logo/kakao-pay.svg" alt="image" />
                                 <P fs={theme.body1} color={theme.black}>
                                     카카오페이로 테스트 결제하기
                                 </P>
