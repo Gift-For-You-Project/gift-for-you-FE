@@ -4,9 +4,9 @@ import { postFundingCreate } from "../../../apis/funding";
 import { useParams } from "react-router-dom";
 import CreateModal from "./Modal/CreateModal";
 import { infoToast } from "../../../components/toast";
+import { IoIosArrowBack } from "react-icons/io";
 import { GrAdd } from "react-icons/gr";
 import theme from "../../../styles/theme";
-import { FaAngleLeft } from "react-icons/fa6";
 import {
   MainContainer,
   LeftContainer,
@@ -23,6 +23,7 @@ import {
   P,
   Button,
   RightContainer,
+  NavbarDiv,
   ImgPlus,
   ProducImgtDiv,
   FundingImg,
@@ -41,11 +42,10 @@ import {
   InputSpan,
   InputInput,
 } from "./FundingCreateStyles";
-import { IconDiv, NavbarDiv } from "../../Home/Signup/SignupStyles";
 
 const FundingCreate = () => {
   const navigate = useNavigate();
-  const { id } = useParams();
+  const { id } = useParams(); // URL 매개변수(id)를 가져옴
   const [itemImage, setItemImage] = useState(false);
   const [isFundingModalOpen, setIsFundingModalOpen] = useState(false);
   const [createData, setCreateData] = useState({
@@ -198,10 +198,12 @@ const FundingCreate = () => {
 
       <RightContainer>
         <NavbarDiv>
-          <IconDiv>
-            <FaAngleLeft onClick={() => navigate("/")} />
-          </IconDiv>
-          <P fs={theme.body2} color={theme.white}>
+          <IoIosArrowBack
+            onClick={() => navigate("/")}
+            color={theme.white}
+            size="20px"
+          />
+          <P pl="120px" fs="13px" fw="900" color={theme.white}>
             펀딩 만들기
           </P>
         </NavbarDiv>
@@ -264,7 +266,7 @@ const FundingCreate = () => {
                 )}
               </TogetherDiv>
 
-              <TogetherDiv m="15px 0 15px 0" bc={theme.white}>
+              <TogetherDiv bc={theme.white}>
                 <SponserDiv>
                   <OpenPrivateComment mt="5px">
                     <P pb="5px" fw="500" fs={theme.title} color={theme.black}>
@@ -356,7 +358,7 @@ const FundingCreate = () => {
                 </InputLabel>
               </TogetherDiv>
 
-              <TogetherDiv bc={theme.white} br="30px 30px 0px 0px">
+              <TogetherDiv h="30vh" bc={theme.white} br="30px 30px 0px 0px">
                 <InputLabel>
                   <InputSpan>마감일 설정</InputSpan>
                   <InputInput
