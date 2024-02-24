@@ -94,6 +94,7 @@ export const LeftImg = styled.img`
   height: ${(props) => props.h};
 `;
 
+
 export const Leftcolumndiv = styled.div`
   flex-direction: column;
   margin-left: ${(props) => props.ml};
@@ -132,7 +133,7 @@ export const MakerDiv = styled.div`
   font-weight: 600;
   padding: 2px 5px 1.5px 5px;
   margin-left: 7px;
-`;
+`
 
 export const SponsorDiv = styled.div`
   background-color: ${theme.primary};
@@ -142,7 +143,7 @@ export const SponsorDiv = styled.div`
   font-weight: 600;
   padding: 2px 5px 1.5px 5px;
   margin-left: 7px;
-`;
+`
 
 /* 오른쪽 컨테이너 */
 export const RightContainer = styled.div`
@@ -202,6 +203,7 @@ export const Body = styled.div`
   height: auto;
 `;
 
+
 export const FundingDiv = styled.div`
   background-color: ${theme.white};
   border-radius: 30px 30px 0px 0px;
@@ -234,7 +236,7 @@ export const TogetherDiv = styled.div`
 export const CommentDiv = styled.div`
   justify-content: center;
   align-items: center;
-  width: 100%;
+  width: 100%; 
   max-width: 270px;
   padding: 12px;
   border-radius: ${(props) => props.br};
@@ -249,7 +251,7 @@ export const CommentDiv = styled.div`
   word-break: break-all;
 
   @media screen and (max-width: 390px) {
-    font-size: 14px;
+    font-size: 14px; 
   }
 `;
 
