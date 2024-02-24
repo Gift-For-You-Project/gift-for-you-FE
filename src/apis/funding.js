@@ -63,11 +63,29 @@ export const getFundingDetail = async (id, data) => {
 };
 
 // 후원자 상세 API
-export const getSponsorDetail = async (id, data) => {
-  try {
-    const response = await instance.get(`/api/funding/${id}/donations`, data);
+// export const getSponsorDetail = async (id, data) => {
+//   try {
+//     const response = await instance.get(`/api/funding/${id}/donations`, data);
 
-    return response.data;
+//     return response.data;
+//   } catch (error) {
+//     const status = error.response.status;
+
+//     if (status === 404) {
+//       console.error("API 호출 중 404 에러 발생: ", error);
+//     } else if (status === 500) {
+//       console.error("API 호출 중 500 에러 발생: ", error);
+//     }
+//   }
+// };
+
+// 후원자 상세 API
+export const getSponsorDetail = async (id) => {
+  try {
+    const response = await instance.get(`/api/funding/${id}/donations`);
+
+    console.log('후원자 상세 API', response)
+    return response.data.result;
   } catch (error) {
     const status = error.response.status;
 

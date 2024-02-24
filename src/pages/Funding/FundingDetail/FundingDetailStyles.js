@@ -19,38 +19,50 @@ export const LeftContainer = styled.div`
   height: 100vh;
   padding-top: ${(props) => props.pt};
 
-  @media (max-width: 1200px) {
+  @media screen and (max-width: 1024px) {
     display: none;
   }
 `;
 
 export const LeftImgContainer = styled.div`
-  position: relative; /*상대 위치 지정*/
-  //width: 300px; /* 이미지 너비 */
-  height: 200px; /* 이미지 높이 */
-  padding-left: 100px; /* 이미지 왼쪽 간격 조정 */
-  justify-content: space-between;
+  position: relative;
+  height: 0;
+  padding-left: 150px;
 `;
 
 export const LeftLogoTextIcon = styled.img`
+  position: absolute;
   height: 40px;
-  position: absolute; /* 절대 위치 지정 */
-  bottom: 20px; /* 아래쪽 위치 조정 */
-  left: 30px; /* 왼쪽 위치 조정 */
+  bottom: 20px;
+  left: 30px;
+  cursor: pointer;
+`;
+
+export const BubbleTxt = styled.div`
+  position: absolute;
+  bottom: 208px;
+  left: 26px;
+  padding: 100px 0 0 300px;
 `;
 
 export const BubbleImg = styled.img`
-  position: absolute; /* 절대 위치 지정 */
-  top: 0; /* 위쪽 정렬 */
-  left: 368px; /* 왼쪽 정렬 */
-  width: 290px; /* 부모 요소에 대한 상대적인 너비 */
-  height: 230px; /* 부모 요소에 대한 상대적인 높이 */
+  position: absolute;
+  bottom: 130px;
+  right: 130px;
+  height: 200px;
+`;
+
+export const LeftPieImg = styled.img`
+  position: absolute;
+  width: 250px;
+  right: 0;
+  bottom: -100px;
 `;
 
 export const LeftRowdiv = styled.div`
   display: flex;
+  align-items: center;
   flex-direction: row;
-  /* align-items: center; */
   padding-top: ${(props) => props.pt};
   margin-top: ${(props) => props.mt};
   padding-bottom: ${(props) => props.pb};
@@ -65,6 +77,12 @@ export const LeftRowdiv = styled.div`
   border-radius: ${(props) => props.br};
   padding: ${(props) => props.p};
   border: none;
+`;
+
+export const LeftContent = styled.div`
+  display: flex;
+  flex-direction: row;
+  padding-top: 30px;
 `;
 
 export const LeftImg = styled.img`
@@ -113,6 +131,7 @@ export const P = styled.p`
   padding: ${(props) => props.p};
   align-items: center;
   border: none;
+  word-break: break-all;
 `;
 
 /* 다용도 버튼 */
@@ -141,31 +160,48 @@ export const Button = styled.button`
 /* 오른쪽 컨테이너 */
 export const RightContainer = styled.div`
   position: relative;
-  width: -webkit-fill-available; /* 사용 가능한 너비로 채움 */
-  max-width: 390px; /* 최대 너비를 390px로 제한 */
-  /* border: 1px solid lightgray; */
+  width: -webkit-fill-available;
+  max-width: 390px;
   height: 100vh;
+  margin: 0 10px;
   overflow-y: scroll;
   &::-webkit-scrollbar {
     display: none;
   }
 
+  /* 모바일뷰 */
   @media screen and (max-width: 390px) {
-    max-width: 100%; /* 최대 너비를 100%로 설정하여 가득 차게 함 */
+    max-width: 100%;
   }
+
+  /* 태블릿뷰는 추후에 적용예정 */
+  /* @media screen and (max-width: 1024px) {
+    max-width: 100%;
+  } */
 `;
 
 /* 네브바 영역 */
 export const NavbarDiv = styled.div`
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 9;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  height: 70px;
+  padding: 10px 10px 4px 10px;
+  background-color: ${theme.gray1};
 `;
 
 // 바디 영역
 export const Body = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 390px;
   height: auto;
 `;
 
@@ -174,7 +210,6 @@ export const BannerImgDiv = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-items: center;
   padding-left: 15px;
   padding-right: 20px;
 `;
@@ -186,7 +221,7 @@ export const GiftCoverImg = styled.img`
   position: absolute; /* 절대 위치 지정 */
   top: 50%; /* 부모 요소의 중앙에 위치하도록 설정 */
   left: 50%; /* 부모 요소의 중앙에 위치하도록 설정 */
-  transform: translate(-50%, -51%); /* 부모 요소의 중앙에 위치하도록 설정 */
+  transform: translate(-50%, -146%); /* 부모 요소의 중앙에 위치하도록 설정 */
   z-index: 1; /* 다른 내용 위에 렌더링되도록 z-index 설정 */
   /* border: 0.3px solid ${theme.gray4};
   box-shadow: 0px 3px 3px 0px ${theme.gray4}; */
@@ -201,9 +236,10 @@ export const BannerImg = styled.img`
   position: absolute; /* 절대 위치 지정 */
   top: 50%; /* 부모 요소의 중앙에 위치하도록 설정 */
   left: 50%; /* 부모 요소의 중앙에 위치하도록 설정 */
-  transform: translate(-50%, 12%); /* 부모 요소의 중앙에 위치하도록 설정 */
+  transform: translate(-50%, -12%); /* 부모 요소의 중앙에 위치하도록 설정 */
   z-index: 1; /* 다른 내용 위에 렌더링되도록 z-index 설정 */
   box-shadow: 2px 2px 5px 2px ${theme.black};
+  object-fit: cover;
 `;
 
 export const IllustImg = styled.img`
@@ -212,13 +248,18 @@ export const IllustImg = styled.img`
   margin: 10px;
 `;
 export const NavigateDiv = styled.div`
-  text-align: right;
-  margin-right: 22px;
+  flex-direction: row;
+  text-align: end;
+  padding-right: 10px;
 `;
 export const NavigateBtn = styled.button`
-  font-size: ${theme.detail};
-  color: ${theme.white};
-  margin-bottom: 7px;
+  font-size: ${theme.detail2};
+  color: ${theme.gray2};
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
 `;
 
 export const TitleDiv = styled.div`
@@ -266,7 +307,7 @@ export const ProgressBar = styled.div`
   background-color: ${theme.gray6};
   border-radius: 12px;
   font-size: 0.8rem;
-  margin: 10px 30px 10px 30px;
+  margin: 5px 30px 5px 30px;
   text-align: center;
   overflow: hidden;
   padding-left: ${(props) => props.pl};
@@ -289,12 +330,13 @@ export const BetweenDiv = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  text-align: center;
   width: -webkit-fill-available; /* 사용 가능한 너비로 채움 */
   max-width: 390px; /* 최대 너비를 390px로 제한 */
   margin: 0 auto; /* 가운데 정렬을 위해 margin을 auto로 설정 */
-  /* padding: 0px 33px 0px 33px; */
   padding: 0px 33px 0px 33px;
   padding-top: ${(props) => props.pt};
+  padding-bottom: ${(props) => props.pb};
 
   @media screen and (max-width: 390px) {
     max-width: 100%; /* 최대 너비를 100%로 설정하여 가득 차게 함 */
@@ -306,7 +348,6 @@ export const TogetherDiv = styled.div`
   border-radius: 30px;
   border: 0.3px solid ${theme.gray4};
   box-shadow: 0px 5px 0px 0px ${theme.gray4};
-  height: 130px;
   width: -webkit-fill-available; /* 사용 가능한 너비로 채움 */
   max-width: 390px; /* 최대 너비를 390px로 제한 */
   margin: 0 auto; /* 가운데 정렬을 위해 margin을 auto로 설정 */
@@ -318,10 +359,11 @@ export const TogetherDiv = styled.div`
 `;
 
 export const SponserDiv = styled.div`
+  margin-top: 17px;
   display: flex;
   flex-direction: row;
   align-items: center;
-  padding: 20px 0px 0px 20px;
+  width: 100%;
 `;
 
 // 네브바 영역
@@ -344,9 +386,9 @@ export const MakerDiv = styled.div`
 
 export const DdayDiv = styled.p`
   border-radius: 8px;
-  color: ${theme.gray2};
-  font-size: ${theme.detail};
-  background-color: ${theme.gray6};
+  color: ${theme.white};
+  font-size: ${theme.body2};
+  background-color: ${theme.gray4};
   font-weight: 600;
   padding: 4px 15px 4px 15px;
 `;
@@ -357,21 +399,28 @@ export const FundingComment = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: end;
+  flex-grow: 1;
 `;
 
 export const CommentDiv = styled.div`
   justify-content: center;
   align-items: center;
-  width: 290px; /* 최대 너비를 390px로 제한 */
-  padding: 14px;
+  width: 95%; 
+  padding: 12px;
   border-radius: ${(props) => props.br};
+  font-weight: 500;
   background-color: ${(props) => props.bc};
-  color: ${theme.black};
-  font-size: ${theme.detail};
+  color: ${theme.gray1};
+  font-size: ${theme.body2};
   margin-top: ${(props) => props.mt};
   margin-bottom: ${(props) => props.mb};
   padding-left: ${(props) => props.pl};
   padding-right: ${(props) => props.pr};
+  word-break: break-all;
+
+  @media screen and (max-width: 390px) {
+    font-size: 14px; 
+  }
 `;
 
 export const SponserComment = styled.div`
@@ -381,6 +430,7 @@ export const SponserComment = styled.div`
   justify-content: center;
   align-items: start;
   width: 100%;
+  flex-grow: 1;
 `;
 
 export const GiftTitle = styled.div`
@@ -394,7 +444,15 @@ export const SponsorImg = styled.img`
   width: 45px;
   height: 45px;
   border-radius: 100px;
-  margin-top: 10px;
+  margin: 10px;
+`;
+
+export const IconButtonImg = styled.img`
+padding-top: 3px;
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
+
 `;
 
 export const SponsorDiv = styled.div`

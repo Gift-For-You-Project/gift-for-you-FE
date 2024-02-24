@@ -10,6 +10,9 @@ import {
     LeftContainer,
     LeftImgContainer,
     LeftLogoTextIcon,
+    BubbleTxt,
+    LeftPieImg,
+    LeftContent,
     BubbleImg,
     LeftRowdiv,
     LeftImg,
@@ -61,7 +64,7 @@ const FundingModify = () => {
                     return;
                 }
                 const data = await getFundingDetail(id);
-                console.log('상세페이지 데이터 불러오기: ', data)
+                console.log('상세페이지 데이터 불러오기: ', data);
                 setFundingData(data);
             } catch (error) {
                 console.error('펀딩상세 가져오기 오류:', error);
@@ -135,49 +138,40 @@ const FundingModify = () => {
     return (
         <MainContainer>
             <LeftContainer>
-                <LeftContainer pt="70px">
+                <LeftContainer>
                     <LeftImgContainer>
-                        <div>
-                            <LeftLogoTextIcon src="/imgs/Common/giftipie.png" />
-                        </div>
-                        <div>
-                            <P pt="60px" pl="355px" fs="23px" fw="800" color={theme.white}>
+                        <BubbleTxt>
+                            <P fs="24px" fw="700" color={theme.white}>
                                 생일선물
                                 <br />뭐 받고싶어?
                             </P>
-                            <BubbleImg src="/imgs/Home/speech-bubble.png" />
-                        </div>
+                        </BubbleTxt>
+                        <BubbleImg src="/imgs/Home/speech-bubble.png" />
+                        <LeftLogoTextIcon onClick={() => navigate('/')} src="/imgs/Common/giftipie.png" />
+                        <LeftPieImg src="/imgs/Home/pie-hi.png" />
                     </LeftImgContainer>
-
                     <LeftRowdiv ml="30px">
                         <LeftRowdiv color={theme.gray1} mr="10px" bc={theme.primary} br="25px" p="8px">
                             <LeftImg src="/imgs/Home/giftbox-red.png" w="30px" h="25px" mr="10px" pl="10px" />
-                            <P fs="20px" fw="900" pr="10px">
+                            <P fs="20px" fw="900" pr="10px" color={theme.black}>
                                 정말 원하는 선물
                             </P>
                         </LeftRowdiv>
-                        <div>
-                            <P mt="6px" pt="2px" fs="20px" fw="700" color={theme.white}>
-                                을 주고 받아요!
-                            </P>
-                        </div>
+                        <P fs="20px" fw="700" color={theme.white}>
+                            을 주고 받아요!
+                        </P>
                     </LeftRowdiv>
-
-                    <LeftRowdiv>
+                    <LeftContent>
                         <Leftcolumndiv ml="30px">
-                            <P fs="16px" fw="500" pt="30px" pb="5px" color={theme.white}>
-                                지금은 유저테스트 진행 중 입니다
-                            </P>
-                            <P pb="100px" fs="16px" fw="500" color={theme.white}>
-                                6명의 개발자와 1명의 디자이너가 함께 개발하고 있습니다
+                            <P fs="16px" fw="500" pb="5px" pr="250px" color={theme.gray4}>
+                                지금은 유저테스트 진행 중 입니다. <br />
+                                6명의 개발자와 1명의 디자이너가 함께 개발하고 있습니다.
                             </P>
                         </Leftcolumndiv>
-                        <LeftImg src="/imgs/Home/pie-hi.png" w="340px" pl="100px" />
-                    </LeftRowdiv>
+                    </LeftContent>
                 </LeftContainer>
-
                 <LeftRowdiv ml="30px"></LeftRowdiv>
-                <IpadLoveImg src="/imgs/Home/pie-ipad.png" w="330px" />
+                <IpadLoveImg src="/imgs/Home/pie-ipad.png" w="300px" />
             </LeftContainer>
 
             <RightContainer>
@@ -191,31 +185,31 @@ const FundingModify = () => {
                 <Body>
                     <FundingDiv>
                         <TogetherDiv bc={theme.white}>
-                            <P pt="5px" pb="5px" fs={theme.title} color={theme.black}>
+                            <P pt="5px" pb="5px" fw="500" fs={theme.title} color={theme.black}>
                                 펀딩 제품
                             </P>
                             <P pb="20px" fs={theme.detail} color={theme.gray2}>
-                                상품명과 이미지, 가격은 변경할 수 없어요.
+                                상품명과 이미지, 금액, 마감일은 변경할 수 없어요.
                             </P>
 
                             <ProducImgtDiv>
                                 <SponsorComment>
-                                    <FundingImg src={fundingData.itemImage} alt="logo" h="124px" w="110px" />
+                                    <FundingImg src={fundingData.itemImage} alt="logo" h="120px" w="110px" />
                                 </SponsorComment>
                                 <ColumnStartDiv>
-                                    <NonInputTag mw="230px">
+                                    <NonInputTag>
                                         <P pl="10px" pt="5px" fs={theme.detail2} color={theme.gray3}>
                                             상품명
                                         </P>
-                                        <P pl="10px" pr="10px" pb="5px" fw="500" fs={theme.body1} color={theme.gray3}>
+                                        <P pl="10px" pr="10px" pb="5px" fw="500" fs={theme.title2} color={theme.gray3}>
                                             {fundingData.itemName}
                                         </P>
                                     </NonInputTag>
-                                    <NonInputTag mw="230px">
+                                    <NonInputTag>
                                         <P pl="10px" pt="5px" fs={theme.detail2} color={theme.gray3}>
                                             목표 금액
                                         </P>
-                                        <P pl="10px" pb="5px" fw="500" fs={theme.body1} color={theme.gray3}>
+                                        <P pl="10px" pb="5px" fw="500" fs={theme.title2} color={theme.gray3}>
                                             {fundingData.targetAmount}원
                                         </P>
                                     </NonInputTag>
@@ -226,10 +220,10 @@ const FundingModify = () => {
                         <TogetherDiv bc={theme.white}>
                             <SponserDiv>
                                 <div>
-                                    <P pt="10px" pb="10px" fs={theme.title} color={theme.black}>
+                                    <P pb="5px" fw="500" fs={theme.title} color={theme.black}>
                                         펀딩 내용
                                     </P>
-                                    <P pb="20px" fs={theme.detail} color={theme.gray2}>
+                                    <P pb="10px" fs={theme.detail} color={theme.gray2}>
                                         공개 방식
                                     </P>
                                     <SponserDiv>
@@ -245,10 +239,10 @@ const FundingModify = () => {
                                             type="radio"
                                             mb="21px"
                                         />
-                                        <P pb="20px" pl="20px" fs={theme.body2} color={theme.black}>
+                                        <P pb="20px" pl="20px" fw="500" fs={theme.body2} color={theme.black}>
                                             공개
                                         </P>
-                                        <P pb="20px" pl="42px" fs={theme.detail2} color={theme.gray2}>
+                                        <P pb="20px" pl="44px" fs={theme.detail} color={theme.gray2}>
                                             누구나 볼 수 있어요
                                         </P>
                                     </SponserDiv>
@@ -266,52 +260,55 @@ const FundingModify = () => {
                                             type="radio"
                                             mb="21px"
                                         />
-                                        <P pb="20px" pl="20px" fs={theme.body2} color={theme.black}>
+                                        <P pb="20px" pl="20px" fw="500" fs={theme.body2} color={theme.black}>
                                             비공개
                                         </P>
-                                        <P pb="20px" pl="30px" fs={theme.detail2} color={theme.gray2}>
+                                        <P pb="20px" pl="30px" fs={theme.detail} color={theme.gray2}>
                                             링크를 통해서만 방문할 수 있어요
                                         </P>
                                     </SponserDiv>
                                 </div>
                             </SponserDiv>
                             <InputLabel>
-                                <InputSpan>보여줄 이름</InputSpan>
+                                <InputSpan>보여줄 이름 (12자 이내)</InputSpan>
                                 <InputInput
                                     type="text"
-                                    placeholder="이름을 입력해주세요"
                                     value={fundingData.showName}
+                                    maxLength={12}
                                     onChange={(e) => {
                                         setFundingData({ ...fundingData, showName: e.target.value });
                                     }}
-                                ></InputInput>
+                                />
                             </InputLabel>
 
                             <InputLabel>
-                                <InputSpan>제목</InputSpan>
+                                <InputSpan>제목 (15자 이내)</InputSpan>
                                 <InputInput
                                     type="text"
-                                    placeholder="제목을 입력해주세요"
                                     value={fundingData.title}
+                                    maxLength={15}
                                     onChange={(e) => {
                                         setFundingData({ ...fundingData, title: e.target.value });
                                     }}
-                                ></InputInput>
+                                />
                             </InputLabel>
 
                             <InputLabel>
-                                <InputSpan>본문</InputSpan>
+                                <InputSpan>본문 (120자 이내)</InputSpan>
                                 <Textarea
                                     type="textarea"
                                     placeholder="본문을 입력해주세요"
                                     value={fundingData.content}
+                                    maxLength={120} 
                                     onChange={(e) => {
-                                        setFundingData({ ...fundingData, content: e.target.value });
+                                        if (e.target.value.length <= 120) {
+                                            setFundingData({ ...fundingData, content: e.target.value });
+                                        }
                                     }}
                                 />
                             </InputLabel>
                         </TogetherDiv>
-                        <TogetherDiv bc={theme.white} br="30px 30px 0px 0px">
+                        <TogetherDiv h="30vh" bc={theme.white} br="30px 30px 0px 0px">
                             {/* <P pt="10px" pb="5px" fs={theme.detail} color={theme.gray2}>
                                 마감일 설정
                             </P>
@@ -365,15 +362,6 @@ const FundingModify = () => {
                                     종료하기
                                 </Button>
                             </BetweenDiv>
-
-                            <ColumnDiv>
-                                <P fs={theme.body2} color={theme.gray3}>
-                                    펀딩 금액은 계좌로 전달돼요
-                                </P>
-                                <P pb="40px" fs={theme.body2} color={theme.gray3}>
-                                    펀딩에 성공하면 카톡으로 알림이 가요
-                                </P>
-                            </ColumnDiv>
                         </TogetherDiv>
                     </FundingDiv>
                 </Body>

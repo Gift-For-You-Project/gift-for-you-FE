@@ -8,6 +8,9 @@ import {
     MainContainer,
     LeftContainer,
     LeftImgContainer,
+    BubbleTxt,
+    LeftPieImg,
+    LeftContent,
     P,
     RightContainer,
     Body,
@@ -33,6 +36,7 @@ import {
 const Sponsor = () => {
     const navigate = useNavigate();
     const { id } = useParams();
+    const [sponsorDetail, setSponsorDetail] = useState([]);
     const [sponsorData, setSponsorData] = useState({
         content: '', // 만든이 본문
         showName: '', // 만든이 보여줄 이름
@@ -40,6 +44,14 @@ const Sponsor = () => {
         sponsorComment: '', // 후원자 댓글 추가
         donationRanking: '', // 후원자 랭킹 추가
     });
+
+    const imageSources = [
+        '/imgs/Funding/FundingPay/water-melon.svg',
+        '/imgs/Funding/FundingPay/icecream.svg',
+        '/imgs/Funding/FundingPay/yellow-tube.svg',
+        '/imgs/Funding/FundingPay/blue-dog.svg',
+        '/imgs/Funding/FundingPay/violet-star.svg',
+    ];
 
     useEffect(() => {
         const getData = async () => {
@@ -64,7 +76,7 @@ const Sponsor = () => {
                     return;
                 }
                 const data = await getSponsorDetail(id);
-                setSponsorData(data);
+                setSponsorDetail(data);
             } catch (error) {
                 console.error('펀딩 상세페이지 오류:', error);
             }
@@ -76,49 +88,40 @@ const Sponsor = () => {
     return (
         <MainContainer>
             <LeftContainer>
-                <LeftContainer pt="70px">
+                <LeftContainer>
                     <LeftImgContainer>
-                        <div>
-                            <LeftLogoTextIcon src="/imgs/Common/giftipie.png" />
-                        </div>
-                        <div>
-                            <P pt="60px" pl="355px" fs="23px" fw="800" color={theme.white}>
+                        <BubbleTxt>
+                            <P fs="24px" fw="700" color={theme.white}>
                                 생일선물
                                 <br />뭐 받고싶어?
                             </P>
-                            <BubbleImg src="/imgs/Home/speech-bubble.png" />
-                        </div>
+                        </BubbleTxt>
+                        <BubbleImg src="/imgs/Home/speech-bubble.png" />
+                        <LeftLogoTextIcon onClick={() => navigate('/')} src="/imgs/Common/giftipie.png" />
+                        <LeftPieImg src="/imgs/Home/pie-hi.png" />
                     </LeftImgContainer>
-
                     <LeftRowdiv ml="30px">
                         <LeftRowdiv color={theme.gray1} mr="10px" bc={theme.primary} br="25px" p="8px">
                             <LeftImg src="/imgs/Home/giftbox-red.png" w="30px" h="25px" mr="10px" pl="10px" />
-                            <P fs="20px" fw="900" pr="10px">
+                            <P fs="20px" fw="900" pr="10px" color={theme.black}>
                                 정말 원하는 선물
                             </P>
                         </LeftRowdiv>
-                        <div>
-                            <P mt="6px" pt="2px" fs="20px" fw="700" color={theme.white}>
-                                을 주고 받아요!
-                            </P>
-                        </div>
+                        <P fs="20px" fw="700" color={theme.white}>
+                            을 주고 받아요!
+                        </P>
                     </LeftRowdiv>
-
-                    <LeftRowdiv>
+                    <LeftContent>
                         <Leftcolumndiv ml="30px">
-                            <P fs="16px" fw="500" pt="30px" pb="5px" color={theme.white}>
-                                지금은 유저테스트 진행 중 입니다
-                            </P>
-                            <P pb="100px" fs="16px" fw="500" color={theme.white}>
-                                6명의 개발자와 1명의 디자이너가 함께 개발하고 있습니다
+                            <P fs="16px" fw="500" pb="5px" pr="250px" color={theme.gray4}>
+                                지금은 유저테스트 진행 중 입니다. <br />
+                                6명의 개발자와 1명의 디자이너가 함께 개발하고 있습니다.
                             </P>
                         </Leftcolumndiv>
-                        <LeftImg src="/imgs/Home/pie-hi.png" w="340px" pl="100px" />
-                    </LeftRowdiv>
+                    </LeftContent>
                 </LeftContainer>
-
                 <LeftRowdiv ml="30px"></LeftRowdiv>
-                <IpadLoveImg src="/imgs/Home/pie-ipad.png" w="330px" />
+                <IpadLoveImg src="/imgs/Home/pie-ipad.png" w="300px" />
             </LeftContainer>
 
             <RightContainer>
@@ -139,88 +142,41 @@ const Sponsor = () => {
                                         </P>
                                         <MakerDiv>만든이</MakerDiv>
                                     </NamingDiv>
-                                    <CommentDiv mt="5px" fs="13px" br="7px 0px 7px 7px" bc={theme.secondary}>
+                                    <CommentDiv mt="5px" fs={theme.body2} br="7px 0px 7px 7px" bc={theme.secondary}>
                                         {sponsorData.content}
                                     </CommentDiv>
                                 </FundingComment>
-                                <SponsorImg src="/imgs/Funding/FundingPay/blue-dog.svg" alt="image" />
+                                <SponsorImg
+                                    src={imageSources[Math.floor(Math.random() * imageSources.length)]}
+                                    alt="image"
+                                />
                             </SponserDiv>
 
-                            {/* <SponserDiv>
-                                <SponsorImg src="/imgs/Funding/FundingPay/water-melon.svg" alt="image" />
-                                <SponserComment mt="20px">
-                                    <NamingDiv>
-                                        <P fs={theme.detail2} color={theme.gray2}>
-                                            {sponsorData.sponsorNickname}
-                                            예시 후원자1등 보여줄 이름
-                                        </P>
-                                        <SponsorDiv>예시 1등{sponsorData.donationRanking}</SponsorDiv>
-                                    </NamingDiv>
-                                    <CommentDiv mt="5px" fs="13px" br="0px 7px 7px 7px" bc={theme.gray6}>
-                                        {sponsorData.sponsorComment}
-                                        예시 후원자1등 남길 메시지
-                                    </CommentDiv>
-                                </SponserComment>
-                            </SponserDiv> */}
-
-                            <SponsorItem
-                                imageSrc="/imgs/Funding/FundingPay/water-melon.svg"
-                                sponsorNickname={sponsorData.sponsorNickname}
-                                ranking={sponsorData.donationRanking}
-                                comment={sponsorData.sponsorComment}
-                            />
-                            <SponsorItem
-                                imageSrc="/imgs/Funding/FundingPay/icecream.svg"
-                                sponsorNickname={sponsorData.sponsorNickname}
-                                ranking={sponsorData.donationRanking}
-                                comment={sponsorData.sponsorComment}
-                            />
-                            <SponsorItem
-                                imageSrc="/imgs/Funding/FundingPay/yellow-tube.svg"
-                                sponsorNickname={sponsorData.sponsorNickname}
-                                ranking={sponsorData.donationRanking}
-                                comment={sponsorData.sponsorComment}
-                            />
-                            <SponsorItem
-                                imageSrc="/imgs/Funding/FundingPay/violet-star.svg"
-                                sponsorNickname={sponsorData.sponsorNickname}
-                                ranking={sponsorData.donationRanking}
-                                comment={sponsorData.sponsorComment}
-                            />
-                            <SponsorItem
-                                imageSrc="/imgs/Funding/FundingPay/blue-dog.svg"
-                                sponsorNickname={sponsorData.sponsorNickname}
-                                ranking={sponsorData.donationRanking}
-                                comment={sponsorData.sponsorComment}
-                            />
+                            {sponsorDetail.map((sponsor, index) => (
+                                <SponserDiv key={index}>
+                                    {/* 이미지 소스를 랜덤으로 선택 */}
+                                    <SponsorImg
+                                        src={imageSources[Math.floor(Math.random() * imageSources.length)]}
+                                        alt="image"
+                                    />
+                                    <SponserComment>
+                                        <NamingDiv>
+                                            <P fs={theme.detail2} color={theme.gray2}>
+                                                {sponsor.sponsorNickname} {/* 후원자 이름 */}
+                                            </P>
+                                            <SponsorDiv>{sponsor.donationRanking}등</SponsorDiv>
+                                        </NamingDiv>
+                                        <CommentDiv mt="5px" fs={theme.detail} bc={theme.gray6} br="0px 7px 7px 7px">
+                                            {sponsor.sponsorComment} {/* 후원자 메시지 */}
+                                        </CommentDiv>
+                                    </SponserComment>
+                                </SponserDiv>
+                            ))}
                         </TogetherDiv>
                     </FundingDiv>
                 </Body>
             </RightContainer>
         </MainContainer>
-    );
-};
-
-const SponsorItem = ({ imageSrc, sponsorNickname, ranking, comment }) => {
-    return (
-        <SponserDiv>
-            <SponsorImg src={imageSrc} alt="image" />
-            <SponserComment mt="20px">
-                <NamingDiv>
-                    <P fs={theme.detail2} color={theme.gray2}>
-                        {sponsorNickname}
-                        {ranking}등 후원자 보여줄 이름
-                    </P>
-                    <SponsorDiv>
-                        {ranking}등{ranking}
-                    </SponsorDiv>
-                </NamingDiv>
-                <CommentDiv mt="5px" fs="13px" br="0px 7px 7px 7px" bc={theme.gray6}>
-                    {comment}
-                    {ranking}등 후원자 남길 메시지
-                </CommentDiv>
-            </SponserComment>
-        </SponserDiv>
     );
 };
 
