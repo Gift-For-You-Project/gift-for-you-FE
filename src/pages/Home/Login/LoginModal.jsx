@@ -1,26 +1,23 @@
 import React from "react";
 import { IoClose } from "react-icons/io5";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { googleLogin, kakaoLogin } from "../../../redux/authSlice";
+import { kakaoLogin } from "../../../redux/authSlice";
+import theme from "../../../styles/theme";
 import {
   ModalContainer,
   Background,
   IoCloseDiv,
   LoginModalImg,
   P,
-  GoogleBtn,
-  KakaoBtn,
   LoginModalBtn,
+  TxtDiv,
+  KakaoImg,
 } from "./LoginModalStyles";
 
 const LoginModal = ({ closeModal }) => {
   const dispatch = useDispatch();
-
-  const GoogleLogin = () => {
-    window.location.href = process.env.REACT_APP_GOOGLE_URL;
-    dispatch(googleLogin());
-  };
+  const navigate = useNavigate();
 
   const KakaoLogin = () => {
     window.location.href = process.env.REACT_APP_KAKAO_URL;
@@ -35,42 +32,50 @@ const LoginModal = ({ closeModal }) => {
           <IoClose />
         </IoCloseDiv>
         <LoginModalImg
-          src="/imgs/Home/pie-banner.png"
-          alt="pie"
-          w="100px"
-          h="100px"
+          src="/imgs/Login/heart.svg"
+          alt="heart"
+          w="110px"
+          h="110px"
         />
-        <P fs="20px" fw="700" mt="20px" color="white">
-          Giftipie에서
+        <TxtDiv>
+          <P fs={theme.title} fw="600" color={theme.black}>
+            Giftipie에서
+          </P>
+          <P fs={theme.title} fw="600" color={theme.primary}>
+            정말 원하는 선물
+            <P fs={theme.title} fw="600" color={theme.black}>
+              을
+            </P>
+          </P>
+          <P fs={theme.title} fw="600" color={theme.black}>
+            주고받아요
+          </P>
+        </TxtDiv>
+        <LoginModalBtn
+          onClick={() => navigate("/signup")}
+          bc={theme.primary}
+          color={theme.white}
+        >
+          1분 만에 가입하기
+        </LoginModalBtn>
+        <P fs={theme.body2} color={theme.gray3}>
+          또는
         </P>
-        <P fs="20px" fw="700" mt="4px" color="white">
-          정말 원하는 선물을
+        <LoginModalBtn onClick={KakaoLogin} bc="#FEE500" color={theme.black}>
+          <KakaoImg src="/imgs/Login/kakao.svg" alt="kakao" />
+          카카오로 계속하기
+        </LoginModalBtn>
+        <P fs={theme.body2} color={theme.gray3} pt="4px">
+          이미 계정이 있으신가요?&nbsp;
+          <P
+            onClick={() => navigate("/login")}
+            cursor="pointer"
+            fs={theme.body2}
+            color={theme.primary}
+          >
+            로그인하기
+          </P>
         </P>
-        <P fs="20px" fw="700" mt="4px" mb="20px" color="white">
-          주고받아요
-        </P>
-        <Link to="/signup">
-          <LoginModalBtn>가입하기</LoginModalBtn>
-        </Link>
-        <Link to="/login">
-          <LoginModalBtn>로그인하기</LoginModalBtn>
-        </Link>
-        <GoogleBtn onClick={GoogleLogin}>
-          <LoginModalImg
-            src="/imgs/Login/google.png"
-            alt="google"
-            w="65%"
-            mt="10px"
-          />
-        </GoogleBtn>
-        <KakaoBtn onClick={KakaoLogin}>
-          <LoginModalImg
-            src="/imgs/Login/kakao.png"
-            alt="kakao"
-            w="65%"
-            mt="10px"
-          />
-        </KakaoBtn>
       </ModalContainer>
     </>
   );
