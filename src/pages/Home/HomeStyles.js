@@ -240,6 +240,7 @@ export const NavbarBtn = styled.button`
   padding-left: ${(props) => props.pl};
   padding-right: ${(props) => props.pr};
   color: ${theme.white};
+  cursor: pointer;
   transition: all 300ms ease;
 
   &:hover {

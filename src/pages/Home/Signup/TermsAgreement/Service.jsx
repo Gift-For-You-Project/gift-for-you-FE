@@ -450,16 +450,8 @@ const Marketing = () => {
               * 위탁항목 : 테스트 결제를 위해 자동으로 수집되는 정보
               <br />* 위탁업무 : 카카오페이 데모 결제처리
             </P>
-            <P fs={theme.body2} fw="600" p="10px 76.9px" bc={theme.white}>
-              제19조 결제 취소▪변경 및 후원에 대한 통지
-            </P>
-            <P fs={theme.body2} p="10px" bc={theme.white}>
-              (1) 결제는 실 결제가 아닌 카카오페이 데모를 사용한 테스트 결제로
-              진행됩니다. 이에 수증자는 테스트 결제 후 결제처리 취소가
-              불가합니다.
-            </P>
-            <P fs={theme.body2} fw="600" p="10px 146.7px" bc={theme.white}>
-              제20조 기타 조항
+            <P fs={theme.body2} fw="600" p="10px 148.4px" bc={theme.white}>
+              제19조 기타 조항
             </P>
             <P fs={theme.body2} p="10px" bc={theme.white}>
               (1) 기프티파이는 회원이 제기하는 정당한 의견이나 불만 사항을
@@ -473,9 +465,8 @@ const Marketing = () => {
             <P fs={theme.body2} fw="600" p="10px 182.8px" bc={theme.white}>
               부칙
             </P>
-
             <P fs={theme.body2} p="0 10px 50px 10px" bc={theme.white}>
-              본 약관은 서비스 시작일을 기준으로 적용되며 2024년 02월 24일부터
+              본 약관은 서비스 시작일을 기준으로 적용되며 2024년 02월 25일부터
               시행됩니다.
             </P>
           </SignupFieldContainer>

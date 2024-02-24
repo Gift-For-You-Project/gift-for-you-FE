@@ -16,6 +16,7 @@ import {
   BlankLine,
   LoginInputDiv,
   LoginInput,
+  InfoDiv,
 } from "./LoginStyles";
 import {
   LeftContent,
@@ -206,6 +207,19 @@ const Login = () => {
                   : ""
               }
             />
+            <InfoDiv>
+              <P fs={theme.body2} color={theme.gray3} pt="4px">
+                아직 계정이 없으신가요?&nbsp;
+                <P
+                  onClick={() => navigate("/signup")}
+                  cursor="pointer"
+                  fs={theme.body2}
+                  color={theme.primary}
+                >
+                  가입하기
+                </P>
+              </P>
+            </InfoDiv>
           </InputFieldContainer>
           <LoginBtn onClick={handleLoginClick}>로그인하기</LoginBtn>
         </Body>

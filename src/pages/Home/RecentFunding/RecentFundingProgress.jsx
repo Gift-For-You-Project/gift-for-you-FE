@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef, useCallback } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import LoginModal from "../Login/LoginModal";
-import { getRecentFundingList } from "../../../apis/home";
+import { getActiveFundingList } from "../../../apis/home";
 import theme from "../../../styles/theme";
 import { FaAngleLeft } from "react-icons/fa6";
 import {
@@ -35,23 +35,27 @@ import {
 } from "./RecentFundingStyles";
 import { NavbarDiv, IconDiv } from "../Signup/SignupStyles";
 
-const RecentFunding = () => {
+const ActiveFunding = () => {
   const navigate = useNavigate();
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
-  const [recentFundingList, setRecentFundingList] = useState([]);
+  const [activeFundingList, setActiveFundingList] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
+  const [activeCategory, setActiveCategory] = useState("progress"); // State to manage active category
   const fundingSectionRef = useRef(null);
 
   const loadMoreData = useCallback(async () => {
     if (isLoading) return;
     setIsLoading(true);
-    const data = await getRecentFundingList(currentPage);
-    if (data && data.content) {
-      setRecentFundingList((prevList) => [...prevList, ...data.content]);
-      setCurrentPage(currentPage + 1);
-    }
-    setIsLoading(false);
+    // 원하는 시간(예: 2000 밀리초 = 2초) 후에 로딩 상태 해제
+    setTimeout(async () => {
+      const data = await getActiveFundingList(currentPage);
+      if (data && data.content) {
+        setActiveFundingList((prevList) => [...prevList, ...data.content]);
+        setCurrentPage(currentPage + 1);
+      }
+      setIsLoading(false);
+    }, 300); // 원하는 시간을 밀리초 단위로 설정
   }, [isLoading, currentPage]);
 
   const closeModal = () => setIsLoginModalOpen(false);
@@ -61,6 +65,11 @@ const RecentFunding = () => {
   };
 
   const handleLogoClick = () => navigate("/");
+
+  const handleCategoryClick = (category) => {
+    setActiveCategory(category); // Set the active category when clicked
+    // Additional logic to filter funding list based on category if needed
+  };
 
   const handleScroll = useCallback(
     (e) => {
@@ -87,7 +96,7 @@ const RecentFunding = () => {
 
   useEffect(() => {
     loadMoreData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line
   }, []);
 
   return (
@@ -156,19 +165,28 @@ const RecentFunding = () => {
           </NavbarDiv>
           <TogetherDiv bc="white">
             <CategoryContainer>
-              <CategoryDiv>
+              <CategoryDiv
+                onClick={() => handleCategoryClick("all")}
+                className={activeCategory === "all" ? "active" : ""}
+              >
                 <Link to="/recentfunding">전체</Link>
               </CategoryDiv>
-              <CategoryDiv>
+              <CategoryDiv
+                onClick={() => handleCategoryClick("progress")}
+                className={activeCategory === "progress" ? "active" : ""}
+              >
                 <Link to="/recentfunding/progress">진행중</Link>
               </CategoryDiv>
-              <CategoryDiv>
+              <CategoryDiv
+                onClick={() => handleCategoryClick("complete")}
+                className={activeCategory === "complete" ? "active" : ""}
+              >
                 <Link to="/recentfunding/complete">완료</Link>
               </CategoryDiv>
             </CategoryContainer>
             <FundingDiv>
               <FundingSection ref={fundingSectionRef}>
-                {recentFundingList.map((funding) => (
+                {activeFundingList.map((funding) => (
                   <FundingGrid
                     key={funding.id}
                     onClick={() => handleFundingClick(funding.id)}
@@ -193,7 +211,7 @@ const RecentFunding = () => {
                     </FundingTitle>
                   </FundingGrid>
                 ))}
-                {isLoading && <p>Loading more...</p>}
+                {isLoading && <p>로딩중...</p>}
               </FundingSection>
             </FundingDiv>
           </TogetherDiv>
@@ -206,4 +224,4 @@ const RecentFunding = () => {
   );
 };
 
-export default RecentFunding;
+export default ActiveFunding;
