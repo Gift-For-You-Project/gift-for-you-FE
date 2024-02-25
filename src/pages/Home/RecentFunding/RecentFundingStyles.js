@@ -263,10 +263,11 @@ export const RecentFundingDiv = styled.div`
 
 export const FundingSection = styled.section`
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
   width: 100%;
   gap: 10px;
-  padding: 19px;
+  padding: 10px;
   padding-bottom: 20px;
   height: 900px;
   overflow-y: auto;
