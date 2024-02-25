@@ -228,12 +228,12 @@ const FundingPay = ({ donation }) => {
               </SponserMoney>
 
               <InputLabel mt="60px">
-                <InputSpan>남길 이름 (10자 이내)</InputSpan>
+                <InputSpan>남길 이름 (12자 이내)</InputSpan>
                 <InputInput
                   type="text"
                   value={sponsorDonation.sponsorNickname}
                   onChange={(e) => {
-                    const inputValue = e.target.value.slice(0, 10);
+                    const inputValue = e.target.value.slice(0, 12);
                     setSponsorDonation({
                       ...sponsorDonation,
                       sponsorNickname: inputValue,
@@ -246,12 +246,12 @@ const FundingPay = ({ donation }) => {
               </P>
 
               <InputLabel mt="25px">
-                <InputSpan>남길 메시지 (120자 이내)</InputSpan>
+                <InputSpan>남길 메시지 (200자 이내)</InputSpan>
                 <Textarea
                   type="text"
                   value={sponsorDonation.sponsorComment}
                   onChange={(e) => {
-                    const inputValue = e.target.value.slice(0, 120);
+                    const inputValue = e.target.value.slice(0, 200);
                     setSponsorDonation({
                       ...sponsorDonation,
                       sponsorComment: inputValue,

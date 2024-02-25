@@ -364,11 +364,11 @@ const FundingModify = () => {
               </InputLabel>
 
               <InputLabel>
-                <InputSpan>제목 (15자 이내)</InputSpan>
+                <InputSpan>제목 (25자 이내)</InputSpan>
                 <InputInput
                   type="text"
                   value={fundingData.title}
-                  maxLength={15}
+                  maxLength={25}
                   onChange={(e) => {
                     setFundingData({ ...fundingData, title: e.target.value });
                   }}
@@ -376,14 +376,14 @@ const FundingModify = () => {
               </InputLabel>
 
               <InputLabel>
-                <InputSpan>본문 (120자 이내)</InputSpan>
+                <InputSpan>본문 (200자 이내)</InputSpan>
                 <Textarea
                   type="textarea"
                   placeholder="본문을 입력해주세요"
                   value={fundingData.content}
-                  maxLength={120}
+                  maxLength={200}
                   onChange={(e) => {
-                    if (e.target.value.length <= 120) {
+                    if (e.target.value.length <= 200) {
                       setFundingData({
                         ...fundingData,
                         content: e.target.value,
