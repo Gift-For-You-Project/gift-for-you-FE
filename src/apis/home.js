@@ -42,7 +42,7 @@ export const getHomeFundingList = async () => {
   }
 };
 
-// 전체 펀딩 페이지에서 펀딩 리스트 데이터를 가져오는 API
+// 진행중인 펀딩 페이지에서 펀딩 리스트 데이터를 가져오는 API
 export const getRecentFundingList = async (page) => {
   try {
     const response = await instance.get(`/api/funding/all?page=${page}`);
