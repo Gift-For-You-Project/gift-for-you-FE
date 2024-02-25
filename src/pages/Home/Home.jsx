@@ -257,7 +257,7 @@ const Home = () => {
           />
         </NavbarDiv>
         <Body>
-          <BannerImg src="/imgs/Home/banner.svg" />
+          <BannerImg src="/imgs/Home/banner.png" />
           {/* 내 펀딩 */}
           <TogetherDiv bc={theme.white}>
             {/* 로그인 상태이면서 내 펀딩이 있을 때 */}

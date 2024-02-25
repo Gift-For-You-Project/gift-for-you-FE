@@ -91,19 +91,19 @@ const FundingModify = () => {
         return;
       }
 
-      const data = await patchFundingModify(id, fundingData);
+      const updateData = await patchFundingModify(id, fundingData);
 
       setFundingData(
         fundingData.map((data) => {
           if (data.id === id) {
-            return { ...data, fundingData };
+            return { ...data, updateData };
           } else {
             return data;
           }
         })
       );
 
-      navigate(`/fundingdetail/${data.id}`);
+      navigate(`/fundingdetail/${updateData.id}`);
     } catch (error) {
       console.error("펀딩 수정 오류:", error);
     }

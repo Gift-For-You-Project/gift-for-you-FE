@@ -84,7 +84,7 @@ export const getSponsorDetail = async (id) => {
   try {
     const response = await instance.get(`/api/funding/${id}/donations`);
 
-    console.log('후원자 상세 API', response)
+    console.log("후원자 상세 API", response);
     return response.data.result;
   } catch (error) {
     const status = error.response.status;
