@@ -79,7 +79,7 @@ const FundingCreate = () => {
   //     setCreateData({ ...createData, itemName: e.target.value });
   // };
   const handleItemNameChange = (e) => {
-    const itemName = e.target.value.slice(0, 15);
+    const itemName = e.target.value.slice(0, 25);
     setCreateData({ ...createData, itemName });
   };
   const handleTargetAmountChange = (e) => {
@@ -88,15 +88,15 @@ const FundingCreate = () => {
     setCreateData({ ...createData, targetAmount });
   };
   const handleShowNameChange = (e) => {
-    let showName = e.target.value.slice(0, 10);
+    let showName = e.target.value.slice(0, 12);
     setCreateData({ ...createData, showName });
   };
   const handleTitleChange = (e) => {
-    let title = e.target.value.slice(0, 12);
+    let title = e.target.value.slice(0, 25);
     setCreateData({ ...createData, title });
   };
   const handleContentChange = (e) => {
-    let content = e.target.value.slice(0, 120);
+    let content = e.target.value.slice(0, 200);
     setCreateData({ ...createData, content });
   };
   const handleEndDateChange = (e) => {
@@ -240,7 +240,7 @@ const FundingCreate = () => {
                   </SponsorComment>
                   <ColumnDiv>
                     <TitleLabel>
-                      <InputSpan>상품명 (15자 이내)</InputSpan>
+                      <InputSpan>상품명 (25자 이내)</InputSpan>
                       <InputInput
                         type="text"
                         value={createData.itemName}
@@ -331,7 +331,7 @@ const FundingCreate = () => {
                 </SponserDiv>
 
                 <InputLabel>
-                  <InputSpan>보여줄 이름 (10자 이내)</InputSpan>
+                  <InputSpan>보여줄 이름 (12자 이내)</InputSpan>
                   <InputInput
                     type="text"
                     value={createData.showName}
@@ -340,7 +340,7 @@ const FundingCreate = () => {
                 </InputLabel>
 
                 <InputLabel>
-                  <InputSpan>제목 (12자 이내)</InputSpan>
+                  <InputSpan>제목 (25자 이내)</InputSpan>
                   <InputInput
                     type="text"
                     value={createData.title}
@@ -349,7 +349,7 @@ const FundingCreate = () => {
                 </InputLabel>
 
                 <InputLabel>
-                  <InputSpan>본문 (120자 이내)</InputSpan>
+                  <InputSpan>본문 (200자 이내)</InputSpan>
                   <Textarea
                     type="textarea"
                     value={createData.content}
