@@ -206,13 +206,6 @@ const Signup = () => {
     );
   };
 
-  // Enter키가 눌렸을 때 로그인 처리
-  const handleKeyDown = (e) => {
-    if (e.key === "Enter") {
-      handleSignupClick();
-    }
-  };
-
   // 알파벳 대소문자, 숫자, 특수문자, @기호, 도메인 부분은 2자 이상
   const isValidEmailFormat = (email) => {
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -302,7 +295,7 @@ const Signup = () => {
       if (!authBtnClicked) {
         infoToast("인증 메일이 발송되었습니다.");
         const code = await postSendMail(formData.email);
-        console.log("이메일 인증 코드 받기: ", code);
+        // console.log("이메일 인증 코드 받기: ", code);
         // 이메일 인증 코드를 상태에 저장
         setReceivedCode(code);
         setAuthBtnClicked(true); // 버튼 클릭 상태를 true로 변경
@@ -325,11 +318,11 @@ const Signup = () => {
     }
 
     if (formData.code === receivedCode) {
-      console.log("인증 성공!", receivedCode);
+      // console.log("인증 성공!", receivedCode);
       setVerificationSuccess(true);
       successToast("이메일 인증이 완료되었습니다.");
     } else {
-      console.log("인증 실패!", receivedCode);
+      // console.log("인증 실패!", receivedCode);
       setVerificationSuccess(false);
       errorToast("이메일 인증에 실패하였습니다.");
     }
@@ -418,7 +411,6 @@ const Signup = () => {
             <InputField
               value={formData.email}
               onChange={handleEmailChange}
-              onKeyDown={handleKeyDown}
               onAuthBtnClick={handleAuthBtnClick}
               title="이메일"
               type="email"
@@ -438,7 +430,6 @@ const Signup = () => {
               value={formData.code}
               onChange={handleCodeChange}
               onCheckBtnClick={handleCheckBtnClick}
-              onKeyDown={handleKeyDown}
               title="이메일 인증"
               type="string"
               placeholder="Confrimation Code"
@@ -449,7 +440,6 @@ const Signup = () => {
             <InputField
               value={formData.nickname}
               onChange={handleNicknameChange}
-              onKeyDown={handleKeyDown}
               title="닉네임"
               type="string"
               placeholder="Nickname"
@@ -462,7 +452,6 @@ const Signup = () => {
             <InputField
               value={formData.password}
               onChange={handlePasswordChange}
-              onKeyDown={handleKeyDown}
               title="비밀번호"
               type="password"
               placeholder="Password"
@@ -478,7 +467,6 @@ const Signup = () => {
             <InputField
               value={formData.confirmPassword}
               onChange={handleConfirmPasswordChange}
-              onKeyDown={handleKeyDown}
               title="비밀번호 확인"
               type="password"
               placeholder="Confirm Password"

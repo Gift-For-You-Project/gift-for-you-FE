@@ -68,7 +68,7 @@ const FundingModify = () => {
           return;
         }
         const data = await getFundingDetail(id);
-        console.log("상세페이지 데이터 불러오기: ", data);
+        // console.log("상세페이지 데이터 불러오기: ", data);
         setFundingData(data);
       } catch (error) {
         console.error("펀딩상세 가져오기 오류:", error);
@@ -116,7 +116,7 @@ const FundingModify = () => {
       if (!confirmDelete) return;
 
       await deleteFundingModify(id, fundingData);
-      console.log("펀딩 삭제 성공:", id);
+      // console.log("펀딩 삭제 성공:", id);
       navigate("/");
     } catch (error) {
       console.error("펀딩 삭제 실패:", error);
@@ -132,7 +132,7 @@ const FundingModify = () => {
       }
       const data = await endFundingModify(id); // 펀딩 상세 정보 가져오기
       setFundingData(data); // 가져온 데이터를 상태 변수에 설정
-      console.log("펀딩 종료 성공", data);
+      // console.log("펀딩 종료 성공", data);
       navigate("/");
     } catch (error) {
       console.error("펀딩 종료 오류:", error);

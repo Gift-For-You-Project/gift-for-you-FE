@@ -84,7 +84,7 @@ const FundingPay = ({ donation }) => {
         donation: sponsorDonation.donation,
       });
 
-      console.log("결제 준비 성공: ", response);
+      // console.log("결제 준비 성공: ", response);
 
       // 모바일이면 모바일 전용 URL로 리다이렉션
       if (isMobile) {
@@ -137,7 +137,7 @@ const FundingPay = ({ donation }) => {
   }, [id, location.search, navigate]);
 
   // donation 값 사용
-  console.log(`펀딩 금액: ${donation}`);
+  // console.log(`펀딩 금액: ${donation}`);
 
   return (
     <MainContainer>

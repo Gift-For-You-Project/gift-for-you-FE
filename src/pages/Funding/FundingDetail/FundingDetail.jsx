@@ -192,7 +192,7 @@ const FundingDetail = () => {
           return;
         }
         const data = await getSponsorDetail(id);
-        console.log("후원자 상세 data", data);
+        // console.log("후원자 상세 data", data);
         setSponsorDetail(data);
       } catch (error) {
         console.error("펀딩 상세페이지 오류:", error);

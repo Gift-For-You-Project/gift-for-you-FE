@@ -120,7 +120,7 @@ const Home = () => {
     try {
       const data = await getMyFunding();
 
-      console.log("내 펀딩: ", data);
+      // console.log("내 펀딩: ", data);
       setMyFunding(data);
     } catch (error) {
       console.error("API 호출 중 에러 발생: ", error);
@@ -132,7 +132,7 @@ const Home = () => {
     try {
       const content = await getHomeFundingList();
 
-      console.log("최근 펀딩 구경하기: ", content);
+      // console.log("최근 펀딩 구경하기: ", content);
       setHomeFundingList(content);
     } catch (error) {
       console.error("API 호출 중 에러 발생: ", error);
@@ -144,7 +144,7 @@ const Home = () => {
     try {
       const data = await getFundingSummary();
 
-      console.log("함께한 선물 데이터: ", data);
+      // console.log("함께한 선물 데이터: ", data);
       setFundingSummary(data);
     } catch (error) {
       console.error("API 호출 중 에러 발생: ", error);
