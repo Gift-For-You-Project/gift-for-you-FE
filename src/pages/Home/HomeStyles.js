@@ -332,7 +332,6 @@ export const RecentFundingDiv = styled.div`
 
 export const FundingSection = styled.section`
   display: flex;
-  justify-content: center;
   flex-wrap: wrap;
   width: 100%;
   gap: 10px;
@@ -401,8 +400,7 @@ export const MyFundingImg = styled.img`
   position: relative;
   width: 100%;
   max-width: 120px;
-  height: 100%;
-  max-height: 120px;
+  height: 120px;
   border-radius: 10px;
   margin: 0 20px 0 20px;
   border: 1px solid ${theme.gray5};
