@@ -144,7 +144,7 @@ const Home = () => {
     try {
       const data = await getFundingSummary();
 
-      console.log("내 펀딩: ", data);
+      console.log("함께한 선물 데이터: ", data);
       setFundingSummary(data);
     } catch (error) {
       console.error("API 호출 중 에러 발생: ", error);
@@ -455,7 +455,7 @@ const Home = () => {
                 <br /> 펀딩 금액
               </P>
               <P pt="10px" pb="10px" fs="16px" fw="700">
-                {formatAmount(fundingSummary.totalFundingAmount)}만 원
+                {formatAmount(fundingSummary.totalFundingAmount)}만원
               </P>
             </TogetherGrid>
           </TogetherGrids>

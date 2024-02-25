@@ -84,7 +84,7 @@ const FundingCreate = () => {
   };
   const handleTargetAmountChange = (e) => {
     let targetAmount = e.target.value.replace(/[^0-9]/g, "");
-    targetAmount = Math.min(parseInt(targetAmount), 1000000).toString();
+    targetAmount = Math.min(parseInt(targetAmount), 10000000).toString();
     setCreateData({ ...createData, targetAmount });
   };
   const handleShowNameChange = (e) => {
@@ -249,7 +249,7 @@ const FundingCreate = () => {
                     </TitleLabel>
 
                     <TitleLabel>
-                      <InputSpan>목표 금액 (백만원 이하)</InputSpan>
+                      <InputSpan>목표 금액 (천만원 이하)</InputSpan>
                       <InputInput
                         type="text"
                         value={createData.targetAmount}

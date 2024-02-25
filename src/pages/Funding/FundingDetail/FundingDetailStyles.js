@@ -228,7 +228,7 @@ export const GiftCoverImg = styled.img`
 
 export const BannerImg = styled.img`
   width: 50%; /* 이미지의 너비를 50%로 설정하여 반쯤 걸쳐지도록 함 */
-  max-width: 121.80px;
+  max-width: 121.8px;
   height: 100%;
   max-height: 101.82px;
   border-radius: 0px 0px 20px 20px;
@@ -258,7 +258,6 @@ export const NavigateBtn = styled.button`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-
 `;
 
 export const TitleDiv = styled.div`
@@ -404,7 +403,7 @@ export const FundingComment = styled.div`
 export const CommentDiv = styled.div`
   justify-content: center;
   align-items: center;
-  width: 95%; 
+  width: 95%;
   padding: 12px;
   border-radius: ${(props) => props.br};
   font-weight: 500;
@@ -418,7 +417,7 @@ export const CommentDiv = styled.div`
   word-break: break-all;
 
   @media screen and (max-width: 390px) {
-    font-size: 14px; 
+    font-size: 14px;
   }
 `;
 
@@ -447,11 +446,10 @@ export const SponsorImg = styled.img`
 `;
 
 export const IconButtonImg = styled.img`
-padding-top: 3px;
+  padding-top: 3px;
   width: 20px;
   height: 20px;
   margin-right: 5px;
-
 `;
 
 export const SponsorDiv = styled.div`
@@ -498,7 +496,7 @@ export const FloatingBtn = styled.button`
   background-color: ${theme.primary};
   color: ${theme.white};
   font-size: ${theme.body2};
-  z-index: 1000;
+  z-index: 10;
 
   &:hover {
     background-color: ${theme.primaryFont};
