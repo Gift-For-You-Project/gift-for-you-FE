@@ -1,9 +1,9 @@
-import React, { useEffect, useState, useRef } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState, useRef, useCallback } from "react";
+import { useNavigate, Link } from "react-router-dom";
 import LoginModal from "../Login/LoginModal";
 import { getRecentFundingList } from "../../../apis/home";
-import { FaChevronRight } from "react-icons/fa";
 import theme from "../../../styles/theme";
+import { FaAngleLeft } from "react-icons/fa6";
 import {
   MainContainer,
   LeftContainer,
@@ -30,15 +30,20 @@ import {
   IpadLoveImg,
   RightContainer,
   Body,
+  CategoryContainer,
+  CategoryDiv,
 } from "./RecentFundingStyles";
+import { NavbarDiv, IconDiv } from "../Signup/SignupStyles";
+
 const RecentFunding = () => {
   const navigate = useNavigate();
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [recentFundingList, setRecentFundingList] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
-  const fundingSectionRef = useRef(null); // Ref for the FundingSection
-  const loadMoreData = async () => {
+  const fundingSectionRef = useRef(null);
+
+  const loadMoreData = useCallback(async () => {
     if (isLoading) return;
     setIsLoading(true);
     const data = await getRecentFundingList(currentPage);
@@ -47,35 +52,42 @@ const RecentFunding = () => {
       setCurrentPage(currentPage + 1);
     }
     setIsLoading(false);
-  };
+  }, [isLoading, currentPage]);
 
   const closeModal = () => setIsLoginModalOpen(false);
 
+  const handleFundingClick = (id) => {
+    navigate(`/fundingdetail/${id}`);
+  };
+
   const handleLogoClick = () => navigate("/");
+
+  const handleScroll = useCallback(
+    (e) => {
+      const { scrollTop, scrollHeight, clientHeight } = e.target;
+      if (!isLoading && scrollTop + clientHeight >= scrollHeight - 5) {
+        loadMoreData();
+        // console.log("top", scrollTop);
+        // console.log("h", scrollHeight);
+        // console.log("c", clientHeight);
+      }
+    },
+    [isLoading, loadMoreData]
+  );
 
   useEffect(() => {
     const fundingSection = fundingSectionRef.current;
     if (!fundingSection) return;
-    const handleScroll = (e) => {
-      const { scrollTop, scrollHeight, clientHeight } = e.target;
-      if (!isLoading && scrollTop + clientHeight >= scrollHeight - 5) {
-        loadMoreData();
-        console.log("top", scrollTop);
-        console.log("h", scrollHeight);
-        console.log("c", clientHeight);
-      }
-    };
-    // Adding scroll event listener to the FundingSection
+
     fundingSection.addEventListener("scroll", handleScroll);
     return () => {
-      // Cleanup scroll event listener from the FundingSection
       fundingSection.removeEventListener("scroll", handleScroll);
     };
-    // eslint-disable-next-line
-  }, [isLoading, currentPage]);
+  }, [handleScroll]);
+
   useEffect(() => {
-    loadMoreData(); // Load initial data
-    // eslint-disable-next-line
+    loadMoreData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -134,26 +146,33 @@ const RecentFunding = () => {
 
       <RightContainer>
         <Body>
+          <NavbarDiv>
+            <IconDiv>
+              <FaAngleLeft onClick={() => navigate("/")} />
+            </IconDiv>
+            <P fs={theme.body2} color={theme.white}>
+              최근 펀딩 구경하기
+            </P>
+          </NavbarDiv>
           <TogetherDiv bc="white">
+            <CategoryContainer>
+              <CategoryDiv>
+                <Link to="/recentfunding">전체</Link>
+              </CategoryDiv>
+              <CategoryDiv>
+                <Link to="/recentfunding/progress">진행중</Link>
+              </CategoryDiv>
+              <CategoryDiv>
+                <Link to="/recentfunding/complete">완료</Link>
+              </CategoryDiv>
+            </CategoryContainer>
             <FundingDiv>
-              <BetweenDiv>
-                <button onClick={() => navigate(`/`)}>
-                  <P fs="16px" fw="900" pt="20px" pb="5px" pl="23px">
-                    최근 펀딩 구경하기 &nbsp;
-                    <FaChevronRight />
-                  </P>
-                </button>
-              </BetweenDiv>
-              <BetweenDiv>
-                <P fs="14px" fw="400" pl="29px" color="gray">
-                  비공개 펀딩은 이곳에 공개되지 않아요
-                </P>
-              </BetweenDiv>
-              {/* Adding ref to FundingSection to attach scroll event listener */}
               <FundingSection ref={fundingSectionRef}>
                 {recentFundingList.map((funding) => (
-                  <FundingGrid key={funding.id}>
-                    <FundingItem>{funding.itemName}</FundingItem>
+                  <FundingGrid
+                    key={funding.id}
+                    onClick={() => handleFundingClick(funding.id)}
+                  >
                     <FundingImg
                       src={funding.itemImage}
                       alt={funding.itemName}
@@ -174,7 +193,7 @@ const RecentFunding = () => {
                     </FundingTitle>
                   </FundingGrid>
                 ))}
-                {isLoading && <p>Loading more...</p>}
+                {isLoading && <p>로딩중...</p>}
               </FundingSection>
             </FundingDiv>
           </TogetherDiv>
