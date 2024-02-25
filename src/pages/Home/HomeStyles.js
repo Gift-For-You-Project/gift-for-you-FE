@@ -336,8 +336,7 @@ export const FundingSection = styled.section`
   flex-wrap: wrap;
   width: 100%;
   gap: 10px;
-  padding: 10px;
-  padding-bottom: 20px;
+  padding: 10px 19px 20px 19px;
 
   @media screen and (max-width: 390px) {
     gap: 2px;
