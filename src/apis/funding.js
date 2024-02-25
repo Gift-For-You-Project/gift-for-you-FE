@@ -1,5 +1,5 @@
 import { instance } from "./auth";
-import { successToast, errorToast } from "../components/toast";
+import { successToast, errorToast, warnToast } from "../components/toast";
 
 // 펀딩 추가 API
 export const postFundingCreate = async (fundingData) => {
@@ -52,8 +52,9 @@ export const getFundingDetail = async (id, data) => {
 
     return response.data;
   } catch (error) {
+    warnToast(error.response.message);
     const status = error.response.status;
-
+    warnToast(error.response.data.message);
     if (status === 404) {
       console.error("API 호출 중 404 에러 발생: ", error);
     } else if (status === 500) {
