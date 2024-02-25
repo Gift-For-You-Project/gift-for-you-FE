@@ -157,7 +157,7 @@ export const RightContainer = styled.div`
   position: relative;
   width: -webkit-fill-available;
   max-width: 390px;
-  height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
   margin: 0 10px;
   overflow-y: scroll;
   &::-webkit-scrollbar {
@@ -270,7 +270,7 @@ export const SponsorComment = styled.div`
 `;
 
 export const ImgPlus = styled.h1`
-  display: ${(props) => props.show ? 'block' : 'none'}; /* 수정된 부분 */
+  display: ${(props) => (props.show ? "block" : "none")}; /* 수정된 부분 */
   position: absolute; /* 추가된 부분 */
   top: 65%; /* 추가된 부분 */
   left: 50%; /* 추가된 부분 */
@@ -280,7 +280,7 @@ export const ImgPlus = styled.h1`
 export const ImgText = styled.h1`
   /* position: absolute;
   top: 47%;
-  right: 25%; */ 
+  right: 25%; */
   transform: translate(22%, -215%);
   color: ${theme.gray3};
   font-size: ${theme.detail};
@@ -337,8 +337,8 @@ export const InputLabel = styled.label`
 `;
 
 export const TitleLabel = styled.label`
-  width: 100%; 
-  max-width: 100%; 
+  width: 100%;
+  max-width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -349,7 +349,7 @@ export const TitleLabel = styled.label`
   &:hover {
     border: 0.5px solid ${theme.gray3};
   }
-`
+`;
 
 export const InputSpan = styled.span`
   padding-top: 10px;
@@ -370,5 +370,5 @@ export const InputInput = styled.input`
   border-radius: 10px;
   justify-content: start;
   align-items: start;
-  font-family: 'Pretendard', sans-serif;
+  font-family: "Pretendard", sans-serif;
 `;

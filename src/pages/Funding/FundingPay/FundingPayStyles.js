@@ -239,13 +239,13 @@ export const NavbarDiv = styled.div`
 export const RightContainer = styled.div`
   position: relative;
   width: -webkit-fill-available;
+  height: calc(var(--vh, 1vh) * 100);
   max-width: 390px;
   margin: 0 10px;
   overflow-y: scroll;
   &::-webkit-scrollbar {
     display: none;
   }
-  height: calc(var(--vh, 1vh) * 100);
 
   /* 모바일뷰 */
   /* @media screen and (max-width: 390px) {

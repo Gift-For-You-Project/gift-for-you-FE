@@ -126,7 +126,7 @@ export const RightContainer = styled.div`
   position: relative;
   width: -webkit-fill-available;
   max-width: 390px;
-  height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
   margin: 0 10px;
   overflow-y: scroll;
 

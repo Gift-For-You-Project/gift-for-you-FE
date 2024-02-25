@@ -76,10 +76,10 @@ const GlobalStyles = createGlobalStyle`
     }
 
       /* 모바일뷰 */
-  @media screen and (max-width: 390px) {
-    max-width: 100%;
-    height: calc(var(--vh, 1vh) * 100);
-  }
+    @media screen and (max-width: 390px) {
+        max-width: 100%;
+        height: calc(var(--vh, 1vh) * 100);
+    }
 `;
 
 export default GlobalStyles;
