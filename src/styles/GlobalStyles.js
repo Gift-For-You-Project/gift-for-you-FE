@@ -5,6 +5,10 @@ import theme from "./theme";
 const GlobalStyles = createGlobalStyle`
     ${reset} // 전역적으로 스타일을 초기화함
 
+    :root {
+        --vh: 100%;
+    }
+
      /* 링크 스타일 */
     a{
         text-decoration: none; // 밑줄 제거
@@ -70,6 +74,12 @@ const GlobalStyles = createGlobalStyle`
         -webkit-appearance: none;
         margin: 0;
     }
+
+      /* 모바일뷰 */
+  @media screen and (max-width: 390px) {
+    max-width: 100%;
+    height: calc(var(--vh, 1vh) * 100);
+  }
 `;
 
 export default GlobalStyles;

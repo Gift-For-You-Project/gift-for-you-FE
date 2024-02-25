@@ -52,9 +52,7 @@ export const getFundingDetail = async (id, data) => {
 
     return response.data;
   } catch (error) {
-    warnToast(error.response.message);
     const status = error.response.status;
-    warnToast(error.response.data.message);
     if (status === 404) {
       console.error("API 호출 중 404 에러 발생: ", error);
     } else if (status === 500) {
@@ -109,7 +107,7 @@ export const patchFundingModify = async (id, data) => {
     }
   } catch (error) {
     const status = error.response.status;
-
+    warnToast(error.response.data.message);
     if (status === 404) {
       console.error("API 호출 중 404 에러 발생: ", error);
     } else if (status === 500) {
@@ -129,7 +127,7 @@ export const deleteFundingModify = async (id, data) => {
     }
   } catch (error) {
     const status = error.response.status;
-
+    warnToast(error.response.data.message);
     if (status === 404) {
       console.error("API 호출 중 404 에러 발생: ", error);
     } else if (status === 500) {
@@ -149,7 +147,7 @@ export const endFundingModify = async (id, data) => {
     }
   } catch (error) {
     const status = error.response.status;
-
+    warnToast(error.response.data.message);
     if (status === 404) {
       console.error("API 호출 중 404 에러 발생: ", error);
     } else if (status === 500) {

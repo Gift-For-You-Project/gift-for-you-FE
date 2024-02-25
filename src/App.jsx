@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import NotFound from "./pages/NotFound/NotFound";
 import Home from "./pages/Home/Home";
@@ -17,6 +17,14 @@ import FundingModify from "./pages/Funding/FundingModify/FundingModify";
 import FundingPay from "./pages/Funding/FundingPay/FundingPay";
 
 function App() {
+  function setScreenSize() {
+    let vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty("--vh", `${vh}px`);
+  }
+  useEffect(() => {
+    setScreenSize();
+  });
+
   return (
     <Router>
       <Routes>
