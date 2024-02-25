@@ -19,7 +19,7 @@ function DetailModal({ closeModal, handleInputSelection, id, detailData }) {
   const navigate = useNavigate();
 
   const handleModalButtonClick = () => {
-    console.log("펀딩 모달 성공:", donationInput);
+    // console.log("펀딩 모달 성공:", donationInput);
     handleInputSelection(donationInput);
     closeModal();
 

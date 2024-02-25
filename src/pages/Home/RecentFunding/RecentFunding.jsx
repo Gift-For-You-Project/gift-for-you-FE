@@ -67,9 +67,9 @@ const RecentFunding = () => {
       const { scrollTop, scrollHeight, clientHeight } = e.target;
       if (!isLoading && scrollTop + clientHeight >= scrollHeight - 5) {
         loadMoreData();
-        console.log("top", scrollTop);
-        console.log("h", scrollHeight);
-        console.log("c", clientHeight);
+        // console.log("top", scrollTop);
+        // console.log("h", scrollHeight);
+        // console.log("c", clientHeight);
       }
     },
     [isLoading, loadMoreData]

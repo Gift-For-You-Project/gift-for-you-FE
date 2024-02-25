@@ -79,7 +79,7 @@ export const postSendMail = async (email) => {
     const response = await instance.post("/api/mailSend", { mail: email });
 
     if (response.status === 200) {
-      console.log("이메일 인증: ", response);
+      // console.log("이메일 인증: ", response);
       return response.data.code;
     }
   } catch (error) {

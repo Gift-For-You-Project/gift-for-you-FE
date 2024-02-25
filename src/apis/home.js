@@ -68,7 +68,7 @@ export const getRecentFundingList = async (page) => {
 export const getFundingSummary = async () => {
   try {
     const response = await instance.get("/api/funding/summary");
-    console.log("기프티파이 펀딩 정보 API", response.data);
+    // console.log("기프티파이 펀딩 정보 API", response.data);
     if (response.status === 200) {
       return response.data;
     }
