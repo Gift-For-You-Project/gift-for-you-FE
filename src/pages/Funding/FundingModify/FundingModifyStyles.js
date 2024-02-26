@@ -146,9 +146,11 @@ export const Button = styled.button`
   padding-left: ${(props) => props.pl};
   padding-right: ${(props) => props.pr};
   padding-right: ${(props) => props.pr};
+  transition: all 300ms ease-in;
+
   &:hover {
-    color: ${theme.white};
-    background-color: ${theme.primaryFont};
+    color: ${(props) => props.hoverColor || theme.white};
+    background-color: ${(props) => props.hoverBgColor || theme.primaryFont};
     cursor: pointer;
   }
 `;

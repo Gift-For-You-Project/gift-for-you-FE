@@ -55,6 +55,7 @@ import {
   BannerProgressDiv,
   TogetherBetween,
   TogetherDiv,
+  TogetherLogoImg,
   TogetherImg,
   TogetherGrids,
   TogetherGrid,
@@ -396,15 +397,7 @@ const Home = () => {
 
           {/* 함께한 선물 */}
           <TogetherBetween>
-            <P
-              pt="40px"
-              pb="40px"
-              fs={theme.title}
-              fw="600"
-              color={theme.primary}
-            >
-              Giftipie
-            </P>
+            <TogetherLogoImg src="/imgs/Common/giftipie.png" alt="logo" />
             <P
               pt="40px"
               pb="40px"

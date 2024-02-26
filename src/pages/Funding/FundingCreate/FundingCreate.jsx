@@ -4,7 +4,7 @@ import { postFundingCreate } from "../../../apis/funding";
 import { useParams } from "react-router-dom";
 import CreateModal from "./Modal/CreateModal";
 import { infoToast } from "../../../components/toast";
-import { IoIosArrowBack } from "react-icons/io";
+import { FaAngleLeft } from "react-icons/fa6";
 import { GrAdd } from "react-icons/gr";
 import theme from "../../../styles/theme";
 import {
@@ -22,7 +22,6 @@ import {
   P,
   Button,
   RightContainer,
-  NavbarDiv,
   ImgPlus,
   ProducImgtDiv,
   FundingImg,
@@ -41,6 +40,7 @@ import {
   InputSpan,
   InputInput,
 } from "./FundingCreateStyles";
+import { IconDiv, NavbarDiv } from "../../Home/Signup/SignupStyles";
 
 const FundingCreate = () => {
   const navigate = useNavigate();
@@ -191,12 +191,10 @@ const FundingCreate = () => {
 
       <RightContainer>
         <NavbarDiv>
-          <IoIosArrowBack
-            onClick={() => navigate("/")}
-            color={theme.white}
-            size="20px"
-          />
-          <P pl="120px" fs="13px" fw="900" color={theme.white}>
+          <IconDiv>
+            <FaAngleLeft onClick={() => navigate("/")} />
+          </IconDiv>
+          <P fs={theme.body2} color={theme.white}>
             펀딩 만들기
           </P>
         </NavbarDiv>

@@ -362,6 +362,7 @@ export const SponserDiv = styled.div`
   flex-direction: row;
   align-items: center;
   width: 100%;
+  padding: 0 20px;
 `;
 
 // 네브바 영역

@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import theme from "../../styles/theme";
 
 /* 전체 컨테이너 */
@@ -180,6 +180,8 @@ export const Button = styled.button`
   margin-bottom: ${(props) => props.mb};
   padding-left: ${(props) => props.pl};
   padding-right: ${(props) => props.pr};
+  transition: all 300ms ease-in;
+
   &:hover {
     color: white;
     background-color: ${theme.primary};
@@ -239,6 +241,44 @@ export const NavbarBtn = styled.button`
   &:hover {
     transform: scale(1.2);
     color: ${theme.primary};
+  }
+`;
+
+const wigglyAnimation = keyframes`
+  0% {
+    transform: rotate(0deg);
+  }
+
+  25% {
+    transform: rotate(-8deg);
+  }
+
+  50% {
+    transform: rotate(8deg);
+  }
+  
+  75% {
+    transform: rotate(-8deg);
+  }
+
+  100% {
+    transform: rotate(0deg);
+  }
+`;
+
+export const WigglyBtn = styled.button`
+  color: ${theme.white};
+  background-color: ${theme.primary};
+  cursor: pointer;
+  animation: ${wigglyAnimation} 3s infinite;
+  width: 60px;
+  height: 34px;
+  border-radius: 8px;
+  border: 2px solid ${theme.primaryFont};
+  transition: all 300ms ease-in;
+
+  &:hover {
+    background-color: ${theme.primaryFont};
   }
 `;
 
@@ -331,7 +371,8 @@ export const FundingSection = styled.section`
   padding: 10px 19px 20px 19px;
 
   @media screen and (max-width: 390px) {
-    gap: 2px;
+    gap: 9px;
+    padding: 10px 10px 20px 10px;
   }
 `;
 
@@ -499,7 +540,7 @@ export const BetweenDiv = styled.div`
 
 export const TogetherBetween = styled.div`
   display: flex;
-  flex-direction: row;
+  align-items: center;
   justify-content: center;
   width: 220px;
 `;
@@ -529,6 +570,11 @@ export const RecentFundingContainer = styled.div`
   @media screen and (max-width: 390px) {
     max-width: 100%;
   }
+`;
+
+export const TogetherLogoImg = styled.img`
+  width: 80px;
+  height: 24px;
 `;
 
 export const TogetherImg = styled.img`
@@ -642,6 +688,7 @@ export const ProductImg = styled.img`
   border-radius: 8px;
   object-fit: cover;
   cursor: pointer;
+  pointer-events: auto;
 `;
 
 export const ProductP = styled.p`
