@@ -108,7 +108,7 @@ const Login = () => {
       dispatch(userLogin()); // 로그인 액션 디스패치
       navigate("/");
     } catch (error) {
-      console.error("로그인 에러:", error);
+      console.error("로그인 에러");
     }
   };
 

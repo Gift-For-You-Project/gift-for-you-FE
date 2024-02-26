@@ -70,7 +70,7 @@ const FundingModify = () => {
         // console.log("상세페이지 데이터 불러오기: ", data);
         setFundingData(data);
       } catch (error) {
-        console.error("펀딩상세 가져오기 오류:", error);
+        console.error("펀딩상세 가져오기 오류");
       }
     };
 
@@ -104,7 +104,7 @@ const FundingModify = () => {
 
       navigate(`/fundingdetail/${updateData.id}`);
     } catch (error) {
-      console.error("펀딩 수정 오류:", error);
+      console.error("펀딩 수정 오류");
     }
   };
 
@@ -118,7 +118,7 @@ const FundingModify = () => {
       // console.log("펀딩 삭제 성공:", id);
       navigate("/");
     } catch (error) {
-      console.error("펀딩 삭제 실패:", error);
+      console.error("펀딩 삭제 실패");
     }
   };
 
@@ -134,7 +134,7 @@ const FundingModify = () => {
       // console.log("펀딩 종료 성공", data);
       navigate("/");
     } catch (error) {
-      console.error("펀딩 종료 오류:", error);
+      console.error("펀딩 종료 오류");
     }
   };
 

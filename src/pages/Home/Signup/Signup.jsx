@@ -287,7 +287,7 @@ const Signup = () => {
         );
       }
     } catch (error) {
-      console.error("인증 에러:", error);
+      console.error("인증 에러");
     }
   };
 
@@ -320,7 +320,7 @@ const Signup = () => {
       });
       navigate("/login");
     } catch (error) {
-      console.error("가입 오류:", error);
+      console.error("가입 오류");
     }
   };
 
@@ -435,7 +435,7 @@ const Signup = () => {
               <SignupHelpDiv>
                 {formData.password.trim() === ""
                   ? "비밀번호를 입력해 주세요."
-                  : "비밀번호는 8자에서 15자 사이의 알파벳 대소문자, 숫자, 특수문자로 구성되어야 합니다."}
+                  : "비밀번호는 8자에서 15자 사이의 알파벳 대소문자, 숫자, 특수문자(@$!%*?_~(),)로 구성되어야 합니다."}
               </SignupHelpDiv>
             )}
             <BlankLine h="20px" />
