@@ -112,7 +112,7 @@ const Marketing = () => {
             <P fs={theme.body2} fw="600" p="10px">
               제3조 용어의 정의
             </P>
-            <P fs={theme.body2} p="10px">
+            <P fs={theme.body2} p="10px" bc={theme.white}>
               본 약관에서 사용하는 용어의 정의는 다음과 같습니다. 본 약관에
               명시되지 않은 용어는 관련 법령이 정하는 바에 따르며, 그 외에는
               일반적인 상거래 관행에 의합니다.
@@ -148,7 +148,7 @@ const Marketing = () => {
               (11) 결제 금액: 물품의 판매가 등 관련 비용을 전부 합한 금액을
               말합니다.
             </P>
-            <P fs={theme.body2} fw="600" p="10px">
+            <P fs={theme.body2} fw="600" p="10px 144.9px" bc={theme.white}>
               제4조 약관외 준칙
             </P>
             <P fs={theme.body2} p="10px" bc={theme.white}>
@@ -343,7 +343,7 @@ const Marketing = () => {
               * 다른 이용자 또는 제3자와 저작권 등 기타 권리를 침해하는 경우
               <br />* 기타 관계 법령에 위배된다고 판단되는 경우
             </P>
-            <P fs={theme.body2} fw="600" p="10px 136.5px" bc={theme.white}>
+            <P fs={theme.body2} fw="600" p="10px 136.4px" bc={theme.white}>
               제13조 게시물의 보관
             </P>
             <P fs={theme.body2} p="10px" bc={theme.white}>
@@ -450,7 +450,7 @@ const Marketing = () => {
               * 위탁항목 : 테스트 결제를 위해 자동으로 수집되는 정보
               <br />* 위탁업무 : 카카오페이 데모 결제처리
             </P>
-            <P fs={theme.body2} fw="600" p="10px 148.4px" bc={theme.white}>
+            <P fs={theme.body2} fw="600" p="10px 148.3px" bc={theme.white}>
               제19조 기타 조항
             </P>
             <P fs={theme.body2} p="10px" bc={theme.white}>
