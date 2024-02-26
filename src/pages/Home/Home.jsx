@@ -497,7 +497,9 @@ const Home = () => {
           </ProductContainer>
         </Body>
         <Button
-          onClick={() => navigate("/fundingcreate")}
+          onClick={
+            isLoggedIn ? () => navigate("/fundingcreate") : handleLoginClick
+          }
           w="100%"
           h="60px"
           color="black"

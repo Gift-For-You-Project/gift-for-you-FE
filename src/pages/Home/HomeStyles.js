@@ -472,6 +472,10 @@ export const MyFundingBtn = styled.button`
   color: ${theme.primaryFont};
   font-size: ${theme.detail};
   border-radius: 8px;
+
+  @media screen and (max-width: 390px) {
+    width: 80px;
+  }
 `;
 
 export const FundingImg = styled.img`
