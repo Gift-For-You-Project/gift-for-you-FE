@@ -7,6 +7,7 @@ export const NotFoundImg = styled.img`
   margin-top: ${(props) => props.mt};
   margin-bottom: ${(props) => props.mb};
   transition: all 300ms ease-in-out;
+  pointer-events: auto;
 
   &:hover {
     transform: scale(1.2);

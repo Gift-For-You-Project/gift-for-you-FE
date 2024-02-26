@@ -38,13 +38,6 @@ export const LeftLogoTextIcon = styled.img`
   cursor: pointer;
 `;
 
-export const BubbleTxt = styled.div`
-  position: absolute;
-  bottom: 208px;
-  left: 26px;
-  padding: 100px 0 0 300px;
-`;
-
 export const BubbleImg = styled.img`
   position: absolute;
   bottom: 130px;
