@@ -202,7 +202,7 @@ const Signup = () => {
   // 알파벳 대소문자, 숫자, 특수문자를 조합하여 8자에서 15자 사이의 비밀번호
   const isValidPasswordFormat = (password) => {
     const passwordRegex =
-      /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,15}$/;
+      /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?_~(),])[A-Za-z\d@$!%*?_~(),]{8,15}$/;
     return passwordRegex.test(password);
   };
 
