@@ -332,7 +332,7 @@ const FundingDetail = () => {
             </BetweenDiv>
           </TogetherDiv>
 
-          <FundingDiv p="0px 20px 0px 20px">
+          <FundingDiv>
             <SponserDiv>
               <FundingComment mt="10px">
                 <NamingDiv>

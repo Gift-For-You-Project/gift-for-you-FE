@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { infoToast } from "../../../components/toast";
-import { IoIosArrowBack } from "react-icons/io";
+import { FaAngleLeft } from "react-icons/fa6";
 import theme from "../../../styles/theme";
 import {
   patchFundingModify,
@@ -25,7 +25,6 @@ import {
   P,
   Button,
   RightContainer,
-  NavbarDiv,
   ProducImgtDiv,
   NonInputTag,
   FundingImg,
@@ -42,6 +41,7 @@ import {
   InputSpan,
   InputInput,
 } from "./FundingModifyStyles";
+import { NavbarDiv, IconDiv } from "../../Home/Signup/SignupStyles";
 
 const FundingModify = () => {
   const navigate = useNavigate();
@@ -188,12 +188,10 @@ const FundingModify = () => {
 
       <RightContainer>
         <NavbarDiv>
-          <IoIosArrowBack
-            onClick={() => navigate(`/fundingdetail/${id}`)}
-            color={theme.white}
-            size="20px"
-          />
-          <P pl="120px" fs="13px" fw="900" color={theme.white}>
+          <IconDiv>
+            <FaAngleLeft onClick={() => navigate(`/fundingdetail/${id}`)} />
+          </IconDiv>
+          <P fs={theme.body2} color={theme.white}>
             펀딩 수정하기
           </P>
         </NavbarDiv>
@@ -434,7 +432,8 @@ const FundingModify = () => {
                   fw="700"
                   color={theme.primaryFont}
                   bc={theme.primaryBtn}
-                  // bc="#FFE6E6"
+                  hoverColor={theme.white}
+                  hoverBgColor="#ffa6a6"
                 >
                   삭제하기
                 </Button>
@@ -448,6 +447,7 @@ const FundingModify = () => {
                   fs={theme.body1}
                   color={theme.gray2}
                   bc={theme.gray6}
+                  hoverBgColor={theme.gray4}
                 >
                   종료하기
                 </Button>
