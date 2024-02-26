@@ -158,15 +158,18 @@ const FundingDetail = () => {
     );
   };
 
-  // const handledonationAllChange = () => {
-  //     setSponsorDonation({ ...sponsorDonation, donationAll: '남은금액' });
-  //     navigate(`/fundingpay/${id}?donation=${sponsorDonation.donationAll}&showName=${detailData.showName}`);
-  // };
-
-  // const handledonationInputChange = () => {
-  //     setSponsorDonation({ ...sponsorDonation, donationInput: '직접입력' });
-  //     navigate(`/fundingpay/${id}?donation=${sponsorDonation.donationInput}&showName=${detailData.showName}`);
-  // };
+  const renderModifyBtn = () => {
+    if (detailData.ownerFlag) {
+      return (
+        <NavigateBtn onClick={() => navigate(`/fundingModify/${id}`)}>
+          <IconButtonImg src="/imgs/Funding/FundingDetail/modify-icon.svg" />{" "}
+          수정하기
+        </NavigateBtn>
+      );
+    }
+    // ownerFlag가 false일 경우, 버튼을 숨김
+    return null;
+  };
 
   useEffect(() => {
     const getData = async () => {
@@ -177,7 +180,7 @@ const FundingDetail = () => {
         const data = await getFundingDetail(id);
         setDetailData(data);
       } catch (error) {
-        console.error("펀딩 상세페이지 오류:", error);
+        console.error("펀딩 상세페이지 오류");
       }
     };
 
@@ -194,7 +197,7 @@ const FundingDetail = () => {
         // console.log("후원자 상세 data", data);
         setSponsorDetail(data);
       } catch (error) {
-        console.error("펀딩 상세페이지 오류:", error);
+        console.error("펀딩 상세페이지 오류");
       }
     };
 
@@ -325,10 +328,7 @@ const FundingDetail = () => {
               <P fs={theme.detail2} color={theme.gray2} pt="5px" fw="500">
                 내 펀딩 관리
               </P>
-              <NavigateBtn onClick={() => navigate(`/fundingModify/${id}`)}>
-                <IconButtonImg src="/imgs/Funding/FundingDetail/modify-icon.svg" />{" "}
-                수정하기
-              </NavigateBtn>
+              {renderModifyBtn()}
             </BetweenDiv>
           </TogetherDiv>
 

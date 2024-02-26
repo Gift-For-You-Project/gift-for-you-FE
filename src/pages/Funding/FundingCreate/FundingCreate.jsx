@@ -137,7 +137,7 @@ const FundingCreate = () => {
       });
       navigate(`/fundingdetail/${data.id}`);
     } catch (error) {
-      console.error("펀딩 추가 API 호출 실패: ", error);
+      console.error("펀딩 추가 API 호출 실패");
     }
   };
 

@@ -61,7 +61,7 @@ const Sponsor = () => {
         const data = await getFundingDetail(id);
         setSponsorData(data);
       } catch (error) {
-        console.error("펀딩 상세페이지 오류:", error);
+        console.error("펀딩 상세페이지 오류");
       }
     };
 
@@ -77,7 +77,7 @@ const Sponsor = () => {
         const data = await getSponsorDetail(id);
         setSponsorDetail(data);
       } catch (error) {
-        console.error("펀딩 상세페이지 오류:", error);
+        console.error("펀딩 상세페이지 오류");
       }
     };
 

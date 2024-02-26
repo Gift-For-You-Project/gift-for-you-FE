@@ -12,7 +12,7 @@ export const getMyFunding = async () => {
     if (error.response) {
       const status = error.response.status;
       if (status === 401) {
-        console.error("API 호출 중 401 에러 발생: ", error);
+        console.error("API 호출 중 401 에러 발생");
       }
     }
 
@@ -32,9 +32,9 @@ export const getHomeFundingList = async () => {
     if (error.response) {
       const status = error.response.status;
       if (status === 404) {
-        console.error("API 호출 중 404 에러 발생: ", error);
+        console.error("API 호출 중 404 에러 발생");
       } else if (status === 500) {
-        console.error("API 호출 중 500 에러 발생: ", error);
+        console.error("API 호출 중 500 에러 발생");
       }
     }
 
@@ -54,9 +54,9 @@ export const getRecentFundingList = async (page) => {
     if (error.response) {
       const status = error.response.status;
       if (status === 404) {
-        console.error("API 호출 중 404 에러 발생: ", error);
+        console.error("API 호출 중 404 에러 발생");
       } else if (status === 500) {
-        console.error("API 호출 중 500 에러 발생: ", error);
+        console.error("API 호출 중 500 에러 발생");
       }
     }
 
@@ -73,11 +73,11 @@ export const getFundingSummary = async () => {
       return response.data;
     }
   } catch (error) {
-    console.error("API 호출 중 에러 발생: ", error);
+    console.error("API 호출 중 에러 발생");
     if (error.response) {
       const status = error.response.status;
       if (status === 401) {
-        console.error("API 호출 중 401 에러 발생: ", error);
+        console.error("API 호출 중 401 에러 발생");
       }
     }
 
@@ -97,9 +97,9 @@ export const getActiveFundingList = async (page) => {
     if (error.response) {
       const status = error.response.status;
       if (status === 404) {
-        console.error("API 호출 중 404 에러 발생: ", error);
+        console.error("API 호출 중 404 에러 발생");
       } else if (status === 500) {
-        console.error("API 호출 중 500 에러 발생: ", error);
+        console.error("API 호출 중 500 에러 발생");
       }
     }
 
@@ -119,9 +119,9 @@ export const getFinishFundingList = async (page) => {
     if (error.response) {
       const status = error.response.status;
       if (status === 404) {
-        console.error("API 호출 중 404 에러 발생: ", error);
+        console.error("API 호출 중 404 에러 발생");
       } else if (status === 500) {
-        console.error("API 호출 중 500 에러 발생: ", error);
+        console.error("API 호출 중 500 에러 발생");
       }
     }
 

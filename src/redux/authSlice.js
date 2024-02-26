@@ -46,7 +46,7 @@ export const logoutAndApiCall = () => async (dispatch) => {
   try {
     await logout();
   } catch (error) {
-    console.error("로그아웃 API 호출 중 오류 발생:", error.message);
+    console.error("로그아웃 API 호출 중 오류 발생");
   }
 };
 

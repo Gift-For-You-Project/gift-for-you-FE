@@ -93,7 +93,7 @@ const FundingPay = ({ donation }) => {
         window.location.href = response.result.next_redirect_pc_url;
       }
     } catch (error) {
-      console.error("결제 준비 오류:", error);
+      console.error("결제 준비 오류");
     }
   };
 
@@ -127,7 +127,7 @@ const FundingPay = ({ donation }) => {
           navigate(`/fundingdetail/${id}`);
         }
       } catch (error) {
-        console.error("결제 오류:", error);
+        console.error("결제 오류");
       }
     };
 

@@ -14,10 +14,10 @@ export const postFundingCreate = async (fundingData) => {
     if (error.response) {
       const status = error.response.status;
       if (status === 404) {
-        console.error("API 호출 중 404 에러 발생: ", error);
+        console.error("API 호출 중 404 에러 발생");
       } else if (status === 500) {
         errorToast("이미 진행 중인 펀딩이 있습니다.");
-        console.error("API 호출 중 500 에러 발생: ", error);
+        console.error("API 호출 중 500 에러 발생");
       }
     }
   }
@@ -37,9 +37,9 @@ export const postModalItemLink = async (LinkData) => {
       const status = error.response.status;
 
       if (status === 404) {
-        console.error("API 호출 중 404 에러 발생: ", error);
+        console.error("API 호출 중 404 에러 발생");
       } else if (status === 500) {
-        console.error("API 호출 중 500 에러 발생: ", error);
+        console.error("API 호출 중 500 에러 발생");
       }
     }
   }
@@ -54,29 +54,12 @@ export const getFundingDetail = async (id, data) => {
   } catch (error) {
     const status = error.response.status;
     if (status === 404) {
-      console.error("API 호출 중 404 에러 발생: ", error);
+      console.error("API 호출 중 404 에러 발생");
     } else if (status === 500) {
-      console.error("API 호출 중 500 에러 발생: ", error);
+      console.error("API 호출 중 500 에러 발생");
     }
   }
 };
-
-// 후원자 상세 API
-// export const getSponsorDetail = async (id, data) => {
-//   try {
-//     const response = await instance.get(`/api/funding/${id}/donations`, data);
-
-//     return response.data;
-//   } catch (error) {
-//     const status = error.response.status;
-
-//     if (status === 404) {
-//       console.error("API 호출 중 404 에러 발생: ", error);
-//     } else if (status === 500) {
-//       console.error("API 호출 중 500 에러 발생: ", error);
-//     }
-//   }
-// };
 
 // 후원자 상세 API
 export const getSponsorDetail = async (id) => {
@@ -89,9 +72,9 @@ export const getSponsorDetail = async (id) => {
     const status = error.response.status;
 
     if (status === 404) {
-      console.error("API 호출 중 404 에러 발생: ", error);
+      console.error("API 호출 중 404 에러 발생");
     } else if (status === 500) {
-      console.error("API 호출 중 500 에러 발생: ", error);
+      console.error("API 호출 중 500 에러 발생");
     }
   }
 };
@@ -109,9 +92,9 @@ export const patchFundingModify = async (id, data) => {
     const status = error.response.status;
     warnToast(error.response.data.message);
     if (status === 404) {
-      console.error("API 호출 중 404 에러 발생: ", error);
+      console.error("API 호출 중 404 에러 발생");
     } else if (status === 500) {
-      console.error("API 호출 중 500 에러 발생: ", error);
+      console.error("API 호출 중 500 에러 발생");
     }
   }
 };
@@ -129,9 +112,9 @@ export const deleteFundingModify = async (id, data) => {
     const status = error.response.status;
     warnToast(error.response.data.message);
     if (status === 404) {
-      console.error("API 호출 중 404 에러 발생: ", error);
+      console.error("API 호출 중 404 에러 발생");
     } else if (status === 500) {
-      console.error("API 호출 중 500 에러 발생: ", error);
+      console.error("API 호출 중 500 에러 발생");
     }
   }
 };
@@ -149,9 +132,9 @@ export const endFundingModify = async (id, data) => {
     const status = error.response.status;
     warnToast(error.response.data.message);
     if (status === 404) {
-      console.error("API 호출 중 404 에러 발생: ", error);
+      console.error("API 호출 중 404 에러 발생");
     } else if (status === 500) {
-      console.error("API 호출 중 500 에러 발생: ", error);
+      console.error("API 호출 중 500 에러 발생");
     }
   }
 };
@@ -168,7 +151,9 @@ export const getFundingDonation = async (id) => {
       const statusCode = error.response.status;
       const errorMessage = error.response.data.message;
       if (statusCode === 400) {
-        errorToast("결제 오류", errorMessage);
+        // errorToast("결제 오류", errorMessage);
+        // errorToast("결제 오류");
+        errorToast(errorMessage);
       }
     }
   }
@@ -196,7 +181,8 @@ export const fundingPayDonationReady = async ({
       const statusCode = error.response.status;
       const errorMessage = error.response.data.message;
       if (statusCode === 400) {
-        errorToast("결제준비 오류 :", errorMessage);
+        // errorToast("결제준비 오류 :", errorMessage);
+        errorToast(errorMessage);
       }
     }
   }
@@ -213,7 +199,7 @@ export const getDonationApproval = async (pg_token) => {
       return response.data;
     }
   } catch (error) {
-    console.error("후원 결제승인 오류:", error.message);
+    console.error("후원 결제승인 오류");
   }
 };
 
