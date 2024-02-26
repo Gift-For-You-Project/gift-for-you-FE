@@ -6,7 +6,6 @@ import Login from "./pages/Home/Login/Login";
 import Signup from "./pages/Home/Signup/Signup";
 import Service from "./pages/Home/Signup/TermsAgreement/Service";
 import Privacy from "./pages/Home/Signup/TermsAgreement/Privacy";
-import Marketing from "./pages/Home/Signup/TermsAgreement/Marketing";
 import RecentFunding from "./pages/Home/RecentFunding/RecentFunding";
 import RecentFundingProgress from "./pages/Home/RecentFunding/RecentFundingProgress";
 import RecentFundingComplete from "./pages/Home/RecentFunding/RecentFundingComplete";
@@ -34,7 +33,6 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/signup/service" element={<Service />} />
         <Route path="/signup/privacy" element={<Privacy />} />
-        <Route path="/signup/marketing" element={<Marketing />} />
         <Route path="/recentfunding" element={<RecentFunding />} />
         <Route
           path="/recentfunding/progress"
