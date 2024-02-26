@@ -20,7 +20,6 @@ import {
   LeftContent,
   Leftcolumndiv,
   LeftImgContainer,
-  BubbleTxt,
   BubbleImg,
   IpadLoveImg,
   P,
@@ -330,12 +329,6 @@ const Signup = () => {
       <LeftContainer>
         <LeftContainer>
           <LeftImgContainer>
-            <BubbleTxt>
-              <P fs="24px" fw="700" color={theme.white}>
-                생일선물
-                <br />뭐 받고싶어?
-              </P>
-            </BubbleTxt>
             <BubbleImg src="/imgs/Home/speech-bubble.png" />
             <LeftLogoTextIcon
               onClick={() => navigate("/")}
