@@ -75,6 +75,11 @@ const GlobalStyles = createGlobalStyle`
         margin: 0;
     }
 
+    img {
+        user-select: none;
+        pointer-events: none;
+    }
+
       /* 모바일뷰 */
     @media screen and (max-width: 390px) {
         max-width: 100%;
