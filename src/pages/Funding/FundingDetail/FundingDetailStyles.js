@@ -38,13 +38,6 @@ export const LeftLogoTextIcon = styled.img`
   cursor: pointer;
 `;
 
-export const BubbleTxt = styled.div`
-  position: absolute;
-  bottom: 208px;
-  left: 26px;
-  padding: 100px 0 0 300px;
-`;
-
 export const BubbleImg = styled.img`
   position: absolute;
   bottom: 130px;
@@ -110,7 +103,6 @@ export const IpadLoveImg = styled.img`
 /* 로고 */
 export const Logo = styled.h1`
   font-size: 30px;
-  /* font-weight: 700; */
   color: ${theme.white};
 `;
 
@@ -172,11 +164,6 @@ export const RightContainer = styled.div`
   @media screen and (max-width: 390px) {
     max-width: 100%;
   }
-
-  /* 태블릿뷰는 추후에 적용예정 */
-  /* @media screen and (max-width: 1024px) {
-    max-width: 100%;
-  } */
 `;
 
 /* 네브바 영역 */
@@ -387,7 +374,7 @@ export const DdayDiv = styled.p`
   border-radius: 8px;
   color: ${theme.white};
   font-size: ${theme.body2};
-  background-color: ${theme.gray4};
+  background-color: ${theme.primary};
   font-weight: 600;
   padding: 4px 15px 4px 15px;
 `;

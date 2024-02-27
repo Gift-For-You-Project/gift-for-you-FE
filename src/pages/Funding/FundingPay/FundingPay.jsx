@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams, useLocation } from "react-router-dom";
 import { warnToast } from "../../../components/toast";
-import { IoIosArrowBack } from "react-icons/io";
+import { FaAngleLeft } from "react-icons/fa6";
 import theme from "../../../styles/theme";
 import { isMobile } from "react-device-detect";
 import {
@@ -22,7 +22,6 @@ import {
   Leftcolumndiv,
   IpadLoveImg,
   P,
-  NavbarDiv,
   RightContainer,
   SponserMoney,
   Body,
@@ -40,6 +39,7 @@ import {
   Checkbox,
   PayDiv,
 } from "./FundingPayStyles";
+import { IconDiv, NavbarDiv } from "../../Home/Signup/SignupStyles";
 
 const FundingPay = ({ donation }) => {
   const navigate = useNavigate();
@@ -165,7 +165,7 @@ const FundingPay = ({ donation }) => {
                 mr="10px"
                 pl="10px"
               />
-              <P fs="20px" fw="900" pr="10px" color={theme.black}>
+              <P fs="20px" fw="700" pr="10px" color={theme.black}>
                 정말 원하는 선물
               </P>
             </LeftRowdiv>
@@ -188,18 +188,16 @@ const FundingPay = ({ donation }) => {
 
       <RightContainer>
         <NavbarDiv>
-          <IoIosArrowBack
-            onClick={() => navigate(`/fundingdetail/${id}`)}
-            color={theme.white}
-            size="20px"
-          />
-          <P pl="80px" fs={theme.body2} color={theme.white}>
+          <IconDiv>
+            <FaAngleLeft onClick={() => navigate(`/fundingdetail/${id}`)} />
+          </IconDiv>
+          <P fs={theme.body2} color={theme.white}>
             지금 선물하면
           </P>
           <P pl="5px" fs={theme.body2} color={theme.primary}>
             {sponsorDonation.donationRanking}등
           </P>
-          <P pl="0px" fs={theme.body2} color={theme.white}>
+          <P fs={theme.body2} color={theme.white}>
             이에요!
           </P>
         </NavbarDiv>
