@@ -85,8 +85,7 @@ const FundingCreate = () => {
       targetAmount = "0";
     }
 
-    targetAmount = Math.min(parseInt(targetAmount), 10000000).toLocaleString();
-    targetAmount = targetAmount.replace(/\B(?=(\d{3})+(?!\d))/g, ","); // 세 자리 수마다 콤마 추가
+    targetAmount = Math.min(parseInt(targetAmount), 10000000).toLocaleString(); // 세 자리 수마다 콤마 추가
     setCreateData({ ...createData, targetAmount });
   };
   const handleShowNameChange = (e) => {
