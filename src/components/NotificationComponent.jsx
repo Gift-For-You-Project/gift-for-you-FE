@@ -58,20 +58,29 @@ function NotificationComponent() {
     const eventSource = new EventSource(
       "http://api.giftipie.me/api/notification/subscribe"
     );
+
+    // SSE 연결이 열렸을 때 실행할 코드
+    eventSource.onopen = () => {
+      console.log("SSE connection opened successfully");
+    };
+
+    // 서버로부터 수신된 메시지 처리
     eventSource.onmessage = (event) => {
-      // 서버로부터 수신된 메시지 처리
       console.log("Received event:", event.data);
     };
+
+    // 오류 처리
     eventSource.onerror = (error) => {
-      // 오류 처리
       console.error("EventSource failed:", error);
       eventSource.close();
     };
+
     // 컴포넌트 언마운트 시 연결 종료
     return () => {
       eventSource.close();
     };
   }, []);
+
   return (
     <div>
       <h1>SSE 연결 예제</h1>
