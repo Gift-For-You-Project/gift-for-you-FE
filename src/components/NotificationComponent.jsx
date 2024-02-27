@@ -3,13 +3,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { setListening } from "../redux/notificationSlice";
 
 function NotificationComponent() {
-  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const eventSource = useRef(null);
   const dispatch = useDispatch();
   const { listening } = useSelector((state) => state.notification);
 
   useEffect(() => {
-    if (!listening && isLoggedIn) {
+    if (!listening) {
       // useRef의 current 속성을 통해 eventSource 인스턴스 생성 및 할당
       eventSource.current = new EventSource(
         `${process.env.REACT_APP_API_URL}/api/notification/subscribe`,
@@ -42,7 +41,9 @@ function NotificationComponent() {
         dispatch(setListening(false));
       };
     }
-  }, [dispatch, listening, isLoggedIn]);
+  }, [dispatch, listening]); // dispatch를 의존성 배열에서 제외
+
   return <img src="/imgs/Home/no-notification.svg" alt="notification" />;
 }
+
 export default NotificationComponent;
