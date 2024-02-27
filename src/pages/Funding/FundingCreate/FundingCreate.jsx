@@ -78,8 +78,14 @@ const FundingCreate = () => {
     setCreateData({ ...createData, itemName });
   };
   const handleTargetAmountChange = (e) => {
-    let targetAmount = e.target.value.replace(/[^0-9]/g, "");
-    targetAmount = Math.min(parseInt(targetAmount), 10000000).toString();
+    let targetAmount = e.target.value.replace(/\D/g, ""); // 숫자가 아닌 문자 제거
+
+    // 사용자가 아무런 값을 입력하지 않은 경우 0으로 설정
+    if (targetAmount === "") {
+      targetAmount = "0";
+    }
+
+    targetAmount = Math.min(parseInt(targetAmount), 10000000).toLocaleString();
     targetAmount = targetAmount.replace(/\B(?=(\d{3})+(?!\d))/g, ","); // 세 자리 수마다 콤마 추가
     setCreateData({ ...createData, targetAmount });
   };
