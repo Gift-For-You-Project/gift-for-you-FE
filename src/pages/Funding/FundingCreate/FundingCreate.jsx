@@ -80,7 +80,7 @@ const FundingCreate = () => {
   const handleTargetAmountChange = (e) => {
     let targetAmount = e.target.value.replace(/[^0-9]/g, "");
     targetAmount = Math.min(parseInt(targetAmount), 10000000).toString();
-    targetAmount = targetAmount.replace(/\B(?=(\d{3})+(?!\d))/g, ","); // 세 자리 수마다 콤마 추가
+    // targetAmount = targetAmount.replace(/\B(?=(\d{3})+(?!\d))/g, ","); // 세 자리 수마다 콤마 추가
     setCreateData({ ...createData, targetAmount });
   };
   const handleShowNameChange = (e) => {
@@ -95,20 +95,23 @@ const FundingCreate = () => {
     let content = e.target.value.slice(0, 200);
     setCreateData({ ...createData, content });
   };
-  const handleEndDateChange = (e) => {
-    const selectedDate = new Date(e.target.value);
-    const currentDate = new Date();
+  // const handleEndDateChange = (e) => {
+  //   const selectedDate = new Date(e.target.value);
+  //   const currentDate = new Date();
 
-    // 선택된 날짜가 현재 날짜보다 이전인지 확인
-    if (selectedDate < currentDate) {
-      // 선택된 날짜가 현재 날짜보다 이전인 경우, 오늘로 설정
-      const formattedCurrentDate = currentDate.toISOString().split("T")[0];
-      setCreateData({ ...createData, endDate: formattedCurrentDate });
-      infoToast("오늘 이후 날짜를 선택해주세요");
-    } else {
-      // 선택된 날짜가 현재 날짜 이후인 경우, 상태 업데이트
-      setCreateData({ ...createData, endDate: e.target.value });
-    }
+  //   // 선택된 날짜가 현재 날짜보다 이전인지 확인
+  //   if (selectedDate < currentDate) {
+  //     // 선택된 날짜가 현재 날짜보다 이전인 경우, 오늘로 설정
+  //     const formattedCurrentDate = currentDate.toISOString().split("T")[0];
+  //     setCreateData({ ...createData, endDate: formattedCurrentDate });
+  //     infoToast("오늘 이후 날짜를 선택해주세요");
+  //   } else {
+  //     // 선택된 날짜가 현재 날짜 이후인 경우, 상태 업데이트
+  //     setCreateData({ ...createData, endDate: e.target.value });
+  //   }
+  // };
+  const handleEndDateChange = (e) => {
+    setCreateData({ ...createData, endDate: e.target.value });
   };
   const handlePublicFlagChange = (e) => {
     // 업데이트: 한 번에 하나의 옵션만 선택했는지 확인하세요.
@@ -132,10 +135,10 @@ const FundingCreate = () => {
         return;
       }
 
-      if (parseInt(createData.targetAmount) === 0) {
-        infoToast("목표 금액을 입력해주세요.");
-        return;
-      }
+      // if (parseInt(createData.targetAmount) === 0) {
+      //   infoToast("목표 금액을 입력해주세요.");
+      //   return;
+      // }
 
       // 펀딩 추가 API
       const data = await postFundingCreate({
