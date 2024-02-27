@@ -67,6 +67,7 @@ import Cookies from "universal-cookie";
 
 const cookies = new Cookies();
 const receivedToken = cookies.get("Authorization");
+console.log("서버에서 받은 토큰:", receivedToken);
 
 const authReducer = createSlice({
   name: "auth",
@@ -74,10 +75,12 @@ const authReducer = createSlice({
   reducers: {
     userLogin: (state) => {
       state.isLoggedIn = true;
+
+      // 토큰 콘솔로그
+      console.log("로그인 시 사용된 토큰:", receivedToken);
+
       // 로그인 시 로컬 스토리지에 토큰 저장
-      localStorage.setItem("Authorization", receivedToken);
-      // 콘솔로그로 쿠키 값 확인
-      console.log("쿠키 값:", receivedToken);
+      localStorage.setItem("Authorization", `Bearer ${receivedToken}`);
     },
     userLogout: (state) => {
       state.isLoggedIn = false;
@@ -91,10 +94,11 @@ const authReducer = createSlice({
       // 카카오 로그인 시 받아온 토큰을 사용
       const receivedToken = "your_kakao_token_here"; // 카카오 로그인 시 받아온 토큰으로 대체
 
+      // 토큰 콘솔로그
+      console.log("카카오 로그인 시 사용된 토큰:", receivedToken);
+
       // 로그인 시 로컬 스토리지에 토큰 저장
-      localStorage.setItem("Authorization", receivedToken);
-      // 콘솔로그로 쿠키 값 확인
-      console.log("쿠키 값:", receivedToken);
+      localStorage.setItem("Authorization", `Bearer ${receivedToken}`);
     },
   },
 });
