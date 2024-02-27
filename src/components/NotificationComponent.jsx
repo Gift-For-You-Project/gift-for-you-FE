@@ -9,12 +9,16 @@ const NotificationComponent = () => {
   useEffect(() => {
     // 로그인 상태인 경우에만 SSE 연결 설정
     if (isLoggedIn) {
+      console.log("NotificationComponent is rendered.");
       const source = axios.CancelToken.source();
 
       // SSE 연결 설정
-      const eventSource = new EventSource("/api/notification/subscribe", {
-        cancelToken: source.token,
-      });
+      const eventSource = new EventSource(
+        `${process.env.REACT_APP_API_URL}/api/notification/subscribe`,
+        {
+          withCredentials: true,
+        }
+      );
 
       eventSource.onmessage = (event) => {
         const eventData = JSON.parse(event.data);
@@ -30,6 +34,8 @@ const NotificationComponent = () => {
         source.cancel("Request canceled");
       };
     }
+    // 두 번째 로그를 if (isLoggedIn) 안으로 이동
+    console.log("NotificationComponent is rendered.");
   }, [isLoggedIn]);
 
   return (
