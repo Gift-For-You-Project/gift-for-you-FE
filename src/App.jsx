@@ -14,8 +14,12 @@ import FundingDetail from "./pages/Funding/FundingDetail/FundingDetail";
 import Sponsor from "./pages/Funding/FundingDetail/Sponsor/Sponsor";
 import FundingModify from "./pages/Funding/FundingModify/FundingModify";
 import FundingPay from "./pages/Funding/FundingPay/FundingPay";
+import { useSelector } from "react-redux";
+import NotificationComponent from "./components/NotificationComponent";
 
 function App() {
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+
   function setScreenSize() {
     let vh = window.innerHeight * 0.01;
     document.documentElement.style.setProperty("--vh", `${vh}px`);
@@ -48,6 +52,8 @@ function App() {
         <Route path="/fundingmodify/:id" element={<FundingModify />} />
         <Route path="/fundingpay/:id" element={<FundingPay />} />
         <Route path="*" element={<NotFound />} />
+        {/* isLoggedIn이 true일 때만 NotificationComponent 렌더링 */}
+        {isLoggedIn && <Route path="*" element={<NotificationComponent />} />}
       </Routes>
     </Router>
   );
