@@ -17,6 +17,7 @@ import {
   NotificationItem,
 } from "../pages/Home/NotificationStyles";
 import { warnToast } from "./toast";
+import NotificationComponent from "./NotificationComponent";
 
 const Navbar = ({ isLoggedIn, handleLoginClick, handleLogoutClick }) => {
   const navigate = useNavigate();
@@ -77,7 +78,7 @@ const Navbar = ({ isLoggedIn, handleLoginClick, handleLogoutClick }) => {
     <>
       <NavbarIconContainer>
         <NavbarBtn onClick={toggleNotification} pt="10px">
-          <img src="/imgs/Home/no-notification.svg" alt="notification" />
+          <NotificationComponent />
         </NavbarBtn>
         {isNotificationOpen && (
           <NotificationContainer>
