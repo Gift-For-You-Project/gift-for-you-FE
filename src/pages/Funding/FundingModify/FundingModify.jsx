@@ -125,7 +125,7 @@ const FundingModify = () => {
   // 펀딩 종료 API
   const handlecompleteFundingClick = async () => {
     try {
-      const id = window.confirm("정말 종료하시겠습니까?");
+      // const id = window.confirm("정말 종료하시겠습니까?");
       if (!id) {
         // 유효한 id가 없으면 데이터를 요청하지 않음
         return;

@@ -162,9 +162,6 @@ const FundingDetail = () => {
     if (detailData.ownerFlag) {
       return (
         <NavigateBtn onClick={() => navigate(`/fundingModify/${id}`)}>
-          <P fs={theme.detail2} color={theme.gray2} pt="5px" fw="500">
-            내 펀딩 관리
-          </P>
           <IconButtonImg src="/imgs/Funding/FundingDetail/modify-icon.svg" />{" "}
           수정하기
         </NavigateBtn>
@@ -327,7 +324,12 @@ const FundingDetail = () => {
             <ProgressBar>
               <Progress width={(detailData.achievementRate / 100) * 100} />
             </ProgressBar>
-            <BetweenDiv pb="10px">{renderModifyBtn()}</BetweenDiv>
+            <BetweenDiv pb="10px">
+              <P fs={theme.detail2} color={theme.gray2} pt="5px" fw="500">
+                내 펀딩 관리
+              </P>
+              {renderModifyBtn()}
+            </BetweenDiv>
           </TogetherDiv>
 
           <FundingDiv>
