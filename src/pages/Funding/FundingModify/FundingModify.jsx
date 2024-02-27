@@ -101,7 +101,7 @@ const FundingModify = () => {
           }
         })
       );
-      navigate(`/fundingdetail/${id}`);
+      navigate("/fundingdetail/:id");
     } catch (error) {
       console.error("펀딩 수정 오류");
     }
