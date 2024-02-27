@@ -56,7 +56,7 @@ function NotificationComponent() {
   useEffect(() => {
     // SSE 연결 설정
     const eventSource = new EventSource(
-      "http://api.giftipie.me/api/notification/subscribe"
+      "https://api.giftipie.me/api/notification/subscribe"
     );
 
     // SSE 연결이 열렸을 때 실행할 코드
