@@ -345,8 +345,6 @@ export const FundingDiv = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100%;
-  max-width: 390px;
   margin-bottom: 10px;
 `;
 
@@ -365,15 +363,12 @@ export const RecentFundingDiv = styled.div`
 
 export const FundingSection = styled.section`
   display: flex;
+  justify-content: space-evenly;
   flex-wrap: wrap;
+  flex-shrink: 0;
   width: 100%;
-  gap: 10px;
-  padding: 10px 19px 20px 19px;
-
-  @media screen and (max-width: 390px) {
-    gap: 9px;
-    padding: 10px 10px 20px 10px;
-  }
+  padding: 10px;
+  gap: 10px 2%;
 `;
 
 export const RecentFundingBtn = styled.button`
@@ -398,7 +393,7 @@ export const EndingSection = styled.section`
 `;
 
 export const FundingGrid = styled.div`
-  width: 100%;
+  width: 32%;
   max-width: 110px;
   overflow: hidden;
   cursor: pointer;
