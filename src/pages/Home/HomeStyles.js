@@ -461,16 +461,12 @@ export const MyFundingDate = styled.div`
 `;
 
 export const MyFundingBtn = styled.button`
-  width: 72px;
+  width: 80px;
   height: 34px;
   background-color: ${theme.primaryBtn};
   color: ${theme.primaryFont};
   font-size: ${theme.detail};
   border-radius: 8px;
-
-  @media screen and (max-width: 390px) {
-    width: 80px;
-  }
 `;
 
 export const FundingImg = styled.img`

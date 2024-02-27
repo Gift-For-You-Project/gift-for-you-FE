@@ -193,7 +193,7 @@ const FundingCreate = () => {
                 mr="10px"
                 pl="10px"
               />
-              <P fs="20px" fw="900" pr="10px" color={theme.black}>
+              <P fs="20px" fw="700" pr="10px" color={theme.black}>
                 정말 원하는 선물
               </P>
             </LeftRowdiv>
@@ -221,7 +221,7 @@ const FundingCreate = () => {
             color={theme.white}
             size="20px"
           />
-          <P pl="120px" fs="13px" fw="900" color={theme.white}>
+          <P pl="120px" fs="13px" fw="700" color={theme.white}>
             펀딩 만들기
           </P>
         </NavbarDiv>
