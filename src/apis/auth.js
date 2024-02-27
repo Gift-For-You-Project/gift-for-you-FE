@@ -6,7 +6,6 @@ export const instance = axios.create({
   withCredentials: true, // Cookies에 브라우저가 자동으로 쿠키를 넣어줌
   headers: {
     "Access-Control-Allow-Origin": `${process.env.REACT_APP_API_URL}`,
-    "Content-Type": "text/event-stream",
   },
 });
 
