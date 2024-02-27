@@ -210,7 +210,7 @@ const FundingPay = ({ donation }) => {
                 </P>
                 <LeftRowdiv>
                   <P fs={theme.headline1} fw="700" color={theme.primaryFont}>
-                    {sponsorDonation.donation}원
+                    {sponsorDonation.donation.toLocaleString()}원
                   </P>
                   <P pl="10px" fs={theme.headline1} fw="700">
                     선물하기

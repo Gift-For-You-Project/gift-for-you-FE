@@ -316,8 +316,10 @@ const FundingDetail = () => {
                 </P>
               ) : (
                 <P pt="5px" fs={theme.body2} color={theme.gray2} fw="500">
-                  {detailData.targetAmount - detailData.currentAmount}원
-                  남았어요
+                  {(
+                    detailData.targetAmount - detailData.currentAmount
+                  ).toLocaleString()}
+                  원 남았어요
                 </P>
               )}
             </BetweenDiv>
@@ -428,7 +430,7 @@ const FundingDetail = () => {
                 />
                 <div>
                   <P pl="20px" fs={theme.body1} fw="600" color={theme.black}>
-                    {sponsorDonation.donation5000}원
+                    {sponsorDonation.donation5000.toLocaleString()}원
                   </P>
                   <P pl="20px" fs={theme.detail2} color={theme.gray4}>
                     커피 한 잔 만큼
@@ -458,7 +460,7 @@ const FundingDetail = () => {
                 />
                 <div>
                   <P pl="20px" fs={theme.body1} fw="600" color={theme.black}>
-                    {sponsorDonation.donation10000}원
+                    {sponsorDonation.donation10000.toLocaleString()}원
                   </P>
                   <P pl="20px" fs={theme.detail2} color={theme.gray4}>
                     파인트 아이스크림 만큼
@@ -488,7 +490,7 @@ const FundingDetail = () => {
                 />
                 <div>
                   <P pl="20px" fs={theme.body1} fw="600" color={theme.black}>
-                    {sponsorDonation.donation20000}원
+                    {sponsorDonation.donation20000.toLocaleString()}원
                   </P>
                   <P pl="20px" fs={theme.detail2} color={theme.gray4}>
                     치킨 한 마리 만큼
@@ -518,7 +520,7 @@ const FundingDetail = () => {
                 />
                 <div>
                   <P pl="20px" fs={theme.body1} fw="600" color={theme.black}>
-                    {sponsorDonation.donation30000}원
+                    {sponsorDonation.donation30000.toLocaleString()}원
                   </P>
                   <P pl="20px" fs={theme.detail2} color={theme.gray4}>
                     2호 케이크 만큼
@@ -548,7 +550,7 @@ const FundingDetail = () => {
                 />
                 <div>
                   <P pl="20px" fs={theme.body1} fw="600" color={theme.black}>
-                    {sponsorDonation.donation50000}원
+                    {sponsorDonation.donation50000.toLocaleString()}원
                   </P>
                   <P pl="20px" fs={theme.detail2} color={theme.gray4}>
                     신사임당 만큼
