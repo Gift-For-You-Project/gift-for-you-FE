@@ -20,7 +20,6 @@ import {
   LeftContent,
   Leftcolumndiv,
   LeftImgContainer,
-  BubbleTxt,
   BubbleImg,
   IpadLoveImg,
   P,
@@ -109,7 +108,6 @@ const Signup = () => {
     isCheckedTerms: false,
     isCheckedService: false,
     isCheckedPrivacy: false,
-    isCheckedMarketing: false,
     isEmailNotificationAgreed: false,
   });
 
@@ -118,7 +116,6 @@ const Signup = () => {
       const allChecked =
         prevState.isCheckedService &&
         prevState.isCheckedPrivacy &&
-        prevState.isCheckedMarketing &&
         prevState.isEmailNotificationAgreed;
 
       switch (type) {
@@ -130,7 +127,6 @@ const Signup = () => {
             isCheckedTerms: !allChecked,
             isCheckedService: !allChecked,
             isCheckedPrivacy: !allChecked,
-            isCheckedMarketing: !allChecked,
             isEmailNotificationAgreed: !allChecked,
           };
 
@@ -143,7 +139,6 @@ const Signup = () => {
             // 전체 동의 체크박스는 개별 체크박스가 하나라도 선택되지 않은 경우에 false
             isCheckedTerms:
               prevState.isCheckedPrivacy &&
-              prevState.isCheckedMarketing &&
               prevState.isEmailNotificationAgreed &&
               !prevState.isCheckedService,
           };
@@ -154,20 +149,8 @@ const Signup = () => {
             isCheckedPrivacy: !prevState.isCheckedPrivacy,
             isCheckedTerms:
               prevState.isCheckedService &&
-              prevState.isCheckedMarketing &&
               prevState.isEmailNotificationAgreed &&
               !prevState.isCheckedPrivacy,
-          };
-
-        case "marketing":
-          return {
-            ...prevState,
-            isCheckedMarketing: !prevState.isCheckedMarketing,
-            isCheckedTerms:
-              prevState.isCheckedService &&
-              prevState.isCheckedPrivacy &&
-              prevState.isEmailNotificationAgreed &&
-              !prevState.isCheckedMarketing,
           };
 
         case "emailNotification":
@@ -177,7 +160,6 @@ const Signup = () => {
             isCheckedTerms:
               prevState.isCheckedService &&
               prevState.isCheckedPrivacy &&
-              prevState.isCheckedMarketing &&
               !prevState.isEmailNotificationAgreed,
           };
 
@@ -201,16 +183,8 @@ const Signup = () => {
       isValidConfirmPasswordFormat(formData.confirmPassword) &&
       checkboxState.isCheckedService &&
       checkboxState.isCheckedPrivacy &&
-      checkboxState.isCheckedMarketing &&
       verificationSuccess // 이메일 인증 확인이 성공한 경우에만 활성화
     );
-  };
-
-  // Enter키가 눌렸을 때 로그인 처리
-  const handleKeyDown = (e) => {
-    if (e.key === "Enter") {
-      handleSignupClick();
-    }
   };
 
   // 알파벳 대소문자, 숫자, 특수문자, @기호, 도메인 부분은 2자 이상
@@ -227,7 +201,7 @@ const Signup = () => {
   // 알파벳 대소문자, 숫자, 특수문자를 조합하여 8자에서 15자 사이의 비밀번호
   const isValidPasswordFormat = (password) => {
     const passwordRegex =
-      /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,15}$/;
+      /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?_~(),])[A-Za-z\d@$!%*?_~(),]{8,15}$/;
     return passwordRegex.test(password);
   };
 
@@ -302,7 +276,7 @@ const Signup = () => {
       if (!authBtnClicked) {
         infoToast("인증 메일이 발송되었습니다.");
         const code = await postSendMail(formData.email);
-        console.log("이메일 인증 코드 받기: ", code);
+        // console.log("이메일 인증 코드 받기: ", code);
         // 이메일 인증 코드를 상태에 저장
         setReceivedCode(code);
         setAuthBtnClicked(true); // 버튼 클릭 상태를 true로 변경
@@ -313,7 +287,7 @@ const Signup = () => {
         );
       }
     } catch (error) {
-      console.error("인증 에러:", error);
+      console.error("인증 에러");
     }
   };
 
@@ -325,11 +299,11 @@ const Signup = () => {
     }
 
     if (formData.code === receivedCode) {
-      console.log("인증 성공!", receivedCode);
+      // console.log("인증 성공!", receivedCode);
       setVerificationSuccess(true);
       successToast("이메일 인증이 완료되었습니다.");
     } else {
-      console.log("인증 실패!", receivedCode);
+      // console.log("인증 실패!", receivedCode);
       setVerificationSuccess(false);
       errorToast("이메일 인증에 실패하였습니다.");
     }
@@ -346,7 +320,7 @@ const Signup = () => {
       });
       navigate("/login");
     } catch (error) {
-      console.error("가입 오류:", error);
+      console.error("가입 오류");
     }
   };
 
@@ -355,12 +329,6 @@ const Signup = () => {
       <LeftContainer>
         <LeftContainer>
           <LeftImgContainer>
-            <BubbleTxt>
-              <P fs="24px" fw="700" color={theme.white}>
-                생일선물
-                <br />뭐 받고싶어?
-              </P>
-            </BubbleTxt>
             <BubbleImg src="/imgs/Home/speech-bubble.png" />
             <LeftLogoTextIcon
               onClick={() => navigate("/")}
@@ -383,7 +351,7 @@ const Signup = () => {
                 mr="10px"
                 pl="10px"
               />
-              <P fs="20px" fw="900" pr="10px" color={theme.black}>
+              <P fs="20px" fw="700" pr="10px" color={theme.black}>
                 정말 원하는 선물
               </P>
             </LeftRowdiv>
@@ -418,7 +386,6 @@ const Signup = () => {
             <InputField
               value={formData.email}
               onChange={handleEmailChange}
-              onKeyDown={handleKeyDown}
               onAuthBtnClick={handleAuthBtnClick}
               title="이메일"
               type="email"
@@ -438,7 +405,6 @@ const Signup = () => {
               value={formData.code}
               onChange={handleCodeChange}
               onCheckBtnClick={handleCheckBtnClick}
-              onKeyDown={handleKeyDown}
               title="이메일 인증"
               type="string"
               placeholder="Confrimation Code"
@@ -449,7 +415,6 @@ const Signup = () => {
             <InputField
               value={formData.nickname}
               onChange={handleNicknameChange}
-              onKeyDown={handleKeyDown}
               title="닉네임"
               type="string"
               placeholder="Nickname"
@@ -462,7 +427,6 @@ const Signup = () => {
             <InputField
               value={formData.password}
               onChange={handlePasswordChange}
-              onKeyDown={handleKeyDown}
               title="비밀번호"
               type="password"
               placeholder="Password"
@@ -471,14 +435,13 @@ const Signup = () => {
               <SignupHelpDiv>
                 {formData.password.trim() === ""
                   ? "비밀번호를 입력해 주세요."
-                  : "비밀번호는 8자에서 15자 사이의 알파벳 대소문자, 숫자, 특수문자로 구성되어야 합니다."}
+                  : "비밀번호는 8자에서 15자 사이의 알파벳 대소문자, 숫자, 특수문자(@$!%*?_~(),)로 구성되어야 합니다."}
               </SignupHelpDiv>
             )}
             <BlankLine h="20px" />
             <InputField
               value={formData.confirmPassword}
               onChange={handleConfirmPasswordChange}
-              onKeyDown={handleKeyDown}
               title="비밀번호 확인"
               type="password"
               placeholder="Confirm Password"
@@ -524,18 +487,6 @@ const Signup = () => {
                   [필수] 개인정보 처리방침
                 </CheckDiv>
                 <SeeMoreDiv onClick={() => navigate("/signup/privacy")}>
-                  <FaAngleRight />
-                </SeeMoreDiv>
-              </TermsAgreementDiv>
-              <TermsAgreementDiv>
-                <CheckDiv fs={theme.body2}>
-                  <Checkbox
-                    checked={checkboxState.isCheckedMarketing}
-                    onChange={() => handleCheckboxChange("marketing")}
-                  />
-                  [필수] 마케팅 정보 수신 동의
-                </CheckDiv>
-                <SeeMoreDiv onClick={() => navigate("/signup/marketing")}>
                   <FaAngleRight />
                 </SeeMoreDiv>
               </TermsAgreementDiv>

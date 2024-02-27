@@ -8,13 +8,13 @@ import { userLogout } from '../../../redux/authSlice';
 import DetailModal from './Modal/DetailModal';
 import { FaAngleRight } from 'react-icons/fa6';
 import theme from '../../../styles/theme';
+import LoginModal from '../../Home/Login/LoginModal';
 import {
     MainContainer,
     LeftContainer,
     LeftImgContainer,
     LeftLogoTextIcon,
     BubbleImg,
-    BubbleTxt,
     LeftPieImg,
     LeftContent,
     P,
@@ -62,6 +62,7 @@ const FundingDetail = () => {
     const { id } = useParams();
     const [sponsorDetail, setSponsorDetail] = useState([]);
     const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+    const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
     const dispatch = useDispatch();
     const [detailData, setDetailData] = useState({
         itemImage: '',
@@ -115,6 +116,9 @@ const FundingDetail = () => {
         setIsFundingModalOpen(false);
     };
 
+    const closeLoginModal = () => setIsLoginModalOpen(false);
+    const handleLoginClick = () => setIsLoginModalOpen(true);
+
     // 모달 내에서 입력값을 설정하는 함수
     const handleInputSelection = (donationInput) => {
         setSponsorDonation({ ...sponsorDonation, donationInput });
@@ -142,15 +146,20 @@ const FundingDetail = () => {
         navigate(`/fundingpay/${id}?donation=${sponsorDonation.donation50000}&showName=${detailData.showName}`);
     };
 
-    // const handledonationAllChange = () => {
-    //     setSponsorDonation({ ...sponsorDonation, donationAll: '남은금액' });
-    //     navigate(`/fundingpay/${id}?donation=${sponsorDonation.donationAll}&showName=${detailData.showName}`);
-    // };
-
-    // const handledonationInputChange = () => {
-    //     setSponsorDonation({ ...sponsorDonation, donationInput: '직접입력' });
-    //     navigate(`/fundingpay/${id}?donation=${sponsorDonation.donationInput}&showName=${detailData.showName}`);
-    // };
+    const renderModifyBtn = () => {
+        if (detailData.ownerFlag) {
+            return (
+                <NavigateBtn onClick={() => navigate(`/fundingModify/${id}`)}>
+                    <P fs={theme.detail2} color={theme.gray2} pt="5px" fw="500">
+                        내 펀딩 관리
+                    </P>
+                    <IconButtonImg src="/imgs/Funding/FundingDetail/modify-icon.svg" /> 수정하기
+                </NavigateBtn>
+            );
+        }
+        // ownerFlag가 false일 경우, 버튼을 숨김
+        return null;
+    };
 
     useEffect(() => {
         const getData = async () => {
@@ -161,7 +170,7 @@ const FundingDetail = () => {
                 const data = await getFundingDetail(id);
                 setDetailData(data);
             } catch (error) {
-                console.error('펀딩 상세페이지 오류:', error);
+                console.error('펀딩 상세페이지 오류');
             }
         };
 
@@ -175,10 +184,10 @@ const FundingDetail = () => {
                     return;
                 }
                 const data = await getSponsorDetail(id);
-                console.log('후원자 상세 data', data);
+                // console.log("후원자 상세 data", data);
                 setSponsorDetail(data);
             } catch (error) {
-                console.error('펀딩 상세페이지 오류:', error);
+                console.error('펀딩 상세페이지 오류');
             }
         };
 
@@ -195,12 +204,6 @@ const FundingDetail = () => {
             <LeftContainer>
                 <LeftContainer>
                     <LeftImgContainer>
-                        <BubbleTxt>
-                            <P fs="24px" fw="700" color={theme.white}>
-                                생일선물
-                                <br />뭐 받고싶어?
-                            </P>
-                        </BubbleTxt>
                         <BubbleImg src="/imgs/Home/speech-bubble.png" />
                         <LeftLogoTextIcon onClick={() => navigate('/')} src="/imgs/Common/giftipie.png" />
                         <LeftPieImg src="/imgs/Home/pie-hi.png" />
@@ -208,7 +211,7 @@ const FundingDetail = () => {
                     <LeftRowdiv ml="30px">
                         <LeftRowdiv color={theme.gray1} mr="10px" bc={theme.primary} br="25px" p="8px">
                             <LeftImg src="/imgs/Home/giftbox-red.png" w="30px" h="25px" mr="10px" pl="10px" />
-                            <P fs="20px" fw="900" pr="10px" color={theme.black}>
+                            <P fs="20px" fw="700" pr="10px" color={theme.black}>
                                 정말 원하는 선물
                             </P>
                         </LeftRowdiv>
@@ -231,7 +234,11 @@ const FundingDetail = () => {
 
             <RightContainer>
                 <NavbarDiv>
-                    <Navbar isLoggedIn={isLoggedIn} handleLogoutClick={handleLogoutClick} />
+                    <Navbar
+                        isLoggedIn={isLoggedIn}
+                        handleLoginClick={handleLoginClick}
+                        handleLogoutClick={handleLogoutClick}
+                    />
                 </NavbarDiv>
                 <Body>
                     <TitleDiv>
@@ -282,16 +289,11 @@ const FundingDetail = () => {
                             <Progress width={(detailData.achievementRate / 100) * 100} />
                         </ProgressBar>
                         <BetweenDiv pb="10px">
-                            <P fs={theme.detail2} color={theme.gray2} pt="5px" fw="500">
-                                내 펀딩 관리
-                            </P>
-                            <NavigateBtn onClick={() => navigate(`/fundingModify/${id}`)}>
-                                <IconButtonImg src="/imgs/Funding/FundingDetail/modify-icon.svg" /> 수정하기
-                            </NavigateBtn>
+                            {renderModifyBtn()}
                         </BetweenDiv>
                     </TogetherDiv>
 
-                    <FundingDiv p="0px 20px 0px 20px">
+                    <FundingDiv>
                         <SponserDiv>
                             <FundingComment mt="10px">
                                 <NamingDiv>
@@ -340,19 +342,19 @@ const FundingDetail = () => {
                     </FundingDiv>
                     <FundingDiv p="20px">
                         <P pt="20px" pl="10px" fs={theme.headline2} color={theme.black}>
-                            펀딩 참여하여
+                            펀딩에 참여하여
                         </P>
                         <GiftTitle>
                             <P pt="0px" pl="10px" fs={theme.headline2} color={theme.primary}>
                                 특별한 선물
                             </P>
                             <P pt="0px" pl="0px" fs={theme.headline2} color={theme.black}>
-                                을 선물하세요!
+                                과 메시지를 전달하세요!
                             </P>
                         </GiftTitle>
                         <GiftTitle>
                             <P pt="0px" pl="10px" fs={theme.detail} color={theme.gray4}>
-                                메시지와 선물이
+                                테스트 금액이
                             </P>
                             <P pt="0px" pl="5px" fs={theme.detail} color={theme.primary}>
                                 {detailData.showName}
@@ -503,12 +505,13 @@ const FundingDetail = () => {
                     bc={theme.primary}
                     as={FloatingBtn}
                 >
-                    원하는 금액만큼 펀딩 참여하기
+                    금액을 입력해 펀딩 참여하기
                 </Button>
                 {isFundingModalOpen && (
                     <DetailModal closeModal={closeModal} handleInputSelection={handleInputSelection} />
                 )}
             </RightContainer>
+            {isLoginModalOpen && <LoginModal closeModal={closeLoginModal} />}
         </MainContainer>
     );
 };

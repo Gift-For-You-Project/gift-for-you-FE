@@ -25,7 +25,6 @@ import {
   Leftcolumndiv,
   IpadLoveImg,
   LeftImgContainer,
-  BubbleTxt,
   BubbleImg,
   LeftLogoTextIcon,
   LeftPieImg,
@@ -109,7 +108,7 @@ const Login = () => {
       dispatch(userLogin()); // 로그인 액션 디스패치
       navigate("/");
     } catch (error) {
-      console.error("로그인 에러:", error);
+      console.error("로그인 에러");
     }
   };
 
@@ -118,12 +117,6 @@ const Login = () => {
       <LeftContainer>
         <LeftContainer>
           <LeftImgContainer>
-            <BubbleTxt>
-              <P fs="24px" fw="700" color={theme.white}>
-                생일선물
-                <br />뭐 받고싶어?
-              </P>
-            </BubbleTxt>
             <BubbleImg src="/imgs/Home/speech-bubble.png" />
             <LeftLogoTextIcon
               onClick={() => navigate("/")}
@@ -146,7 +139,7 @@ const Login = () => {
                 mr="10px"
                 pl="10px"
               />
-              <P fs="20px" fw="900" pr="10px" color={theme.black}>
+              <P fs="20px" fw="700" pr="10px" color={theme.black}>
                 정말 원하는 선물
               </P>
             </LeftRowdiv>

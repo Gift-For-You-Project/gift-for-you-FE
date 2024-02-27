@@ -6,6 +6,7 @@ import {
   NavbarIconContainer,
   NavbarLogoBtn,
   NavbarBtn,
+  WigglyBtn,
   LogoIcon,
   LogoTextIcon,
   LogoDiv,
@@ -114,9 +115,7 @@ const Navbar = ({ isLoggedIn, handleLoginClick, handleLogoutClick }) => {
     </>
   ) : (
     <>
-      <NavbarBtn onClick={handleLoginClick} pt="10px">
-        <img src="/imgs/Home/login.svg" alt="login" />
-      </NavbarBtn>
+      <WigglyBtn onClick={handleLoginClick}>로그인</WigglyBtn>
     </>
   );
 

@@ -14,7 +14,6 @@ import {
 } from "./NotFoundStyles";
 import {
   P,
-  BubbleTxt,
   LeftContainer,
   MainContainer,
   BubbleImg,
@@ -58,12 +57,6 @@ const NotFound = () => {
       <LeftContainer>
         <LeftContainer>
           <LeftImgContainer>
-            <BubbleTxt>
-              <P fs={theme.headline1} fw="700" color={theme.white}>
-                생일선물
-                <br />뭐 받고싶어?
-              </P>
-            </BubbleTxt>
             <BubbleImg src="/imgs/Home/speech-bubble.png" />
             <LeftLogoTextIcon
               onClick={() => navigate("/")}
@@ -86,7 +79,7 @@ const NotFound = () => {
                 mr="10px"
                 pl="10px"
               />
-              <P fs="20px" fw="900" pr="10px" color={theme.black}>
+              <P fs="20px" fw="700" pr="10px" color={theme.black}>
                 정말 원하는 선물
               </P>
             </LeftRowdiv>

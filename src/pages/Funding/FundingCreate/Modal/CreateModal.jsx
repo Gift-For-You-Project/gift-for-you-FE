@@ -25,12 +25,12 @@ function CreateModal({ closeModal, handleImageSelection }) {
             const data = await postModalItemLink({
                 itemLink,
             });
-            console.log('펀딩 모달 성공:', data);
+            // console.log('펀딩 모달 성공:', data);
             handleImageSelection(data.itemImage);
             closeModal();
             navigate('/fundingcreate');
         } catch (error) {
-            console.error('펀딩 모달 오류: ', error);
+            console.error('펀딩 모달 오류');
         }
     };
 

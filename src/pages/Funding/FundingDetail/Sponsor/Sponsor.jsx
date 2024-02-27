@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
-import { IoIosArrowBack } from 'react-icons/io';
+import { FaAngleLeft } from 'react-icons/fa6';
 import theme from '../../../../styles/theme';
 import { getFundingDetail, getSponsorDetail } from '../../../../apis/funding';
 import {
     MainContainer,
     LeftContainer,
     LeftImgContainer,
-    BubbleTxt,
     LeftPieImg,
     LeftContent,
     P,
@@ -18,7 +17,6 @@ import {
     SponserDiv,
     SponserComment,
     SponsorImg,
-    NavbarDiv,
     TogetherDiv,
     CommentDiv,
     FundingComment,
@@ -32,6 +30,7 @@ import {
     IpadLoveImg,
     LeftLogoTextIcon,
 } from './SponsorStyles';
+import { NavbarDiv, IconDiv } from '../../../Home/Signup/SignupStyles';
 
 const Sponsor = () => {
     const navigate = useNavigate();
@@ -62,7 +61,7 @@ const Sponsor = () => {
                 const data = await getFundingDetail(id);
                 setSponsorData(data);
             } catch (error) {
-                console.error('펀딩 상세페이지 오류:', error);
+                console.error('펀딩 상세페이지 오류');
             }
         };
 
@@ -78,7 +77,7 @@ const Sponsor = () => {
                 const data = await getSponsorDetail(id);
                 setSponsorDetail(data);
             } catch (error) {
-                console.error('펀딩 상세페이지 오류:', error);
+                console.error('펀딩 상세페이지 오류');
             }
         };
 
@@ -90,12 +89,6 @@ const Sponsor = () => {
             <LeftContainer>
                 <LeftContainer>
                     <LeftImgContainer>
-                        <BubbleTxt>
-                            <P fs="24px" fw="700" color={theme.white}>
-                                생일선물
-                                <br />뭐 받고싶어?
-                            </P>
-                        </BubbleTxt>
                         <BubbleImg src="/imgs/Home/speech-bubble.png" />
                         <LeftLogoTextIcon onClick={() => navigate('/')} src="/imgs/Common/giftipie.png" />
                         <LeftPieImg src="/imgs/Home/pie-hi.png" />
@@ -103,7 +96,7 @@ const Sponsor = () => {
                     <LeftRowdiv ml="30px">
                         <LeftRowdiv color={theme.gray1} mr="10px" bc={theme.primary} br="25px" p="8px">
                             <LeftImg src="/imgs/Home/giftbox-red.png" w="30px" h="25px" mr="10px" pl="10px" />
-                            <P fs="20px" fw="900" pr="10px" color={theme.black}>
+                            <P fs="20px" fw="700" pr="10px" color={theme.black}>
                                 정말 원하는 선물
                             </P>
                         </LeftRowdiv>
@@ -126,8 +119,10 @@ const Sponsor = () => {
 
             <RightContainer>
                 <NavbarDiv>
-                    <IoIosArrowBack onClick={() => navigate(`/fundingdetail/${id}`)} color={theme.white} size="20px" />
-                    <P pl="120px" fs="13px" fw="900" color={theme.white}>
+                    <IconDiv>
+                        <FaAngleLeft onClick={() => navigate(`/fundingdetail/${id}`)} />
+                    </IconDiv>
+                    <P fs={theme.body2} color={theme.white}>
                         메시지 더보기
                     </P>
                 </NavbarDiv>

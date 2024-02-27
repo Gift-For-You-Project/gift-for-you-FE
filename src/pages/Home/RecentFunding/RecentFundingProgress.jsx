@@ -12,7 +12,6 @@ import {
   LeftPieImg,
   LeftContent,
   BubbleImg,
-  BubbleTxt,
   TogetherDiv,
   FundingDiv,
   BetweenDiv,
@@ -76,9 +75,9 @@ const ActiveFunding = () => {
       const { scrollTop, scrollHeight, clientHeight } = e.target;
       if (!isLoading && scrollTop + clientHeight >= scrollHeight - 5) {
         loadMoreData();
-        console.log("top", scrollTop);
-        console.log("h", scrollHeight);
-        console.log("c", clientHeight);
+        // console.log("top", scrollTop);
+        // console.log("h", scrollHeight);
+        // console.log("c", clientHeight);
       }
     },
     [isLoading, loadMoreData]
@@ -104,12 +103,6 @@ const ActiveFunding = () => {
       <LeftContainer>
         <LeftContainer>
           <LeftImgContainer>
-            <BubbleTxt>
-              <P fs="24px" fw="700" color={theme.white}>
-                생일선물
-                <br />뭐 받고싶어?
-              </P>
-            </BubbleTxt>
             <BubbleImg src="/imgs/Home/speech-bubble.png" />
             <LeftLogoTextIcon
               onClick={handleLogoClick}
@@ -132,7 +125,7 @@ const ActiveFunding = () => {
                 mr="10px"
                 pl="10px"
               />
-              <P fs="20px" fw="900" pr="10px" color={theme.black}>
+              <P fs="20px" fw="700" pr="10px" color={theme.black}>
                 정말 원하는 선물
               </P>
             </LeftRowdiv>

@@ -24,13 +24,6 @@ export const LeftContainer = styled.div`
   }
 `;
 
-export const BubbleTxt = styled.div`
-  position: absolute;
-  bottom: 208px;
-  left: 26px;
-  padding: 100px 0 0 300px;
-`;
-
 export const LeftImgContainer = styled.div`
   position: relative;
   height: 0;
@@ -147,9 +140,10 @@ export const Button = styled.button`
   padding-left: ${(props) => props.pl};
   padding-right: ${(props) => props.pr};
   padding-right: ${(props) => props.pr};
+
   &:hover {
-    color: white;
-    background-color: ${theme.primaryFont};
+    color: ${(props) => props.hoverColor || theme.white};
+    background-color: ${(props) => props.hoverBgColor || theme.primaryFont};
     cursor: pointer;
   }
 `;
@@ -159,7 +153,7 @@ export const RightContainer = styled.div`
   position: relative;
   width: -webkit-fill-available;
   max-width: 390px;
-  height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
   margin: 0 10px;
   overflow-y: scroll;
   &::-webkit-scrollbar {
@@ -170,27 +164,6 @@ export const RightContainer = styled.div`
   @media screen and (max-width: 390px) {
     max-width: 100%;
   }
-
-  /* 태블릿뷰는 추후에 적용예정 */
-  /* @media screen and (max-width: 1024px) {
-    max-width: 100%;
-  } */
-`;
-
-/* 네브바 영역 */
-export const NavbarDiv = styled.div`
-  position: sticky;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 70px;
-  z-index: 9;
-  display: flex;
-  flex-direction: row;
-  justify-content: start;
-  align-items: center;
-  padding: 10px 10px 4px 10px;
-  background-color: ${theme.gray1};
 `;
 
 // 바디 영역
@@ -295,14 +268,6 @@ export const RadioInput = styled.input`
 export const FundingNewline = styled.div`
   width: 100%;
   height: 12px;
-`;
-
-export const ColumnDiv = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: start;
-  align-items: center;
-  margin-top: 15px;
 `;
 
 export const ColumnStartDiv = styled.div`

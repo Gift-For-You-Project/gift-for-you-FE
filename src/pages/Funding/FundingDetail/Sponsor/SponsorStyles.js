@@ -24,13 +24,6 @@ export const LeftContainer = styled.div`
   }
 `;
 
-export const BubbleTxt = styled.div`
-  position: absolute;
-  bottom: 208px;
-  left: 26px;
-  padding: 100px 0 0 300px;
-`;
-
 export const LeftImgContainer = styled.div`
   position: relative;
   height: 0;
@@ -161,11 +154,6 @@ export const RightContainer = styled.div`
   @media screen and (max-width: 390px) {
     max-width: 100%;
   }
-
-  /* 태블릿뷰는 추후에 적용예정 */
-  /* @media screen and (max-width: 1024px) {
-    max-width: 100%;
-  } */
 `;
 
 // 네브바 영역
@@ -174,22 +162,6 @@ export const NamingDiv = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-`;
-
-/* 네브바 영역 */
-export const NavbarDiv = styled.div`
-  position: sticky;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 70px;
-  z-index: 9;
-  display: flex;
-  flex-direction: row;
-  justify-content: start;
-  align-items: center;
-  padding: 10px 10px 4px 10px;
-  background-color: ${theme.gray1};
 `;
 
 // 바디 영역
@@ -202,7 +174,6 @@ export const Body = styled.div`
   max-width: 390px;
   height: auto;
 `;
-
 
 export const FundingDiv = styled.div`
   background-color: ${theme.white};

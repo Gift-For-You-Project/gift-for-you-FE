@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import theme from "../../styles/theme";
 
 /* 전체 컨테이너 */
@@ -36,13 +36,6 @@ export const LeftLogoTextIcon = styled.img`
   bottom: 20px;
   left: 30px;
   cursor: pointer;
-`;
-
-export const BubbleTxt = styled.div`
-  position: absolute;
-  bottom: 208px;
-  left: 26px;
-  padding: 100px 0 0 300px;
 `;
 
 export const BubbleImg = styled.img`
@@ -187,6 +180,8 @@ export const Button = styled.button`
   margin-bottom: ${(props) => props.mb};
   padding-left: ${(props) => props.pl};
   padding-right: ${(props) => props.pr};
+  transition: all 300ms ease-in;
+
   &:hover {
     color: white;
     background-color: ${theme.primary};
@@ -199,7 +194,7 @@ export const RightContainer = styled.div`
   position: relative;
   width: -webkit-fill-available;
   max-width: 390px;
-  height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
   margin: 0 10px;
   overflow-y: scroll;
   &::-webkit-scrollbar {
@@ -246,6 +241,44 @@ export const NavbarBtn = styled.button`
   &:hover {
     transform: scale(1.2);
     color: ${theme.primary};
+  }
+`;
+
+const wigglyAnimation = keyframes`
+  0% {
+    transform: rotate(0deg);
+  }
+
+  25% {
+    transform: rotate(-8deg);
+  }
+
+  50% {
+    transform: rotate(8deg);
+  }
+  
+  75% {
+    transform: rotate(-8deg);
+  }
+
+  100% {
+    transform: rotate(0deg);
+  }
+`;
+
+export const WigglyBtn = styled.button`
+  color: ${theme.white};
+  background-color: ${theme.primary};
+  cursor: pointer;
+  animation: ${wigglyAnimation} 3s infinite;
+  width: 60px;
+  height: 34px;
+  border-radius: 8px;
+  border: 2px solid ${theme.primaryFont};
+  transition: all 300ms ease-in;
+
+  &:hover {
+    background-color: ${theme.primaryFont};
   }
 `;
 
@@ -312,8 +345,6 @@ export const FundingDiv = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100%;
-  max-width: 390px;
   margin-bottom: 10px;
 `;
 
@@ -332,16 +363,12 @@ export const RecentFundingDiv = styled.div`
 
 export const FundingSection = styled.section`
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   flex-wrap: wrap;
+  flex-shrink: 0;
   width: 100%;
-  gap: 10px;
   padding: 10px;
-  padding-bottom: 20px;
-
-  @media screen and (max-width: 390px) {
-    gap: 2px;
-  }
+  gap: 10px 2%;
 `;
 
 export const RecentFundingBtn = styled.button`
@@ -366,7 +393,7 @@ export const EndingSection = styled.section`
 `;
 
 export const FundingGrid = styled.div`
-  width: 100%;
+  width: 32%;
   max-width: 110px;
   overflow: hidden;
   cursor: pointer;
@@ -402,8 +429,7 @@ export const MyFundingImg = styled.img`
   position: relative;
   width: 100%;
   max-width: 120px;
-  height: 100%;
-  max-height: 120px;
+  height: 120px;
   border-radius: 10px;
   margin: 0 20px 0 20px;
   border: 1px solid ${theme.gray5};
@@ -435,7 +461,7 @@ export const MyFundingDate = styled.div`
 `;
 
 export const MyFundingBtn = styled.button`
-  width: 72px;
+  width: 80px;
   height: 34px;
   background-color: ${theme.primaryBtn};
   color: ${theme.primaryFont};
@@ -509,7 +535,7 @@ export const BetweenDiv = styled.div`
 
 export const TogetherBetween = styled.div`
   display: flex;
-  flex-direction: row;
+  align-items: center;
   justify-content: center;
   width: 220px;
 `;
@@ -539,6 +565,11 @@ export const RecentFundingContainer = styled.div`
   @media screen and (max-width: 390px) {
     max-width: 100%;
   }
+`;
+
+export const TogetherLogoImg = styled.img`
+  width: 80px;
+  height: 24px;
 `;
 
 export const TogetherImg = styled.img`
@@ -652,6 +683,7 @@ export const ProductImg = styled.img`
   border-radius: 8px;
   object-fit: cover;
   cursor: pointer;
+  pointer-events: auto;
 `;
 
 export const ProductP = styled.p`

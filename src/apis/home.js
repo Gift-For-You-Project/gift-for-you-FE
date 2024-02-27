@@ -12,7 +12,7 @@ export const getMyFunding = async () => {
     if (error.response) {
       const status = error.response.status;
       if (status === 401) {
-        console.error("API 호출 중 401 에러 발생: ", error);
+        console.error("API 호출 중 401 에러 발생");
       }
     }
 
@@ -32,9 +32,9 @@ export const getHomeFundingList = async () => {
     if (error.response) {
       const status = error.response.status;
       if (status === 404) {
-        console.error("API 호출 중 404 에러 발생: ", error);
+        console.error("API 호출 중 404 에러 발생");
       } else if (status === 500) {
-        console.error("API 호출 중 500 에러 발생: ", error);
+        console.error("API 호출 중 500 에러 발생");
       }
     }
 
@@ -42,7 +42,7 @@ export const getHomeFundingList = async () => {
   }
 };
 
-// 전체 펀딩 페이지에서 펀딩 리스트 데이터를 가져오는 API
+// 진행중인 펀딩 페이지에서 펀딩 리스트 데이터를 가져오는 API
 export const getRecentFundingList = async (page) => {
   try {
     const response = await instance.get(`/api/funding/all?page=${page}`);
@@ -54,9 +54,9 @@ export const getRecentFundingList = async (page) => {
     if (error.response) {
       const status = error.response.status;
       if (status === 404) {
-        console.error("API 호출 중 404 에러 발생: ", error);
+        console.error("API 호출 중 404 에러 발생");
       } else if (status === 500) {
-        console.error("API 호출 중 500 에러 발생: ", error);
+        console.error("API 호출 중 500 에러 발생");
       }
     }
 
@@ -68,16 +68,16 @@ export const getRecentFundingList = async (page) => {
 export const getFundingSummary = async () => {
   try {
     const response = await instance.get("/api/funding/summary");
-    console.log("기프티파이 펀딩 정보 API", response.data);
+    // console.log("기프티파이 펀딩 정보 API", response.data);
     if (response.status === 200) {
       return response.data;
     }
   } catch (error) {
-    console.error("API 호출 중 에러 발생: ", error);
+    console.error("API 호출 중 에러 발생");
     if (error.response) {
       const status = error.response.status;
       if (status === 401) {
-        console.error("API 호출 중 401 에러 발생: ", error);
+        console.error("API 호출 중 401 에러 발생");
       }
     }
 
@@ -97,9 +97,9 @@ export const getActiveFundingList = async (page) => {
     if (error.response) {
       const status = error.response.status;
       if (status === 404) {
-        console.error("API 호출 중 404 에러 발생: ", error);
+        console.error("API 호출 중 404 에러 발생");
       } else if (status === 500) {
-        console.error("API 호출 중 500 에러 발생: ", error);
+        console.error("API 호출 중 500 에러 발생");
       }
     }
 
@@ -119,9 +119,9 @@ export const getFinishFundingList = async (page) => {
     if (error.response) {
       const status = error.response.status;
       if (status === 404) {
-        console.error("API 호출 중 404 에러 발생: ", error);
+        console.error("API 호출 중 404 에러 발생");
       } else if (status === 500) {
-        console.error("API 호출 중 500 에러 발생: ", error);
+        console.error("API 호출 중 500 에러 발생");
       }
     }
 

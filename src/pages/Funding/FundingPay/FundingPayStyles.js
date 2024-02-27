@@ -184,6 +184,7 @@ export const Logo = styled.h1`
 `;
 
 export const P = styled.p`
+text-decoration: ${(props) => (props.underline ? 'underline' : 'none')};
   padding-top: ${(props) => props.pt};
   padding-bottom: ${(props) => props.pb};
   padding-left: ${(props) => props.pl};
@@ -288,7 +289,6 @@ export const SponserDiv = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 15px;
 `;
 
 export const SponserMoney = styled.div`

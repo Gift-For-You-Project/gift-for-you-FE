@@ -19,7 +19,7 @@ function DetailModal({ closeModal, handleInputSelection, id, detailData }) {
     const navigate = useNavigate();
 
     const handleModalButtonClick = () => {
-        console.log('펀딩 모달 성공:', donationInput);
+        // console.log('펀딩 모달 성공:', donationInput);
         handleInputSelection(donationInput);
         closeModal(); 
 
@@ -52,12 +52,12 @@ function DetailModal({ closeModal, handleInputSelection, id, detailData }) {
                         </XButton>
                     </ModalTitleXBox>
                     <P fs={theme.detail} color={theme.gray4}>
-                        원하는 금액만큼 펀딩에 참여해보세요!
+                        원하는 테스트 금액만큼 펀딩에 참여해보세요!
                     </P>
                     <ModalInput
                         type="text"
                         value={donationInput}
-                        placeholder={isPlaceholderVisible ? "원하는 금액만큼 입력하세요" : ""}
+                        placeholder={isPlaceholderVisible ? "원하는 테스트 금액만큼 입력하세요" : ""}
                         onFocus={() => setIsPlaceholderVisible(false)} // 입력창을 클릭할 때 placeholder가 사라지도록 설정
                         onBlur={() => setIsPlaceholderVisible(donationInput === '')} // 입력창을 벗어났을 때 placeholder가 다시 나타나도록 설정
                         onChange={handleDonationInputChange} // 숫자만 입력되도록 및 1000000 이하로 제한

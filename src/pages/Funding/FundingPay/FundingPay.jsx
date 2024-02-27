@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import { warnToast } from '../../../components/toast';
 import { fundingPayDonationReady, getFundingDonation, getDonationApproval } from '../../../apis/funding';
-import { IoIosArrowBack } from 'react-icons/io';
+import { FaAngleLeft } from 'react-icons/fa6';
 import theme from '../../../styles/theme';
+import { GoDotFill } from 'react-icons/go';
 import {
     MainContainer,
     LeftContainer,
@@ -12,13 +13,11 @@ import {
     BubbleImg,
     LeftRowdiv,
     LeftImg,
-    BubbleTxt,
     LeftPieImg,
     LeftContent,
     Leftcolumndiv,
     IpadLoveImg,
     P,
-    NavbarDiv,
     RightContainer,
     SponserMoney,
     Body,
@@ -36,6 +35,7 @@ import {
     Checkbox,
     PayDiv,
 } from './FundingPayStyles';
+import { IconDiv, NavbarDiv } from '../../Home/Signup/SignupStyles';
 
 const FundingPay = ({ donation }) => {
     const navigate = useNavigate();
@@ -127,12 +127,6 @@ const FundingPay = ({ donation }) => {
             <LeftContainer>
                 <LeftContainer>
                     <LeftImgContainer>
-                        <BubbleTxt>
-                            <P fs="24px" fw="700" color={theme.white}>
-                                생일선물
-                                <br />뭐 받고싶어?
-                            </P>
-                        </BubbleTxt>
                         <BubbleImg src="/imgs/Home/speech-bubble.png" />
                         <LeftLogoTextIcon onClick={() => navigate('/')} src="/imgs/Common/giftipie.png" />
                         <LeftPieImg src="/imgs/Home/pie-hi.png" />
@@ -140,7 +134,7 @@ const FundingPay = ({ donation }) => {
                     <LeftRowdiv ml="30px">
                         <LeftRowdiv color={theme.gray1} mr="10px" bc={theme.primary} br="25px" p="8px">
                             <LeftImg src="/imgs/Home/giftbox-red.png" w="30px" h="25px" mr="10px" pl="10px" />
-                            <P fs="20px" fw="900" pr="10px" color={theme.black}>
+                            <P fs="20px" fw="700" pr="10px" color={theme.black}>
                                 정말 원하는 선물
                             </P>
                         </LeftRowdiv>
@@ -163,14 +157,16 @@ const FundingPay = ({ donation }) => {
 
             <RightContainer>
                 <NavbarDiv>
-                    <IoIosArrowBack onClick={() => navigate(`/fundingdetail/${id}`)} color={theme.white} size="20px" />
-                    <P pl="80px" fs={theme.body2} color={theme.white}>
+                    <IconDiv>
+                        <FaAngleLeft onClick={() => navigate(`/fundingdetail/${id}`)} />
+                    </IconDiv>
+                    <P fs={theme.body2} color={theme.white}>
                         지금 선물하면
                     </P>
                     <P pl="5px" fs={theme.body2} color={theme.primary}>
                         {sponsorDonation.donationRanking}등
                     </P>
-                    <P pl="0px" fs={theme.body2} color={theme.white}>
+                    <P fs={theme.body2} color={theme.white}>
                         이에요!
                     </P>
                 </NavbarDiv>
@@ -192,12 +188,12 @@ const FundingPay = ({ donation }) => {
                             </SponserMoney>
 
                             <InputLabel mt="60px">
-                                <InputSpan>남길 이름 (10자 이내)</InputSpan>
+                                <InputSpan>남길 이름 (12자 이내)</InputSpan>
                                 <InputInput
                                     type="text"
                                     value={sponsorDonation.sponsorNickname}
                                     onChange={(e) => {
-                                        const inputValue = e.target.value.slice(0, 10);
+                                        const inputValue = e.target.value.slice(0, 12);
                                         setSponsorDonation({
                                             ...sponsorDonation,
                                             sponsorNickname: inputValue,
@@ -210,12 +206,12 @@ const FundingPay = ({ donation }) => {
                             </P>
 
                             <InputLabel mt="25px">
-                                <InputSpan>남길 메시지 (120자 이내)</InputSpan>
+                                <InputSpan>남길 메시지 (200자 이내)</InputSpan>
                                 <Textarea
                                     type="text"
                                     value={sponsorDonation.sponsorComment}
                                     onChange={(e) => {
-                                        const inputValue = e.target.value.slice(0, 120);
+                                        const inputValue = e.target.value.slice(0, 200);
                                         setSponsorDonation({
                                             ...sponsorDonation,
                                             sponsorComment: inputValue,
@@ -240,10 +236,28 @@ const FundingPay = ({ donation }) => {
                         </TogetherDiv>
 
                         <PayDiv bc={theme.white} br="30px 30px 0px 0px">
+                            <P pt="20px" fs="16px" color={theme.gray2} pl="10px" fw="800">
+                                [테스트 결제 안내]
+                            </P>
                             <SponserDiv>
-                                <P pt="20px" fs={theme.body2} color={theme.gray2} pl="10px">
-                                    카카오페이 테스트 결제에 필요한 개인정보 <br />
-                                    제공에 동의하십니까?
+                                <GoDotFill />
+                                <P pt="16px" fs={theme.body2} color={theme.gray2} pl="10px" underline>
+                                    본 테스트 결제는 카카오페이 API를 사용한 가상 결제로, 실제 결제가 진행되지 않습니다.
+                                </P>
+                            </SponserDiv>
+                            <SponserDiv>
+                                <GoDotFill />
+                                <P pt="16px" fs={theme.body2} color={theme.gray2} pl="10px" underline>
+                                    본 테스트 결제 시, 카카오페이 내에서 가상 현금과 카드를 사용한 결제 과정을 경험하실
+                                    수 있습니다.
+                                </P>
+                            </SponserDiv>
+
+                            <SponserDiv>
+                                <P pt="30px" fs={theme.body2} color={theme.gray2} pl="10px">
+                                    상기 [테스트 결제 안내]를 확인한 후,
+                                    <br />
+                                    카카오페이 테스트 결제 이용에 동의하십니까?
                                 </P>
                                 <Checkbox
                                     type="checkbox"

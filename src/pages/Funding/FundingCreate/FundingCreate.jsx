@@ -4,7 +4,7 @@ import { postFundingCreate } from '../../../apis/funding';
 import { useParams } from 'react-router-dom';
 import CreateModal from './Modal/CreateModal';
 import { infoToast } from '../../../components/toast';
-import { IoIosArrowBack } from 'react-icons/io';
+import { FaAngleLeft } from 'react-icons/fa6';
 import { GrAdd } from 'react-icons/gr';
 import theme from '../../../styles/theme';
 import {
@@ -13,7 +13,6 @@ import {
     LeftImgContainer,
     LeftLogoTextIcon,
     BubbleImg,
-    BubbleTxt,
     LeftPieImg,
     LeftContent,
     LeftRowdiv,
@@ -23,7 +22,6 @@ import {
     P,
     Button,
     RightContainer,
-    NavbarDiv,
     ImgPlus,
     ProducImgtDiv,
     FundingImg,
@@ -42,6 +40,7 @@ import {
     InputSpan,
     InputInput,
 } from './FundingCreateStyles';
+import { IconDiv, NavbarDiv } from '../../Home/Signup/SignupStyles';
 
 const FundingCreate = () => {
     const navigate = useNavigate();
@@ -74,33 +73,42 @@ const FundingCreate = () => {
         setIsFundingModalOpen(false);
     };
 
-    // 각 입력값에 대한 상태 업데이트 핸들러
-    // const handleItemNameChange = (e) => {
-    //     setCreateData({ ...createData, itemName: e.target.value });
-    // };
     const handleItemNameChange = (e) => {
         const itemName = e.target.value.slice(0, 15);
         setCreateData({ ...createData, itemName });
     };
     const handleTargetAmountChange = (e) => {
-        let targetAmount = e.target.value.replace(/[^0-9]/g, '');
-        targetAmount = Math.min(parseInt(targetAmount), 1000000).toString();
+        let targetAmount = e.target.value.replace(/\D/g, ''); // 숫자 이외의 문자 모두 제거
+        targetAmount = Math.min(parseInt(targetAmount) || '', 10000000).toString(); // 1부터 1000000까지의 범위 제한
+        targetAmount = targetAmount.replace(/\B(?=(\d{3})+(?!\d))/g, ','); // 세 자리 수마다 콤마 추가
         setCreateData({ ...createData, targetAmount });
     };
     const handleShowNameChange = (e) => {
-        let showName = e.target.value.slice(0, 10);
+        let showName = e.target.value.slice(0, 12);
         setCreateData({ ...createData, showName });
     };
     const handleTitleChange = (e) => {
-        let title = e.target.value.slice(0, 12);
+        let title = e.target.value.slice(0, 25);
         setCreateData({ ...createData, title });
     };
     const handleContentChange = (e) => {
-        let content = e.target.value.slice(0, 120);
+        let content = e.target.value.slice(0, 200);
         setCreateData({ ...createData, content });
     };
     const handleEndDateChange = (e) => {
-        setCreateData({ ...createData, endDate: e.target.value });
+        const selectedDate = new Date(e.target.value);
+        const currentDate = new Date();
+
+        // 선택된 날짜가 현재 날짜보다 이전인지 확인
+        if (selectedDate < currentDate) {
+            // 선택된 날짜가 현재 날짜보다 이전인 경우, 오늘로 설정
+            const formattedCurrentDate = currentDate.toISOString().split('T')[0];
+            setCreateData({ ...createData, endDate: formattedCurrentDate });
+            infoToast('오늘 이후 날짜를 선택해주세요');
+        } else {
+            // 선택된 날짜가 현재 날짜 이후인 경우, 상태 업데이트
+            setCreateData({ ...createData, endDate: e.target.value });
+        }
     };
     const handlePublicFlagChange = (e) => {
         // 업데이트: 한 번에 하나의 옵션만 선택했는지 확인하세요.
@@ -121,6 +129,11 @@ const FundingCreate = () => {
                 createData.endDate === ''
             ) {
                 infoToast('내용을 입력해주세요');
+                return;
+            }
+
+            if (parseInt(createData.targetAmount) === 0) {
+                infoToast('목표 금액을 입력해주세요.');
                 return;
             }
 
@@ -147,12 +160,6 @@ const FundingCreate = () => {
             <LeftContainer>
                 <LeftContainer>
                     <LeftImgContainer>
-                        <BubbleTxt>
-                            <P fs="24px" fw="700" color={theme.white}>
-                                생일선물
-                                <br />뭐 받고싶어?
-                            </P>
-                        </BubbleTxt>
                         <BubbleImg src="/imgs/Home/speech-bubble.png" />
                         <LeftLogoTextIcon onClick={() => navigate('/')} src="/imgs/Common/giftipie.png" />
                         <LeftPieImg src="/imgs/Home/pie-hi.png" />
@@ -160,7 +167,7 @@ const FundingCreate = () => {
                     <LeftRowdiv ml="30px">
                         <LeftRowdiv color={theme.gray1} mr="10px" bc={theme.primary} br="25px" p="8px">
                             <LeftImg src="/imgs/Home/giftbox-red.png" w="30px" h="25px" mr="10px" pl="10px" />
-                            <P fs="20px" fw="900" pr="10px" color={theme.black}>
+                            <P fs="20px" fw="700" pr="10px" color={theme.black}>
                                 정말 원하는 선물
                             </P>
                         </LeftRowdiv>
@@ -183,8 +190,10 @@ const FundingCreate = () => {
 
             <RightContainer>
                 <NavbarDiv>
-                    <IoIosArrowBack onClick={() => navigate('/')} color={theme.white} size="20px" />
-                    <P pl="120px" fs="13px" fw="900" color={theme.white}>
+                    <IconDiv>
+                        <FaAngleLeft onClick={() => navigate('/')} />
+                    </IconDiv>
+                    <P fs={theme.body2} color={theme.white}>
                         펀딩 만들기
                     </P>
                 </NavbarDiv>
@@ -213,7 +222,7 @@ const FundingCreate = () => {
                                     </SponsorComment>
                                     <ColumnDiv>
                                         <TitleLabel>
-                                            <InputSpan>상품명 (15자 이내)</InputSpan>
+                                            <InputSpan>상품명 (25자 이내)</InputSpan>
                                             <InputInput
                                                 type="text"
                                                 value={createData.itemName}
@@ -222,7 +231,7 @@ const FundingCreate = () => {
                                         </TitleLabel>
 
                                         <TitleLabel>
-                                            <InputSpan>목표 금액 (백만원 이하)</InputSpan>
+                                            <InputSpan>목표 금액 (천만원 이하)</InputSpan>
                                             <InputInput
                                                 type="text"
                                                 value={createData.targetAmount}
@@ -279,7 +288,7 @@ const FundingCreate = () => {
                                 </SponserDiv>
 
                                 <InputLabel>
-                                    <InputSpan>보여줄 이름 (10자 이내)</InputSpan>
+                                    <InputSpan>보여줄 이름 (12자 이내)</InputSpan>
                                     <InputInput
                                         type="text"
                                         value={createData.showName}
@@ -288,7 +297,7 @@ const FundingCreate = () => {
                                 </InputLabel>
 
                                 <InputLabel>
-                                    <InputSpan>제목 (12자 이내)</InputSpan>
+                                    <InputSpan>제목 (25자 이내)</InputSpan>
                                     <InputInput
                                         type="text"
                                         value={createData.title}
@@ -297,7 +306,7 @@ const FundingCreate = () => {
                                 </InputLabel>
 
                                 <InputLabel>
-                                    <InputSpan>본문 (120자 이내)</InputSpan>
+                                    <InputSpan>본문 (200자 이내)</InputSpan>
                                     <Textarea
                                         type="textarea"
                                         value={createData.content}
@@ -306,7 +315,7 @@ const FundingCreate = () => {
                                 </InputLabel>
                             </TogetherDiv>
 
-                            <TogetherDiv bc={theme.white} br="30px 30px 0px 0px">
+                            <TogetherDiv h="30vh" bc={theme.white} br="30px 30px 0px 0px">
                                 <InputLabel>
                                     <InputSpan>마감일 설정</InputSpan>
                                     <InputInput

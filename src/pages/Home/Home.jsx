@@ -24,7 +24,6 @@ import {
   Leftcolumndiv,
   LeftImgContainer,
   BannerImg,
-  BubbleTxt,
   BubbleImg,
   IpadLoveImg,
   P,
@@ -56,6 +55,7 @@ import {
   BannerProgressDiv,
   TogetherBetween,
   TogetherDiv,
+  TogetherLogoImg,
   TogetherImg,
   TogetherGrids,
   TogetherGrid,
@@ -120,7 +120,7 @@ const Home = () => {
     try {
       const data = await getMyFunding();
 
-      console.log("내 펀딩: ", data);
+      // console.log("내 펀딩: ", data);
       setMyFunding(data);
     } catch (error) {
       console.error("API 호출 중 에러 발생: ", error);
@@ -132,7 +132,7 @@ const Home = () => {
     try {
       const content = await getHomeFundingList();
 
-      console.log("최근 펀딩 구경하기: ", content);
+      // console.log("최근 펀딩 구경하기: ", content);
       setHomeFundingList(content);
     } catch (error) {
       console.error("API 호출 중 에러 발생: ", error);
@@ -144,7 +144,7 @@ const Home = () => {
     try {
       const data = await getFundingSummary();
 
-      console.log("내 펀딩: ", data);
+      // console.log("함께한 선물 데이터: ", data);
       setFundingSummary(data);
     } catch (error) {
       console.error("API 호출 중 에러 발생: ", error);
@@ -199,12 +199,6 @@ const Home = () => {
       <LeftContainer>
         <LeftContainer>
           <LeftImgContainer>
-            <BubbleTxt>
-              <P fs={theme.headline1} fw="700" color={theme.white}>
-                생일선물
-                <br />뭐 받고싶어?
-              </P>
-            </BubbleTxt>
             <BubbleImg src="/imgs/Home/speech-bubble.png" />
             <LeftLogoTextIcon
               onClick={() => navigate("/")}
@@ -227,7 +221,7 @@ const Home = () => {
                 mr="10px"
                 pl="10px"
               />
-              <P fs="20px" fw="900" pr="10px" color={theme.black}>
+              <P fs="20px" fw="700" pr="10px" color={theme.black}>
                 정말 원하는 선물
               </P>
             </LeftRowdiv>
@@ -257,7 +251,7 @@ const Home = () => {
           />
         </NavbarDiv>
         <Body>
-          <BannerImg src="/imgs/Home/banner.svg" />
+          <BannerImg src="/imgs/Home/banner.png" />
           {/* 내 펀딩 */}
           <TogetherDiv bc={theme.white}>
             {/* 로그인 상태이면서 내 펀딩이 있을 때 */}
@@ -403,15 +397,7 @@ const Home = () => {
 
           {/* 함께한 선물 */}
           <TogetherBetween>
-            <P
-              pt="40px"
-              pb="40px"
-              fs={theme.title}
-              fw="600"
-              color={theme.primary}
-            >
-              Giftipie
-            </P>
+            <TogetherLogoImg src="/imgs/Common/giftipie.png" alt="logo" />
             <P
               pt="40px"
               pb="40px"
@@ -455,7 +441,7 @@ const Home = () => {
                 <br /> 펀딩 금액
               </P>
               <P pt="10px" pb="10px" fs="16px" fw="700">
-                {formatAmount(fundingSummary.totalFundingAmount)}만 원
+                {formatAmount(fundingSummary.totalFundingAmount)}만원
               </P>
             </TogetherGrid>
           </TogetherGrids>
@@ -511,7 +497,9 @@ const Home = () => {
           </ProductContainer>
         </Body>
         <Button
-          onClick={() => navigate("/fundingcreate")}
+          onClick={
+            isLoggedIn ? () => navigate("/fundingcreate") : handleLoginClick
+          }
           w="100%"
           h="60px"
           color="black"

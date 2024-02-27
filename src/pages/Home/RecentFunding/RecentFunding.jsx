@@ -3,7 +3,7 @@ import { useNavigate, Link } from "react-router-dom";
 import LoginModal from "../Login/LoginModal";
 import { getRecentFundingList } from "../../../apis/home";
 import theme from "../../../styles/theme";
-import { FaPlus, FaAngleLeft } from "react-icons/fa6";
+import { FaAngleLeft } from "react-icons/fa6";
 import {
   MainContainer,
   LeftContainer,
@@ -12,7 +12,6 @@ import {
   LeftPieImg,
   LeftContent,
   BubbleImg,
-  BubbleTxt,
   TogetherDiv,
   FundingDiv,
   BetweenDiv,
@@ -34,7 +33,6 @@ import {
   CategoryDiv,
 } from "./RecentFundingStyles";
 import { NavbarDiv, IconDiv } from "../Signup/SignupStyles";
-import { Button, FloatingBtn } from "../HomeStyles";
 
 const RecentFunding = () => {
   const navigate = useNavigate();
@@ -68,9 +66,9 @@ const RecentFunding = () => {
       const { scrollTop, scrollHeight, clientHeight } = e.target;
       if (!isLoading && scrollTop + clientHeight >= scrollHeight - 5) {
         loadMoreData();
-        console.log("top", scrollTop);
-        console.log("h", scrollHeight);
-        console.log("c", clientHeight);
+        // console.log("top", scrollTop);
+        // console.log("h", scrollHeight);
+        // console.log("c", clientHeight);
       }
     },
     [isLoading, loadMoreData]
@@ -96,12 +94,6 @@ const RecentFunding = () => {
       <LeftContainer>
         <LeftContainer>
           <LeftImgContainer>
-            <BubbleTxt>
-              <P fs="24px" fw="700" color={theme.white}>
-                생일선물
-                <br />뭐 받고싶어?
-              </P>
-            </BubbleTxt>
             <BubbleImg src="/imgs/Home/speech-bubble.png" />
             <LeftLogoTextIcon
               onClick={handleLogoClick}
@@ -124,7 +116,7 @@ const RecentFunding = () => {
                 mr="10px"
                 pl="10px"
               />
-              <P fs="20px" fw="900" pr="10px" color={theme.black}>
+              <P fs="20px" fw="700" pr="10px" color={theme.black}>
                 정말 원하는 선물
               </P>
             </LeftRowdiv>
@@ -194,22 +186,10 @@ const RecentFunding = () => {
                     </FundingTitle>
                   </FundingGrid>
                 ))}
-                {isLoading && <p>Loading more...</p>}
+                {isLoading && <p>로딩중...</p>}
               </FundingSection>
             </FundingDiv>
           </TogetherDiv>
-          <Button
-            onClick={() => navigate("/fundingcreate")}
-            w="100%"
-            h="60px"
-            color="black"
-            fs="20px"
-            bc={theme.primary}
-            as={FloatingBtn}
-          >
-            <FaPlus />
-            &nbsp; 펀딩 만들기
-          </Button>
         </Body>
       </RightContainer>
 

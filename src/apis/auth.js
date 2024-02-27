@@ -79,12 +79,12 @@ export const postSendMail = async (email) => {
     const response = await instance.post("/api/mailSend", { mail: email });
 
     if (response.status === 200) {
-      console.log("이메일 인증: ", response);
+      // console.log("이메일 인증: ", response);
       return response.data.code;
     }
   } catch (error) {
     if (error.response.status === 401) {
-      console.error("API 호출 중 401 에러 발생", error);
+      console.error("API 호출 중 401 에러 발생");
     }
   }
 };
@@ -131,7 +131,7 @@ export const logout = async () => {
 
     if (response.status === 200) {
       successToast(response.data.message);
-      console.log("로그아웃이 완료되었습니다.");
+      // console.log("로그아웃이 완료되었습니다.");
     }
   } catch (error) {
     console.error("API 호출 중 오류 발생:", error.message);
