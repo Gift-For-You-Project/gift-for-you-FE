@@ -37,7 +37,8 @@ function NotificationComponent() {
         setIsConnected((prevIsConnected) => !prevIsConnected); // 이전 상태값을 이용하여 변경
       }
     };
-  }, [isLoggedIn, isConnected]); // isConnected를 의존성 배열에 추가
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return <img src="/imgs/Home/no-notification.svg" alt="notification" />;
 }
