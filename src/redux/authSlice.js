@@ -62,12 +62,19 @@
 // export default authReducer.reducer;
 
 import { createSlice } from "@reduxjs/toolkit";
-import { successToast } from "../components/toast";
 import { logout } from "../apis/auth";
 import Cookies from "universal-cookie";
 
 const cookies = new Cookies();
-const receivedToken = cookies.get("Authorization");
+
+// 쿠키에서 토큰 가져오는 함수
+const getAuthTokenFromCookie = () => {
+  const authToken = cookies.get("Authorization") || null;
+  console.log("토큰 가져왔는지 여부:", authToken ? "예" : "아니오");
+  return authToken;
+};
+
+const receivedToken = getAuthTokenFromCookie();
 
 const authReducer = createSlice({
   name: "auth",
@@ -77,8 +84,8 @@ const authReducer = createSlice({
       state.isLoggedIn = true;
       // 로그인 시 로컬 스토리지에 토큰 저장
       localStorage.setItem("Authorization", receivedToken);
-      // 기타 로그인 성공 시 필요한 작업 수행
-      successToast("로그인 되었습니다.");
+      // 콘솔로그로 쿠키 값 확인
+      console.log("쿠키 값:", receivedToken);
     },
     userLogout: (state) => {
       state.isLoggedIn = false;
@@ -94,9 +101,8 @@ const authReducer = createSlice({
 
       // 로그인 시 로컬 스토리지에 토큰 저장
       localStorage.setItem("Authorization", receivedToken);
-
-      // 기타 로그인 성공 시 필요한 작업 수행
-      successToast("로그인 되었습니다.");
+      // 콘솔로그로 쿠키 값 확인
+      console.log("쿠키 값:", receivedToken);
     },
   },
 });
