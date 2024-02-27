@@ -135,24 +135,13 @@ const FundingCreate = () => {
         return;
       }
 
-      // if (parseInt(createData.targetAmount) === 0) {
-      //   infoToast("목표 금액을 입력해주세요.");
-      //   return;
-      // }
+      if (parseInt(createData.targetAmount) === 0) {
+        infoToast("목표 금액을 입력해주세요.");
+        return;
+      }
 
       // 펀딩 추가 API
       const data = await postFundingCreate({
-        id,
-        itemImage,
-        itemName: createData.itemName,
-        targetAmount: createData.targetAmount,
-        publicFlag: createData.publicFlag,
-        showName: createData.showName,
-        title: createData.title,
-        content: createData.content,
-        endDate: createData.endDate,
-      });
-      console.log("전송하는 데이터:", {
         id,
         itemImage,
         itemName: createData.itemName,
