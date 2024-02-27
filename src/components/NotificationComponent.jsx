@@ -41,7 +41,8 @@ function NotificationComponent() {
         setListening(false);
       };
     }
-  }, [isLoggedIn, listening]); // 의존성 배열에 isLogin 추가
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   return <img src="/imgs/Home/no-notification.svg" alt="notification" />;
 }
 export default NotificationComponent;
