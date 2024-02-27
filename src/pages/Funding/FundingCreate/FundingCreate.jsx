@@ -149,6 +149,17 @@ const FundingCreate = () => {
         content: createData.content,
         endDate: createData.endDate,
       });
+      console.log("전송하는 데이터:", {
+        id,
+        itemImage,
+        itemName: createData.itemName,
+        targetAmount: createData.targetAmount,
+        publicFlag: createData.publicFlag,
+        showName: createData.showName,
+        title: createData.title,
+        content: createData.content,
+        endDate: createData.endDate,
+      });
       navigate(`/fundingdetail/${data.id}`);
     } catch (error) {
       console.error("펀딩 추가 API 호출 실패");

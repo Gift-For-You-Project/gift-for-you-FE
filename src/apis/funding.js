@@ -13,7 +13,6 @@ export const postFundingCreate = async (fundingData) => {
   } catch (error) {
     if (error.response) {
       const status = error.response.status;
-      console.error("만들기 오류: ", error);
       if (status === 404) {
         console.error("API 호출 중 404 에러 발생");
       } else if (status === 500) {
