@@ -116,7 +116,7 @@ const RecentFunding = () => {
                 mr="10px"
                 pl="10px"
               />
-              <P fs="20px" fw="900" pr="10px" color={theme.black}>
+              <P fs="20px" fw="700" pr="10px" color={theme.black}>
                 정말 원하는 선물
               </P>
             </LeftRowdiv>

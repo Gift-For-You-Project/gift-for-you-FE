@@ -162,6 +162,9 @@ const FundingDetail = () => {
     if (detailData.ownerFlag) {
       return (
         <NavigateBtn onClick={() => navigate(`/fundingModify/${id}`)}>
+          <P fs={theme.detail2} color={theme.gray2} pt="5px" fw="500">
+            내 펀딩 관리
+          </P>
           <IconButtonImg src="/imgs/Funding/FundingDetail/modify-icon.svg" />{" "}
           수정하기
         </NavigateBtn>
@@ -236,7 +239,7 @@ const FundingDetail = () => {
                 mr="10px"
                 pl="10px"
               />
-              <P fs="20px" fw="900" pr="10px" color={theme.black}>
+              <P fs="20px" fw="700" pr="10px" color={theme.black}>
                 정말 원하는 선물
               </P>
             </LeftRowdiv>
@@ -324,12 +327,7 @@ const FundingDetail = () => {
             <ProgressBar>
               <Progress width={(detailData.achievementRate / 100) * 100} />
             </ProgressBar>
-            <BetweenDiv pb="10px">
-              <P fs={theme.detail2} color={theme.gray2} pt="5px" fw="500">
-                내 펀딩 관리
-              </P>
-              {renderModifyBtn()}
-            </BetweenDiv>
+            <BetweenDiv pb="10px">{renderModifyBtn()}</BetweenDiv>
           </TogetherDiv>
 
           <FundingDiv>
@@ -397,19 +395,19 @@ const FundingDetail = () => {
           </FundingDiv>
           <FundingDiv p="20px">
             <P pt="20px" pl="10px" fs={theme.headline2} color={theme.black}>
-              펀딩 참여하여
+              펀딩에 참여하여
             </P>
             <GiftTitle>
               <P pt="0px" pl="10px" fs={theme.headline2} color={theme.primary}>
                 특별한 선물
               </P>
               <P pt="0px" pl="0px" fs={theme.headline2} color={theme.black}>
-                을 선물하세요!
+                과 메시지를 전달하세요
               </P>
             </GiftTitle>
             <GiftTitle>
               <P pt="0px" pl="10px" fs={theme.detail} color={theme.gray4}>
-                메시지와 선물이
+                테스트 금액이
               </P>
               <P pt="0px" pl="5px" fs={theme.detail} color={theme.primary}>
                 {detailData.showName}
@@ -580,7 +578,7 @@ const FundingDetail = () => {
           bc={theme.primary}
           as={FloatingBtn}
         >
-          금액을 입력해 펀딩 참여하기
+          원하는 테스트 금액만큼 펀딩 참여하기
         </Button>
         {isFundingModalOpen && (
           <DetailModal

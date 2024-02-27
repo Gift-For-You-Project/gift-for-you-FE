@@ -34,10 +34,11 @@ function DetailModal({ closeModal, handleInputSelection, id, detailData }) {
 
   const handleDonationInputChange = (e) => {
     let input = e.target.value;
-    // 입력값이 0~100만원 이하의 값일 때만 값을 변경
-    if (/^[1-9]?\d{0,6}$/.test(input)) {
-      setDonationInput(input);
+    // 입력값이 숫자가 아니거나 6자리를 넘을 때 값을 변경하지 않음
+    if (!/^\d{0,6}$/.test(input)) {
+      return;
     }
+    setDonationInput(input);
   };
 
   return (
@@ -53,12 +54,14 @@ function DetailModal({ closeModal, handleInputSelection, id, detailData }) {
             </XButton>
           </ModalTitleXBox>
           <P fs={theme.detail} color={theme.gray4}>
-            금액을 입력해 펀딩에 참여해보세요!
+            원하는 테스트 금액만큼 펀딩에 참여해보세요!
           </P>
           <ModalInput
             type="text"
             value={donationInput}
-            placeholder={isPlaceholderVisible ? "금액을 입력하세요" : ""}
+            placeholder={
+              isPlaceholderVisible ? "원하는 테스트 금액을 입력하세요" : ""
+            }
             onFocus={() => setIsPlaceholderVisible(false)} // 입력창을 클릭할 때 placeholder가 사라지도록 설정
             onBlur={() => setIsPlaceholderVisible(donationInput === "")} // 입력창을 벗어났을 때 placeholder가 다시 나타나도록 설정
             onChange={handleDonationInputChange} // 숫자만 입력되도록 및 1000000 이하로 제한

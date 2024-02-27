@@ -90,18 +90,19 @@ const FundingModify = () => {
         return;
       }
 
-      const updateData = await patchFundingModify(id, fundingData);
+      const data = await patchFundingModify(id, fundingData);
 
       setFundingData(
         fundingData.map((data) => {
           if (data.id === id) {
-            return { ...data, updateData };
+            return { ...data, fundingData };
           } else {
             return data;
           }
         })
       );
-      navigate("/fundingdetail/:id");
+
+      navigate(`/fundingdetail/${data.id}`); // 페이지 이동 안됨!
     } catch (error) {
       console.error("펀딩 수정 오류");
     }
@@ -124,6 +125,7 @@ const FundingModify = () => {
   // 펀딩 종료 API
   const handlecompleteFundingClick = async () => {
     try {
+      const id = window.confirm("정말 종료하시겠습니까?");
       if (!id) {
         // 유효한 id가 없으면 데이터를 요청하지 않음
         return;
@@ -164,7 +166,7 @@ const FundingModify = () => {
                 mr="10px"
                 pl="10px"
               />
-              <P fs="20px" fw="900" pr="10px" color={theme.black}>
+              <P fs="20px" fw="700" pr="10px" color={theme.black}>
                 정말 원하는 선물
               </P>
             </LeftRowdiv>
@@ -384,11 +386,6 @@ const FundingModify = () => {
               </InputLabel>
             </TogetherDiv>
             <TogetherDiv h="30vh" bc={theme.white} br="30px 30px 0px 0px">
-              {/* <P pt="10px" pb="5px" fs={theme.detail} color={theme.gray2}>
-                                마감일 설정
-                            </P>
-                            <InputTag type="date" disabled={false} value={fundingData.endDate} h="40px" w="97%" pl="10px" pt="10px" /> */}
-
               <NonInputTag>
                 <P
                   pl="10px"
@@ -428,7 +425,6 @@ const FundingModify = () => {
                   br="16px 4px 4px 16px"
                   mt="10px"
                   fs={theme.body1}
-                  fw="700"
                   color={theme.primaryFont}
                   bc={theme.primaryBtn}
                   hoverColor={theme.white}
@@ -442,7 +438,6 @@ const FundingModify = () => {
                   h="48px"
                   br="4px 16px 16px 4px"
                   mt="10px"
-                  fw="900"
                   fs={theme.body1}
                   color={theme.gray2}
                   bc={theme.gray6}

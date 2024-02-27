@@ -15,7 +15,6 @@ export const Container = styled.div`
 export const Background = styled.div`
   width: 100%;
   height: 100%;
-  /* background-color: rgba(255,255,255,0.15); */
   background: #00000080;
   backdrop-filter: blur(1px);
   display: flex;
@@ -60,8 +59,9 @@ export const ModalBox = styled.div`
 export const ModalTitleXBox = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
+  width: 100%;
   padding-bottom: 10px;
 `;
 
@@ -81,9 +81,8 @@ export const ModalInput = styled.input`
   }
 `;
 export const XButton = styled.button`
-  width: 30px;
+  display: flex;
   font-weight: 700;
-  padding-left: 145px;
   font-size: 20px;
   color: ${theme.gray3};
 `;
