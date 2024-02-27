@@ -66,15 +66,7 @@ import { logout } from "../apis/auth";
 import Cookies from "universal-cookie";
 
 const cookies = new Cookies();
-
-// 쿠키에서 토큰 가져오는 함수
-const getAuthTokenFromCookie = () => {
-  const authToken = cookies.get("Authorization") || null;
-  console.log("토큰 가져왔는지 여부:", authToken ? "예" : "아니오");
-  return authToken;
-};
-
-const receivedToken = getAuthTokenFromCookie();
+const receivedToken = cookies.get("Authorization");
 
 const authReducer = createSlice({
   name: "auth",
