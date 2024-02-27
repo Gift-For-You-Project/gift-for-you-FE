@@ -131,7 +131,7 @@ export const logout = async () => {
 
     if (response.status === 200) {
       successToast(response.data.message);
-      console.log("로그아웃이 완료되었습니다.");
+      // console.log("로그아웃이 완료되었습니다.");
     }
   } catch (error) {
     console.error("API 호출 중 오류 발생:", error.message);
