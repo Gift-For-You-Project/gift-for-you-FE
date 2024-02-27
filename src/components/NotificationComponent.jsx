@@ -52,7 +52,7 @@
 // export default NotificationComponent;
 
 import React, { useEffect } from "react";
-function App() {
+function NotificationComponent() {
   useEffect(() => {
     // SSE 연결 설정
     const eventSource = new EventSource(
@@ -78,4 +78,4 @@ function App() {
     </div>
   );
 }
-export default App;
+export default NotificationComponent;
