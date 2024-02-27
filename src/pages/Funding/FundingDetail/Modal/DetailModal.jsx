@@ -35,7 +35,7 @@ function DetailModal({ closeModal, handleInputSelection, id, detailData }) {
   const handleDonationInputChange = (e) => {
     let input = e.target.value;
     // 입력값이 숫자가 아니거나 6자리를 넘을 때 값을 변경하지 않음
-    if (!/^\d{0,6}$/.test(input)) {
+    if (!/^\d{0,6}$/.test(input.toLocaleString())) {
       return;
     }
     setDonationInput(input);
