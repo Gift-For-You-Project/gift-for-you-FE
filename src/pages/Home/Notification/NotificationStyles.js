@@ -35,7 +35,7 @@ export const NotiContainer = styled.div`
   padding-top: 10px;
 `;
 
-export const NotiImg = styled.div`
+export const NotiImg = styled.img`
   width: ${(props) => props.w};
   height: ${(props) => props.h};
 `;
