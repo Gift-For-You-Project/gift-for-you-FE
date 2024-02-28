@@ -6,16 +6,11 @@ function NotificationComponent() {
   const eventSource = useRef(null);
   const [isConnected, setIsConnected] = useState(false);
 
-  useEffect(() => {
-    // 이미 연결되어 있거나 로그인 상태가 아니면 아무것도 하지 않습니다.
-    if (isConnected || !isLoggedIn) return;
-
+  // SSE 연결을 설정하는 함수
+  const initializeEventSource = () => {
     eventSource.current = new EventSource(
       `${process.env.REACT_APP_API_URL}/api/notification/subscribe`,
       {
-        headers: {
-          Connection: "keep-alive",
-        },
         withCredentials: true,
       }
     );
@@ -32,16 +27,28 @@ function NotificationComponent() {
     eventSource.current.onerror = (error) => {
       console.error("SSE Connection error:", error);
       if (eventSource.current) eventSource.current.close();
-      // 연결 상태를 false로 설정합니다.
-      setIsConnected(false);
+      setIsConnected(false); // 연결 상태를 false로 설정합니다.
+
+      // 일정 시간 후 재연결 시도
+      setTimeout(() => {
+        if (isLoggedIn && !isConnected) {
+          initializeEventSource(); // EventSource 재초기화 및 연결 재시도
+        }
+      }, 5000); // 예: 5초 후 재연결 시도
     };
+  };
+
+  useEffect(() => {
+    // 이미 연결되어 있거나 로그인 상태가 아니면 아무것도 하지 않습니다.
+    if (isConnected || !isLoggedIn) return;
+
+    initializeEventSource(); // SSE 연결을 초기화하고 설정합니다.
 
     // 컴포넌트 언마운트 또는 로그아웃 시 SSE 연결을 종료합니다.
     return () => {
       if (eventSource.current) {
         eventSource.current.close();
-        // 연결 상태를 false로 설정합니다.
-        setIsConnected(false);
+        setIsConnected(false); // 연결 상태를 false로 설정합니다.
       }
     };
     // eslint-disable-next-line
