@@ -2,7 +2,6 @@ import React from "react";
 import { FaAngleLeft } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 import theme from "../../../styles/theme";
-import {} from "./NotificationStyles";
 import {
   MainContainer,
   LeftContainer,
@@ -19,7 +18,14 @@ import {
   RightContainer,
   Body,
 } from "../HomeStyles";
-import { NavbarDiv, IconDiv, FieldContainer } from "../Signup/SignupStyles";
+import { NavbarDiv, IconDiv } from "../Signup/SignupStyles";
+import {
+  NotiSection,
+  NotiBtn,
+  NotiDiv,
+  NotiContainer,
+  NotiImg,
+} from "./NotificationStyles";
 
 const Notification = () => {
   const navigate = useNavigate();
@@ -82,37 +88,50 @@ const Notification = () => {
           </P>
         </NavbarDiv>
         <Body>
-          <FieldContainer>
-            <section>
-              <div>읽은 알림 모두 삭제</div>
-              <div>
+          <NotiSection>
+            <NotiBtn>읽은 알림 모두 삭제</NotiBtn>
+            <NotiDiv>
+              <NotiContainer>
+                <NotiImg>
+                  <img
+                    src="/imgs/Notification/on-funding.png"
+                    alt="onfunding"
+                  />
+                </NotiImg>
                 <div>
-                  <div>
-                    <img src="/imgs/Notification/on-funding" alt="onfunding" />
-                  </div>
-                  <div>
-                    <P>날아라쿠키 님이 펀딩에 참여했어요.</P>
-                    <P>2024. 02. 20. 20:14</P>
-                  </div>
-                  <div>
-                    <img src="/imgs/Notification/delete" alt="delete" />
-                  </div>
+                  <P fs={theme.body2} color={theme.black}>
+                    날아라쿠키님이 펀딩에 참여했어요.
+                  </P>
+                  <P fs={theme.detail} color={theme.gray4}>
+                    2024-02-25 19:24:08.560470
+                  </P>
                 </div>
+                <NotiImg>
+                  <img src="/imgs/Notification/delete.png" alt="delete" />
+                </NotiImg>
+              </NotiContainer>
+
+              <NotiContainer>
+                <NotiImg>
+                  <img
+                    src="/imgs/Notification/off-funding.png"
+                    alt="onfunding"
+                  />
+                </NotiImg>
                 <div>
-                  <div>
-                    <img src="/imgs/Notification/off-funding" alt="onfunding" />
-                  </div>
-                  <div>
-                    <P>이름이이렇게길수도있지 님이 펀딩에 참여했어요.</P>
-                    <P>2024. 02. 20. 20:14</P>
-                  </div>
-                  <div>
-                    <img src="/imgs/Notification/delete" alt="delete" />
-                  </div>
+                  <P fs={theme.body2} color={theme.black}>
+                    이름이이렇게길수도있지님이 펀딩에 참여했어요.
+                  </P>
+                  <P fs={theme.detail} color={theme.gray4}>
+                    2024-02-25 19:24:08.560470
+                  </P>
                 </div>
-              </div>
-            </section>
-          </FieldContainer>
+                <NotiImg>
+                  <img src="/imgs/Notification/delete.png" alt="delete" />
+                </NotiImg>
+              </NotiContainer>
+            </NotiDiv>
+          </NotiSection>
         </Body>
       </RightContainer>
     </MainContainer>
