@@ -4,6 +4,7 @@ import { warnToast } from "../../../components/toast";
 import { FaAngleLeft } from "react-icons/fa6";
 import theme from "../../../styles/theme";
 import { isMobile } from "react-device-detect";
+import { GoDotFill } from "react-icons/go";
 import {
   fundingPayDonationReady,
   getFundingDonation,
@@ -134,9 +135,6 @@ const FundingPay = ({ donation }) => {
     // 컴포넌트가 마운트될 때와 id가 변경될 때 API 호출 함수 실행
     getData();
   }, [id, location.search, navigate]);
-
-  // donation 값 사용
-  // console.log(`펀딩 금액: ${donation}`);
 
   return (
     <MainContainer>
@@ -299,10 +297,41 @@ const FundingPay = ({ donation }) => {
             </TogetherDiv>
 
             <PayDiv bc={theme.white} br="30px 30px 0px 0px">
+              <P pt="20px" fs="16px" color={theme.gray2} pl="10px" fw="800">
+                [테스트 결제 안내]
+              </P>
               <SponserDiv>
-                <P pt="20px" fs={theme.body2} color={theme.gray2} pl="10px">
-                  카카오페이 테스트 결제에 필요한 개인정보 <br />
-                  제공에 동의하십니까?
+                <GoDotFill />
+                <P
+                  pt="16px"
+                  fs={theme.body2}
+                  color={theme.gray2}
+                  pl="10px"
+                  underline
+                >
+                  본 테스트 결제는 카카오페이 API를 사용한 가상 결제로, 실제
+                  결제가 진행되지 않습니다.
+                </P>
+              </SponserDiv>
+              <SponserDiv>
+                <GoDotFill />
+                <P
+                  pt="16px"
+                  fs={theme.body2}
+                  color={theme.gray2}
+                  pl="10px"
+                  underline
+                >
+                  본 테스트 결제 시, 카카오페이 내에서 가상 현금과 카드를 사용한
+                  결제 과정을 경험하실 수 있습니다.
+                </P>
+              </SponserDiv>
+
+              <SponserDiv>
+                <P pt="30px" fs={theme.body2} color={theme.gray2} pl="10px">
+                  상기 [테스트 결제 안내]를 확인한 후,
+                  <br />
+                  카카오페이 테스트 결제 이용에 동의하십니까?
                 </P>
                 <Checkbox
                   type="checkbox"

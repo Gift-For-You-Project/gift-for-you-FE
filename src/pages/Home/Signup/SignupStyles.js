@@ -138,10 +138,6 @@ export const RightContainer = styled.div`
   &::-webkit-scrollbar {
     display: none;
   }
-
-  @media (max-width: 390px) {
-    width: 100%;
-  }
 `;
 
 // 바디 영역
