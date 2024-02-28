@@ -13,6 +13,7 @@ import {
   LoginModalBtn,
   TxtDiv,
   KakaoImg,
+  InfoDiv,
 } from "./LoginModalStyles";
 
 const LoginModal = ({ closeModal }) => {
@@ -42,10 +43,10 @@ const LoginModal = ({ closeModal }) => {
             Giftipie에서
           </P>
           <P fs={theme.title} fw="600" color={theme.primary}>
-            정말 원하는 선물
-            <P fs={theme.title} fw="600" color={theme.black}>
+            정말 원하는 선물{" "}
+            <span style={{ color: theme.black, fontSize: theme.title }}>
               을
-            </P>
+            </span>
           </P>
           <P fs={theme.title} fw="600" color={theme.black}>
             주고받아요
@@ -65,8 +66,10 @@ const LoginModal = ({ closeModal }) => {
           <KakaoImg src="/imgs/Login/kakao.svg" alt="kakao" />
           카카오로 계속하기
         </LoginModalBtn>
-        <P fs={theme.body2} color={theme.gray3} pt="4px">
-          이미 계정이 있으신가요?&nbsp;
+        <InfoDiv>
+          <P fs={theme.body2} color={theme.gray3}>
+            이미 계정이 있으신가요?&nbsp;
+          </P>
           <P
             onClick={() => navigate("/login")}
             cursor="pointer"
@@ -75,7 +78,7 @@ const LoginModal = ({ closeModal }) => {
           >
             로그인하기
           </P>
-        </P>
+        </InfoDiv>
       </ModalContainer>
     </>
   );

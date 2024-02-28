@@ -1,5 +1,6 @@
 import axios from "axios";
 import { successToast, errorToast } from "../components/toast";
+// import { userLogin } from "../redux/authSlice";
 
 export const instance = axios.create({
   baseURL: process.env.REACT_APP_API_URL,
@@ -90,7 +91,7 @@ export const postSendMail = async (email) => {
 };
 
 // 로그인 API
-export const login = async (credentials) => {
+export const login = async (credentials, dispatch) => {
   try {
     const response = await instance.post("/api/login", credentials);
 
@@ -98,6 +99,8 @@ export const login = async (credentials) => {
       const { code, message, result } = response.data;
 
       if (code === 2000 && result) {
+        // 엑세스 토큰 값을 authSlice의 userLogin 액션에 전달하여 디스패치
+        // dispatch(userLogin({ accessToken: result }));
         successToast(message);
       } else {
         console.error("올바르지 않은 응답 형식 또는 값");

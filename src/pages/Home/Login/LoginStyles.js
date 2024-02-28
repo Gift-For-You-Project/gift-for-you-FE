@@ -251,6 +251,9 @@ export const LoginInput = styled.input`
 `;
 
 export const InfoDiv = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: absolute;
   bottom: 90px;
 `;
