@@ -17,12 +17,12 @@ import {
   P,
   RightContainer,
   NavbarDiv,
-  SignupFieldContainer,
+  FieldContainer,
   Body,
   IconDiv,
 } from "../SignupStyles";
 
-const Marketing = () => {
+const Privacy = () => {
   const navigate = useNavigate();
   return (
     <MainContainer>
@@ -82,7 +82,7 @@ const Marketing = () => {
           </P>
         </NavbarDiv>
         <Body>
-          <SignupFieldContainer>
+          <FieldContainer>
             <P fs={theme.body2} p="10px">
               Giftipie(이하 "기프티파이")는 이용자(이하 "회원" 또는 "이용자")의
               동의를 기반으로 개인정보를 수집·이용·제공하고 있으며, 「정보통신망
@@ -366,11 +366,11 @@ const Marketing = () => {
               <br />
               개정일자: 2024년 02월 26일
             </P>
-          </SignupFieldContainer>
+          </FieldContainer>
         </Body>
       </RightContainer>
     </MainContainer>
   );
 };
 
-export default Marketing;
+export default Privacy;

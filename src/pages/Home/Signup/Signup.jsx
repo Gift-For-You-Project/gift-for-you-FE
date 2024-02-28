@@ -25,7 +25,7 @@ import {
   P,
   RightContainer,
   NavbarDiv,
-  SignupFieldContainer,
+  FieldContainer,
   Body,
   IconDiv,
   SignupInputDiv,
@@ -382,7 +382,7 @@ const Signup = () => {
           </P>
         </NavbarDiv>
         <Body>
-          <SignupFieldContainer>
+          <FieldContainer>
             <InputField
               value={formData.email}
               onChange={handleEmailChange}
@@ -506,7 +506,7 @@ const Signup = () => {
             >
               회원가입하기
             </SignupBtn>
-          </SignupFieldContainer>
+          </FieldContainer>
         </Body>
       </RightContainer>
     </MainContainer>

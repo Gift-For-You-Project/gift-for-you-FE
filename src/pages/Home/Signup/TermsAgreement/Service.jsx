@@ -17,12 +17,12 @@ import {
   P,
   RightContainer,
   NavbarDiv,
-  SignupFieldContainer,
+  FieldContainer,
   Body,
   IconDiv,
 } from "../SignupStyles";
 
-const Marketing = () => {
+const Service = () => {
   const navigate = useNavigate();
   return (
     <MainContainer>
@@ -82,7 +82,7 @@ const Marketing = () => {
           </P>
         </NavbarDiv>
         <Body>
-          <SignupFieldContainer>
+          <FieldContainer>
             <P fs={theme.body2} fw="600" p="10px">
               제1조 목적
             </P>
@@ -462,11 +462,11 @@ const Marketing = () => {
               본 약관은 서비스 시작일을 기준으로 적용되며 2024년 02월 25일부터
               시행됩니다.
             </P>
-          </SignupFieldContainer>
+          </FieldContainer>
         </Body>
       </RightContainer>
     </MainContainer>
   );
 };
 
-export default Marketing;
+export default Service;
