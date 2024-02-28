@@ -25,6 +25,7 @@ import {
   NotiDiv,
   NotiContainer,
   NotiImg,
+  NotiContents,
 } from "./NotificationStyles";
 
 const Notification = () => {
@@ -92,43 +93,129 @@ const Notification = () => {
             <NotiBtn>읽은 알림 모두 삭제</NotiBtn>
             <NotiDiv>
               <NotiContainer>
-                <NotiImg>
-                  <img
-                    src="/imgs/Notification/on-funding.png"
-                    alt="onfunding"
-                  />
-                </NotiImg>
-                <div>
+                <NotiImg
+                  w="32px"
+                  src="/imgs/Notification/on-funding.png"
+                  alt="onfunding"
+                />
+                <NotiContents>
                   <P fs={theme.body2} color={theme.black}>
                     날아라쿠키님이 펀딩에 참여했어요.
                   </P>
                   <P fs={theme.detail} color={theme.gray4}>
                     2024-02-25 19:24:08.560470
                   </P>
-                </div>
-                <NotiImg>
-                  <img src="/imgs/Notification/delete.png" alt="delete" />
-                </NotiImg>
+                </NotiContents>
+                <NotiImg
+                  w="20px"
+                  src="/imgs/Notification/delete.png"
+                  alt="delete"
+                />
               </NotiContainer>
 
               <NotiContainer>
-                <NotiImg>
-                  <img
-                    src="/imgs/Notification/off-funding.png"
-                    alt="onfunding"
-                  />
-                </NotiImg>
+                <NotiImg
+                  w="32px"
+                  src="/imgs/Notification/off-funding.png"
+                  alt="onfunding"
+                />
                 <div>
-                  <P fs={theme.body2} color={theme.black}>
+                  <P fs={theme.body2} color={theme.gray4}>
                     이름이이렇게길수도있지님이 펀딩에 참여했어요.
                   </P>
                   <P fs={theme.detail} color={theme.gray4}>
                     2024-02-25 19:24:08.560470
                   </P>
                 </div>
-                <NotiImg>
-                  <img src="/imgs/Notification/delete.png" alt="delete" />
-                </NotiImg>
+                <NotiImg
+                  w="20px"
+                  src="/imgs/Notification/delete.png"
+                  alt="delete"
+                />
+              </NotiContainer>
+
+              <NotiContainer>
+                <NotiImg
+                  w="32px"
+                  src="/imgs/Notification/on-date.png"
+                  alt="onfunding"
+                />
+                <div>
+                  <P fs={theme.body2} color={theme.black}>
+                    펀딩 종료까지 5일 남았어요.
+                  </P>
+                  <P fs={theme.detail} color={theme.gray4}>
+                    2024-02-25 19:24:08.560470
+                  </P>
+                </div>
+                <NotiImg
+                  w="20px"
+                  src="/imgs/Notification/delete.png"
+                  alt="delete"
+                />
+              </NotiContainer>
+
+              <NotiContainer>
+                <NotiImg
+                  w="32px"
+                  src="/imgs/Notification/off-date.png"
+                  alt="onfunding"
+                />
+                <div>
+                  <P fs={theme.body2} color={theme.gray4}>
+                    펀딩 종료까지 15일 남았어요.
+                  </P>
+                  <P fs={theme.detail} color={theme.gray4}>
+                    2024-02-25 19:24:08.560470
+                  </P>
+                </div>
+                <NotiImg
+                  w="20px"
+                  src="/imgs/Notification/delete.png"
+                  alt="delete"
+                />
+              </NotiContainer>
+
+              <NotiContainer>
+                <NotiImg
+                  w="32px"
+                  src="/imgs/Notification/on-finish.png"
+                  alt="onfunding"
+                />
+                <div>
+                  <P fs={theme.body2} color={theme.black}>
+                    펀딩이 종료됐어요! 결과를 확인해보세요.
+                  </P>
+                  <P fs={theme.detail} color={theme.gray4}>
+                    2024-02-25 19:24:08.560470
+                  </P>
+                </div>
+                <NotiImg
+                  w="20px"
+                  src="/imgs/Notification/delete.png"
+                  alt="delete"
+                />
+              </NotiContainer>
+
+              <NotiContainer>
+                <NotiImg
+                  w="32px"
+                  src="/imgs/Notification/off-finish.png"
+                  alt="onfunding"
+                />
+                <div>
+                  <P fs={theme.body2} color={theme.gray4}>
+                    펀딩이 종료됐어요! 결과를 확인해보세요.
+                  </P>
+                  <P fs={theme.detail} color={theme.gray4}>
+                    2024-02-25 19:24:08.560470
+                  </P>
+                </div>
+                <NotiImg
+                  w="20px"
+                  src="/imgs/Notification/delete.png"
+                  alt="delete"
+                />
               </NotiContainer>
             </NotiDiv>
           </NotiSection>

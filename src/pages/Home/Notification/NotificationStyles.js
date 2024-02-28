@@ -4,7 +4,6 @@ import theme from "../../../styles/theme";
 export const NotiSection = styled.section`
   display: flex;
   flex-direction: column;
-  align-items: center;
   width: -webkit-fill-available;
   max-width: 390px;
   height: 100vh;
@@ -37,8 +36,17 @@ export const NotiContainer = styled.div`
 `;
 
 export const NotiImg = styled.div`
+  width: ${(props) => props.w};
+  height: ${(props) => props.h};
+`;
+
+export const NotiContents = styled.div`
   width: 100%;
-  max-width: 32px;
-  height: 100%;
-  max-height: 32px;
+  max-width: 250px;
+`;
+
+export const NotiTxt = styled.p`
+  font-size: ${(props) => props.fs};
+  color: ${(props) => props.color};
+  -webkit-line-clamp: 2;
 `;
