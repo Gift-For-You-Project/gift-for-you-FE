@@ -15,7 +15,10 @@ function NotificationComponent() {
 
     eventSource.current = new EventSource(
       `${process.env.REACT_APP_API_URL}/api/notification/subscribe`,
-      { withCredentials: true }
+      {
+        heartbeatTimeout: 86400000, //sse 연결 시간 (토큰 유지 24시간)
+        withCredentials: true,
+      }
     );
 
     eventSource.current.onopen = () => {
