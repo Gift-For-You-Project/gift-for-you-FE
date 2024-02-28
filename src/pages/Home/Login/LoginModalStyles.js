@@ -99,3 +99,9 @@ export const KakaoImg = styled.img`
   height: 20px;
   margin-right: 6px;
 `;
+
+export const InfoDiv = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;

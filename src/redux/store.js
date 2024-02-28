@@ -32,11 +32,6 @@ const store = configureStore({
     }),
 });
 
-// 브라우저 닫힘 이벤트 리스너 등록
-// window.addEventListener("beforeunload", () => {
-//   store.dispatch(browserClosedLogout());
-// });
-
 // Persisted 스토어와 임시 스토어를 생성
 export const persistor = persistStore(store);
 

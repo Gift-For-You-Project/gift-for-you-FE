@@ -201,16 +201,16 @@ const Login = () => {
               }
             />
             <InfoDiv>
-              <P fs={theme.body2} color={theme.gray3} pt="4px">
+              <P fs={theme.body2} color={theme.gray3}>
                 아직 계정이 없으신가요?&nbsp;
-                <P
-                  onClick={() => navigate("/signup")}
-                  cursor="pointer"
-                  fs={theme.body2}
-                  color={theme.primary}
-                >
-                  가입하기
-                </P>
+              </P>
+              <P
+                onClick={() => navigate("/signup")}
+                cursor="pointer"
+                fs={theme.body2}
+                color={theme.primary}
+              >
+                가입하기
               </P>
             </InfoDiv>
           </InputFieldContainer>
