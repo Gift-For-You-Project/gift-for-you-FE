@@ -24,8 +24,8 @@ function NotificationComponent() {
       console.log("New data received:", JSON.parse(event.data));
     };
 
-    eventSource.current.onerror = (error) => {
-      console.error("SSE Connection error:", error);
+    eventSource.current.onerror = () => {
+      console.error("SSE Connection error");
       if (eventSource.current) eventSource.current.close();
       setIsConnected(false); // 연결 상태를 false로 설정합니다.
 
@@ -34,7 +34,7 @@ function NotificationComponent() {
         if (isLoggedIn && !isConnected) {
           initializeEventSource(); // EventSource 재초기화 및 연결 재시도
         }
-      });
+      }, 5000);
     };
   };
 
