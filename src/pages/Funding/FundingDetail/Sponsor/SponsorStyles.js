@@ -148,11 +148,6 @@ export const RightContainer = styled.div`
   &::-webkit-scrollbar {
     display: none;
   }
-
-  /* 모바일뷰 */
-  @media screen and (max-width: 390px) {
-    max-width: 100%;
-  }
 `;
 
 // 네브바 영역
@@ -181,10 +176,6 @@ export const FundingDiv = styled.div`
   max-width: 390px; /* 최대 너비를 390px로 제한 */
   margin: 0 auto; /* 가운데 정렬을 위해 margin을 auto로 설정 */
   padding-bottom: ${(props) => props.pb};
-
-  @media screen and (max-width: 390px) {
-    max-width: 100%; /* 최대 너비를 100%로 설정하여 가득 차게 함 */
-  }
 `;
 
 export const TogetherDiv = styled.div`
@@ -197,10 +188,6 @@ export const TogetherDiv = styled.div`
   margin: 0 auto; /* 가운데 정렬을 위해 margin을 auto로 설정 */
   padding: 20px;
   position: relative; //상대 위치 설정
-
-  @media screen and (max-width: 390px) {
-    max-width: 100%; /* 최대 너비를 100%로 설정하여 가득 차게 함 */
-  }
 `;
 
 export const CommentDiv = styled.div`

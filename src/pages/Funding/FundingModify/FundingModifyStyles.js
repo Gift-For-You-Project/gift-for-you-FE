@@ -159,11 +159,6 @@ export const RightContainer = styled.div`
   &::-webkit-scrollbar {
     display: none;
   }
-
-  /* 모바일뷰 */
-  @media screen and (max-width: 390px) {
-    max-width: 100%;
-  }
 `;
 
 // 바디 영역
@@ -187,10 +182,6 @@ export const TogetherDiv = styled.div`
   margin-bottom: 15px;
   padding: 20px;
   height: ${(props) => props.h};
-
-  @media screen and (max-width: 390px) {
-    width: 100%;
-  }
 `;
 
 export const FundingDiv = styled.div`

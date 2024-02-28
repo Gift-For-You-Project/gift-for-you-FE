@@ -200,16 +200,6 @@ export const RightContainer = styled.div`
   &::-webkit-scrollbar {
     display: none;
   }
-
-  /* 모바일뷰 */
-  @media screen and (max-width: 390px) {
-    max-width: 100%;
-  }
-
-  /* 태블릿뷰는 추후에 적용예정 */
-  /* @media screen and (max-width: 1024px) {
-    max-width: 100%;
-  } */
 `;
 
 /* 네브바 영역 */
@@ -397,10 +387,6 @@ export const FundingGrid = styled.div`
   max-width: 110px;
   overflow: hidden;
   cursor: pointer;
-
-  @media screen and (max-width: 390px) {
-    width: 100%;
-  }
 `;
 
 export const CharacterImg = styled.img`
@@ -481,28 +467,6 @@ export const FundingImg = styled.img`
   object-fit: cover;
 `;
 
-export const FundingDate = styled.div`
-  position: absolute;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  top: 698px;
-  left: 82px;
-  width: 100%;
-  max-width: 48px;
-  padding-top: ${(props) => props.pt};
-  padding-bottom: ${(props) => props.pb};
-  color: ${theme.white};
-  background-color: ${theme.gray3};
-  border-top-right-radius: 10px;
-  border-bottom-left-radius: 10px;
-
-  @media screen and (max-width: 390px) {
-    top: 682px;
-    left: 79px;
-  }
-`;
-
 export const ProgressBar = styled.div`
   width: 100%;
   max-width: 110px;
@@ -548,10 +512,6 @@ export const TogetherDiv = styled.div`
   width: -webkit-fill-available;
   max-width: 390px;
   margin-bottom: 15px;
-
-  @media screen and (max-width: 390px) {
-    max-width: 100%;
-  }
 `;
 
 export const RecentFundingContainer = styled.div`
@@ -561,10 +521,6 @@ export const RecentFundingContainer = styled.div`
   width: -webkit-fill-available;
   max-width: 390px;
   margin-bottom: 15px;
-
-  @media screen and (max-width: 390px) {
-    max-width: 100%;
-  }
 `;
 
 export const TogetherLogoImg = styled.img`
@@ -669,10 +625,6 @@ export const ProductGrids = styled.div`
 export const ProductGrid = styled.div`
   width: -webkit-fill-available;
   max-width: 390px;
-
-  @media screen and (max-width: 390px) {
-    width: 100%;
-  }
 `;
 
 export const ProductImg = styled.img`
@@ -707,10 +659,6 @@ export const FundingProductGrid = styled.div`
   width: 100%;
   max-width: 110px;
   object-fit: cover;
-
-  @media screen and (max-width: 390px) {
-    width: 100%;
-  }
 `;
 
 export const FloatingBtn = styled.button`

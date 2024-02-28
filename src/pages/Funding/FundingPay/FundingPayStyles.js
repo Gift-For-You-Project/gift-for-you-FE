@@ -148,8 +148,7 @@ export const ProfileImageRow = styled.div`
 `;
 
 export const ProfileImg = styled.img`
-  height: 62px;
-  width: 62px;
+  width: 17.5%;
   border-radius: 3px;
   margin-right: ${(props) => props.mr};
 `;
@@ -182,6 +181,7 @@ export const Logo = styled.h1`
 `;
 
 export const P = styled.p`
+  text-decoration: ${(props) => (props.underline ? "underline" : "none")};
   padding-top: ${(props) => props.pt};
   padding-bottom: ${(props) => props.pb};
   padding-left: ${(props) => props.pl};
@@ -239,8 +239,8 @@ export const NavbarDiv = styled.div`
 export const RightContainer = styled.div`
   position: relative;
   width: -webkit-fill-available;
-  height: calc(var(--vh, 1vh) * 100);
   max-width: 390px;
+  height: 100vh;
   margin: 0 10px;
   overflow-y: scroll;
   &::-webkit-scrollbar {
@@ -248,10 +248,9 @@ export const RightContainer = styled.div`
   }
 
   /* 모바일뷰 */
-  /* @media screen and (max-width: 390px) {
+  @media screen and (max-width: 390px) {
     max-width: 100%;
-    height: calc(var(--vh, 1vh) * 100);
-  } */
+  }
 
   /* 태블릿뷰는 추후에 적용예정 */
   /* @media screen and (max-width: 1024px) {
@@ -287,7 +286,6 @@ export const SponserDiv = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 15px;
 `;
 
 export const SponserMoney = styled.div`
@@ -336,7 +334,7 @@ export const PayDiv = styled.div`
 `;
 
 export const Checkbox = styled.input.attrs({ type: "checkbox" })`
-  margin-top: 25px;
+  margin-top: 30px;
   margin-right: 15px;
   width: 25px;
   height: 25px;

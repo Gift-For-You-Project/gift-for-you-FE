@@ -9,6 +9,7 @@ import DetailModal from "./Modal/DetailModal";
 import { FaAngleRight } from "react-icons/fa6";
 import theme from "../../../styles/theme";
 import LoginModal from "../../Home/Login/LoginModal";
+import { infoToast, warnToast } from "../../../components/toast";
 import {
   MainContainer,
   LeftContainer,
@@ -55,7 +56,6 @@ import {
   GiftCoverImg,
   IconButtonImg,
 } from "./FundingDetailStyles";
-import { infoToast } from "../../../components/toast";
 
 const FundingDetail = () => {
   const navigate = useNavigate();
@@ -108,7 +108,11 @@ const FundingDetail = () => {
 
   // 버튼 클릭했을 때 모달을 열고 금액을 설정하는 함수
   const handleFundingModalClick = (e) => {
-    setIsFundingModalOpen(true);
+    if (detailData.status === "FINISHED") {
+      warnToast("종료된 펀딩입니다. 결제할 수 없습니다.");
+    } else {
+      setIsFundingModalOpen(true);
+    }
   };
 
   // 모달을 닫는 함수
@@ -129,33 +133,53 @@ const FundingDetail = () => {
   };
 
   const handledonation5000Change = () => {
-    navigate(
-      `/fundingpay/${id}?donation=${sponsorDonation.donation5000}&showName=${detailData.showName}`
-    );
+    if (detailData.status === "FINISHED") {
+      warnToast("종료된 펀딩입니다. 결제할 수 없습니다.");
+    } else {
+      navigate(
+        `/fundingpay/${id}?donation=${sponsorDonation.donation5000}&showName=${detailData.showName}`
+      );
+    }
   };
 
   const handledonation10000Change = () => {
-    navigate(
-      `/fundingpay/${id}?donation=${sponsorDonation.donation10000}&showName=${detailData.showName}`
-    );
+    if (detailData.status === "FINISHED") {
+      warnToast("종료된 펀딩입니다. 결제할 수 없습니다.");
+    } else {
+      navigate(
+        `/fundingpay/${id}?donation=${sponsorDonation.donation10000}&showName=${detailData.showName}`
+      );
+    }
   };
 
   const handledonation20000Change = () => {
-    navigate(
-      `/fundingpay/${id}?donation=${sponsorDonation.donation20000}&showName=${detailData.showName}`
-    );
+    if (detailData.status === "FINISHED") {
+      warnToast("종료된 펀딩입니다. 결제할 수 없습니다.");
+    } else {
+      navigate(
+        `/fundingpay/${id}?donation=${sponsorDonation.donation20000}&showName=${detailData.showName}`
+      );
+    }
   };
 
   const handledonation30000Change = () => {
-    navigate(
-      `/fundingpay/${id}?donation=${sponsorDonation.donation30000}&showName=${detailData.showName}`
-    );
+    if (detailData.status === "FINISHED") {
+      warnToast("종료된 펀딩입니다. 결제할 수 없습니다.");
+    } else {
+      navigate(
+        `/fundingpay/${id}?donation=${sponsorDonation.donation30000}&showName=${detailData.showName}`
+      );
+    }
   };
 
   const handledonation50000Change = () => {
-    navigate(
-      `/fundingpay/${id}?donation=${sponsorDonation.donation50000}&showName=${detailData.showName}`
-    );
+    if (detailData.status === "FINISHED") {
+      warnToast("종료된 펀딩입니다. 결제할 수 없습니다.");
+    } else {
+      navigate(
+        `/fundingpay/${id}?donation=${sponsorDonation.donation50000}&showName=${detailData.showName}`
+      );
+    }
   };
 
   const renderModifyBtn = () => {
@@ -398,19 +422,19 @@ const FundingDetail = () => {
             </MassageBtn>
           </FundingDiv>
           <FundingDiv p="20px">
-            <P pt="20px" pl="10px" fs={theme.headline2} color={theme.black}>
+            <P pt="20px" pl="10px" fs={theme.title2} color={theme.black}>
               펀딩에 참여하여
             </P>
             <GiftTitle>
-              <P pt="0px" pl="10px" fs={theme.headline2} color={theme.primary}>
+              <P pt="0px" pl="10px" fs={theme.title2} color={theme.primary}>
                 특별한 선물
               </P>
-              <P pt="0px" pl="0px" fs={theme.headline2} color={theme.black}>
+              <P pt="0px" pl="0px" fs={theme.title2} color={theme.black}>
                 과 메시지를 전달하세요
               </P>
             </GiftTitle>
             <GiftTitle>
-              <P pt="0px" pl="10px" fs={theme.detail} color={theme.gray4}>
+              <P pt="0px" pl="11px" fs={theme.detail} color={theme.gray4}>
                 테스트 금액이
               </P>
               <P pt="0px" pl="5px" fs={theme.detail} color={theme.primary}>
