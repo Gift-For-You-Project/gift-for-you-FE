@@ -14,7 +14,7 @@ function NotificationComponent() {
       `${process.env.REACT_APP_API_URL}/api/notification/subscribe`,
       {
         headers: {
-          Connetction: "keep-alive",
+          Connection: "keep-alive",
         },
         withCredentials: true,
       }
