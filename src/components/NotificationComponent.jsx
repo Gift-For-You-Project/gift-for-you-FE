@@ -34,7 +34,7 @@ function NotificationComponent() {
         if (isLoggedIn && !isConnected) {
           initializeEventSource(); // EventSource 재초기화 및 연결 재시도
         }
-      }, 5000); // 예: 5초 후 재연결 시도
+      });
     };
   };
 
