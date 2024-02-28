@@ -9,6 +9,7 @@ import Privacy from "./pages/Home/Signup/TermsAgreement/Privacy";
 import RecentFunding from "./pages/Home/RecentFunding/RecentFunding";
 import RecentFundingProgress from "./pages/Home/RecentFunding/RecentFundingProgress";
 import RecentFundingComplete from "./pages/Home/RecentFunding/RecentFundingComplete";
+import Notification from "./pages/Home/Notification/Notification";
 import FundingCreate from "./pages/Funding/FundingCreate/FundingCreate";
 import FundingDetail from "./pages/Funding/FundingDetail/FundingDetail";
 import Sponsor from "./pages/Funding/FundingDetail/Sponsor/Sponsor";
@@ -46,6 +47,7 @@ function App() {
           path="/recentfunding/complete"
           element={<RecentFundingComplete />}
         />
+        <Route path="/notification" element={<Notification />} />
         <Route path="/fundingcreate" element={<FundingCreate />} />
         <Route path="/fundingdetail/:id" element={<FundingDetail />} />
         <Route path="/fundingsponsordetail/:id" element={<Sponsor />} />
