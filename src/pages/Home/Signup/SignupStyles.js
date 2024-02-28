@@ -162,7 +162,7 @@ export const NavbarDiv = styled.div`
   padding-top: 20px;
 `;
 
-export const SignupFieldContainer = styled.div`
+export const FieldContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
