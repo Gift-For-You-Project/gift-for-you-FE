@@ -38,11 +38,13 @@ export const NotiContainer = styled.div`
 export const NotiImg = styled.img`
   width: ${(props) => props.w};
   height: ${(props) => props.h};
+  cursor: pointer;
 `;
 
 export const NotiContents = styled.div`
   width: 100%;
   max-width: 250px;
+  cursor: pointer;
 `;
 
 export const NotiTxt = styled.p`
