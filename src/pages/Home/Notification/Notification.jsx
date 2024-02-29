@@ -40,6 +40,7 @@ const NotiItem = ({
   onDelete,
   onClick,
 }) => {
+  console.log("onRead:", onRead);
   const getNotiImg = () => {
     if (onRead) {
       switch (notificationType) {
@@ -121,6 +122,7 @@ const Notification = () => {
   // 해당 알림 조회 시 읽음 처리 API
   const handleMarkAsRead = async (notificationId) => {
     try {
+      console.log("handleMarkAsRead 호출 정상임");
       const response = await axios.patch(
         `${process.env.REACT_APP_API_URL}/api/notification/${notificationId}`,
         {
