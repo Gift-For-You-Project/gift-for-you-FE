@@ -100,8 +100,11 @@ const Notification = () => {
         const response = await axios.get(
           `${process.env.REACT_APP_API_URL}/api/notification`
         );
-        console.log("전체 알림 조회", response.data);
-        setNoti(response.data);
+
+        if (response.status === 200) {
+          console.log("전체 알림 조회", response.data);
+          setNoti(response.data);
+        }
       } catch (error) {
         console.error("전체 알림 조회 API 호출 중 에러:", error);
         console.error("에러 상세 정보:", error.response);
