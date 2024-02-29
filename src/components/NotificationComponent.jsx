@@ -9,14 +9,6 @@ function NotificationComponent() {
   const [isConnected, setIsConnected] = useState(false);
 
   useEffect(() => {
-    // const handleSSEMessage = (event) => {
-    //   console.log("New data received:", JSON.parse(event.data));
-    //   const { data } = event;
-    //   const noti = JSON.parse(data);
-    //   console.log("Noti received:", noti);
-    //   infoToast(noti.message);
-    // };
-
     const initializeEventSource = () => {
       eventSource.current = new EventSource(
         `${process.env.REACT_APP_API_URL}/api/notification/subscribe`,
@@ -30,11 +22,11 @@ function NotificationComponent() {
         setIsConnected(true);
       };
 
-      eventSource.current.onmessage = (event) => {
-        const noti = JSON.parse(event.data);
-        console.log("Noti received:", noti);
-        infoToast(noti.message);
-      };
+      eventSource.current.addEventListener("sse", (event) => {
+        const data = JSON.parse(event.data);
+        console.log("SSE data received:", data);
+        infoToast(data.message);
+      });
 
       eventSource.current.onerror = () => {
         console.error("SSE Connection error");
