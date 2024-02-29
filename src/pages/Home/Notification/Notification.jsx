@@ -119,6 +119,7 @@ const Notification = () => {
     try {
       const response = await axios.patch(
         `${process.env.REACT_APP_API_URL}/api/notification/${notificationId}`,
+        null,
         {
           withCredentials: true,
         }
