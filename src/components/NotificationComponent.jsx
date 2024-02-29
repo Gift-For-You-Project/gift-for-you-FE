@@ -37,7 +37,7 @@ function NotificationComponent() {
           if (isLoggedIn && !isConnected) {
             initializeEventSource();
           }
-        }, 5000);
+        }, 3000);
       };
     };
 
