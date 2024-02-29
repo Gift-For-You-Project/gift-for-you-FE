@@ -121,7 +121,7 @@ const Notification = () => {
   // 해당 알림 조회 시 읽음 처리 API
   const handleMarkAsRead = async (notificationId) => {
     try {
-      const response = await axios.put(
+      const response = await axios.patch(
         `${process.env.REACT_APP_API_URL}/api/notification/${notificationId}`,
         {
           withCredentials: true,
@@ -162,7 +162,7 @@ const Notification = () => {
       }
     } catch (error) {
       if (error.response.status === 400) {
-        warnToast(error.response.message);
+        warnToast(error.response.data.message);
       }
       console.error("알림 메시지 삭제 중 에러:", error);
       console.error("에러 상세 정보:", error.response);
