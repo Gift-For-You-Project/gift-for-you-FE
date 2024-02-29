@@ -11,14 +11,12 @@ import {
   LogoTextIcon,
   LogoDiv,
 } from "../pages/Home/HomeStyles";
-import { warnToast } from "./toast";
 import NotificationComponent from "./NotificationComponent";
 
 const Navbar = ({ isLoggedIn, handleLoginClick, handleLogoutClick }) => {
   const navigate = useNavigate();
 
   const handleNotificationClick = () => {
-    warnToast("알림 서비스 개발 중입니다.");
     navigate("/notification");
   };
 
