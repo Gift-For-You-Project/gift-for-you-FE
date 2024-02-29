@@ -155,7 +155,8 @@ const Notification = () => {
       if (response.status === 200) {
         console.log("읽은 모든 알림 메시지를 삭제했습니다.", response.data);
         // 삭제 후, 알림 목록을 초기화
-        setNoti([]);
+        const newNoti = noti.filter((noti) => noti.isRead === false);
+        setNoti(newNoti);
       }
     } catch (error) {
       if (error.response.status === 400) {
