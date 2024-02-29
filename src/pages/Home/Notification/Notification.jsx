@@ -39,7 +39,7 @@ const NotiItem = ({
   onDelete,
 }) => {
   const getNotiImg = () => {
-    if (isRead) {
+    if (onRead) {
       switch (notificationType) {
         case "DONATION":
           return "/imgs/Notification/off-funding.png";
