@@ -36,41 +36,36 @@ const NotiItem = ({
   date,
   isRead,
   notificationType,
-  onRead,
   onDelete,
   onClick,
 }) => {
-  const handleOnRead = async () => {
-    await onRead();
-  };
   const getNotiImg = () => {
     switch (notificationType) {
       case "DONATION":
         return isRead
-          ? "/imgs/Notification/on-funding.png"
-          : "/imgs/Notification/off-funding.png";
+          ? "/imgs/Notification/off-funding.png"
+          : "/imgs/Notification/on-funding.png";
       case "FUNDING_SUCCESS":
         return isRead
-          ? "/imgs/Notification/on-finish.png"
-          : "/imgs/Notification/off-finish.png";
+          ? "/imgs/Notification/off-finish.png"
+          : "/imgs/Notification/on-finish.png";
       case "FUNDING_TIME_OUT":
         return isRead
-          ? "/imgs/Notification/on-date.png"
-          : "/imgs/Notification/off-date.png";
+          ? "/imgs/Notification/off-date.png"
+          : "/imgs/Notification/on-date.png";
       default:
         return imgSrc;
     }
   };
 
   const getColor = () => {
-    return isRead ? theme.black : theme.gray4;
+    return isRead ? theme.gray4 : theme.black;
   };
 
   return (
     <NotiContainer style={{ display: isRead ? "none" : "flex" }}>
       <NotiBtn
         onClick={() => {
-          handleOnRead();
           onClick();
         }}
       >
@@ -274,7 +269,6 @@ const Notification = () => {
                   date={item.createdAt}
                   isRead={item.isRead}
                   notificationType={item.notificationType}
-                  onRead={() => handleMarkAsRead(item.notificationId)}
                   onDelete={() => handleDelete(item.notificationId)}
                 />
               ))}
