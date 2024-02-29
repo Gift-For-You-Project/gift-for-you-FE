@@ -75,7 +75,7 @@ const NotiItem = ({
       <NotiBtn onClick={onClick}>
         <NotiImg w="32px" src={getNotiImg()} alt="notification" />
       </NotiBtn>
-      <NotiContents onClick={() => onRead()}>
+      <NotiContents onClick={onClick}>
         <P fs={theme.body2} color={getColor()}>
           {title}
         </P>
@@ -264,7 +264,9 @@ const Notification = () => {
             <NotiDiv>
               {noti.map((item) => (
                 <NotiItem
-                  onClick={() => (window.location.href = item.url)}
+                  onClick={() =>
+                    navigate(`/fundingdetail/${item.url.split("/").pop()}`)
+                  }
                   key={item.notificationId}
                   title={item.content}
                   date={item.createdAt}
