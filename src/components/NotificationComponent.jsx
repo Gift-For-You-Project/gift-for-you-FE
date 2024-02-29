@@ -11,6 +11,7 @@ function NotificationComponent() {
     console.log("New data received:", JSON.parse(event.data));
     const { data } = event;
     const noti = JSON.parse(data);
+    console.log("Noti received:", noti);
     infoToast(noti.message);
   };
 
@@ -51,7 +52,7 @@ function NotificationComponent() {
       if (eventSource.current) {
         eventSource.current.close();
         setIsConnected(false);
-        // eventSource.current.onmessage = null;
+        eventSource.current.onmessage = null;
       }
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
