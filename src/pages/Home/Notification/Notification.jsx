@@ -104,6 +104,7 @@ const Notification = () => {
         setNoti(response.data);
       } catch (error) {
         console.error("전체 알림 조회 API 호출 중 에러:", error);
+        console.error("에러 상세 정보:", error.response);
       }
     };
 
@@ -128,6 +129,7 @@ const Notification = () => {
       setNoti(updatedNoti);
     } catch (error) {
       console.error("알림 읽음 처리 중 에러:", error);
+      console.error("에러 상세 정보:", error.response);
     }
   };
 
@@ -144,6 +146,7 @@ const Notification = () => {
       setNoti([]);
     } catch (error) {
       console.error("알림 메시지 삭제 중 에러:", error);
+      console.error("에러 상세 정보:", error.response);
     }
   };
 
@@ -163,6 +166,7 @@ const Notification = () => {
       setNoti(updatedNoti);
     } catch (error) {
       console.error("알림 메시지 삭제 중 에러:", error);
+      console.error("에러 상세 정보:", error.response);
     }
   };
 
@@ -239,12 +243,12 @@ const Notification = () => {
                   onDelete={() => handleDelete(item.notificationId)}
                 />
               ))}
-              <NotiItem
+              {/* <NotiItem
                 imgSrc="/imgs/Notification/on-funding.png"
                 title="날아라쿠키님이 펀딩에 참여했어요."
                 date="2024-02-25 19:24:08.560470"
                 color={theme.black}
-              />
+              /> */}
             </NotiDiv>
           </NotiSection>
         </Body>
