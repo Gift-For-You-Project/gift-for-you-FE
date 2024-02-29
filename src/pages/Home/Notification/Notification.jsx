@@ -64,7 +64,7 @@ const NotiItem = ({
     }
   };
 
-  const getColor = ({ isRead }) => {
+  const getColor = () => {
     return isRead ? theme.gray4 : theme.black;
   };
 
