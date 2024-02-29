@@ -44,33 +44,26 @@ const NotiItem = ({
     await onRead();
   };
   const getNotiImg = () => {
-    if (onRead) {
-      switch (notificationType) {
-        case "DONATION":
-          return "/imgs/Notification/on-funding.png";
-        case "FUNDING_SUCCESS":
-          return "/imgs/Notification/on-finish.png";
-        case "FUNDING_TIME_OUT":
-          return "/imgs/Notification/on-date.png";
-        default:
-          return imgSrc;
-      }
-    } else {
-      switch (notificationType) {
-        case "DONATION":
-          return "/imgs/Notification/off-funding.png";
-        case "FUNDING_SUCCESS":
-          return "/imgs/Notification/off-finish.png";
-        case "FUNDING_TIME_OUT":
-          return "/imgs/Notification/off-date.png";
-        default:
-          return imgSrc;
-      }
+    switch (notificationType) {
+      case "DONATION":
+        return isRead
+          ? "/imgs/Notification/on-funding.png"
+          : "/imgs/Notification/off-funding.png";
+      case "FUNDING_SUCCESS":
+        return isRead
+          ? "/imgs/Notification/on-finish.png"
+          : "/imgs/Notification/off-finish.png";
+      case "FUNDING_TIME_OUT":
+        return isRead
+          ? "/imgs/Notification/on-date.png"
+          : "/imgs/Notification/off-date.png";
+      default:
+        return imgSrc;
     }
   };
 
   const getColor = () => {
-    return onRead ? theme.black : theme.gray4;
+    return isRead ? theme.black : theme.gray4;
   };
 
   return (
