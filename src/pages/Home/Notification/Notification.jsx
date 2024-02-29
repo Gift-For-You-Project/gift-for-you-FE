@@ -98,7 +98,10 @@ const Notification = () => {
     const getNoti = async () => {
       try {
         const response = await axios.get(
-          `${process.env.REACT_APP_API_URL}/api/notification`
+          `${process.env.REACT_APP_API_URL}/api/notification`,
+          {
+            withCredentials: true,
+          }
         );
 
         if (response.status === 200) {
