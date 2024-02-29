@@ -121,7 +121,10 @@ const Notification = () => {
   const handleMarkAsRead = async (notificationId) => {
     try {
       const response = await axios.put(
-        `${process.env.REACT_APP_API_URL}/api/notification/${notificationId}`
+        `${process.env.REACT_APP_API_URL}/api/notification/${notificationId}`,
+        {
+          withCredentials: true,
+        }
       );
 
       console.log("알림을 읽음 처리했습니다.", response.data);
@@ -143,7 +146,10 @@ const Notification = () => {
   const handleDeleteAll = async () => {
     try {
       const response = await axios.delete(
-        `${process.env.REACT_APP_API_URL}/api/notification`
+        `${process.env.REACT_APP_API_URL}/api/notification`,
+        {
+          withCredentials: true,
+        }
       );
 
       console.log("읽은 모든 알림 메시지를 삭제했습니다.", response.data);
@@ -160,7 +166,10 @@ const Notification = () => {
   const handleDelete = async (notificationId) => {
     try {
       const response = await axios.delete(
-        `${process.env.REACT_APP_API_URL}/api/notification/${notificationId}`
+        `${process.env.REACT_APP_API_URL}/api/notification/${notificationId}`,
+        {
+          withCredentials: true,
+        }
       );
 
       console.log("알림 메시지를 삭제했습니다.", response.data);
