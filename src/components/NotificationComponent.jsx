@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useSelector } from "react-redux";
+import { infoToast } from "./toast";
 
 function NotificationComponent() {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
@@ -11,7 +12,6 @@ function NotificationComponent() {
     eventSource.current = new EventSource(
       `${process.env.REACT_APP_API_URL}/api/notification/subscribe`,
       {
-        heartbeatTimeout: 86400000, //sse 연결 시간 (토큰 유지 24시간)
         withCredentials: true,
       }
     );
@@ -23,6 +23,9 @@ function NotificationComponent() {
 
     eventSource.current.onmessage = (event) => {
       console.log("New data received:", JSON.parse(event.data));
+      const { data } = event;
+      const noti = JSON.parse(data);
+      infoToast(noti.message);
     };
 
     eventSource.current.onerror = () => {
