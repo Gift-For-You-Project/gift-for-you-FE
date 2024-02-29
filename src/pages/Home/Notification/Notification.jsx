@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FaAngleLeft } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 import theme from "../../../styles/theme";
+import axios from "axios";
 import {
   MainContainer,
   LeftContainer,
@@ -28,18 +29,50 @@ import {
   NotiContents,
 } from "./NotificationStyles";
 
-const NotiItem = ({ imgSrc, title, date, color }) => {
-  const [isDeleted, setIsDeleted] = useState(false);
+const NotiItem = ({
+  imgSrc,
+  title,
+  date,
+  isRead,
+  notificationType,
+  onRead,
+  onDelete,
+}) => {
+  const getNotiImg = () => {
+    if (isRead) {
+      switch (notificationType) {
+        case "DONATION":
+          return "/imgs/Notification/off-funding.png";
+        case "FUNDING_SUCCESS":
+          return "/imgs/Notification/off-finish.png";
+        case "FUNDING_TIME_OUT":
+          return "/imgs/Notification/off-date.png";
+        default:
+          return imgSrc;
+      }
+    } else {
+      switch (imgSrc) {
+        case "DONATION":
+          return "/imgs/Notification/on-funding.png";
+        case "FUNDING_SUCCESS":
+          return "/imgs/Notification/on-finish.png";
+        case "FUNDING_TIME_OUT":
+          return "/imgs/Notification/on-date.png";
+        default:
+          return imgSrc;
+      }
+    }
+  };
 
-  const handleDelete = () => {
-    setIsDeleted(true);
+  const getColor = ({ isRead }) => {
+    return isRead ? theme.gray4 : theme.black;
   };
 
   return (
-    <NotiContainer style={{ display: isDeleted ? "none" : "flex" }}>
-      <NotiImg w="32px" src={imgSrc} alt="notification" />
+    <NotiContainer style={{ display: isRead ? "none" : "flex" }}>
+      <NotiImg w="32px" src={getNotiImg()} alt="notification" />
       <NotiContents>
-        <P fs={theme.body2} color={color}>
+        <P fs={theme.body2} color={getColor()}>
           {title}
         </P>
         <P fs={theme.detail} color={theme.gray4}>
@@ -47,7 +80,7 @@ const NotiItem = ({ imgSrc, title, date, color }) => {
         </P>
       </NotiContents>
       <NotiImg
-        onClick={handleDelete}
+        onClick={onDelete}
         w="20px"
         src="/imgs/Notification/delete.png"
         alt="delete"
@@ -58,6 +91,80 @@ const NotiItem = ({ imgSrc, title, date, color }) => {
 
 const Notification = () => {
   const navigate = useNavigate();
+  const [noti, setNoti] = useState([]);
+
+  // 전체 알림 조회 API
+  useEffect(() => {
+    const getNoti = async () => {
+      try {
+        const response = await axios.get(
+          `${process.env.REACT_APP_API_URL}/api/notification`
+        );
+        console.log("전체 알림 조회", response.data);
+        setNoti(response.data);
+      } catch (error) {
+        console.error("전체 알림 조회 API 호출 중 에러:", error);
+      }
+    };
+
+    getNoti();
+  }, []);
+
+  // 해당 알림 조회 시 읽음 처리 API
+  const handleMarkAsRead = async (notificationId) => {
+    try {
+      const response = await axios.put(
+        `${process.env.REACT_APP_API_URL}/api/notification/${notificationId}`
+      );
+
+      console.log("알림을 읽음 처리했습니다.", response.data);
+
+      // 읽음 처리 후, 알림 목록을 업데이트
+      const updatedNoti = noti.map((item) =>
+        item.notificationId === notificationId
+          ? { ...item, isRead: true }
+          : item
+      );
+      setNoti(updatedNoti);
+    } catch (error) {
+      console.error("알림 읽음 처리 중 에러:", error);
+    }
+  };
+
+  // 전체 알림 삭제 API
+  const handleDeleteAll = async () => {
+    try {
+      const response = await axios.delete(
+        `${process.env.REACT_APP_API_URL}/api/notification`
+      );
+
+      console.log("읽은 모든 알림 메시지를 삭제했습니다.", response.data);
+
+      // 삭제 후, 알림 목록을 초기화
+      setNoti([]);
+    } catch (error) {
+      console.error("알림 메시지 삭제 중 에러:", error);
+    }
+  };
+
+  // 개별 알림 삭제 API
+  const handleDelete = async (notificationId) => {
+    try {
+      const response = await axios.delete(
+        `${process.env.REACT_APP_API_URL}/api/notification/${notificationId}`
+      );
+
+      console.log("알림 메시지를 삭제했습니다.", response.data);
+
+      // 삭제 후, 알림 목록에서 해당 알림을 제거
+      const updatedNoti = noti.filter(
+        (item) => item.notificationId !== notificationId
+      );
+      setNoti(updatedNoti);
+    } catch (error) {
+      console.error("알림 메시지 삭제 중 에러:", error);
+    }
+  };
 
   return (
     <MainContainer>
@@ -118,43 +225,25 @@ const Notification = () => {
         </NavbarDiv>
         <Body>
           <NotiSection>
-            <NotiBtn>읽은 알림 모두 삭제</NotiBtn>
+            <NotiBtn onClick={handleDeleteAll}>읽은 알림 모두 삭제</NotiBtn>
             <NotiDiv>
+              {noti.map((item) => (
+                <NotiItem
+                  onClick={() => navigate(item.url)}
+                  key={item.notificationId}
+                  title={item.content}
+                  date={item.createdAt}
+                  isRead={item.isRead}
+                  notificationType={item.notificationType}
+                  onRead={() => handleMarkAsRead(item.notificationId)}
+                  onDelete={() => handleDelete(item.notificationId)}
+                />
+              ))}
               <NotiItem
                 imgSrc="/imgs/Notification/on-funding.png"
                 title="날아라쿠키님이 펀딩에 참여했어요."
                 date="2024-02-25 19:24:08.560470"
                 color={theme.black}
-              />
-              <NotiItem
-                imgSrc="/imgs/Notification/off-funding.png"
-                title="이름이이렇게길수도있지님이 펀딩에 참여했어요."
-                date="2024-02-25 19:24:08.560470"
-                color={theme.gray4}
-              />
-              <NotiItem
-                imgSrc="/imgs/Notification/on-date.png"
-                title="펀딩 종료까지 5일 남았어요."
-                date="2024-02-25 19:24:08.560470"
-                color={theme.black}
-              />
-              <NotiItem
-                imgSrc="/imgs/Notification/off-date.png"
-                title="펀딩 종료까지 15일 남았어요."
-                date="2024-02-25 19:24:08.560470"
-                color={theme.gray4}
-              />
-              <NotiItem
-                imgSrc="/imgs/Notification/on-finish.png"
-                title="펀딩이 종료됐어요! 결과를 확인해보세요."
-                date="2024-02-25 19:24:08.560470"
-                color={theme.black}
-              />
-              <NotiItem
-                imgSrc="/imgs/Notification/off-finish.png"
-                title="펀딩이 종료됐어요! 결과를 확인해보세요."
-                date="2024-02-25 19:24:08.560470"
-                color={theme.gray4}
               />
             </NotiDiv>
           </NotiSection>

@@ -24,6 +24,7 @@ import {
 
 const Privacy = () => {
   const navigate = useNavigate();
+
   return (
     <MainContainer>
       <LeftContainer>
