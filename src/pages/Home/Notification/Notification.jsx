@@ -40,7 +40,9 @@ const NotiItem = ({
   onDelete,
   onClick,
 }) => {
-  console.log("onRead:", onRead);
+  const handleOnRead = async () => {
+    await onRead();
+  };
   const getNotiImg = () => {
     if (onRead) {
       switch (notificationType) {
@@ -54,7 +56,7 @@ const NotiItem = ({
           return imgSrc;
       }
     } else {
-      switch (imgSrc) {
+      switch (notificationType) {
         case "DONATION":
           return "/imgs/Notification/off-funding.png";
         case "FUNDING_SUCCESS":
@@ -73,7 +75,12 @@ const NotiItem = ({
 
   return (
     <NotiContainer style={{ display: isRead ? "none" : "flex" }}>
-      <NotiBtn onClick={onClick}>
+      <NotiBtn
+        onClick={() => {
+          handleOnRead();
+          onClick();
+        }}
+      >
         <NotiImg w="32px" src={getNotiImg()} alt="notification" />
       </NotiBtn>
       <NotiContents onClick={onClick}>
@@ -122,7 +129,6 @@ const Notification = () => {
   // 해당 알림 조회 시 읽음 처리 API
   const handleMarkAsRead = async (notificationId) => {
     try {
-      console.log("handleMarkAsRead 호출 정상임");
       const response = await axios.patch(
         `${process.env.REACT_APP_API_URL}/api/notification/${notificationId}`,
         {
@@ -266,9 +272,10 @@ const Notification = () => {
             <NotiDiv>
               {noti.map((item) => (
                 <NotiItem
-                  onClick={() =>
-                    navigate(`/fundingdetail/${item.url.split("/").pop()}`)
-                  }
+                  onClick={() => {
+                    handleMarkAsRead(item.notificationId);
+                    navigate(`/fundingdetail/${item.url.split("/").pop()}`);
+                  }}
                   key={item.notificationId}
                   title={item.content}
                   date={item.createdAt}
