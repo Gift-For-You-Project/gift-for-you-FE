@@ -42,6 +42,20 @@ export const infoToast = (message) => {
   });
 };
 
+export const notiToast = (content) => {
+  toast.info(content, {
+    position: "top-center",
+    autoClose: 3000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "colored",
+    transition: Zoom,
+  });
+};
+
 export const warnToast = (message) => {
   toast.warn(message, {
     position: "top-center",
