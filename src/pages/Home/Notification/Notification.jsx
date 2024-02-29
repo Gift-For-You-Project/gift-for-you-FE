@@ -70,7 +70,7 @@ const NotiItem = ({
   };
 
   return (
-    <NotiContainer style={{ display: onRead ? "none" : "flex" }}>
+    <NotiContainer style={{ display: isRead ? "none" : "flex" }}>
       <NotiBtn onClick={onClick}>
         <NotiImg w="32px" src={getNotiImg()} alt="notification" />
       </NotiBtn>
@@ -127,15 +127,17 @@ const Notification = () => {
         }
       );
 
-      console.log("알림을 읽음 처리했습니다.", response.data);
+      if (response.status === 200) {
+        console.log("알림을 읽음 처리했습니다.", response.data);
 
-      // 읽음 처리 후, 알림 목록을 업데이트
-      const updatedNoti = noti.map((item) =>
-        item.notificationId === notificationId
-          ? { ...item, isRead: true }
-          : item
-      );
-      setNoti(updatedNoti);
+        // 읽음 처리 후, 알림 목록을 업데이트
+        const updatedNoti = noti.map((item) =>
+          item.notificationId === notificationId
+            ? { ...item, isRead: true }
+            : item
+        );
+        setNoti(updatedNoti);
+      }
     } catch (error) {
       console.error("알림 읽음 처리 중 에러:", error);
       console.error("에러 상세 정보:", error.response);
@@ -152,10 +154,11 @@ const Notification = () => {
         }
       );
 
-      console.log("읽은 모든 알림 메시지를 삭제했습니다.", response.data);
-
-      // 삭제 후, 알림 목록을 초기화
-      setNoti([]);
+      if (response.status === 200) {
+        console.log("읽은 모든 알림 메시지를 삭제했습니다.", response.data);
+        // 삭제 후, 알림 목록을 초기화
+        setNoti([]);
+      }
     } catch (error) {
       console.error("알림 메시지 삭제 중 에러:", error);
       console.error("에러 상세 정보:", error.response);
@@ -172,13 +175,15 @@ const Notification = () => {
         }
       );
 
-      console.log("알림 메시지를 삭제했습니다.", response.data);
+      if (response.status === 200) {
+        console.log("알림 메시지를 삭제했습니다.", response.data);
 
-      // 삭제 후, 알림 목록에서 해당 알림을 제거
-      const updatedNoti = noti.filter(
-        (item) => item.notificationId !== notificationId
-      );
-      setNoti(updatedNoti);
+        // 삭제 후, 알림 목록에서 해당 알림을 제거
+        const updatedNoti = noti.filter(
+          (item) => item.notificationId !== notificationId
+        );
+        setNoti(updatedNoti);
+      }
     } catch (error) {
       console.error("알림 메시지 삭제 중 에러:", error);
       console.error("에러 상세 정보:", error.response);
