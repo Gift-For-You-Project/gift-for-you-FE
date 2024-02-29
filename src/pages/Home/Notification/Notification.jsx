@@ -3,6 +3,7 @@ import { FaAngleLeft } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 import theme from "../../../styles/theme";
 import axios from "axios";
+import { warnToast } from "../../../components/toast";
 import {
   MainContainer,
   LeftContainer,
@@ -160,6 +161,9 @@ const Notification = () => {
         setNoti([]);
       }
     } catch (error) {
+      if (error.response.status === 400) {
+        warnToast(error.response.message);
+      }
       console.error("알림 메시지 삭제 중 에러:", error);
       console.error("에러 상세 정보:", error.response);
     }
@@ -260,7 +264,7 @@ const Notification = () => {
             <NotiDiv>
               {noti.map((item) => (
                 <NotiItem
-                  onClick={() => navigate(item.url)}
+                  onClick={() => (window.location.href = item.url)}
                   key={item.notificationId}
                   title={item.content}
                   date={item.createdAt}
