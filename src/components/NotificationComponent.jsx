@@ -11,6 +11,7 @@ function NotificationComponent() {
     console.log("New data received:", JSON.parse(event.data));
     const { data } = event;
     const noti = JSON.parse(data);
+    console.log("Noti received:", noti);
     infoToast(noti.message);
   };
 
