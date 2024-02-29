@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useSelector } from "react-redux";
-import { infoToast } from "./toast";
+import { notiToast } from "./toast";
 import { ToastContainer } from "react-toastify";
 
 function NotificationComponent() {
@@ -25,7 +25,7 @@ function NotificationComponent() {
       eventSource.current.addEventListener("sse", (event) => {
         const data = JSON.parse(event.data);
         console.log("SSE data received:", data);
-        infoToast(data.content);
+        notiToast(data.content);
       });
 
       eventSource.current.onerror = () => {
