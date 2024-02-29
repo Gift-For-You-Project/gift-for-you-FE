@@ -63,7 +63,7 @@ const NotiItem = ({
   };
 
   return (
-    <NotiContainer style={{ display: isRead ? "none" : "flex" }}>
+    <NotiContainer>
       <NotiBtn
         onClick={() => {
           onClick();
