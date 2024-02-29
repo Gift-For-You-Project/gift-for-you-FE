@@ -54,7 +54,8 @@ function NotificationComponent() {
         setIsConnected(false);
       }
     };
-  }, [isLoggedIn, isConnected]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isLoggedIn]);
 
   return <img src="/imgs/Home/no-notification.svg" alt="notification" />;
 }
