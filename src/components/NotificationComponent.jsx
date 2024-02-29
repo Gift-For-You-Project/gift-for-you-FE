@@ -27,7 +27,7 @@ function NotificationComponent() {
       setIsConnected(true);
     };
 
-    eventSource.current.onmessage = handleSSEMessage;
+    eventSource.current.onmessage = (event) => handleSSEMessage(event);
 
     eventSource.current.onerror = () => {
       console.error("SSE Connection error");
@@ -51,7 +51,7 @@ function NotificationComponent() {
       if (eventSource.current) {
         eventSource.current.close();
         setIsConnected(false);
-        eventSource.current.removeEventListener("message", handleSSEMessage);
+        // eventSource.current.onmessage = null;
       }
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
