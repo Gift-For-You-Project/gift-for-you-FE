@@ -75,7 +75,7 @@ const NotiItem = ({
       <NotiBtn onClick={onClick}>
         <NotiImg w="32px" src={getNotiImg()} alt="notification" />
       </NotiBtn>
-      <NotiContents onClick={onClick}>
+      <NotiContents onClick={() => onRead()}>
         <P fs={theme.body2} color={getColor()}>
           {title}
         </P>
