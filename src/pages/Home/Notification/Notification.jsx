@@ -37,21 +37,11 @@ const NotiItem = ({
   notificationType,
   onRead,
   onDelete,
+  onClick,
 }) => {
   const getNotiImg = () => {
     if (onRead) {
       switch (notificationType) {
-        case "DONATION":
-          return "/imgs/Notification/off-funding.png";
-        case "FUNDING_SUCCESS":
-          return "/imgs/Notification/off-finish.png";
-        case "FUNDING_TIME_OUT":
-          return "/imgs/Notification/off-date.png";
-        default:
-          return imgSrc;
-      }
-    } else {
-      switch (imgSrc) {
         case "DONATION":
           return "/imgs/Notification/on-funding.png";
         case "FUNDING_SUCCESS":
@@ -61,17 +51,33 @@ const NotiItem = ({
         default:
           return imgSrc;
       }
+    } else {
+      switch (imgSrc) {
+        case "DONATION":
+          return "/imgs/Notification/off-funding.png";
+        case "FUNDING_SUCCESS":
+          return "/imgs/Notification/off-finish.png";
+        case "FUNDING_TIME_OUT":
+          return "/imgs/Notification/off-date.png";
+        default:
+          return imgSrc;
+      }
     }
   };
 
   const getColor = () => {
-    return isRead ? theme.gray4 : theme.black;
+    return onRead ? theme.black : theme.gray4;
   };
 
   return (
     <NotiContainer style={{ display: isRead ? "none" : "flex" }}>
-      <NotiImg w="32px" src={getNotiImg()} alt="notification" />
-      <NotiContents>
+      <NotiImg
+        onClick={onClick}
+        w="32px"
+        src={getNotiImg()}
+        alt="notification"
+      />
+      <NotiContents onClick={onClick}>
         <P fs={theme.body2} color={getColor()}>
           {title}
         </P>
@@ -258,12 +264,6 @@ const Notification = () => {
                   onDelete={() => handleDelete(item.notificationId)}
                 />
               ))}
-              {/* <NotiItem
-                imgSrc="/imgs/Notification/on-funding.png"
-                title="날아라쿠키님이 펀딩에 참여했어요."
-                date="2024-02-25 19:24:08.560470"
-                color={theme.black}
-              /> */}
             </NotiDiv>
           </NotiSection>
         </Body>
