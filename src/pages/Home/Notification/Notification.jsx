@@ -70,13 +70,10 @@ const NotiItem = ({
   };
 
   return (
-    <NotiContainer style={{ display: isRead ? "none" : "flex" }}>
-      <NotiImg
-        onClick={onClick}
-        w="32px"
-        src={getNotiImg()}
-        alt="notification"
-      />
+    <NotiContainer style={{ display: onRead ? "none" : "flex" }}>
+      <NotiBtn onClick={onClick}>
+        <NotiImg w="32px" src={getNotiImg()} alt="notification" />
+      </NotiBtn>
       <NotiContents onClick={onClick}>
         <P fs={theme.body2} color={getColor()}>
           {title}
@@ -85,12 +82,9 @@ const NotiItem = ({
           {date}
         </P>
       </NotiContents>
-      <NotiImg
-        onClick={onDelete}
-        w="20px"
-        src="/imgs/Notification/delete.png"
-        alt="delete"
-      />
+      <NotiBtn onClick={onDelete}>
+        <NotiImg w="20px" src="/imgs/Notification/delete.png" alt="delete" />
+      </NotiBtn>
     </NotiContainer>
   );
 };
@@ -250,7 +244,14 @@ const Notification = () => {
         </NavbarDiv>
         <Body>
           <NotiSection>
-            <NotiBtn onClick={handleDeleteAll}>읽은 알림 모두 삭제</NotiBtn>
+            <NotiBtn
+              jc="end"
+              fs={theme.detail}
+              color={theme.gray3}
+              onClick={handleDeleteAll}
+            >
+              읽은 알림 모두 삭제
+            </NotiBtn>
             <NotiDiv>
               {noti.map((item) => (
                 <NotiItem

@@ -15,9 +15,11 @@ export const NotiSection = styled.section`
 
 export const NotiBtn = styled.button`
   display: flex;
-  justify-content: end;
-  font-size: ${theme.detail};
-  color: ${theme.gray3};
+  justify-content: ${(props) => props.jc};
+  width: ${(props) => props.w};
+  height: ${(props) => props.h};
+  font-size: ${(props) => props.fs};
+  color: ${(props) => props.color};
 `;
 
 export const NotiDiv = styled.div`
