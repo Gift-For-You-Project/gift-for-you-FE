@@ -7,56 +7,54 @@ function NotificationComponent() {
   const eventSource = useRef(null);
   const [isConnected, setIsConnected] = useState(false);
 
-  const handleSSEMessage = (event) => {
-    console.log("New data received:", JSON.parse(event.data));
-    const { data } = event;
-    const noti = JSON.parse(data);
-    console.log("Noti received:", noti);
-    infoToast(noti.message);
-  };
-
-  const initializeEventSource = () => {
-    eventSource.current = new EventSource(
-      `${process.env.REACT_APP_API_URL}/api/notification/subscribe`,
-      {
-        withCredentials: true,
-      }
-    );
-
-    eventSource.current.onopen = () => {
-      console.log("SSE Connection opened.");
-      setIsConnected(true);
-    };
-
-    eventSource.current.onmessage = (event) => handleSSEMessage(event);
-
-    eventSource.current.onerror = () => {
-      console.error("SSE Connection error");
-      if (eventSource.current) eventSource.current.close();
-      setIsConnected(false);
-
-      setTimeout(() => {
-        if (isLoggedIn && !isConnected) {
-          initializeEventSource();
-        }
-      }, 3000);
-    };
-  };
-
   useEffect(() => {
-    if (isConnected || !isLoggedIn) return;
+    const handleSSEMessage = (event) => {
+      console.log("New data received:", JSON.parse(event.data));
+      const { data } = event;
+      const noti = JSON.parse(data);
+      console.log("Noti received:", noti);
+      infoToast(noti.message);
+    };
 
-    initializeEventSource();
+    const initializeEventSource = () => {
+      eventSource.current = new EventSource(
+        `${process.env.REACT_APP_API_URL}/api/notification/subscribe`,
+        {
+          withCredentials: true,
+        }
+      );
+
+      eventSource.current.onopen = () => {
+        console.log("SSE Connection opened.");
+        setIsConnected(true);
+      };
+
+      eventSource.current.onmessage = handleSSEMessage;
+
+      eventSource.current.onerror = () => {
+        console.error("SSE Connection error");
+        if (eventSource.current) eventSource.current.close();
+        setIsConnected(false);
+
+        setTimeout(() => {
+          if (isLoggedIn && !isConnected) {
+            initializeEventSource();
+          }
+        }, 3000);
+      };
+    };
+
+    if (isLoggedIn && !isConnected) {
+      initializeEventSource();
+    }
 
     return () => {
       if (eventSource.current) {
         eventSource.current.close();
         setIsConnected(false);
-        eventSource.current.onmessage = null;
       }
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isLoggedIn]);
+  }, [isLoggedIn, isConnected]);
 
   return <img src="/imgs/Home/no-notification.svg" alt="notification" />;
 }
