@@ -51,7 +51,7 @@ function NotificationComponent() {
       if (eventSource.current) {
         eventSource.current.close();
         setIsConnected(false);
-        // eventSource.current.onmessage = null;
+        eventSource.current.onmessage = null;
       }
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
