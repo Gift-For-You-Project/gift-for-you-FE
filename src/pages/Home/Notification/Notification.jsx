@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { FaAngleLeft } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 import theme from "../../../styles/theme";
@@ -29,8 +29,14 @@ import {
 } from "./NotificationStyles";
 
 const NotiItem = ({ imgSrc, title, date, color }) => {
+  const [isDeleted, setIsDeleted] = useState(false);
+
+  const handleDelete = () => {
+    setIsDeleted(true);
+  };
+
   return (
-    <NotiContainer>
+    <NotiContainer style={{ display: isDeleted ? "none" : "flex" }}>
       <NotiImg w="32px" src={imgSrc} alt="notification" />
       <NotiContents>
         <P fs={theme.body2} color={color}>
@@ -40,7 +46,12 @@ const NotiItem = ({ imgSrc, title, date, color }) => {
           {date}
         </P>
       </NotiContents>
-      <NotiImg w="20px" src="/imgs/Notification/delete.png" alt="delete" />
+      <NotiImg
+        onClick={handleDelete}
+        w="20px"
+        src="/imgs/Notification/delete.png"
+        alt="delete"
+      />
     </NotiContainer>
   );
 };
@@ -121,90 +132,30 @@ const Notification = () => {
                 date="2024-02-25 19:24:08.560470"
                 color={theme.gray4}
               />
-
-              <NotiContainer>
-                <NotiImg
-                  w="32px"
-                  src="/imgs/Notification/on-date.png"
-                  alt="onfunding"
-                />
-                <NotiContents>
-                  <P fs={theme.body2} color={theme.black}>
-                    펀딩 종료까지 5일 남았어요.
-                  </P>
-                  <P fs={theme.detail} color={theme.gray4}>
-                    2024-02-25 19:24:08.560470
-                  </P>
-                </NotiContents>
-                <NotiImg
-                  w="20px"
-                  src="/imgs/Notification/delete.png"
-                  alt="delete"
-                />
-              </NotiContainer>
-
-              <NotiContainer>
-                <NotiImg
-                  w="32px"
-                  src="/imgs/Notification/off-date.png"
-                  alt="onfunding"
-                />
-                <NotiContents>
-                  <P fs={theme.body2} color={theme.gray4}>
-                    펀딩 종료까지 15일 남았어요.
-                  </P>
-                  <P fs={theme.detail} color={theme.gray4}>
-                    2024-02-25 19:24:08.560470
-                  </P>
-                </NotiContents>
-                <NotiImg
-                  w="20px"
-                  src="/imgs/Notification/delete.png"
-                  alt="delete"
-                />
-              </NotiContainer>
-
-              <NotiContainer>
-                <NotiImg
-                  w="32px"
-                  src="/imgs/Notification/on-finish.png"
-                  alt="onfunding"
-                />
-                <NotiContents>
-                  <P fs={theme.body2} color={theme.black}>
-                    펀딩이 종료됐어요! 결과를 확인해보세요.
-                  </P>
-                  <P fs={theme.detail} color={theme.gray4}>
-                    2024-02-25 19:24:08.560470
-                  </P>
-                </NotiContents>
-                <NotiImg
-                  w="20px"
-                  src="/imgs/Notification/delete.png"
-                  alt="delete"
-                />
-              </NotiContainer>
-
-              <NotiContainer>
-                <NotiImg
-                  w="32px"
-                  src="/imgs/Notification/off-finish.png"
-                  alt="onfunding"
-                />
-                <NotiContents>
-                  <P fs={theme.body2} color={theme.gray4}>
-                    펀딩이 종료됐어요! 결과를 확인해보세요.
-                  </P>
-                  <P fs={theme.detail} color={theme.gray4}>
-                    2024-02-25 19:24:08.560470
-                  </P>
-                </NotiContents>
-                <NotiImg
-                  w="20px"
-                  src="/imgs/Notification/delete.png"
-                  alt="delete"
-                />
-              </NotiContainer>
+              <NotiItem
+                imgSrc="/imgs/Notification/on-date.png"
+                title="펀딩 종료까지 5일 남았어요."
+                date="2024-02-25 19:24:08.560470"
+                color={theme.black}
+              />
+              <NotiItem
+                imgSrc="/imgs/Notification/off-date.png"
+                title="펀딩 종료까지 15일 남았어요."
+                date="2024-02-25 19:24:08.560470"
+                color={theme.gray4}
+              />
+              <NotiItem
+                imgSrc="/imgs/Notification/on-finish.png"
+                title="펀딩이 종료됐어요! 결과를 확인해보세요."
+                date="2024-02-25 19:24:08.560470"
+                color={theme.black}
+              />
+              <NotiItem
+                imgSrc="/imgs/Notification/off-finish.png"
+                title="펀딩이 종료됐어요! 결과를 확인해보세요."
+                date="2024-02-25 19:24:08.560470"
+                color={theme.gray4}
+              />
             </NotiDiv>
           </NotiSection>
         </Body>

@@ -33,6 +33,7 @@ export const NotiContainer = styled.div`
   width: 100%;
   max-width: 330px;
   padding-top: 10px;
+  cursor: pointer;
 `;
 
 export const NotiImg = styled.img`
@@ -44,7 +45,6 @@ export const NotiImg = styled.img`
 export const NotiContents = styled.div`
   width: 100%;
   max-width: 250px;
-  cursor: pointer;
 `;
 
 export const NotiTxt = styled.p`
