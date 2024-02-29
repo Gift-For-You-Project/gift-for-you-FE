@@ -25,7 +25,7 @@ function NotificationComponent() {
       eventSource.current.addEventListener("sse", (event) => {
         const data = JSON.parse(event.data);
         console.log("SSE data received:", data);
-        notiToast(data.content);
+        notiToast(data.message);
       });
 
       eventSource.current.onerror = () => {

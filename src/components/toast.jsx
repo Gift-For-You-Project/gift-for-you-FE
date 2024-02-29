@@ -28,8 +28,8 @@ export const errorToast = (message) => {
   });
 };
 
-export const infoToast = (content) => {
-  toast.info(content, {
+export const infoToast = (message) => {
+  toast.info(message, {
     position: "top-center",
     autoClose: 3000,
     hideProgressBar: false,
