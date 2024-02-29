@@ -28,6 +28,23 @@ import {
   NotiContents,
 } from "./NotificationStyles";
 
+const NotiItem = ({ imgSrc, title, date, color }) => {
+  return (
+    <NotiContainer>
+      <NotiImg w="32px" src={imgSrc} alt="notification" />
+      <NotiContents>
+        <P fs={theme.body2} color={color}>
+          {title}
+        </P>
+        <P fs={theme.detail} color={theme.gray4}>
+          {date}
+        </P>
+      </NotiContents>
+      <NotiImg w="20px" src="/imgs/Notification/delete.png" alt="delete" />
+    </NotiContainer>
+  );
+};
+
 const Notification = () => {
   const navigate = useNavigate();
 
@@ -92,47 +109,18 @@ const Notification = () => {
           <NotiSection>
             <NotiBtn>읽은 알림 모두 삭제</NotiBtn>
             <NotiDiv>
-              <NotiContainer>
-                <NotiImg
-                  w="32px"
-                  src="/imgs/Notification/on-funding.png"
-                  alt="onfunding"
-                />
-                <NotiContents>
-                  <P fs={theme.body2} color={theme.black}>
-                    날아라쿠키님이 펀딩에 참여했어요.
-                  </P>
-                  <P fs={theme.detail} color={theme.gray4}>
-                    2024-02-25 19:24:08.560470
-                  </P>
-                </NotiContents>
-                <NotiImg
-                  w="20px"
-                  src="/imgs/Notification/delete.png"
-                  alt="delete"
-                />
-              </NotiContainer>
-
-              <NotiContainer>
-                <NotiImg
-                  w="32px"
-                  src="/imgs/Notification/off-funding.png"
-                  alt="onfunding"
-                />
-                <NotiContents>
-                  <P fs={theme.body2} color={theme.gray4}>
-                    이름이이렇게길수도있지님이 펀딩에 참여했어요.
-                  </P>
-                  <P fs={theme.detail} color={theme.gray4}>
-                    2024-02-25 19:24:08.560470
-                  </P>
-                </NotiContents>
-                <NotiImg
-                  w="20px"
-                  src="/imgs/Notification/delete.png"
-                  alt="delete"
-                />
-              </NotiContainer>
+              <NotiItem
+                imgSrc="/imgs/Notification/on-funding.png"
+                title="날아라쿠키님이 펀딩에 참여했어요."
+                date="2024-02-25 19:24:08.560470"
+                color={theme.black}
+              />
+              <NotiItem
+                imgSrc="/imgs/Notification/off-funding.png"
+                title="이름이이렇게길수도있지님이 펀딩에 참여했어요."
+                date="2024-02-25 19:24:08.560470"
+                color={theme.gray4}
+              />
 
               <NotiContainer>
                 <NotiImg
