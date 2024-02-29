@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useSelector } from "react-redux";
 import { infoToast } from "./toast";
+import { ToastContainer } from "react-toastify";
 
 function NotificationComponent() {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
@@ -57,7 +58,12 @@ function NotificationComponent() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoggedIn]);
 
-  return <img src="/imgs/Home/no-notification.svg" alt="notification" />;
+  return (
+    <div>
+      <img src="/imgs/Home/no-notification.svg" alt="notification" />
+      <ToastContainer />
+    </div>
+  );
 }
 
 export default NotificationComponent;
