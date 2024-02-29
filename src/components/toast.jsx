@@ -28,21 +28,7 @@ export const errorToast = (message) => {
   });
 };
 
-export const infoToast = (message) => {
-  toast.info(message, {
-    position: "top-center",
-    autoClose: 3000,
-    hideProgressBar: false,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-    progress: undefined,
-    theme: "colored",
-    transition: Zoom,
-  });
-};
-
-export const notiToast = (content) => {
+export const infoToast = (content) => {
   toast.info(content, {
     position: "top-center",
     autoClose: 3000,
