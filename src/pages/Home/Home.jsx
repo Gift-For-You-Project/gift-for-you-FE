@@ -65,6 +65,7 @@ import {
   ProductImg,
   ProductP,
   FloatingBtn,
+  ProductRecommend,
 } from "./HomeStyles";
 
 const Home = () => {
@@ -493,7 +494,14 @@ const Home = () => {
                 price="1,337,000원"
               />
             </ProductGrids>
-            <P fw="600" pt="20px" pb="5px" pl="20px" />
+            <ProductRecommend onClick={() => navigate("/recentfunding")}>
+              <P pt="2px" fs={theme.detail} color={theme.gray2}>
+                추천 상품 더보기 &nbsp;
+              </P>
+              <P pt="4px" fs={theme.detail}>
+                <FaAngleRight />
+              </P>
+            </ProductRecommend>
           </ProductContainer>
         </Body>
         <Button

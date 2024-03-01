@@ -215,3 +215,6 @@ export const getDonationApproval = async (pg_token) => {
 //     console.error("후원 결제승인 응답 오류:", error.message);
 //   }
 // };
+
+// 후원 취소
+// 후원 실패

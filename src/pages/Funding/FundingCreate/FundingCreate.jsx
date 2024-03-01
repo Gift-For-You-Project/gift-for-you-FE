@@ -119,6 +119,7 @@ const FundingCreate = () => {
       setCreateData({ ...createData, endDate: e.target.value });
     }
   };
+
   const handlePublicFlagChange = (e) => {
     // 업데이트: 한 번에 하나의 옵션만 선택했는지 확인하세요.
     const value = e.target.value === "true" ? true : false;
@@ -137,7 +138,7 @@ const FundingCreate = () => {
         createData.content === "" ||
         createData.endDate === ""
       ) {
-        infoToast("내용을 입력해주세요");
+        infoToast("내용을 모두 입력해주세요");
         return;
       }
 

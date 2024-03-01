@@ -468,6 +468,8 @@ export const FloatingBtn = styled.button`
   color: ${theme.white};
   font-size: ${theme.body2};
   z-index: 10;
+  box-shadow: 6px 6px 6px rgba(0, 0, 0, 0.2), -6px 6px 6px rgba(0, 0, 0, 0.2),
+    -6px -6px 6px rgba(0, 0, 0, 0.2), 6px -6px 6px rgba(0, 0, 0, 0.2);
 
   &:hover {
     background-color: ${theme.primaryFont};

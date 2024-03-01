@@ -12,6 +12,7 @@ import {
   XButton,
 } from "./DetailModalStyles";
 import theme from "../../../../styles/theme";
+import { warnToast } from "../../../../components/toast";
 
 function DetailModal({ closeModal, handleInputSelection, id, detailData }) {
   const [donationInput, setDonationInput] = useState("");
@@ -19,16 +20,19 @@ function DetailModal({ closeModal, handleInputSelection, id, detailData }) {
   const navigate = useNavigate();
 
   const handleModalButtonClick = () => {
-    // console.log("펀딩 모달 성공:", donationInput);
-    handleInputSelection(donationInput);
-    closeModal();
-
-    if (detailData && detailData.showName) {
-      navigate(
-        `/fundingpay/${id}?donation=${donationInput}&showName=${detailData.showName}`
-      );
+    if (donationInput.trim() === "" || donationInput === "0") {
+      warnToast("원하는 테스트 금액을 입력하세요");
     } else {
-      console.error("detailData가 유효하지 않거나 showName 속성이 없습니다.");
+      handleInputSelection(donationInput);
+      closeModal();
+
+      if (detailData && detailData.showName) {
+        navigate(
+          `/fundingpay/${id}?donation=${donationInput}&showName=${detailData.showName}`
+        );
+      } else {
+        console.error("detailData가 유효하지 않거나 showName 속성이 없습니다.");
+      }
     }
   };
 
