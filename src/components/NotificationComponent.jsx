@@ -18,18 +18,15 @@ function NotificationComponent() {
       );
 
       eventSource.current.onopen = () => {
-        console.log("SSE Connection opened.");
         setIsConnected(true);
       };
 
       eventSource.current.addEventListener("sse", (event) => {
         const data = JSON.parse(event.data);
-        console.log("SSE data received:", data);
         infoToast(data.message);
       });
 
       eventSource.current.onerror = () => {
-        console.error("SSE Connection error");
         if (eventSource.current) eventSource.current.close();
         setIsConnected(false);
 

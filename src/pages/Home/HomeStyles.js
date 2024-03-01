@@ -686,3 +686,14 @@ export const FloatingBtn = styled.button`
     position: fixed;
   }
 `;
+
+export const ProductRecommend = styled.button`
+  display: flex;
+  width: -webkit-fill-available;
+  max-width: 390px;
+  justify-content: center;
+  align-items: center;
+  border-top: 1px solid ${theme.gray5};
+  padding-top: 12px;
+  padding-bottom: 14px;
+`;
