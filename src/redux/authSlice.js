@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { successToast } from "../components/toast";
 import { logout } from "../apis/auth";
 
 const authReducer = createSlice({
@@ -13,7 +12,6 @@ const authReducer = createSlice({
     // 구글 로그인 액션
     googleLogin: (state) => {
       state.isLoggedIn = true;
-      successToast("로그인 되었습니다.");
     },
     // 카카오 로그인 액션
     kakaoLogin: (state) => {

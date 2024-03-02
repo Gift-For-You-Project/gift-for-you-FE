@@ -12,7 +12,7 @@ export const instance = axios.create({
 // Access token 재발급 요청
 export const issueAccessToken = async () => {
   try {
-    const response = await axios.get("/api/access-token/issue");
+    const response = await instance.get("/api/access-token/issue");
 
     if (response.status === 200) {
       console.log(response.data.message);
@@ -54,7 +54,7 @@ export const postKakaoLogin = async () => {
   const code = new URL(document.location.toString()).searchParams.get("code");
 
   try {
-    const response = await instance.post("/api/kakao/login", { code });
+    const response = await instance.post(`/api/kakao/login`, { code });
     if (response.status === 200) {
       console.log(response.data.message);
       successToast(response.data.message);
