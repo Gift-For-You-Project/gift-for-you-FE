@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useSelector } from "react-redux";
 import { infoToast } from "./toast";
-import { ToastContainer } from "react-toastify";
+// import { ToastContainer } from "react-toastify";
 
 function NotificationComponent() {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
@@ -55,7 +55,7 @@ function NotificationComponent() {
   return (
     <div>
       <img src="/imgs/Home/no-notification.svg" alt="notification" />
-      <ToastContainer />
+      {/* <ToastContainer /> */}
     </div>
   );
 }
