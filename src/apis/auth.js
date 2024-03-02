@@ -63,7 +63,7 @@ export const postKakaoLogin = async () => {
       successToast(response.data.message);
     }
   } catch (error) {
-    if (error.response && error.response.status === 401) {
+    if (error.response && error.response.status === 404) {
       console.error("API 호출 중 401 에러 발생");
       errorToast(error.response.message);
       console.log("code: ", code);
