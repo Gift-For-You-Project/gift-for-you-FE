@@ -291,8 +291,8 @@ const FundingDetail = () => {
         </NavbarDiv>
         <Body>
           <TitleDiv>
-            <P pt="20px" fs="13px" fw="800" color={theme.gray3}>
-              {detailData.status === "FINISHED" ? "종료" : "진행중"}
+            <P pt="20px" fs="16px" fw="800" color={theme.gray6}>
+              {detailData.itemName}
             </P>
             <P pt="10px" fs="20px" fw="900" color={theme.white}>
               {detailData.title}
@@ -350,12 +350,7 @@ const FundingDetail = () => {
             <ProgressBar>
               <Progress width={(detailData.achievementRate / 100) * 100} />
             </ProgressBar>
-            <BetweenDiv pb="10px">
-              <P fs={theme.detail2} color={theme.gray2} pt="5px" fw="500">
-                내 펀딩 관리
-              </P>
-              {renderModifyBtn()}
-            </BetweenDiv>
+            <BetweenDiv pb="10px">{renderModifyBtn()}</BetweenDiv>
           </TogetherDiv>
 
           <FundingDiv>
@@ -421,7 +416,7 @@ const FundingDetail = () => {
               </P>
             </MassageBtn>
           </FundingDiv>
-          <FundingDiv p="20px">
+          <FundingDiv p="20px" mb="40px">
             <P pt="20px" pl="10px" fs={theme.title2} color={theme.black}>
               펀딩에 참여하여
             </P>

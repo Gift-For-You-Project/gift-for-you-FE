@@ -258,6 +258,7 @@ export const FundingDiv = styled.div`
   max-width: 390px; /* 최대 너비를 390px로 제한 */
   margin: 10px auto 0 auto;
   padding-bottom: ${(props) => props.pb};
+  margin-bottom: ${(props) => props.mb};
   padding: ${(props) => props.p};
 `;
 
