@@ -36,10 +36,10 @@ const LoginModal = ({ closeModal }) => {
 
   // 카카오 로그인 API
   const KakaoLogin = async () => {
-    const REST_API_KEY = process.env.REACT_APP_KAKAO_REST_API_KEY;
-    const REDIRECT_URI = process.env.REACT_APP_KAKAO_REDIRECT_URI;
-    const code = new URL(document.location.toString()).searchParams.get("code");
-    const link = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=${code}`;
+    // const REST_API_KEY = process.env.REACT_APP_KAKAO_REST_API_KEY;
+    // const REDIRECT_URI = process.env.REACT_APP_KAKAO_REDIRECT_URI;
+    // const code = new URL(document.location.toString()).searchParams.get("code");
+    const link = process.env.REACT_APP_KAKAO_URL;
 
     try {
       await postKakaoLogin();
