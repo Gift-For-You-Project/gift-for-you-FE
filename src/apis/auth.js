@@ -52,6 +52,7 @@ export const postGoogleLogin = async () => {
 // 카카오 로그인 API
 export const postKakaoLogin = async () => {
   const code = new URL(document.location.toString()).searchParams.get("code");
+  console.log("code: ", code);
 
   try {
     const response = await instance.post(`/api/kakao/login`, { code });
