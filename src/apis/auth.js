@@ -56,6 +56,8 @@ export const postKakaoLogin = async () => {
 
   try {
     const response = await instance.post(`/api/kakao/login`, { code });
+    console.log("code: ", code);
+
     if (response.status === 200) {
       console.log(response.data.message);
       successToast(response.data.message);
@@ -64,10 +66,12 @@ export const postKakaoLogin = async () => {
     if (error.response && error.response.status === 401) {
       console.error("API 호출 중 401 에러 발생");
       errorToast(error.response.message);
+      console.log("code: ", code);
     } else {
       // 기타 에러 처리
       console.error("API 호출 중 에러 발생: ", error);
       errorToast("카카오 로그인 중 오류가 발생했습니다.");
+      console.log("code: ", code);
     }
   }
 };
