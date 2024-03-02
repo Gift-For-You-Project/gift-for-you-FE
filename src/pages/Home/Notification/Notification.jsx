@@ -102,12 +102,10 @@ const Notification = () => {
         );
 
         if (response.status === 200) {
-          console.log("전체 알림 조회", response.data);
           setNoti(response.data);
         }
       } catch (error) {
-        console.error("전체 알림 조회 API 호출 중 에러:", error);
-        console.error("에러 상세 정보:", error.response);
+        console.error("전체 알림 조회 API 호출 중 에러");
       }
     };
 
@@ -126,8 +124,6 @@ const Notification = () => {
       );
 
       if (response.status === 200) {
-        console.log("알림을 읽음 처리했습니다.", response.data);
-
         // 읽음 처리 후, 알림 목록을 업데이트
         const updatedNoti = noti.map((item) =>
           item.notificationId === notificationId
@@ -137,8 +133,7 @@ const Notification = () => {
         setNoti(updatedNoti);
       }
     } catch (error) {
-      console.error("알림 읽음 처리 중 에러:", error);
-      console.error("에러 상세 정보:", error.response);
+      console.error("알림 읽음 처리 중 에러");
     }
   };
 
@@ -153,7 +148,6 @@ const Notification = () => {
       );
 
       if (response.status === 200) {
-        console.log("읽은 모든 알림 메시지를 삭제했습니다.", response.data);
         // 삭제 후, 알림 목록을 초기화
         const newNoti = noti.filter((noti) => noti.isRead === false);
         setNoti(newNoti);
@@ -162,8 +156,7 @@ const Notification = () => {
       if (error.response.status === 400) {
         warnToast(error.response.data.message);
       }
-      console.error("알림 메시지 삭제 중 에러:", error);
-      console.error("에러 상세 정보:", error.response);
+      console.error("알림 메시지 삭제 중 에러");
     }
   };
 
@@ -178,8 +171,6 @@ const Notification = () => {
       );
 
       if (response.status === 200) {
-        console.log("알림 메시지를 삭제했습니다.", response.data);
-
         // 삭제 후, 알림 목록에서 해당 알림을 제거
         const updatedNoti = noti.filter(
           (item) => item.notificationId !== notificationId
@@ -187,8 +178,7 @@ const Notification = () => {
         setNoti(updatedNoti);
       }
     } catch (error) {
-      console.error("알림 메시지 삭제 중 에러:", error);
-      console.error("에러 상세 정보:", error.response);
+      console.error("알림 메시지 삭제 중 에러");
     }
   };
 

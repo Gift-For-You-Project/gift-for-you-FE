@@ -27,6 +27,7 @@ function NotificationComponent() {
       });
 
       eventSource.current.onerror = () => {
+        console.error("SSE Connection error");
         if (eventSource.current) eventSource.current.close();
         setIsConnected(false);
 

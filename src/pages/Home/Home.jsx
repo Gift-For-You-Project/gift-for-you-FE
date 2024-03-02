@@ -380,7 +380,7 @@ const Home = () => {
                       {funding.itemName}
                     </FundingItem>
                     <FundingTitle pt="2px" fs={theme.body2} color={theme.black}>
-                      {funding.content}
+                      {funding.title}
                     </FundingTitle>
                   </FundingGrid>
                 ))}
