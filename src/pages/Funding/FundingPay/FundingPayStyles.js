@@ -175,11 +175,6 @@ export const IpadLoveImg = styled.img`
   height: ${(props) => props.h};
 `;
 
-export const Logo = styled.h1`
-  font-size: 24px;
-  font-weight: 800;
-`;
-
 export const P = styled.p`
   text-decoration: ${(props) => (props.underline ? "underline" : "none")};
   padding-top: ${(props) => props.pt};
@@ -350,12 +345,10 @@ export const KakaoButton = styled.button`
   flex-direction: row;
   align-items: center;
   width: 100%;
-  height: 60px;
-  background-color: #fae101; /* 변경됨 */
-  border: none; /* 변경됨 */
-  border-radius: 20px;
-  font-size: 19px;
-  font-weight: 600;
+  height: 48px;
+  background-color: #fee500;
+  border: none;
+  border-radius: 16px;
   margin-top: 13px;
   margin-bottom: 15px;
   padding-left: ${(props) => props.pl};

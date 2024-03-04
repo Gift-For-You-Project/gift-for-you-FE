@@ -5,6 +5,7 @@ import { FaAngleLeft } from "react-icons/fa6";
 import theme from "../../../styles/theme";
 import { isMobile } from "react-device-detect";
 import { GoDotFill } from "react-icons/go";
+import Checkbox from "../../../components/Checkbox";
 import {
   fundingPayDonationReady,
   getFundingDonation,
@@ -37,10 +38,9 @@ import {
   Textarea,
   ProfileImageRow,
   ProfileImg,
-  Checkbox,
   PayDiv,
 } from "./FundingPayStyles";
-import { IconDiv, NavbarDiv } from "../../Home/Signup/SignupStyles";
+import { IconDiv, NavbarDiv, CheckDiv } from "../../Home/Signup/SignupStyles";
 
 const FundingPay = ({ donation }) => {
   const navigate = useNavigate();
@@ -215,7 +215,10 @@ const FundingPay = ({ donation }) => {
               </SponserMoney>
 
               <InputLabel mt="60px">
-                <InputSpan>남길 이름 (12자 이내)</InputSpan>
+                <InputSpan>
+                  남길 이름 ({`${sponsorDonation.sponsorNickname.length}/12`}자
+                  이내)
+                </InputSpan>
                 <InputInput
                   type="text"
                   value={sponsorDonation.sponsorNickname}
@@ -228,12 +231,15 @@ const FundingPay = ({ donation }) => {
                   }}
                 />
               </InputLabel>
-              <P pl="10px" fs={theme.detail2} color={theme.gray2}>
+              <P pl="10px" fs={theme.detail2} color={theme.gray3}>
                 만든이와 방문자 모두에게 표시됩니다.
               </P>
 
               <InputLabel mt="25px">
-                <InputSpan>남길 메시지 (200자 이내)</InputSpan>
+                <InputSpan>
+                  남길 메시지 ({`${sponsorDonation.sponsorComment.length}/200`}
+                  자 이내)
+                </InputSpan>
                 <Textarea
                   type="text"
                   value={sponsorDonation.sponsorComment}
@@ -285,7 +291,7 @@ const FundingPay = ({ donation }) => {
               </ProfileImageRow>
               <P
                 fs={theme.detail2}
-                color={theme.gray2}
+                color={theme.gray3}
                 pl="5px"
                 pt="8px"
                 pb="15px"
@@ -295,7 +301,7 @@ const FundingPay = ({ donation }) => {
             </TogetherDiv>
 
             <PayDiv bc={theme.white} br="30px 30px 0px 0px">
-              <P pt="20px" fs="16px" color={theme.gray2} pl="10px" fw="800">
+              <P pt="20px" fs="16px" color={theme.gray2} pl="10px" fw="700">
                 [테스트 결제 안내]
               </P>
               <SponserDiv>
@@ -331,18 +337,19 @@ const FundingPay = ({ donation }) => {
                   <br />
                   카카오페이 테스트 결제 이용에 동의하십니까?
                 </P>
-                <Checkbox
-                  type="checkbox"
-                  checked={isChecked}
-                  onChange={(e) => setIsChecked(e.target.checked)}
-                />
+                <CheckDiv pt="30px">
+                  <Checkbox
+                    checked={isChecked}
+                    onChange={(e) => setIsChecked(e.target.checked)}
+                  />
+                </CheckDiv>
               </SponserDiv>
               <KakaoButton
                 onClick={handleFundingDonationClick}
                 disabled={!isChecked}
               >
                 <KakaoPayLogo src="/imgs/Logo/kakao-pay.svg" alt="image" />
-                <P fs={theme.body1} color={theme.black}>
+                <P fs={theme.body2} color={theme.black}>
                   카카오페이로 테스트 결제하기
                 </P>
               </KakaoButton>

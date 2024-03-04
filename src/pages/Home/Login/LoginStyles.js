@@ -214,7 +214,7 @@ export const LoginBtn = styled.button`
   background-color: ${theme.primary};
   transition: all 300ms ease-in-out;
   border-radius: 16px;
-  margin-bottom: 20px;
+  margin-bottom: 40px;
 
   &:hover {
     background-color: ${theme.primaryFont};
@@ -251,5 +251,5 @@ export const InfoDiv = styled.div`
   justify-content: center;
   align-items: center;
   position: absolute;
-  bottom: 90px;
+  bottom: 110px;
 `;

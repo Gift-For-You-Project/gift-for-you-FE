@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { postSendMail, signup } from "../../../apis/auth";
 import theme from "../../../styles/theme";
 import Checkbox from "../../../components/Checkbox";
+import ServiceModal from "./ServiceModal";
+import PrivacyModal from "./PrivacyModal";
 import {
   infoToast,
   warnToast,
@@ -88,6 +90,9 @@ const Signup = () => {
   const [receivedCode, setReceivedCode] = useState(""); // 이메일로 받은 인증코드
   const [verificationSuccess, setVerificationSuccess] = useState(false); // 인증코드 성공 여부
   const [authBtnClicked, setAuthBtnClicked] = useState(false); // 인증버튼 클릭 여부와 상태변경
+  const [isServiceModalOpen, setIsServiceModalOpen] = useState(false);
+  const [isPrivacyModalOpen, setIsPrivacyModalOpen] = useState(false);
+
   // 입력폼
   const [formData, setFormData] = useState({
     email: "",
@@ -324,6 +329,22 @@ const Signup = () => {
     }
   };
 
+  const openServiceModal = () => {
+    setIsServiceModalOpen(true);
+  };
+
+  const closeServiceModal = () => {
+    setIsServiceModalOpen(false);
+  };
+
+  const openPrivacyModal = () => {
+    setIsPrivacyModalOpen(true);
+  };
+
+  const closePrivacyModal = () => {
+    setIsPrivacyModalOpen(false);
+  };
+
   return (
     <MainContainer>
       <LeftContainer>
@@ -474,7 +495,7 @@ const Signup = () => {
                   />
                   [필수] 서비스 이용약관
                 </CheckDiv>
-                <SeeMoreDiv onClick={() => navigate("/signup/service")}>
+                <SeeMoreDiv onClick={openServiceModal}>
                   <FaAngleRight />
                 </SeeMoreDiv>
               </TermsAgreementDiv>
@@ -486,7 +507,7 @@ const Signup = () => {
                   />
                   [필수] 개인정보 처리방침
                 </CheckDiv>
-                <SeeMoreDiv onClick={() => navigate("/signup/privacy")}>
+                <SeeMoreDiv onClick={openPrivacyModal}>
                   <FaAngleRight />
                 </SeeMoreDiv>
               </TermsAgreementDiv>
@@ -509,6 +530,10 @@ const Signup = () => {
           </FieldContainer>
         </Body>
       </RightContainer>
+
+      {/* 모달이 열렸을 때 각각의 Modal 컴포넌트 렌더링 */}
+      {isServiceModalOpen && <ServiceModal closeModal={closeServiceModal} />}
+      {isPrivacyModalOpen && <PrivacyModal closeModal={closePrivacyModal} />}
     </MainContainer>
   );
 };
