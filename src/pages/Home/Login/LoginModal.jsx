@@ -7,7 +7,7 @@ import theme from "../../../styles/theme";
 import {
   getGoogleLogin,
   getKakaoLogin,
-  // getKakaoAuthorizationCode,
+  getKakaoAuthorizationCode,
 } from "../../../apis/auth";
 import {
   ModalContainer,
@@ -45,8 +45,7 @@ const LoginModal = ({ closeModal }) => {
 
     try {
       const params = new URLSearchParams(location.search);
-      // const authorizationCode = await getKakaoAuthorizationCode();
-      // await getKakaoLogin(authorizationCode);
+      await getKakaoAuthorizationCode();
 
       if (params.has("code")) {
         const code = params.get("code");
