@@ -195,6 +195,16 @@ const Home = () => {
     return formattedAmount.toLocaleString();
   };
 
+  const handleCreateFunding = () => {
+    // 내 펀딩이 있을 때
+    if (isLoggedIn && myFunding && myFunding.status === "ACTIVE") {
+      infoToast("진행 중인 펀딩은 하나만 만들 수 있어요.");
+    } else {
+      // 내 펀딩이 없거나 로그아웃 상태일 때 펀딩 만들기로 이동
+      navigate("/fundingcreate");
+    }
+  };
+
   return (
     <MainContainer>
       <LeftContainer>
@@ -505,9 +515,7 @@ const Home = () => {
           </ProductContainer>
         </Body>
         <Button
-          onClick={
-            isLoggedIn ? () => navigate("/fundingcreate") : handleLoginClick
-          }
+          onClick={handleCreateFunding}
           w="100%"
           h="60px"
           color="black"
