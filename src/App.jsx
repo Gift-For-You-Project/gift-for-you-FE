@@ -17,6 +17,7 @@ import FundingModify from "./pages/Funding/FundingModify/FundingModify";
 import FundingPay from "./pages/Funding/FundingPay/FundingPay";
 import { useSelector } from "react-redux";
 import NotificationComponent from "./components/NotificationComponent";
+import Product from "./pages/Home/Product/Product";
 
 function App() {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
@@ -53,6 +54,7 @@ function App() {
         <Route path="/fundingsponsordetail/:id" element={<Sponsor />} />
         <Route path="/fundingmodify/:id" element={<FundingModify />} />
         <Route path="/fundingpay/:id" element={<FundingPay />} />
+        <Route path="/product" element={<Product />} />
         <Route path="*" element={<NotFound />} />
         {/* isLoggedIn이 true일 때만 NotificationComponent 렌더링 */}
         {isLoggedIn && <Route path="*" element={<NotificationComponent />} />}

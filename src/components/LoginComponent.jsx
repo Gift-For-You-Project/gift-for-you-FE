@@ -17,15 +17,16 @@ const LoginComponent = () => {
           // 컴포넌트가 마운트된 상태일 때만 상태 업데이트
           if (response.status === 200) {
             console.log("로그인 API 호출", response.data);
-            dispatch(login());
 
-            // 로그인 상태인 경우에만 Access Token 재발급 수행
-            if (isLoggedIn) {
+            // 로그인 상태인 경우에 Access Token 재발급
+            if (!isLoggedIn) {
+              dispatch(login());
               await handleAccessTokenIssue();
             }
           } else if (response.status === 401) {
             console.error("로그인 API 오류");
             dispatch(logout());
+            handleAccessTokenIssue(); // 401(Access Token이 만료)일 때 재발급
           }
         }
       } catch (error) {
@@ -42,8 +43,24 @@ const LoginComponent = () => {
     };
   }, [dispatch, isLoggedIn]);
 
-  const handleLogin = () => {
-    dispatch(login()); // login 액션 디스패치
+  // 로그인 버튼 클릭 시 로그인 API 호출
+  const handleLogin = async () => {
+    try {
+      const response = await loginApi();
+
+      if (response.status === 200) {
+        console.log("로그인 API 호출", response.data);
+        dispatch(login()); // login 액션 디스패치
+        await handleAccessTokenIssue();
+      } else if (response.status === 401) {
+        console.error("로그인 API 오류");
+        dispatch(logout());
+        handleAccessTokenIssue();
+      }
+    } catch (error) {
+      console.error("로그인 API 오류:", error);
+      dispatch(logout());
+    }
   };
 
   const handleLogout = () => {

@@ -494,7 +494,7 @@ const Home = () => {
                 price="1,337,000원"
               />
             </ProductGrids>
-            <ProductRecommend onClick={() => navigate("/recentfunding")}>
+            <ProductRecommend onClick={() => navigate("/product")}>
               <P pt="2px" fs={theme.detail} color={theme.gray2}>
                 추천 상품 더보기 &nbsp;
               </P>
