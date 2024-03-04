@@ -2,13 +2,13 @@ import React from "react";
 import { IoClose } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import {
-  googleLogin,
-  kakaoLogin,
-  getKakaoAuthorizationCode,
-} from "../../../redux/authSlice";
+import { googleLogin, kakaoLogin } from "../../../redux/authSlice";
 import theme from "../../../styles/theme";
-import { getGoogleLogin, getKakaoLogin } from "../../../apis/auth";
+import {
+  getGoogleLogin,
+  getKakaoLogin,
+  getKakaoAuthorizationCode,
+} from "../../../apis/auth";
 import {
   ModalContainer,
   Background,
@@ -33,7 +33,7 @@ const LoginModal = ({ closeModal }) => {
       dispatch(googleLogin()); // Redux 액션 디스패치
       navigate("/");
     } catch (error) {
-      console.error("구글 로그인 오류");
+      console.error("구글 로그인 오류: ", error);
     }
   };
 
@@ -46,7 +46,7 @@ const LoginModal = ({ closeModal }) => {
       dispatch(kakaoLogin()); // Redux 액션 디스패치
       navigate("/");
     } catch (error) {
-      console.error("카카오 로그인 오류:", error);
+      console.error("카카오 로그인 오류: ", error);
     }
   };
 
