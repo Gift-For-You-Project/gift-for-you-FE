@@ -29,8 +29,6 @@ export const issueAccessToken = async () => {
 
 // 구글 로그인 API
 export const getGoogleLogin = async (code) => {
-  // https://api.giftipie.me/api/login/oauth2/code/google?code=
-
   try {
     const response = await instance.get(`/api/google/login?code=${code}`);
     if (response.status === 200) {
@@ -45,8 +43,6 @@ export const getGoogleLogin = async (code) => {
 
 // 카카오 로그인 API
 export const getKakaoLogin = async (code) => {
-  // https://api.giftipie.me/api/kakao/callback?code=
-
   try {
     const response = await instance.get(`/api/kakao/callback?code=${code}`);
 

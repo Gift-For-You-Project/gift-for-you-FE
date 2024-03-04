@@ -125,7 +125,7 @@ const FundingPay = ({ donation }) => {
           const pg_token = params.get("pg_token");
           await getDonationApproval(pg_token);
 
-          // navigate(`/fundingdetail/${id}`);
+          navigate(`/fundingdetail/${id}`);
         }
       } catch (error) {
         console.error("결제 오류");
