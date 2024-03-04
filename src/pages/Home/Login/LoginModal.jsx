@@ -7,7 +7,7 @@ import theme from "../../../styles/theme";
 import {
   getGoogleLogin,
   getKakaoLogin,
-  // getKakaoAuthorizationCode,
+  getKakaoAuthorizationCode,
 } from "../../../apis/auth";
 import {
   ModalContainer,
@@ -48,13 +48,13 @@ const LoginModal = ({ closeModal }) => {
     const getData = async () => {
       try {
         const params = new URLSearchParams(location.search);
-        // const code = await getKakaoAuthorizationCode();
-        // console.log("code값", code);
+        const code = await getKakaoAuthorizationCode();
+        console.log("code값", code);
 
         if (params.has("code")) {
-          const codeFromParams = params.get("code");
-          console.log("params의 code값", codeFromParams);
-          await getKakaoLogin(codeFromParams);
+          const code = params.get("code");
+          console.log("params의 code값", code);
+          await getKakaoLogin(code);
 
           dispatch(kakaoLogin()); // Redux 액션 디스패치
           navigate("/");

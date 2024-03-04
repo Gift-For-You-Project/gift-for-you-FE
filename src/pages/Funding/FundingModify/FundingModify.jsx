@@ -46,18 +46,28 @@ import { NavbarDiv, IconDiv } from "../../Home/Signup/SignupStyles";
 const FundingModify = () => {
   const navigate = useNavigate();
   const { id } = useParams();
-  const [fundingData, setFundingData] = useState([
-    {
-      itemName: "",
-      showName: "",
-      title: "",
-      content: "",
-      targetAmount: 0,
-      publicFlag: "",
-      endDate: "",
-      itemImage: "",
-    },
-  ]);
+  // const [fundingData, setFundingData] = useState([
+  //   {
+  //     itemName: "",
+  //     showName: "",
+  //     title: "",
+  //     content: "",
+  //     targetAmount: 0,
+  //     publicFlag: "",
+  //     endDate: "",
+  //     itemImage: "",
+  //   },
+  // ]);
+  const [fundingData, setFundingData] = useState({
+    itemName: "",
+    showName: "",
+    title: "",
+    content: "",
+    targetAmount: 0,
+    publicFlag: "",
+    endDate: "",
+    itemImage: "",
+  });
 
   // 수정페이지로 상세페이지 데이터 불러오기
   useEffect(() => {
@@ -92,17 +102,23 @@ const FundingModify = () => {
 
       const data = await patchFundingModify(id, fundingData);
 
-      setFundingData(
-        fundingData.map((data) => {
-          if (data.id === id) {
-            return { ...data, fundingData };
-          } else {
-            return data;
-          }
-        })
-      );
+      // setFundingData(
+      //   fundingData.map((data) => {
+      //     if (data.id === id) {
+      //       return { ...data, fundingData };
+      //     } else {
+      //       return data;
+      //     }
+      //   })
+      // );
 
-      navigate(`/fundingdetail/${data.id}`); // 페이지 이동 안됨!
+      setFundingData({
+        ...fundingData,
+        data, // 수정된 데이터로 업데이트
+      });
+
+      // navigate(`/fundingdetail/${data.id}`); // 페이지 이동 안됨!
+      navigate(`/fundingdetail/${id}`);
     } catch (error) {
       console.error("펀딩 수정 오류");
     }
@@ -125,11 +141,12 @@ const FundingModify = () => {
   // 펀딩 종료 API
   const handlecompleteFundingClick = async () => {
     try {
-      // const id = window.confirm("정말 종료하시겠습니까?");
-      if (!id) {
-        // 유효한 id가 없으면 데이터를 요청하지 않음
-        return;
-      }
+      // if (!id) {
+      //   return;
+      // }
+      const confirmComplete = window.confirm("정말 종료하시겠습니까?");
+      if (!confirmComplete) return;
+      if (!id) return;
       const data = await endFundingModify(id); // 펀딩 상세 정보 가져오기
       setFundingData(data); // 가져온 데이터를 상태 변수에 설정
       // console.log("펀딩 종료 성공", data);
@@ -218,7 +235,7 @@ const FundingModify = () => {
                   <FundingImg
                     src={fundingData.itemImage}
                     alt="logo"
-                    h="120px"
+                    h="124px"
                     w="110px"
                   />
                 </SponsorComment>
@@ -278,7 +295,7 @@ const FundingModify = () => {
                   <SponserDiv>
                     <RadioInput
                       value="true"
-                      checked={fundingData.publicFlag === "true"}
+                      checked={fundingData.publicFlag === true}
                       onChange={(e) => {
                         setFundingData({
                           ...fundingData,
@@ -310,7 +327,7 @@ const FundingModify = () => {
                   <SponserDiv>
                     <RadioInput
                       value="false"
-                      checked={fundingData.publicFlag === "false"}
+                      checked={fundingData.publicFlag === false}
                       onChange={(e) => {
                         setFundingData({
                           ...fundingData,
