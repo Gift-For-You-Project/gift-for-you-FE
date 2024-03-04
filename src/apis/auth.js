@@ -64,14 +64,6 @@ export const getKakaoLogin = async (code) => {
 export const getKakaoAuthorizationCode = async () => {
   try {
     const authorizationUrl = process.env.REACT_APP_KAKAO_URL;
-    // const clientId = process.env.REACT_APP_KAKAO_CLIENT_ID;
-    // const params = {
-    //   client_id: clientId,
-    //   redirect_uri: process.env.REACT_APP_KAKAO_REDIRECT_URI,
-    //   response_type: "code",
-    //   scope: "account_email",
-    // };
-
     const response = await instance.get(authorizationUrl);
     const authorizationCode = response.data.code;
     return authorizationCode;
