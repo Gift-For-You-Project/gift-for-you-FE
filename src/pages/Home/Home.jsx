@@ -103,7 +103,7 @@ const Home = () => {
 
   // 카카오 로그인
   useEffect(() => {
-    if (location.state.type === "KAKAO_AUTH") {
+    if (location.state.type && location.state.type === "KAKAO_AUTH") {
       const code = location.state.code;
       handleKakaoLogin(code);
     }
