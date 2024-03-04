@@ -316,6 +316,19 @@ export const BetweenDiv = styled.div`
   padding-bottom: ${(props) => props.pb};
 `;
 
+export const ModifyDiv = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+  text-align: center;
+  width: -webkit-fill-available; /* 사용 가능한 너비로 채움 */
+  max-width: 390px; /* 최대 너비를 390px로 제한 */
+  margin: 0 auto; /* 가운데 정렬을 위해 margin을 auto로 설정 */
+  padding: 0px 33px 0px 33px;
+  padding-top: ${(props) => props.pt};
+  padding-bottom: ${(props) => props.pb};
+`;
+
 export const TogetherDiv = styled.div`
   background-color: ${(props) => props.bc};
   border-radius: 30px;
