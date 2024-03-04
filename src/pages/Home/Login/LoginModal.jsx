@@ -35,8 +35,7 @@ const LoginModal = ({ closeModal }) => {
 
   // 카카오 로그인 API
   const KakaoLogin = async () => {
-    const link = process.env.REACT_APP_KAKAO_URL;
-    window.location.href = link;
+    window.location.href = process.env.REACT_APP_KAKAO_URL;
   };
 
   return (

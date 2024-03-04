@@ -1,14 +1,14 @@
 import React, { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { getKakaoLogin } from "../../apis/auth";
-import { kakaoLogin } from "../../redux/authSlice";
+import { getGoogleLogin } from "../../apis/auth";
+import { googleLogin } from "../../redux/authSlice";
 import { useDispatch } from "react-redux";
 import { BarLoader } from "react-spinners";
 import { SpinnerContainer } from "./CallbacksStyle";
 import { successToast } from "../../components/toast";
 import theme from "../../styles/theme";
 
-const KakaoLogin = () => {
+const GoogleLogin = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -22,15 +22,15 @@ const KakaoLogin = () => {
         const code = params.get("code");
         console.log("params의 code값", code);
 
-        const data = await getKakaoLogin(code);
+        const data = await getGoogleLogin(code);
         if (data.status === 200) {
-          dispatch(kakaoLogin()); // Redux 액션 디스패치
+          dispatch(googleLogin()); // Redux 액션 디스패치
           navigate("/");
           successToast(data.message);
         }
       }
     } catch (error) {
-      console.error("카카오 로그인 오류: ", error);
+      console.error("구글 로그인 오류: ", error);
     }
   };
 
@@ -46,4 +46,4 @@ const KakaoLogin = () => {
   );
 };
 
-export default KakaoLogin;
+export default GoogleLogin;

@@ -8,7 +8,7 @@ import { GoDotFill } from "react-icons/go";
 import {
   fundingPayDonationReady,
   getFundingDonation,
-  getDonationApproval,
+  // getDonationApproval,
 } from "../../../apis/funding";
 import {
   MainContainer,
@@ -84,8 +84,6 @@ const FundingPay = ({ donation }) => {
         donation: sponsorDonation.donation,
       });
 
-      // console.log("결제 준비 성공: ", response);
-
       // 모바일이면 모바일 전용 URL로 리다이렉션
       if (isMobile) {
         window.location.href = response.result.next_redirect_mobile_url;
@@ -121,12 +119,12 @@ const FundingPay = ({ donation }) => {
         }));
 
         // 후원 결제승인 API 호출
-        if (params.has("pg_token")) {
-          const pg_token = params.get("pg_token");
-          await getDonationApproval(pg_token);
+        // if (params.has("pg_token")) {
+        //   const pg_token = params.get("pg_token");
+        //   await getDonationApproval(pg_token);
 
-          navigate(`/fundingdetail/${id}`);
-        }
+        //   navigate(`/fundingdetail/${id}`);
+        // }
       } catch (error) {
         console.error("결제 오류");
       }
