@@ -28,7 +28,7 @@ export const issueAccessToken = async () => {
 };
 
 // 구글 로그인 API
-export const postGoogleLogin = async (code) => {
+export const getGoogleLogin = async (code) => {
   // https://api.giftipie.me/api/login/oauth2/code/google?code=
 
   try {
@@ -44,7 +44,7 @@ export const postGoogleLogin = async (code) => {
 };
 
 // 카카오 로그인 API
-export const postKakaoLogin = async (code) => {
+export const getKakaoLogin = async (code) => {
   // https://api.giftipie.me/api/kakao/callback?code=
 
   try {
@@ -57,6 +57,27 @@ export const postKakaoLogin = async (code) => {
     }
   } catch (error) {
     console.error("카카오 로그인 오류 발생:", error);
+  }
+};
+
+// 카카오 로그인 인가 코드를 받아오는 함수
+export const getKakaoAuthorizationCode = async () => {
+  try {
+    const authorizationUrl = "https://kauth.kakao.com/oauth/authorize";
+    const clientId = process.env.REACT_APP_KAKAO_CLIENT_ID;
+    const params = {
+      client_id: clientId,
+      redirect_uri: process.env.REACT_APP_KAKAO_REDIRECT_URI,
+      response_type: "code",
+      scope: "account_email",
+    };
+
+    const response = await axios.get(authorizationUrl, { params });
+    const authorizationCode = response.data.code;
+    return authorizationCode;
+  } catch (error) {
+    console.error("카카오 로그인 인가 코드 요청 중 오류:", error);
+    throw error;
   }
 };
 

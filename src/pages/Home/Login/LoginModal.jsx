@@ -2,9 +2,13 @@ import React from "react";
 import { IoClose } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { googleLogin, kakaoLogin } from "../../../redux/authSlice";
+import {
+  googleLogin,
+  kakaoLogin,
+  getKakaoAuthorizationCode,
+} from "../../../redux/authSlice";
 import theme from "../../../styles/theme";
-import { postGoogleLogin, postKakaoLogin } from "../../../apis/auth";
+import { getGoogleLogin, getKakaoLogin } from "../../../apis/auth";
 import {
   ModalContainer,
   Background,
@@ -24,31 +28,24 @@ const LoginModal = ({ closeModal }) => {
   // 구글 로그인 API
   const GoogleLogin = async () => {
     try {
-      await postGoogleLogin();
+      await getGoogleLogin();
 
       dispatch(googleLogin()); // Redux 액션 디스패치
       navigate("/");
     } catch (error) {
-      // 에러 처리
-      console.error("구글 로그인 오류:", error);
+      console.error("구글 로그인 오류");
     }
   };
 
   // 카카오 로그인 API
   const KakaoLogin = async () => {
-    // const REST_API_KEY = process.env.REACT_APP_KAKAO_REST_API_KEY;
-    // const REDIRECT_URI = process.env.REACT_APP_KAKAO_REDIRECT_URI;
-    // const code = new URL(document.location.toString()).searchParams.get("code");
-    const link = process.env.REACT_APP_KAKAO_URL;
-
     try {
-      await postKakaoLogin();
+      const authorizationCode = await getKakaoAuthorizationCode();
+      await getKakaoLogin(authorizationCode);
 
       dispatch(kakaoLogin()); // Redux 액션 디스패치
-      window.location.href = link;
       navigate("/");
     } catch (error) {
-      // 에러 처리
       console.error("카카오 로그인 오류:", error);
     }
   };
