@@ -48,7 +48,7 @@ export const getKakaoLogin = async (code) => {
   // https://api.giftipie.me/api/kakao/callback?code=
 
   try {
-    const response = await instance.get(`/api/kakao/login?code=${code}`);
+    const response = await instance.get(`/api/kakao/callback?code=${code}`);
 
     if (response.status === 200) {
       console.log(response.data.message);
@@ -64,8 +64,7 @@ export const getKakaoLogin = async (code) => {
 export const getKakaoAuthorizationCode = async () => {
   try {
     const response = await axios.get(process.env.REACT_APP_KAKAO_URL);
-    const authorizationCode = response.data.code;
-    return authorizationCode;
+    return response.data;
   } catch (error) {
     console.error("카카오 로그인 인가 코드 요청 중 오류:", error);
     throw error;
