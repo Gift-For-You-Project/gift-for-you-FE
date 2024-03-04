@@ -192,10 +192,9 @@ export const fundingPayDonationReady = async ({
 export const getDonationApproval = async (pg_token) => {
   try {
     const response = await instance.get(
-      `/api/donation/approve?pg_token=${pg_token}` // https://api.giftipie.me
+      `/api/donation/approve?pg_token=${pg_token}`
     );
     if (response.data.isSuccess) {
-      // console.log("결제승인: ", response.data.result);
       return response.data;
     }
   } catch (error) {

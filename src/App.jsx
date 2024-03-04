@@ -18,6 +18,7 @@ import FundingPay from "./pages/Funding/FundingPay/FundingPay";
 import { useSelector } from "react-redux";
 import NotificationComponent from "./components/NotificationComponent";
 import Product from "./pages/Home/Product/Product";
+import GoogleLogin from "./pages/Callbacks/GoogleLogin";
 import KakaoLogin from "./pages/Callbacks/KakaoLogin";
 import KakaoPay from "./pages/Callbacks/KakaoPay";
 
@@ -57,6 +58,7 @@ function App() {
         <Route path="/fundingmodify/:id" element={<FundingModify />} />
         <Route path="/fundingpay/:id" element={<FundingPay />} />
         <Route path="/product" element={<Product />} />
+        <Route path="/api/google/login" element={<GoogleLogin />} />
         <Route path="/api/kakao/callback" element={<KakaoLogin />} />
         <Route path="/api/donation/approve" element={<KakaoPay />} />
         <Route path="*" element={<NotFound />} />
