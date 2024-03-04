@@ -18,6 +18,8 @@ import FundingPay from "./pages/Funding/FundingPay/FundingPay";
 import { useSelector } from "react-redux";
 import NotificationComponent from "./components/NotificationComponent";
 import Product from "./pages/Home/Product/Product";
+import KakaoLogin from "./pages/Callbacks/KakaoLogin";
+import KakaoPay from "./pages/Callbacks/KakaoPay";
 
 function App() {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
@@ -55,6 +57,8 @@ function App() {
         <Route path="/fundingmodify/:id" element={<FundingModify />} />
         <Route path="/fundingpay/:id" element={<FundingPay />} />
         <Route path="/product" element={<Product />} />
+        <Route path="/api/kakao/callback" element={<KakaoLogin />} />
+        <Route path="/api/donation/approve" element={<KakaoPay />} />
         <Route path="*" element={<NotFound />} />
         {/* isLoggedIn이 true일 때만 NotificationComponent 렌더링 */}
         {isLoggedIn && <Route path="*" element={<NotificationComponent />} />}
