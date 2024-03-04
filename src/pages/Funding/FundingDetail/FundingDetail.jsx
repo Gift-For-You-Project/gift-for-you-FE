@@ -183,19 +183,9 @@ const FundingDetail = () => {
   };
 
   const renderModifyBtn = () => {
-    // if (detailData.ownerFlag) {
-    //   return (
-    //     <NavigateBtn onClick={() => navigate(`/fundingModify/${id}`)}>
-    //       <IconButtonImg src="/imgs/Funding/FundingDetail/modify-icon.svg" />{" "}
-    //       수정하기
-    //     </NavigateBtn>
-    //   );
-    // }
-    // // ownerFlag가 false일 경우, 버튼을 숨김
-    // return null;
-
     if (detailData.status === "FINISHED") {
       // 종료된 펀딩일 때 버튼 비활성화 및 메시지 출력
+      warnToast("종료된 펀딩은 수정할 수 없어요.");
       return (
         <NavigateBtn disabled>
           <IconButtonImg src="/imgs/Funding/FundingDetail/modify-icon.svg" />{" "}
