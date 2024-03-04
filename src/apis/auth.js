@@ -32,7 +32,7 @@ export const postGoogleLogin = async (code) => {
   // https://api.giftipie.me/api/login/oauth2/code/google?code=
 
   try {
-    const response = await instance.post(`/api/google/login?code=${code}`);
+    const response = await instance.get(`/api/google/login?code=${code}`);
     if (response.status === 200) {
       console.log(response.data.message);
       successToast(response.data.message);
@@ -48,7 +48,7 @@ export const postKakaoLogin = async (code) => {
   // https://api.giftipie.me/api/kakao/callback?code=
 
   try {
-    const response = await instance.post(`/api/kakao/login?code=${code}`);
+    const response = await instance.get(`/api/kakao/login?code=${code}`);
 
     if (response.status === 200) {
       console.log(response.data.message);
