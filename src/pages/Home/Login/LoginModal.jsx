@@ -1,14 +1,10 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { IoClose } from "react-icons/io5";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { googleLogin, kakaoLogin } from "../../../redux/authSlice";
+import { googleLogin } from "../../../redux/authSlice";
 import theme from "../../../styles/theme";
-import {
-  getGoogleLogin,
-  getKakaoLogin,
-  getKakaoAuthorizationCode,
-} from "../../../apis/auth";
+import { getGoogleLogin } from "../../../apis/auth";
 import {
   ModalContainer,
   Background,
@@ -24,7 +20,6 @@ import {
 const LoginModal = ({ closeModal }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const location = useLocation();
 
   // 구글 로그인 API
   const GoogleLogin = async () => {
@@ -43,29 +38,6 @@ const LoginModal = ({ closeModal }) => {
     const link = process.env.REACT_APP_KAKAO_URL;
     window.location.href = link;
   };
-
-  useEffect(() => {
-    const getData = async () => {
-      try {
-        const params = new URLSearchParams(location.search);
-        const code = await getKakaoAuthorizationCode();
-        console.log("code값", code);
-
-        if (params.has("code")) {
-          const code = params.get("code");
-          console.log("params의 code값", code);
-          await getKakaoLogin(code);
-
-          dispatch(kakaoLogin()); // Redux 액션 디스패치
-          navigate("/");
-        }
-      } catch (error) {
-        console.error("카카오 로그인 오류: ", error);
-      }
-    };
-
-    getData();
-  }, [location.search, dispatch, navigate]);
 
   return (
     <>
