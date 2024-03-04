@@ -50,9 +50,7 @@ export const getKakaoLogin = async (code) => {
   try {
     const response = await instance.get(`/api/kakao/callback?code=${code}`);
 
-    if (response.status === 200) {
-      console.log(response.data.message);
-      successToast(response.data.message);
+    if (response.data.isSuccess) {
       return response.data;
     }
   } catch (error) {
