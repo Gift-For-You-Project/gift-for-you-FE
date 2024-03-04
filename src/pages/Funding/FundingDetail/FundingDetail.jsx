@@ -194,13 +194,20 @@ const FundingDetail = () => {
           수정하기
         </NavigateBtn>
       );
-    } else {
+    } else if (detailData.ownerFlag) {
+      // ownerFlag가 true일 때 내 펀딩 관리 기능 추가
       return (
         <NavigateBtn onClick={() => navigate(`/fundingModify/${id}`)}>
+          <P fs={theme.detail2} color={theme.gray2} pt="5px" fw="500">
+            내 펀딩 관리
+          </P>
           <IconButtonImg src="/imgs/Funding/FundingDetail/modify-icon.svg" />{" "}
           수정하기
         </NavigateBtn>
       );
+    } else {
+      // ownerFlag가 false일 경우, 버튼을 숨김
+      return null;
     }
   };
 
