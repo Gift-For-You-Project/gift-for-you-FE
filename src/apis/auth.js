@@ -61,16 +61,16 @@ export const getKakaoLogin = async (code) => {
 };
 
 // 카카오 로그인 인가 코드를 받아오는 함수
-export const getKakaoAuthorizationCode = async () => {
-  try {
-    const response = await axios.get(process.env.REACT_APP_KAKAO_URL);
-    console.log(response.data.code);
-    return response.data.code;
-  } catch (error) {
-    console.error("카카오 로그인 인가 코드 요청 중 오류:", error);
-    throw error;
-  }
-};
+// export const getKakaoAuthorizationCode = async () => {
+//   try {
+//     const response = await axios.get(process.env.REACT_APP_KAKAO_URL);
+//     console.log(response.data.code);
+//     return response.data.code;
+//   } catch (error) {
+//     console.error("카카오 로그인 인가 코드 요청 중 오류:", error);
+//     throw error;
+//   }
+// };
 
 // 회원가입 API
 export const signup = async (userData) => {

@@ -7,7 +7,7 @@ import theme from "../../../styles/theme";
 import {
   getGoogleLogin,
   getKakaoLogin,
-  getKakaoAuthorizationCode,
+  // getKakaoAuthorizationCode,
 } from "../../../apis/auth";
 import {
   ModalContainer,
@@ -42,31 +42,14 @@ const LoginModal = ({ closeModal }) => {
   const KakaoLogin = async () => {
     const link = process.env.REACT_APP_KAKAO_URL;
     window.location.href = link;
-
-    try {
-      const params = new URLSearchParams(location.search);
-      const code = await getKakaoAuthorizationCode();
-      console.log("code값", code);
-
-      if (params.has("code")) {
-        const codeFromParams = params.get("code");
-        console.log("params의 code값", codeFromParams);
-        await getKakaoLogin(codeFromParams);
-
-        dispatch(kakaoLogin()); // Redux 액션 디스패치
-        navigate("/");
-      }
-    } catch (error) {
-      console.error("카카오 로그인 오류: ", error);
-    }
   };
 
   useEffect(() => {
     const getData = async () => {
       try {
         const params = new URLSearchParams(location.search);
-        const code = await getKakaoAuthorizationCode();
-        console.log("code값", code);
+        // const code = await getKakaoAuthorizationCode();
+        // console.log("code값", code);
 
         if (params.has("code")) {
           const codeFromParams = params.get("code");
