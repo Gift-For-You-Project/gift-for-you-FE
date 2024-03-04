@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import {} from "./NotFoundStyles";
 import theme from "../../styles/theme";
 import Navbar from "../../components/Navbar";
@@ -32,6 +32,7 @@ import {
 
 const NotFound = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const dispatch = useDispatch();
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
@@ -50,6 +51,34 @@ const NotFound = () => {
       "https://docs.google.com/forms/d/1h4jvN1LE4Z8mAgNYxqcsZR9S0I5PB_nTDpVbqYcn-mc/edit",
       "_blank"
     );
+  };
+
+  useEffect(() => {
+    if (location.pathname.includes("/api/kakao/callback")) {
+      getData();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [location.pathname]);
+
+  const getData = async () => {
+    try {
+      const params = new URLSearchParams(location.search);
+      console.log("params", params);
+      if (params.has("code")) {
+        const code = params.get("code");
+        console.log("params의 code값", code);
+
+        navigate("/", {
+          replace: true,
+          state: {
+            type: "KAKAO_AUTH",
+            code,
+          },
+        });
+      }
+    } catch (error) {
+      console.error("카카오 로그인 오류: ", error);
+    }
   };
 
   return (

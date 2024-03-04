@@ -56,6 +56,7 @@ export const getKakaoLogin = async (code) => {
     }
   } catch (error) {
     console.error("카카오 로그인 오류 발생:", error);
+    return false;
   }
 };
 

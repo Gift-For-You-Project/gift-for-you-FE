@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { FaPlus, FaAngleRight } from "react-icons/fa6";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import LoginModal from "../Home/Login/LoginModal";
 import { useDispatch, useSelector } from "react-redux";
 import { bootChannelTalk } from "../../redux/channelTalkSlice";
@@ -13,6 +13,7 @@ import {
   getHomeFundingList,
   getFundingSummary,
 } from "../../apis/home";
+import { getKakaoLogin } from "../../apis/auth";
 import {
   MainContainer,
   LeftContainer,
@@ -71,6 +72,7 @@ import {
 const Home = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const location = useLocation();
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [homeFundingList, setHomeFundingList] = useState([]);
@@ -93,6 +95,19 @@ const Home = () => {
     ownerFlag: false,
     modifiedAt: "",
   });
+
+  const handleKakaoLogin = async (code) => {
+    const resp = await getKakaoLogin(code);
+    // dispatch(kakaoLogin()); // Redux 액션 디스패치
+  };
+
+  // 카카오 로그인
+  useEffect(() => {
+    if (location.state.type === "KAKAO_AUTH") {
+      const code = location.state.code;
+      handleKakaoLogin(code);
+    }
+  }, []);
 
   const closeModal = () => setIsLoginModalOpen(false);
   const handleLoginClick = () => setIsLoginModalOpen(true);
