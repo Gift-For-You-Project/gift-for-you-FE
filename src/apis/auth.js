@@ -48,7 +48,7 @@ export const getKakaoLogin = async (code) => {
   // https://api.giftipie.me/api/kakao/callback?code=
 
   try {
-    const response = await instance.get(`/api/kakao/login?code=${code}`);
+    const response = await instance.get(`/api/kakao/callback?code=${code}`);
 
     if (response.status === 200) {
       console.log(response.data.message);
@@ -63,7 +63,7 @@ export const getKakaoLogin = async (code) => {
 // 카카오 로그인 인가 코드를 받아오는 함수
 export const getKakaoAuthorizationCode = async () => {
   try {
-    const authorizationUrl = "https://kauth.kakao.com/oauth/authorize";
+    const authorizationUrl = process.env.REACT_APP_KAKAO_URL;
     const clientId = process.env.REACT_APP_KAKAO_CLIENT_ID;
     const params = {
       client_id: clientId,
@@ -72,7 +72,7 @@ export const getKakaoAuthorizationCode = async () => {
       scope: "account_email",
     };
 
-    const response = await axios.get(authorizationUrl, { params });
+    const response = await instance.get(authorizationUrl, { params });
     const authorizationCode = response.data.code;
     return authorizationCode;
   } catch (error) {
