@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { IoClose } from "react-icons/io5";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -40,16 +40,15 @@ const LoginModal = ({ closeModal }) => {
 
   // 카카오 로그인 API
   const KakaoLogin = async () => {
-    const link = process.env.REACT_APP_KAKAO_URL;
-    window.location.href = link;
-
     try {
       const params = new URLSearchParams(location.search);
-      await getKakaoAuthorizationCode();
+      const code = await getKakaoAuthorizationCode();
+      console.log("code값", code);
 
       if (params.has("code")) {
-        const code = params.get("code");
-        await getKakaoLogin(code);
+        const codeFromParams = params.get("code");
+        console.log("params의 code값", codeFromParams);
+        await getKakaoLogin(codeFromParams);
 
         dispatch(kakaoLogin()); // Redux 액션 디스패치
         navigate("/");
@@ -58,6 +57,29 @@ const LoginModal = ({ closeModal }) => {
       console.error("카카오 로그인 오류: ", error);
     }
   };
+
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const params = new URLSearchParams(location.search);
+        const code = await getKakaoAuthorizationCode();
+        console.log("code값", code);
+
+        if (params.has("code")) {
+          const codeFromParams = params.get("code");
+          console.log("params의 code값", codeFromParams);
+          await getKakaoLogin(codeFromParams);
+
+          dispatch(kakaoLogin()); // Redux 액션 디스패치
+          navigate("/");
+        }
+      } catch (error) {
+        console.error("카카오 로그인 오류: ", error);
+      }
+    };
+
+    getData();
+  }, [location.search, dispatch, navigate]);
 
   return (
     <>
