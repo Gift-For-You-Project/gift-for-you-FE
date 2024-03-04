@@ -358,7 +358,9 @@ const FundingModify = () => {
                 </div>
               </SponserDiv>
               <InputLabel>
-                <InputSpan>보여줄 이름 (12자 이내)</InputSpan>
+                <InputSpan>
+                  보여줄 이름 ({`${fundingData.showName.length}/12`}자 이내)
+                </InputSpan>
                 <InputInput
                   type="text"
                   value={fundingData.showName}
@@ -373,7 +375,9 @@ const FundingModify = () => {
               </InputLabel>
 
               <InputLabel>
-                <InputSpan>제목 (25자 이내)</InputSpan>
+                <InputSpan>
+                  제목 ({`${fundingData.title.length}/25`}자 이내)
+                </InputSpan>
                 <InputInput
                   type="text"
                   value={fundingData.title}
@@ -385,7 +389,9 @@ const FundingModify = () => {
               </InputLabel>
 
               <InputLabel>
-                <InputSpan>본문 (200자 이내)</InputSpan>
+                <InputSpan>
+                  본문 ({`${fundingData.content.length}/200`}자 이내)
+                </InputSpan>
                 <Textarea
                   type="textarea"
                   placeholder="본문을 입력해주세요"

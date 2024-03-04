@@ -183,7 +183,6 @@ export const TogetherDiv = styled.div`
   border-radius: 30px 30px 0px 0px;
   width: -webkit-fill-available; /* 사용 가능한 너비로 채움 */
   max-width: 390px; /* 최대 너비를 390px로 제한 */
-  height: 100vh;
   max-height: -webkit-fill-available; /*사용 가능한 너비로 채움*/
   margin: 0 auto; /* 가운데 정렬을 위해 margin을 auto로 설정 */
   padding: 20px;

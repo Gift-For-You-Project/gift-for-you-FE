@@ -250,12 +250,14 @@ const FundingCreate = () => {
                       <GrAdd fontSize={theme.title} color={theme.gray3} />
                     </ImgPlus>
                     <ImgText>
-                      {itemImage ? "이미지 변경" : "이미지 등록"}
+                      {itemImage ? "상품 URL 변경" : "상품 URL 등록"}
                     </ImgText>
                   </SponsorComment>
                   <ColumnDiv>
                     <TitleLabel>
-                      <InputSpan>상품명 (25자 이내)</InputSpan>
+                      <InputSpan>
+                        상품명 ({`${createData.itemName.length}/25`}자 이내)
+                      </InputSpan>
                       <InputInput
                         type="text"
                         value={createData.itemName}
@@ -281,7 +283,7 @@ const FundingCreate = () => {
                 )}
               </TogetherDiv>
 
-              <TogetherDiv bc={theme.white}>
+              <TogetherDiv m="14px 0" bc={theme.white}>
                 <SponserDiv>
                   <OpenPrivateComment mt="5px">
                     <P pb="5px" fw="500" fs={theme.title} color={theme.black}>
@@ -309,7 +311,7 @@ const FundingCreate = () => {
                       </P>
                       <P
                         pb="20px"
-                        pl="44px"
+                        pl="40px"
                         fs={theme.detail}
                         color={theme.gray2}
                       >
@@ -335,7 +337,7 @@ const FundingCreate = () => {
                       </P>
                       <P
                         pb="20px"
-                        pl="30px"
+                        pl="28px"
                         fs={theme.detail}
                         color={theme.gray2}
                       >
@@ -346,7 +348,9 @@ const FundingCreate = () => {
                 </SponserDiv>
 
                 <InputLabel>
-                  <InputSpan>보여줄 이름 (12자 이내)</InputSpan>
+                  <InputSpan>
+                    보여줄 이름 ({`${createData.showName.length}/12`}자 이내)
+                  </InputSpan>
                   <InputInput
                     type="text"
                     value={createData.showName}
@@ -355,7 +359,9 @@ const FundingCreate = () => {
                 </InputLabel>
 
                 <InputLabel>
-                  <InputSpan>제목 (25자 이내)</InputSpan>
+                  <InputSpan>
+                    제목 ({`${createData.title.length}/25`}자 이내)
+                  </InputSpan>
                   <InputInput
                     type="text"
                     value={createData.title}
@@ -364,7 +370,9 @@ const FundingCreate = () => {
                 </InputLabel>
 
                 <InputLabel>
-                  <InputSpan>본문 (200자 이내)</InputSpan>
+                  <InputSpan>
+                    본문 ({`${createData.content.length}/200`}자 이내)
+                  </InputSpan>
                   <Textarea
                     type="textarea"
                     value={createData.content}

@@ -173,8 +173,7 @@ export const TogetherDiv = styled.div`
   background-color: ${(props) => props.bc};
   border-radius: 30px;
   border-radius: ${(props) => props.br};
-  margin: 0 auto; /* 가운데 정렬을 위해 margin을 auto로 설정 */
-  margin-bottom: 15px;
+  margin: ${(props) => props.m};
   padding: 20px;
   height: ${(props) => props.h};
 `;
@@ -230,9 +229,10 @@ export const SponsorComment = styled.div`
   border-radius: 10px;
   height: 100px;
   position: relative; /* 추가된 부분 */
+  cursor: pointer;
 `;
 
-export const ImgPlus = styled.h1`
+export const ImgPlus = styled.p`
   display: ${(props) => (props.show ? "block" : "none")}; /* 수정된 부분 */
   position: absolute; /* 추가된 부분 */
   top: 65%; /* 추가된 부분 */
@@ -240,8 +240,8 @@ export const ImgPlus = styled.h1`
   transform: translate(-50%, -50%); /* 추가된 부분 */
 `;
 
-export const ImgText = styled.h1`
-  transform: translate(22%, -215%);
+export const ImgText = styled.p`
+  transform: translate(17%, -215%);
   color: ${theme.gray3};
   font-size: ${theme.detail};
   &:hover {
