@@ -184,8 +184,8 @@ const FundingDetail = () => {
   };
 
   const renderModifyBtn = () => {
-    if (detailData.status === "FINISHED") {
-      // 종료된 펀딩일 때 버튼 비활성화 및 메시지 출력
+    if (detailData.status === "FINISHED" && detailData.ownerFlag) {
+      // 종료된 펀딩이면서 ownerFlag가 true일 때 수정 가능
       return (
         <NavigateBtn
           onClick={() => warnToast("종료된 펀딩은 수정할 수 없어요.")}
@@ -195,7 +195,7 @@ const FundingDetail = () => {
         </NavigateBtn>
       );
     } else if (detailData.ownerFlag) {
-      // ownerFlag가 true일 때 내 펀딩 관리 기능 추가
+      // ownerFlag가 true일 때 수정 가능
       return (
         <NavigateBtn onClick={() => navigate(`/fundingModify/${id}`)}>
           <P fs={theme.detail2} color={theme.gray2} pt="5px" fw="500">
