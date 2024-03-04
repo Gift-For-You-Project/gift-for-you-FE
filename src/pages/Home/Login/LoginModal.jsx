@@ -33,7 +33,7 @@ const LoginModal = ({ closeModal }) => {
       dispatch(googleLogin()); // Redux 액션 디스패치
       navigate("/");
     } catch (error) {
-      console.error("구글 로그인 오류");
+      console.error("구글 로그인 오류: ", error);
     }
   };
 
@@ -46,7 +46,7 @@ const LoginModal = ({ closeModal }) => {
       dispatch(kakaoLogin()); // Redux 액션 디스패치
       navigate("/");
     } catch (error) {
-      console.error("카카오 로그인 오류:", error);
+      console.error("카카오 로그인 오류: ", error);
     }
   };
 
