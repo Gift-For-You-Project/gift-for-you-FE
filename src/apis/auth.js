@@ -63,8 +63,7 @@ export const getKakaoLogin = async (code) => {
 // 카카오 로그인 인가 코드를 받아오는 함수
 export const getKakaoAuthorizationCode = async () => {
   try {
-    const authorizationUrl = process.env.REACT_APP_KAKAO_URL;
-    const response = await instance.get(authorizationUrl);
+    const response = await axios.get(process.env.REACT_APP_KAKAO_URL);
     const authorizationCode = response.data.code;
     return authorizationCode;
   } catch (error) {

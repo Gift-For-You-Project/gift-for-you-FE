@@ -39,10 +39,12 @@ const LoginModal = ({ closeModal }) => {
 
   // 카카오 로그인 API
   const KakaoLogin = async () => {
+    const link = process.env.REACT_APP_KAKAO_URL;
+
     try {
+      window.location.href = link;
       const authorizationCode = await getKakaoAuthorizationCode();
       await getKakaoLogin(authorizationCode);
-
       dispatch(kakaoLogin()); // Redux 액션 디스패치
       navigate("/");
     } catch (error) {
