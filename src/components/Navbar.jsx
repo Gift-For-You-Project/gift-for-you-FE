@@ -1,7 +1,5 @@
 import React from "react";
-// import { FaAngleLeft } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
-// import theme from "../styles/theme";
 import {
   NavbarIconContainer,
   NavbarLogoBtn,
@@ -27,12 +25,8 @@ const Navbar = ({ isLoggedIn, handleLoginClick, handleLogoutClick }) => {
     <>
       <NavbarIconContainer>
         <NavbarBtn onClick={handleNotificationClick} pt="10px">
-          {/* <img src="/imgs/Home/no-notification.svg" alt="notification" /> */}
           <NotificationComponent />
         </NavbarBtn>
-        {/* <NavbarBtn pt="10px">
-          <img src="/imgs/Home/login.svg" alt="login" />
-        </NavbarBtn> */}
         <NavbarBtn onClick={handleLogoutClick} fs="24px" pt="10px">
           <img src="/imgs/Home/logout.svg" alt="logout" />
         </NavbarBtn>

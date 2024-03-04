@@ -28,51 +28,35 @@ export const issueAccessToken = async () => {
 };
 
 // 구글 로그인 API
-export const postGoogleLogin = async () => {
-  const code = new URL(document.location.toString()).searchParams.get("code");
+export const postGoogleLogin = async (code) => {
+  // https://api.giftipie.me/api/login/oauth2/code/google?code=
 
   try {
-    const response = await instance.post("/api/google/login", { code });
+    const response = await instance.post(`/api/google/login?code=${code}`);
     if (response.status === 200) {
       console.log(response.data.message);
       successToast(response.data.message);
+      return response.data;
     }
   } catch (error) {
-    if (error.response && error.response.status === 401) {
-      console.error("API 호출 중 401 에러 발생");
-      errorToast(error.response.message);
-    } else {
-      // 기타 에러 처리
-      console.error("API 호출 중 에러 발생: ", error);
-      errorToast("구글 로그인 중 오류가 발생했습니다.");
-    }
+    console.error("구글 로그인 오류 발생:", error);
   }
 };
 
 // 카카오 로그인 API
-export const postKakaoLogin = async () => {
-  const code = new URL(document.location.toString()).searchParams.get("code");
-  console.log("code: ", code);
+export const postKakaoLogin = async (code) => {
+  // https://api.giftipie.me/api/kakao/callback?code=
 
   try {
-    const response = await instance.post(`/api/kakao/login`, { code });
-    console.log("code: ", code);
+    const response = await instance.post(`/api/kakao/login?code=${code}`);
 
     if (response.status === 200) {
       console.log(response.data.message);
       successToast(response.data.message);
+      return response.data;
     }
   } catch (error) {
-    if (error.response && error.response.status === 404) {
-      console.error("API 호출 중 401 에러 발생");
-      errorToast(error.response.message);
-      console.log("code: ", code);
-    } else {
-      // 기타 에러 처리
-      console.error("API 호출 중 에러 발생: ", error);
-      errorToast("카카오 로그인 중 오류가 발생했습니다.");
-      console.log("code: ", code);
-    }
+    console.error("카카오 로그인 오류 발생:", error);
   }
 };
 
@@ -134,9 +118,9 @@ export const login = async (credentials) => {
     const response = await instance.post("/api/login", credentials);
 
     if (response.status === 200) {
-      const { code, message, result } = response.data;
+      const { code, message } = response.data;
 
-      if (code === 2000 && result) {
+      if (code === 2000) {
         successToast(message);
       } else {
         console.error("올바르지 않은 응답 형식 또는 값");
