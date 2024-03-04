@@ -46,18 +46,6 @@ import { NavbarDiv, IconDiv } from "../../Home/Signup/SignupStyles";
 const FundingModify = () => {
   const navigate = useNavigate();
   const { id } = useParams();
-  // const [fundingData, setFundingData] = useState([
-  //   {
-  //     itemName: "",
-  //     showName: "",
-  //     title: "",
-  //     content: "",
-  //     targetAmount: 0,
-  //     publicFlag: "",
-  //     endDate: "",
-  //     itemImage: "",
-  //   },
-  // ]);
   const [fundingData, setFundingData] = useState({
     itemName: "",
     showName: "",
@@ -102,22 +90,11 @@ const FundingModify = () => {
 
       const data = await patchFundingModify(id, fundingData);
 
-      // setFundingData(
-      //   fundingData.map((data) => {
-      //     if (data.id === id) {
-      //       return { ...data, fundingData };
-      //     } else {
-      //       return data;
-      //     }
-      //   })
-      // );
-
       setFundingData({
         ...fundingData,
         data, // 수정된 데이터로 업데이트
       });
 
-      // navigate(`/fundingdetail/${data.id}`); // 페이지 이동 안됨!
       navigate(`/fundingdetail/${id}`);
     } catch (error) {
       console.error("펀딩 수정 오류");

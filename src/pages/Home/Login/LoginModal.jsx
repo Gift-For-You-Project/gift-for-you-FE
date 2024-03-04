@@ -1,10 +1,7 @@
 import React from "react";
 import { IoClose } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { googleLogin } from "../../../redux/authSlice";
 import theme from "../../../styles/theme";
-import { getGoogleLogin } from "../../../apis/auth";
 import {
   ModalContainer,
   Background,
@@ -18,19 +15,11 @@ import {
 } from "./LoginModalStyles";
 
 const LoginModal = ({ closeModal }) => {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   // 구글 로그인 API
   const GoogleLogin = async () => {
-    try {
-      await getGoogleLogin();
-
-      dispatch(googleLogin()); // Redux 액션 디스패치
-      navigate("/");
-    } catch (error) {
-      console.error("구글 로그인 오류: ", error);
-    }
+    window.location.href = process.env.REACT_APP_GOOGLE_URL;
   };
 
   // 카카오 로그인 API

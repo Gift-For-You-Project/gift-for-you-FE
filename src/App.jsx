@@ -4,8 +4,6 @@ import NotFound from "./pages/NotFound/NotFound";
 import Home from "./pages/Home/Home";
 import Login from "./pages/Home/Login/Login";
 import Signup from "./pages/Home/Signup/Signup";
-import Service from "./pages/Home/Signup/TermsAgreement/Service";
-import Privacy from "./pages/Home/Signup/TermsAgreement/Privacy";
 import RecentFunding from "./pages/Home/RecentFunding/RecentFunding";
 import RecentFundingProgress from "./pages/Home/RecentFunding/RecentFundingProgress";
 import RecentFundingComplete from "./pages/Home/RecentFunding/RecentFundingComplete";
@@ -40,8 +38,6 @@ function App() {
         <Route path="/kakao/callback" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
-        <Route path="/signup/service" element={<Service />} />
-        <Route path="/signup/privacy" element={<Privacy />} />
         <Route path="/recentfunding" element={<RecentFunding />} />
         <Route
           path="/recentfunding/progress"
@@ -62,7 +58,6 @@ function App() {
         <Route path="/api/kakao/callback" element={<KakaoLogin />} />
         <Route path="/api/donation/approve" element={<KakaoPay />} />
         <Route path="*" element={<NotFound />} />
-        {/* isLoggedIn이 true일 때만 NotificationComponent 렌더링 */}
         {isLoggedIn && <Route path="*" element={<NotificationComponent />} />}
       </Routes>
     </Router>
