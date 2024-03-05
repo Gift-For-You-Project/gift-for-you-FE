@@ -56,7 +56,7 @@ function App() {
         <Route path="/product" element={<Product />} />
         <Route path="/api/login/oauth2/code/google" element={<GoogleLogin />} />
         <Route path="/api/kakao/callback" element={<KakaoLogin />} />
-        <Route path="/api/donation/approve" element={<KakaoPay />} />
+        <Route path="/api/donation" element={<KakaoPay />} />
         <Route path="*" element={<NotFound />} />
         {isLoggedIn && <Route path="*" element={<NotificationComponent />} />}
       </Routes>
