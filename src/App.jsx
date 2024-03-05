@@ -54,7 +54,7 @@ function App() {
         <Route path="/fundingmodify/:id" element={<FundingModify />} />
         <Route path="/fundingpay/:id" element={<FundingPay />} />
         <Route path="/product" element={<Product />} />
-        <Route path="/api/google/login" element={<GoogleLogin />} />
+        <Route path="/api/login/oauth2/code/google" element={<GoogleLogin />} />
         <Route path="/api/kakao/callback" element={<KakaoLogin />} />
         <Route path="/api/donation/approve" element={<KakaoPay />} />
         <Route path="*" element={<NotFound />} />
