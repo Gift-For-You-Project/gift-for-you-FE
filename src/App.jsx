@@ -19,6 +19,8 @@ import Product from "./pages/Home/Product/Product";
 import GoogleLogin from "./pages/Callbacks/GoogleLogin";
 import KakaoLogin from "./pages/Callbacks/KakaoLogin";
 import KakaoPay from "./pages/Callbacks/KakaoPay";
+import KakaoPayCancel from "./pages/Callbacks/KakaoPayCancel";
+import KakaoPayFail from "./pages/Callbacks/KakaoPayFail";
 
 function App() {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
@@ -57,6 +59,8 @@ function App() {
         <Route path="/api/login/oauth2/code/google" element={<GoogleLogin />} />
         <Route path="/api/kakao/callback" element={<KakaoLogin />} />
         <Route path="/api/donation/approve" element={<KakaoPay />} />
+        <Route path="/api/donation/cancel" element={<KakaoPayCancel />} />
+        <Route path="/api/donation/fail" element={<KakaoPayFail />} />
         <Route path="*" element={<NotFound />} />
         {isLoggedIn && <Route path="*" element={<NotificationComponent />} />}
       </Routes>
