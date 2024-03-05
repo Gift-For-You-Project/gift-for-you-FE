@@ -23,7 +23,8 @@ const GoogleLogin = () => {
         console.log("params의 code값", code);
 
         const data = await getGoogleLogin(code);
-        if (data.status === 200) {
+        console.log("data", data);
+        if (data.isSuccess === true) {
           dispatch(googleLogin()); // Redux 액션 디스패치
           navigate("/");
           successToast(data.message);
