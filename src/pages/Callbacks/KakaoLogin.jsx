@@ -20,10 +20,8 @@ const KakaoLogin = () => {
 
       if (params.has("code")) {
         const code = params.get("code");
-        console.log("params의 code값", code);
-
         const data = await getKakaoLogin(code);
-        console.log("data", data);
+
         if (data.isSuccess === true) {
           dispatch(kakaoLogin()); // Redux 액션 디스패치
           navigate("/");
@@ -31,7 +29,7 @@ const KakaoLogin = () => {
         }
       }
     } catch (error) {
-      console.error("카카오 로그인 오류: ", error);
+      console.error("카카오 로그인 오류");
     }
   };
 

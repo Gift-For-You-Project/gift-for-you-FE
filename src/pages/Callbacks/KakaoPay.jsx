@@ -4,6 +4,7 @@ import { getDonationApproval } from "../../apis/funding";
 import { BarLoader } from "react-spinners";
 import { SpinnerContainer } from "./CallbacksStyle";
 import theme from "../../styles/theme";
+import { successToast } from "../../components/toast";
 
 const KakaoLogin = () => {
   const location = useLocation();
@@ -17,14 +18,17 @@ const KakaoLogin = () => {
       }
 
       const params = new URLSearchParams(location.search);
-      console.log("params", params);
 
       // 후원 결제승인 API 호출
       if (params.has("pg_token")) {
         const pg_token = params.get("pg_token");
-        console.log("params의 code값", pg_token);
-        await getDonationApproval(pg_token);
-        navigate(`/fundingdetail/${id}`);
+        const data = await getDonationApproval(pg_token);
+        console.log("data:", data);
+
+        if (data.isSuccess === true) {
+          navigate(`/fundingdetail/${id}`);
+          successToast(data.message);
+        }
       }
     } catch (error) {
       console.error("결제 오류: ", error);
