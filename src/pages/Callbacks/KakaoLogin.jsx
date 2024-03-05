@@ -24,7 +24,7 @@ const KakaoLogin = () => {
 
         const data = await getKakaoLogin(code);
         console.log("data", data);
-        if (data.status === 200) {
+        if (data.isSuccess === true) {
           dispatch(kakaoLogin()); // Redux 액션 디스패치
           navigate("/");
           successToast(data.message);
