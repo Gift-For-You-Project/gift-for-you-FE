@@ -245,7 +245,7 @@ const FundingCreate = () => {
                 </P>
                 <ProducImgtDiv>
                   <SponsorComment onClick={handleFundingModalClick}>
-                    <FundingImg src={itemImage} h="120px" w="110px" />
+                    <FundingImg src={itemImage} h="129px" w="110px" />
                     <ImgPlus show={!itemImage}>
                       <GrAdd fontSize={theme.title} color={theme.gray3} />
                     </ImgPlus>
@@ -289,7 +289,7 @@ const FundingCreate = () => {
                     <P pb="5px" fw="500" fs={theme.title} color={theme.black}>
                       펀딩 내용
                     </P>
-                    <P pb="10px" fs={theme.detail} color={theme.gray2}>
+                    <P pb="10px" pl="1px" fs={theme.detail} color={theme.gray2}>
                       공개 방식
                     </P>
                     <SponserDiv>
@@ -381,7 +381,7 @@ const FundingCreate = () => {
                 </InputLabel>
               </TogetherDiv>
 
-              <TogetherDiv h="30vh" bc={theme.white} br="30px 30px 0px 0px">
+              <TogetherDiv h="24vh" bc={theme.white} br="30px 30px 0px 0px">
                 <InputLabel>
                   <InputSpan>마감일 설정</InputSpan>
                   <InputInput
@@ -394,7 +394,7 @@ const FundingCreate = () => {
                 <Button
                   onClick={handleFundingClick}
                   w="100%"
-                  h="60px"
+                  h="48px"
                   mt="10px"
                   mb="10px"
                   color="white"

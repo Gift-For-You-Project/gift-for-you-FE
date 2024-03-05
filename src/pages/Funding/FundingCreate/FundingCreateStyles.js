@@ -129,15 +129,16 @@ export const Button = styled.button`
   height: ${(props) => props.h};
   padding: 10px;
   background-color: ${(props) => props.bc};
-  border-radius: 15px;
+  border-radius: 16px;
   color: ${(props) => props.color};
   font-size: ${(props) => props.fs};
-  font-weight: 600;
   margin-top: ${(props) => props.mt};
   margin-bottom: ${(props) => props.mb};
   padding-left: ${(props) => props.pl};
   padding-right: ${(props) => props.pr};
   padding-right: ${(props) => props.pr};
+  transition: all 300ms ease-in;
+
   &:hover {
     color: ${theme.white};
     background-color: ${theme.primaryFont};
@@ -216,7 +217,6 @@ export const FundingImg = styled.img`
   padding-left: ${(props) => props.pl};
   border: 0.3px solid ${theme.gray6};
   border-radius: 10px;
-  height: 133px;
   &:hover {
     cursor: pointer;
   }
