@@ -23,6 +23,7 @@ const KakaoLogin = () => {
         console.log("params의 code값", code);
 
         const data = await getKakaoLogin(code);
+        console.log("data", data);
         if (data.status === 200) {
           dispatch(kakaoLogin()); // Redux 액션 디스패치
           navigate("/");
