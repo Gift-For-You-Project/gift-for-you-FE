@@ -167,21 +167,18 @@ export const fundingPayDonationReady = async ({
   donation,
 }) => {
   try {
-    // console.log("결제 ID정보: ", id);
     const response = await instance.post(`/api/funding/${id}/donation/ready`, {
       sponsorNickname,
       sponsorComment,
       donation,
     });
 
-    // console.log("결제준비: ", response);
     return response.data;
   } catch (error) {
     if (error.response) {
       const statusCode = error.response.status;
       const errorMessage = error.response.data.message;
       if (statusCode === 400) {
-        // errorToast("결제준비 오류 :", errorMessage);
         errorToast(errorMessage);
       }
     }
