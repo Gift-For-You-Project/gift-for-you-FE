@@ -4,6 +4,7 @@ import storage from "redux-persist/lib/storage";
 import channelTalkReducer from "./channelTalkSlice";
 import authReducer from "./authSlice";
 import notificationReducer from "./notificationSlice";
+import { composeWithDevTools } from "@reduxjs/toolkit/dist/devtoolsExtension";
 
 // 여러 개의 리듀서를 합쳐 rootReducer로 지정
 const rootReducer = combineReducers({

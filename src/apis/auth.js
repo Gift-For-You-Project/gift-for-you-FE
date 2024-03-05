@@ -44,7 +44,7 @@ export const getGoogleLogin = async (code) => {
 // 카카오 로그인 API
 export const getKakaoLogin = async (code) => {
   try {
-    const response = await instance.get(`/api/kakao/callback?code=${code}`);
+    const response = await instance.get(`/api/kakao/login?code=${code}`);
 
     if (response.status === 200) {
       console.log("로그인: ", response.data);

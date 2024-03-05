@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { login, logout } from "./authSlice";
 import { useEffect } from "react";
-import { login as loginApi, issueAccessToken } from "../apis/auth";
+import { login as loginApi } from "../apis/auth";
 
 const LoginComponent = () => {
   const dispatch = useDispatch(); // useDispatch 훅을 사용하여 액션 디스패치 함수 가져오기
@@ -17,16 +17,9 @@ const LoginComponent = () => {
           // 컴포넌트가 마운트된 상태일 때만 상태 업데이트
           if (response.status === 200) {
             console.log("로그인 API 호출", response.data);
-
-            // 로그인 상태인 경우에 Access Token 재발급
-            if (!isLoggedIn) {
-              dispatch(login());
-              await handleAccessTokenIssue();
-            }
           } else if (response.status === 401) {
             console.error("로그인 API 오류");
             dispatch(logout());
-            handleAccessTokenIssue(); // 401(Access Token이 만료)일 때 재발급
           }
         }
       } catch (error) {
@@ -51,11 +44,9 @@ const LoginComponent = () => {
       if (response.status === 200) {
         console.log("로그인 API 호출", response.data);
         dispatch(login()); // login 액션 디스패치
-        await handleAccessTokenIssue();
       } else if (response.status === 401) {
         console.error("로그인 API 오류");
         dispatch(logout());
-        handleAccessTokenIssue();
       }
     } catch (error) {
       console.error("로그인 API 오류:", error);
@@ -65,20 +56,6 @@ const LoginComponent = () => {
 
   const handleLogout = () => {
     dispatch(logout()); // logout 액션 디스패치
-  };
-
-  const handleAccessTokenIssue = async () => {
-    try {
-      const accessTokenResponse = await issueAccessToken();
-
-      if (accessTokenResponse && accessTokenResponse.isSuccess) {
-        console.log("Access Token이 재발급되었습니다.", accessTokenResponse);
-      } else {
-        console.error("Access Token 재발급 실패");
-      }
-    } catch (error) {
-      console.error("Access Token 재발급 오류:", error);
-    }
   };
 
   return (
