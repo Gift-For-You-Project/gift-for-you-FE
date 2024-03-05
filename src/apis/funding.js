@@ -197,9 +197,9 @@ export const getDonationApproval = async (pg_token) => {
 };
 
 // 후원 결제취소 API
-export const getDonationCancel = async (cancel) => {
+export const getDonationCancel = async () => {
   try {
-    const response = await instance.get(`/api/donation/${cancel}`);
+    const response = await instance.get("/api/donation/cancel");
     if (response.status === 200) {
       return response.data;
     }
@@ -209,9 +209,9 @@ export const getDonationCancel = async (cancel) => {
 };
 
 // 후원 결제실패 API
-export const getDonationFail = async (fail) => {
+export const getDonationFail = async () => {
   try {
-    const response = await instance.get(`/api/donation/${fail}`);
+    const response = await instance.get("/api/donation/fail");
     if (response.status === 200) {
       return response.data;
     }

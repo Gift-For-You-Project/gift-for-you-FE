@@ -23,14 +23,12 @@ const KakaoLogin = () => {
         const data = await getDonationApproval(pg_token);
 
         handleResponse(data, "후원 결제승인");
-      } else if (params.has("cancel")) {
-        const cancel = params.get("cancel");
-        const data = await getDonationCancel(cancel);
+      } else if (window.location.href.includes("cancel")) {
+        const data = await getDonationCancel();
 
         handleResponse(data, "후원 결제취소");
-      } else if (params.has("fail")) {
-        const fail = params.get("fail");
-        const data = await getDonationFail(fail);
+      } else if (window.location.href.includes("fail")) {
+        const data = await getDonationFail();
 
         handleResponse(data, "후원 결제실패");
       }
