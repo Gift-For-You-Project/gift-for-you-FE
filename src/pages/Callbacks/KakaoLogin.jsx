@@ -16,7 +16,6 @@ const KakaoLogin = () => {
   const getData = async () => {
     try {
       const params = new URLSearchParams(location.search);
-      console.log("params", params);
 
       if (params.has("code")) {
         const code = params.get("code");
