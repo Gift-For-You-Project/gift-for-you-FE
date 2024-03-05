@@ -166,7 +166,6 @@ export const Body = styled.div`
   align-items: center;
   width: 100%;
   max-width: 390px;
-  height: auto;
 `;
 
 export const FundingDiv = styled.div`
@@ -176,6 +175,7 @@ export const FundingDiv = styled.div`
   max-width: 390px; /* 최대 너비를 390px로 제한 */
   margin: 0 auto; /* 가운데 정렬을 위해 margin을 auto로 설정 */
   padding-bottom: ${(props) => props.pb};
+  height: 100vh;
 `;
 
 export const TogetherDiv = styled.div`
