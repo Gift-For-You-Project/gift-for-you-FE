@@ -199,8 +199,11 @@ const Home = () => {
     // 내 펀딩이 있을 때
     if (isLoggedIn && myFunding && myFunding.status === "ACTIVE") {
       infoToast("진행 중인 펀딩은 하나만 만들 수 있어요.");
+    } else if (!isLoggedIn) {
+      // 로그아웃 상태일 때
+      handleLoginClick();
     } else {
-      // 내 펀딩이 없거나 로그아웃 상태일 때 펀딩 만들기로 이동
+      // 내 펀딩이 없을 때
       navigate("/fundingcreate");
     }
   };
