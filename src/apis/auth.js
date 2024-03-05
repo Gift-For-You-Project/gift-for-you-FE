@@ -9,31 +9,11 @@ export const instance = axios.create({
   },
 });
 
-// Access token 재발급 요청
-export const issueAccessToken = async () => {
-  try {
-    const response = await instance.get("/api/access-token/issue");
-
-    if (response.status === 200) {
-      console.log(response.data.message);
-      return response.data;
-    } else {
-      console.error("Access token 재발급 실패");
-      throw new Error("Access token 재발급 실패");
-    }
-  } catch (error) {
-    console.error("API 호출 중 오류 발생:", error);
-    throw error;
-  }
-};
-
 // 구글 로그인 API
 export const getGoogleLogin = async (code) => {
   try {
     const response = await instance.get(`/api/google/login?code=${code}`);
     if (response.status === 200) {
-      console.log(response.data.message);
-      successToast(response.data.message);
       return response.data;
     }
   } catch (error) {
@@ -47,7 +27,6 @@ export const getKakaoLogin = async (code) => {
     const response = await instance.get(`/api/kakao/login?code=${code}`);
 
     if (response.status === 200) {
-      console.log("로그인: ", response.data);
       return response.data;
     }
   } catch (error) {
