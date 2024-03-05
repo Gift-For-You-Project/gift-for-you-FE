@@ -188,7 +188,7 @@ export const getDonationApproval = async (pg_token) => {
     const response = await instance.get(
       `/api/donation/approve?pg_token=${pg_token}`
     );
-    if (response.data.isSuccess) {
+    if (response.status === 200) {
       return response.data;
     }
   } catch (error) {
@@ -200,7 +200,7 @@ export const getDonationApproval = async (pg_token) => {
 export const getDonationCancel = async (cancel) => {
   try {
     const response = await instance.get(`/api/donation/${cancel}`);
-    if (response.data.isSuccess) {
+    if (response.status === 200) {
       return response.data;
     }
   } catch (error) {
@@ -212,7 +212,7 @@ export const getDonationCancel = async (cancel) => {
 export const getDonationFail = async (fail) => {
   try {
     const response = await instance.get(`/api/donation/${fail}`);
-    if (response.data.isSuccess) {
+    if (response.status === 200) {
       return response.data;
     }
   } catch (error) {
