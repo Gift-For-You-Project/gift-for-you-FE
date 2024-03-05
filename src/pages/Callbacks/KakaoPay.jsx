@@ -1,6 +1,10 @@
 import React, { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { getDonationApproval } from "../../apis/funding";
+import {
+  getDonationApproval,
+  getDonationCancel,
+  getDonationFail,
+} from "../../apis/funding";
 import { BarLoader } from "react-spinners";
 import { SpinnerContainer } from "./CallbacksStyle";
 import theme from "../../styles/theme";
@@ -14,18 +18,34 @@ const KakaoLogin = () => {
     try {
       const params = new URLSearchParams(location.search);
 
-      // 후원 결제승인 API 호출
       if (params.has("pg_token")) {
         const pg_token = params.get("pg_token");
         const data = await getDonationApproval(pg_token);
 
-        if (data.isSuccess === true) {
-          navigate(`/fundingdetail/${data.result}`);
-          successToast(data.message);
-        }
+        handleResponse(data, "후원 결제승인");
+      } else if (params.has("cancel")) {
+        const cancel = params.get("cancel");
+        const data = await getDonationCancel(cancel);
+
+        handleResponse(data, "후원 결제취소");
+      } else if (params.has("fail")) {
+        const fail = params.get("fail");
+        const data = await getDonationFail(fail);
+
+        handleResponse(data, "후원 결제실패");
       }
     } catch (error) {
       console.error("결제 오류: ", error);
+    }
+  };
+
+  const handleResponse = (data, type) => {
+    if (data.isSuccess === true) {
+      console.log(`${type} 성공:`, data.message);
+      navigate(`/fundingdetail/${data.result}`);
+      successToast(data.message);
+    } else {
+      console.error(`${type} 실패:`, data.message);
     }
   };
 

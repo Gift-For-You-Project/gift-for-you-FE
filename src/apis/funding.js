@@ -103,7 +103,7 @@ export const patchFundingModify = async (id, data) => {
 export const deleteFundingModify = async (id, data) => {
   try {
     const response = await instance.delete(`/api/funding/${id}`, data);
-    // console.log("펀딩 삭제 API", response);
+
     if (response.status === 200) {
       successToast("펀딩이 삭제되었습니다.");
       return response.data;
@@ -123,7 +123,7 @@ export const deleteFundingModify = async (id, data) => {
 export const endFundingModify = async (id, data) => {
   try {
     const response = await instance.patch(`/api/funding/${id}/finish`, data);
-    // console.log("펀딩 종료 API", response);
+
     if (response.status === 200) {
       successToast("펀딩이 종료되었습니다.");
       return response.data;
@@ -144,15 +144,12 @@ export const getFundingDonation = async (id) => {
   try {
     const response = await instance.get(`/api/funding/${id}/donation`);
 
-    // console.log("결제랭킹 API 호출 성공: ", response);
     return response.data;
   } catch (error) {
     if (error.response) {
       const statusCode = error.response.status;
       const errorMessage = error.response.data.message;
       if (statusCode === 400) {
-        // errorToast("결제 오류", errorMessage);
-        // errorToast("결제 오류");
         errorToast(errorMessage);
       }
     }
@@ -199,18 +196,26 @@ export const getDonationApproval = async (pg_token) => {
   }
 };
 
-// 후원 결제승인 응답 API
-// export const getDonationApprovalResponse = async (id, navigate) => {
-//   try {
-//     const response = await instance.get(`/api/fundingdetail/${id}`);
+// 후원 결제취소 API
+export const getDonationCancel = async (cancel) => {
+  try {
+    const response = await instance.get(`/api/donation/${cancel}`);
+    if (response.data.isSuccess) {
+      return response.data;
+    }
+  } catch (error) {
+    console.error("후원 결제취소 오류");
+  }
+};
 
-//     console.log("결제 승인 응답: ", response);
-//     navigate("/");
-//     return response.data.result;
-//   } catch (error) {
-//     console.error("후원 결제승인 응답 오류:", error.message);
-//   }
-// };
-
-// 후원 취소
-// 후원 실패
+// 후원 결제실패 API
+export const getDonationFail = async (fail) => {
+  try {
+    const response = await instance.get(`/api/donation/${fail}`);
+    if (response.data.isSuccess) {
+      return response.data;
+    }
+  } catch (error) {
+    console.error("후원 결제실패 오류");
+  }
+};
