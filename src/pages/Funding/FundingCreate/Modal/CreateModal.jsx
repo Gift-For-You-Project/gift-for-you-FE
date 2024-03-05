@@ -40,7 +40,7 @@ function CreateModal({ closeModal, handleImageSelection }) {
         <ModalBox>
           <ModalTitleXBox>
             <P fs={theme.title} color={theme.gray1}>
-              상품 이미지 등록
+              상품 URL 등록
             </P>
             <XButton onClick={closeModal}>
               <IoClose />
