@@ -9,6 +9,27 @@ export const instance = axios.create({
   },
 });
 
+// 인터셉터 설정
+instance.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    // useNavigate는 컴포넌트 내에서만 사용 가능하므로 여기서 호출
+    const { useNavigate } = require("react-router-dom");
+    const { useDispatch } = require("react-redux");
+    const { userLogout } = require("../redux/authSlice");
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+
+    if (error.response && error.response.status === 401) {
+      // 모든 API 응답에 대해 HTTP 상태 코드가 401인 경우에만 로그인 페이지로 이동
+      dispatch(userLogout());
+      navigate("/login");
+    }
+
+    return Promise.reject(error);
+  }
+);
+
 // 구글 로그인 API
 export const getGoogleLogin = async (code) => {
   try {
@@ -17,7 +38,7 @@ export const getGoogleLogin = async (code) => {
       return response.data;
     }
   } catch (error) {
-    console.error("구글 로그인 오류 발생:", error);
+    console.error("구글 로그인 오류 발생");
   }
 };
 
@@ -30,7 +51,7 @@ export const getKakaoLogin = async (code) => {
       return response.data;
     }
   } catch (error) {
-    console.error("카카오 로그인 오류 발생:", error);
+    console.error("카카오 로그인 오류 발생");
     return false;
   }
 };
@@ -45,25 +66,21 @@ export const signup = async (userData) => {
 
       if (code === 2000) {
         successToast(message);
-        console.log("가입 성공! 환영합니다.");
       } else {
-        console.error("올바르지 않은 응답 형식 또는 값");
         throw new Error("회원가입 처리 중 오류가 발생했습니다.");
       }
     }
 
     return response.data;
   } catch (error) {
-    console.error("회원가입 오류:", error);
+    console.error("회원가입 오류");
 
     if (error.response && error.response.status === 400) {
       const { code, message } = error.response.data;
 
       if (code === 4000) {
-        console.log("Error 4000:", message);
         errorToast(message);
       } else {
-        console.error("올바르지 않은 응답 형식 또는 값");
         errorToast("회원가입 처리 중 오류가 발생했습니다.");
       }
     }
@@ -105,7 +122,7 @@ export const login = async (credentials) => {
 
     return response.data;
   } catch (error) {
-    console.error("로그인 오류:", error);
+    console.error("로그인 오류");
 
     if (error.response && error.response.status === 401) {
       const { code, message } = error.response.data;
@@ -131,6 +148,6 @@ export const logout = async () => {
       successToast(response.data.message);
     }
   } catch (error) {
-    console.error("API 호출 중 오류 발생:", error.message);
+    console.error("API 호출 중 오류 발생");
   }
 };
