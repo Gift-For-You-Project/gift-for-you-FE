@@ -121,8 +121,8 @@ export const InputInput = styled.input`
   border-radius: 10px;
   justify-content: start;
   align-items: start;
-  font-family: 'Pretendard', sans-serif;
-  `;
+  font-family: "Pretendard", sans-serif;
+`;
 
 export const Textarea = styled.textarea`
   width: 98%;
@@ -137,19 +137,18 @@ export const Textarea = styled.textarea`
   color: ${theme.black};
   justify-content: start;
   align-items: start;
-  `;
+`;
 
 export const ProfileImageRow = styled.div`
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: start;
-    margin-bottom: ${(props) => props.mb};
-  `;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: start;
+  margin-bottom: ${(props) => props.mb};
+`;
 
 export const ProfileImg = styled.img`
-  height: 62px;
-  width: 62px;
+  width: 17.5%;
   border-radius: 3px;
   margin-right: ${(props) => props.mr};
 `;
@@ -163,12 +162,10 @@ export const LeftImg = styled.img`
   height: ${(props) => props.h};
 `;
 
-
 export const Leftcolumndiv = styled.div`
   flex-direction: column;
   margin-left: ${(props) => props.ml};
 `;
-
 
 export const IpadLoveImg = styled.img`
   position: absolute;
@@ -178,13 +175,8 @@ export const IpadLoveImg = styled.img`
   height: ${(props) => props.h};
 `;
 
-export const Logo = styled.h1`
-  font-size: 24px;
-  font-weight: 800;
-`;
-
 export const P = styled.p`
-text-decoration: ${(props) => (props.underline ? 'underline' : 'none')};
+  text-decoration: ${(props) => (props.underline ? "underline" : "none")};
   padding-top: ${(props) => props.pt};
   padding-bottom: ${(props) => props.pb};
   padding-left: ${(props) => props.pl};
@@ -280,7 +272,7 @@ export const FundingDiv = styled.div`
   margin: 0 auto; /* 가운데 정렬을 위해 margin을 auto로 설정 */
 
   @media screen and (max-width: 390px) {
-  max-width: 100%; /* 최대 너비를 100%로 설정하여 가득 차게 함 */
+    max-width: 100%; /* 최대 너비를 100%로 설정하여 가득 차게 함 */
   }
 `;
 
@@ -319,7 +311,6 @@ export const TogetherDiv = styled.div`
   }
 `;
 
-
 export const PayDiv = styled.div`
   background-color: ${(props) => props.bc};
   border-radius: ${(props) => props.br};
@@ -337,36 +328,34 @@ export const PayDiv = styled.div`
   }
 `;
 
-export const Checkbox = styled.input.attrs({ type: 'checkbox' })`
-    margin-top: 25px;
-    margin-right: 15px;
-    width: 25px;
-    height: 25px;
-    accent-color: ${theme.primary};
-    border: 2px solid ${(props) => (props.checked ? '#FFFFFF' : '#fae101')};
-    background-color: ${(props) => (props.checked ? '#808080' : '#fae101')};
+export const Checkbox = styled.input.attrs({ type: "checkbox" })`
+  margin-top: 30px;
+  margin-right: 15px;
+  width: 25px;
+  height: 25px;
+  accent-color: ${theme.primary};
+  border: 2px solid ${(props) => (props.checked ? "#FFFFFF" : "#fae101")};
+  background-color: ${(props) => (props.checked ? "#808080" : "#fae101")};
 `;
 
-// 카카오버튼 
+// 카카오버튼
 export const KakaoButton = styled.button`
-    display: flex;
-    justify-content: center;
-    flex-direction: row;
-    align-items: center;
-    width: 100%;
-    height: 60px;
-    background-color: #fae101; /* 변경됨 */
-    border: none; /* 변경됨 */
-    border-radius: 20px;
-    font-size: 19px;
-    font-weight: 600;
-    margin-top: 13px;
-    margin-bottom: 15px;
-    padding-left: ${(props) => props.pl};
-    padding-right: ${(props) => props.pr};
-    &:hover {
-        cursor: ${(props) => (props.disabled ? 'not-allowed' : 'pointer')};
-    }
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  height: 48px;
+  background-color: #fee500;
+  border: none;
+  border-radius: 16px;
+  margin-top: 13px;
+  margin-bottom: 15px;
+  padding-left: ${(props) => props.pl};
+  padding-right: ${(props) => props.pr};
+  &:hover {
+    cursor: ${(props) => (props.disabled ? "not-allowed" : "pointer")};
+  }
 `;
 
 export const KakaoPayLogo = styled.img`

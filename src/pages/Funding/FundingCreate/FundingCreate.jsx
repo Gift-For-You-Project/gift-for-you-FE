@@ -74,13 +74,19 @@ const FundingCreate = () => {
     };
 
     const handleItemNameChange = (e) => {
-        const itemName = e.target.value.slice(0, 15);
+        const itemName = e.target.value.slice(0, 25);
         setCreateData({ ...createData, itemName });
     };
+
     const handleTargetAmountChange = (e) => {
-        let targetAmount = e.target.value.replace(/\D/g, ''); // 숫자 이외의 문자 모두 제거
-        targetAmount = Math.min(parseInt(targetAmount) || '', 10000000).toString(); // 1부터 1000000까지의 범위 제한
-        targetAmount = targetAmount.replace(/\B(?=(\d{3})+(?!\d))/g, ','); // 세 자리 수마다 콤마 추가
+        let targetAmount = e.target.value.replace(/\D/g, ''); // 숫자가 아닌 문자 제거
+
+        if (targetAmount === '') {
+            targetAmount = '';
+        } else {
+            targetAmount = Math.min(parseInt(targetAmount), 10000000).toLocaleString(); // 세 자리 수마다 콤마 추가
+        }
+
         setCreateData({ ...createData, targetAmount });
     };
     const handleShowNameChange = (e) => {
@@ -110,6 +116,7 @@ const FundingCreate = () => {
             setCreateData({ ...createData, endDate: e.target.value });
         }
     };
+
     const handlePublicFlagChange = (e) => {
         // 업데이트: 한 번에 하나의 옵션만 선택했는지 확인하세요.
         const value = e.target.value === 'true' ? true : false;
@@ -128,7 +135,7 @@ const FundingCreate = () => {
                 createData.content === '' ||
                 createData.endDate === ''
             ) {
-                infoToast('내용을 입력해주세요');
+                infoToast('내용을 모두 입력해주세요');
                 return;
             }
 
@@ -151,7 +158,7 @@ const FundingCreate = () => {
             });
             navigate(`/fundingdetail/${data.id}`);
         } catch (error) {
-            console.error('펀딩 추가 API 호출 실패: ', error);
+            console.error('펀딩 추가 API 호출 실패');
         }
     };
 
@@ -214,15 +221,15 @@ const FundingCreate = () => {
                                 </P>
                                 <ProducImgtDiv>
                                     <SponsorComment onClick={handleFundingModalClick}>
-                                        <FundingImg src={itemImage} h="120px" w="110px" />
+                                        <FundingImg src={itemImage} h="129px" w="110px" />
                                         <ImgPlus show={!itemImage}>
                                             <GrAdd fontSize={theme.title} color={theme.gray3} />
                                         </ImgPlus>
-                                        <ImgText>{itemImage ? '이미지 변경' : '이미지 등록'}</ImgText>
+                                        <ImgText>{itemImage ? '상품 URL 변경' : '상품 URL 등록'}</ImgText>
                                     </SponsorComment>
                                     <ColumnDiv>
                                         <TitleLabel>
-                                            <InputSpan>상품명 (25자 이내)</InputSpan>
+                                            <InputSpan>상품명 ({`${createData.itemName.length}/25`}자 이내)</InputSpan>
                                             <InputInput
                                                 type="text"
                                                 value={createData.itemName}
@@ -245,13 +252,13 @@ const FundingCreate = () => {
                                 )}
                             </TogetherDiv>
 
-                            <TogetherDiv bc={theme.white}>
+                            <TogetherDiv m="14px 0" bc={theme.white}>
                                 <SponserDiv>
                                     <OpenPrivateComment mt="5px">
                                         <P pb="5px" fw="500" fs={theme.title} color={theme.black}>
                                             펀딩 내용
                                         </P>
-                                        <P pb="10px" fs={theme.detail} color={theme.gray2}>
+                                        <P pb="10px" pl="1px" fs={theme.detail} color={theme.gray2}>
                                             공개 방식
                                         </P>
                                         <SponserDiv>
@@ -265,7 +272,7 @@ const FundingCreate = () => {
                                             <P pb="20px" pl="20px" fw="500" fs={theme.body2} color={theme.black}>
                                                 공개
                                             </P>
-                                            <P pb="20px" pl="44px" fs={theme.detail} color={theme.gray2}>
+                                            <P pb="20px" pl="40px" fs={theme.detail} color={theme.gray2}>
                                                 누구나 볼 수 있어요
                                             </P>
                                         </SponserDiv>
@@ -280,7 +287,7 @@ const FundingCreate = () => {
                                             <P pb="20px" pl="20px" fw="500" fs={theme.body2} color={theme.black}>
                                                 비공개
                                             </P>
-                                            <P pb="20px" pl="30px" fs={theme.detail} color={theme.gray2}>
+                                            <P pb="20px" pl="28px" fs={theme.detail} color={theme.gray2}>
                                                 링크를 통해서만 방문할 수 있어요
                                             </P>
                                         </SponserDiv>
@@ -288,7 +295,7 @@ const FundingCreate = () => {
                                 </SponserDiv>
 
                                 <InputLabel>
-                                    <InputSpan>보여줄 이름 (12자 이내)</InputSpan>
+                                    <InputSpan>보여줄 이름 ({`${createData.showName.length}/12`}자 이내)</InputSpan>
                                     <InputInput
                                         type="text"
                                         value={createData.showName}
@@ -297,7 +304,7 @@ const FundingCreate = () => {
                                 </InputLabel>
 
                                 <InputLabel>
-                                    <InputSpan>제목 (25자 이내)</InputSpan>
+                                    <InputSpan>제목 ({`${createData.title.length}/25`}자 이내)</InputSpan>
                                     <InputInput
                                         type="text"
                                         value={createData.title}
@@ -306,7 +313,7 @@ const FundingCreate = () => {
                                 </InputLabel>
 
                                 <InputLabel>
-                                    <InputSpan>본문 (200자 이내)</InputSpan>
+                                    <InputSpan>본문 ({`${createData.content.length}/200`}자 이내)</InputSpan>
                                     <Textarea
                                         type="textarea"
                                         value={createData.content}
@@ -315,7 +322,7 @@ const FundingCreate = () => {
                                 </InputLabel>
                             </TogetherDiv>
 
-                            <TogetherDiv h="30vh" bc={theme.white} br="30px 30px 0px 0px">
+                            <TogetherDiv h="24vh" bc={theme.white} br="30px 30px 0px 0px">
                                 <InputLabel>
                                     <InputSpan>마감일 설정</InputSpan>
                                     <InputInput
@@ -328,7 +335,7 @@ const FundingCreate = () => {
                                 <Button
                                     onClick={handleFundingClick}
                                     w="100%"
-                                    h="60px"
+                                    h="48px"
                                     mt="10px"
                                     mb="10px"
                                     color="white"

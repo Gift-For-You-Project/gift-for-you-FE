@@ -133,10 +133,6 @@ export const RightContainer = styled.div`
   &::-webkit-scrollbar {
     display: none;
   }
-
-  @media (max-width: 390px) {
-    width: 100%;
-  }
 `;
 
 // 바디 영역
@@ -218,7 +214,7 @@ export const LoginBtn = styled.button`
   background-color: ${theme.primary};
   transition: all 300ms ease-in-out;
   border-radius: 16px;
-  margin-bottom: 20px;
+  margin-bottom: 40px;
 
   &:hover {
     background-color: ${theme.primaryFont};
@@ -251,6 +247,9 @@ export const LoginInput = styled.input`
 `;
 
 export const InfoDiv = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: absolute;
-  bottom: 90px;
+  bottom: 110px;
 `;

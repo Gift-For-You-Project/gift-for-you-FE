@@ -38,13 +38,6 @@ export const LeftLogoTextIcon = styled.img`
   cursor: pointer;
 `;
 
-export const BubbleTxt = styled.div`
-  position: absolute;
-  bottom: 208px;
-  left: 26px;
-  padding: 100px 0 0 300px;
-`;
-
 export const BubbleImg = styled.img`
   position: absolute;
   bottom: 130px;
@@ -110,7 +103,6 @@ export const IpadLoveImg = styled.img`
 /* 로고 */
 export const Logo = styled.h1`
   font-size: 30px;
-  /* font-weight: 700; */
   color: ${theme.white};
 `;
 
@@ -167,16 +159,6 @@ export const RightContainer = styled.div`
   &::-webkit-scrollbar {
     display: none;
   }
-
-  /* 모바일뷰 */
-  @media screen and (max-width: 390px) {
-    max-width: 100%;
-  }
-
-  /* 태블릿뷰는 추후에 적용예정 */
-  /* @media screen and (max-width: 1024px) {
-    max-width: 100%;
-  } */
 `;
 
 /* 네브바 영역 */
@@ -276,11 +258,8 @@ export const FundingDiv = styled.div`
   max-width: 390px; /* 최대 너비를 390px로 제한 */
   margin: 10px auto 0 auto;
   padding-bottom: ${(props) => props.pb};
+  margin-bottom: ${(props) => props.mb};
   padding: ${(props) => props.p};
-
-  @media screen and (max-width: 390px) {
-    max-width: 100%; /* 최대 너비를 100%로 설정하여 가득 차게 함 */
-  }
 `;
 
 export const MassageBtn = styled.button`
@@ -335,10 +314,19 @@ export const BetweenDiv = styled.div`
   padding: 0px 33px 0px 33px;
   padding-top: ${(props) => props.pt};
   padding-bottom: ${(props) => props.pb};
+`;
 
-  @media screen and (max-width: 390px) {
-    max-width: 100%; /* 최대 너비를 100%로 설정하여 가득 차게 함 */
-  }
+export const ModifyDiv = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+  text-align: center;
+  width: -webkit-fill-available; /* 사용 가능한 너비로 채움 */
+  max-width: 390px; /* 최대 너비를 390px로 제한 */
+  margin: 0 auto; /* 가운데 정렬을 위해 margin을 auto로 설정 */
+  padding: 0px 33px 0px 33px;
+  padding-top: ${(props) => props.pt};
+  padding-bottom: ${(props) => props.pb};
 `;
 
 export const TogetherDiv = styled.div`
@@ -350,10 +338,6 @@ export const TogetherDiv = styled.div`
   max-width: 390px; /* 최대 너비를 390px로 제한 */
   margin: 0 auto; /* 가운데 정렬을 위해 margin을 auto로 설정 */
   position: relative; /* 상대 위치 설정 */
-
-  @media screen and (max-width: 390px) {
-    max-width: 100%; /* 최대 너비를 100%로 설정하여 가득 차게 함 */
-  }
 `;
 
 export const SponserDiv = styled.div`
@@ -491,13 +475,15 @@ export const FloatingBtn = styled.button`
   left: 50%;
   transform: translateX(-5.5%);
   margin-bottom: 10px;
-  width: 350px;
+  width: 90%;
   height: 48px;
-  border-radius: 15px;
+  border-radius: 16px;
   background-color: ${theme.primary};
   color: ${theme.white};
   font-size: ${theme.body2};
   z-index: 10;
+  box-shadow: 6px 6px 6px rgba(0, 0, 0, 0.2), -6px 6px 6px rgba(0, 0, 0, 0.2),
+    -6px -6px 6px rgba(0, 0, 0, 0.2), 6px -6px 6px rgba(0, 0, 0, 0.2);
 
   &:hover {
     background-color: ${theme.primaryFont};
@@ -509,9 +495,9 @@ export const FloatingBtn = styled.button`
     left: 50%;
     transform: translateX(-50%);
     margin-bottom: 10px;
-    width: 132px;
+    width: 90%;
     height: 44px;
-    border-radius: 24px;
+    border-radius: 16px;
     background-color: ${theme.primary};
     color: ${theme.white};
     font-size: ${theme.body2};

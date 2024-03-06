@@ -60,7 +60,8 @@ export const ModalBox = styled.div`
 export const ModalTitleXBox = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  width: 100%;
+  justify-content: space-between;
   align-items: center;
   padding-bottom: 10px;
 `;
@@ -82,8 +83,6 @@ export const ModalInput = styled.input`
 `;
 export const XButton = styled.button`
   width: 30px;
-  font-weight: 700;
-  padding-left: 125px;
   font-size: 20px;
   color: ${theme.gray3};
 `;

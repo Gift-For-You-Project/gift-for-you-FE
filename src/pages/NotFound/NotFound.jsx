@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import {} from "./NotFoundStyles";
 import theme from "../../styles/theme";
 import Navbar from "../../components/Navbar";
 import { useDispatch, useSelector } from "react-redux";

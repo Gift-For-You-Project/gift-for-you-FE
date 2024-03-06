@@ -10,31 +10,30 @@ export const instance = axios.create({
 });
 
 // 구글 로그인 API
-// export const getGoogleResponse = async () => {
-//   try {
-//     const response = await instance.get("/api/google/response");
-//     if (response.data.isSuccess) {
-//       console.log(response.data.message);
-//     }
-//   } catch (error) {
-//     console.error("API 호출 중 에러 발생: ", error);
-//     return null;
-//   }
-// };
+export const getGoogleLogin = async (code) => {
+  try {
+    const response = await instance.get(`/api/google/login?code=${code}`);
+    if (response.status === 200) {
+      return response.data;
+    }
+  } catch (error) {
+    console.error("구글 로그인 오류 발생:", error);
+  }
+};
 
 // 카카오 로그인 API
-// export const getKakaoResponse = async () => {
-//   try {
-//     const response = await instance.get("/api/kakao/callback");
-//     if (response.status === 302) {
-//       console.log(response.data.message);
-//       alert(response.data.message);
-//     }
-//   } catch (error) {
-//     console.error("API 호출 중 에러 발생: ", error);
-//     return null;
-//   }
-// };
+export const getKakaoLogin = async (code) => {
+  try {
+    const response = await instance.get(`/api/kakao/login?code=${code}`);
+
+    if (response.status === 200) {
+      return response.data;
+    }
+  } catch (error) {
+    console.error("카카오 로그인 오류 발생:", error);
+    return false;
+  }
+};
 
 // 회원가입 API
 export const signup = async (userData) => {
@@ -65,7 +64,7 @@ export const signup = async (userData) => {
         errorToast(message);
       } else {
         console.error("올바르지 않은 응답 형식 또는 값");
-        alert("회원가입 처리 중 오류가 발생했습니다.");
+        errorToast("회원가입 처리 중 오류가 발생했습니다.");
       }
     }
 
@@ -79,7 +78,6 @@ export const postSendMail = async (email) => {
     const response = await instance.post("/api/mailSend", { mail: email });
 
     if (response.status === 200) {
-      // console.log("이메일 인증: ", response);
       return response.data.code;
     }
   } catch (error) {
@@ -95,9 +93,9 @@ export const login = async (credentials) => {
     const response = await instance.post("/api/login", credentials);
 
     if (response.status === 200) {
-      const { code, message, result } = response.data;
+      const { code, message } = response.data;
 
-      if (code === 2000 && result) {
+      if (code === 2000) {
         successToast(message);
       } else {
         console.error("올바르지 않은 응답 형식 또는 값");
@@ -116,7 +114,7 @@ export const login = async (credentials) => {
         errorToast(message);
       } else {
         console.error("올바르지 않은 응답 형식 또는 값");
-        alert("로그인 처리 중 오류가 발생했습니다.");
+        errorToast("로그인 처리 중 오류가 발생했습니다.");
       }
     }
 
@@ -131,7 +129,6 @@ export const logout = async () => {
 
     if (response.status === 200) {
       successToast(response.data.message);
-      // console.log("로그아웃이 완료되었습니다.");
     }
   } catch (error) {
     console.error("API 호출 중 오류 발생:", error.message);

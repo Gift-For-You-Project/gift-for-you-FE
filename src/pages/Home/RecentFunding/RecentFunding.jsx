@@ -41,16 +41,20 @@ const RecentFunding = () => {
   const [currentPage, setCurrentPage] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const fundingSectionRef = useRef(null);
+  const [activeCategory, setActiveCategory] = useState("all");
 
   const loadMoreData = useCallback(async () => {
     if (isLoading) return;
     setIsLoading(true);
-    const data = await getRecentFundingList(currentPage);
-    if (data && data.content) {
-      setRecentFundingList((prevList) => [...prevList, ...data.content]);
-      setCurrentPage(currentPage + 1);
-    }
-    setIsLoading(false);
+    // 원하는 시간(예: 2000 밀리초 = 2초) 후에 로딩 상태 해제
+    setTimeout(async () => {
+      const data = await getRecentFundingList(currentPage);
+      if (data && data.content) {
+        setRecentFundingList((prevList) => [...prevList, ...data.content]);
+        setCurrentPage(currentPage + 1);
+      }
+      setIsLoading(false);
+    }, 300); // 원하는 시간을 밀리초 단위로 설정
   }, [isLoading, currentPage]);
 
   const closeModal = () => setIsLoginModalOpen(false);
@@ -60,6 +64,10 @@ const RecentFunding = () => {
   };
 
   const handleLogoClick = () => navigate("/");
+
+  const handleCategoryClick = (category) => {
+    setActiveCategory(category);
+  };
 
   const handleScroll = useCallback(
     (e) => {
@@ -149,13 +157,22 @@ const RecentFunding = () => {
           </NavbarDiv>
           <TogetherDiv bc="white">
             <CategoryContainer>
-              <CategoryDiv>
+              <CategoryDiv
+                onClick={() => handleCategoryClick("all")}
+                className={activeCategory === "all" ? "active" : ""}
+              >
                 <Link to="/recentfunding">전체</Link>
               </CategoryDiv>
-              <CategoryDiv>
+              <CategoryDiv
+                onClick={() => handleCategoryClick("progress")}
+                className={activeCategory === "progress" ? "active" : ""}
+              >
                 <Link to="/recentfunding/progress">진행중</Link>
               </CategoryDiv>
-              <CategoryDiv>
+              <CategoryDiv
+                onClick={() => handleCategoryClick("complete")}
+                className={activeCategory === "complete" ? "active" : ""}
+              >
                 <Link to="/recentfunding/complete">완료</Link>
               </CategoryDiv>
             </CategoryContainer>

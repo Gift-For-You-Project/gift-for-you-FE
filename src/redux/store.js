@@ -2,12 +2,14 @@ import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import channelTalkReducer from "./channelTalkSlice";
-import authReducer from "./authSlice"; // { browserClosedLogout }
+import authReducer from "./authSlice";
+import notificationReducer from "./notificationSlice";
 
 // 여러 개의 리듀서를 합쳐 rootReducer로 지정
 const rootReducer = combineReducers({
   channelTalk: channelTalkReducer,
   auth: authReducer,
+  notification: notificationReducer,
 });
 
 // Redux Persist의 설정을 담고 있는 객체
@@ -29,11 +31,6 @@ const store = configureStore({
       serializableCheck: false,
     }),
 });
-
-// 브라우저 닫힘 이벤트 리스너 등록
-// window.addEventListener("beforeunload", () => {
-//   store.dispatch(browserClosedLogout());
-// });
 
 // Persisted 스토어와 임시 스토어를 생성
 export const persistor = persistStore(store);

@@ -87,7 +87,6 @@ export const LeftImg = styled.img`
   height: ${(props) => props.h};
 `;
 
-
 export const Leftcolumndiv = styled.div`
   flex-direction: column;
   margin-left: ${(props) => props.ml};
@@ -126,7 +125,7 @@ export const MakerDiv = styled.div`
   font-weight: 600;
   padding: 2px 5px 1.5px 5px;
   margin-left: 7px;
-`
+`;
 
 export const SponsorDiv = styled.div`
   background-color: ${theme.primary};
@@ -136,23 +135,18 @@ export const SponsorDiv = styled.div`
   font-weight: 600;
   padding: 2px 5px 1.5px 5px;
   margin-left: 7px;
-`
+`;
 
 /* 오른쪽 컨테이너 */
 export const RightContainer = styled.div`
   position: relative;
   width: -webkit-fill-available;
   max-width: 390px;
-  height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
   margin: 0 10px;
   overflow-y: scroll;
   &::-webkit-scrollbar {
     display: none;
-  }
-
-  /* 모바일뷰 */
-  @media screen and (max-width: 390px) {
-    max-width: 100%;
   }
 `;
 
@@ -172,7 +166,6 @@ export const Body = styled.div`
   align-items: center;
   width: 100%;
   max-width: 390px;
-  height: auto;
 `;
 
 export const FundingDiv = styled.div`
@@ -182,10 +175,7 @@ export const FundingDiv = styled.div`
   max-width: 390px; /* 최대 너비를 390px로 제한 */
   margin: 0 auto; /* 가운데 정렬을 위해 margin을 auto로 설정 */
   padding-bottom: ${(props) => props.pb};
-
-  @media screen and (max-width: 390px) {
-    max-width: 100%; /* 최대 너비를 100%로 설정하여 가득 차게 함 */
-  }
+  height: 100vh;
 `;
 
 export const TogetherDiv = styled.div`
@@ -193,21 +183,16 @@ export const TogetherDiv = styled.div`
   border-radius: 30px 30px 0px 0px;
   width: -webkit-fill-available; /* 사용 가능한 너비로 채움 */
   max-width: 390px; /* 최대 너비를 390px로 제한 */
-  height: 100vh;
   max-height: -webkit-fill-available; /*사용 가능한 너비로 채움*/
   margin: 0 auto; /* 가운데 정렬을 위해 margin을 auto로 설정 */
   padding: 20px;
   position: relative; //상대 위치 설정
-
-  @media screen and (max-width: 390px) {
-    max-width: 100%; /* 최대 너비를 100%로 설정하여 가득 차게 함 */
-  }
 `;
 
 export const CommentDiv = styled.div`
   justify-content: center;
   align-items: center;
-  width: 100%; 
+  width: 100%;
   max-width: 270px;
   padding: 12px;
   border-radius: ${(props) => props.br};
@@ -222,7 +207,7 @@ export const CommentDiv = styled.div`
   word-break: break-all;
 
   @media screen and (max-width: 390px) {
-    font-size: 14px; 
+    font-size: 14px;
   }
 `;
 

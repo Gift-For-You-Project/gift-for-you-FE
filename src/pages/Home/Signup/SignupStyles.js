@@ -138,10 +138,6 @@ export const RightContainer = styled.div`
   &::-webkit-scrollbar {
     display: none;
   }
-
-  @media (max-width: 390px) {
-    width: 100%;
-  }
 `;
 
 // 바디 영역
@@ -166,7 +162,7 @@ export const NavbarDiv = styled.div`
   padding-top: 20px;
 `;
 
-export const SignupFieldContainer = styled.div`
+export const FieldContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -274,8 +270,6 @@ export const CheckCodeBtn = styled.button`
 `;
 
 export const SignupBtn = styled.button`
-  position: absolute;
-  bottom: 0;
   width: -webkit-fill-available;
   max-width: 336px;
   height: 48px;
@@ -284,7 +278,7 @@ export const SignupBtn = styled.button`
   background-color: ${theme.primary};
   transition: all 300ms ease-in-out;
   border-radius: 16px;
-  margin-bottom: 20px;
+  margin: 20px;
 
   &:hover {
     background-color: ${theme.primaryFont};
@@ -327,6 +321,7 @@ export const CheckDiv = styled.div`
   align-items: center;
   font-size: ${(props) => props.fs};
   gap: 6px;
+  padding-top: ${(props) => props.pt};
 `;
 
 export const SeeMoreDiv = styled.div`

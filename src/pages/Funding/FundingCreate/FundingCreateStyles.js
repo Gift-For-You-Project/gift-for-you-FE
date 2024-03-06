@@ -129,15 +129,16 @@ export const Button = styled.button`
   height: ${(props) => props.h};
   padding: 10px;
   background-color: ${(props) => props.bc};
-  border-radius: 15px;
+  border-radius: 16px;
   color: ${(props) => props.color};
   font-size: ${(props) => props.fs};
-  font-weight: 600;
   margin-top: ${(props) => props.mt};
   margin-bottom: ${(props) => props.mb};
   padding-left: ${(props) => props.pl};
   padding-right: ${(props) => props.pr};
   padding-right: ${(props) => props.pr};
+  transition: all 300ms ease-in;
+
   &:hover {
     color: ${theme.white};
     background-color: ${theme.primaryFont};
@@ -156,11 +157,6 @@ export const RightContainer = styled.div`
   &::-webkit-scrollbar {
     display: none;
   }
-
-  /* 모바일뷰 */
-  @media screen and (max-width: 390px) {
-    max-width: 100%;
-  }
 `;
 
 // 바디 영역
@@ -178,14 +174,9 @@ export const TogetherDiv = styled.div`
   background-color: ${(props) => props.bc};
   border-radius: 30px;
   border-radius: ${(props) => props.br};
-  margin: 0 auto; /* 가운데 정렬을 위해 margin을 auto로 설정 */
-  margin-bottom: 15px;
+  margin: ${(props) => props.m};
   padding: 20px;
   height: ${(props) => props.h};
-
-  @media screen and (max-width: 390px) {
-    width: 100%; /* 최대 너비를 100%로 설정하여 가득 차게 함 */
-  }
 `;
 
 export const FundingDiv = styled.div`
@@ -226,7 +217,6 @@ export const FundingImg = styled.img`
   padding-left: ${(props) => props.pl};
   border: 0.3px solid ${theme.gray6};
   border-radius: 10px;
-  height: 133px;
   &:hover {
     cursor: pointer;
   }
@@ -239,18 +229,19 @@ export const SponsorComment = styled.div`
   border-radius: 10px;
   height: 100px;
   position: relative; /* 추가된 부분 */
+  cursor: pointer;
 `;
 
-export const ImgPlus = styled.h1`
-  display: ${(props) => props.show ? 'block' : 'none'}; /* 수정된 부분 */
+export const ImgPlus = styled.p`
+  display: ${(props) => (props.show ? "block" : "none")}; /* 수정된 부분 */
   position: absolute; /* 추가된 부분 */
   top: 65%; /* 추가된 부분 */
   left: 50%; /* 추가된 부분 */
   transform: translate(-50%, -50%); /* 추가된 부분 */
 `;
 
-export const ImgText = styled.h1`
-  transform: translate(22%, -215%);
+export const ImgText = styled.p`
+  transform: translate(17%, -215%);
   color: ${theme.gray3};
   font-size: ${theme.detail};
   &:hover {
@@ -306,8 +297,8 @@ export const InputLabel = styled.label`
 `;
 
 export const TitleLabel = styled.label`
-  width: 100%; 
-  max-width: 100%; 
+  width: 100%;
+  max-width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -318,7 +309,7 @@ export const TitleLabel = styled.label`
   &:hover {
     border: 0.5px solid ${theme.gray3};
   }
-`
+`;
 
 export const InputSpan = styled.span`
   padding-top: 10px;
@@ -339,5 +330,5 @@ export const InputInput = styled.input`
   border-radius: 10px;
   justify-content: start;
   align-items: start;
-  font-family: 'Pretendard', sans-serif;
+  font-family: "Pretendard", sans-serif;
 `;

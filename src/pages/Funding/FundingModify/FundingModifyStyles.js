@@ -92,7 +92,6 @@ export const Leftcolumndiv = styled.div`
   margin-left: ${(props) => props.ml};
 `;
 
-
 export const IpadLoveImg = styled.img`
   position: absolute;
   bottom: 0;
@@ -140,6 +139,7 @@ export const Button = styled.button`
   padding-left: ${(props) => props.pl};
   padding-right: ${(props) => props.pr};
   padding-right: ${(props) => props.pr};
+  transition: all 300ms ease-in;
 
   &:hover {
     color: ${(props) => props.hoverColor || theme.white};
@@ -159,11 +159,6 @@ export const RightContainer = styled.div`
   &::-webkit-scrollbar {
     display: none;
   }
-
-  /* 모바일뷰 */
-  @media screen and (max-width: 390px) {
-    max-width: 100%;
-  }
 `;
 
 // 바디 영역
@@ -181,16 +176,12 @@ export const TogetherDiv = styled.div`
   background-color: ${(props) => props.bc};
   border-radius: 30px;
   border-radius: ${(props) => props.br};
-  width: -webkit-fill-available; 
-  max-width: 390px; 
-  margin: 0 auto; 
+  width: -webkit-fill-available;
+  max-width: 390px;
+  margin: 0 auto;
   margin-bottom: 15px;
   padding: 20px;
   height: ${(props) => props.h};
-
-  @media screen and (max-width: 390px) {
-    width: 100%; 
-  }
 `;
 
 export const FundingDiv = styled.div`
@@ -198,7 +189,6 @@ export const FundingDiv = styled.div`
   width: 100%;
   max-width: 390px;
   height: auto;
-
 `;
 
 export const ProducImgtDiv = styled.div`
@@ -250,7 +240,7 @@ export const Textarea = styled.textarea`
   border-radius: 10px;
   border: none;
   resize: none;
-  overflow:hidden;
+  overflow: hidden;
   margin-bottom: 10px;
   padding-left: 10px;
   font-weight: 500;
@@ -268,6 +258,14 @@ export const RadioInput = styled.input`
 export const FundingNewline = styled.div`
   width: 100%;
   height: 12px;
+`;
+
+export const ColumnDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  margin-top: 15px;
 `;
 
 export const ColumnStartDiv = styled.div`
@@ -298,7 +296,7 @@ export const InputLabel = styled.label`
   &:hover {
     border: 0.5px solid ${theme.gray3};
   }
-`
+`;
 
 export const InputSpan = styled.span`
   padding-top: 10px;

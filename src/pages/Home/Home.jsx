@@ -65,6 +65,7 @@ import {
   ProductImg,
   ProductP,
   FloatingBtn,
+  ProductRecommend,
 } from "./HomeStyles";
 
 const Home = () => {
@@ -192,6 +193,19 @@ const Home = () => {
     // 만 원 단위로 끊어서 표시
     const formattedAmount = Math.floor(amount / 10000);
     return formattedAmount.toLocaleString();
+  };
+
+  const handleCreateFunding = () => {
+    // 내 펀딩이 있을 때
+    if (isLoggedIn && myFunding && myFunding.status === "ACTIVE") {
+      infoToast("진행 중인 펀딩은 하나만 만들 수 있어요.");
+    } else if (!isLoggedIn) {
+      // 로그아웃 상태일 때
+      handleLoginClick();
+    } else {
+      // 내 펀딩이 없을 때
+      navigate("/fundingcreate");
+    }
   };
 
   return (
@@ -379,7 +393,7 @@ const Home = () => {
                       {funding.itemName}
                     </FundingItem>
                     <FundingTitle pt="2px" fs={theme.body2} color={theme.black}>
-                      {funding.content}
+                      {funding.title}
                     </FundingTitle>
                   </FundingGrid>
                 ))}
@@ -493,13 +507,18 @@ const Home = () => {
                 price="1,337,000원"
               />
             </ProductGrids>
-            <P fw="600" pt="20px" pb="5px" pl="20px" />
+            <ProductRecommend onClick={() => navigate("/product")}>
+              <P pt="2px" fs={theme.detail} color={theme.gray2}>
+                추천 상품 더보기 &nbsp;
+              </P>
+              <P pt="4px" fs={theme.detail}>
+                <FaAngleRight />
+              </P>
+            </ProductRecommend>
           </ProductContainer>
         </Body>
         <Button
-          onClick={
-            isLoggedIn ? () => navigate("/fundingcreate") : handleLoginClick
-          }
+          onClick={handleCreateFunding}
           w="100%"
           h="60px"
           color="black"
