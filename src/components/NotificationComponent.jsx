@@ -26,10 +26,10 @@ function NotificationComponent() {
       // SSE 메시지 수신 이벤트 핸들러
       eventSource.current.addEventListener("sse", (event) => {
         const data = JSON.parse(event.data);
-        infoToast(data.message);
 
         // 알림이 도착했을 때 상태 변경
         setUnreadNoti(true);
+        infoToast(data.message);
       });
 
       // SSE 연결 오류 처리
@@ -63,7 +63,7 @@ function NotificationComponent() {
 
   const handleReadNotification = () => {
     // 알림을 읽었을 때 상태 변경
-    setUnreadNoti(false);
+    setUnreadNoti(true);
   };
 
   return (
