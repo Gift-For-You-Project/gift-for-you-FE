@@ -86,7 +86,7 @@ const NotiItem = ({
   );
 };
 
-const Notification = () => {
+const Notification = ({ setUnreadNoti }) => {
   const navigate = useNavigate();
   const [noti, setNoti] = useState([]);
 
@@ -131,6 +131,11 @@ const Notification = () => {
             : item
         );
         setNoti(updatedNoti);
+
+        // 읽음 처리 후, 읽지 않은 알림이 없다면 상태를 업데이트
+        if (!updatedNoti.some((item) => !item.isRead)) {
+          setUnreadNoti(false);
+        }
       }
     } catch (error) {
       console.error("알림 읽음 처리 중 에러");
