@@ -6,6 +6,7 @@ function NotificationComponent() {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const eventSource = useRef(null);
   const [isConnected, setIsConnected] = useState(false);
+  const [unreadNoti, setUnreadNoti] = useState(false);
 
   useEffect(() => {
     const initializeEventSource = () => {
@@ -23,6 +24,9 @@ function NotificationComponent() {
       eventSource.current.addEventListener("sse", (event) => {
         const data = JSON.parse(event.data);
         infoToast(data.message);
+
+        // 읽지 않은 알림이 도착하면 상태를 업데이트
+        setUnreadNoti(true);
       });
 
       eventSource.current.onerror = () => {
@@ -53,7 +57,11 @@ function NotificationComponent() {
 
   return (
     <div>
-      <img src="/imgs/Home/no-notification.svg" alt="notification" />
+      {unreadNoti ? (
+        <img src="/imgs/Home/notification.svg" alt="notification" />
+      ) : (
+        <img src="/imgs/Home/no-notification.svg" alt="no-notification" />
+      )}
     </div>
   );
 }
