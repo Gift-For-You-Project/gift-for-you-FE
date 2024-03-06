@@ -56,13 +56,13 @@ function NotificationComponent() {
   }, [isLoggedIn]);
 
   return (
-    <div>
+    <>
       {unreadNoti ? (
         <img src="/imgs/Home/notification.svg" alt="notification" />
       ) : (
         <img src="/imgs/Home/no-notification.svg" alt="no-notification" />
       )}
-    </div>
+    </>
   );
 }
 
