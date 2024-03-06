@@ -26,9 +26,6 @@ function NotificationComponent() {
       // SSE 메시지 수신 이벤트 핸들러
       eventSource.current.addEventListener("sse", (event) => {
         const data = JSON.parse(event.data);
-
-        // 알림이 도착했을 때 상태 변경
-        setUnreadNoti(true);
         infoToast(data.message);
       });
 
