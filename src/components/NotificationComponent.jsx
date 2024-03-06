@@ -6,7 +6,7 @@ function NotificationComponent() {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const eventSource = useRef(null);
   const [isConnected, setIsConnected] = useState(false);
-  const [readNoti, setReadNoti] = useState(false);
+  const [unreadNoti, setUnreadNoti] = useState(false);
 
   useEffect(() => {
     // EventSource 초기화 함수
@@ -27,6 +27,9 @@ function NotificationComponent() {
       eventSource.current.addEventListener("sse", (event) => {
         const data = JSON.parse(event.data);
         infoToast(data.message);
+
+        // 알림이 도착했을 때 상태 변경
+        setUnreadNoti(true);
       });
 
       // SSE 연결 오류 처리
@@ -59,13 +62,13 @@ function NotificationComponent() {
   }, [isLoggedIn]);
 
   const handleReadNotification = () => {
-    // 알림을 읽음 상태로 변경
-    setReadNoti(true);
+    // 알림을 읽었을 때 상태 변경
+    setUnreadNoti(false);
   };
 
   return (
     <div>
-      {readNoti ? (
+      {unreadNoti ? (
         <img
           src="/imgs/Home/notification.svg"
           alt="notification"
