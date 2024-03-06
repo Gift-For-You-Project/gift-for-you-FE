@@ -64,11 +64,15 @@ function NotificationComponent() {
   };
 
   return (
-    <div onClick={handleReadNotification}>
+    <div>
       {readNoti ? (
-        <img src="/imgs/Home/no-notification.svg" alt="no-notification" />
+        <img
+          src="/imgs/Home/notification.svg"
+          alt="notification"
+          onClick={handleReadNotification}
+        />
       ) : (
-        <img src="/imgs/Home/notification.svg" alt="notification" />
+        <img src="/imgs/Home/no-notification.svg" alt="no-notification" />
       )}
     </div>
   );
