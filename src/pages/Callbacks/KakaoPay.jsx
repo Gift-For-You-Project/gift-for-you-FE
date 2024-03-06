@@ -6,7 +6,7 @@ import { SpinnerContainer } from "./CallbacksStyle";
 import theme from "../../styles/theme";
 import { successToast } from "../../components/toast";
 
-const KakaoLogin = () => {
+const KakaoPay = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -41,4 +41,4 @@ const KakaoLogin = () => {
   );
 };
 
-export default KakaoLogin;
+export default KakaoPay;
