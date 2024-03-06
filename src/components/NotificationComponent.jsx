@@ -55,15 +55,12 @@ function NotificationComponent() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoggedIn]);
 
-  return (
-    <>
-      {unreadNoti ? (
-        <img src="/imgs/Home/notification.svg" alt="notification" />
-      ) : (
-        <img src="/imgs/Home/no-notification.svg" alt="no-notification" />
-      )}
-    </>
-  );
+  // 알림이 없을 때 초기값으로 설정
+  if (!isLoggedIn || (isLoggedIn && !unreadNoti)) {
+    return <img src="/imgs/Home/no-notification.svg" alt="no-notification" />;
+  }
+
+  return <img src="/imgs/Home/notification.svg" alt="notification" />;
 }
 
 export default NotificationComponent;
