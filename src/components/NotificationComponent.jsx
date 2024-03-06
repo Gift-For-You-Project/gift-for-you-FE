@@ -25,8 +25,10 @@ function NotificationComponent() {
         const data = JSON.parse(event.data);
         infoToast(data.message);
 
-        // 읽지 않은 알림이 도착하면 상태를 업데이트
-        setUnreadNoti(true);
+        // 도착한 알림을 읽지 않은 경우에만 상태를 업데이트
+        if (!data.isRead) {
+          setUnreadNoti(true);
+        }
       });
 
       eventSource.current.onerror = () => {

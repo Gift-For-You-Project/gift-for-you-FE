@@ -133,7 +133,7 @@ const Notification = ({ setUnreadNoti }) => {
         setNoti(updatedNoti);
 
         // 읽음 처리 후, 읽지 않은 알림이 없다면 상태를 업데이트
-        if (!updatedNoti.some((item) => !item.isRead)) {
+        if (updatedNoti.every((item) => item.isRead)) {
           setUnreadNoti(false);
         }
       }
