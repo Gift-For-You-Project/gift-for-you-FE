@@ -17,14 +17,13 @@ instance.interceptors.response.use(
     const { useNavigate } = require("react-router-dom");
     const navigate = useNavigate();
 
-    if (error.response && error.response.status === 401) {
+    if (error.response.status === 401) {
       // 모든 API 응답에 대해 HTTP 상태 코드가 401인 경우에만 로그인 페이지로 이동
-      navigate("/login");
+
       console.log("error.response", error.response);
       errorToast(error.response.message);
+      navigate("/login");
     }
-
-    return Promise.reject(error);
   }
 );
 
