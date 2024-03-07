@@ -6,7 +6,6 @@ function NotificationComponent() {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const eventSource = useRef(null);
   const [isConnected, setIsConnected] = useState(false);
-  const [unreadNoti, setUnreadNoti] = useState(false);
 
   useEffect(() => {
     // EventSource 초기화 함수
@@ -58,22 +57,9 @@ function NotificationComponent() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoggedIn]);
 
-  const handleReadNotification = () => {
-    // 알림을 읽었을 때 상태 변경
-    setUnreadNoti(true);
-  };
-
   return (
     <div>
-      {unreadNoti ? (
-        <img
-          src="/imgs/Home/notification.svg"
-          alt="notification"
-          onClick={handleReadNotification}
-        />
-      ) : (
-        <img src="/imgs/Home/no-notification.svg" alt="no-notification" />
-      )}
+      <img src="/imgs/Home/no-notification.svg" alt="no-notification" />
     </div>
   );
 }

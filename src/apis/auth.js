@@ -22,8 +22,11 @@ instance.interceptors.response.use(
 
     if (error.response && error.response.status === 401) {
       // 모든 API 응답에 대해 HTTP 상태 코드가 401인 경우에만 로그인 페이지로 이동
+      console.log("error.response", error.response);
       dispatch(userLogout());
       navigate("/login");
+      errorToast(error.response.message);
+      console.log("error.response", error.response);
     }
 
     return Promise.reject(error);

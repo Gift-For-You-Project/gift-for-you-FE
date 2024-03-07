@@ -191,7 +191,7 @@ const RecentFunding = () => {
                       <Progress width={(funding.achievementRate / 100) * 100} />
                     </ProgressBar>
                     <BetweenDiv>
-                      <P pt="2px" fs="13px" fw="800" color="#FF7C7C">
+                      <P fs={theme.detail} fw="600" color={theme.primary}>
                         {funding.achievementRate}%
                       </P>
                     </BetweenDiv>
