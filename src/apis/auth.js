@@ -15,18 +15,13 @@ instance.interceptors.response.use(
   (error) => {
     // useNavigate는 컴포넌트 내에서만 사용 가능하므로 여기서 호출
     const { useNavigate } = require("react-router-dom");
-    const { useDispatch } = require("react-redux");
-    const { userLogout } = require("../redux/authSlice");
     const navigate = useNavigate();
-    const dispatch = useDispatch();
 
     if (error.response && error.response.status === 401) {
       // 모든 API 응답에 대해 HTTP 상태 코드가 401인 경우에만 로그인 페이지로 이동
-      console.log("error.response", error.response);
-      dispatch(userLogout());
       navigate("/login");
-      errorToast(error.response.message);
       console.log("error.response", error.response);
+      errorToast(error.response.message);
     }
 
     return Promise.reject(error);
