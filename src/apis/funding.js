@@ -8,7 +8,7 @@ export const postFundingCreate = async (fundingData) => {
 
     if (response.status === 200 || response.status === 201) {
       successToast(response.data.message);
-      return response.data;
+      return response.data.result;
     }
   } catch (error) {
     if (error.response && error.response.status === 400) {
@@ -24,7 +24,7 @@ export const postModalItemLink = async (LinkData) => {
 
     if (response.status === 200) {
       successToast(response.data.message);
-      return response.data;
+      return response.data.result;
     }
   } catch (error) {
     if (error.response && error.response.status === 400) {
