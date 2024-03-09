@@ -9,24 +9,6 @@ export const instance = axios.create({
   },
 });
 
-// 인터셉터 설정
-instance.interceptors.response.use(
-  (response) => response,
-  (error) => {
-    // useNavigate는 컴포넌트 내에서만 사용 가능하므로 여기서 호출
-    const { useNavigate } = require("react-router-dom");
-    const navigate = useNavigate();
-
-    if (error.response.status === 401) {
-      // 모든 API 응답에 대해 HTTP 상태 코드가 401인 경우에만 로그인 페이지로 이동
-
-      console.log("error.response", error.response);
-      errorToast(error.response.message);
-      navigate("/login");
-    }
-  }
-);
-
 // 구글 로그인 API
 export const getGoogleLogin = async (code) => {
   try {
@@ -35,7 +17,10 @@ export const getGoogleLogin = async (code) => {
       return response.data;
     }
   } catch (error) {
-    console.error("구글 로그인 오류 발생");
+    if (error.response && error.response.status === 401) {
+      errorToast(error.response.data.message);
+    }
+    throw error;
   }
 };
 
@@ -48,8 +33,10 @@ export const getKakaoLogin = async (code) => {
       return response.data;
     }
   } catch (error) {
-    console.error("카카오 로그인 오류 발생");
-    return false;
+    if (error.response && error.response.status === 401) {
+      errorToast(error.response.data.message);
+    }
+    throw error;
   }
 };
 
@@ -59,29 +46,14 @@ export const signup = async (userData) => {
     const response = await instance.post("/api/signup", userData);
 
     if (response.status === 201) {
-      const { code, message } = response.data;
-
-      if (code === 2000) {
-        successToast(message);
-      } else {
-        throw new Error("회원가입 처리 중 오류가 발생했습니다.");
-      }
+      successToast(response.data.message);
     }
 
     return response.data;
   } catch (error) {
-    console.error("회원가입 오류");
-
     if (error.response && error.response.status === 400) {
-      const { code, message } = error.response.data;
-
-      if (code === 4000) {
-        errorToast(message);
-      } else {
-        errorToast("회원가입 처리 중 오류가 발생했습니다.");
-      }
+      errorToast(error.response.data.message);
     }
-
     throw error;
   }
 };
@@ -95,8 +67,8 @@ export const postSendMail = async (email) => {
       return response.data.code;
     }
   } catch (error) {
-    if (error.response.status === 401) {
-      console.error("API 호출 중 401 에러 발생");
+    if (error.response && error.response.status === 401) {
+      errorToast(error.response.data.message);
     }
   }
 };
@@ -107,29 +79,13 @@ export const login = async (credentials) => {
     const response = await instance.post("/api/login", credentials);
 
     if (response.status === 200) {
-      const { code, message } = response.data;
-
-      if (code === 2000) {
-        successToast(message);
-      } else {
-        console.error("올바르지 않은 응답 형식 또는 값");
-        throw new Error("로그인 처리 중 오류가 발생했습니다.");
-      }
+      successToast(response.data.message);
     }
 
     return response.data;
   } catch (error) {
-    console.error("로그인 오류");
-
     if (error.response && error.response.status === 401) {
-      const { code, message } = error.response.data;
-
-      if (code === 4000) {
-        errorToast(message);
-      } else {
-        console.error("올바르지 않은 응답 형식 또는 값");
-        errorToast("로그인 처리 중 오류가 발생했습니다.");
-      }
+      errorToast(error.response.data.message);
     }
 
     throw error;
@@ -145,6 +101,8 @@ export const logout = async () => {
       successToast(response.data.message);
     }
   } catch (error) {
-    console.error("API 호출 중 오류 발생");
+    if (error.response && error.response.status === 400) {
+      errorToast(error.response.data.message);
+    }
   }
 };

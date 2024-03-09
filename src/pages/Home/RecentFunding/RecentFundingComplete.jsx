@@ -6,12 +6,6 @@ import theme from "../../../styles/theme";
 import { FaAngleLeft } from "react-icons/fa6";
 import {
   MainContainer,
-  LeftContainer,
-  LeftImgContainer,
-  LeftLogoTextIcon,
-  LeftPieImg,
-  LeftContent,
-  BubbleImg,
   TogetherDiv,
   FundingDiv,
   BetweenDiv,
@@ -23,16 +17,13 @@ import {
   Progress,
   FundingItem,
   FundingTitle,
-  LeftRowdiv,
-  LeftImg,
-  Leftcolumndiv,
-  IpadLoveImg,
   RightContainer,
   Body,
   CategoryContainer,
   CategoryDiv,
 } from "./RecentFundingStyles";
 import { NavbarDiv, IconDiv } from "../Signup/SignupStyles";
+import LeftContainerComponent from "../../../components/LeftContainerComponent";
 
 const FinishFunding = () => {
   const navigate = useNavigate();
@@ -63,8 +54,6 @@ const FinishFunding = () => {
     navigate(`/fundingdetail/${id}`);
   };
 
-  const handleLogoClick = () => navigate("/");
-
   const handleCategoryClick = (category) => {
     setActiveCategory(category);
   };
@@ -74,9 +63,6 @@ const FinishFunding = () => {
       const { scrollTop, scrollHeight, clientHeight } = e.target;
       if (!isLoading && scrollTop + clientHeight >= scrollHeight - 5) {
         loadMoreData();
-        // console.log("top", scrollTop);
-        // console.log("h", scrollHeight);
-        // console.log("c", clientHeight);
       }
     },
     [isLoading, loadMoreData]
@@ -99,52 +85,7 @@ const FinishFunding = () => {
 
   return (
     <MainContainer>
-      <LeftContainer>
-        <LeftContainer>
-          <LeftImgContainer>
-            <BubbleImg src="/imgs/Home/speech-bubble.png" />
-            <LeftLogoTextIcon
-              onClick={handleLogoClick}
-              src="/imgs/Common/giftipie.png"
-            />
-            <LeftPieImg src="/imgs/Home/pie-hi.png" />
-          </LeftImgContainer>
-          <LeftRowdiv ml="30px">
-            <LeftRowdiv
-              color={theme.gray1}
-              mr="10px"
-              bc={theme.primary}
-              br="25px"
-              p="8px"
-            >
-              <LeftImg
-                src="/imgs/Home/giftbox-red.png"
-                w="30px"
-                h="25px"
-                mr="10px"
-                pl="10px"
-              />
-              <P fs="20px" fw="700" pr="10px" color={theme.black}>
-                정말 원하는 선물
-              </P>
-            </LeftRowdiv>
-            <P fs="20px" fw="700" color={theme.white}>
-              을 주고 받아요!
-            </P>
-          </LeftRowdiv>
-          <LeftContent>
-            <Leftcolumndiv ml="30px">
-              <P fs="16px" fw="500" pb="5px" pr="250px" color={theme.gray4}>
-                지금은 유저테스트 진행 중 입니다. <br />
-                6명의 개발자와 1명의 디자이너가 함께 개발하고 있습니다.
-              </P>
-            </Leftcolumndiv>
-          </LeftContent>
-        </LeftContainer>
-        <LeftRowdiv ml="30px"></LeftRowdiv>
-        <IpadLoveImg src="/imgs/Home/pie-ipad.png" w="300px" />
-      </LeftContainer>
-
+      <LeftContainerComponent navigate={navigate} theme={theme} />
       <RightContainer>
         <Body>
           <NavbarDiv>
@@ -191,15 +132,18 @@ const FinishFunding = () => {
                       <Progress width={(funding.achievementRate / 100) * 100} />
                     </ProgressBar>
                     <BetweenDiv>
-                      <P pt="2px" fs="13px" fw="800" color="#FF7C7C">
+                      <P pt="2px" fs="13px" fw="800" color={theme.primary}>
                         {funding.achievementRate}%
                       </P>
+                      <P fs={theme.detail} color={theme.gray3} fw="600">
+                        {funding.dday}
+                      </P>
                     </BetweenDiv>
-                    <FundingItem pt="10px" fs="11.5px" fw="600" color="gray">
+                    <FundingItem pt="2px" fs={theme.body2} color={theme.gray3}>
                       {funding.itemName}
                     </FundingItem>
-                    <FundingTitle pt="10px" fs="12.5px" fw="600">
-                      {funding.content}
+                    <FundingTitle pt="2px" fs={theme.body2} color={theme.black}>
+                      {funding.title}
                     </FundingTitle>
                   </FundingGrid>
                 ))}
