@@ -6,14 +6,11 @@ export const getMyFunding = async () => {
     const response = await instance.get("/api/funding/myFunding");
 
     if (response.status === 200) {
-      return response.data;
+      return response.data.result;
     }
   } catch (error) {
-    if (error.response) {
-      const status = error.response.status;
-      if (status === 401) {
-        console.error("API 호출 중 401 에러 발생");
-      }
+    if (error.response && error.response.status === 401) {
+      console.error(error.response.message);
     }
 
     return null; // 에러 발생 시 데이터를 반환하지 않도록 수정
@@ -26,16 +23,11 @@ export const getHomeFundingList = async () => {
     const response = await instance.get("/api/funding");
 
     if (response.status === 200) {
-      return response.data.content;
+      return response.data.result.content;
     }
   } catch (error) {
-    if (error.response) {
-      const status = error.response.status;
-      if (status === 404) {
-        console.error("API 호출 중 404 에러 발생");
-      } else if (status === 500) {
-        console.error("API 호출 중 500 에러 발생");
-      }
+    if (error.response && error.response.status === 400) {
+      console.error(error.response.message);
     }
 
     return null;
@@ -48,16 +40,11 @@ export const getRecentFundingList = async (page) => {
     const response = await instance.get(`/api/funding/all?page=${page}`);
 
     if (response.status === 200) {
-      return response.data;
+      return response.data.result;
     }
   } catch (error) {
-    if (error.response) {
-      const status = error.response.status;
-      if (status === 404) {
-        console.error("API 호출 중 404 에러 발생");
-      } else if (status === 500) {
-        console.error("API 호출 중 500 에러 발생");
-      }
+    if (error.response && error.response.status === 400) {
+      console.error(error.response.message);
     }
 
     return null;
@@ -68,17 +55,12 @@ export const getRecentFundingList = async (page) => {
 export const getFundingSummary = async () => {
   try {
     const response = await instance.get("/api/funding/summary");
-    // console.log("기프티파이 펀딩 정보 API", response.data);
     if (response.status === 200) {
-      return response.data;
+      return response.data.result;
     }
   } catch (error) {
-    console.error("API 호출 중 에러 발생");
-    if (error.response) {
-      const status = error.response.status;
-      if (status === 401) {
-        console.error("API 호출 중 401 에러 발생");
-      }
+    if (error.response && error.response.status === 400) {
+      console.error(error.response.message);
     }
 
     return null; // 에러 발생 시 데이터를 반환하지 않도록 수정
@@ -91,16 +73,11 @@ export const getActiveFundingList = async (page) => {
     const response = await instance.get(`/api/funding/active?page=${page}`);
 
     if (response.status === 200) {
-      return response.data;
+      return response.data.result;
     }
   } catch (error) {
-    if (error.response) {
-      const status = error.response.status;
-      if (status === 404) {
-        console.error("API 호출 중 404 에러 발생");
-      } else if (status === 500) {
-        console.error("API 호출 중 500 에러 발생");
-      }
+    if (error.response && error.response.status === 400) {
+      console.error(error.response.message);
     }
 
     return null;
@@ -113,16 +90,11 @@ export const getFinishFundingList = async (page) => {
     const response = await instance.get(`/api/funding/finished?page=${page}`);
 
     if (response.status === 200) {
-      return response.data;
+      return response.data.result;
     }
   } catch (error) {
-    if (error.response) {
-      const status = error.response.status;
-      if (status === 404) {
-        console.error("API 호출 중 404 에러 발생");
-      } else if (status === 500) {
-        console.error("API 호출 중 500 에러 발생");
-      }
+    if (error.response && error.response.status === 400) {
+      console.error(error.response.message);
     }
 
     return null;

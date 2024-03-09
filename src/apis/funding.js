@@ -6,19 +6,13 @@ export const postFundingCreate = async (fundingData) => {
   try {
     const response = await instance.post("/api/funding/create", fundingData);
 
-    if (response.status === 200 || response.data.status === 201) {
-      successToast("펀딩이 추가되었습니다.");
+    if (response.status === 200 || response.status === 201) {
+      successToast(response.data.message);
       return response.data;
     }
   } catch (error) {
-    if (error.response) {
-      const status = error.response.status;
-      if (status === 404) {
-        console.error("API 호출 중 404 에러 발생");
-      } else if (status === 500) {
-        errorToast("이미 진행 중인 펀딩이 있습니다.");
-        console.error("API 호출 중 500 에러 발생");
-      }
+    if (error.response && error.response.status === 400) {
+      errorToast(error.response.data.message);
     }
   }
 };
@@ -29,18 +23,12 @@ export const postModalItemLink = async (LinkData) => {
     const response = await instance.post("/api/funding/addLink", LinkData);
 
     if (response.status === 200) {
-      successToast("펀딩 상품 이미지가 생성되었습니다.");
+      successToast(response.data.message);
       return response.data;
     }
   } catch (error) {
-    if (error.response) {
-      const status = error.response.status;
-
-      if (status === 404) {
-        console.error("API 호출 중 404 에러 발생");
-      } else if (status === 500) {
-        console.error("API 호출 중 500 에러 발생");
-      }
+    if (error.response && error.response.status === 400) {
+      errorToast(error.response.data.message);
     }
   }
 };
@@ -50,13 +38,10 @@ export const getFundingDetail = async (id, data) => {
   try {
     const response = await instance.get(`/api/funding/${id}`, data);
 
-    return response.data;
+    return response.data.result;
   } catch (error) {
-    const status = error.response.status;
-    if (status === 404) {
-      console.error("API 호출 중 404 에러 발생");
-    } else if (status === 500) {
-      console.error("API 호출 중 500 에러 발생");
+    if (error.response && error.response.status === 400) {
+      console.error(error.response.message);
     }
   }
 };
@@ -66,15 +51,10 @@ export const getSponsorDetail = async (id) => {
   try {
     const response = await instance.get(`/api/funding/${id}/donations`);
 
-    // console.log("후원자 상세 API", response);
     return response.data.result;
   } catch (error) {
-    const status = error.response.status;
-
-    if (status === 404) {
-      console.error("API 호출 중 404 에러 발생");
-    } else if (status === 500) {
-      console.error("API 호출 중 500 에러 발생");
+    if (error.response && error.response.status === 400) {
+      console.error(error.response.message);
     }
   }
 };
@@ -85,16 +65,12 @@ export const patchFundingModify = async (id, data) => {
     const response = await instance.patch(`/api/funding/${id}/update`, data);
 
     if (response.status === 200) {
-      successToast("펀딩이 수정되었습니다.");
+      successToast(response.data.message);
       return response.data;
     }
   } catch (error) {
-    const status = error.response.status;
-    warnToast(error.response.data.message);
-    if (status === 404) {
-      console.error("API 호출 중 404 에러 발생");
-    } else if (status === 500) {
-      console.error("API 호출 중 500 에러 발생");
+    if (error.response && error.response.status === 400) {
+      warnToast(error.response.data.message);
     }
   }
 };
@@ -105,16 +81,12 @@ export const deleteFundingModify = async (id, data) => {
     const response = await instance.delete(`/api/funding/${id}`, data);
 
     if (response.status === 200) {
-      successToast("펀딩이 삭제되었습니다.");
+      successToast(response.data.message);
       return response.data;
     }
   } catch (error) {
-    const status = error.response.status;
-    warnToast(error.response.data.message);
-    if (status === 404) {
-      console.error("API 호출 중 404 에러 발생");
-    } else if (status === 500) {
-      console.error("API 호출 중 500 에러 발생");
+    if (error.response && error.response.status === 400) {
+      warnToast(error.response.data.message);
     }
   }
 };
@@ -125,16 +97,12 @@ export const endFundingModify = async (id, data) => {
     const response = await instance.patch(`/api/funding/${id}/finish`, data);
 
     if (response.status === 200) {
-      successToast("펀딩이 종료되었습니다.");
+      successToast(response.data.message);
       return response.data;
     }
   } catch (error) {
-    const status = error.response.status;
-    warnToast(error.response.data.message);
-    if (status === 404) {
-      console.error("API 호출 중 404 에러 발생");
-    } else if (status === 500) {
-      console.error("API 호출 중 500 에러 발생");
+    if (error.response && error.response.status === 400) {
+      warnToast(error.response.data.message);
     }
   }
 };
@@ -146,12 +114,8 @@ export const getFundingDonation = async (id) => {
 
     return response.data;
   } catch (error) {
-    if (error.response) {
-      const statusCode = error.response.status;
-      const errorMessage = error.response.data.message;
-      if (statusCode === 400) {
-        errorToast(errorMessage);
-      }
+    if (error.response && error.response.status === 400) {
+      warnToast(error.response.data.message);
     }
   }
 };
@@ -172,12 +136,8 @@ export const fundingPayDonationReady = async ({
 
     return response.data;
   } catch (error) {
-    if (error.response) {
-      const statusCode = error.response.status;
-      const errorMessage = error.response.data.message;
-      if (statusCode === 400) {
-        errorToast(errorMessage);
-      }
+    if (error.response && error.response.status === 400) {
+      warnToast(error.response.data.message);
     }
   }
 };
