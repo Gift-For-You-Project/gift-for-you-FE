@@ -374,7 +374,7 @@ const Signup = () => {
               onCheckBtnClick={handleCheckBtnClick}
               title="이메일 인증"
               type="string"
-              placeholder="Confrimation Code"
+              placeholder="Confirmation Code"
               isButtonActive={isCheckBtnActive()}
               verificationSuccess={verificationSuccess}
             />

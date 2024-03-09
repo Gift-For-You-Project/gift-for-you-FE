@@ -147,36 +147,36 @@ const Product = () => {
                 price="1,337,000원"
               />
               <ProductGridComponent
-                imgLink="https://www.apple.com/kr/shop/product/MTJV3KH/A/airpods-pro"
-                imgSrc="/imgs/Home/airpods.jpeg"
-                altText="airpods"
-                brand="Apple"
-                itemName="AirPods Pro MagSafe 충전 케이스 모델(2세대, USB-C)"
-                price="359,000원"
+                imgLink="https://www.desker.co.kr/product/detail/20"
+                imgSrc="/imgs/Product/desk.png"
+                altText="desk"
+                brand="Desker"
+                itemName="W1400*D700 컴퓨터 데스크"
+                price="195,000원"
               />
               <ProductGridComponent
-                imgLink="https://www.ssg.com/item/itemView.ssg?itemId=1000572753927"
-                imgSrc="/imgs/Home/sony.jpeg"
-                altText="sonycamera"
-                brand="Sony"
-                itemName="렌즈 교환식 디지털 카메라 ILCE-9M3"
-                price="7,790,000원"
+                imgLink="https://kr.sidiz.com/product/TNF503F/451M"
+                imgSrc="/imgs/Product/chair.png"
+                altText="chair"
+                brand="Sidiz"
+                itemName="T50 캐주얼 컴퓨터 책상 의자 화이트"
+                price="199,000원"
               />
               <ProductGridComponent
-                imgLink="https://www.nike.com/kr/t/%EC%97%90%EC%96%B4-%EC%A1%B0%EB%8D%98-1-%EB%AF%B8%EB%93%9C-%EB%82%A8%EC%84%B1-%EC%8B%A0%EB%B0%9C-Fpo9YM44/DQ8426-106"
-                imgSrc="/imgs/Home/jordan.png"
-                altText="airjordan"
-                brand="Nike"
-                itemName="에어 조던 1 미드 남성 신발"
-                price="159,000원"
-              />
-              <ProductGridComponent
-                imgLink="https://minigold.co.kr/m/product/custom.php?code=&pcode=EMSM4965"
-                imgSrc="/imgs/Home/earring.png"
-                altText="earring"
-                brand="Minigold"
-                itemName="보니타 원터치 귀걸이 EMSM4965"
+                imgLink="https://www.musinsa.com/app/goods/3401252"
+                imgSrc="/imgs/Product/cardigan.jpeg"
+                altText="cardigan"
+                brand="Polo Ralph Lauren"
+                itemName="코튼 블렌드 카디건 - 그린"
                 price="239,000원"
+              />
+              <ProductGridComponent
+                imgLink="https://www.musinsa.com/app/goods/3540248"
+                imgSrc="/imgs/Product/hood.jpeg"
+                altText="hood"
+                brand="Thisisneverthat"
+                itemName="T-Logo Hoodie Heather Grey"
+                price="95,000원"
               />
               <ProductGridComponent
                 imgLink="https://www.samsung.com/sec/smartphones/galaxy-z-flip5-5g-sm-f731-cpo/SM-F731NZBEKOO/"
@@ -241,30 +241,30 @@ const Product = () => {
                 brand="Sony"
                 itemName="렌즈 교환식 디지털 카메라 ILCE-9M3"
                 price="7,790,000원"
-              />
-              <ProductGridComponent
-                imgLink="https://www.nike.com/kr/t/%EC%97%90%EC%96%B4-%EC%A1%B0%EB%8D%98-1-%EB%AF%B8%EB%93%9C-%EB%82%A8%EC%84%B1-%EC%8B%A0%EB%B0%9C-Fpo9YM44/DQ8426-106"
-                imgSrc="/imgs/Home/jordan.png"
-                altText="airjordan"
-                brand="Nike"
-                itemName="에어 조던 1 미드 남성 신발"
-                price="159,000원"
-              />
-              <ProductGridComponent
-                imgLink="https://minigold.co.kr/m/product/custom.php?code=&pcode=EMSM4965"
-                imgSrc="/imgs/Home/earring.png"
-                altText="earring"
-                brand="Minigold"
-                itemName="보니타 원터치 귀걸이 EMSM4965"
-                price="239,000원"
               />
               <ProductGridComponent
                 imgLink="https://www.apple.com/kr/shop/buy-ipad/ipad-pro/12.9%ED%98%95-%EB%94%94%EC%8A%A4%ED%94%8C%EB%A0%88%EC%9D%B4-128gb-%EC%8A%A4%ED%8E%98%EC%9D%B4%EC%8A%A4-%EA%B7%B8%EB%A0%88%EC%9D%B4-wifi"
-                imgSrc="/imgs/Home/zflip5.png"
+                imgSrc="/imgs/Product/ipad-pro.jpeg"
                 altText="ipadpro"
                 brand="Apple"
                 itemName="iPad Pro 12.9형 디스플레이 128GB 스페이스그레이 wifi"
                 price="1,924,000원"
+              />
+              <ProductGridComponent
+                imgLink="https://www.nike.com/kr/t/%EC%97%90%EC%96%B4-%EC%A1%B0%EB%8D%98-1-%EB%AF%B8%EB%93%9C-%EB%82%A8%EC%84%B1-%EC%8B%A0%EB%B0%9C-Fpo9YM44/DQ8426-106"
+                imgSrc="/imgs/Home/jordan.png"
+                altText="airjordan"
+                brand="Nike"
+                itemName="에어 조던 1 미드 남성 신발"
+                price="159,000원"
+              />
+              <ProductGridComponent
+                imgLink="https://minigold.co.kr/m/product/custom.php?code=&pcode=EMSM4965"
+                imgSrc="/imgs/Home/earring.png"
+                altText="earring"
+                brand="Minigold"
+                itemName="보니타 원터치 귀걸이 EMSM4965"
+                price="239,000원"
               />
               <P fw="600" pt="20px" pb="5px" pl="20px" />
             </ProductGrids>
