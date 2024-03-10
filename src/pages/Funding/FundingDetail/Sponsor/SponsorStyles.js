@@ -110,8 +110,6 @@ export const P = styled.p`
   color: ${(props) => props.color};
   margin-top: ${(props) => props.mt};
   margin-right: ${(props) => props.mr};
-  background-color: ${(props) => props.bc};
-  border-radius: ${(props) => props.br};
   padding: ${(props) => props.p};
   border: none;
   align-items: center;

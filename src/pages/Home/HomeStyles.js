@@ -100,30 +100,20 @@ export const IpadLoveImg = styled.img`
   height: ${(props) => props.h};
 `;
 
-/* 로고 */
-export const Logo = styled.h1`
-  font-size: 30px;
-  font-weight: 700;
-  color: white;
-`;
-
 /* 다용도 P 태그 */
 export const P = styled.p`
-  /* display: flex; */
   padding-top: ${(props) => props.pt};
-  margin-top: ${(props) => props.mt};
   padding-bottom: ${(props) => props.pb};
   padding-left: ${(props) => props.pl};
   padding-right: ${(props) => props.pr};
+  margin-top: ${(props) => props.mt};
   margin-right: ${(props) => props.mr};
   font-size: ${(props) => props.fs};
   font-weight: ${(props) => props.fw};
   color: ${(props) => props.color};
-  background-color: ${(props) => props.bc};
-  border-radius: ${(props) => props.br};
   padding: ${(props) => props.p};
-  border: none;
   align-items: center;
+  width: ${(props) => props.w};
 `;
 
 /* 펀딩 Title */
@@ -172,7 +162,7 @@ export const Button = styled.button`
   height: ${(props) => props.h};
   padding: 10px;
   background-color: ${(props) => props.bc};
-  border-radius: 7px;
+  border-radius: 8px;
   color: ${(props) => props.color};
   font-size: ${(props) => props.fs};
   font-weight: 600;
@@ -183,7 +173,7 @@ export const Button = styled.button`
   transition: all 300ms ease-in;
 
   &:hover {
-    color: white;
+    color: ${theme.white};
     background-color: ${theme.primary};
     cursor: pointer;
   }

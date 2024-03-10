@@ -12,10 +12,8 @@ import {
   successToast,
   errorToast,
 } from "../../../components/toast";
+import { MainContainer, RightContainer, P } from "../HomeStyles";
 import {
-  MainContainer,
-  P,
-  RightContainer,
   NavbarDiv,
   FieldContainer,
   Body,

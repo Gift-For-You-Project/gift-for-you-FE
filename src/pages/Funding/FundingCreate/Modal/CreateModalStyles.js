@@ -15,29 +15,11 @@ export const Container = styled.div`
 export const Background = styled.div`
   width: 100%;
   height: 100%;
-  /* background-color: rgba(255,255,255,0.15); */
   background: #00000080;
   backdrop-filter: blur(1px);
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
-`;
-
-export const P = styled.p`
-  padding-top: ${(props) => props.pt};
-  padding-bottom: ${(props) => props.pb};
-  padding-left: ${(props) => props.pl};
-  padding-right: ${(props) => props.pr};
-  font-size: ${(props) => props.fs};
-  font-weight: ${(props) => props.fw};
-  color: ${(props) => props.color};
-  margin-top: ${(props) => props.mt};
-  margin-right: ${(props) => props.mr};
-  background-color: ${(props) => props.bc};
-  border-radius: ${(props) => props.br};
-  padding: ${(props) => props.p};
-  border: none;
   align-items: center;
 `;
 
@@ -49,9 +31,9 @@ export const ModalBox = styled.div`
   padding: 10px;
   width: 320px;
   height: 220px;
-  padding: 10px 20px 20px 20px;
+  padding: 10px 10px 20px 20px;
   position: absolute;
-  background: white;
+  background: ${theme.white};
   border: 0.3px solid ${theme.gray4};
   box-shadow: 0.3px 0.3px 0.3px 0.3px ${theme.gray4};
   border-radius: 20px;
@@ -73,7 +55,7 @@ export const ModalInput = styled.input`
   border-radius: 10px;
   border: 0.3px solid ${theme.gray5};
   text-align: center;
-  font-weight: 500;
+  font-weight: 400;
   font-size: ${theme.detail};
   margin-bottom: 10px;
   color: ${theme.black};
@@ -82,7 +64,7 @@ export const ModalInput = styled.input`
   }
 `;
 export const XButton = styled.button`
-  width: 30px;
+  display: flex;
   font-size: 20px;
   color: ${theme.gray3};
 `;
@@ -91,7 +73,7 @@ export const ModalButton = styled.button`
   width: 280px;
   height: 45px;
   background-color: ${theme.primary};
-  color: white;
+  color: ${theme.white};
   border-radius: 10px;
   border: none;
 `;

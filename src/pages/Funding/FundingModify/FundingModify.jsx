@@ -10,15 +10,12 @@ import {
   getFundingDetail,
   endFundingModify,
 } from "../../../apis/funding";
+import { MainContainer, P, RightContainer, Body } from "../../Home/HomeStyles";
 import {
-  MainContainer,
-  P,
   Button,
-  RightContainer,
   ProducImgtDiv,
   NonInputTag,
   FundingImg,
-  Body,
   FundingDiv,
   SponserDiv,
   RadioInput,
