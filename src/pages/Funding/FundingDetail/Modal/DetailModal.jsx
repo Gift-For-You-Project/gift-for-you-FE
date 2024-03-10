@@ -1,16 +1,16 @@
 import React, { useState } from "react";
 import { IoClose } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
+import { P } from "../../../Home/HomeStyles";
 import {
   Container,
   Background,
-  P,
   ModalBox,
   ModalTitleXBox,
   ModalInput,
   ModalButton,
   XButton,
-} from "./DetailModalStyles";
+} from "../../FundingCreate/Modal/CreateModalStyles";
 import theme from "../../../../styles/theme";
 import { warnToast } from "../../../../components/toast";
 

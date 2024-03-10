@@ -4,12 +4,11 @@ import LoginModal from "../Login/LoginModal";
 import { getActiveFundingList } from "../../../apis/home";
 import theme from "../../../styles/theme";
 import { FaAngleLeft } from "react-icons/fa6";
+import { MainContainer, P, RightContainer } from "../HomeStyles";
 import {
-  MainContainer,
   TogetherDiv,
   FundingDiv,
   BetweenDiv,
-  P,
   FundingSection,
   FundingGrid,
   FundingImg,
@@ -17,7 +16,6 @@ import {
   Progress,
   FundingItem,
   FundingTitle,
-  RightContainer,
   Body,
   CategoryContainer,
   CategoryDiv,

@@ -5,10 +5,8 @@ import LoginModal from "../../Home/Login/LoginModal";
 import { useDispatch } from "react-redux";
 import { bootChannelTalk } from "../../../redux/channelTalkSlice";
 import theme from "../../../styles/theme";
+import { MainContainer, RightContainer, P } from "../HomeStyles";
 import {
-  MainContainer,
-  P,
-  RightContainer,
   NavbarDiv,
   Body,
   ProductInput,
@@ -243,14 +241,6 @@ const Product = () => {
                 price="7,790,000원"
               />
               <ProductGridComponent
-                imgLink="https://www.apple.com/kr/shop/buy-ipad/ipad-pro/12.9%ED%98%95-%EB%94%94%EC%8A%A4%ED%94%8C%EB%A0%88%EC%9D%B4-128gb-%EC%8A%A4%ED%8E%98%EC%9D%B4%EC%8A%A4-%EA%B7%B8%EB%A0%88%EC%9D%B4-wifi"
-                imgSrc="/imgs/Product/ipad-pro.jpeg"
-                altText="ipadpro"
-                brand="Apple"
-                itemName="iPad Pro 12.9형 디스플레이 128GB 스페이스그레이 wifi"
-                price="1,924,000원"
-              />
-              <ProductGridComponent
                 imgLink="https://www.nike.com/kr/t/%EC%97%90%EC%96%B4-%EC%A1%B0%EB%8D%98-1-%EB%AF%B8%EB%93%9C-%EB%82%A8%EC%84%B1-%EC%8B%A0%EB%B0%9C-Fpo9YM44/DQ8426-106"
                 imgSrc="/imgs/Home/jordan.png"
                 altText="airjordan"
@@ -259,12 +249,20 @@ const Product = () => {
                 price="159,000원"
               />
               <ProductGridComponent
-                imgLink="https://minigold.co.kr/m/product/custom.php?code=&pcode=EMSM4965"
+                imgLink=""
                 imgSrc="/imgs/Home/earring.png"
                 altText="earring"
                 brand="Minigold"
                 itemName="보니타 원터치 귀걸이 EMSM4965"
                 price="239,000원"
+              />
+              <ProductGridComponent
+                imgLink="https://www.apple.com/kr/shop/buy-ipad/ipad-pro/12.9%ED%98%95-%EB%94%94%EC%8A%A4%ED%94%8C%EB%A0%88%EC%9D%B4-128gb-%EC%8A%A4%ED%8E%98%EC%9D%B4%EC%8A%A4-%EA%B7%B8%EB%A0%88%EC%9D%B4-wifi"
+                imgSrc="/imgs/Product/ipad-pro.jpeg"
+                altText="ipadpro"
+                brand="Apple"
+                itemName="iPad Pro 12.9형 디스플레이 128GB 스페이스그레이 wifi"
+                price="1,924,000원"
               />
               <P fw="600" pt="20px" pb="5px" pl="20px" />
             </ProductGrids>

@@ -12,10 +12,12 @@ import LoginModal from "../../Home/Login/LoginModal";
 import { infoToast, warnToast } from "../../../components/toast";
 import {
   MainContainer,
-  P,
-  Button,
   RightContainer,
   NavbarDiv,
+} from "../../Home/HomeStyles";
+import {
+  P,
+  Button,
   NavigateBtn,
   NavigateDiv,
   Body,
@@ -124,55 +126,59 @@ const FundingDetail = () => {
     );
   };
 
-  const handledonation5000Change = () => {
+  const handleDonationChange = (donationAmount) => {
     if (detailData.status === "FINISHED") {
       warnToast("종료된 펀딩입니다. 결제할 수 없습니다.");
     } else {
       navigate(
-        `/fundingpay/${id}?donation=${sponsorDonation.donation5000}&showName=${detailData.showName}`
+        `/fundingpay/${id}?donation=${donationAmount}&showName=${detailData.showName}`
       );
     }
   };
 
-  const handledonation10000Change = () => {
-    if (detailData.status === "FINISHED") {
-      warnToast("종료된 펀딩입니다. 결제할 수 없습니다.");
-    } else {
-      navigate(
-        `/fundingpay/${id}?donation=${sponsorDonation.donation10000}&showName=${detailData.showName}`
-      );
-    }
-  };
+  const handledonation5000Change = () =>
+    handleDonationChange(sponsorDonation.donation5000);
+  const handledonation10000Change = () =>
+    handleDonationChange(sponsorDonation.donation10000);
+  const handledonation20000Change = () =>
+    handleDonationChange(sponsorDonation.donation20000);
+  const handledonation30000Change = () =>
+    handleDonationChange(sponsorDonation.donation30000);
+  const handledonation50000Change = () =>
+    handleDonationChange(sponsorDonation.donation50000);
 
-  const handledonation20000Change = () => {
-    if (detailData.status === "FINISHED") {
-      warnToast("종료된 펀딩입니다. 결제할 수 없습니다.");
-    } else {
-      navigate(
-        `/fundingpay/${id}?donation=${sponsorDonation.donation20000}&showName=${detailData.showName}`
-      );
-    }
-  };
-
-  const handledonation30000Change = () => {
-    if (detailData.status === "FINISHED") {
-      warnToast("종료된 펀딩입니다. 결제할 수 없습니다.");
-    } else {
-      navigate(
-        `/fundingpay/${id}?donation=${sponsorDonation.donation30000}&showName=${detailData.showName}`
-      );
-    }
-  };
-
-  const handledonation50000Change = () => {
-    if (detailData.status === "FINISHED") {
-      warnToast("종료된 펀딩입니다. 결제할 수 없습니다.");
-    } else {
-      navigate(
-        `/fundingpay/${id}?donation=${sponsorDonation.donation50000}&showName=${detailData.showName}`
-      );
-    }
-  };
+  const SponsorItem = ({
+    imgSrc,
+    donationAmount,
+    description,
+    onClickHandler,
+  }) => (
+    <SponsorimgDiv pt="30px">
+      <StartRowDiv>
+        <FundingImg src={imgSrc} alt="image" ml="10px" />
+        <div>
+          <P pl="20px" fs={theme.body1} fw="600" color={theme.black}>
+            {donationAmount.toLocaleString()}원
+          </P>
+          <P pl="20px" fs={theme.detail2} color={theme.gray4}>
+            {description}
+          </P>
+        </div>
+      </StartRowDiv>
+      <Button
+        mr="10px"
+        onClick={onClickHandler}
+        w="58px"
+        h="34px"
+        bc={theme.primaryBtn}
+        fw="700"
+        fs="11px"
+        color={theme.primaryFont}
+      >
+        선물하기
+      </Button>
+    </SponsorimgDiv>
+  );
 
   const renderModifyBtn = () => {
     if (detailData.status === "FINISHED" && detailData.ownerFlag) {
@@ -401,155 +407,40 @@ const FundingDetail = () => {
               </P>
             </GiftTitle>
 
-            <SponsorimgDiv p="0px 20px 0px 20px" pt="40px">
-              <StartRowDiv>
-                <FundingImg
-                  src="/imgs/Funding/FundingDetail/coffee.svg"
-                  alt="image"
-                  ml="10px"
-                />
-                <div>
-                  <P pl="20px" fs={theme.body1} fw="600" color={theme.black}>
-                    {sponsorDonation.donation5000.toLocaleString()}원
-                  </P>
-                  <P pl="20px" fs={theme.detail2} color={theme.gray4}>
-                    커피 한 잔 만큼
-                  </P>
-                </div>
-              </StartRowDiv>
-              <Button
-                mr="10px"
-                onClick={handledonation5000Change}
-                w="58px"
-                h="34px"
-                bc={theme.primaryBtn}
-                fw="700"
-                fs="11px"
-                color={theme.primaryFont}
-              >
-                선물하기
-              </Button>
-            </SponsorimgDiv>
+            <SponsorItem
+              imgSrc="/imgs/Funding/FundingDetail/coffee.svg"
+              donationAmount={sponsorDonation.donation5000}
+              description="커피 한 잔 만큼"
+              onClickHandler={handledonation5000Change}
+            />
 
-            <SponsorimgDiv pt="30px">
-              <StartRowDiv>
-                <FundingImg
-                  src="/imgs/Funding/FundingDetail/icecream.svg"
-                  alt="image"
-                  ml="10px"
-                />
-                <div>
-                  <P pl="20px" fs={theme.body1} fw="600" color={theme.black}>
-                    {sponsorDonation.donation10000.toLocaleString()}원
-                  </P>
-                  <P pl="20px" fs={theme.detail2} color={theme.gray4}>
-                    파인트 아이스크림 만큼
-                  </P>
-                </div>
-              </StartRowDiv>
-              <Button
-                mr="10px"
-                onClick={handledonation10000Change}
-                w="58px"
-                h="34px"
-                bc={theme.primaryBtn}
-                fw="700"
-                fs="11px"
-                color={theme.primaryFont}
-              >
-                선물하기
-              </Button>
-            </SponsorimgDiv>
+            <SponsorItem
+              imgSrc="/imgs/Funding/FundingDetail/icecream.svg"
+              donationAmount={sponsorDonation.donation10000}
+              description="파인트 아이스크림 만큼"
+              onClickHandler={handledonation10000Change}
+            />
 
-            <SponsorimgDiv pt="30px">
-              <StartRowDiv>
-                <FundingImg
-                  src="/imgs/Funding/FundingDetail/chicken.svg"
-                  alt="image"
-                  ml="10px"
-                />
-                <div>
-                  <P pl="20px" fs={theme.body1} fw="600" color={theme.black}>
-                    {sponsorDonation.donation20000.toLocaleString()}원
-                  </P>
-                  <P pl="20px" fs={theme.detail2} color={theme.gray4}>
-                    치킨 한 마리 만큼
-                  </P>
-                </div>
-              </StartRowDiv>
-              <Button
-                mr="10px"
-                onClick={handledonation20000Change}
-                w="58px"
-                h="34px"
-                bc={theme.primaryBtn}
-                fw="700"
-                fs="11px"
-                color={theme.primaryFont}
-              >
-                선물하기
-              </Button>
-            </SponsorimgDiv>
+            <SponsorItem
+              imgSrc="/imgs/Funding/FundingDetail/chicken.svg"
+              donationAmount={sponsorDonation.donation20000}
+              description="치킨 한 마리 만큼"
+              onClickHandler={handledonation20000Change}
+            />
 
-            <SponsorimgDiv pt="30px">
-              <StartRowDiv>
-                <FundingImg
-                  src="/imgs/Funding/FundingDetail/cake.svg"
-                  alt="image"
-                  ml="10px"
-                />
-                <div>
-                  <P pl="20px" fs={theme.body1} fw="600" color={theme.black}>
-                    {sponsorDonation.donation30000.toLocaleString()}원
-                  </P>
-                  <P pl="20px" fs={theme.detail2} color={theme.gray4}>
-                    2호 케이크 만큼
-                  </P>
-                </div>
-              </StartRowDiv>
-              <Button
-                mr="10px"
-                onClick={handledonation30000Change}
-                w="58px"
-                h="34px"
-                bc={theme.primaryBtn}
-                fw="700"
-                fs="11px"
-                color={theme.primaryFont}
-              >
-                선물하기
-              </Button>
-            </SponsorimgDiv>
+            <SponsorItem
+              imgSrc="/imgs/Funding/FundingDetail/cake.svg"
+              donationAmount={sponsorDonation.donation30000}
+              description="딸기 케이크 만큼"
+              onClickHandler={handledonation30000Change}
+            />
 
-            <SponsorimgDiv pt="30px">
-              <StartRowDiv>
-                <FundingImg
-                  src="/imgs/Funding/FundingDetail/shimsaimdang.svg"
-                  alt="image"
-                  ml="10px"
-                />
-                <div>
-                  <P pl="20px" fs={theme.body1} fw="600" color={theme.black}>
-                    {sponsorDonation.donation50000.toLocaleString()}원
-                  </P>
-                  <P pl="20px" fs={theme.detail2} color={theme.gray4}>
-                    신사임당 만큼
-                  </P>
-                </div>
-              </StartRowDiv>
-              <Button
-                mr="10px"
-                onClick={handledonation50000Change}
-                w="58px"
-                h="34px"
-                bc={theme.primaryBtn}
-                fw="700"
-                fs="11px"
-                color={theme.primaryFont}
-              >
-                선물하기
-              </Button>
-            </SponsorimgDiv>
+            <SponsorItem
+              imgSrc="/imgs/Funding/FundingDetail/shimsaimdang.svg"
+              donationAmount={sponsorDonation.donation50000}
+              description="신사임당 만큼"
+              onClickHandler={handledonation50000Change}
+            />
           </FundingDiv>
         </Body>
 

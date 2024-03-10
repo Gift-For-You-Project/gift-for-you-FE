@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { IoClose } from "react-icons/io5";
+import { P } from "../../../Home/HomeStyles";
 import {
   Container,
   Background,
-  P,
   ModalBox,
   ModalTitleXBox,
   ModalInput,

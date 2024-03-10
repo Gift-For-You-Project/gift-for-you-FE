@@ -13,8 +13,10 @@ import {
 import {
   MainContainer,
   LeftRowdiv,
-  P,
   RightContainer,
+} from "../../Home/HomeStyles";
+import {
+  P,
   SponserMoney,
   Body,
   FundingDiv,

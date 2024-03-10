@@ -5,12 +5,10 @@ import { login } from "../../../apis/auth";
 import { useDispatch } from "react-redux";
 import { userLogin } from "../../../redux/authSlice";
 import theme from "../../../styles/theme";
+import { MainContainer, RightContainer, Body } from "../HomeStyles";
 import {
-  MainContainer,
   P,
-  RightContainer,
   InputFieldContainer,
-  Body,
   LoginBtn,
   BlankLine,
   LoginInputDiv,

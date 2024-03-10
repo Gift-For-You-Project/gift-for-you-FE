@@ -1,36 +1,6 @@
 import styled from "styled-components";
 import theme from "../../../styles/theme";
 
-/* 전체 컨테이너 */
-export const MainContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  max-width: 1200px;
-  height: 100vh;
-  margin: 0 auto;
-  flex-wrap: wrap;
-`;
-
-/* 다용도 P 태그 */
-export const P = styled.p`
-  /* display: flex; */
-  padding-top: ${(props) => props.pt};
-  margin-top: ${(props) => props.mt};
-  padding-bottom: ${(props) => props.pb};
-  padding-left: ${(props) => props.pl};
-  padding-right: ${(props) => props.pr};
-  margin-right: ${(props) => props.mr};
-  font-size: ${(props) => props.fs};
-  font-weight: ${(props) => props.fw};
-  color: ${(props) => props.color};
-  background-color: ${(props) => props.bc};
-  border-radius: ${(props) => props.br};
-  padding: ${(props) => props.p};
-  border: none;
-  align-items: center;
-`;
-
-/* 다용도 버튼 */
 export const Button = styled.button`
   display: flex;
   justify-content: center;
@@ -53,19 +23,6 @@ export const Button = styled.button`
     color: white;
     background-color: ${theme.primary};
     cursor: pointer;
-  }
-`;
-
-/* 오른쪽 컨테이너 */
-export const RightContainer = styled.div`
-  position: relative;
-  width: -webkit-fill-available;
-  max-width: 390px;
-  height: calc(var(--vh, 1vh) * 100);
-  margin: 0 10px;
-  overflow-y: scroll;
-  &::-webkit-scrollbar {
-    display: none;
   }
 `;
 

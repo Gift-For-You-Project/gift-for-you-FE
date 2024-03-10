@@ -7,11 +7,9 @@ import { infoToast } from "../../../components/toast";
 import { FaAngleLeft } from "react-icons/fa6";
 import { GrAdd } from "react-icons/gr";
 import theme from "../../../styles/theme";
+import { MainContainer, P, RightContainer } from "../../Home/HomeStyles";
 import {
-  MainContainer,
-  P,
   Button,
-  RightContainer,
   ImgPlus,
   ProducImgtDiv,
   FundingImg,
