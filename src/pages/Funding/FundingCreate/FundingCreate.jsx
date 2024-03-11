@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { postFundingCreate } from "../../../apis/funding";
 import { useParams } from "react-router-dom";
 import CreateModal from "./Modal/CreateModal";
-import { infoToast } from "../../../components/toast";
+import { infoToast, warnToast } from "../../../components/toast";
 import { FaAngleLeft } from "react-icons/fa6";
 import { GrAdd } from "react-icons/gr";
 import theme from "../../../styles/theme";
@@ -58,8 +58,12 @@ const FundingCreate = () => {
 
   // 모달 내에서 이미지를 선택하고 설정하는 함수
   const handleImageSelection = (itemImage) => {
-    setItemImage(itemImage);
-    setIsFundingModalOpen(false);
+    if (itemImage.includes("400") || itemImage.includes("500")) {
+      warnToast("일부 사이트 링크는 지원되지 않습니다. 양해 부탁드립니다.");
+    } else {
+      setItemImage(itemImage);
+      setIsFundingModalOpen(false);
+    }
   };
 
   const handleItemNameChange = (e) => {
