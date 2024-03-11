@@ -283,7 +283,9 @@ const FundingDetail = () => {
           <TogetherDiv bc={theme.white}>
             <NavigateDiv></NavigateDiv>
             <BetweenDiv pt="10px">
-              <DdayDiv>{detailData.dday}</DdayDiv>
+              <DdayDiv>
+                {detailData.status === "FINISHED" ? "종료" : detailData.dday}
+              </DdayDiv>
               <NavigateBtn
                 onClick={() => {
                   navigator.clipboard.writeText(window.location.href);
