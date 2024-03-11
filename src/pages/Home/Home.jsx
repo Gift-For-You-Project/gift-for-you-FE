@@ -335,7 +335,9 @@ const Home = () => {
                           {funding.achievementRate}%
                         </P>
                         <P fs={theme.detail} color={theme.gray3} fw="600">
-                          {funding.dday}
+                          {funding.status === "FINISHED"
+                            ? "종료"
+                            : funding.dday}
                         </P>
                       </BetweenDiv>
                       <FundingItem
