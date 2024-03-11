@@ -28,7 +28,7 @@ export const postModalItemLink = async (LinkData) => {
     }
   } catch (error) {
     if (error.response && error.response.status === 400) {
-      errorToast(error.response.data.message);
+      warnToast("일부 사이트 링크는 지원되지 않습니다. 양해 부탁드립니다.");
     }
   }
 };

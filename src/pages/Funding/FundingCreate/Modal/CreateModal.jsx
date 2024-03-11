@@ -13,7 +13,6 @@ import {
 import { postModalItemLink } from "../../../../apis/funding";
 import { useNavigate } from "react-router-dom";
 import theme from "../../../../styles/theme";
-import { warnToast } from "../../../../components/toast";
 
 function CreateModal({ closeModal, handleImageSelection }) {
   const navigate = useNavigate();
@@ -31,12 +30,7 @@ function CreateModal({ closeModal, handleImageSelection }) {
       closeModal();
       navigate("/fundingcreate");
     } catch (error) {
-      if (
-        (error.response && error.response.status === 400) ||
-        error.response.status === 500
-      ) {
-        warnToast("일부 사이트 링크는 지원되지 않습니다. 양해 부탁드립니다.");
-      }
+      console.error("펀딩 이미지 API 호출 실패");
     }
   };
 
