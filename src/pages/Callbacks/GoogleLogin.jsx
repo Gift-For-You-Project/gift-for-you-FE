@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { getGoogleLogin } from "../../apis/auth";
+import { postGoogleLogin } from "../../apis/auth";
 import { googleLogin } from "../../redux/authSlice";
 import { useDispatch } from "react-redux";
 import { BarLoader } from "react-spinners";
@@ -19,7 +19,7 @@ const GoogleLogin = () => {
 
       if (params.has("code")) {
         const code = params.get("code");
-        const data = await getGoogleLogin(code);
+        const data = await postGoogleLogin(code);
 
         if (data.isSuccess === true) {
           dispatch(googleLogin()); // Redux 액션 디스패치

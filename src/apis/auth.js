@@ -10,7 +10,7 @@ export const instance = axios.create({
 });
 
 // 구글 로그인 API
-export const getGoogleLogin = async (code) => {
+export const postGoogleLogin = async (code) => {
   try {
     const response = await instance.post(
       "/api/google/login",
@@ -29,7 +29,7 @@ export const getGoogleLogin = async (code) => {
 };
 
 // 카카오 로그인 API
-export const getKakaoLogin = async (code) => {
+export const postKakaoLogin = async (code) => {
   try {
     const response = await instance.post(
       "/api/kakao/login",
