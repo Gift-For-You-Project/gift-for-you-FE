@@ -16,14 +16,11 @@ const GoogleLogin = () => {
   const getData = async () => {
     try {
       const params = new URLSearchParams(location.search);
-      console.log("params", params);
 
       if (params.has("code")) {
         const code = params.get("code");
-        console.log("params의 code값", code);
-
         const data = await getGoogleLogin(code);
-        console.log("data", data);
+
         if (data.isSuccess === true) {
           dispatch(googleLogin()); // Redux 액션 디스패치
           navigate("/");
@@ -31,7 +28,7 @@ const GoogleLogin = () => {
         }
       }
     } catch (error) {
-      console.error("구글 로그인 오류: ", error);
+      console.error("구글 로그인 오류");
     }
   };
 
