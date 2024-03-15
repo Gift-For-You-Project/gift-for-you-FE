@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { getKakaoLogin } from "../../apis/auth";
+import { postKakaoLogin } from "../../apis/auth";
 import { kakaoLogin } from "../../redux/authSlice";
 import { useDispatch } from "react-redux";
 import { BarLoader } from "react-spinners";
@@ -19,7 +19,7 @@ const KakaoLogin = () => {
 
       if (params.has("code")) {
         const code = params.get("code");
-        const data = await getKakaoLogin(code);
+        const data = await postKakaoLogin(code);
 
         if (data.isSuccess === true) {
           dispatch(kakaoLogin()); // Redux 액션 디스패치
