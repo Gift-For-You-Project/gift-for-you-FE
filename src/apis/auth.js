@@ -56,7 +56,11 @@ export const getGoogleLogin = async (code) => {
 
 export const getKakaoLogin = async (code) => {
   try {
-    const response = await instance.post("/api/kakao/login", code);
+    const response = await instance.post(
+      "/api/kakao/login",
+      { code },
+      { headers: { "Content-Type": "application/json" } }
+    );
 
     if (response.status === 200) {
       return response.data;
