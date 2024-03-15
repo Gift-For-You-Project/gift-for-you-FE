@@ -12,7 +12,7 @@ export const instance = axios.create({
 // 구글 로그인 API
 export const getGoogleLogin = async (code) => {
   try {
-    const response = await instance.post(`/api/google/login?code=${code}`);
+    const response = await instance.get(`/api/google/login?code=${code}`);
     if (response.status === 200) {
       return response.data;
     }
@@ -24,10 +24,39 @@ export const getGoogleLogin = async (code) => {
   }
 };
 
+// export const getGoogleLogin = async (code) => {
+//   try {
+//     const response = await instance.post('/api/google/login', code);
+//     if (response.status === 200) {
+//       return response.data;
+//     }
+//   } catch (error) {
+//     if (error.response && error.response.status === 401) {
+//       errorToast(error.response.data.message);
+//     }
+//     throw error;
+//   }
+// };
+
 // 카카오 로그인 API
+// export const getKakaoLogin = async (code) => {
+//   try {
+//     const response = await instance.get(`/api/kakao/login?code=${code}`);
+
+//     if (response.status === 200) {
+//       return response.data;
+//     }
+//   } catch (error) {
+//     if (error.response && error.response.status === 401) {
+//       errorToast(error.response.data.message);
+//     }
+//     throw error;
+//   }
+// };
+
 export const getKakaoLogin = async (code) => {
   try {
-    const response = await instance.post(`/api/kakao/login?code=${code}`);
+    const response = await instance.post("/api/kakao/login", code);
 
     if (response.status === 200) {
       return response.data;
