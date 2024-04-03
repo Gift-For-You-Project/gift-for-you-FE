@@ -166,3 +166,5 @@
 ## 💟 로고
 
 ![image](https://github.com/Gift-For-You-Project/gift-for-you-FE/assets/153044803/9fa94138-4bee-43f0-adbb-21e2a24e3d44)
+
+![항해18기 앙케이트 상장 pptx ](https://github.com/Gift-For-You-Project/gift-for-you-FE/assets/153044803/182c3a5b-e0a3-45bb-afec-b88143b92a22)
